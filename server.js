@@ -17,6 +17,7 @@ const promisify = require("es6-promisify");
 app.use(express.static("public"));
 app.use("/assets", express.static(path.join(__dirname, "node_modules/")));
 app.use("/assets", express.static(path.join(__dirname, "assets/css/")));
+app.use("/assets", express.static(path.join(__dirname, "assets/icons/")));
 app.use("/media", express.static(path.join(__dirname, "assets/media/")));
 
 app.use(bodyParser.urlencoded({ extended: true }));
