@@ -1,0 +1,33 @@
+/*navigation-active-bracket*/
+
+.active{
+  content:'';
+  position: relative;
+}
+
+.active:before{
+  content: '';
+  position: absolute;
+  background-image: url('/media/bracket.svg');
+  background-repeat: no-repeat;
+  background-size: 10px;
+  display: inline-block;
+  left: -4px;
+  top: 5px;
+  height: 50px;
+  width: 50px;
+}
+
+.active:after{
+  content: '';
+  position: absolute;
+  background-image: url('/media/bracket.svg');
+  transform: rotate(180deg);
+  background-repeat: no-repeat;
+  background-size: 10px;
+  display: inline-block;
+  right: -2px;
+  top: -17px;
+  height: 50px;
+  width: 50px;
+}
