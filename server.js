@@ -28,20 +28,12 @@ let courses = Course.find({})
   .sort("name")
   .exec();
 
-//TODO get realy database records instead of this fake data
-// const courses = [
-//   { name: "Orientation course", type: "orientation" },
-//   { name: "One year course", type: "oneyear" },
-//   { name: "Coaching course", type: "coaching" }
-// ];
-// app.locals.courses = courses;
-
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   //Logger
   console.log(req.method, req.headers.host + req.url);
   next();
 });
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   if (req.query.alert === "created") {
     res.locals.message = "Story created successfully!";
     res.locals.color = "alert-success";
@@ -79,14 +71,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // pass variables to our templates + all requests
-app.use((req, res, next) => {
-  // let courses = Course.find({})
-  //   .sort("name")
-  //   .exec();
+app.use(async (req, res, next) => {
+  let courses = await Course.find({})
+    .sort("name")
+    .exec();
   res.locals.user = req.user || null;
   res.locals.currentPath = req.path;
   res.locals.courses = courses;
-  // console.log(res.locals.courses)
   next();
 });
 

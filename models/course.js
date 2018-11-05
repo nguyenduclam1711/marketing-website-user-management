@@ -10,7 +10,12 @@ var CourseSchema = new Schema({
   content: {
     type: String,
     trim: true,
-    required: 'Please enter a !'
+    required: 'Please enter a course content !'
+  },
+  type: {
+    type: String,
+    trim: true,
+    required: 'Please enter a course type !'
   },
   locations: [{ type: Schema.ObjectId, ref: "Location" }],
 

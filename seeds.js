@@ -57,15 +57,18 @@ const locations = [
 const courses = [
   {
     name: "Orientation course",
-    content: "One month course"
+    content: "One month course",
+    type: "orientation"
   },
   {
     name: "One year course",
-    content: "One year course"
+    content: "One year course",
+    type: "oneyear"
   },
   {
     name: "Coaching course",
-    content: "Six months course"
+    content: "Six months course",
+    type: "coaching"
   }
 ]
 
