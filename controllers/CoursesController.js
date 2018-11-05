@@ -1,8 +1,6 @@
 module.exports.getCourses = async (req, res) => {
   try {
     //TODO get the real courses from the database model
-    //const courses = res.app.locals.course
-
     res.render("courses", {
       //courses: courses
     });
@@ -14,7 +12,7 @@ module.exports.getCourses = async (req, res) => {
 module.exports.getSingleCourse = async (req, res) => {
   try {
     //TODO get the real courses from the database model
-    const courses = res.app.locals.courses;
+    const courses = res.locals.courses;
     const course = courses.find(n => n.name == req.params.course);
     res.render(`course`, {
       course: course

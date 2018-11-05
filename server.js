@@ -3,12 +3,13 @@ const express = require("express");
 const app = express();
 var path = require("path");
 var bodyParser = require("body-parser");
-var expressValidator = require("express-validator");
-var session = require("express-session");
-var passport = require("passport");
-var LocalStrategy = require("passport-local").Strategy;
-const MongoStore = require("connect-mongo")(session);
-const promisify = require("es6-promisify");
+var expressValidator = require('express-validator');
+var session = require('express-session');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+const MongoStore = require('connect-mongo')(session);
+const promisify = require('es6-promisify');
+const Course = require("./models/course");
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -23,20 +24,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(expressValidator());
 
-//TODO get realy database records instead of this fake data
-const courses = [
-  { name: "Orientation course", type: "orientation" },
-  { name: "One year course", type: "oneyear" },
-  { name: "Coaching course", type: "coaching" }
-];
-app.locals.courses = courses;
+let courses = Course.find({})
+  .sort("name")
+  .exec();
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   //Logger
   console.log(req.method, req.headers.host + req.url);
   next();
 });
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   if (req.query.alert === "created") {
     res.locals.message = "Story created successfully!";
     res.locals.color = "alert-success";
@@ -74,9 +71,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // pass variables to our templates + all requests
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
+  let courses = await Course.find({})
+    .sort("name")
+    .exec();
   res.locals.user = req.user || null;
   res.locals.currentPath = req.path;
+  res.locals.courses = courses;
   next();
 });
 

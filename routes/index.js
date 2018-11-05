@@ -4,6 +4,7 @@ const Story = require("../models/story");
 const Contact = require("../models/contact");
 const Category = require("../models/category");
 const Location = require("../models/location");
+const Course = require("../models/course");
 
 const express = require("express");
 const router = express.Router();
@@ -20,9 +21,13 @@ router.get("/", async (req, res) => {
     //const categories = await Category.find({story.categories}).exec({});
     const locations = await Location.find({})
 
+    let courses = await Course.find({})
+    // console.log(courses)
+
     res.render("index", {
       stories: stories,
-      locations: locations
+      locations: locations,
+      courses: courses
     });
   } catch (err) {
     console.log(err);
@@ -38,12 +43,12 @@ router.post('/contact', async (req, res) => {
   contact.body = req.body.body;
   contact.createdAt = new Date();
 
-  contact.locations = req.body.locations; 
+  contact.locations = req.body.locations;
   if (!contact.email) {
     res.redirect("/?alert=error")
   }
 
-  contact.save(function(err) {
+  contact.save(function (err) {
     if (err) res.send(err);
     console.log("Contact created:", contact);
 
