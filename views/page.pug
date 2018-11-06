@@ -1,0 +1,11 @@
+extends layout.pug
+block content
+  +navigation
+  .container.mt-5.text-left
+    h1.mr-3=page.title
+
+    - var str = page.content.replace(/[\r\n]/g, '<br/>');
+    p !{str}
+    //-to deploy this app I needed a helper. In .env ive set "https://tmy.menkent.uberspace.de/ultrablog/" and pass this in index.js:14 as a template helper per res.locals.domain to use here absolute paths
+    a.btn.btn-outline-primary(href='/admin/pages') Back
+  
