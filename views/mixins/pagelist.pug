@@ -1,0 +1,18 @@
+mixin pagelist(public)
+  ul.list-group
+    each page in pages
+      li.list-group-item.mb-3
+        h2.mr-3=page.title
+        p.mr-3=page.content
+        div.mr-3=page.order
+
+
+        //-to deploy this app I needed a helper. In .env ive set "https://tmy.menkent.uberspace.de/ultrablog/" and pass this in index.js:14 as a template helper per res.locals.domain to use here absolute paths
+        form.d-flex.justify-content-between(method='POST', action='/admin/pages/delete/'+page._id +'?_method=DELETE')
+          a.btn.btn-outline-primary.mr-2(href="/pages/"+page._id) Show
+
+          if !public
+            .d-flex.align-items-center
+              //-to deploy this app I needed a helper. In .env ive set "https://tmy.menkent.uberspace.de/ultrablog/" and pass this in index.js:14 as a template helper per res.locals.domain to use here absolute paths
+              a.btn.btn-outline-primary.mr-2(href="/admin/pages/edit/"+page._id) Edit
+              button.btn.btn-outline-danger(type='submit') delete

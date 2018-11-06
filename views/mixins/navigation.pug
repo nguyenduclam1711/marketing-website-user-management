@@ -14,6 +14,7 @@ mixin navigation
             a.dropdown-item(href='/admin/categories') Categories
             a.dropdown-item(href='/admin/locations') Locations
             a.dropdown-item(href='/admin/stories') Stories
+            a.dropdown-item(href='/admin/pages') Pages
 
       li.nav-item.dropdown
         a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mr-4(class= currentPath.includes('/courses') ? "active" : "" data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
@@ -36,11 +37,8 @@ mixin navigation
         a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mr-4(data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' class=currentPath == "/admin/contacts" ? "active" : "" href='/admin/contacts')
           | Get Involved
         .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
-          a.dropdown-item(href='/admin/contacts') Jobcenter/AA
-          a.dropdown-item(href='/admin/contacts') Support us
-          a.dropdown-item(href='/admin/contacts') Become a buddy
-          a.dropdown-item(href='/admin/contacts') Teach at DCI
-          a.dropdown-item(href='/admin/contacts') Jobs
+          each page in pages
+            a.dropdown-item(class= currentPath === ("/pages/" + page.id) ? "active" : "" href='/pages/'+ page.id)=page.title
         if user
           li.nav-item
             a.nav-link(href='/users/logout') Logout

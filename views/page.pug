@@ -1,0 +1,8 @@
+extends layout.pug
+block content
+  +navigation
+  .container.mt-5.text-left
+    h1.mr-3=page.title
+    - var str = page.content.replace(/[\r\n]/g, '<br/>');
+    p !{str}
+  

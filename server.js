@@ -10,6 +10,7 @@ var LocalStrategy = require('passport-local').Strategy;
 const MongoStore = require('connect-mongo')(session);
 const promisify = require('es6-promisify');
 const Course = require("./models/course");
+const Page = require("./models/page");
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -25,9 +26,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(expressValidator());
 
-let courses = Course.find({})
-  .sort("name")
-  .exec();
 
 app.use(function (req, res, next) {
   //Logger
@@ -74,11 +72,15 @@ app.use(passport.session());
 // pass variables to our templates + all requests
 app.use(async (req, res, next) => {
   let courses = await Course.find({})
-    .sort("name")
+    .sort("order")
+    .exec();
+  let pages = await Page.find({})
+    .sort("order")
     .exec();
   res.locals.user = req.user || null;
   res.locals.currentPath = req.path;
   res.locals.courses = courses;
+  res.locals.pages = pages;
   next();
 });
 
@@ -91,20 +93,24 @@ app.use((req, res, next) => {
 let indexRoutes = require("./routes/index");
 let usersRoutes = require("./routes/users");
 let storiesRoutes = require("./routes/stories");
+let pagesRoutes = require("./routes/pages");
 let eventsRoutes = require("./routes/events");
 let coursesRoutes = require("./routes/courses");
 
 let categoryAdminRoutes = require("./routes/admin/categories");
 let storiesAdminRoutes = require("./routes/admin/stories");
+let pagesAdminRoutes = require("./routes/admin/pages");
 let locationsAdminRoutes = require("./routes/admin/locations");
 let contactsAdminRoutes = require("./routes/admin/contacts");
 
 app.use("/", indexRoutes);
 app.use("/users", usersRoutes);
 app.use("/stories", storiesRoutes);
+app.use("/pages", pagesRoutes);
 app.use("/events", eventsRoutes);
 app.use("/courses", coursesRoutes);
 app.use("/admin/stories", storiesAdminRoutes);
+app.use("/admin/pages", pagesAdminRoutes);
 app.use("/admin/locations", locationsAdminRoutes);
 app.use("/admin/categories", categoryAdminRoutes);
 app.use("/admin/contacts", contactsAdminRoutes);
