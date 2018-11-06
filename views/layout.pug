@@ -9,6 +9,7 @@ include mixins/landingpage/upcomingEvents
 include mixins/landingpage/partners
 include mixins/landingpage/footer
 include mixins/storylist
+include mixins/contactformfaded
 include mixins/contactform
 include mixins/courses/oneyear
 include mixins/courses/coaching
@@ -36,6 +37,7 @@ html(lang='en')
     link(rel="stylesheet", href="/assets/upcomingEvents.css")
     link(rel="stylesheet", href="/assets/partners.css")
     link(rel="stylesheet", href="/assets/contactform.css")
+    link(rel="stylesheet", href="/assets/contactformfaded.css")
     link(rel="stylesheet", href="/assets/footer.css")
     link(rel="stylesheet", href="/assets/header.css")
     // Custom styles for this template
@@ -51,7 +53,7 @@ html(lang='en')
   
 
   body(data-spy='scroll', data-target='#myScrollspy', data-offset='1')
-    if message
+    //if message
       .alert.alert-dismissible.fade.show(role='alert', class=color, style="z-index: 1")
         strong= message
         button.close(type='button', data-dismiss='alert', aria-label='Close')
@@ -59,9 +61,11 @@ html(lang='en')
 
     block content
 
-    script(src='/scripts/frontend.js', type='application/javascript')
+  
     script(src='/assets/jquery/dist/jquery.slim.min.js')
     script(src='/assets/popper.js/dist/umd/popper.min.js')
     script(src='/assets/bootstrap/dist/js/bootstrap.min.js')
+    script(src='/scripts/frontend.js', type='application/javascript')
+    
   
     
