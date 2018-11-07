@@ -1,5 +1,8 @@
 
-console.log("js file loaded");
+// console.log("js file loaded");
+
+import Popper from 'popper.js';
+import bootstrap from 'bootstrap';
 $(document).scroll(function() {
   if (
     $(document).scrollTop() > 1000 &&
@@ -10,12 +13,10 @@ $(document).scroll(function() {
   }
 });
 
-
-let Typed = require('./typed.min.js');
-
-import Typed from "typed.js";
-
-let typedCursor = new Typed('#typed-cursor', {
-  strings: ["Learn digital skills with us to get the most fulfilling jobs."],
-  typeSpeed: 40
-});
+// 
+// import Typed from "typed.js";
+//
+// let typedCursor = new Typed('#typed-cursor', {
+//   strings: ["Learn digital skills with us to get the most fulfilling jobs."],
+//   typeSpeed: 2000
+// });
