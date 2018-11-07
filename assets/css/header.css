@@ -33,12 +33,12 @@ font-size: 12px;
 
 
 /*NAVIGATION-BRACKETS*/
-.active{
+#headernav .active{
   content:'';
   position: relative;
 }
 
-.active:before{
+#headernav .active:before{
   content: '';
   position: absolute;
   background-image: url('/media/bracket.svg');
@@ -53,7 +53,7 @@ font-size: 12px;
   filter: drop-shadow(4px 3px 1px #bfbebe);
 }
 
-.active:after{
+#headernav .active:after{
   content: '';
   position: absolute;
   background-image: url('/media/bracket.svg');
