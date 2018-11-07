@@ -1,0 +1,28 @@
+mixin storyForm
+  - var editPath = currentPath.includes('admin/stories/edit')
+  form.form-signin(method='POST', action=editPath ? '/admin/stories/update/'+story._id+'?_method=PUT' : '/admin/stories?alert=create', enctype="multipart/form-data")
+    
+    h2=editPath ? "Edit story" :"Create a new Story"
+    
+    .mb-3
+      label.sr-only(for='inputName') Name
+      input#inputName.form-control(name='name', type='text', placeholder='Name', value=editPath ? story.name :"" required='', autofocus='')
+      
+    .mb-3
+      label.sr-only(for='inputContent') Content
+      textarea#inputContent.form-control(name='content', type='password', placeholder='Content', required='')=editPath ? story.content :""
+    .mb-3
+      label.sr-only(for='inputContent') Order
+      input#inputOrder.form-control(name='order', type='number', placeholder='Order', required='', value=editPath ? story.order :"" autofocus='')
+
+    .form-group
+      label(for='exampleFormControlFile1') Upload Photo
+      input#exampleFormControlFile1.form-control-file(type='file' name='avatar')
+
+
+    each category in categories
+      .custom-control.custom-checkbox
+        input.custom-control-input(name="categories" type='checkbox' id=category.name value=category._id  checked=(category.selected))
+        label.custom-control-label(for=category.name)=category.name
+
+    button.btn.btn-lg.btn-primary.btn-block(type='submit')=editPath ? "Update" :"Create a new Story" 

@@ -12,8 +12,8 @@ router.get("/:id", ensureAuthenticated, AdminStoriesController.getSingleStory);
 
 router.get("/edit/:id", ensureAuthenticated, AdminStoriesController.editStory);
 
-router.post("/", ensureAuthenticated, AdminStoriesController.createStory);
+router.post("/", ensureAuthenticated, AdminStoriesController.uploadImages, AdminStoriesController.resizeImages, AdminStoriesController.createStory);
 
 router.delete("/delete/:id", ensureAuthenticated, AdminStoriesController.deleteStory);
-router.put("/update/:id", ensureAuthenticated, AdminStoriesController.updateStory);
+router.put("/update/:id", ensureAuthenticated, AdminStoriesController.uploadImages, AdminStoriesController.resizeImages, AdminStoriesController.updateStory);
 module.exports = router;
