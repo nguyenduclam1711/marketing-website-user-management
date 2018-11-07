@@ -18,7 +18,7 @@ url("fonts/Didact_Gothic/DidactGothic-Regular.ttf") format("ttf");
 
 /*NAVIGATION-BAR*/
 .nav-link {
-font-family: 'Didact Gothic', sans-serif;
+/* font-family: 'Didact Gothic', sans-serif; */
 color: #1d3b8b !important;
 font-size: 12px;
 }
