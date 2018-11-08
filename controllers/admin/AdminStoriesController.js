@@ -63,11 +63,14 @@ module.exports.editStory = async function (req, res) {
 }
 module.exports.createStory = function (req, res) {
   var story = new Story(); // create a new instance of the story model
-  story.name = req.body.name; // set the stories name (comes from the request)
-  story.content = req.body.content; // set the stories name (comes from the request)
-  story.order = req.body.order; // set the stories name (comes from the
+  story.title = req.body.title; // set the stories title (comes from the request)
+  story.alumniName = req.body.alumniName; // set the stories alumni name (comes from the request)
+  story.workPosition = req.body.workPosition; // set the stories work position (comes from the request)
+  story.excerpt = req.body.excerpt; // set the stories excerpt (comes from the request)
+  story.content = req.body.content; // set the stories content (comes from the request)
+  story.order = req.body.order; // set the stories order (comes from the
   story.image = req.body.image; // set the avatar image
-  story._categories = req.body.categories; // set the stories name (comes from the
+  story._categories = req.body.categories; // set the stories category (comes from the
 
   // save the story and check for errors
   story.save(function (err) {
@@ -99,25 +102,6 @@ module.exports.updateStory = async function (req, res) {
   ).exec()
 
   res.redirect("/admin/stories/edit/" + req.params.id + "?alert=updated");
-  /*
-    Story.findById(req.params.id, function (err, story) {
-      if (err) res.send(err);
-  
-      story.name = req.body.name; // update the stories info
-      story.content = req.body.content; // update the stories info
-      story.order = req.body.order; // update the stories info
-      story.categories = req.body.categories;
-      story.image = req.body.image;
-  
-      // save the story
-      story.save(function (err) {
-        if (err) res.send(err);
-  
-        console.log("Story updated:", story);
-        res.redirect("/admin/stories/edit/" + story._id + "?alert=updated");
-      });
-    });
-    */
 }
 
 
