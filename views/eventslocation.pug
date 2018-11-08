@@ -1,0 +1,12 @@
+extends layout.pug
+block content
+
+  ul.list-group
+    each event in events
+      a(href=event.url target='_blank')=event.name
+      br
+      =event.start
+      br
+      =event.text
+      br
+      span=event.location.name

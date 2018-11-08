@@ -10,11 +10,15 @@ mongoose.connect(process.env.MONGOURL);
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 
 const Story = require("./models/story");
+const User = require("./models/user");
 const Category = require("./models/category");
 const Contact = require("./models/contact");
-const Location = require("./models/location");
 const Course = require("./models/course");
+const Location = require("./models/location");
 const Page = require("./models/page");
+const Event = require("./models/event");
+
+const EventsController = require('./controllers/admin/AdminEventsController');
 
 
 
@@ -26,6 +30,13 @@ const categories = [
     name: "Easy"
   }
 ];
+
+const adminUser = new User({
+  name: 'admin',
+  email: 'admin@example.com',
+  username: 'admin',
+  password: 'password'
+});
 
 const pages = [
   {
@@ -146,16 +157,6 @@ const stories = [
   }
 ];
 
-const locations = [
-  {
-    name: "Berlin",
-    address: "Vulkanstrasse 1, 10499 Berlin"
-  },
-  {
-    name: "Hamburg",
-    address: "Hafenstrasse 1, 20499 Hamburg"
-  }
-]
 
 const courses = [
   {
@@ -211,6 +212,8 @@ async function deleteData() {
   await Course.remove();
   await Contact.remove();
   await Page.remove();
+  await User.remove();
+  await Event.remove();
   console.log("Data Deleted. To load sample data, run\n\n\t npm run seeds\n\n");
   process.exit();
 }
@@ -222,7 +225,6 @@ async function seedRandomNtoN(arrayOfRecords, relationship, model) {
     for (let i = 0; i < randomSetter; i++) {
       return record[model.collection.name][i] = relationship[randomSetter - 1]._id.toString();
     }
-    //console.log('#####', record);
   });
   return arrayOfRecords;
 }
@@ -254,9 +256,14 @@ async function loadData() {
     const resp = await Promise.all(await seedRandomImages())
     console.log('#####', resp);
     const createdCategories = await Category.insertMany(categories);
-    const createdLocations = await Location.insertMany(locations);
+    const response = await EventsController.fetchevents();
+    const createdLocations = await Location.find();
     const createdCourse = await Course.insertMany(courses);
     const createdPages = await Page.insertMany(pages);
+
+    await User.createUser(adminUser, (err, user) => {
+      if (err) throw err;
+    });
 
     var associatedCategories = await seedRandomNtoN(stories, createdCategories, Category)
     var associatedLocations = await seedRandomNtoN(contacts, createdLocations, Location)
