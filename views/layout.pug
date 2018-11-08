@@ -12,6 +12,7 @@ include mixins/storylist
 include mixins/contactformfaded
 include mixins/pagelist
 include mixins/contactform
+include mixins/storyForm
 include mixins/courses/oneyear
 include mixins/courses/coaching
 include mixins/courses/orientation
@@ -54,7 +55,7 @@ html(lang='en')
   
 
   body(data-spy='scroll', data-target='#myScrollspy', data-offset='1')
-    //if message
+    if message
       .alert.alert-dismissible.fade.show(role='alert', class=color, style="z-index: 1")
         strong= message
         button.close(type='button', data-dismiss='alert', aria-label='Close')

@@ -2,20 +2,18 @@ mixin storylist(public)
   ul.list-group
     each story in stories
       li.list-group-item.mb-3
-        h2.mr-3=story.name
+        h2.mr-3=story.title
         p.mr-3=story.content
         div.mr-3=story.order
         .mb-3
           each category in story.categories
             span.badge.badge-primary.mr-2= category.name
 
-
-        //-to deploy this app I needed a helper. In .env ive set "https://tmy.menkent.uberspace.de/ultrablog/" and pass this in index.js:14 as a template helper per res.locals.domain to use here absolute paths
         form.d-flex.justify-content-between(method='POST', action='/admin/stories/delete/'+story._id +'?_method=DELETE')
           a.btn.btn-outline-primary.mr-2(href="/stories/"+story._id) Show
 
           if !public
             .d-flex.align-items-center
-              //-to deploy this app I needed a helper. In .env ive set "https://tmy.menkent.uberspace.de/ultrablog/" and pass this in index.js:14 as a template helper per res.locals.domain to use here absolute paths
+              
               a.btn.btn-outline-primary.mr-2(href="/admin/stories/edit/"+story._id) Edit
               button.btn.btn-outline-danger(type='submit') delete

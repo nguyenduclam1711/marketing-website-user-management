@@ -3,9 +3,13 @@ var Schema = mongoose.Schema;
 
 var StorySchema = new Schema({
   categories: [{ type: Schema.ObjectId, ref: "Category" }],
-  name: String,
+  title: String,
+  alumniName: String,
+  workPosition: String,
+  excerpt: String,
   content: String,
-  order: Number
+  order: Number,
+  image: String
 });
 
 module.exports = mongoose.model("Story", StorySchema);

@@ -5,11 +5,11 @@ mixin contactlist(public)
         h2.mr-3=contact.name
         p.mr-3=contact.content
         div.mr-3=contact.order
-        //-to deploy this app I needed a helper. In .env ive set "https://tmy.menkent.uberspace.de/ultrablog/" and pass this in index.js:14 as a template helper per res.locals.domain to use here absolute paths
+        
         form.d-flex.justify-content-between(method='POST', action='/contacts/delete/'+contact._id +'?_method=DELETE')
           a.btn.btn-outline-primary.mr-2(href="contacts/"+contact._id) Show
           if !public
             .d-flex.align-items-center
-              //-to deploy this app I needed a helper. In .env ive set "https://tmy.menkent.uberspace.de/ultrablog/" and pass this in index.js:14 as a template helper per res.locals.domain to use here absolute paths
+              
               a.btn.btn-outline-primary.mr-2(href="contacts/edit/"+contact._id) Edit
               button.btn.btn-outline-danger(type='submit') delete
