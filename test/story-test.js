@@ -25,7 +25,7 @@ describe("Stories", function() {
   describe("Model tests", function() {
     it("should save without error", function(done) {
       var story = new Story({
-        name: "tobi",
+        title: "tobi",
         order: 1,
         content: "Lorem ipsum dolor sit amed."
       });
@@ -50,7 +50,7 @@ describe("Database Tests", function() {
     //Save object with 'name' value of 'Mike"
     it("New name saved to test database", function(done) {
       var testStory = new Story({
-        name: "Mike"
+        title: "Mike"
       });
 
       testStory.save(done);
@@ -69,7 +69,7 @@ describe("Database Tests", function() {
     //});
     it("Should retrieve data from test database", function(done) {
       //Look up the 'Mike' object previously saved.
-      Story.find({ name: "Mike" }, (err, name) => {
+      Story.find({ title: "Mike" }, (err, name) => {
         if (err) {
           throw err;
         }
@@ -89,9 +89,9 @@ describe("Database Tests", function() {
   });
 });
 //describe('Connection', async function() {
-//var tobi = new Story({name: 'tobi', order: 1, content: "Lorem ipsum dolor sit amed."}),
-//loki = new Story({name: 'loki', order: 2, content: "Lorem ipsum dolor sit amed."}),
-//jane = new Story({name: 'jane', order: 3, content: "Lorem ipsum dolor sit amed."});
+//var tobi = new Story({title: 'tobi', order: 1, content: "Lorem ipsum dolor sit amed."}),
+//loki = new Story({title: 'loki', order: 2, content: "Lorem ipsum dolor sit amed."}),
+//jane = new Story({title: 'jane', order: 3, content: "Lorem ipsum dolor sit amed."});
 //await Story.remove()
 
 //beforeEach(function(done) {
