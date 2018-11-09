@@ -3,6 +3,7 @@ require("dotenv").config({
   path: __dirname + "/.env"
 });
 const fs = require("fs");
+const request = require('request');
 
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGOURL);
@@ -14,6 +15,8 @@ const Contact = require("./models/contact");
 const Location = require("./models/location");
 const Course = require("./models/course");
 const Page = require("./models/page");
+
+
 
 const categories = [
   {
@@ -105,7 +108,11 @@ const pages = [
     order: 3
   }
 ];
-
+var images = [
+  'https://placekitten.com/400/300',
+  'https://placekitten.com/400/301',
+  'https://placekitten.com/400/302',
+]
 const stories = [
   {
     title: "Voluptatem sunt similique non ",
@@ -115,7 +122,7 @@ const stories = [
     content:
       "The story of Jenny which has a super cool job as a Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum.",
     order: 1,
-    image: "e8ed086b-785c-4b5e-8197-28956d05bb76.png"
+    image: 'kitten1.jpg'
   },
   {
     title: "Volsggdsg sytyt sgfdhgfhgjg ",
@@ -125,7 +132,7 @@ const stories = [
     content:
       "Back in the days she was a bit introvert but now she can handle a lot of strange situations with her colleagues without any problem. Talking in front of many people Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum.",
     order: 2,
-    image: "e8ed086b-783d-4b5c-8198-28956d05tt67.png"
+    image: 'kitten2.jpg'
   },
   {
     title: "Qui mollitia sit animi quisquam et nostrud consequatur Facilis dignissimo",
@@ -135,7 +142,7 @@ const stories = [
     content:
       "Stuart bit introvert but now she can handle a lot of strange situations with her colleagues without any problem. Talking in front of many people Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum.",
     order: 3,
-    image: "e8ed086b-785c-4b5e-8197-28956d05bb76.png"
+    image: 'kitten3.jpg'
   }
 ];
 
@@ -219,9 +226,33 @@ async function seedRandomNtoN(arrayOfRecords, relationship, model) {
   });
   return arrayOfRecords;
 }
+const downloadImages = async function(uri, filename, callback){
+  return new Promise(function(resolve, reject) {
+    request.head(uri, function(err, res, body){
+      console.log('content-type:', res.headers['content-type']);
+      console.log('content-length:', res.headers['content-length']);
 
+      request(uri).pipe(fs.createWriteStream(filename)).on('close', () =>{
+        resolve('ya')
+      });
+    });
+  });
+};
+
+async function seedRandomImages(arrayOfRecords, relationship, model) {
+  const imageUploadDir = './uploads/images/'
+  let index = 0
+  var promises = []
+  for await (let image of images){
+    index++
+    promises.push(downloadImages(image, `${imageUploadDir}/kitten${index}.jpg` ))
+  }
+  return promises
+}
 async function loadData() {
   try {
+    const resp = await Promise.all(await seedRandomImages())
+    console.log('#####', resp);
     const createdCategories = await Category.insertMany(categories);
     const createdLocations = await Location.insertMany(locations);
     const createdCourse = await Course.insertMany(courses);
