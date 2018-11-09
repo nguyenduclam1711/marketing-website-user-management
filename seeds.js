@@ -3,6 +3,7 @@ require("dotenv").config({
   path: __dirname + "/.env"
 });
 const fs = require("fs");
+const request = require('request');
 
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGOURL);
@@ -14,6 +15,8 @@ const Contact = require("./models/contact");
 const Location = require("./models/location");
 const Course = require("./models/course");
 const Page = require("./models/page");
+
+
 
 const categories = [
   {
@@ -57,7 +60,7 @@ const pages = [
   {
     title: "Support us",
     content:
-        `
+      `
         At Digital Career Institute  you learn the most relevant technology skills of today from Web Development, Digital Marketing, Product Management to Data.
         \n\r
         We train and  provide the necessary hardware and digital learning aids as well as a relevant mentoring and buddy system needed to get the digital skills of today’s age.`,
@@ -66,7 +69,7 @@ const pages = [
   {
     title: "Become a buddy",
     content:
-        `Digital Career Institute doesn’t only qualify refugees but also helps to integrate them. To keep ambitions and motivation of the participants high, we want to place a spiritual coach, a buddy, at their sides – you!
+      `Digital Career Institute doesn’t only qualify refugees but also helps to integrate them. To keep ambitions and motivation of the participants high, we want to place a spiritual coach, a buddy, at their sides – you!
 
         \n\r
         Become a buddy
@@ -102,28 +105,44 @@ const pages = [
       Share your knowledge in a class or workshop whenever it fits your schedule.
 
       Check out our open Positions`,
-order: 3
+    order: 3
   }
 ];
-
+var images = [
+  'https://placekitten.com/400/300',
+  'https://placekitten.com/400/301',
+  'https://placekitten.com/400/302',
+]
 const stories = [
   {
+    title: "Voluptatem sunt similique non ",
     name: "Finally arrived in cool company",
+    workPosition: "Sunt est dicta obcaecati ",
+    excerpt: "Occaecat voluptatem commodo sapiente unde",
     content:
       "The story of Jenny which has a super cool job as a Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum.",
-    order: 1
+    order: 1,
+    image: 'kitten1.jpg'
   },
   {
+    title: "Volsggdsg sytyt sgfdhgfhgjg ",
     name: "Alice is a Do-er",
+    workPosition: "Culpa ut deserunt rem voluptatem sunt id",
+    excerpt: "Ea ex in est quisquam obcaecati rem qui non consequuntur quo qui",
     content:
       "Back in the days she was a bit introvert but now she can handle a lot of strange situations with her colleagues without any problem. Talking in front of many people Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum.",
-    order: 2
+    order: 2,
+    image: 'kitten2.jpg'
   },
   {
+    title: "Qui mollitia sit animi quisquam et nostrud consequatur Facilis dignissimo",
     name: "Stuart struggles while doing so much Backend",
+    workPosition: "Culpa ut deserunt rem voluptatem",
+    excerpt: "Ea ex in est quisquam obcaecati rem qui non consequuntur quo qui",
     content:
       "Stuart bit introvert but now she can handle a lot of strange situations with her colleagues without any problem. Talking in front of many people Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum.",
-    order: 3
+    order: 3,
+    image: 'kitten3.jpg'
   }
 ];
 
@@ -207,9 +226,33 @@ async function seedRandomNtoN(arrayOfRecords, relationship, model) {
   });
   return arrayOfRecords;
 }
+const downloadImages = async function(uri, filename, callback){
+  return new Promise(function(resolve, reject) {
+    request.head(uri, function(err, res, body){
+      console.log('content-type:', res.headers['content-type']);
+      console.log('content-length:', res.headers['content-length']);
 
+      request(uri).pipe(fs.createWriteStream(filename)).on('close', () =>{
+        resolve('ya')
+      });
+    });
+  });
+};
+
+async function seedRandomImages(arrayOfRecords, relationship, model) {
+  const imageUploadDir = './uploads/images/'
+  let index = 0
+  var promises = []
+  for await (let image of images){
+    index++
+    promises.push(downloadImages(image, `${imageUploadDir}/kitten${index}.jpg` ))
+  }
+  return promises
+}
 async function loadData() {
   try {
+    const resp = await Promise.all(await seedRandomImages())
+    console.log('#####', resp);
     const createdCategories = await Category.insertMany(categories);
     const createdLocations = await Location.insertMany(locations);
     const createdCourse = await Course.insertMany(courses);
