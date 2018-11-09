@@ -57,7 +57,7 @@ const pages = [
   {
     title: "Support us",
     content:
-        `
+      `
         At Digital Career Institute  you learn the most relevant technology skills of today from Web Development, Digital Marketing, Product Management to Data.
         \n\r
         We train and  provide the necessary hardware and digital learning aids as well as a relevant mentoring and buddy system needed to get the digital skills of today’s age.`,
@@ -66,7 +66,7 @@ const pages = [
   {
     title: "Become a buddy",
     content:
-        `Digital Career Institute doesn’t only qualify refugees but also helps to integrate them. To keep ambitions and motivation of the participants high, we want to place a spiritual coach, a buddy, at their sides – you!
+      `Digital Career Institute doesn’t only qualify refugees but also helps to integrate them. To keep ambitions and motivation of the participants high, we want to place a spiritual coach, a buddy, at their sides – you!
 
         \n\r
         Become a buddy
@@ -102,28 +102,40 @@ const pages = [
       Share your knowledge in a class or workshop whenever it fits your schedule.
 
       Check out our open Positions`,
-order: 3
+    order: 3
   }
 ];
 
 const stories = [
   {
+    title: "Voluptatem sunt similique non ",
     name: "Finally arrived in cool company",
+    workPosition: "Sunt est dicta obcaecati ",
+    excerpt: "Occaecat voluptatem commodo sapiente unde",
     content:
       "The story of Jenny which has a super cool job as a Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum.",
-    order: 1
+    order: 1,
+    image: "e8ed086b-785c-4b5e-8197-28956d05bb76.png"
   },
   {
+    title: "Volsggdsg sytyt sgfdhgfhgjg ",
     name: "Alice is a Do-er",
+    workPosition: "Culpa ut deserunt rem voluptatem sunt id",
+    excerpt: "Ea ex in est quisquam obcaecati rem qui non consequuntur quo qui",
     content:
       "Back in the days she was a bit introvert but now she can handle a lot of strange situations with her colleagues without any problem. Talking in front of many people Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum.",
-    order: 2
+    order: 2,
+    image: "e8ed086b-783d-4b5c-8198-28956d05tt67.png"
   },
   {
+    title: "Qui mollitia sit animi quisquam et nostrud consequatur Facilis dignissimo",
     name: "Stuart struggles while doing so much Backend",
+    workPosition: "Culpa ut deserunt rem voluptatem",
+    excerpt: "Ea ex in est quisquam obcaecati rem qui non consequuntur quo qui",
     content:
       "Stuart bit introvert but now she can handle a lot of strange situations with her colleagues without any problem. Talking in front of many people Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum.",
-    order: 3
+    order: 3,
+    image: "e8ed086b-785c-4b5e-8197-28956d05bb76.png"
   }
 ];
 
