@@ -25,6 +25,8 @@ ul.nav-courses-pills {
   top: 0;
   position: sticky;
   list-style: none;
+  color: #007aff;
+  background-color: white;
 }
 
 /******************************************

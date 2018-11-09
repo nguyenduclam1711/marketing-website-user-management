@@ -1,4 +1,5 @@
-.cf-section {
+.modal-content {
+  border: none;
   padding: 3rem 0;
 }
 .cf-title {
@@ -54,9 +55,7 @@ form.contactForm-form input {
 .fluid-item > *:not(:last-child) {
   margin-right: 1rem;
 }
-.contactForm-form-control-wrap {
-  position: relative;
-}
+
 .m-b-10 {
   margin-bottom: 10px;
 }
