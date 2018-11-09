@@ -1,10 +1,12 @@
 console.log("js file loaded");
-$(document).scroll(function() {
-  if (
-    $(document).scrollTop() > 1000 &&
-    $("#contactModal").attr("displayed") === "false"
-  ) {
-    $("#contactModal").modal("show");
-    $("#contactModal").attr("displayed", "true");
+
+$(function() {
+  if (typeof Storage != "undefined") {
+    if (!localStorage.getItem("done")) {
+      setTimeout(function() {
+        $("#contactFormModal").modal("show");
+      }, 5000);
+    }
+    localStorage.setItem("done", true);
   }
 });
