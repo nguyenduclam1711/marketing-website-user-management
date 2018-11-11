@@ -1,0 +1,7 @@
+extends ../layout.pug
+block content
+  .container
+    .btn-group.mt-3(role="group" aria-label="Basic example" )
+      a.btn.btn-outline-primary(href="/admin/events/fetchevents")="Fetch events from Eventbride"
+      a.btn.btn-outline-danger(href="/admin/events/deleteevents")="Delete all"
+    +eventlist
