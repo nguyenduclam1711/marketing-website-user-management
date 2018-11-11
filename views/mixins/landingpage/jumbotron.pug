@@ -3,12 +3,9 @@ mixin jumbotron
     .jumbotron.jumbotron-fluid.jumbotron-courses
       .container
         h1.jumbotron-header Start your digital Career
-        p.paragraph-jumbotron
-          | Learn digital skills with us 
-          br
-          |  get the most fulfilling jobs.
+        p.paragraph-jumbotron#typed-cursor
+          | typedCursor.strings
         .btn-group
           a.btn.btn-primary.btn-lg.active(href='/courses', role='button') Brows Courses
           button#contact-us-btn.btn.ml-3.btn-secondary.rounded.mx-1.contact-us-btn(data-toggle='modal', data-target='#contactFormModal')
             |  Contact Us
-

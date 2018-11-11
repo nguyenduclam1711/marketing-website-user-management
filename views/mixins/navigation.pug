@@ -1,6 +1,8 @@
 mixin navigation
- nav.navbar.navbar-dark.navbar-expand-md.bg-primary.justify-content-center(class=currentPath == "/" ? "fixed-top" : "")
-  a.navbar-brand.d-flex.w-50.mr-auto(href="/") DCI
+ nav#headernav.navbar.navbar-dark.navbar-expand-md.justify-content-center.pr-5.pt-4.pb-4.bg-white(class=currentPath == "/" ? "fixed-top" : "")
+
+  a.navbar-brand.d-flex.w-50.ml-5.pt-0(href="/")
+    img(src='/media/dci.svg' alt='dci-logo' id='dci-logo')
   button.navbar-toggler(type='button', data-toggle='collapse', data-target='#collapsingNavbar3')
     span.navbar-toggler-icon
   #collapsingNavbar3.navbar-collapse.collapse.w-100
@@ -18,30 +20,30 @@ mixin navigation
 
       li.nav-item.dropdown
         a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mr-4(class= currentPath.includes('/courses') ? "active" : "" data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-          | Courses
+          | COURSES
         .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
           each course in courses
             a.dropdown-item(class= currentPath === ("/courses/" + course.name) ? "active" : "" href='/courses/'+ course.name)=course.name
       li.nav-item.dropdown
-        a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mr-4(class=currentPath == "/events" ? "active" : "" href='/events' data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-          | Events
+        a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mr-4(class=currentPath.includes('/events') ? "active" : "" href='/events' data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+          | EVENTS
         .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
           a.dropdown-item(href='/events') Berlin
           a.dropdown-item(href='/events') Düsseldorf
           a.dropdown-item(href='/events') Hamburg
           a.dropdown-item(href='/events') Köln
       li.nav-item
-        a.nav-link.mr-4(class=currentPath == "/stories" ? "active" : "" href='/stories') Stories
+        a.nav-link.mr-4(class=currentPath == "/stories" ? "active" : "" href='/stories') STORIES
     
-      li.nav-item.dropdown
+      li.nav-item.dropdowa
         a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mr-4(data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' class=currentPath == "/admin/contacts" ? "active" : "" href='/admin/contacts')
-          | Get Involved
+          | GET INVOLVED
         .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
           each page in pages
             a.dropdown-item(class= currentPath === ("/pages/" + page.id) ? "active" : "" href='/pages/'+ page.id)=page.title
         if user
           li.nav-item
-            a.nav-link(href='/users/logout') Logout
+            a.nav-link(href='/users/logout') LOGOUT
         else
           li.nav-item
-            a.nav-link(class=currentPath == "/users/login" ? "active" : "" href='/users/login') Login
+            a.nav-link(class=currentPath == "/users/login" ? "active" : "" href='/users/login') LOGIN
