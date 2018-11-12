@@ -9,6 +9,8 @@ const jimp = require('jimp');
 const uuid = require('uuid');
 const fs = require('fs');
 
+const IMAGE_UPLOAD_DIR = process.env.IMAGE_UPLOAD_DIR;
+
 module.exports.getStories = async function (req, res) {
   //here we get the whole collection and sort by order
   let stories = await Story.find({})
@@ -105,7 +107,7 @@ module.exports.updateStory = async function (req, res) {
 }
 
 
-const imageUploadDir = './uploads/images/'
+const imageUploadDir = IMAGE_UPLOAD_DIR;
 
 // Storage settings for project images
 const storage = multer.diskStorage({
