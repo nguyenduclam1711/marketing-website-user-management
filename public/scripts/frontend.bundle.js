@@ -95,16 +95,31 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var popper_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js");
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_1__);
-// console.log("js file loaded");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var popper_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js");
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_2__);
 
 
-$(document).scroll(function () {
-  if ($(document).scrollTop() > 1000 && $("#contactModal").attr("displayed") === "false") {
-    $("#contactModal").modal("show");
-    $("#contactModal").attr("displayed", "true");
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).scroll(function () {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).scrollTop() > 1000 && jquery__WEBPACK_IMPORTED_MODULE_0___default()("#contactModal").attr("displayed") === "false") {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()("#contactModal").modal("show");
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()("#contactModal").attr("displayed", "true");
+    }
+  });
+  console.log("js file loaded");
+
+  if (typeof Storage != "undefined") {
+    if (!localStorage.getItem("done")) {
+      setTimeout(function () {
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()("#contactFormModal").modal("show");
+      }, 5000);
+    }
+
+    localStorage.setItem("done", true);
   }
 }); // 
 // import Typed from "typed.js";
@@ -113,7 +128,6 @@ $(document).scroll(function () {
 //   strings: ["Learn digital skills with us to get the most fulfilling jobs."],
 //   typeSpeed: 2000
 // });
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
 
