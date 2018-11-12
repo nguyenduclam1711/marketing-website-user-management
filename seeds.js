@@ -6,7 +6,7 @@ const fs = require("fs");
 const request = require('request');
 
 const mongoose = require("mongoose");
-mongoose.connect(process.env.MONGOURL);
+mongoose.connect(process.env.MONGOURL, { useNewUrlParser: true });
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 
 const Story = require("./models/story");
@@ -119,11 +119,6 @@ const pages = [
     order: 3
   }
 ];
-var images = [
-  'https://placekitten.com/400/300',
-  'https://placekitten.com/400/301',
-  'https://placekitten.com/400/302',
-]
 const stories = [
   {
     title: "Voluptatem sunt similique non ",
@@ -206,14 +201,14 @@ const contacts = [
 
 async function deleteData() {
   console.log("😢 Goodbye Data...");
-  await Story.remove();
-  await Category.remove();
-  await Location.remove();
-  await Course.remove();
-  await Contact.remove();
-  await Page.remove();
-  await User.remove();
-  await Event.remove();
+  await Story.deleteMany();
+  await Category.deleteMany();
+  await Location.deleteMany();
+  await Course.deleteMany();
+  await Contact.deleteMany();
+  await Page.deleteMany();
+  await User.deleteMany();
+  await Event.deleteMany();
   console.log("Data Deleted. To load sample data, run\n\n\t npm run seeds\n\n");
   process.exit();
 }
@@ -231,30 +226,35 @@ async function seedRandomNtoN(arrayOfRecords, relationship, model) {
 const downloadImages = async function(uri, filename, callback){
   return new Promise(function(resolve, reject) {
     request.head(uri, function(err, res, body){
-      console.log('content-type:', res.headers['content-type']);
-      console.log('content-length:', res.headers['content-length']);
-
+      if(err){
+        console.log('#####', err);
+      }
       request(uri).pipe(fs.createWriteStream(filename)).on('close', () =>{
-        resolve('ya')
+        resolve()
       });
     });
   });
 };
 
+const imageUploadDir = './uploads/images/'
 async function seedRandomImages(arrayOfRecords, relationship, model) {
-  const imageUploadDir = './uploads/images/'
+  var images = [
+    'http://place-hoff.com/400/300',
+    'http://place-hoff.com/400/301',
+    'http://place-hoff.com/400/302',
+  ]
   let index = 0
   var promises = []
   for await (let image of images){
     index++
-    promises.push(downloadImages(image, `${imageUploadDir}/kitten${index}.jpg` ))
+    promises.push(downloadImages(image, `${imageUploadDir}/example_image_${index}.jpg` ))
   }
   return promises
 }
 async function loadData() {
   try {
     const resp = await Promise.all(await seedRandomImages())
-    console.log('#####', resp);
+    console.log(`Images saved to ${imageUploadDir}`);
     const createdCategories = await Category.insertMany(categories);
     const response = await EventsController.fetchevents();
     const createdLocations = await Location.find();

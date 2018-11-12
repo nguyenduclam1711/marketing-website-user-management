@@ -76,7 +76,9 @@ module.exports.fetchevents = async (req, res) => {
           }
         }
         resolve("worked")
-        res.redirect("/admin/events?alert=created")
+        if(res) {
+          res.redirect("/admin/events?alert=created")
+        }
       });
     });
   } catch (err) {
