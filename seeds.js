@@ -20,6 +20,8 @@ const Event = require("./models/event");
 
 const EventsController = require('./controllers/admin/AdminEventsController');
 
+const IMAGE_UPLOAD_DIR = process.env.IMAGE_UPLOAD_DIR;
+
 
 
 const categories = [
@@ -223,20 +225,20 @@ async function seedRandomNtoN(arrayOfRecords, relationship, model) {
   });
   return arrayOfRecords;
 }
-const downloadImages = async function(uri, filename, callback){
-  return new Promise(function(resolve, reject) {
-    request.head(uri, function(err, res, body){
-      if(err){
+const downloadImages = async function (uri, filename, callback) {
+  return new Promise(function (resolve, reject) {
+    request.head(uri, function (err, res, body) {
+      if (err) {
         console.log('#####', err);
       }
-      request(uri).pipe(fs.createWriteStream(filename)).on('close', () =>{
+      request(uri).pipe(fs.createWriteStream(filename)).on('close', () => {
         resolve()
       });
     });
   });
 };
 
-const imageUploadDir = './uploads/images/'
+const imageUploadDir = IMAGE_UPLOAD_DIR;
 async function seedRandomImages(arrayOfRecords, relationship, model) {
   var images = [
     'http://place-hoff.com/400/300',
@@ -245,9 +247,9 @@ async function seedRandomImages(arrayOfRecords, relationship, model) {
   ]
   let index = 0
   var promises = []
-  for await (let image of images){
+  for await (let image of images) {
     index++
-    promises.push(downloadImages(image, `${imageUploadDir}/example_image_${index}.jpg` ))
+    promises.push(downloadImages(image, `${imageUploadDir}/example_image_${index}.jpg`))
   }
   return promises
 }
