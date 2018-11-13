@@ -2,3 +2,5 @@ node_modules
 users/*
 !users/.gitkeep
 .env
+uploads/images
+install_nvm.sh
