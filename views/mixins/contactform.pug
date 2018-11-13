@@ -28,17 +28,14 @@ mixin contactform
             
           p.mt-4
           each location in locations
-            p | CLASS COMMENTED AND RE-DONE AS TERMS INPUT TO AVOID SCROLLING TO BOTTOM OF THE WINDOW. 
-              .custom-control.custom-checkbox
-                input.custom-control-input(name="locations" type='checkbox' id=location.name value=location._id  checked=(location.selected))
-                label.custom-control-label(for=location.name)=location.name
-            //p
-              .location-checkbox
+            //Without bootstrap
+            p
+              label.checkbox.Location
                 input(name="locations" type='checkbox' id=location.name value=location._id  checked=(location.selected))
-                span.ml-2.label(for=location.name)=location.name
+                span(for=location.name)=location.name
+                span.checkmark
 
-
-          //Without bootstrap
+   
           p
             label.checkbox.TermsofService
               | I have read and agree to the
@@ -47,7 +44,6 @@ mixin contactform
             a.ml-1(href='https://www.digitalcareerinstitute.org/dataprivacy/')
               | Data
               | Privacy
-
 
           p
             label.checkbox.StorageofData
@@ -63,6 +59,11 @@ mixin contactform
 
               
           //Bootstrap version
+
+             p
+              .custom-control.custom-checkbox
+                input.custom-control-input(name="locations" type='checkbox' id=location.name value=location._id  checked=(location.selected))
+                label.custom-control-label(for=location.name)=location.name
           //p
             .TermsofService.custom-control.custom-checkbox
               input#terms.custom-control-input(type='checkbox', name='TermsofService[]', value='I have read and agree to the', required='')
