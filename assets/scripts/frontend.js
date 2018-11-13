@@ -1,29 +1,20 @@
-import $ from 'jquery';
-import Popper from 'popper.js';
-import bootstrap from 'bootstrap';
+import $ from "jquery";
+import Popper from "popper.js";
+import bootstrap from "bootstrap";
+
+console.log("js file loaded");
+
 $(function() {
-  $(document).scroll(function() {
-    if (
-      $(document).scrollTop() > 1000 &&
-      $("#contactModal").attr("displayed") === "false"
-    ) {
-      $("#contactModal").modal("show");
-      $("#contactModal").attr("displayed", "true");
-    }
-  });
-
-  console.log("js file loaded");
-
   if (typeof Storage != "undefined") {
-    if (!localStorage.getItem("done")) {
+    if (!sessionStorage.getItem("done")) {
       setTimeout(function() {
         $("#contactFormModal").modal("show");
+        sessionStorage.setItem("done", true);
       }, 5000);
     }
-    localStorage.setItem("done", true);
   }
 });
-// 
+//
 // import Typed from "typed.js";
 //
 // let typedCursor = new Typed('#typed-cursor', {
