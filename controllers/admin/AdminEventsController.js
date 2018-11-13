@@ -16,16 +16,16 @@ module.exports.getEvents = async (req, res) => {
     } else {
       return acc
     }
-    }, {});
+  }, {});
 
   res.render('admin/events', {
     locationEvents
   })
 }
 module.exports.getEventsByLocation = async (req, res) => {
-  let location = await Location.findOne( { "name" : { $regex : new RegExp(req.params.location, "i") } } ) 
+  let location = await Location.findOne({ "name": { $regex: new RegExp(req.params.location, "i") } })
 
-  let events = await Event.find({location: location._id})
+  let events = await Event.find({ location: location._id })
 
   res.render('admin/eventslocation', {
     events
@@ -35,19 +35,20 @@ module.exports.getEventsByLocation = async (req, res) => {
 module.exports.fetchevents = async (req, res) => {
   const url = `https://www.eventbriteapi.com/v3/organizers/16608751086/events/?order_by=start_desc&expand=venue&token=${process.env.EVENTBRIDE_API_KEY}`
   try {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       request(url, async (error, response, body) => {
+        console.log(body)
         body = JSON.parse(body)
         if (error) {
           console.log('error:', error);
         }
         //const events = await body.events.map(async event => {
-        for await ( let event of body.events ){
+        for await (let event of body.events) {
           try {
             const existingEvent = await Event.findOne({ eventbride_id: event.id })
             if (!existingEvent) {
-              let location = await Location.findOne( { "name" : { $regex : new RegExp(event.venue.address.city, "i") } } ) 
-              if(!location){
+              let location = await Location.findOne({ "name": { $regex: new RegExp(event.venue.address.city, "i") } })
+              if (!location) {
                 location = new Location({
                   name: event.venue.address.city,
                   street: event.venue.address.address_1,
@@ -76,10 +77,10 @@ module.exports.fetchevents = async (req, res) => {
           }
         }
         resolve("worked")
-        if(res) {
+        if (res) {
           res.redirect("/admin/events?alert=created")
         }
-      });
+      })
     });
   } catch (err) {
     console.log(err);
