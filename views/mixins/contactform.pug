@@ -28,33 +28,60 @@ mixin contactform
             
           p.mt-4
           each location in locations
-            //p | CLASS COMMENTED AND RE-DONE AS TERMS INPUT TO AVOID SCROLLING TO BOTTOM OF THE WINDOW. 
+            //Without bootstrap
+            p
+              label.checkbox.Location
+                input(name="locations" type='checkbox' id=location.name value=location._id  checked=(location.selected))
+                span(for=location.name)=location.name
+                span.checkmark
+
+   
+          p
+            label.checkbox.TermsofService
+              | I have read and agree to the
+              input(type='checkbox', name='TermsofService[]', value='I have read and agree to the', required='')
+              span.checkmark
+            a.ml-1(href='https://www.digitalcareerinstitute.org/dataprivacy/')
+              | Data
+              | Privacy
+
+          p
+            label.checkbox.StorageofData
+              | I agree to my data being stored and used to receive the newsletter.
+              input(type='checkbox', name='StorageofData[]', value='I agree to my data being stored and used to receive the newsletter.')
+              span.checkmark
+
+          p
+            label.checkbox.Commercials
+              | I agree to receive information and commercial offers.
+              input(type='checkbox', name='Commercials[]', value='I agree to receive information and commercial offers.')
+              span.checkmark  
+
+              
+          //Bootstrap version
+
+             p
               .custom-control.custom-checkbox
                 input.custom-control-input(name="locations" type='checkbox' id=location.name value=location._id  checked=(location.selected))
                 label.custom-control-label(for=location.name)=location.name
-          
-
-            p
-              .location-checkbox
-                input(name="locations" type='checkbox' id=location.name value=location._id  checked=(location.selected))
-                span.ml-2.label(for=location.name)=location.name
-
-          p
-            .TermsofService
-              input(type='checkbox', name='TermsofService[]', value='I have read and agree to the', required='')
-              span.ml-2 I have read and agree to the
+          //p
+            .TermsofService.custom-control.custom-checkbox
+              input#terms.custom-control-input(type='checkbox', name='TermsofService[]', value='I have read and agree to the', required='')
+              label.custom-control-label(for='terms')
+                | I have read and agree to the
               a.ml-1(href='https://www.digitalcareerinstitute.org/dataprivacy/')
                 | Data
                 | Privacy
-          p
-            .StorageofData
-              input(type='checkbox', name='StorageofData[]', value='I agree to my data being stored and used to receive the newsletter.')
-              span.ml-2 I agree to my data being stored and used to receive the newsletter.
-          p
-            .Commercials
-              input(type='checkbox', name='Commercials[]', value='I agree to receive information and commercial offers.')
-              span.ml-2
-                | I
+
+          //p
+            .StorageofData.custom-control.custom-checkbox
+              input#datastorage.custom-control-input(type='checkbox', name='StorageofData[]', value='I agree to my data being stored and used to receive the newsletter.')
+              label.custom-control-label(for='datastorage')
+                | I agree to my data being stored and used to receive the newsletter.
+          //p
+            .Commercials.custom-control.custom-checkbox
+              input#commercials.custom-control-input(type='checkbox', name='Commercials[]', value='I agree to receive information and commercial offers.')
+              label.custom-control-label(for='commercials')
                 | I agree to receive information and commercial offers.
 
           button.btn.btn-primary(type="submit") Send!

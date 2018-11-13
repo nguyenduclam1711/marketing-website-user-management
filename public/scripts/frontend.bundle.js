@@ -103,25 +103,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+console.log("js file loaded");
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(function () {
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).scroll(function () {
-    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).scrollTop() > 1000 && jquery__WEBPACK_IMPORTED_MODULE_0___default()("#contactModal").attr("displayed") === "false") {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()("#contactModal").modal("show");
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()("#contactModal").attr("displayed", "true");
-    }
-  });
-  console.log("js file loaded");
-
   if (typeof Storage != "undefined") {
-    if (!localStorage.getItem("done")) {
+    if (!sessionStorage.getItem("done")) {
       setTimeout(function () {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()("#contactFormModal").modal("show");
+        sessionStorage.setItem("done", true);
       }, 5000);
     }
-
-    localStorage.setItem("done", true);
   }
-}); // 
+}); //
 // import Typed from "typed.js";
 //
 // let typedCursor = new Typed('#typed-cursor', {
@@ -14472,7 +14464,7 @@ return jQuery;
 __webpack_require__.r(__webpack_exports__);
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.14.4
+ * @version 1.14.5
  * @license
  * Copyright (c) 2016 Federico Zivolo and contributors
  *
@@ -14569,7 +14561,8 @@ function getStyleComputedProperty(element, property) {
     return [];
   }
   // NOTE: 1 DOM access here
-  var css = getComputedStyle(element, null);
+  var window = element.ownerDocument.defaultView;
+  var css = window.getComputedStyle(element, null);
   return property ? css[property] : css;
 }
 
@@ -14657,7 +14650,7 @@ function getOffsetParent(element) {
   var noOffsetParent = isIE(10) ? document.body : null;
 
   // NOTE: 1 DOM access here
-  var offsetParent = element.offsetParent;
+  var offsetParent = element.offsetParent || null;
   // Skip hidden elements which don't have an offsetParent
   while (offsetParent === noOffsetParent && element.nextElementSibling) {
     offsetParent = (element = element.nextElementSibling).offsetParent;
@@ -14669,9 +14662,9 @@ function getOffsetParent(element) {
     return element ? element.ownerDocument.documentElement : document.documentElement;
   }
 
-  // .offsetParent will return the closest TD or TABLE in case
+  // .offsetParent will return the closest TH, TD or TABLE in case
   // no offsetParent is present, I hate this job...
-  if (['TD', 'TABLE'].indexOf(offsetParent.nodeName) !== -1 && getStyleComputedProperty(offsetParent, 'position') === 'static') {
+  if (['TH', 'TD', 'TABLE'].indexOf(offsetParent.nodeName) !== -1 && getStyleComputedProperty(offsetParent, 'position') === 'static') {
     return getOffsetParent(offsetParent);
   }
 
@@ -15219,7 +15212,8 @@ function getReferenceOffsets(state, popper, reference) {
  * @returns {Object} object containing width and height properties
  */
 function getOuterSizes(element) {
-  var styles = getComputedStyle(element);
+  var window = element.ownerDocument.defaultView;
+  var styles = window.getComputedStyle(element);
   var x = parseFloat(styles.marginTop) + parseFloat(styles.marginBottom);
   var y = parseFloat(styles.marginLeft) + parseFloat(styles.marginRight);
   var result = {
