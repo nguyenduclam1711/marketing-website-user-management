@@ -18,6 +18,7 @@ router.get("/", async (req, res) => {
       .populate("categories")
       .sort("order")
       .exec({});
+    console.log('#####', stories);
     const locations = await Location.find({})
 
     let courses = await Course.find({})

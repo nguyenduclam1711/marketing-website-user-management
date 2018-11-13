@@ -5,6 +5,7 @@ mixin storylist(public)
         h2.mr-3=story.title
         p.mr-3=story.content
         div.mr-3=story.order
+        img(src='images/'+story.image)
         .mb-3
           each category in story.categories
             span.badge.badge-primary.mr-2= category.name
