@@ -39,9 +39,9 @@ font-size: 25px;
   position: relative;
 }
 
-/* #headernav a:active:before,
+/* #headernav a:active:before, 
 #headernav a:focus:before */
-#headernav .active:before {
+#headernav .active:before{
   content: '';
   position: absolute;
   background-image: url('/media/bracket.svg');
