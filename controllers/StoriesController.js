@@ -8,7 +8,7 @@ module.exports.getStories = async function(req, res) {
     .sort("order")
     .exec();
   let categories = await Category.find({}).exec();
-  console.log('#####', stories);
+  console.log(stories);
 
   res.render("stories", {
     stories: stories,

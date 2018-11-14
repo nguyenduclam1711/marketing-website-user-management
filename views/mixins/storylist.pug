@@ -1,20 +1,23 @@
 mixin storylist(public)
-  ul.list-group
+  ul.row
     each story in stories
-      li.list-group-item.mb-3
-        h2.mr-3=story.title
-        p.mr-3=story.content
-        div.mr-3=story.order
-        img(src='images/'+story.image)
-        .mb-3
-          each category in story.categories
-            span.badge.badge-primary.mr-2= category.name
+      li.col-4.d-flex
+        div.story-item.p-5.d-flex.flex-column.justify-content-between
+          p.text-justify=story.excerpt
+          .row.mt-4
+            .col-5.align-items-center
+              img.img-fluid.rounded-circle.mt-2(src='images/'+story.image)
+            .col
+              h3=story.alumniName          
+              p=story.workPosition
+            each category in story.categories
+              span.badge.badge-primary.mr-2= category.name
 
-        form.d-flex.justify-content-between(method='POST', action='/admin/stories/delete/'+story._id +'?_method=DELETE')
-          a.btn.btn-outline-primary.mr-2(href="/stories/"+story._id) Show
+          form.d-flex.justify-content-between(method='POST', action='/admin/stories/delete/'+story._id +'?_method=DELETE')
+            a.btn.mt-2(href="/stories/"+story._id) +Show more
 
-          if !public
-            .d-flex.align-items-center
-              
-              a.btn.btn-outline-primary.mr-2(href="/admin/stories/edit/"+story._id) Edit
-              button.btn.btn-outline-danger(type='submit') delete
+            if !public
+              .d-flex.align-items-center
+                
+                a.btn.btn-outline-primary.mr-2(href="/admin/stories/edit/"+story._id) Edit
+                button.btn.btn-outline-danger(type='submit') delete
