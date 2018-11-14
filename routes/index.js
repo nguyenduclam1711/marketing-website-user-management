@@ -82,7 +82,6 @@ router.post('/contact', async (req, res) => {
         return console.log(error);
         res.redirect("/?alert=error");
       }
-      console.log('#####', info);
       console.log("Message sent: %s", info.messageId);
     });
 

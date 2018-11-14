@@ -1,0 +1,36 @@
+
+body{
+  background-color: #fcfcfc;
+  width: 100vw;
+}
+
+h1{
+  /* font-weight: bold; */
+  color: #fff;
+  -webkit-filter: drop-shadow(10px 10px 5px #bfbebe);
+  filter: drop-shadow(10px 10px 5px #bfbebe);
+}
+
+h2{
+  font-weight: bold;
+  color: #1d3b8b;
+}
+
+span, a{
+  color: #e38419;
+}
+
+p{
+  color: #939393;
+}
+.story-item{
+  background-color: #fff;
+  -webkit-filter: drop-shadow(10px 10px 5px #bfbebe);
+  filter: drop-shadow(10px 10px 5px #bfbebe);
+}
+
+/* .img-alumn{
+  width: 5vw;
+  height: 5vw;
+  /* border-radius: 50%; 
+} */

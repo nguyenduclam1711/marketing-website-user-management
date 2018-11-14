@@ -124,33 +124,33 @@ const pages = [
 const stories = [
   {
     title: "Voluptatem sunt similique non ",
-    name: "Finally arrived in cool company",
-    workPosition: "Sunt est dicta obcaecati ",
-    excerpt: "Occaecat voluptatem commodo sapiente unde",
+    alumniName: "Daniela",
+    workPosition: "Ikea, Full-Stack Developer",
+    excerpt: "Daniela is one of our best students and an important part of the student community here at DCI campus.",
     content:
       "The story of Jenny which has a super cool job as a Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum.",
     order: 1,
-    image: 'kitten1.jpg'
+    image: 'example_image_1.jpg'
   },
   {
     title: "Volsggdsg sytyt sgfdhgfhgjg ",
-    name: "Alice is a Do-er",
-    workPosition: "Culpa ut deserunt rem voluptatem sunt id",
-    excerpt: "Ea ex in est quisquam obcaecati rem qui non consequuntur quo qui",
+    alumniName: "Jürgen",
+    workPosition: "Zalando, Full-Stack Developer",
+    excerpt: "Jürgen recently landed a job as a Junior Front-End Engineer at streaming provider Loots here in Berlin.",
     content:
       "Back in the days she was a bit introvert but now she can handle a lot of strange situations with her colleagues without any problem. Talking in front of many people Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum.",
     order: 2,
-    image: 'kitten2.jpg'
+    image: 'example_image_2.jpg'
   },
   {
     title: "Qui mollitia sit animi quisquam et nostrud consequatur Facilis dignissimo",
-    name: "Stuart struggles while doing so much Backend",
-    workPosition: "Culpa ut deserunt rem voluptatem",
-    excerpt: "Ea ex in est quisquam obcaecati rem qui non consequuntur quo qui",
+    alumniName: "Manny",
+    workPosition: "Amazon, Front-end Developer",
+    excerpt: "Manny recently landed a job as a Junior Full-Stack Engineer at streaming provider Loots here in Berlin.",
     content:
       "Stuart bit introvert but now she can handle a lot of strange situations with her colleagues without any problem. Talking in front of many people Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum.",
     order: 3,
-    image: 'kitten3.jpg'
+    image: 'example_image_3.jpg'
   }
 ];
 
@@ -229,7 +229,7 @@ const downloadImages = async function (uri, filename, callback) {
   return new Promise(function (resolve, reject) {
     request.head(uri, function (err, res, body) {
       if (err) {
-        console.log('#####', err);
+        console.log('error', err);
       }
       request(uri).pipe(fs.createWriteStream(filename)).on('close', () => {
         resolve()
