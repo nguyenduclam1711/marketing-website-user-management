@@ -18,7 +18,6 @@ router.get("/", async (req, res) => {
       .populate("categories")
       .sort("order")
       .exec({});
-    console.log('#####', stories);
     const locations = await Location.find({})
 
     let courses = await Course.find({})
@@ -83,7 +82,6 @@ router.post('/contact', async (req, res) => {
         return console.log(error);
         res.redirect("/?alert=error");
       }
-      console.log('#####', info);
       console.log("Message sent: %s", info.messageId);
     });
 

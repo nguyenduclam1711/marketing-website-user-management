@@ -229,7 +229,7 @@ const downloadImages = async function (uri, filename, callback) {
   return new Promise(function (resolve, reject) {
     request.head(uri, function (err, res, body) {
       if (err) {
-        console.log('#####', err);
+        console.log('error', err);
       }
       request(uri).pipe(fs.createWriteStream(filename)).on('close', () => {
         resolve()

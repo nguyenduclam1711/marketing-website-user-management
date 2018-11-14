@@ -51,7 +51,6 @@ module.exports.editStory = async function (req, res) {
         return cat._doc;
       }
     });
-    console.log('#####', stories.length);
     const shiftStoryBack = stories.length + 1
 
     res.render("admin/editStory", {
