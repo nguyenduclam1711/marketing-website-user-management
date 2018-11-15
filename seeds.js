@@ -104,8 +104,7 @@ const pages = [
   },
   {
     title: "Teach at DCI",
-    content:
-      `Become an Instructor
+    content: `Become an Instructor
       EMPOWER PEOPLE TO PURSUE THE DIGITAL CAREERS THEY LOVE.
       Teach when you want
       FULL-TIME
@@ -127,8 +126,7 @@ const stories = [
     alumniName: "Daniela",
     workPosition: "Ikea, Full-Stack Developer",
     excerpt: "Daniela is one of our best students and an important part of the student community here at DCI campus.",
-    content:
-      "The story of Jenny which has a super cool job as a Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum.",
+    content: "The story of Jenny which has a super cool job as a Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum.",
     order: 1,
     image: 'example_image_1.jpg'
   },
