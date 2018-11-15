@@ -2,7 +2,7 @@ extends layout.pug
 block content
   
   .container.mt-5.text-left
-    h1.mr-3=page.title
+    h2.my-5=page.title
     - var str = page.content.replace(/[\r\n]/g, '<br/>');
-    p !{str}
+    p.pSize !{str}
   
