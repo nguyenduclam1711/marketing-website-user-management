@@ -42,7 +42,6 @@ module.exports.fetchevents = async (req, res) => {
   try {
     return new Promise(function(resolve, reject) {
       request(url, async (error, response, body) => {
-        console.log(body);
         body = JSON.parse(body);
         if (error) {
           console.log("error:", error);
@@ -68,7 +67,6 @@ module.exports.fetchevents = async (req, res) => {
                 location = await location.save();
               }
               let locationId = location._id ? location : null;
-              console.log("###", event);
 
               const newevent = new Event({
                 eventbride_id: event.id,

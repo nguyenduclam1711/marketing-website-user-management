@@ -261,9 +261,7 @@ async function loadData() {
     const createdCourse = await Course.insertMany(courses);
     const createdPages = await Page.insertMany(pages);
 
-    await User.createUser(adminUser, (err, user) => {
-      if (err) throw err;
-    });
+    const user = await User.createUser(adminUser);
 
     var associatedCategories = await seedRandomNtoN(stories, createdCategories, Category)
     var associatedLocations = await seedRandomNtoN(contacts, createdLocations, Location)
