@@ -1,0 +1,11 @@
+mixin getinvolved
+  .container.mt-5.text-left
+    .row
+      .col
+        h1.my-5.display-1 GET
+        | INVOLVED
+        .row
+          each page in pages
+            h2.mb-3
+              a(class= currentPath === ("/pages/" + page.id) ? "active" : "" href='/pages/'+ page.id)=page.title
+            
