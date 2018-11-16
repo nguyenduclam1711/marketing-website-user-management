@@ -53,6 +53,11 @@ section {
   clear: both;
   content: "";
 }
+
+.pSize{
+  font-size: 25px;
+}
+
 h1 a,
 h2 a,
 h3 a,
