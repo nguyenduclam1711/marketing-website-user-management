@@ -41,9 +41,11 @@ html(lang='en')
     link(rel="stylesheet", href="/assets/partners.css")
     link(rel="stylesheet", href="/assets/contactform.css")
     link(rel="stylesheet", href="/assets/footer.css")
-    link(rel="stylesheet", href="/assets/header.css")
     link(rel="stylesheet", href="/assets/oneyear.css")
     link(rel="stylesheet", href="/assets/storylist.css")
+
+    //TODO this should be the only stylesheet we require. All above should be removed
+    link(rel="stylesheet", href="/style.css")
     // Custom styles for this template
 
     //favicons
@@ -66,6 +68,6 @@ html(lang='en')
     +navigation
     block content
 
-    script(src="/scripts/frontend.bundle.js")
+    script(src="/frontend.bundle.js")
   
     
