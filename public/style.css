@@ -66,8 +66,8 @@ a {
   top: -5px;
   height: 58px;
   width: 50px;
-  -webkit-filter: drop-shadow(4px 3px 1px #bfbebe);
-  filter: drop-shadow(4px 3px 1px #bfbebe);
+  -webkit-filter: drop-shadow(10px 10px 4.5px #bfbebe);
+  filter: drop-shadow(10px 10px 4.5px #bfbebe);
 }
 
 #headernav .active:after {
@@ -84,8 +84,25 @@ a {
   top: -5px;
   height: 58px;
   width: 50px;
-  -webkit-filter: drop-shadow(-4px -3px 1px #bfbebe);
-  filter: drop-shadow(-4px -3px 1px #bfbebe);
+  -webkit-filter: drop-shadow(10px -8px 4.5px #bfbebe);
+  filter: drop-shadow(-10px -8px 4.5px #bfbebe);
+}
+
+/*GET INVOLVED*/
+div.verticalLineGetInv {
+  border-left: 4px solid #d3ba30 !important;
+}
+
+a.linksInvolved {
+  color: #1f3d87 !important;
+  text-decoration: none !important;
+}
+
+a.linksInvolved:hover {
+  color: #d3ba30 !important;
+  background-color: #fff !important;
+  -webkit-filter: drop-shadow(10px 10px 5px #bfbebe);
+  filter: drop-shadow(10px 10px 5px #bfbebe);
 }
 
 /******************************************
