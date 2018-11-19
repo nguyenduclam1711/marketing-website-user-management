@@ -33,12 +33,12 @@ const categories = [
   }
 ];
 
-const adminUser = new User({
+const adminUser = {
   name: 'admin',
   email: 'admin@example.com',
   username: 'admin',
-  password: 'password'
-});
+  password: '$2a$10$.D.ObRTjFkv4X0zyLCOE3ui9FKU1GveILRgvhQMWlIl2q3jbgnNoi', //password
+};
 
 const pages = [
   {
@@ -261,7 +261,9 @@ async function loadData() {
     const createdCourse = await Course.insertMany(courses);
     const createdPages = await Page.insertMany(pages);
 
-    const user = await User.createUser(adminUser);
+   const user = await User.create(adminUser)
+    console.log(`You can now login as:`)
+    console.log(adminUser)
 
     var associatedCategories = await seedRandomNtoN(stories, createdCategories, Category)
     var associatedLocations = await seedRandomNtoN(contacts, createdLocations, Location)

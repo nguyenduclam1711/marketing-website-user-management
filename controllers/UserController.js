@@ -43,7 +43,7 @@ module.exports.register = (req, res) => {
   }
 }
 module.exports.login = passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/admin/contacts',
     failureRedirect: '/users/login'
   }),
   (req, res) => {
