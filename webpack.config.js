@@ -7,15 +7,15 @@ module.exports = (env, argv) => {
   return {
     // Define the entry points of our application (can be multiple for different sections of a website)
     entry: {
-      frontend: "./assets/scripts/frontend.js"
+      frontend: "./assets/scripts/frontend.js",
       // backend: "./src/backend.js",
-      // style: "./src/style.js"
+       style: "./assets/css/style.js"
     },
 
     // Define the destination directory and filenames of compiled resources
     output: {
       filename: "[name].bundle.js",
-      path: path.resolve(__dirname, "public/scripts")
+      path: path.resolve(__dirname, "public")
     },
 
     // Define development options

@@ -15,6 +15,7 @@
     "connect-flash": "*",
     "connect-mongo": "*",
     "cookie-parser": "^1.4.3",
+    "css-loader": "^1.0.1",
     "dotenv": "^5.0.1",
     "es6-promisify": "^5.0.0",
     "express": "^4.16.3",
@@ -28,13 +29,16 @@
     "mongodb": "*",
     "mongoose": "^5.1.1",
     "multer": "*",
+    "node-sass": "^4.10.0",
     "nodemailer": "^4.6.7",
     "nodemon": "^1.17.5",
     "passport": "*",
     "passport-http": "*",
     "passport-local": "*",
     "popper.js": "^1.14.4",
+    "postcss-loader": "^3.0.0",
     "pug": "^2.0.3",
+    "sass-loader": "^7.1.0",
     "typed.js": "^1.1.6",
     "webpack": "^4.25.1"
   },
@@ -49,7 +53,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "dev": "concurrently \"webpack --mode development --watch\" \"nodemon index.js\"  -n \"WEBPACK,NODE\" --prefix name -c \"red.bold,blue.bold\"",
+    "dev": "concurrently \"webpack --mode development --watch\" \"nodemon index.js --ignore 'assets' --ignore 'public'\"  -n \"WEBPACK,NODE\" --prefix name -c \"red.bold,blue.bold\"",
     "seed": "node seeds.js",
     "seed:delete": "node seeds.js --delete",
     "test": "NODE_ENV=test mocha test/ --timeout 10000 --exit"
