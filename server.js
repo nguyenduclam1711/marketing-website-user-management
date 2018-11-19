@@ -1,4 +1,4 @@
-var { url, mongopath } = require("./helper.js");
+var { url, mongopath, getAsyncRedis } = require("./helper.js");
 const express = require("express");
 const app = express();
 var path = require("path");
@@ -13,7 +13,6 @@ const { promisify } = require('util');
 const Course = require("./models/course");
 const Page = require("./models/page");
 const Location = require("./models/location");
-const helper = require("./helper")
 
 // connect to redis server and get an extended client with promisified
 // methods getAsync() and setAsync()
@@ -22,7 +21,7 @@ let redisClient = null;
 
 if (process.env.USE_REDIS === "true") {
   redis = require("redis");
-  redisClient = helper.getAsyncRedis();
+  redisClient = getAsyncRedis();
 }
 
 // configure app to use bodyParser()
