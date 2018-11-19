@@ -1,18 +1,4 @@
-/*FONT-FAMILY*/
 @import url('https://fonts.googleapis.com/css?family=Didact+Gothic');
-
-@font-face {
-font-family: "Didact Gothic";
-src: url("fonts/Didact_Gothic/DidactGothic-Regular.ttf");
-src:
-url("fonts/Didact_Gothic/DidactGothic-Regular.ttf") format("ttf");
-}
-
-/*LOGO DCI*/
-/* .navbar-brand{
-  color: #1d3b8b !important;
-
-} */
 
 #dci-logo{
   width: 50px;
@@ -20,7 +6,6 @@ url("fonts/Didact_Gothic/DidactGothic-Regular.ttf") format("ttf");
   -webkit-filter: drop-shadow(3px 3px 1px #bfbebe);
   filter: drop-shadow(3px 3px 1px #bfbebe);
 }
-
 /*NAVIGATION-BAR*/
 .nav-link {
 /* font-family: 'Didact Gothic', sans-serif; */
