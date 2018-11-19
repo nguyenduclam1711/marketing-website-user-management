@@ -1,4 +1,4 @@
-var { url, mongopath } = require("./helper.js");
+var { url, mongopath, getAsyncRedis } = require("./helper.js");
 const express = require("express");
 const app = express();
 var path = require("path");
@@ -8,10 +8,21 @@ var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 const MongoStore = require('connect-mongo')(session);
-const promisify = require('es6-promisify');
+// const promisify = require('es6-promisify');
+const { promisify } = require('util');
 const Course = require("./models/course");
 const Page = require("./models/page");
 const Location = require("./models/location");
+
+// connect to redis server and get an extended client with promisified
+// methods getAsync() and setAsync()
+let redis = null;
+let redisClient = null;
+
+if (process.env.USE_REDIS === "true") {
+  redis = require("redis");
+  redisClient = getAsyncRedis();
+}
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -73,14 +84,45 @@ app.use(passport.session());
 
 // pass variables to our templates + all requests
 app.use(async (req, res, next) => {
-  let courses = await Course.find({})
-    .sort("order")
-    .exec();
-  let locations = await Location.find({})
-    .exec();
-  let pages = await Page.find({})
-    .sort("order")
-    .exec();
+  let navData = null;
+
+  if (process.env.USE_REDIS === "true") {
+    try {
+      getNavData = await redisClient.getAsync("navData");
+      navData = JSON.parse(getNavData);
+    } catch (error) {
+      console.error("Redis ERROR: Could not get navigation data: " + error);
+    }
+  }
+
+  if (navData === null) {
+    let courses = await Course.find({})
+      .sort("order")
+      .exec();
+    let locations = await Location.find({})
+      .exec();
+    let pages = await Page.find({})
+      .sort("order")
+      .exec();
+
+    navData = {
+      courses,
+      locations,
+      pages
+    };
+
+    console.log("saving data");
+    try {
+      await redisClient.setAsync("navData", JSON.stringify(navData));
+    } catch (error) {
+      console.error("Redis ERROR: Could not save navigation data: " + error);
+    }
+  } else {
+    console.log("using cached data");
+  }
+
+  const { courses, locations, pages } = navData;
+
   res.locals.user = req.user || null;
   res.locals.currentPath = req.path;
   res.locals.locations = locations;
