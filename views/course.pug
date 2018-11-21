@@ -1,9 +1,3 @@
 extends layout.pug
 block content
-  
-  if course.type == "oneyear"
-    +oneyear
-  else if course.type == "orientation"
-    +orientation
-  else if course.type == "coaching"
-    +coaching
+  +courses

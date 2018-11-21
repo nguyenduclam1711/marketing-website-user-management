@@ -21,6 +21,7 @@ router.get("/", async (req, res) => {
     const locations = await Location.find({})
 
     let courses = await Course.find({})
+    console.log(courses)
     let events = []
     for await (let loc of locations){
       if(!events){
@@ -43,7 +44,7 @@ router.get("/", async (req, res) => {
 
 
 router.post('/contact', async (req, res) => {
-  var contact = new Contact(); 
+  var contact = new Contact();
 
   contact.name = req.body.name;
   contact.email = req.body.email;
