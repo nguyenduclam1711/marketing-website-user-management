@@ -4,6 +4,9 @@
 footer {
   display: block;
 }
+.footer-flex {
+  justify-content: center;
+}
 
 .site-footer {
   margin-top: 3rem;
@@ -31,7 +34,7 @@ footer {
   padding: 0;
   margin-bottom: 1rem;
 }
-ul {
+ul.footer-ul {
   display: block;
   list-style-type: disc;
   list-style: none;
@@ -41,18 +44,19 @@ ul {
   margin-inline-end: 0px;
   padding-inline-start: 40px;
 }
-ul li,
-ol li {
+ul.footer-ul li {
   margin: 8px 0;
-}
-li {
   display: list-item;
 }
+
 .site-footer .site-info ul a {
   color: #555;
 }
 
 /*SUF*/
+.suf-row {
+  justify-content: center;
+}
 .site-footer .footer-suf {
   background-color: #f3f3f3;
   padding: 1.25rem 0 1rem;

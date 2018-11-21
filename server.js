@@ -3,13 +3,13 @@ const express = require("express");
 const app = express();
 var path = require("path");
 var bodyParser = require("body-parser");
-var expressValidator = require('express-validator');
-var session = require('express-session');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-const MongoStore = require('connect-mongo')(session);
+var expressValidator = require("express-validator");
+var session = require("express-session");
+var passport = require("passport");
+var LocalStrategy = require("passport-local").Strategy;
+const MongoStore = require("connect-mongo")(session);
 // const promisify = require('es6-promisify');
-const { promisify } = require('util');
+const { promisify } = require("util");
 const Course = require("./models/course");
 const Page = require("./models/page");
 const Location = require("./models/location");
@@ -39,13 +39,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(expressValidator());
 
-
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
   //Logger
   console.log(req.method, req.headers.host + req.url);
   next();
 });
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
   if (req.query.alert === "created") {
     res.locals.message = "Story created successfully!";
     res.locals.color = "alert-success";
@@ -99,8 +98,7 @@ app.use(async (req, res, next) => {
     let courses = await Course.find({})
       .sort("order")
       .exec();
-    let locations = await Location.find({})
-      .exec();
+    let locations = await Location.find({}).exec();
     let pages = await Page.find({})
       .sort("order")
       .exec();
