@@ -24,7 +24,7 @@ mixin navigation
           | COURSES
         .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
           each course in courses
-            a.dropdown-item(class= currentPath === ("/courses/" + course.name) ? "active" : "" href='/courses/'+ course.name)=course.name
+            a.dropdown-item(class= currentPath === ("/courses/" + course.headline) ? "active" : "" href='/courses/'+ course.headline)=course.headline
       li.nav-item.dropdown
         a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mr-4(class=currentPath.includes('/events') ? "active" : "" href='/events' data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
           | Events
