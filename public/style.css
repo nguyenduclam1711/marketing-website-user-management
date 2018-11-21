@@ -1,15 +1,12 @@
 @import url(https://fonts.googleapis.com/css?family=Didact+Gothic);
 /*GENERAL STYLES*/
 body {
-  background-color: #f8f7f7;
   width: 100vw;
 }
 
 h1 {
   /* font-weight: bold; */
-  color: #fff;
-  -webkit-filter: drop-shadow(10px 10px 5px #bfbebe);
-  filter: drop-shadow(10px 10px 5px #bfbebe);
+  color: #1d3b8b;
 }
 
 h2 {
@@ -23,8 +20,8 @@ h2 {
 
 /*NAVIGATION-BAR*/
 #dci-logo {
-  width: 50px;
-  height: 50px;
+  width: 69px;
+  height: 54px;
   -webkit-filter: drop-shadow(3px 3px 1px #bfbebe);
   filter: drop-shadow(3px 3px 1px #bfbebe);
 }
