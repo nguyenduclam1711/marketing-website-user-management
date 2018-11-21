@@ -22,8 +22,6 @@ const EventsController = require('./controllers/admin/AdminEventsController');
 
 const IMAGE_UPLOAD_DIR = process.env.IMAGE_UPLOAD_DIR;
 
-
-
 const categories = [
   {
     name: "Hard"
@@ -120,6 +118,7 @@ const pages = [
     order: 3
   }
 ];
+
 const stories = [
   {
     title: "Voluptatem sunt similique non ",
@@ -135,39 +134,233 @@ const stories = [
     alumniName: "Jürgen",
     workPosition: "Zalando, Full-Stack Developer",
     excerpt: "Jürgen recently landed a job as a Junior Front-End Engineer at streaming provider Loots here in Berlin.",
-    content:
-      "Back in the days she was a bit introvert but now she can handle a lot of strange situations with her colleagues without any problem. Talking in front of many people Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum.",
+    content:  "Back in the days she was a bit introvert but now she can handle a lot of strange situations with her colleagues without any problem. Talking in front of many people Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum.",
     order: 2,
     image: 'example_image_2.jpg'
   },
   {
-    title: "Qui mollitia sit animi quisquam et nostrud consequatur Facilis dignissimo",
+    title: "Qui mollt itia sit animi quisquam et nostrud consequatur Facilis dignissimo",
     alumniName: "Manny",
     workPosition: "Amazon, Front-end Developer",
     excerpt: "Manny recently landed a job as a Junior Full-Stack Engineer at streaming provider Loots here in Berlin.",
-    content:
-      "Stuart bit introvert but now she can handle a lot of strange situations with her colleagues without any problem. Talking in front of many people Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum.",
+    content:  "Stuart bit introvert but now she can handle a lot of strange situations with her colleagues without any problem. Talking in front of many people Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum.",
     order: 3,
     image: 'example_image_3.jpg'
   }
 ];
 
-
 const courses = [
   {
-    name: "Orientation course",
-    content: "One month course",
-    type: "orientation"
+    headline: "One to One Coaching",
+    subheading: "Write here something...",
+    title: "Figure out what tech job is for You",
+    subtitle: "Take special one to one 40 hours of coaching to find out what digital jobs suits you best. We learn hands-on from people working in the tech scene",
+    archivements: [
+      {
+        icon: "https://digitalcareerinstitute.org/wp-content/uploads/2017/04/students-on-class.png",
+        description: "Write here something..."
+      },
+      {
+        icon: "https://digitalcareerinstitute.org/wp-content/uploads/2017/04/students-on-class.png",
+        description: "Write here something..."
+      },
+      {
+        icon: "https://digitalcareerinstitute.org/wp-content/uploads/2017/04/students-on-class.png",
+        description: "Write here something..."
+      }
+    ],
+    features: [
+      {
+        title: "Write here something...",
+        subtitle: "Write here something...",
+        icon:"https://digitalcareerinstitute.org/wp-content/uploads/2017/04/javascript-hand-drawn-file.png"
+      },
+      {
+        title: "Write here something...",
+        subtitle: "Write here something...",
+        icon:"https://digitalcareerinstitute.org/wp-content/uploads/2017/04/sql-file-format-symbol.png"
+      },
+      {
+        title: "Write here something...",
+        subtitle: "Write here something...",
+        icon:"https://digitalcareerinstitute.org/wp-content/uploads/2017/04/github-logo.png"
+      },
+      {
+        title: "Write here something...",
+        subtitle: "Write here something...",
+        icon:"https://digitalcareerinstitute.org/wp-content/uploads/2017/04/project-manager.png"
+      }
+    ],
+    timeline: [
+      {
+        title: "Coffee & Code",
+        subtitle: "Self paced learning session",
+        time: "09:00"
+      },
+      {
+        title: "Lesson",
+        subtitle: "Teacher summary + Group discussion + Quick test",
+        time: "10:30"
+      },
+      {
+        title: "Lunch & Buddy Meetupe",
+        subtitle: "Lunch, buddy lunch once a week",
+        time: "12:00"
+      },
+      {
+        title: "Project Work",
+        subtitle: "Work on assignments to develop practical skills in a structured and supportive environment",
+        time: "12:30"
+      },
+      {
+        title: "Language Course",
+        subtitle: "Learn and improve your German and English with Expert instructors",
+        time: "16:00"
+      }
+    ]
   },
   {
-    name: "One year course",
-    content: "One year course",
-    type: "oneyear"
+    headline: "Orientation Course",
+    subheading: "Find out what tech job are you passionate about",
+    title: "Figure out which pathway suits you",
+    subtitle: "Take 4 weeks and find out which digital jobs suits you best. We visit the best tech companies and learn hands-on from people working there.",
+    archivements: [
+      {
+        icon: "https://digitalcareerinstitute.org/wp-content/uploads/2017/04/students-on-class.png",
+        description: "Introduction to Tech"
+      },
+      {
+        icon: "https://digitalcareerinstitute.org/wp-content/uploads/2017/04/students-on-class.png",
+        description: "Company Tours"
+      },
+      {
+        icon: "https://digitalcareerinstitute.org/wp-content/uploads/2017/04/students-on-class.png",
+        description: "Soft Skills"
+      }
+    ],
+    features: [
+      {
+        title: "Technical Introduction",
+        subtitle: "Internet, Browser, Coding Languages and Web Development",
+        icon:"https://digitalcareerinstitute.org/wp-content/uploads/2017/04/javascript-hand-drawn-file.png"
+      },
+      {
+        title: "Soft skills",
+        subtitle: "Discover and Measure one’s Personality, Behaviour as Employee and Teamwork",
+        icon:"https://digitalcareerinstitute.org/wp-content/uploads/2017/04/sql-file-format-symbol.png"
+      },
+      {
+        title: "Company Tours",
+        subtitle: "Take a tour of a local startup and see what the work environment is all about",
+        icon:"https://digitalcareerinstitute.org/wp-content/uploads/2017/04/github-logo.png"
+      },
+      {
+        title: "Find your passion",
+        subtitle: "Figure out which career path you want to take to achieve your dreams",
+        icon:"https://digitalcareerinstitute.org/wp-content/uploads/2017/04/project-manager.png"
+      }
+    ],
+    timeline: [
+      {
+        title: "Coffee & Code",
+        subtitle: "Self paced learning session",
+        time: "09:00"
+      },
+      {
+        title: "Lesson",
+        subtitle: "Teacher summary + Group discussion + Quick test",
+        time: "10:00"
+      },
+      {
+        title: "Lunch & Buddy Meetupe",
+        subtitle: "Lunch, buddy lunch once a week",
+        time: "13:00"
+      },
+      {
+        title: "Project Work",
+        subtitle: "Work on assignments to develop practical skills in a structured and supportive environment",
+        time: "14:00"
+      },
+      {
+        title: "Office Hours & Homework",
+        subtitle: "Get one to one time with instructors. Students often stay late to work together and solve problems before heading home. Make the most of your 9 months!",
+        time: "17:00"
+      }
+    ]
   },
   {
-    name: "Coaching course",
-    content: "Six months course",
-    type: "coaching"
+    headline: "Web Development Course",
+    subheading: "Become a web developer in 12 months",
+    title: "Start Your Career in Web Development",
+    subtitle: "Want to become a professional web developer? This is how it’s done. In this intensive, fully immersive 12-months course with 11-months of learning and 3-months internship, we’ll teach you everything you need to know to unlock your spot in one of the fastest-growing industries.",
+    archivements: [
+      {
+        icon: "https://digitalcareerinstitute.org/wp-content/uploads/2017/04/students-on-class.png",
+        description: "Learn from professional developers"
+      },
+      {
+        icon: "https://digitalcareerinstitute.org/wp-content/uploads/2017/04/students-on-class.png",
+        description: "Develop your own project"
+      },
+      {
+        icon: "https://digitalcareerinstitute.org/wp-content/uploads/2017/04/students-on-class.png",
+        description: "Ongoing career placement support"
+      }
+    ],
+    features: [
+      {
+        title: "Programming basics",
+        subtitle: "Learn the core skills of development – a beginner-friendly stack HTML, CSS and JavaScript",
+        icon:"https://digitalcarlearnedeerinstitute.org/wp-content/uploads/2017/04/javascript-hand-drawn-file.png"
+      },
+      {
+        title: "Specialisation",
+        subtitle: "Specialise in technologies like Angular, Node.js and Databases",
+        icon:"https://digitalcareerinstitute.org/wp-content/uploads/2017/04/sql-file-format-symbol.png"
+      },
+      {
+        title: "Team Work in Development",
+        subtitle: "Learn to work on a project with other developers",
+        icon:"https://digitalcareerinstitute.org/wp-content/uploads/2017/04/github-logo.png"
+      },
+      {
+        title: "Project Management",
+        subtitle: "Learn agile project management and tools like scrum",
+        icon:"https://digitalcareerinstitute.org/wp-content/uploads/2017/04/project-manager.png"
+      },
+      {
+        title: "Internship",
+        subtitle: "your steps into the job, do an internship in a tech company to apply what you have learned",
+        icon:"https://digitalcareerinstitute.org/wp-content/uploads/2017/04/project-manager.png"
+      }
+    ],
+    timeline: [
+      {
+        title: "Coffee & Code",
+        subtitle: "Self paced learning session",
+        time: "09:00"
+      },
+      {
+        title: "Lesson",
+        subtitle: "Teacher summary + Group discussion + Quick test",
+        time: "10:30"
+      },
+      {
+        title: "Lunch & Buddy Meetupe",
+        subtitle: "Lunch, buddy lunch once a week",
+        time: "12:00"
+      },
+      {
+        title: "Project Work",
+        subtitle: "Work on assignments to develop practical skills in a structured and supportive environment",
+        time: "12:30"
+      },
+      {
+        title: "Language Course",
+        subtitle: "Learn and improve your German and English with Expert instructors",
+        time: "16:00"
+      }
+    ]
   }
 ]
 

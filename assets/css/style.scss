@@ -6,9 +6,8 @@
   -webkit-filter: drop-shadow(3px 3px 1px #bfbebe);
   filter: drop-shadow(3px 3px 1px #bfbebe);
 }
-/*NAVIGATION-BAR*/
+
 .nav-link {
-  /* font-family: 'Didact Gothic', sans-serif; */
   color: #1d3b8b !important;
   font-size: 25px;
 }
@@ -23,8 +22,6 @@
   position: relative;
 }
 
-/* #headernav a:active:before, 
-#headernav a:focus:before */
 #headernav .active:before {
   content: "";
   position: absolute;
@@ -767,4 +764,81 @@ li {
 .site-footer .footer-suf .legal-links li {
   display: inline-block;
   margin: 0 0 0 0.5rem;
+}
+////////////////////////*COURSES*////////////////////////
+
+.btn-apply{
+  background:  #d3ba30;
+  color: #fff; 
+}
+
+.icons{
+  width: 48px;
+  height: 48px;
+}
+
+/*timeline*/
+
+.timelineRow:last-child .timelineDiv {
+  padding-bottom: 0;
+}
+
+.timelineDiv{
+  display: flex;
+  padding-bottom: 6rem;
+  position: relative;
+}
+
+.timelineDiv:not(:last-child):before {
+  content: "";
+  height: 100%;
+  width: 4px;
+  background: #d3ba30;
+  position: absolute;
+  left: 33px;
+  top: 0;
+}
+
+.timeline {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #d3ba30;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  line-height: 70px;
+  display: block;
+  position: relative;
+  margin-right: 1.5rem;
+}
+
+/*steps to apply*/
+
+.apply-step-number{
+  margin: 0;
+  padding: 0;
+}
+
+.applyDiv:not(:last-child):before {
+  content: "";
+  background: #007aff;
+  height: 3px;
+  width: 130%;
+  position: absolute;
+  top: 30px;
+}
+
+.apply-step-number {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #007aff;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  line-height: 60px;
+  margin-bottom: 1rem;
+  display: block;
+  position: relative;
 }

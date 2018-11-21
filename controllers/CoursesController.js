@@ -13,7 +13,9 @@ module.exports.getSingleCourse = async (req, res) => {
   try {
     //TODO get the real courses from the database model
     const courses = res.locals.courses;
-    const course = courses.find(n => n.name == req.params.course);
+    console.log(courses)
+    console.log(req.params.course)
+    const course = courses.find(n => n.headline == req.params.course);
     res.render(`course`, {
       course: course
     });
