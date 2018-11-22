@@ -1,25 +1,5 @@
 
-body{
-  background-color: #f8f7f7;
-  width: 100vw;
-}
-
-h1{
-  /* font-weight: bold; */
-  color: #fff;
-  -webkit-filter: drop-shadow(10px 10px 5px #bfbebe);
-  filter: drop-shadow(10px 10px 5px #bfbebe);
-}
-
-h2{
-  font-weight: bold;
-  color: #1d3b8b;
-}
-
-.orange-dot, a{
-  color: #e38419;
-}
-/* 
+/*
 p{
   color: #939393;
 } */
