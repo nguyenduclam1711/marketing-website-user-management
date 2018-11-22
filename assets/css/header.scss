@@ -1,0 +1,36 @@
+/*NAVIGATION-BRACKETS*/
+#headernav .active {
+  content: "";
+  position: relative;
+}
+
+#headernav .active:before {
+  content: "";
+  position: absolute;
+  background-image: url("/media/bracket.svg");
+  background-repeat: no-repeat;
+  background-size: 20px;
+  display: inline-block;
+  left: -7px;
+  top: -5px;
+  height: 58px;
+  width: 50px;
+  -webkit-filter: drop-shadow(10px 10px 4.5px #bfbebe);
+  filter: drop-shadow(10px 10px 4.5px #bfbebe);
+}
+
+#headernav .active:after {
+  content: "";
+  position: absolute;
+  background-image: url("/media/bracket.svg");
+  transform: rotate(180deg);
+  background-repeat: no-repeat;
+  background-size: 20px;
+  display: inline-block;
+  right: -5px;
+  top: -5px;
+  height: 58px;
+  width: 50px;
+  -webkit-filter: drop-shadow(10px -8px 4.5px #bfbebe);
+  filter: drop-shadow(-10px -8px 4.5px #bfbebe);
+}

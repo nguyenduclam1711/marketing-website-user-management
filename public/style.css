@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Didact+Gothic);
+<<<<<<< HEAD
 .getInvolved-content {
   text-align: center;
 }
@@ -49,6 +50,8 @@ a {
   border: 0;
 }
 
+=======
+>>>>>>> scope and clean up css
 /*NAVIGATION-BRACKETS*/
 #headernav .active {
   content: "";
@@ -66,8 +69,8 @@ a {
   top: -5px;
   height: 58px;
   width: 50px;
-  -webkit-filter: drop-shadow(4px 3px 1px #bfbebe);
-  filter: drop-shadow(4px 3px 1px #bfbebe);
+  -webkit-filter: drop-shadow(10px 10px 4.5px #bfbebe);
+  filter: drop-shadow(10px 10px 4.5px #bfbebe);
 }
 
 #headernav .active:after {
@@ -84,8 +87,358 @@ a {
   top: -5px;
   height: 58px;
   width: 50px;
-  -webkit-filter: drop-shadow(-4px -3px 1px #bfbebe);
-  filter: drop-shadow(-4px -3px 1px #bfbebe);
+  -webkit-filter: drop-shadow(10px -8px 4.5px #bfbebe);
+  filter: drop-shadow(-10px -8px 4.5px #bfbebe);
+}
+
+/******************************************
+     CONTACT FORM SECTION 
+*******************************************/
+.modal-content {
+  border: none;
+  padding: 3rem 0;
+}
+
+.cf-title {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+div.contactForm {
+  margin: 0;
+  padding: 0;
+}
+
+div.contactForm .screen-reader-response {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  width: 1px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+form.contactForm-form {
+  letter-spacing: initial;
+  font-weight: initial;
+  text-transform: initial;
+  font-size: initial;
+}
+
+div.contactForm {
+  margin: 0;
+  padding: 0;
+}
+
+form {
+  display: block;
+  margin-top: 0em;
+}
+
+form.contactForm-form input {
+  margin-bottom: 1.5rem;
+}
+
+.fluid-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.fluid-item > *:not(:last-child) {
+  margin-right: 1rem;
+}
+
+.m-b-10 {
+  margin-bottom: 10px;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+div.contactForm-response-output {
+  margin: 2em 0.5em 1em;
+  padding: 0.2em 1em;
+  border: 2px solid #f00;
+}
+
+.contactForm-display-none {
+  display: none;
+}
+
+.btn.btn-wide {
+  width: 100%;
+}
+
+textarea,
+select,
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"] {
+  background-color: white;
+  color: #222;
+  border: 2px solid #d9d9d9;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: normal;
+  width: 100%;
+  max-width: 100%;
+  outline: none;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  height: 42px;
+}
+
+/******************************************/
+.checkbox {
+  width: auto;
+  display: inline-block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 13px;
+  cursor: pointer;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox input {
+  position: absolute;
+  opacity: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  height: 15px;
+  width: 15px;
+  background-color: #eee;
+  border-radius: 20%;
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox input:checked ~ .checkmark {
+  background-color: #2196f3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox .checkmark:after {
+  left: 5px;
+  top: 3px;
+  width: 6px;
+  height: 6px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/******************************************
+        FOOTER SECTION 
+*******************************************/
+footer {
+  display: block;
+}
+
+.footer-flex {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.site-footer {
+  margin-top: 3rem;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.site-footer .footer-connect {
+  padding: 1.5rem 0px;
+}
+
+.site-footer .site-info {
+  padding: 2rem 0px;
+}
+
+.site-footer .footer-connect form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.site-footer .footer-connect .btn {
+  margin-left: 1rem;
+}
+
+.site-footer .site-info ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+ul.footer-ul {
+  display: block;
+  list-style-type: disc;
+  list-style: none;
+  -webkit-margin-before: 1em;
+          margin-block-start: 1em;
+  -webkit-margin-after: 1em;
+          margin-block-end: 1em;
+  -webkit-margin-start: 0px;
+          margin-inline-start: 0px;
+  -webkit-margin-end: 0px;
+          margin-inline-end: 0px;
+  -webkit-padding-start: 40px;
+          padding-inline-start: 40px;
+}
+
+ul.footer-ul li {
+  margin: 8px 0;
+  display: list-item;
+}
+
+.site-footer .site-info ul a {
+  color: #555;
+}
+
+/*SUF*/
+.suf-row {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.site-footer .footer-suf {
+  background-color: #f3f3f3;
+  padding: 1.25rem 0 1rem;
+}
+
+.site-footer .footer-suf .last-line {
+  float: left;
+}
+
+.site-footer .footer-suf p {
+  margin: 0;
+}
+
+.site-footer .footer-suf .legal-links {
+  float: right;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-footer .footer-suf .legal-links li {
+  display: inline-block;
+  margin: 0 0 0 0.5rem;
+}
+
+/*GENERAL STYLES*/
+body {
+  width: 100vw;
+}
+
+h1 {
+  /* font-weight: bold; */
+  color: #1d3b8b;
+}
+
+h2 {
+  font-weight: bold;
+  color: #1d3b8b;
+}
+
+.orange-dot, a {
+  color: #da9446;
+}
+
+/*NAVIGATION-BAR*/
+/*NAVIGATION-BAR*/
+#dci-logo {
+  width: 69px;
+  height: 54px;
+  -webkit-filter: drop-shadow(3px 3px 1px #bfbebe);
+  filter: drop-shadow(3px 3px 1px #bfbebe);
+}
+
+.nav-link {
+  color: #1d3b8b !important;
+  font-size: 25px;
+}
+
+.dropdown-toggle::after {
+  border: 0;
+}
+
+/*GET INVOLVED*/
+div.verticalLineGetInv {
+  border-left: 4px solid #d3ba30 !important;
+}
+
+a.linksInvolved {
+  color: #1f3d87 !important;
+  text-decoration: none !important;
+}
+
+a.linksInvolved:hover {
+  color: #d3ba30 !important;
+  background-color: #fff !important;
+  -webkit-filter: drop-shadow(10px 10px 5px #bfbebe);
+  filter: drop-shadow(10px 10px 5px #bfbebe);
 }
 
 /******************************************
@@ -384,10 +737,23 @@ textarea {
   font-size: 0.8rem;
 }
 
+<<<<<<< HEAD
+.footer-flex {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.site-footer {
+  margin-top: 3rem;
+  color: #555;
+  font-size: 0.9rem;
+=======
 .event-item-date .event-day {
   display: block;
   font-size: 1.75rem;
   line-height: 1;
+>>>>>>> scope and clean up css
 }
 
 .event-item .icon {
@@ -464,6 +830,9 @@ textarea {
   position: relative;
 }
 
+<<<<<<< HEAD
+ul.footer-ul {
+=======
 .newEvent-media-object {
   background-position: center center;
   background-size: cover;
@@ -472,6 +841,7 @@ textarea {
 
 .newEvent-media-object:after {
   content: " ";
+>>>>>>> scope and clean up css
   display: block;
   height: 100%;
   left: 0;
@@ -485,6 +855,11 @@ textarea {
   z-index: 10;
 }
 
+<<<<<<< HEAD
+ul.footer-ul li {
+  margin: 8px 0;
+  display: list-item;
+=======
 .newEvent-media:hover .newEvent-media-object:after {
   background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), color-stop(52%, rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.4)));
   background: -o-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 52%, rgba(0, 0, 0, 0.4) 100%);
@@ -500,16 +875,30 @@ textarea {
   padding: 12px 15px;
   position: relative;
   width: 65%;
+>>>>>>> scope and clean up css
 }
 
 .newEvent-media-body-top {
   display: block;
 }
 
+<<<<<<< HEAD
+/*SUF*/
+.suf-row {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.site-footer .footer-suf {
+  background-color: #f3f3f3;
+  padding: 1.25rem 0 1rem;
+=======
 .newEvent-media-body-heading {
   display: block;
   height: auto;
   margin-top: 10px;
+>>>>>>> scope and clean up css
 }
 
 .newEvent-media-body-supporting-bottom {
@@ -578,302 +967,6 @@ textarea {
   background-repeat: no-repeat;
   -webkit-filter: grayscale(100%);
           filter: grayscale(100%);
-}
-
-/******************************************
-     CONTACT FORM SECTION 
-*******************************************/
-.modal-content {
-  border: none;
-  padding: 3rem 0;
-}
-
-.cf-title {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-h3 {
-  font-size: 20px;
-  font-weight: 600;
-}
-
-div.contactForm {
-  margin: 0;
-  padding: 0;
-}
-
-div.contactForm .screen-reader-response {
-  position: absolute;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
-  height: 1px;
-  width: 1px;
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
-form.contactForm-form {
-  letter-spacing: initial;
-  font-weight: initial;
-  text-transform: initial;
-  font-size: initial;
-}
-
-div.contactForm {
-  margin: 0;
-  padding: 0;
-}
-
-form {
-  display: block;
-  margin-top: 0em;
-}
-
-form.contactForm-form input {
-  margin-bottom: 1.5rem;
-}
-
-.fluid-item {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -moz-align-items: center;
-  -ms-align-items: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.fluid-item > *:not(:last-child) {
-  margin-right: 1rem;
-}
-
-.m-b-10 {
-  margin-bottom: 10px;
-}
-
-textarea {
-  min-height: 100px;
-  resize: vertical;
-}
-
-div.contactForm-response-output {
-  margin: 2em 0.5em 1em;
-  padding: 0.2em 1em;
-  border: 2px solid #f00;
-}
-
-.contactForm-display-none {
-  display: none;
-}
-
-.btn.btn-wide {
-  width: 100%;
-}
-
-textarea,
-select,
-input[type="date"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="email"],
-input[type="month"],
-input[type="number"],
-input[type="password"],
-input[type="search"],
-input[type="tel"],
-input[type="text"],
-input[type="time"],
-input[type="url"],
-input[type="week"] {
-  background-color: white;
-  color: #222;
-  border: 2px solid #d9d9d9;
-  -webkit-box-shadow: none;
-          box-shadow: none;
-  padding: 12px;
-  border-radius: 4px;
-  font-size: 16px;
-  font-weight: normal;
-  width: 100%;
-  max-width: 100%;
-  outline: none;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  height: 42px;
-}
-
-/******************************************/
-.checkbox {
-  width: auto;
-  display: inline-block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 13px;
-  cursor: pointer;
-  font-size: 16px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-/* Hide the browser's default checkbox */
-.checkbox input {
-  position: absolute;
-  opacity: 0;
-  left: 0;
-  cursor: pointer;
-}
-
-/* Create a custom checkbox */
-.checkmark {
-  position: absolute;
-  top: 4px;
-  left: 0;
-  height: 15px;
-  width: 15px;
-  background-color: #eee;
-  border-radius: 20%;
-}
-
-/* On mouse-over, add a grey background color */
-.checkbox:hover input ~ .checkmark {
-  background-color: #ccc;
-}
-
-/* When the checkbox is checked, add a blue background */
-.checkbox input:checked ~ .checkmark {
-  background-color: #2196f3;
-}
-
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-/* Show the checkmark when checked */
-.checkbox input:checked ~ .checkmark:after {
-  display: block;
-}
-
-/* Style the checkmark/indicator */
-.checkbox .checkmark:after {
-  left: 5px;
-  top: 3px;
-  width: 6px;
-  height: 6px;
-  border: solid white;
-  border-width: 0 2px 2px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-
-/******************************************
-     FOOTER SECTION 
-*******************************************/
-footer {
-  display: block;
-}
-
-.footer-flex {
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.site-footer {
-  margin-top: 3rem;
-  color: #555;
-  font-size: 0.9rem;
-}
-
-.site-footer .footer-connect {
-  padding: 1.5rem 0px;
-}
-
-.site-footer .site-info {
-  padding: 2rem 0px;
-}
-
-.site-footer .footer-connect form {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  max-width: 500px;
-  margin: 0 auto;
-}
-
-.site-footer .footer-connect .btn {
-  margin-left: 1rem;
-}
-
-.site-footer .site-info ul {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 1rem;
-}
-
-ul.footer-ul {
-  display: block;
-  list-style-type: disc;
-  list-style: none;
-  -webkit-margin-before: 1em;
-          margin-block-start: 1em;
-  -webkit-margin-after: 1em;
-          margin-block-end: 1em;
-  -webkit-margin-start: 0px;
-          margin-inline-start: 0px;
-  -webkit-margin-end: 0px;
-          margin-inline-end: 0px;
-  -webkit-padding-start: 40px;
-          padding-inline-start: 40px;
-}
-
-ul.footer-ul li {
-  margin: 8px 0;
-  display: list-item;
-}
-
-.site-footer .site-info ul a {
-  color: #555;
-}
-
-/*SUF*/
-.suf-row {
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.site-footer .footer-suf {
-  background-color: #f3f3f3;
-  padding: 1.25rem 0 1rem;
-}
-
-.site-footer .footer-suf .last-line {
-  float: left;
-}
-
-.site-footer .footer-suf p {
-  margin: 0;
-}
-
-.site-footer .footer-suf .legal-links {
-  float: right;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.site-footer .footer-suf .legal-links li {
-  display: inline-block;
-  margin: 0 0 0 0.5rem;
 }
 
 .btn-apply {
