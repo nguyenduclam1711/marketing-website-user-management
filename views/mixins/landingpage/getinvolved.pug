@@ -9,5 +9,5 @@ mixin getinvolved
         each page in pages                       
           h2.my-4
             div
-              a.linksInvolved.text-center.px-3.py-1(class= currentPath === ("/pages/" + page.id) ? "active" : "" href='/pages/'+ page.id)=page.title
+              a.linksInvolved.text-center.px-3.py-1(class= currentPath === ("/pages/" + page._id) ? "active" : "" href='/pages/'+ page._id)=page.title
       
