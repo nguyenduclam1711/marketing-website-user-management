@@ -1,33 +1,43 @@
 @import url("https://fonts.googleapis.com/css?family=Didact+Gothic");
 
+.getInvolved-content {
+  text-align: center;
+}
+.getInvolved-container {
+  display: flex;
+  justify-content: center;
+}
+
 /*GENERAL STYLES*/
 
-body{
+body {
   // background-color: #f8f7f7;
   width: 100vw;
 }
 
-h1{
+h1 {
   /* font-weight: bold; */
   color: #1d3b8b;
   // -webkit-filter: drop-shadow(10px 10px 5px #bfbebe);
   // filter: drop-shadow(10px 10px 5px #bfbebe);
 }
 
-h2{
+h2 {
   font-weight: bold;
   color: #1d3b8b;
 }
 
-.orange-dot, a{
+.orange-dot,
+a {
   color: #da9446;
 }
 
 /*NAVIGATION-BAR*/
 
-#dci-logo{
+#dci-logo {
   width: 69px;
   height: 54px;
+
   -webkit-filter: drop-shadow(3px 3px 1px #bfbebe);
   filter: drop-shadow(3px 3px 1px #bfbebe);
 }
@@ -720,6 +730,10 @@ footer {
   display: block;
 }
 
+.footer-flex {
+  justify-content: center;
+}
+
 .site-footer {
   margin-top: 3rem;
   color: #555;
@@ -746,7 +760,7 @@ footer {
   padding: 0;
   margin-bottom: 1rem;
 }
-ul {
+ul.footer-ul {
   display: block;
   list-style-type: disc;
   list-style: none;
@@ -756,11 +770,8 @@ ul {
   margin-inline-end: 0px;
   padding-inline-start: 40px;
 }
-ul li,
-ol li {
+ul.footer-ul li {
   margin: 8px 0;
-}
-li {
   display: list-item;
 }
 .site-footer .site-info ul a {
@@ -768,6 +779,10 @@ li {
 }
 
 /*SUF*/
+.suf-row {
+  justify-content: center;
+}
+
 .site-footer .footer-suf {
   background-color: #f3f3f3;
   padding: 1.25rem 0 1rem;
@@ -792,12 +807,12 @@ li {
 }
 ////////////////////////*COURSES*////////////////////////
 
-.btn-apply{
-  background:  #d3ba30;
-  color: #fff; 
+.btn-apply {
+  background: #d3ba30;
+  color: #fff;
 }
 
-.icons{
+.icons {
   width: 48px;
   height: 48px;
 }
@@ -808,7 +823,7 @@ li {
   padding-bottom: 0;
 }
 
-.timelineDiv{
+.timelineDiv {
   display: flex;
   padding-bottom: 6rem;
   position: relative;
@@ -840,7 +855,7 @@ li {
 
 /*steps to apply*/
 
-.apply-step-number{
+.apply-step-number {
   margin: 0;
   padding: 0;
 }

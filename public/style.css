@@ -1,4 +1,17 @@
 @import url(https://fonts.googleapis.com/css?family=Didact+Gothic);
+.getInvolved-content {
+  text-align: center;
+}
+
+.getInvolved-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 /*GENERAL STYLES*/
 body {
   width: 100vw;
@@ -14,7 +27,8 @@ h2 {
   color: #1d3b8b;
 }
 
-.orange-dot, a {
+.orange-dot,
+a {
   color: #da9446;
 }
 
@@ -767,6 +781,12 @@ footer {
   display: block;
 }
 
+.footer-flex {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 .site-footer {
   margin-top: 3rem;
   color: #555;
@@ -799,7 +819,7 @@ footer {
   margin-bottom: 1rem;
 }
 
-ul {
+ul.footer-ul {
   display: block;
   list-style-type: disc;
   list-style: none;
@@ -815,12 +835,8 @@ ul {
           padding-inline-start: 40px;
 }
 
-ul li,
-ol li {
+ul.footer-ul li {
   margin: 8px 0;
-}
-
-li {
   display: list-item;
 }
 
@@ -829,6 +845,12 @@ li {
 }
 
 /*SUF*/
+.suf-row {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 .site-footer .footer-suf {
   background-color: #f3f3f3;
   padding: 1.25rem 0 1rem;
