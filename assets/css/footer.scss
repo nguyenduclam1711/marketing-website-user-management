@@ -1,0 +1,81 @@
+/******************************************
+        FOOTER SECTION 
+*******************************************/
+footer {
+  display: block;
+}
+.footer-flex {
+  justify-content: center;
+}
+
+.site-footer {
+  margin-top: 3rem;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.site-footer .footer-connect {
+  padding: 1.5rem 0px;
+}
+.site-footer .site-info {
+  padding: 2rem 0px;
+}
+.site-footer .footer-connect form {
+  display: flex;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.site-footer .footer-connect .btn {
+  margin-left: 1rem;
+}
+
+.site-footer .site-info ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+ul.footer-ul {
+  display: block;
+  list-style-type: disc;
+  list-style: none;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+ul.footer-ul li {
+  margin: 8px 0;
+  display: list-item;
+}
+
+.site-footer .site-info ul a {
+  color: #555;
+}
+
+/*SUF*/
+.suf-row {
+  justify-content: center;
+}
+.site-footer .footer-suf {
+  background-color: #f3f3f3;
+  padding: 1.25rem 0 1rem;
+}
+
+.site-footer .footer-suf .last-line {
+  float: left;
+}
+.site-footer .footer-suf p {
+  margin: 0;
+}
+
+.site-footer .footer-suf .legal-links {
+  float: right;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.site-footer .footer-suf .legal-links li {
+  display: inline-block;
+  margin: 0 0 0 0.5rem;
+}
