@@ -41,7 +41,7 @@
     "pug": "^2.0.3",
     "redis": "^2.8.0",
     "sass-loader": "^7.1.0",
-    "typed.js": "^1.1.6",
+    "typed.js": "^2.0.9",
     "webpack": "^4.25.1"
   },
   "devDependencies": {

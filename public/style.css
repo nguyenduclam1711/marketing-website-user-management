@@ -1,12 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Didact+Gothic);
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: "Didact Gothic", sans-serif !important;
-}
-
 .navbar.landingpage {
   position: absolute;
   width: 100%;
@@ -523,6 +515,56 @@ a {
 }
 
 /*NAVIGATION-BAR*/
+/*HOME*/
+.homeSection {
+  position: relative;
+  min-width: 100vw;
+  min-height: 100vh;
+  background-image: url("/images/home.jpg");
+  background-size: cover;
+}
+
+.mainHome {
+  position: relative;
+  background: rgba(29, 59, 139, 0.5);
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+.contentHome {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 60vw;
+}
+
+.startYour, .digitalCarrer {
+  font-size: 10rem;
+  font-weight: bold;
+  color: #fff;
+  margin: -27px;
+}
+
+.subtitle {
+  font-size: 3.7rem;
+  font-weight: lighter;
+  color: #dce0f2;
+}
+
+.buttonRow {
+  position: absolute;
+  left: 27%;
+  top: 108%;
+  width: 100vw;
+}
+
+.browserCourses, .contactUs {
+  font-size: 2rem;
+}
+
 #dci-logo {
   width: 69px;
   height: 54px;
@@ -710,7 +752,7 @@ textarea {
 }
 
 /******************************************
-        OUR COURSES TESTIMONIALS 
+        OUR COURSES TESTIMONIALS
 *******************************************/
 .section-padding {
   padding: 5rem 0;
@@ -766,7 +808,7 @@ textarea {
 }
 
 /******************************************
-     STATS COUNTER 
+     STATS COUNTER
 *******************************************/
 .counter-item {
   text-align: center;
@@ -799,7 +841,7 @@ textarea {
 }
 
 /******************************************
-     QUOTE  
+     QUOTE
 *******************************************/
 .section-mission {
   margin: 0 auto;
@@ -1048,7 +1090,7 @@ textarea {
 }
 
 /******************************************
-     OUR PARTNERS SECTION 
+     OUR PARTNERS SECTION
 *******************************************/
 .section-partners {
   padding: 4rem 0;
@@ -1071,7 +1113,7 @@ textarea {
 }
 
 /******************************************
-     CONTACT FORM SECTION 
+     CONTACT FORM SECTION
 *******************************************/
 .modal-content {
   border: none;
