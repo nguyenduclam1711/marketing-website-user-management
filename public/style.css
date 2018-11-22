@@ -1,57 +1,137 @@
 @import url(https://fonts.googleapis.com/css?family=Didact+Gothic);
-<<<<<<< HEAD
-.getInvolved-content {
-  text-align: center;
+html {
+  scroll-behavior: smooth;
 }
 
-.getInvolved-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-/*GENERAL STYLES*/
 body {
-  width: 100vw;
+  font-family: "Didact Gothic", sans-serif !important;
 }
 
-h1 {
-  /* font-weight: bold; */
-  color: #1d3b8b;
+.navbar.landingpage {
+  position: absolute;
+  width: 100%;
+  z-index: +1;
 }
 
-h2 {
-  font-weight: bold;
-  color: #1d3b8b;
+body:not(.admin).btn {
+  border-radius: 2px;
+  font-size: 1rem;
+  font-weight: 500;
+  border-width: 3px;
+  line-height: 1.5;
+  background-color: #007aff;
+  border-color: #007aff;
+  color: white;
+  line-height: 36px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
-.orange-dot,
-a {
-  color: #da9446;
+section {
+  display: block;
 }
 
-/*NAVIGATION-BAR*/
-#dci-logo {
-  width: 69px;
-  height: 54px;
-  -webkit-filter: drop-shadow(3px 3px 1px #bfbebe);
-  filter: drop-shadow(3px 3px 1px #bfbebe);
+.section-button-wrap {
+  text-align: center;
+  margin-top: 40px;
+  display: block;
 }
 
-.nav-link {
-  color: #1d3b8b !important;
+.container {
+  width: 100%;
+  max-width: 1140px;
+  padding-right: 0.9375rem;
+  padding-left: 0.9375rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.container::after {
+  display: table;
+  clear: both;
+  content: "";
+}
+
+.pSize {
   font-size: 25px;
 }
 
-.dropdown-toggle::after {
-  border: 0;
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: #333;
+  text-decoration: none;
 }
 
-=======
->>>>>>> scope and clean up css
+.col-lg-1,
+.col-lg-10,
+.col-lg-11,
+.col-lg-12,
+.col-lg-2,
+.col-lg-3,
+.col-lg-4,
+.col-lg-5,
+.col-lg-6,
+.col-lg-7,
+.col-lg-8,
+.col-lg-9,
+.col-md-1,
+.col-md-10,
+.col-md-11,
+.col-md-12,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-sm-1,
+.col-sm-10,
+.col-sm-11,
+.col-sm-12,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9,
+.col-xl-1,
+.col-xl-10,
+.col-xl-11,
+.col-xl-12,
+.col-xl-2,
+.col-xl-3,
+.col-xl-4,
+.col-xl-5,
+.col-xl-6,
+.col-xl-7,
+.col-xl-8,
+.col-xl-9,
+.col-xs-1,
+.col-xs-10,
+.col-xs-11,
+.col-xs-12,
+.col-xs-2,
+.col-xs-3,
+.col-xs-4,
+.col-xs-5,
+.col-xs-6,
+.col-xs-7,
+.col-xs-8,
+.col-xs-9 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 0.9375rem;
+  padding-left: 0.9375rem;
+}
+
 /*NAVIGATION-BRACKETS*/
 #headernav .active {
   content: "";
@@ -387,6 +467,38 @@ ul.footer-ul li {
   margin: 0 0 0 0.5rem;
 }
 
+/*
+p{
+  color: #939393;
+} */
+.story-item {
+  background-color: #fff;
+  -webkit-filter: drop-shadow(10px 10px 5px #bfbebe);
+  filter: drop-shadow(10px 10px 5px #bfbebe);
+}
+
+/* .img-alumn{
+  width: 5vw;
+  height: 5vw;
+  /* border-radius: 50%;
+} */
+body.admin {
+  background: #5a5a5a2b;
+}
+
+.getInvolved-content {
+  text-align: center;
+}
+
+.getInvolved-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 /*GENERAL STYLES*/
 body {
   width: 100vw;
@@ -402,11 +514,11 @@ h2 {
   color: #1d3b8b;
 }
 
-.orange-dot, a {
+.orange-dot,
+a {
   color: #da9446;
 }
 
-/*NAVIGATION-BAR*/
 /*NAVIGATION-BAR*/
 #dci-logo {
   width: 69px;
@@ -737,23 +849,10 @@ textarea {
   font-size: 0.8rem;
 }
 
-<<<<<<< HEAD
-.footer-flex {
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.site-footer {
-  margin-top: 3rem;
-  color: #555;
-  font-size: 0.9rem;
-=======
 .event-item-date .event-day {
   display: block;
   font-size: 1.75rem;
   line-height: 1;
->>>>>>> scope and clean up css
 }
 
 .event-item .icon {
@@ -830,9 +929,6 @@ textarea {
   position: relative;
 }
 
-<<<<<<< HEAD
-ul.footer-ul {
-=======
 .newEvent-media-object {
   background-position: center center;
   background-size: cover;
@@ -841,7 +937,6 @@ ul.footer-ul {
 
 .newEvent-media-object:after {
   content: " ";
->>>>>>> scope and clean up css
   display: block;
   height: 100%;
   left: 0;
@@ -855,11 +950,6 @@ ul.footer-ul {
   z-index: 10;
 }
 
-<<<<<<< HEAD
-ul.footer-ul li {
-  margin: 8px 0;
-  display: list-item;
-=======
 .newEvent-media:hover .newEvent-media-object:after {
   background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), color-stop(52%, rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.4)));
   background: -o-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 52%, rgba(0, 0, 0, 0.4) 100%);
@@ -875,30 +965,16 @@ ul.footer-ul li {
   padding: 12px 15px;
   position: relative;
   width: 65%;
->>>>>>> scope and clean up css
 }
 
 .newEvent-media-body-top {
   display: block;
 }
 
-<<<<<<< HEAD
-/*SUF*/
-.suf-row {
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.site-footer .footer-suf {
-  background-color: #f3f3f3;
-  padding: 1.25rem 0 1rem;
-=======
 .newEvent-media-body-heading {
   display: block;
   height: auto;
   margin-top: 10px;
->>>>>>> scope and clean up css
 }
 
 .newEvent-media-body-supporting-bottom {
@@ -967,6 +1043,302 @@ ul.footer-ul li {
   background-repeat: no-repeat;
   -webkit-filter: grayscale(100%);
           filter: grayscale(100%);
+}
+
+/******************************************
+     CONTACT FORM SECTION 
+*******************************************/
+.modal-content {
+  border: none;
+  padding: 3rem 0;
+}
+
+.cf-title {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+div.contactForm {
+  margin: 0;
+  padding: 0;
+}
+
+div.contactForm .screen-reader-response {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  width: 1px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+form.contactForm-form {
+  letter-spacing: initial;
+  font-weight: initial;
+  text-transform: initial;
+  font-size: initial;
+}
+
+div.contactForm {
+  margin: 0;
+  padding: 0;
+}
+
+form {
+  display: block;
+  margin-top: 0em;
+}
+
+form.contactForm-form input {
+  margin-bottom: 1.5rem;
+}
+
+.fluid-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.fluid-item > *:not(:last-child) {
+  margin-right: 1rem;
+}
+
+.m-b-10 {
+  margin-bottom: 10px;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+div.contactForm-response-output {
+  margin: 2em 0.5em 1em;
+  padding: 0.2em 1em;
+  border: 2px solid #f00;
+}
+
+.contactForm-display-none {
+  display: none;
+}
+
+.btn.btn-wide {
+  width: 100%;
+}
+
+textarea,
+select,
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"] {
+  background-color: white;
+  color: #222;
+  border: 2px solid #d9d9d9;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: normal;
+  width: 100%;
+  max-width: 100%;
+  outline: none;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  height: 42px;
+}
+
+/******************************************/
+.checkbox {
+  width: auto;
+  display: inline-block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 13px;
+  cursor: pointer;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox input {
+  position: absolute;
+  opacity: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  height: 15px;
+  width: 15px;
+  background-color: #eee;
+  border-radius: 20%;
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox input:checked ~ .checkmark {
+  background-color: #2196f3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox .checkmark:after {
+  left: 5px;
+  top: 3px;
+  width: 6px;
+  height: 6px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/******************************************
+     FOOTER SECTION 
+*******************************************/
+footer {
+  display: block;
+}
+
+.footer-flex {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.site-footer {
+  margin-top: 3rem;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.site-footer .footer-connect {
+  padding: 1.5rem 0px;
+}
+
+.site-footer .site-info {
+  padding: 2rem 0px;
+}
+
+.site-footer .footer-connect form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.site-footer .footer-connect .btn {
+  margin-left: 1rem;
+}
+
+.site-footer .site-info ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+ul.footer-ul {
+  display: block;
+  list-style-type: disc;
+  list-style: none;
+  -webkit-margin-before: 1em;
+          margin-block-start: 1em;
+  -webkit-margin-after: 1em;
+          margin-block-end: 1em;
+  -webkit-margin-start: 0px;
+          margin-inline-start: 0px;
+  -webkit-margin-end: 0px;
+          margin-inline-end: 0px;
+  -webkit-padding-start: 40px;
+          padding-inline-start: 40px;
+}
+
+ul.footer-ul li {
+  margin: 8px 0;
+  display: list-item;
+}
+
+.site-footer .site-info ul a {
+  color: #555;
+}
+
+/*SUF*/
+.suf-row {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.site-footer .footer-suf {
+  background-color: #f3f3f3;
+  padding: 1.25rem 0 1rem;
+}
+
+.site-footer .footer-suf .last-line {
+  float: left;
+}
+
+.site-footer .footer-suf p {
+  margin: 0;
+}
+
+.site-footer .footer-suf .legal-links {
+  float: right;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-footer .footer-suf .legal-links li {
+  display: inline-block;
+  margin: 0 0 0 0.5rem;
 }
 
 .btn-apply {
