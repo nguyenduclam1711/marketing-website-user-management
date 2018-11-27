@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./style.scss */ "./assets/css/style.scss");
+__webpack_require__(/*! ./style.scss */ "./assets/css/style.scss"); //require("./footer.scss");
 
 /***/ }),
 

@@ -1,0 +1,37 @@
+/******************************************
+//////////////////////////////////////////
+ ONE YEAR COURSE STYLING
+//////////////////////////////////////////
+*******************************************/
+.body-scroll {
+  position: relative;
+}
+
+/******************************************
+  SUB-CONTAINER WITH SCROLLSPY AND SECTIONS
+*******************************************/
+.container-fluid-courses {
+  width: 66%;
+}
+.col-sm-9 {
+  padding-left: 45px;
+}
+
+/******************************************
+  SCROLLSPY
+*******************************************/
+
+ul.nav-courses-pills {
+  top: 0;
+  padding: 10px;
+  position: sticky;
+  list-style: none;
+  color: #007aff;
+  background-color: white;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+}
+
+a.nav-link {
+  font-size: 1rem;
+  padding: 5px;
+}
