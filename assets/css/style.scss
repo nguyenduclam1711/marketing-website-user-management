@@ -42,6 +42,35 @@ a {
 
 /*NAVIGATION-BAR*/
 
+/*HOME*/
+$breakpoint1: 768px;
+
+.homeSection{
+  position: relative;
+  min-width: 100vw;
+  min-height: calc(100vh - 5rem);
+  background-image: url("/media/header.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  clip-path: polygon(50% 0%, 100% 0, 100% 95%, 50% 100%, 0 96%, 0 0);
+  @media (min-width: $breakpoint1){
+    clip-path: polygon(50% 0%, 100% 0, 100% 88%, 50% 100%, 0 92%, 0 0);
+  }
+}
+.mainHome{
+  position: relative;
+  background:rgba(29,59,139,0.5);
+  min-height:  calc(100vh - 5rem);
+}
+.startYour, .digitalCarrer{
+  font-weight: bold;
+  color: #fff;
+}
+
+.subtitle{
+  font-weight: lighter;
+  color: #dce0f2;
+}
 #dci-logo {
   width: 69px;
   height: 54px;
@@ -51,7 +80,6 @@ a {
 
 .nav-link {
   color: #1d3b8b !important;
-  font-size: 25px;
 }
 
 .dropdown-toggle::after {
@@ -59,40 +87,46 @@ a {
 }
 
 /*NAVIGATION-BRACKETS*/
-#headernav .active {
+#headernav {
+  height: 5rem;
+}
+
+#headernav a.active {
   content: "";
   position: relative;
 }
 
-#headernav .active:before {
-  content: "";
-  position: absolute;
-  background-image: url("/media/bracket.svg");
-  background-repeat: no-repeat;
-  background-size: 20px;
-  display: inline-block;
-  left: -7px;
-  top: -5px;
-  height: 58px;
-  width: 50px;
-  -webkit-filter: drop-shadow(4px 3px 1px #bfbebe);
-  filter: drop-shadow(4px 3px 1px #bfbebe);
-}
-
-#headernav .active:after {
-  content: "";
-  position: absolute;
-  background-image: url("/media/bracket.svg");
-  transform: rotate(180deg);
-  background-repeat: no-repeat;
-  background-size: 20px;
-  display: inline-block;
-  right: -5px;
-  top: -5px;
-  height: 58px;
-  width: 50px;
-  -webkit-filter: drop-shadow(-4px -3px 1px #bfbebe);
-  filter: drop-shadow(-4px -3px 1px #bfbebe);
+#headernav {
+  a.active,
+  a:hover {
+    &:before,
+    &:after{
+      content: "";
+      position: absolute;
+      background-image: url("/media/bracket.svg");
+      background-repeat: no-repeat;
+      background-size: 1em;
+      height: 58px;
+      width: 50px;
+    }
+    &:before{
+      left: -7px;
+      top: -5px;
+      -webkit-filter: drop-shadow(4px 3px 3px #bfbebe);
+      filter: drop-shadow(4px 3px 3px #bfbebe);
+    }
+    &:after{
+      left: auto;
+      right: 15px;
+      top: -17px;
+      transform: rotate(180deg);
+      -webkit-filter: drop-shadow(-4px -3px 3px #bfbebe);
+      filter: drop-shadow(-4px -3px 3px #bfbebe);
+    }
+  }
+  .dropdown-toggle:after {
+    margin-left: 0;
+  }
 }
 
 /******************************************
@@ -103,12 +137,6 @@ video {
   min-height: 100%;
   z-index: -100;
   background-size: cover;
-  filter: grayscale(43%) sepia(84%) brightness(54%) hue-rotate(170deg)
-    saturate(131%) opacity(87%) contrast(90%);
-  -webkit-filter: grayscale(43%) sepia(84%) brightness(54%) hue-rotate(170deg)
-    saturate(131%) opacity(87%) contrast(90%);
-  -moz-filter: grayscale(43%) sepia(84%) brightness(54%) hue-rotate(170deg)
-    saturate(131%) opacity(87%) contrast(90%);
 }
 
 /******************************************
@@ -216,7 +244,7 @@ textarea {
 }
 
 /******************************************
-        OUR COURSES TESTIMONIALS 
+        OUR COURSES TESTIMONIALS
 *******************************************/
 .section-padding {
   padding: 5rem 0;
@@ -266,7 +294,7 @@ textarea {
 }
 
 /******************************************
-     STATS COUNTER 
+     STATS COUNTER
 *******************************************/
 
 .counter-item {
@@ -297,7 +325,7 @@ textarea {
 }
 
 /******************************************
-     QUOTE  
+     QUOTE
 *******************************************/
 
 .section-mission {
@@ -532,7 +560,7 @@ textarea {
 }
 
 /******************************************
-     OUR PARTNERS SECTION 
+     OUR PARTNERS SECTION
 *******************************************/
 .section-partners {
   padding: 4rem 0;
@@ -553,7 +581,7 @@ textarea {
 }
 
 /******************************************
-     CONTACT FORM SECTION 
+     CONTACT FORM SECTION
 *******************************************/
 .modal-content {
   border: none;
@@ -732,8 +760,8 @@ input[type="week"] {
 
 ////////////////////////*COURSES*////////////////////////
 
-.btn-apply {
-  background: #d3ba30;
+.btn-apply{
+  background:  #d3ba30;
   color: #fff;
 }
 
