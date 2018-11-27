@@ -39,9 +39,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(expressValidator());
 
-
-app.use(function (req, res, next) {
-  app.locals.pathclass = req.url.replace(/^\//g, "").replace(/\//g, "-").toLowerCase();
+app.use(function(req, res, next) {
+  app.locals.pathclass = req.url
+    .replace(/^\//g, "")
+    .replace(/\//g, "-")
+    .toLowerCase();
   console.log(req.method, req.headers.host + req.url);
   next();
 });
