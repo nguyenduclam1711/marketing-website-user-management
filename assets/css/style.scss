@@ -43,24 +43,25 @@ a {
 /*NAVIGATION-BAR*/
 
 /*HOME*/
+$breakpoint1: 768px;
 
 .homeSection{
   position: relative;
   min-width: 100vw;
   min-height: calc(100vh - 5rem);
-  background-image: url("/images/home.jpg");
+  background-image: url("/media/header.jpg");
   background-size: cover;
-  -webkit-clip-path: polygon(50% 0%, 100% 0, 100% 88%, 50% 100%, 0 92%, 0 0);
-  clip-path: polygon(50% 0%, 100% 0, 100% 88%, 50% 100%, 0 92%, 0 0);
+  background-attachment: fixed;
+  clip-path: polygon(50% 0%, 100% 0, 100% 95%, 50% 100%, 0 96%, 0 0);
+  @media (min-width: $breakpoint1){
+    clip-path: polygon(50% 0%, 100% 0, 100% 88%, 50% 100%, 0 92%, 0 0);
+  }
 }
-
 .mainHome{
   position: relative;
   background:rgba(29,59,139,0.5);
   min-height:  calc(100vh - 5rem);
 }
-
-
 .startYour, .digitalCarrer{
   font-weight: bold;
   color: #fff;
@@ -70,7 +71,6 @@ a {
   font-weight: lighter;
   color: #dce0f2;
 }
-
 #dci-logo {
   width: 69px;
   height: 54px;
@@ -106,28 +106,15 @@ a {
       background-image: url("/media/bracket.svg");
       background-repeat: no-repeat;
       background-size: 1em;
-      display: inline-block;
       height: 58px;
       width: 50px;
     }
-  }
-}
-
-#headernav {
-  a.active,
-  a:hover{
     &:before{
       left: -7px;
       top: -5px;
       -webkit-filter: drop-shadow(4px 3px 3px #bfbebe);
       filter: drop-shadow(4px 3px 3px #bfbebe);
     }
-  }
-}
-
-#headernav {
-  a.active,
-  a:hover{
     &:after{
       left: auto;
       right: 15px;
@@ -136,6 +123,9 @@ a {
       -webkit-filter: drop-shadow(-4px -3px 3px #bfbebe);
       filter: drop-shadow(-4px -3px 3px #bfbebe);
     }
+  }
+  .dropdown-toggle:after {
+    margin-left: 0;
   }
 }
 

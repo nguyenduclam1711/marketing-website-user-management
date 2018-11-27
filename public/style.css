@@ -536,10 +536,18 @@ a {
   position: relative;
   min-width: 100vw;
   min-height: calc(100vh - 5rem);
-  background-image: url("/images/home.jpg");
+  background-image: url("/media/header.jpg");
   background-size: cover;
-  -webkit-clip-path: polygon(50% 0%, 100% 0, 100% 88%, 50% 100%, 0 92%, 0 0);
-  clip-path: polygon(50% 0%, 100% 0, 100% 88%, 50% 100%, 0 92%, 0 0);
+  background-attachment: fixed;
+  -webkit-clip-path: polygon(50% 0%, 100% 0, 100% 95%, 50% 100%, 0 96%, 0 0);
+          clip-path: polygon(50% 0%, 100% 0, 100% 95%, 50% 100%, 0 96%, 0 0);
+}
+
+@media (min-width: 768px) {
+  .homeSection {
+    -webkit-clip-path: polygon(50% 0%, 100% 0, 100% 88%, 50% 100%, 0 92%, 0 0);
+            clip-path: polygon(50% 0%, 100% 0, 100% 88%, 50% 100%, 0 92%, 0 0);
+  }
 }
 
 .mainHome {
@@ -591,7 +599,6 @@ a {
   background-image: url("/media/bracket.svg");
   background-repeat: no-repeat;
   background-size: 1em;
-  display: inline-block;
   height: 58px;
   width: 50px;
 }
@@ -614,6 +621,10 @@ a {
           transform: rotate(180deg);
   -webkit-filter: drop-shadow(-4px -3px 3px #bfbebe);
   filter: drop-shadow(-4px -3px 3px #bfbebe);
+}
+
+#headernav .dropdown-toggle:after {
+  margin-left: 0;
 }
 
 /******************************************
