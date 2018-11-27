@@ -42,6 +42,10 @@ mixin navigation
         .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
           each page in pages
             a.dropdown-item(class= currentPath === ("/pages/" + page._id) ? "active" : "" href='/pages/'+ page._id)=page.title
+
+      li.nav-item
+        a.nav-link.mr-4(data-toggle='modal', data-target='#contactFormModal') CONTACT US
+
         if user
           li.nav-item
             a.nav-link(href='/users/logout') LOGOUT

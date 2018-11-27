@@ -4,7 +4,7 @@ mixin singleCourse
       .jumbotron-courses-container    
         h1.display-1.mt-5.mb-3=course.headline
         p.mb-5=course.subheading
-        button.btn.btn-apply.mt-3.mb-5 Apply
+        button.btn.btn-apply.mt-3.mb-5(type='button' data-toggle='modal', data-target='#contactFormModal') Apply
 
     .container-fluid.container-fluid-courses
       .row
@@ -19,7 +19,7 @@ mixin singleCourse
               a.nav-link.nav-link-spy(href='#section3') Day at DCI
             li.nav-item
               a.nav-link.nav-link-spy(href='#section4') How to Apply
-            button.btn.btn-primary.btn-spy(type='button') Apply Now
+            button.btn.btn-primary.btn-spy(type='button' data-toggle='modal', data-target='#contactFormModal') Apply Now
 
         .col-sm-9.col-8
           #section1.my-5
@@ -96,4 +96,5 @@ mixin singleCourse
             p Have questions? Want to see the student life for yourself? Book a one-on-one visit with our admissions team and we’ll show you around.
             p Vulkanstraße 1
             p 10367 Berlin
-          
+    .modal#contactFormModal
+      +contactform      
