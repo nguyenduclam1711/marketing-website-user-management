@@ -1,4 +1,20 @@
 @import url(https://fonts.googleapis.com/css?family=Didact+Gothic);
+/* @import url("https://fonts.googleapis.com/css?family=Didact+Gothic");
+
+@font-face {
+  font-family: "Didact Gothic";
+  src: url("fonts/Didact_Gothic/DidactGothic-Regular.ttf");
+  src: url("fonts/Didact_Gothic/DidactGothic-Regular.ttf") format("ttf");
+} */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  /* font-family: "Didact Gothic", sans-serif !important; */
+  overflow-x: hidden;
+}
+
 .navbar.landingpage {
   position: absolute;
   width: 100%;
@@ -358,7 +374,7 @@ input[type="week"] {
 }
 
 /******************************************
-        FOOTER SECTION 
+        FOOTER SECTION
 *******************************************/
 footer {
   display: block;
@@ -519,50 +535,27 @@ a {
 .homeSection {
   position: relative;
   min-width: 100vw;
-  min-height: 100vh;
+  min-height: calc(100vh - 5rem);
   background-image: url("/images/home.jpg");
   background-size: cover;
+  -webkit-clip-path: polygon(50% 0%, 100% 0, 100% 88%, 50% 100%, 0 92%, 0 0);
+  clip-path: polygon(50% 0%, 100% 0, 100% 88%, 50% 100%, 0 92%, 0 0);
 }
 
 .mainHome {
   position: relative;
   background: rgba(29, 59, 139, 0.5);
-  min-width: 100vw;
-  min-height: 100vh;
-}
-
-.contentHome {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  width: 60vw;
+  min-height: calc(100vh - 5rem);
 }
 
 .startYour, .digitalCarrer {
-  font-size: 10rem;
   font-weight: bold;
   color: #fff;
-  margin: -27px;
 }
 
 .subtitle {
-  font-size: 3.7rem;
   font-weight: lighter;
   color: #dce0f2;
-}
-
-.buttonRow {
-  position: absolute;
-  left: 27%;
-  top: 108%;
-  width: 100vw;
-}
-
-.browserCourses, .contactUs {
-  font-size: 2rem;
 }
 
 #dci-logo {
@@ -574,7 +567,6 @@ a {
 
 .nav-link {
   color: #1d3b8b !important;
-  font-size: 25px;
 }
 
 .dropdown-toggle::after {
@@ -582,42 +574,46 @@ a {
 }
 
 /*NAVIGATION-BRACKETS*/
-#headernav .active {
+#headernav {
+  height: 5rem;
+}
+
+#headernav a.active {
   content: "";
   position: relative;
 }
 
-#headernav .active:before {
+#headernav a.active:before, #headernav a.active:after,
+#headernav a:hover:before,
+#headernav a:hover:after {
   content: "";
   position: absolute;
   background-image: url("/media/bracket.svg");
   background-repeat: no-repeat;
-  background-size: 20px;
+  background-size: 1em;
   display: inline-block;
-  left: -7px;
-  top: -5px;
   height: 58px;
   width: 50px;
-  -webkit-filter: drop-shadow(4px 3px 1px #bfbebe);
-  filter: drop-shadow(4px 3px 1px #bfbebe);
 }
 
-#headernav .active:after {
-  content: "";
-  position: absolute;
-  background-image: url("/media/bracket.svg");
+#headernav a.active:before,
+#headernav a:hover:before {
+  left: -7px;
+  top: -5px;
+  -webkit-filter: drop-shadow(4px 3px 3px #bfbebe);
+  filter: drop-shadow(4px 3px 3px #bfbebe);
+}
+
+#headernav a.active:after,
+#headernav a:hover:after {
+  left: auto;
+  right: 15px;
+  top: -17px;
   -webkit-transform: rotate(180deg);
       -ms-transform: rotate(180deg);
           transform: rotate(180deg);
-  background-repeat: no-repeat;
-  background-size: 20px;
-  display: inline-block;
-  right: -5px;
-  top: -5px;
-  height: 58px;
-  width: 50px;
-  -webkit-filter: drop-shadow(-4px -3px 1px #bfbebe);
-  filter: drop-shadow(-4px -3px 1px #bfbebe);
+  -webkit-filter: drop-shadow(-4px -3px 3px #bfbebe);
+  filter: drop-shadow(-4px -3px 3px #bfbebe);
 }
 
 /******************************************
@@ -628,9 +624,6 @@ video {
   min-height: 100%;
   z-index: -100;
   background-size: cover;
-  filter: grayscale(43%) sepia(84%) brightness(54%) hue-rotate(170deg) saturate(131%) opacity(87%) contrast(90%);
-  -webkit-filter: grayscale(43%) sepia(84%) brightness(54%) hue-rotate(170deg) saturate(131%) opacity(87%) contrast(90%);
-  -moz-filter: grayscale(43%) sepia(84%) brightness(54%) hue-rotate(170deg) saturate(131%) opacity(87%) contrast(90%);
 }
 
 /******************************************
