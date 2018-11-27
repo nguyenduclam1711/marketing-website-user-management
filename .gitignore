@@ -3,3 +3,4 @@ users/*
 !users/.gitkeep
 uploads/images/*
 .env
+dump.rdb
