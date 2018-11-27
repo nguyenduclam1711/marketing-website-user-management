@@ -5,59 +5,39 @@
 .homeSection{
   position: relative;
   min-width: 100vw;
-  min-height: 100vh;
+  min-height: calc(100vh - 5rem);
   background-image: url("/images/home.jpg");
   background-size: cover;
+  -webkit-clip-path: polygon(50% 0%, 100% 0, 100% 88%, 50% 100%, 0 92%, 0 0);
+  clip-path: polygon(50% 0%, 100% 0, 100% 88%, 50% 100%, 0 92%, 0 0);
 }
 
 .mainHome{
   position: relative;
   background:rgba(29,59,139,0.5);
-  min-width: 100vw;
-  min-height: 100vh;
+  min-height:  calc(100vh - 5rem);
 }
 
-.contentHome{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60vw;
-}
 
 .startYour, .digitalCarrer{
-  font-size: 10rem;
   font-weight: bold;
   color: #fff;
-  margin: -27px;
 }
 
 .subtitle{
-  font-size: 3.7rem;
   font-weight: lighter;
   color: #dce0f2;
-}
-
-.buttonRow {
-  position: absolute;
-  left: 27%;
-  top: 108%;
-  width: 100vw;
-}
-.browserCourses, .contactUs{
-  font-size: 2rem;
 }
 
 #dci-logo {
   width: 50px;
   height: 50px;
-  -webkit-filter: drop-shadow(3px 3px 1px #bfbebe);
-  filter: drop-shadow(3px 3px 1px #bfbebe);
+  -webkit-filter: drop-shadow(4px 3px 3px #bfbebe);
+  filter: drop-shadow(4px 3px 3px #bfbebe);
 }
 
 .nav-link {
   color: #1d3b8b !important;
-  font-size: 25px;
 }
 
 .dropdown-toggle::after {
@@ -65,40 +45,56 @@
 }
 
 /*NAVIGATION-BRACKETS*/
-#headernav .active {
+#headernav {
+  height: 5rem;
+}
+
+#headernav a.active {
   content: "";
   position: relative;
 }
 
-#headernav .active:before {
-  content: "";
-  position: absolute;
-  background-image: url("/media/bracket.svg");
-  background-repeat: no-repeat;
-  background-size: 20px;
-  display: inline-block;
-  left: -7px;
-  top: -5px;
-  height: 58px;
-  width: 50px;
-  -webkit-filter: drop-shadow(4px 3px 1px #bfbebe);
-  filter: drop-shadow(4px 3px 1px #bfbebe);
+#headernav {
+  a.active,
+  a:hover {
+    &:before,
+    &:after{
+      content: "";
+      position: absolute;
+      background-image: url("/media/bracket.svg");
+      background-repeat: no-repeat;
+      background-size: 1em;
+      display: inline-block;
+      height: 58px;
+      width: 50px;
+    }
+  }
 }
 
-#headernav .active:after {
-  content: "";
-  position: absolute;
-  background-image: url("/media/bracket.svg");
-  transform: rotate(180deg);
-  background-repeat: no-repeat;
-  background-size: 20px;
-  display: inline-block;
-  right: -5px;
-  top: -5px;
-  height: 58px;
-  width: 50px;
-  -webkit-filter: drop-shadow(-4px -3px 1px #bfbebe);
-  filter: drop-shadow(-4px -3px 1px #bfbebe);
+#headernav {
+  a.active,
+  a:hover{
+    &:before{
+      left: -7px;
+      top: -5px;
+      -webkit-filter: drop-shadow(4px 3px 3px #bfbebe);
+      filter: drop-shadow(4px 3px 3px #bfbebe);
+    }
+  }
+}
+
+#headernav {
+  a.active,
+  a:hover{
+    &:after{
+      left: auto;
+      right: 15px;
+      top: -17px;
+      transform: rotate(180deg);
+      -webkit-filter: drop-shadow(-4px -3px 3px #bfbebe);
+      filter: drop-shadow(-4px -3px 3px #bfbebe);
+    }
+  }
 }
 
 /******************************************
@@ -109,12 +105,6 @@ video {
   min-height: 100%;
   z-index: -100;
   background-size: cover;
-  filter: grayscale(43%) sepia(84%) brightness(54%) hue-rotate(170deg)
-    saturate(131%) opacity(87%) contrast(90%);
-  -webkit-filter: grayscale(43%) sepia(84%) brightness(54%) hue-rotate(170deg)
-    saturate(131%) opacity(87%) contrast(90%);
-  -moz-filter: grayscale(43%) sepia(84%) brightness(54%) hue-rotate(170deg)
-    saturate(131%) opacity(87%) contrast(90%);
 }
 
 /******************************************

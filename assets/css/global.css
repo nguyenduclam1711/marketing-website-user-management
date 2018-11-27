@@ -12,6 +12,7 @@ html {
 
 body {
   /* font-family: "Didact Gothic", sans-serif !important; */
+  overflow-x: hidden;
 }
 
 .navbar.landingpage {

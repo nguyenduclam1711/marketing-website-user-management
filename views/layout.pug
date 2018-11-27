@@ -51,8 +51,8 @@ html(lang='en')
         strong= message
         button.close(type='button', data-dismiss='alert', aria-label='Close')
           span(aria-hidden='true') ×
-
-    +navigation
+    if currentPath !== "/"
+      +navigation
     block content
     +footer
     script(src="/frontend.bundle.js")
