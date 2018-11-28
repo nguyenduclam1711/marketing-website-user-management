@@ -183,7 +183,8 @@ h6 a {
      CONTACT FORM SECTION 
 *******************************************/
 .modal-content {
-  border: none;
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   padding: 3rem 0;
 }
 
@@ -488,6 +489,10 @@ p{
   filter: drop-shadow(10px 10px 5px #bfbebe);
 }
 
+.story-cards-ul {
+  padding: 0;
+}
+
 /* .img-alumn{
   width: 5vw;
   height: 5vw;
@@ -556,7 +561,8 @@ a {
   min-height: calc(100vh - 5rem);
 }
 
-.startYour, .digitalCarrer {
+.startYour,
+.digitalCarrer {
   font-weight: bold;
   color: #fff;
 }
@@ -579,11 +585,6 @@ a {
 
 .dropdown-toggle::after {
   border: 0;
-}
-
-/*NAVIGATION-BRACKETS*/
-#headernav {
-  height: 5rem;
 }
 
 #headernav a.active {

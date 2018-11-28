@@ -1,12 +1,15 @@
-
 /*
 p{
   color: #939393;
 } */
-.story-item{
+.story-item {
   background-color: #fff;
   -webkit-filter: drop-shadow(10px 10px 5px #bfbebe);
   filter: drop-shadow(10px 10px 5px #bfbebe);
+}
+
+.story-cards-ul {
+  padding: 0;
 }
 
 /* .img-alumn{

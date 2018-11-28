@@ -45,7 +45,7 @@ a {
 /*HOME*/
 $breakpoint1: 768px;
 
-.homeSection{
+.homeSection {
   position: relative;
   min-width: 100vw;
   min-height: calc(100vh - 5rem);
@@ -53,21 +53,22 @@ $breakpoint1: 768px;
   background-size: cover;
   background-attachment: fixed;
   clip-path: polygon(50% 0%, 100% 0, 100% 95%, 50% 100%, 0 96%, 0 0);
-  @media (min-width: $breakpoint1){
+  @media (min-width: $breakpoint1) {
     clip-path: polygon(50% 0%, 100% 0, 100% 88%, 50% 100%, 0 92%, 0 0);
   }
 }
-.mainHome{
+.mainHome {
   position: relative;
-  background:rgba(29,59,139,0.5);
-  min-height:  calc(100vh - 5rem);
+  background: rgba(29, 59, 139, 0.5);
+  min-height: calc(100vh - 5rem);
 }
-.startYour, .digitalCarrer{
+.startYour,
+.digitalCarrer {
   font-weight: bold;
   color: #fff;
 }
 
-.subtitle{
+.subtitle {
   font-weight: lighter;
   color: #dce0f2;
 }
@@ -86,11 +87,6 @@ $breakpoint1: 768px;
   border: 0;
 }
 
-/*NAVIGATION-BRACKETS*/
-#headernav {
-  height: 5rem;
-}
-
 #headernav a.active {
   content: "";
   position: relative;
@@ -100,7 +96,7 @@ $breakpoint1: 768px;
   a.active,
   a:hover {
     &:before,
-    &:after{
+    &:after {
       content: "";
       position: absolute;
       background-image: url("/media/bracket.svg");
@@ -109,13 +105,13 @@ $breakpoint1: 768px;
       height: 58px;
       width: 50px;
     }
-    &:before{
+    &:before {
       left: -7px;
       top: -5px;
       -webkit-filter: drop-shadow(4px 3px 3px #bfbebe);
       filter: drop-shadow(4px 3px 3px #bfbebe);
     }
-    &:after{
+    &:after {
       left: auto;
       right: 15px;
       top: -17px;
@@ -760,8 +756,8 @@ input[type="week"] {
 
 ////////////////////////*COURSES*////////////////////////
 
-.btn-apply{
-  background:  #d3ba30;
+.btn-apply {
+  background: #d3ba30;
   color: #fff;
 }
 
