@@ -27,42 +27,44 @@ module.exports.getStories = async function (req, res) {
 }
 
 
-module.exports.getSingleStory = function (req, res) {
-  Story.findById(req.params.id, function (err, story) {
-    res.render("story", {
-      story: story,
+module.exports.getSingleStory = async (req, res) => {
+  try {
+    const story = await Story.findOne({ "slug": req.params.slug })
+    res.render(`story`, {
+      story
     });
-  });
+  } catch (err) {
+    console.log(err);
+  }
 }
 module.exports.editStory = async function (req, res) {
   let stories = await Story.find({})
     .sort("order")
     .exec();
-  Story.findById(req.params.id, async function (err, story) {
-    let allcategories = await Category.find({}).exec();
-    all = allcategories.map(cat => {
-      let match = story.categories
-        .map(pcat => pcat.toString())
-        .includes(cat._id.toString());
+  const story = await Story.findOne({slug: req.params.slug})
+  let allcategories = await Category.find({}).exec();
+  all = allcategories.map(cat => {
+    let match = story.categories
+      .map(pcat => pcat.toString())
+      .includes(cat._id.toString());
 
-      if (match) {
-        return Object.assign({ selected: true }, cat._doc);
-      } else {
-        return cat._doc;
-      }
-    });
-    const shiftStoryBack = stories.length + 1
+    if (match) {
+      return Object.assign({ selected: true }, cat._doc);
+    } else {
+      return cat._doc;
+    }
+  });
+  const shiftStoryBack = stories.length + 1
 
-    res.render("admin/editStory", {
-      story: story,
-      maxOrder: shiftStoryBack,
-      categories: all,
-      message: res.locals.message,
-      color: res.locals.color
-    });
+  res.render("admin/editStory", {
+    story,
+    maxOrder: shiftStoryBack,
+    categories: all,
+    message: res.locals.message,
+    color: res.locals.color
   });
 }
-module.exports.createStory = function (req, res) {
+module.exports.createStory = async (req, res) => {
   var story = new Story(); // create a new instance of the story model
   story.title = req.body.title; // set the stories title (comes from the request)
   story.alumniName = req.body.alumniName; // set the stories alumni name (comes from the request)
@@ -80,29 +82,28 @@ module.exports.createStory = function (req, res) {
     res.redirect("/admin/stories?alert=created");
   });
 }
-module.exports.deleteStory = function (req, res) {
-  Story.remove(
-    {
-      _id: req.params.id
-    },
-    function (err, story) {
-      if (err) res.send(err);
-
-      console.log("Story deleted");
-      res.redirect("/admin/stories?alert=deleted");
-    }
-  );
+module.exports.deleteStory = async (req, res) => {
+  try {
+    console.log("", req.params.slug);
+    const story = await Story.findOne({ "slug": req.params.slug })
+    console.log("", story);
+    await Story.remove({ slug: req.params.slug})
+    console.log("Story deleted");
+    res.redirect("/admin/stories?alert=deleted");
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 module.exports.updateStory = async function (req, res) {
   // use our story model to find the story we want
   await Story.findOneAndUpdate(
-    { _id: req.params.id },
+    { slug: req.params.slug },
     req.body,
     { new: true, runValidators: true }
   ).exec()
 
-  res.redirect("/admin/stories/edit/" + req.params.id + "?alert=updated");
+  res.redirect("/admin/stories/edit/" + req.params.slug + "?alert=updated");
 }
 
 
@@ -162,7 +163,7 @@ exports.updateProfile = async (request, response) => {
   console.log(request.body);
 
   await User.findOneAndUpdate(
-    { _id: request.story._id },
+    { _id: request.story.slug },
     request.body,
     {
       new: true,
@@ -171,5 +172,5 @@ exports.updateProfile = async (request, response) => {
   ).exec()
 
   console.log('success', `Successfully updated your profile.`)
-  response.redirect('/admin/stories/edit' + story._id + "?alert=updated")
+  response.redirect('/admin/stories/edit' + story.slug + "?alert=updated")
 }

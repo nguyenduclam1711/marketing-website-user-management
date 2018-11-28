@@ -2,31 +2,39 @@ require('dotenv').config({ path: __dirname + '/../.env' });
 const request = require("request");
 const Page = require("../../models/page");
 
-module.exports.getPages = async function (req, res) {
+module.exports.getPages = async (req, res) => {
+  try {
   let pages = await Page.find({})
     .sort("order")
     .exec();
 
   res.render("admin/pages", {
-    pages: pages,
+    pages,
     message: res.locals.message,
     color: res.locals.color
   });
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 
-module.exports.getSinglePage = function (req, res) {
-  Page.findById(req.params.id, function (err, page) {
-    res.render("page", {
-      page: page,
+module.exports.getSinglePage = async (req, res) => {
+  try {
+    const page = await Page.findOne({ "slug": req.params.slug })
+    res.render(`page`, {
+      page
     });
-  });
+  } catch (err) {
+    console.log(err);
+  }
 }
-module.exports.editPage = async function (req, res) {
-  let pages = await Page.find({})
-    .sort("order")
-    .exec();
-  Page.findById(req.params.id, async function (err, page) {
+module.exports.editPage = async (req, res) => {
+  try {
+    let pages = await Page.find({})
+      .sort("order")
+      .exec();
+    const page = await Page.findOne({ "slug": req.params.slug })
     const shiftPageBack = pages.length + 1
 
     res.render("admin/editPage", {
@@ -35,43 +43,45 @@ module.exports.editPage = async function (req, res) {
       message: res.locals.message,
       color: res.locals.color
     });
-  });
+  } catch (err) {
+    console.log(err);
+  }
 }
-module.exports.createPage = function (req, res) {
-  var page = new Page(); 
-  page.title = req.body.title; 
-  page.content = req.body.content; 
-  page.order = req.body.order; 
+module.exports.createPage = async (req, res) => {
+  try {
+    var page = new Page(); 
+    page.title = req.body.title; 
+    page.content = req.body.content; 
+    page.order = req.body.order; 
 
-  page.save(function (err) {
-    if (err) res.send(err);
+    await page.save()
     console.log("Page created:", page);
     res.redirect("/admin/pages?alert=created");
-  });
+  } catch (err) {
+    console.log(err);
+  }
 }
-module.exports.deletePage = function (req, res) {
-  Page.remove( { _id: req.params.id },
-    function (err, page) {
-      if (err) res.send(err);
-
-      console.log("Page deleted");
-      res.redirect("/admin/pages?alert=deleted");
-    }
-  );
+module.exports.deletePage = async (req, res) => {
+  try {
+    await Page.remove( { slug: req.params.slug})
+    console.log("Page deleted");
+    res.redirect("/admin/pages?alert=deleted");
+  } catch (err) {
+    console.log(err);
+  }
 }
-module.exports.updatePage = function (req, res) {
-  Page.findById(req.params.id, function (err, page) {
-    if (err) res.send(err);
-
+module.exports.updatePage = async (req, res) => {
+  try {
+    const page = await Page.findOne({ "slug": req.params.slug })
     page.title = req.body.title;
     page.content = req.body.content;
     page.order = req.body.order;
 
-    page.save(function (err) {
-      if (err) res.send(err);
+    await page.save()
 
-      console.log("Page updated:", page);
-      res.redirect("/admin/pages/edit/" + page._id + "?alert=updated");
-    });
-  });
+    console.log("Page updated:", page);
+    res.redirect("/admin/pages/edit/" + page.slug + "?alert=updated");
+  } catch (err) {
+    console.log(err);
+  }
 }

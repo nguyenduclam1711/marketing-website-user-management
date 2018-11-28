@@ -1,7 +1,12 @@
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
+var mongoose = require("mongoose"),
+  Schema = mongoose.Schema,
+  URLSlugs = require('mongoose-url-slugs');
+
 
 var CourseSchema = new Schema({
+  icon: {
+    type: String
+  },
   headline: {
     type: String,
     trim: true,
@@ -39,4 +44,5 @@ var CourseSchema = new Schema({
   }],
 });
 
+CourseSchema.plugin(URLSlugs('headline'));
 module.exports = mongoose.model("Course", CourseSchema);

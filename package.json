@@ -29,6 +29,7 @@
     "mini-css-extract-plugin": "^0.4.4",
     "mongodb": "*",
     "mongoose": "^5.1.1",
+    "mongoose-url-slugs": "^1.0.2",
     "multer": "*",
     "node-sass": "^4.10.0",
     "nodemailer": "^4.6.7",

@@ -1,5 +1,6 @@
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
+var mongoose = require("mongoose"),
+  Schema = mongoose.Schema,
+  URLSlugs = require('mongoose-url-slugs');
 
 var PageSchema = new Schema({
   title: String,
@@ -7,4 +8,5 @@ var PageSchema = new Schema({
   order: Number
 });
 
+PageSchema.plugin(URLSlugs('title'));
 module.exports = mongoose.model("Page", PageSchema);

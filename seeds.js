@@ -35,6 +35,7 @@ async function deleteData() {
   await Page.deleteMany();
   await User.deleteMany();
   await Event.deleteMany();
+  await Job.deleteMany();
   console.log("Data Deleted. To load sample data, run\n\n\t npm run seeds\n\n");
   process.exit();
 }

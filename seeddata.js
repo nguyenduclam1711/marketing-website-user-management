@@ -89,6 +89,14 @@ Wenn du dich für unsere Stelle am Berliner Standort interessierst und die passe
 
 exports.pages = [
   {
+    title: "Devugees",
+    content:
+      `Das Digital Career Institute hat das Devugees-Programm aufgelegt, um interessierten Geflüchteten die Möglichkeit zu geben, sich für Jobs in der Digitalwirtschaft zu qualifizieren. Wir sind davon überzeugt, dass das Devugees-Programm dazu beiträgt, Geflüchtete schnell und umfassend in den deutschen Arbeitsmarkt und die deutsche Gesellschaft zu integrieren. Wir halten Bildung für den Schlüssel zu einem erfolgreichen sozialen und Arbeitsleben.
+
+`,
+    order: 0
+  },
+  {
     title: "Jobcenter/AA",
     content:
       `DCI Digital Career Institute gGmbH
@@ -200,9 +208,10 @@ exports.stories = [
 
 exports.courses = [
   {
-    headline: "One to One Coaching",
+    headline: "Digital Marketing / E-Commerce",
+    icon: "https://digitalcareerinstitute.org/wp-content/uploads/2018/10/shop-bag-1.png",
     subheading: "Write here something...",
-    title: "Figure out what tech job is for You",
+    title: "Take 4 weeks to find out what digital jobs suits you best by visiting the best tech companies and learning the basics.",
     subtitle: "Take special one to one 40 hours of coaching to find out what digital jobs suits you best. We learn hands-on from people working in the tech scene",
     archivements: [
       {
@@ -270,8 +279,9 @@ exports.courses = [
   },
   {
     headline: "Orientation Course",
+    icon: "https://digitalcareerinstitute.org/wp-content/uploads/2017/04/Center-Direction-96.png",
     subheading: "Find out what tech job are you passionate about",
-    title: "Figure out which pathway suits you",
+    title: "In this immersive 12 month course you will acquire the skills to become a job-ready Full stake developer.   ",
     subtitle: "Take 4 weeks and find out which digital jobs suits you best. We visit the best tech companies and learn hands-on from people working there.",
     archivements: [
       {
@@ -339,6 +349,7 @@ exports.courses = [
   },
   {
     headline: "Web Development Course",
+    icon: "https://digitalcareerinstitute.org/wp-content/uploads/2017/05/Web-Design-64.png",
     subheading: "Become a web developer in 12 months",
     title: "Start Your Career in Web Development",
     subtitle: "Want to become a professional web developer? This is how it’s done. In this intensive, fully immersive 12-months course with 11-months of learning and 3-months internship, we’ll teach you everything you need to know to unlock your spot in one of the fastest-growing industries.",

@@ -5,12 +5,12 @@ const { ensureAuthenticated } = require('../../helpers/passport')
 const AdminJobsController = require("../../controllers/admin/AdminJobsController");
 router.get("/", ensureAuthenticated, AdminJobsController.getJobs);
 
-router.get("/:id", ensureAuthenticated, AdminJobsController.getSingleJob);
+router.get("/:slug", ensureAuthenticated, AdminJobsController.getSingleJob);
 
-router.get("/edit/:id", ensureAuthenticated, AdminJobsController.editJob);
+router.get("/edit/:slug", ensureAuthenticated, AdminJobsController.editJob);
 
 router.post("/", ensureAuthenticated, AdminJobsController.createJob);
 
-router.delete("/delete/:id", ensureAuthenticated, AdminJobsController.deleteJob);
-router.put("/update/:id", ensureAuthenticated, AdminJobsController.updateJob);
+router.delete("/delete/:slug", ensureAuthenticated, AdminJobsController.deleteJob);
+router.put("/update/:slug", ensureAuthenticated, AdminJobsController.updateJob);
 module.exports = router;

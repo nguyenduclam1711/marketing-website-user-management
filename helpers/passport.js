@@ -11,7 +11,6 @@ module.exports.ensureAuthenticated = (req, res, next) => {
 
 passport.use(
   new LocalStrategy((username, password, done) => {
-    console.log("GRRR", username)
     User.getUserByUsername(username, (err, user) => {
       if (err) throw err;
       if (!user) {

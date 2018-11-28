@@ -6,8 +6,8 @@ mixin getinvolved
         div INVOLVED
     .row.my-5
       div.verticalLineGetInv.p-5.m-auto
-        each page in pages                       
+        each page in pages
           h2.my-4
             div
-              a.linksInvolved.text-center.px-3.py-1(class= currentPath === ("/pages/" + page._id) ? "active" : "" href='/pages/'+ page._id)=page.title
+              a.linksInvolved.text-center.px-3.py-1(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
       

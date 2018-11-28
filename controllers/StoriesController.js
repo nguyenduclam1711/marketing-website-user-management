@@ -10,18 +10,18 @@ module.exports.getStories = async function(req, res) {
   let categories = await Category.find({}).exec();
 
   res.render("stories", {
-    stories: stories,
-    categories: categories,
+    stories,
+    categories,
     message: res.locals.message,
     color: res.locals.color
   });
 }
 
 
-module.exports.getSingleStory = function(req, res) {
-  Story.findById(req.params.id, function(err, story) {
-    res.render("story", {
-      story: story
-    });
+module.exports.getSingleStory = async (req, res) => {
+  const story = await Story.findOne({ slug: req.params.id })
+  res.render("story", {
+    story
   });
+
 }
