@@ -147,6 +147,7 @@ let coursesRoutes = require("./routes/courses");
 
 let categoryAdminRoutes = require("./routes/admin/categories");
 let storiesAdminRoutes = require("./routes/admin/stories");
+let coursesAdminRoutes = require("./routes/admin/courses");
 let pagesAdminRoutes = require("./routes/admin/pages");
 let locationsAdminRoutes = require("./routes/admin/locations");
 let eventsAdminRoutes = require("./routes/admin/events");
@@ -159,6 +160,7 @@ app.use("/pages", pagesRoutes);
 app.use("/events", eventsRoutes);
 app.use("/courses", coursesRoutes);
 app.use("/admin/stories", storiesAdminRoutes);
+app.use("/admin/courses", coursesAdminRoutes);
 app.use("/admin/pages", pagesAdminRoutes);
 app.use("/admin/locations", locationsAdminRoutes);
 app.use("/admin/events", eventsAdminRoutes);

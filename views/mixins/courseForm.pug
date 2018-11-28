@@ -1,0 +1,25 @@
+mixin courseForm
+  - var editPath = currentPath.includes('admin/courses/edit')
+  form.form-signin(method='POST', action=editPath ? '/admin/courses/update/'+course._id+'?_method=PUT' : '/admin/courses?alert=create', enctype="multipart/form-data")
+    
+    h2=editPath ? "Edit course" :"Create a new course"
+    
+    .mb-3
+      label.sr-only(for='inputTitle') Headline
+      input#inputTitle.form-control(name='headline', type='text', placeholder='Title', value=editPath ? course.headline :"" required='', autofocus='')
+
+    .mb-3
+      label.sr-only(for='subheadline') Subheadline
+      input#subheadline.form-control(name='subheadline', type='text', placeholder='Subheadline', value=editPath ? course.subheadline :"" required='', autofocus='')
+
+    .mb-3
+      label.sr-only(for='title') Title
+      input#title.form-control(name='title', type='text', placeholder='Title', value=editPath ? course.title :"" required='', autofocus='')
+
+    .mb-3
+      label.sr-only(for='subtitle') Subtitle
+      input#subtitle.form-control(name='subtitle', type='text', placeholder='subtitle', value=editPath ? course.subtitle :"" required='', autofocus='')
+
+
+
+    button.btn.btn-lg.btn-primary.btn-block(type='submit')=editPath ? "Update" :"Create a new course" 

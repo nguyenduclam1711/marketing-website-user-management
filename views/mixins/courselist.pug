@@ -1,0 +1,38 @@
+mixin courselist(public)
+  ul.row
+    each course in courses
+      .card
+        div.course-item.p-5.d-flex.flex-column.justify-content-between
+          p.text-justify=course.headline
+          .row.mt-4
+            .col
+              h3=course.subheadline          
+              p=course.title
+              each object in course.archivements
+                figure.col-md-4
+                  img.img-fluid(src=object.icon, alt=object.description)
+                  p=object.description
+
+              each object in course.features
+                .row.container            
+                  .col-12.d.flex.m-auto
+                    img.img-fluid.float-left.mr-5.icons(src=object.icon, alt=object.title)
+                    h3.text-left=object.title
+                    p.text-left=object.subtitle
+              each object in course.timeline
+                .row.container.timelineRow            
+                  .col-12.d.flex.m-auto
+                    div.timelineDiv.float-left.text-center
+                      span.timeline=object.time
+                    div.ml-5
+                      h3.ml-5.pt-2.text-left=object.title 
+                      p.ml-5.text-left=object.subtitle
+                    
+          form.d-flex.justify-content-between(method='POST', action='/admin/courses/delete/'+course._id +'?_method=DELETE')
+            a.btn.mt-2(href="/courses/"+course._id) +Show more
+
+            if !public
+              .d-flex.align-items-center
+                
+                a.btn.btn-outline-primary.mr-2(href="/admin/courses/edit/"+course._id) Edit
+                button.btn.btn-outline-danger(type='submit') delete
