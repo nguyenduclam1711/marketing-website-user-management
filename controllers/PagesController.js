@@ -8,15 +8,18 @@ module.exports.getPages = async function(req, res) {
     .exec();
 
   res.render("pages", {
-    pages: pages
+    pages
   });
 }
 
 
-module.exports.getSinglePage = function(req, res) {
-  Page.findById(req.params.id, function(err, page) {
-    res.render("page", {
-      page: page
+module.exports.getSinglePage = async (req, res) => {
+  try {
+    const page = await Page.findOne({ "slug": req.params.slug })
+    res.render(`page`, {
+      page
     });
-  });
+  } catch (err) {
+    console.log(err);
+  }
 }

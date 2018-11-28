@@ -13,13 +13,13 @@ mixin storylist(public)
           each category in story.categories
             span.badge.badge-primary.mr-2= category.name
 
-        form.d-flex.justify-content-between(method='POST', action='/admin/stories/delete/'+story._id +'?_method=DELETE')
-          a.btn.mt-2(href="/stories/"+story._id) +Show more
+        form.d-flex.justify-content-between(method='POST', action='/admin/stories/delete/'+story.slug +'?_method=DELETE')
+          a.btn.mt-2(href="/stories/"+story.slug) +Show more
 
           if !public
             .d-flex.align-items-center
               
-              a.btn.btn-outline-primary.mr-2(href="/admin/stories/edit/"+story._id) Edit
+              a.btn.btn-outline-primary.mr-2(href="/admin/stories/edit/"+story.slug) Edit
               button.btn.btn-outline-danger(type='submit') delete
 
   

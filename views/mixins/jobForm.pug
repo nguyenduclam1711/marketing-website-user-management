@@ -1,6 +1,6 @@
 mixin jobform
   - var editPath = currentPath.includes('admin/jobs/edit')
-  form(method='POST', action=editPath ? '/admin/jobs/update/'+job._id+'?_method=PUT' : '/admin/jobs?alert=create')
+  form(method='POST', action=editPath ? '/admin/jobs/update/'+job.slug+'?_method=PUT' : '/admin/jobs?alert=create')
     
     h2=editPath ? "Edit job" :"Create a new Job"
 

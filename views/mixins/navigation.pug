@@ -19,13 +19,14 @@ mixin navigation
             a.dropdown-item(href='/admin/jobs') Jobs
             a.dropdown-item(href='/admin/events') Events
             a.dropdown-item(href='/admin/courses') Courses
+            a.dropdown-item(href='/admin/jobs') Jobs
 
       li.position-relative.nav-item.dropdown
         a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mr-4(class= currentPath.includes('/courses') ? "active" : "" data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
           | COURSES
         .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
           each course in courses
-            a.dropdown-item(class= currentPath === ("/courses/" + course.headline) ? "active" : "" href='/courses/'+ course.headline)=course.headline
+            a.dropdown-item(class= currentPath === ("/courses/" + course.slug) ? "active" : "" href='/courses/'+ course.slug)=course.headline
       li.position-relative.nav-item.dropdown
         a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mr-4(class=currentPath.includes('/events') ? "active" : "" href='/events' data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
           | EVENTS
@@ -42,7 +43,7 @@ mixin navigation
           | GET INVOLVED
         .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
           each page in pages
-            a.dropdown-item(class= currentPath === ("/pages/" + page._id) ? "active" : "" href='/pages/'+ page._id)=page.title
+            a.dropdown-item(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
 
       li.position-relative.nav-item
         a.nav-link.mr-4(data-toggle='modal', data-target='#contactFormModal') CONTACT US
