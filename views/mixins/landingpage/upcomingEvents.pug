@@ -35,8 +35,8 @@ mixin upcomingEvents
                 span.newEvent-media-body-supporting-bottom-text.subtle.u-float-right= event.location.name
               .newEvent-media-body-supporting-bottom.newEvent-media-body-supporting-bottom-reveal
                 span.newEvent-media-body-supporting-bottom-text.subtle=event.location.name
-                a.newEvent-media-body-supporting-bottom-text.newEvent-media-link.u-float-right(href='#/') Contact Us
-
+                a.newEvent-media-body-supporting-bottom-text.newEvent-media-link.u-float-right(data-toggle='modal', data-target='#contactFormModal') Contact Us
+  
       //each event in events
         .card
           h5.card-header

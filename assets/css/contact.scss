@@ -1,9 +1,8 @@
-
 /******************************************
      CONTACT FORM SECTION 
 *******************************************/
 .modal-content {
-  border: none;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   padding: 3rem 0;
 }
 .cf-title {
@@ -176,4 +175,3 @@ input[type="week"] {
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-
