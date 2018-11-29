@@ -1,9 +1,23 @@
 extends layout.pug
 block content
-  
-  .row
-    .offset-md-4.col-md-3
-      ul.list-group.text-center
+  section#services.section-services
+    .container.container-courses
+      .section-title-area
+        h2.section-title
+          | Our Courses
+      .row
         each course in courses
-          li.list-group-item
-            a(href='/courses/'+course.headline)=course.headline
+          .col-md-6.col-lg-4
+            .service-item
+              a.service-link(href="/courses/"+course.slug)
+                span.screen-reader-text
+                  = course.title
+              .service-image.icon-image
+                img.h-100(src=course.icon, alt=course.title)
+              .service-content
+                h4.service-title= course.headline
+                p=course.title
+    
+
+
+
