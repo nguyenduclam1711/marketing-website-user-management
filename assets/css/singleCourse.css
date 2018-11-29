@@ -22,7 +22,9 @@
 *******************************************/
 
 ul.nav-courses-pills {
-  top: 0;
+  max-width: 50rem;
+  word-wrap: break-word;
+  top: 20%;
   padding: 10px;
   position: sticky;
   list-style: none;
@@ -34,4 +36,8 @@ ul.nav-courses-pills {
 a.nav-link {
   font-size: 1rem;
   padding: 5px;
+}
+
+#myScrollspy {
+  margin-top: 4.7%;
 }
