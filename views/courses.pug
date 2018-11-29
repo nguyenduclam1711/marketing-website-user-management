@@ -1,16 +1,23 @@
 extends layout.pug
 block content
-  .card
-    each course in courses
-      .card-body
-          h1.card-title.font-weight-bold
-            a(href='/courses/'+ course.slug)=course.headline
-          p.card-text=course.subtitle
-      img.card-img-bottom(src='https://www.elegantthemes.com/blog/wp-content/uploads/2017/07/programming-languages-to-learn-for-wordpress-featured-image.png', alt='Card image cap')
-      a.btn.btn-info.mb-5.font-weight-bold(data-toggle='modal', data-target='#contactFormModal') Contact us
+  section#services.section-services
+    .container.container-courses
+      .section-title-area
+        h2.section-title
+          | Our Courses
+      .row
+        each course in courses
+          .col-md-6.col-lg-4
+            .service-item
+              a.service-link(href="/courses/"+course.slug)
+                span.screen-reader-text
+                  = course.title
+              .service-image.icon-image
+                img.h-100(src=course.icon, alt=course.title)
+              .service-content
+                h4.service-title= course.headline
+                p=course.title
     
-  .modal#contactFormModal
-    +contactform  
 
 
 
