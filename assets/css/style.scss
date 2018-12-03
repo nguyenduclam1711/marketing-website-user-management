@@ -5,78 +5,40 @@
 @import "footer";
 @import "storylist";
 
-body.admin {
-  background: #5a5a5a2b;
-}
-.getInvolved-content {
-  text-align: center;
-}
-.getInvolved-container {
-  display: flex;
-  justify-content: center;
-}
-
-/*GENERAL STYLES*/
-
-body {
-  // background-color: #f8f7f7;
-  width: 100vw;
-}
-
-h1 {
-  /* font-weight: bold; */
-  color: #1d3b8b;
-  // -webkit-filter: drop-shadow(10px 10px 5px #bfbebe);
-  // filter: drop-shadow(10px 10px 5px #bfbebe);
-}
-
-h2 {
-  font-weight: bold;
-  color: #1d3b8b;
-}
-
-.orange-dot,
-a {
-  color: #da9446;
-}
-
-/*NAVIGATION-BAR*/
-
 /*HOME*/
-$breakpoint1: 768px;
 
-.homeSection {
+.homeSection{
   position: relative;
   min-width: 100vw;
   min-height: calc(100vh - 5rem);
-  background-image: url("/media/header.jpg");
+  background-image: url("/images/home.jpg");
   background-size: cover;
-  background-attachment: fixed;
-  clip-path: polygon(50% 0%, 100% 0, 100% 95%, 50% 100%, 0 96%, 0 0);
-  @media (min-width: $breakpoint1) {
-    clip-path: polygon(50% 0%, 100% 0, 100% 88%, 50% 100%, 0 92%, 0 0);
-  }
+  -webkit-clip-path: polygon(50% 0%, 100% 0, 100% 88%, 50% 100%, 0 92%, 0 0);
+  clip-path: polygon(50% 0%, 100% 0, 100% 88%, 50% 100%, 0 92%, 0 0);
 }
-.mainHome {
+
+.mainHome{
   position: relative;
-  background: rgba(29, 59, 139, 0.5);
-  min-height: calc(100vh - 5rem);
+  background:rgba(29,59,139,0.5);
+  min-height:  calc(100vh - 5rem);
 }
-.startYour,
-.digitalCarrer {
+
+
+.startYour, .digitalCarrer{
   font-weight: bold;
   color: #fff;
 }
 
-.subtitle {
+.subtitle{
   font-weight: lighter;
   color: #dce0f2;
 }
+
 #dci-logo {
-  width: 69px;
-  height: 54px;
-  -webkit-filter: drop-shadow(3px 3px 1px #bfbebe);
-  filter: drop-shadow(3px 3px 1px #bfbebe);
+  width: 50px;
+  height: 50px;
+  -webkit-filter: drop-shadow(4px 3px 3px #bfbebe);
+  filter: drop-shadow(4px 3px 3px #bfbebe);
 }
 
 .nav-link {
@@ -85,6 +47,11 @@ $breakpoint1: 768px;
 
 .dropdown-toggle::after {
   border: 0;
+}
+
+/*NAVIGATION-BRACKETS*/
+#headernav {
+  height: 5rem;
 }
 
 #headernav a.active {
@@ -96,22 +63,35 @@ $breakpoint1: 768px;
   a.active,
   a:hover {
     &:before,
-    &:after {
+    &:after{
       content: "";
       position: absolute;
       background-image: url("/media/bracket.svg");
       background-repeat: no-repeat;
       background-size: 1em;
+      display: inline-block;
       height: 58px;
       width: 50px;
     }
-    &:before {
+  }
+}
+
+#headernav {
+  a.active,
+  a:hover{
+    &:before{
       left: -7px;
       top: -5px;
       -webkit-filter: drop-shadow(4px 3px 3px #bfbebe);
       filter: drop-shadow(4px 3px 3px #bfbebe);
     }
-    &:after {
+  }
+}
+
+#headernav {
+  a.active,
+  a:hover{
+    &:after{
       left: auto;
       right: 15px;
       top: -17px;
@@ -119,9 +99,6 @@ $breakpoint1: 768px;
       -webkit-filter: drop-shadow(-4px -3px 3px #bfbebe);
       filter: drop-shadow(-4px -3px 3px #bfbebe);
     }
-  }
-  .dropdown-toggle:after {
-    margin-left: 0;
   }
 }
 
@@ -830,4 +807,65 @@ input[type="week"] {
   margin-bottom: 1rem;
   display: block;
   position: relative;
+}
+
+/*CONTACT-FORM*/
+#contactForm-box{
+  width: 45vw;
+}
+#contactForm-bg {
+
+}
+
+
+#contactForm{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#heading{
+  font-weight: light;
+  background: linear-gradient(270deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 200% auto;
+  color: #000;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: shine 30s linear infinite;
+  @keyframes shine {
+    to {
+      background-position: 200% center;
+    }
+  }
+}
+
+#btn-contactForm{
+   width: 100%;
+   color: #fff;
+   boder-color: #fff;
+   background: linear-gradient(270deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+   background-size: 800% 800%;
+
+   -webkit-animation: AnimationName 30s ease infinite;
+   -moz-animation: AnimationName 30s ease infinite;
+   animation: AnimationName 30s ease infinite;
+
+   @-webkit-keyframes AnimationName {
+       0%{background-position:0% 50%}
+       50%{background-position:100% 50%}
+       100%{background-position:0% 50%}
+   }
+   @-moz-keyframes AnimationName {
+       0%{background-position:0% 50%}
+       50%{background-position:100% 50%}
+       100%{background-position:0% 50%}
+   }
+   @keyframes AnimationName {
+       0%{background-position:0% 50%}
+       50%{background-position:100% 50%}
+       100%{background-position:0% 50%}
+   }
 }

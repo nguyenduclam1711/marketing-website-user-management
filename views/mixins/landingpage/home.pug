@@ -1,13 +1,13 @@
 mixin home 
-  .bg-white
-    .homeSection
-      div.mainHome.d-flex
-        div.contentHome.m-auto.container.text-center
-          p.startYour.display-1 START YOUR 
-          p.digitalCarrer.display-1 DIGITAL CARRER
-          p.subtitle.h2.mb-5.mt-2 Learn digital skills with us to get the most fulfilling jobs.
-          .m-auto.buttonRow
-             a.btn.btn-lg.btn-warning.browserCourses.mr-5(href='/courses/') Browser Courses      
-             button.btn.btn-lg.btn-danger.contactUs(data-toggle='modal', data-target='#contactFormModal') Contact us
-      
-      
+
+  .homeSection.container 
+    div.mainHome.d-flex 
+      div.contentHome.m-auto    
+        p.startYour.display-1 START YOUR 
+        p.digitalCarrer.display-1 DIGITAL CARRER
+        p.subtitle.h2.mb-5.mt-2 Learn digital skills with us to get the most fulfilling jobs.
+        .m-auto.buttonRow.text-center
+           button.btn.btn-lg.btn-warning.browserCourses.mr-5(href='/courses', role='button') Browser Courses      
+           button.btn.btn-lg.btn-danger.contactUs(data-toggle='modal', data-target='#contactFormModal') Contact us
+    
+    

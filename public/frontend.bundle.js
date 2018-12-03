@@ -95,7 +95,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var typed_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! typed.js */ "./node_modules/typed.js/lib/typed.js");
 /* harmony import */ var typed_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(typed_js__WEBPACK_IMPORTED_MODULE_1__);
@@ -103,17 +103,18 @@ __webpack_require__.r(__webpack_exports__);
 // import Popper from "popper.js";
 
 
-console.log("js file loaded");
-$(function () {
-  if (typeof Storage != "undefined") {
-    if (!sessionStorage.getItem("done")) {
-      setTimeout(function () {
-        $("#contactFormModal").modal("show");
-        sessionStorage.setItem("done", true);
-      }, 5000);
-    }
-  }
-}); //
+console.log("js file loaded"); // $(function() {
+//   if (typeof Storage != "undefined") {
+//     if (!sessionStorage.getItem("done")) {
+//       setTimeout(function() {
+//         $("#contactFormModal").modal("show");
+//         sessionStorage.setItem("done", true);
+//       }, 5000);
+//     }
+//   }
+// });
+//
+//
 // let typedCursor = new Typed('.subtitle', {
 //   strings: ["Learn digital skills with us to get the most fulfilling jobs."],
 //   typeSpeed: 30,
@@ -139,7 +140,6 @@ $(function () {
 // }
 //
 // window.addEventListener('scroll', stickyNavigation);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
 

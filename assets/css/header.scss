@@ -34,3 +34,6 @@
   -webkit-filter: drop-shadow(10px -8px 4.5px #bfbebe);
   filter: drop-shadow(-10px -8px 4.5px #bfbebe);
 }
+.dropdown-toggle:after {
+  margin-left: 0;
+}
