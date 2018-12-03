@@ -1,13 +1,15 @@
 mixin ourCoursesSection
-  section#services.section-services
+  section#services.section-services.my-5
     .container.container-courses
-      .section-title-area
-        h2.section-title
-          | Our Courses
-      .row
+      .section
+        h1.display-1.font-weight-bold.text-left
+          | Our 
+          br
+          | Courses
+      .row.mt-5
         each course in courses
           .col-md-6.col-lg-4
-            .service-item
+            .service-item.p-5
               a.service-link(href="/courses/"+course.slug)
                 span.screen-reader-text
                   = course.title
@@ -18,4 +20,4 @@ mixin ourCoursesSection
                 p=course.title
 
       .section-button-wrap
-        a.btn.btn-primary.btn-lg.active(href='/courses/', role='button', aria-pressed='true') Browse Courses
+        a#btn.btn.btn-primary.btn-lg.active(href='/courses/', role='button', aria-pressed='true') Browse Courses
