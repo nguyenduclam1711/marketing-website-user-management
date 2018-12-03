@@ -39,9 +39,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(expressValidator());
 
-
-app.use(function (req, res, next) {
-  app.locals.pathclass = req.url.replace(/^\//g, "").replace(/\//g, "-").toLowerCase();
+app.use(function(req, res, next) {
+  app.locals.pathclass = req.url
+    .replace(/^\//g, "")
+    .replace(/\//g, "-")
+    .toLowerCase();
   console.log(req.method, req.headers.host + req.url);
   next();
 });
@@ -140,12 +142,15 @@ let indexRoutes = require("./routes/index");
 let usersRoutes = require("./routes/users");
 let storiesRoutes = require("./routes/stories");
 let pagesRoutes = require("./routes/pages");
+let jobsRoutes = require("./routes/jobs");
 let eventsRoutes = require("./routes/events");
 let coursesRoutes = require("./routes/courses");
 
 let categoryAdminRoutes = require("./routes/admin/categories");
 let storiesAdminRoutes = require("./routes/admin/stories");
+let coursesAdminRoutes = require("./routes/admin/courses");
 let pagesAdminRoutes = require("./routes/admin/pages");
+let jobsAdminRoutes = require("./routes/admin/jobs");
 let locationsAdminRoutes = require("./routes/admin/locations");
 let eventsAdminRoutes = require("./routes/admin/events");
 let contactsAdminRoutes = require("./routes/admin/contacts");
@@ -154,10 +159,13 @@ app.use("/", indexRoutes);
 app.use("/users", usersRoutes);
 app.use("/stories", storiesRoutes);
 app.use("/pages", pagesRoutes);
+app.use("/jobs", jobsRoutes);
 app.use("/events", eventsRoutes);
 app.use("/courses", coursesRoutes);
 app.use("/admin/stories", storiesAdminRoutes);
+app.use("/admin/courses", coursesAdminRoutes);
 app.use("/admin/pages", pagesAdminRoutes);
+app.use("/admin/jobs", jobsAdminRoutes);
 app.use("/admin/locations", locationsAdminRoutes);
 app.use("/admin/events", eventsAdminRoutes);
 app.use("/admin/categories", categoryAdminRoutes);

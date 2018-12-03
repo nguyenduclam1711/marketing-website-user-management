@@ -1,11 +1,9 @@
-/* @import url("https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz");
+/* @import url("https://fonts.googleapis.com/css?family=Didact+Gothic");
 
 @font-face {
-  font-family: "Yanone kaffeesatz";
-  src: url("fonts/Yanone_kaffeesatz/YanoneKaffeesatz-Bold.ttf") format("ttf");
-  src: url("fonts/Yanone_kaffeesatz/YanoneKaffeesatz-Regular.ttf") format("ttf");
-  src: url("fonts/Yanone_kaffeesatz/YanoneKaffeesatz-Light.ttf") format("ttf");
-  src: url("fonts/Yanone_kaffeesatz/YanoneKaffeesatz-ExtraLight.ttf") format("ttf");
+  font-family: "Didact Gothic";
+  src: url("fonts/Didact_Gothic/DidactGothic-Regular.ttf");
+  src: url("fonts/Didact_Gothic/DidactGothic-Regular.ttf") format("ttf");
 } */
 
 html {
@@ -13,6 +11,7 @@ html {
 }
 
 body {
+  /* font-family: "Didact Gothic", sans-serif !important; */
   overflow-x: hidden;
 }
 

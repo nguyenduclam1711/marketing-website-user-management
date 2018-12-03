@@ -5,41 +5,17 @@ mixin ourCoursesSection
         h2.section-title
           | Our Courses
       .row
-        .col-md-6.col-lg-4
-          .service-item
-            a.service-link(href='https://digitalcareerinstitute.org/en/onetoone-coaching/')
-              span.screen-reader-text
-                | One
-                | to One Coaching
-            .service-image.icon-image
-              img(src='https://digitalcareerinstitute.org/wp-content/uploads/2017/04/Coach-96.png', alt='')
-            .service-content
-              h4.service-title One to One Coaching
-              p Get one to one coaching on choosing the digital job that best fits you. 
-        .col-md-6.col-lg-4
-          .service-item
-            a.service-link(href='https://digitalcareerinstitute.org/en/orientiation-course/')
-              span.screen-reader-text
-                | Orientation
-                | Course
-            .service-image.icon-image
-              img(src='https://digitalcareerinstitute.org/wp-content/uploads/2017/04/Center-Direction-96.png', alt='')
-            .service-content
-              h4.service-title Orientation Course
-              p
-                | Take 4 weeks to find out what digital jobs suits you best by visiting the best tech companies and learning
-                | the basics.
-        .col-md-6.col-lg-4
-          .service-item
-            a.service-link(href='https://digitalcareerinstitute.org/en/courses/one-year-program/')
-              span.screen-reader-text
-                | Web
-                | Development Course
-            .service-image.icon-image
-              img(src='https://digitalcareerinstitute.org/wp-content/uploads/2017/05/Web-Design-64.png', alt='')
-            .service-content
-              h4.service-title Web Development Course
-              p
-                | In this immersive 12 month course you will acquire the skills to become a job-ready Full stake developer.
+        each course in courses
+          .col-md-6.col-lg-4
+            .service-item
+              a.service-link(href="/courses/"+course.slug)
+                span.screen-reader-text
+                  = course.title
+              .service-image.icon-image
+                img.h-100(src=course.icon, alt=course.title)
+              .service-content
+                h4.service-title= course.headline
+                p=course.title
+
       .section-button-wrap
-        a.btn.btn-primary.btn-lg.active(href='#', role='button', aria-pressed='true') Brows Courses
+        a.btn.btn-primary.btn-lg.active(href='/courses/', role='button', aria-pressed='true') Browse Courses

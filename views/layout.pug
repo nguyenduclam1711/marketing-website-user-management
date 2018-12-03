@@ -7,10 +7,14 @@ include mixins/landingpage/upcomingEvents
 include mixins/landingpage/partners
 include mixins/landingpage/footer
 include mixins/storylist
+include mixins/courselist
 include mixins/pagelist
+include mixins/joblist
 include mixins/eventlist
 include mixins/contactform
 include mixins/storyForm
+include mixins/courseForm
+include mixins/jobForm
 include mixins/courses/singleCourse
 include mixins/landingpage/getinvolved
 include mixins/landingpage/home
@@ -20,16 +24,26 @@ doctype html
 html(lang='en')
   head
     meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
-    meta(name='description', content='')
-    meta(name='author', content='')
+    meta(name='viewport', content='width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86')
+    meta(property='og:locale', content='en_GB')
+    meta(property='og:locale:alternate', content='de_DE')
+    meta(property='og:type', content='website')
+    meta(property='og:title', content='Digital Career Institute')
+    meta(property='og:description', content='Find out which digital profession fits you')
+    meta(property='og:image', content='/assets/media/header.jpg')
+    meta(property='og:url', content='https://digitalcareerinstitute.org')
+    meta(property='og:site_name', content='DCI Digital Career Institute')
+    meta(name='twitter:card', content='')
+    meta(name='twitter:title', content='Home - DCI Digital Career Institute')
+    meta(name='twitter:site', content='@devugeesorgi')
+    meta(name='twitter:creator', content='@devugeesorgi')
     title Signin Template for Bootstrap
     link(rel='stylesheet', href='/assets/bootstrap/dist/css/bootstrap.min.css')
     //link (rel='stylesheet', href="/assets/@fortawesome/fontawesome-free/css/fontawesome.mincss")
-    link(rel="stylesheet", href="/assets/global.css")
-    //link(rel="stylesheet", href="/assets/footer.css")
-    link(rel="stylesheet", href="/assets/oneyear.css")
-    link(rel="stylesheet", href="/assets/storylist.css")
+    //link(rel="stylesheet", href="/assets/global.css")
+    link(rel="stylesheet", href="/assets/footer.scss")
+    link(rel="stylesheet", href="/assets/singleCourse.css")
+    //link(rel="stylesheet", href="/assets/storylist.css")
 
     //TODO this should be the only stylesheet we require. All above should be removed
     link(rel="stylesheet", href="/style.css")
@@ -45,7 +59,7 @@ html(lang='en')
     meta(name="theme-color", content="#ffffff")
   
 
-  body(data-spy='scroll', data-target='#myScrollspy', data-offset='1', class=(currentPath.includes('admin') ? pathclass + 'admin' : pathclass)) 
+  body(data-spy='scroll', data-target='#myScrollspy', data-offset='1', class=pathclass+(currentPath.includes('admin') ? ' admin' : '' )) 
     if message
       .alert.alert-dismissible.fade.show(role='alert', class=color, style="z-index: 1")
         strong= message
@@ -54,7 +68,8 @@ html(lang='en')
     if currentPath !== "/"
       +navigation
     block content
-    +footer
+    if !currentPath.includes('admin')
+      +footer
     script(src="/frontend.bundle.js")
   
     

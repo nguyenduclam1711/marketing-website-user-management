@@ -17,14 +17,13 @@ console.log("js file loaded");
 // });
 //
 
-// 
+//
 // let typedCursor = new Typed('.subtitle', {
 //   strings: ["Learn digital skills with us to get the most fulfilling jobs."],
 //   typeSpeed: 30,
 //   loop: true
 // });
 // console.log(typedCursor)
-
 
 //nav-sticky
 // const nav = document.querySelector('#headernav');

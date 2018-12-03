@@ -114,7 +114,7 @@ console.log("js file loaded"); // $(function() {
 //   }
 // });
 //
-// 
+//
 // let typedCursor = new Typed('.subtitle', {
 //   strings: ["Learn digital skills with us to get the most fulfilling jobs."],
 //   typeSpeed: 30,

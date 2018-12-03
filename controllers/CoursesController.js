@@ -1,8 +1,7 @@
+const Course = require("../models/course");
 module.exports.getCourses = async (req, res) => {
   try {
-    //TODO get the real courses from the database model
     res.render("courses", {
-      //courses: courses
     });
   } catch (err) {
     console.log(err);
@@ -11,13 +10,9 @@ module.exports.getCourses = async (req, res) => {
 
 module.exports.getSingleCourse = async (req, res) => {
   try {
-    //TODO get the real courses from the database model
-    const courses = res.locals.courses;
-    console.log(courses)
-    console.log(req.params.course)
-    const course = courses.find(n => n.headline == req.params.course);
+    const course = await Course.findOne({ "slug": req.params.course })
     res.render(`course`, {
-      course: course
+      course
     });
   } catch (err) {
     console.log(err);

@@ -18,16 +18,17 @@ router.get("/", async (req, res) => {
       .populate("categories")
       .sort("order")
       .exec({});
-    const locations = await Location.find({})
+    const locations = await Location.find({});
 
-    let courses = await Course.find({})
-    console.log(courses)
-    let events = []
-    for await (let loc of locations){
-      if(!events){
-        events[await Event.findOne({ location: loc._id }).populate("location")]
+    let courses = await Course.find({});
+    let events = [];
+    for await (let loc of locations) {
+      if (!events) {
+        events[await Event.findOne({ location: loc._id }).populate("location")];
       } else {
-        events.push(await Event.findOne({ location: loc._id }).populate("location"))
+        events.push(
+          await Event.findOne({ location: loc._id }).populate("location")
+        );
       }
     }
 
@@ -42,8 +43,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-
-router.post('/contact', async (req, res) => {
+router.post("/contact", async (req, res) => {
   var contact = new Contact();
 
   contact.name = req.body.name;
@@ -53,10 +53,10 @@ router.post('/contact', async (req, res) => {
 
   contact.locations = req.body.locations;
   if (!contact.email) {
-    res.redirect("/?alert=error")
+    res.redirect(req.headers.referer + "?alert=error");
   }
 
-  contact.save(function (err) {
+  contact.save(function(err) {
     if (err) res.send(err);
     console.log("Contact created:", contact);
 
@@ -81,12 +81,13 @@ router.post('/contact', async (req, res) => {
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         return console.log(error);
-        res.redirect("/?alert=error");
+        res.redirect(req.headers.referer + "?alert=error");
       }
       console.log("Message sent: %s", info.messageId);
     });
+    console.log(req.headers.referer);
 
-    res.redirect("/?alert=success");
+    res.redirect(req.headers.referer + "?alert=success");
   });
 });
 module.exports = router;

@@ -1,11 +1,18 @@
 mixin getinvolved
-  .container.mt-5.text-left
-    .row
-      .col
-        h1.my-5.display-1 GET
-        | INVOLVED
-        .row
-          each page in pages
-            h2.mb-3
-              a(class= currentPath === ("/pages/" + page.id) ? "active" : "" href='/pages/'+ page.id)=page.title
-            
+  .container.mt-5.text-left.getInvolved-container
+    .row.getInvolved-content
+      h1.my-5.display-1.text-right
+        div GET
+        div INVOLVED
+    .row.my-5
+      div.verticalLineGetInv.p-5.m-auto
+        each page in pages
+          h2.my-4
+            div
+               a.linksInvolved.text-center.px-3.py-1(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
+        h2.my-4
+          div
+            a.linksInvolved.text-center.px-3.py-1(href='/jobs/') Jobs
+             
+     
+      

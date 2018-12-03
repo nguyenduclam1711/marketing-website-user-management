@@ -4,7 +4,7 @@ const Event = require('../models/event');
 const Location = require('../models/location');
 
 module.exports.getEvents = async (req, res) => {
-  let events = await Event.find().populate("location")
+  let events = await Event.find().populate("location").sort({'start': -1}).limit(8);
 
   locationEvents = events.reduce(function (acc, obj) {
     if (obj.location) {

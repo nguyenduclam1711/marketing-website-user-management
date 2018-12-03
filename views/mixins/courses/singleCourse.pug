@@ -1,85 +1,100 @@
 mixin singleCourse
+  .body-scroll
+    .jumbotron.jumbotron-fluid.text-center
+      .jumbotron-courses-container    
+        h1.display-1.mt-5.mb-3=course.headline
+        p.mb-5=course.subheading
+        button.btn.btn-apply.mt-3.mb-5(type='button' data-toggle='modal', data-target='#contactFormModal') Apply
 
-  .container
-    .m-auto.text-center
-      
-      section      
-          h1.display-1.mt-5.mb-3=course.headline
-          p.mb-5=course.subheading
-          button.btn.btn-apply.mt-3.mb-5 Apply
-        
-      section.my-5
-        h2.mt-5.mb-3.text-left=courses.title
-        p.text-left=courses.subtitle  
-        .row.mt-5
-          - 
-          each object in course.archivements
-            figure.col-md-4
-              img.img-fluid(src=object.icon, alt=object.description)
-              p=object.description
-        
-      section.my-5
-        - 
-        each object in course.features
-          .row.container            
-            .col-12.d.flex.m-auto
-              img.img-fluid.float-left.mr-5.icons(src=object.icon, alt=object.title)
-              h3.text-left=object.title
-              p.text-left=object.subtitle
+    .container-fluid.container-fluid-courses
+      .row
+        nav#myScrollspy.col-sm-3.col-4
+          ul.nav.nav-pills.flex-column.nav-courses-pills
+            h4=course.headline
+            li.nav-item
+              a.nav-link.nav-link-spy.active(href='#section1') Overview
+            li.nav-item
+              a.nav-link.nav-link-spy(href='#section2') What you will learn
+            li.nav-item
+              a.nav-link.nav-link-spy(href='#section3') Day at DCI
+            li.nav-item
+              a.nav-link.nav-link-spy(href='#section4') How to Apply
+            button.btn.btn-primary.btn-spy(type='button' data-toggle='modal', data-target='#contactFormModal') Apply Now
+
+        .col-sm-9.col-8
+          #section1.my-5
+            h2.mt-5.mb-3.text-left=courses.title
+            p.text-left=courses.subtitle  
+            .row.mt-5
+              - 
+              each object in course.archivements
+                figure.col-md-4
+                  img.img-fluid(src=object.icon, alt=object.description)
+                  p=object.description
+            
+          #section2.my-5
+            - 
+            each object in course.features
+              .row.container            
+                .col-12.d.flex.m-auto
+                  img.img-fluid.float-left.mr-5.icons(src=object.icon, alt=object.title)
+                  h3.text-left=object.title
+                  p.text-left=object.subtitle
+                  
+          section.my-5
+            h2 Want more details about our Web Development Course?
+            p We will send you the full course information to your email
+            
+          #section3.my-5
+            h2.text-left.mb-5 A day at DCI
+            -
+            each object in course.timeline
+              .row.container.timelineRow            
+                .col-12.d.flex.m-auto
+                  div.timelineDiv.float-left.text-center
+                    span.timeline=object.time
+                  div.ml-5
+                    h3.ml-5.pt-2.text-left=object.title 
+                    p.ml-5.text-left=object.subtitle
+                        
+          section.my-5.text-center
+            div.my-5
+              h2 More than just classwork
+              p Beyond building the hard skills in class, you need to get involved in the local tech scene and market yourself. We’re here to help you succeed with career development support and opportunities to get into the community.
               
-      section.my-5
-        h2 Want more details about our Web Development Course?
-        p We will send you the full course information to your email
-        
-      section.my-5
-        h2.text-left.mb-5 A day at DCI
-        -
-        each object in course.timeline
-          .row.container.timelineRow            
-            .col-12.d.flex.m-auto
-              div.timelineDiv.float-left.text-center
-                span.timeline=object.time
-              div.ml-5
-                h3.ml-5.pt-2.text-left=object.title 
-                p.ml-5.text-left=object.subtitle
-                    
-      section.my-5.text-center
-        div.my-5
-          h2 More than just classwork
-          p Beyond building the hard skills in class, you need to get involved in the local tech scene and market yourself. We’re here to help you succeed with career development support and opportunities to get into the community.
+            div.my-5
+              h2 Career workshops
+              p preparing an industry-specific resume to creating an online presence, you’ll pick up the skills to stand out.
+            
+            div.my-5
+              h2 Guest speakers
+              p additional specialised sessions from top professionals and get tips from DCI alumni.
+            
+            div.my-5
+              h2 Company Tours
+              p Take a tour of a local startup and see what the work environment is all about.
           
-        div.my-5
-          h2 Career workshops
-          p preparing an industry-specific resume to creating an online presence, you’ll pick up the skills to stand out.
-        
-        div.my-5
-          h2 Guest speakers
-          p additional specialised sessions from top professionals and get tips from DCI alumni.
-        
-        div.my-5
-          h2 Company Tours
-          p Take a tour of a local startup and see what the work environment is all about.
-      
-      section.my-5 
-        h2.text-left How to apply?
-        .row.container.mt-5.applyRow
-          .col-3.m-auto.applyDiv
-            span.m-auto.apply-step-number 1    
-          .col-3.m-auto.applyDiv
-            span.m-auto.apply-step-number 2            
-          .col-3.m-auto.applyDiv
-            span.m-auto.apply-step-number 3            
-        .row.container.mb-5
-          .col-3.m-auto
-            p.mt-3 Complete the application form
-          .col-3.m-auto
-            p.mt-3.pt-4 Visit DCI and chat with our admissions team
-          .col-3.m-auto
-            p.mt-3 Reserve your spot
-        
-      section.my-5.text-left
-        h2 Come see our campus!
-        p Have questions? Want to see the student life for yourself? Book a one-on-one visit with our admissions team and we’ll show you around.
-        p Vulkanstraße 1
-        p 10367 Berlin
-      
+          #section4.my-5 
+            h2.text-left How to apply?
+            .row.container.mt-5.applyRow
+              .col-3.m-auto.applyDiv
+                span.m-auto.apply-step-number 1    
+              .col-3.m-auto.applyDiv
+                span.m-auto.apply-step-number 2            
+              .col-3.m-auto.applyDiv
+                span.m-auto.apply-step-number 3            
+            .row.container.mb-5
+              .col-3.m-auto
+                p.mt-3 Complete the application form
+              .col-3.m-auto
+                p.mt-3.pt-4 Visit DCI and chat with our admissions team
+              .col-3.m-auto
+                p.mt-3 Reserve your spot
+            
+          section.my-5.text-left
+            h2 Come see our campus!
+            p Have questions? Want to see the student life for yourself? Book a one-on-one visit with our admissions team and we’ll show you around.
+            p Vulkanstraße 1
+            p 10367 Berlin
+    .modal#contactFormModal
+      +contactform      

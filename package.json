@@ -29,6 +29,7 @@
     "mini-css-extract-plugin": "^0.4.4",
     "mongodb": "*",
     "mongoose": "^5.1.1",
+    "mongoose-url-slugs": "^1.0.2",
     "multer": "*",
     "node-sass": "^4.10.0",
     "nodemailer": "^4.6.7",
@@ -55,7 +56,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "dev": "concurrently \"webpack --mode development --watch\" \"nodemon index.js --ignore 'assets' --ignore 'public'\"  -n \"WEBPACK,NODE\" --prefix name -c \"red.bold,blue.bold\"",
+    "dev": "concurrently \"redis-server\" \"webpack --mode development --watch\" \"nodemon index.js --ignore 'assets' --ignore 'public'\"  -n \"REDIS,WEBPACK,NODE\" --prefix name -c \"green.bold,red.bold,blue.bold\"",
     "seed": "node seeds.js",
     "seed:delete": "node seeds.js --delete",
     "test": "NODE_ENV=test mocha test/ --timeout 10000 --exit"
