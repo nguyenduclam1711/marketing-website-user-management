@@ -5,57 +5,6 @@
 @import "footer";
 @import "storylist";
 
-body.admin {
-  background: #5a5a5a2b;
-}
-.getInvolved-content {
-  text-align: center;
-}
-.getInvolved-container {
-  display: flex;
-  justify-content: center;
-}
-
-/*GENERAL STYLES*/
-
-body {
-  // background-color: #f8f7f7;
-  width: 100vw;
-}
-
-h1 { color: #1d3b8b; }
-
-.orange-dot,
-a {
-  color: #da9446;
-}
-
-#btn{
-   color: #fff;
-   boder-color: #fff;
-   background: linear-gradient(270deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-   background-size: 800% 800%;
-    -webkit-animation: AnimationName 30s ease infinite;
-   -moz-animation: AnimationName 30s ease infinite;
-   animation: AnimationName 30s ease infinite;
-    @-webkit-keyframes AnimationName {
-       0%{background-position:0% 50%}
-       50%{background-position:100% 50%}
-       100%{background-position:0% 50%}
-   }
-   @-moz-keyframes AnimationName {
-       0%{background-position:0% 50%}
-       50%{background-position:100% 50%}
-       100%{background-position:0% 50%}
-   }
-   @keyframes AnimationName {
-       0%{background-position:0% 50%}
-       50%{background-position:100% 50%}
-       100%{background-position:0% 50%}
-   }
-}
-/*NAVIGATION-BAR*/
-
 /*HOME*/
 
 .homeSection{
