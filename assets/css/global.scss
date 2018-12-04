@@ -1,3 +1,4 @@
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
 /* @import url("https://fonts.googleapis.com/css?family=Didact+Gothic");
 
 @font-face {
@@ -5,6 +6,32 @@
   src: url("fonts/Didact_Gothic/DidactGothic-Regular.ttf");
   src: url("fonts/Didact_Gothic/DidactGothic-Regular.ttf") format("ttf");
 } */
+
+.startYour,
+.digitalCarrer {
+  font-size: 1rem;
+}
+
+@include media-breakpoint-up(sm) {
+  .startYour,
+  .digitalCarrer {
+    font-size: 3rem;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .startYour,
+  .digitalCarrer {
+    font-size: 4.5rem;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .startYour,
+  .digitalCarrer {
+    font-size: 6rem;
+  }
+}
 
 html {
   scroll-behavior: smooth;
