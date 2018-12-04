@@ -5,6 +5,7 @@
 @import "footer";
 @import "storylist";
 
+
 /*HOME*/
 
 .homeSection{
@@ -34,73 +35,6 @@
   color: #dce0f2;
 }
 
-#dci-logo {
-  width: 50px;
-  height: 50px;
-  -webkit-filter: drop-shadow(4px 3px 3px #bfbebe);
-  filter: drop-shadow(4px 3px 3px #bfbebe);
-}
-
-.nav-link {
-  color: #1d3b8b !important;
-}
-
-.dropdown-toggle::after {
-  border: 0;
-}
-
-/*NAVIGATION-BRACKETS*/
-#headernav {
-  height: 5rem;
-}
-
-#headernav a.active {
-  content: "";
-  position: relative;
-}
-
-#headernav {
-  a.active,
-  a:hover {
-    &:before,
-    &:after{
-      content: "";
-      position: absolute;
-      background-image: url("/media/bracket.svg");
-      background-repeat: no-repeat;
-      background-size: 1em;
-      display: inline-block;
-      height: 58px;
-      width: 50px;
-    }
-  }
-}
-
-#headernav {
-  a.active,
-  a:hover{
-    &:before{
-      left: -7px;
-      top: -5px;
-      -webkit-filter: drop-shadow(4px 3px 3px #bfbebe);
-      filter: drop-shadow(4px 3px 3px #bfbebe);
-    }
-  }
-}
-
-#headernav {
-  a.active,
-  a:hover{
-    &:after{
-      left: auto;
-      right: 15px;
-      top: -17px;
-      transform: rotate(180deg);
-      -webkit-filter: drop-shadow(-4px -3px 3px #bfbebe);
-      filter: drop-shadow(-4px -3px 3px #bfbebe);
-    }
-  }
-}
 
 /******************************************
         VIDEO SECTION

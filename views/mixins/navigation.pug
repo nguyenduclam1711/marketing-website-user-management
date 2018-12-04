@@ -1,13 +1,13 @@
 mixin navigation
 
- nav#headernav.sticky-top.navbar.navbar-dark.navbar-expand-md.justify-content-center.pr-5.py-4.mb-5.bg-white(class=currentPath == "/" ? "" : "")
+ nav.sticky-top.navbar.navbar-light.navbar-expand-md.justify-content-center.pr-5.bg-white(class=currentPath == "/" ? "" : "")
 
   a.navbar-brand.d-flex.w-50.ml-5.pt-0(href="/")
     img(src='/media/dci.svg' alt='dci-logo' id='dci-logo')
   button.navbar-toggler(type='button', data-toggle='collapse', data-target='#collapsingNavbar3')
     span.navbar-toggler-icon
   #collapsingNavbar3.navbar-collapse.collapse.w-100
-    ul#headernav.nav.navbar-nav.ml-auto.w-100.justify-content-end
+    ul.nav.navbar-nav.ml-auto.w-100.justify-content-end
       if user
         li.position-relative.nav-item.dropdown
           a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mr-4(data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
@@ -22,13 +22,13 @@ mixin navigation
             a.dropdown-item(href='/admin/courses') Courses
             a.dropdown-item(href='/admin/jobs') Jobs
 
-      li.position-relative.nav-item.dropdown
+      li#headernav.position-relative.nav-item.dropdown
         a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mr-4(class= currentPath.includes('/courses') ? "active" : "" data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
           | COURSES
         .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
           each course in courses
             a.dropdown-item(class= currentPath === ("/courses/" + course.slug) ? "active" : "" href='/courses/'+ course.slug)=course.slug
-      li.position-relative.nav-item.dropdown
+      li#headernav.position-relative.nav-item.dropdown
         a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mr-4(class=currentPath.includes('/events') ? "active" : "" href='/events' data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
           | EVENTS
 
@@ -36,10 +36,10 @@ mixin navigation
           a.dropdown-item(class= currentPath === ("/events") ? "active" : "" href='/events') All locations 
           each location in locations
             a.dropdown-item(class= currentPath === ("/events/" + location.name) ? "active" : "" href='/events/'+ location.name)=location.name
-      li.position-relative.nav-item
+      li#headernav.position-relative.nav-item
         a.nav-link.mr-4(class=currentPath == "/stories" ? "active" : "" href='/stories') STORIES
     
-      li.position-relative.nav-item.dropdown
+      li#headernav.position-relative.nav-item.dropdown
         a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mr-4(data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' class=currentPath == "/admin/contacts" ? "active" : "" href='/admin/contacts')
           | GET INVOLVED
         .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
@@ -48,12 +48,13 @@ mixin navigation
           a.dropdown-item(href='/jobs/') Jobs
             
 
-      li.position-relative.nav-item
-        a.nav-link(data-toggle='modal', data-target='#contactFormModal') CONTACT US
+      li#headernav.position-relative.nav-item
+        a.nav-link.mr-4(data-toggle='modal', data-target='#contactFormModal') CONTACT US
 
         if user
-          li.position-relative.nav-item
-            a.nav-link(href='/users/logout') LOGOUT
+          li#headernav.position-relative.nav-item
+            a.nav-link.mr-4(href='/users/logout') LOGOUT
         else
-          li.position-relative.nav-item
-            a.nav-link(class=currentPath == "/users/login" ? "active" : "" href='/users/login') LOGIN
+          
+          li#headernav.position-relative.nav-item
+            a.nav-link.mr-4(class=currentPath == "/users/login" ? "active" : "" href='/users/login') LOGIN
