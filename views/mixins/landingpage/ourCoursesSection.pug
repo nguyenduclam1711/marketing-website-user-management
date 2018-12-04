@@ -2,7 +2,7 @@ mixin ourCoursesSection
   section#services.section-services
     .container.container-courses
       .section-title-area
-        h2.section-title
+        h1.display-1
           | Our Courses
       .row
         each course in courses
@@ -11,7 +11,7 @@ mixin ourCoursesSection
               a.service-link(href="/courses/"+course.slug)
                 span.screen-reader-text
                   = course.title
-              .service-image.icon-image
+              .service-image.icon-image.mb-5
                 img.h-100(src=course.icon, alt=course.title)
               .service-content
                 h4.service-title= course.headline
