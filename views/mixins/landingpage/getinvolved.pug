@@ -1,18 +1,18 @@
 mixin getinvolved
-  .container.mt-5.text-left.getInvolved-container
+  .container.my-5.p-5.text-left.getInvolved-container
     .row.getInvolved-content
-      h1.my-5.display-1.text-right
-        div.getinvolved.display-1.font-weight-bold.text-left GET
-        div.getinvolved.display-1.font-weight-bold INVOLVED
-    .row.my-5
-      div.verticalLineGetInv.p-5
+      h1.display-1.text-right.mx-5
+        div.headingSection.display-1.font-weight-bold.text-left GET
+        div.headingSection.display-1.font-weight-bold INVOLVED
+    .row.ml-5
+      div.verticalLineGetInv.pt-5.mt-5
         each page in pages
-          h2.my-4
-            div
-               a.linksInvolved.text-center.px-3.py-1(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
-        h2.my-4
-          div
-            a.linksInvolved.text-center.px-3.py-1(href='/jobs/') Jobs
+        
+          div.mx-5
+             a.linksInvolved(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
+        
+        div.mx-5.mb-5
+          a.linksInvolved(href='/jobs/') Jobs
              
      
       

@@ -806,13 +806,56 @@ input[type="week"] {
 
 /*GET INVOLVED*/
 
-.getinvolved {
+/*responsive*/
+
+.headingSection {
+  font-size: 3rem;
   color: #1f3d87;
+}
+
+@include media-breakpoint-up(sm) {
+  .headingSection {
+    font-size: 3rem;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .headingSection {
+    font-size: 6rem;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .headingSection {
+    font-size: 4rem;
+  }
+}
+
+.linksInvolved {
+  font-size: 1.5rem;
+}
+
+@include media-breakpoint-up(sm) {
+  .linksInvolved {
+    font-size: 1rem;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .linksInvolved {
+    font-size: 2.75rem;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .linksInvolved {
+    font-size: 1.75rem;
+  }
 }
 
 
 .verticalLineGetInv {
-  --borderWidth: 5px;
+  --borderWidth: 3px;
   background: #fff;
   position: relative;
 }
