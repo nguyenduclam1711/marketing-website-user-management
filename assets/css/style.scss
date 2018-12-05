@@ -776,7 +776,7 @@ input[type="week"] {
   }
 }
 
-#btn-contactForm{
+#btn-contactForm {
    width: 100%;
    color: #fff;
    boder-color: #fff;
@@ -802,4 +802,73 @@ input[type="week"] {
        50%{background-position:100% 50%}
        100%{background-position:0% 50%}
    }
+}
+
+/*GET INVOLVED*/
+
+.getinvolved {
+  color: #1f3d87;
+}
+
+
+.verticalLineGetInv {
+  --borderWidth: 5px;
+  background: #fff;
+  position: relative;
+}
+.verticalLineGetInv:after {
+  content: '';
+  position: absolute;
+  left: calc(-1 * var(--borderWidth));
+  bottom: calc(-1 * var(--borderWidth));
+  height: calc(100% + var(--borderWidth));
+  width: calc(100% + var(--borderWidth));
+  background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
+  z-index: -1;
+  animation: animatedgradient 3s ease alternate infinite;
+  background-size: 300% 300%;
+}
+
+
+@keyframes animatedgradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.linksInvolved {
+  position: relative;
+  text-decoration: none !important;
+  color: #4285F4;
+}
+
+.linksInvolved:hover {
+  color: #0d47a1;
+}
+
+.linksInvolved:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #0d47a1;
+  visibility: hidden;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.linksInvolved:hover:before {
+  visibility: visible;
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
 }
