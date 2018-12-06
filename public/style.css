@@ -10839,12 +10839,54 @@ input[type="week"] {
 }
 
 /*GET INVOLVED*/
-.getinvolved {
+/*responsive*/
+.headingSection {
+  font-size: 3rem;
   color: #1f3d87;
 }
 
+@media (min-width: 576px) {
+  .headingSection {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .headingSection {
+    font-size: 6rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .headingSection {
+    font-size: 4rem;
+  }
+}
+
+.linksInvolved {
+  font-size: 1.5rem;
+}
+
+@media (min-width: 576px) {
+  .linksInvolved {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .linksInvolved {
+    font-size: 2.75rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .linksInvolved {
+    font-size: 1.75rem;
+  }
+}
+
 .verticalLineGetInv {
-  --borderWidth: 5px;
+  --borderWidth: 3px;
   background: #fff;
   position: relative;
 }
