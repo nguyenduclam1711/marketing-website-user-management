@@ -9,7 +9,6 @@ module.exports = (env, argv) => {
     entry: {
       frontend: "./assets/scripts/frontend.js",
       // backend: "./src/backend.js",
-       style: "./assets/css/style.js"
     },
 
     // Define the destination directory and filenames of compiled resources

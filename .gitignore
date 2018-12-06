@@ -4,3 +4,4 @@ users/*
 uploads/images/*
 .env
 dump.rdb
+*.map

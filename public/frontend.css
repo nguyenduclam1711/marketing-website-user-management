@@ -10618,6 +10618,10 @@ input[type="week"] {
   height: 42px;
 }
 
+.dataPrivacyLink {
+  text-decoration: underline;
+}
+
 /******************************************/
 .checkbox {
   width: auto;
@@ -10892,7 +10896,7 @@ input[type="week"] {
 }
 
 .verticalLineGetInv:after {
-  content: '';
+  content: "";
   position: absolute;
   left: calc(-1 * var(--borderWidth));
   bottom: calc(-1 * var(--borderWidth));
@@ -10933,7 +10937,7 @@ input[type="week"] {
 .linksInvolved {
   position: relative;
   text-decoration: none !important;
-  color: #4285F4;
+  color: #4285f4;
 }
 
 .linksInvolved:hover {
@@ -10965,4 +10969,4 @@ input[type="week"] {
 }
 
 
-/*# sourceMappingURL=style.css.map*/
+/*# sourceMappingURL=frontend.css.map*/

@@ -12,6 +12,7 @@ include mixins/pagelist
 include mixins/joblist
 include mixins/eventlist
 include mixins/contactform
+include mixins/dataPrivacy
 include mixins/storyForm
 include mixins/courseForm
 include mixins/jobForm
@@ -46,7 +47,7 @@ html(lang='en')
     //link(rel="stylesheet", href="/assets/storylist.css")
 
     //TODO this should be the only stylesheet we require. All above should be removed
-    link(rel="stylesheet", href="/style.css")
+    link(rel="stylesheet", href="/frontend.css")
     // Custom styles for this template
 
     //favicons
@@ -59,7 +60,8 @@ html(lang='en')
     meta(name="theme-color", content="#ffffff")
   
 
-  body(data-spy='scroll', data-target='#myScrollspy', data-offset='1', class=pathclass+(currentPath.includes('admin') ? ' admin' : '' )) 
+  body(data-spy='scroll', data-target='#myScrollspy', data-offset='1', class=pathclass+(currentPath.includes('admin') ? ' admin' : '' ))
+
     if message
       .alert.alert-dismissible.fade.show(role='alert', class=color, style="z-index: 1")
         strong= message
@@ -70,6 +72,10 @@ html(lang='en')
     block content
     if !currentPath.includes('admin')
       +footer
+      .modal#contactFormModal
+        +contactform
+      .modal#dataPrivacy
+        +dataPrivacy  
     script(src="/frontend.bundle.js")
   
     

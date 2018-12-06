@@ -36,12 +36,12 @@ mixin contactform
                 option(value=(location._id))=location.name
         
    
-          p
+          p.dataPrivacyLink
             label.checkbox.TermsofService
               | I have read and agree to the
               input(type='checkbox', name='TermsofService[]', value='I have read and agree to the', required='')
               span.checkmark
-            a.ml-1(href='https://www.digitalcareerinstitute.org/dataprivacy/')
+            a.ml-1(data-toggle='modal', data-target='#dataPrivacy')
               | Data
               | Privacy
               
