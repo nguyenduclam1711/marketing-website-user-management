@@ -10005,8 +10005,8 @@ p{
 }
 
 /******************************************
-        VIDEO SECTION
-*******************************************/
+VIDEO SECTION
+ *******************************************/
 video {
   min-width: 100%;
   min-height: 100%;
@@ -10015,8 +10015,8 @@ video {
 }
 
 /******************************************
-        JUMBOTRON SECTION
-*******************************************/
+JUMBOTRON SECTION
+ *******************************************/
 .jumbotron-courses {
   text-align: center;
   position: absolute;
@@ -10052,8 +10052,8 @@ a:hover {
 }
 
 /******************************************
-        OUR COURSES SECTION
-*******************************************/
+OUR COURSES SECTION
+ *******************************************/
 .section-services {
   padding: 5rem 0;
 }
@@ -10133,8 +10133,8 @@ textarea {
 }
 
 /******************************************
-        OUR COURSES TESTIMONIALS
-*******************************************/
+OUR COURSES TESTIMONIALS
+ *******************************************/
 .section-padding {
   padding: 5rem 0;
 }
@@ -10189,8 +10189,8 @@ textarea {
 }
 
 /******************************************
-     STATS COUNTER
-*******************************************/
+STATS COUNTER
+ *******************************************/
 .counter-item {
   text-align: center;
 }
@@ -10222,8 +10222,8 @@ textarea {
 }
 
 /******************************************
-     QUOTE
-*******************************************/
+QUOTE
+ *******************************************/
 .section-mission {
   margin: 0 auto;
   width: 100%;
@@ -10259,8 +10259,8 @@ textarea {
 }
 
 /******************************************
-     UPCOMING EVENTS
-*******************************************/
+UPCOMING EVENTS
+ *******************************************/
 .event-item {
   margin-bottom: 2rem;
   background: rgba(0, 122, 255, 0.1);
@@ -10542,8 +10542,8 @@ textarea {
 }
 
 /******************************************
-     OUR PARTNERS SECTION
-*******************************************/
+  OUR PARTNERS SECTION
+   *******************************************/
 .section-partners {
   padding: 4rem 0;
 }
@@ -10565,8 +10565,8 @@ textarea {
 }
 
 /******************************************
-     CONTACT FORM SECTION
-*******************************************/
+CONTACT FORM SECTION
+ *******************************************/
 .modal-content {
   border: none;
   padding: 3rem 0;
@@ -10841,6 +10841,37 @@ input[type="week"] {
 /*CONTACT-FORM*/
 #contactForm-box {
   width: 40vw;
+}
+
+@media (min-width: 992px) and (max-width: 1160px) {
+  #contactForm-box {
+    width: 47vw;
+  }
+}
+
+@media (min-width: 771px) and (max-width: 992px) {
+  #contactForm-box {
+    width: 60vw;
+  }
+}
+
+@media (min-width: 581px) and (max-width: 770px) {
+  #contactForm-box {
+    width: 80vw;
+  }
+}
+
+@media (min-width: 200px) and (max-width: 580px) {
+  #contactForm-box {
+    width: 100vw;
+  }
+  #contactForm-box a, #contactForm-box label {
+    font-size: 12px;
+  }
+  #contactForm-box label {
+    padding-top: 4px;
+    padding-left: 24px;
+  }
 }
 
 @media (min-width: 992px) and (max-width: 1160px) {
