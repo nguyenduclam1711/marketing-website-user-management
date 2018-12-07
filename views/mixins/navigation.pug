@@ -1,8 +1,8 @@
 mixin navigation
 
- nav.sticky-top.navbar.navbar-light.navbar-expand-md.justify-content-center.pr-5.bg-white(class=currentPath == "/" ? "" : "")
+ nav.container.sticky-top.navbar.navbar-light.navbar-expand-md.justify-content-center.pr-5.bg-white(class=currentPath == "/" ? "" : "")
 
-  a.navbar-brand.d-flex.w-50.ml-5.pt-0(href="/")
+  a.navbar-brand.d-flex.pt-0(href="/")
     img(src='/media/dci.svg' alt='dci-logo' id='dci-logo')
   button.navbar-toggler(type='button', data-toggle='collapse', data-target='#collapsingNavbar3')
     span.navbar-toggler-icon
