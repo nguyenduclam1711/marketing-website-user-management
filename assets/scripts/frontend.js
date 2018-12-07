@@ -2,6 +2,7 @@
 // import Popper from "popper.js";
 import bootstrap from "bootstrap";
 import Typed from "typed.js";
+require("../css/style.scss");
 
 console.log("js file loaded");
 

@@ -86,6 +86,17 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./assets/css/style.scss":
+/*!*******************************!*\
+  !*** ./assets/css/style.scss ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "./assets/scripts/frontend.js":
 /*!************************************!*\
   !*** ./assets/scripts/frontend.js ***!
@@ -102,6 +113,9 @@ __webpack_require__.r(__webpack_exports__);
 // import $ from "jquery";
 // import Popper from "popper.js";
 
+
+
+__webpack_require__(/*! ../css/style.scss */ "./assets/css/style.scss");
 
 console.log("js file loaded");
 $(function () {

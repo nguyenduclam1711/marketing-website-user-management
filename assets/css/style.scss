@@ -5,10 +5,8 @@
 @import "footer";
 @import "storylist";
 
-
 /*HOME*/
-
-.homeSection{
+.homeSection {
   position: relative;
   min-width: 100vw;
   min-height: calc(100vh - 5rem);
@@ -18,23 +16,22 @@
   clip-path: polygon(50% 0%, 100% 0, 100% 88%, 50% 100%, 0 92%, 0 0);
 }
 
-.mainHome{
+.mainHome {
   position: relative;
-  background:rgba(29,59,139,0.5);
-  min-height:  calc(100vh - 5rem);
+  background: rgba(29, 59, 139, 0.5);
+  min-height: calc(100vh - 5rem);
 }
 
-
-.startYour, .digitalCarrer{
+.startYour,
+.digitalCarrer {
   font-weight: bold;
   color: #fff;
 }
 
-.subtitle{
+.subtitle {
   font-weight: lighter;
   color: #dce0f2;
 }
-
 
 /******************************************
         VIDEO SECTION
@@ -595,6 +592,9 @@ input[type="week"] {
   box-sizing: border-box;
   height: 42px;
 }
+.dataPrivacyLink {
+  text-decoration: underline;
+}
 
 /******************************************/
 
@@ -744,21 +744,19 @@ input[type="week"] {
 }
 
 /*CONTACT-FORM*/
-#contactForm-box{
+#contactForm-box {
   width: 45vw;
 }
 #contactForm-bg {
-
 }
 
-
-#contactForm{
+#contactForm {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-#heading{
+#heading {
   font-weight: light;
   background: linear-gradient(270deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 200% auto;
@@ -777,31 +775,49 @@ input[type="week"] {
 }
 
 #btn-contactForm {
-   width: 100%;
-   color: #fff;
-   boder-color: #fff;
-   background: linear-gradient(270deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-   background-size: 800% 800%;
+  width: 100%;
+  color: #fff;
+  boder-color: #fff;
+  background: linear-gradient(270deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 800% 800%;
 
-   -webkit-animation: AnimationName 30s ease infinite;
-   -moz-animation: AnimationName 30s ease infinite;
-   animation: AnimationName 30s ease infinite;
+  -webkit-animation: AnimationName 30s ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
 
-   @-webkit-keyframes AnimationName {
-       0%{background-position:0% 50%}
-       50%{background-position:100% 50%}
-       100%{background-position:0% 50%}
-   }
-   @-moz-keyframes AnimationName {
-       0%{background-position:0% 50%}
-       50%{background-position:100% 50%}
-       100%{background-position:0% 50%}
-   }
-   @keyframes AnimationName {
-       0%{background-position:0% 50%}
-       50%{background-position:100% 50%}
-       100%{background-position:0% 50%}
-   }
+  @-webkit-keyframes AnimationName {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  @-moz-keyframes AnimationName {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  @keyframes AnimationName {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
 }
 
 /*GET INVOLVED*/
@@ -853,42 +869,50 @@ input[type="week"] {
   }
 }
 
-
 .verticalLineGetInv {
   --borderWidth: 3px;
   background: #fff;
   position: relative;
 }
 .verticalLineGetInv:after {
-  content: '';
+  content: "";
   position: absolute;
   left: calc(-1 * var(--borderWidth));
   bottom: calc(-1 * var(--borderWidth));
   height: calc(100% + var(--borderWidth));
   width: calc(100% + var(--borderWidth));
-  background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
+  background: linear-gradient(
+    60deg,
+    #f79533,
+    #f37055,
+    #ef4e7b,
+    #a166ab,
+    #5073b8,
+    #1098ad,
+    #07b39b,
+    #6fba82
+  );
   z-index: -1;
   animation: animatedgradient 3s ease alternate infinite;
   background-size: 300% 300%;
 }
 
-
 @keyframes animatedgradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .linksInvolved {
   position: relative;
   text-decoration: none !important;
-  color: #4285F4;
+  color: #4285f4;
 }
 
 .linksInvolved:hover {
