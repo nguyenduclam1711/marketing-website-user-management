@@ -9,10 +9,10 @@ mixin getinvolved
         each page in pages
         
           div.mx-5
-             a.linksInvolved(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
+             a.linksInvolved.animationLink(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
         
         div.mx-5.mb-5
-          a.linksInvolved(href='/jobs/') Jobs
+          a.linksInvolved.animationLink(href='/jobs/') Jobs
              
      
       
