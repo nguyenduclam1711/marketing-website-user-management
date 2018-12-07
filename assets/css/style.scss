@@ -463,6 +463,80 @@ textarea {
   text-decoration: none;
 }
 
+//*SEE ALL OUR EVENTS*//
+.warningColorDark{
+  color: #FF8800;
+}
+.warningColorDark:hover{
+  color: #e65100;
+}
+
+/*responsive typography*/
+
+@media (max-width: 575px) {
+  .img-xs-customise{
+    margin-top: 0;
+  }
+  .responsiveD-3 {
+    font-size: 1.5rem;
+  }
+  .responsiveH2 {
+    font-size: 0.88rem;
+
+  }
+  .pre-xs-customise,.responsiveH2{
+    margin-bottom: 0;
+    overflow: unset;
+  }
+  .responsiveP{
+    font-size: 0.8rem;
+    white-space: initial;
+    margin-bottom: 0;
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  .responsiveD-3 {
+    font-size: 1.5rem;
+  }
+  .responsiveH2 {
+    font-size: 1rem;
+  }
+  .pre-xs-customise,.responsiveH2{
+    margin-bottom: 0;
+    overflow: unset;
+  }
+  .responsiveP{
+    font-size: 0.8rem;
+    white-space: initial;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .responsiveD-3 {
+    font-size: 3.5rem;
+  }
+  .responsiveH2 {
+    font-size: 2rem;
+  }
+  .responsiveP {
+    font-size: 1rem;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .responsiveD-3 {
+    font-size: 4.5rem;
+  }
+  .responsiveH2 {
+    font-size: 2rem;
+  }
+  .responsiveP {
+    font-size: 1rem;
+  }
+}
+
+
 /******************************************
      OUR PARTNERS SECTION
 *******************************************/
@@ -756,8 +830,6 @@ input[type="week"] {
   }
 }
 
-
-
 @media (min-width: 771px ) and ( max-width: 992px){
   #contactForm-box{
     width: 60vw;
@@ -884,24 +956,24 @@ input[type="week"] {
   }
 }
 
-.linksInvolved {
+.animationLink {
   font-size: 1.5rem;
 }
 
 @include media-breakpoint-up(sm) {
-  .linksInvolved {
+  .animationLink {
     font-size: 1rem;
   }
 }
 
 @include media-breakpoint-up(md) {
-  .linksInvolved {
+  .animationLink {
     font-size: 2.75rem;
   }
 }
 
 @include media-breakpoint-up(lg) {
-  .linksInvolved {
+  .animationLink {
     font-size: 1.75rem;
   }
 }
@@ -946,17 +1018,17 @@ input[type="week"] {
   }
 }
 
-.linksInvolved {
+.animationLink {
   position: relative;
   text-decoration: none !important;
   color: #4285f4;
 }
 
-.linksInvolved:hover {
+.animationLink:hover {
   color: #0d47a1;
 }
 
-.linksInvolved:before {
+.animationLink:before {
   content: "";
   position: absolute;
   width: 100%;
@@ -971,7 +1043,7 @@ input[type="week"] {
   transition: all 0.3s ease-in-out 0s;
 }
 
-.linksInvolved:hover:before {
+.animationLink:hover:before {
   visibility: visible;
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
