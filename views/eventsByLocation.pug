@@ -1,0 +1,8 @@
+extends layout.pug
+block content
+  .container
+    h1.blue-headline.responsiveD-3.my-5.display-3.text-left.m-5 
+      = "See our recent Events from "
+      =location.name
+    each event in events
+      +singleEvent(event)

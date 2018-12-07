@@ -27,8 +27,9 @@ module.exports.getEventsByLocation = async (req, res) => {
 
   let events = await Event.find({location: location._id})
 
-  res.render('eventslocation', {
-    events
+  res.render('eventsByLocation', {
+    events,
+    location
   })
 }
 
