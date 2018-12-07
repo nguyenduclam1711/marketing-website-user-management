@@ -10085,6 +10085,11 @@ OUR COURSES SECTION
 .section-services .service-item .service-title {
   margin-bottom: 1rem;
   color: #333;
+  min-height: 56px;
+}
+
+.section-services .service-item p {
+  min-height: 63px;
 }
 
 .section-services .service-item .service-link:before {
