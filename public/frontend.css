@@ -10769,7 +10769,38 @@ input[type="week"] {
 
 /*CONTACT-FORM*/
 #contactForm-box {
-  width: 45vw;
+  width: 40vw;
+}
+
+@media (min-width: 992px) and (max-width: 1160px) {
+  #contactForm-box {
+    width: 47vw;
+  }
+}
+
+@media (min-width: 771px) and (max-width: 992px) {
+  #contactForm-box {
+    width: 60vw;
+  }
+}
+
+@media (min-width: 581px) and (max-width: 770px) {
+  #contactForm-box {
+    width: 80vw;
+  }
+}
+
+@media (min-width: 200px) and (max-width: 580px) {
+  #contactForm-box {
+    width: 100vw;
+  }
+  #contactForm-box a, #contactForm-box label {
+    font-size: 12px;
+  }
+  #contactForm-box label {
+    padding-top: 4px;
+    padding-left: 24px;
+  }
 }
 
 #contactForm {
