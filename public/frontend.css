@@ -9633,14 +9633,16 @@ section {
 }
 
 /*NAVIGATION-BRACKETS*/
-#headernav a.active {
+#headernav > li > a.active {
   content: "";
   position: relative;
 }
 
-#headernav a.active:before, #headernav a.active:after,
-#headernav a:hover:before,
-#headernav a:hover:after {
+#headernav > li:hover > a:before, #headernav > li:hover > a:after,
+#headernav > li > a.active:before,
+#headernav > li > a.active:after,
+#headernav > li > a:hover:before,
+#headernav > li > a:hover:after {
   content: "";
   position: absolute;
   background-image: url("/media/bracket.svg");
@@ -9651,18 +9653,20 @@ section {
   width: 50px;
 }
 
-#headernav a.active:before,
-#headernav a:hover:before {
-  left: -7px;
+#headernav > li:hover > a:before,
+#headernav > li > a.active:before,
+#headernav > li > a:hover:before {
+  left: 0;
   top: -8px;
   -webkit-filter: drop-shadow(4px 3px 3px #bfbebe);
   filter: drop-shadow(4px 3px 3px #bfbebe);
 }
 
-#headernav a.active:after,
-#headernav a:hover:after {
+#headernav > li:hover > a:after,
+#headernav > li > a.active:after,
+#headernav > li > a:hover:after {
   left: auto;
-  right: 15px;
+  right: 0;
   top: -17px;
   -webkit-transform: rotate(180deg);
       -ms-transform: rotate(180deg);

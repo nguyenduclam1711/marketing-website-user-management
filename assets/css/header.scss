@@ -12,46 +12,41 @@
 
 /*NAVIGATION-BRACKETS*/
 
-#headernav a.active {
+#headernav > li > a.active {
   content: "";
   position: relative;
 }
 
-#headernav {
-  a.active,
-  a:hover {
-    &:before,
-    &:after{
-      content: "";
-      position: absolute;
-      background-image: url("/media/bracket.svg");
-      background-repeat: no-repeat;
-      background-size: 1em;
-      display: inline-block;
-      height: 55px;
-      width: 50px;
-    }
-  }
-
-  a.active,
-  a:hover{
-    &:before{
-      left: -7px;
-      top: -8px;
-      -webkit-filter: drop-shadow(4px 3px 3px #bfbebe);
-      filter: drop-shadow(4px 3px 3px #bfbebe);
-    }
-  }
-
-  a.active,
-  a:hover{
-    &:after{
-      left: auto;
-      right: 15px;
-      top: -17px;
-      transform: rotate(180deg);
-      -webkit-filter: drop-shadow(-4px -3px 3px #bfbebe);
-      filter: drop-shadow(-4px -3px 3px #bfbebe);
+#headernav  {
+  > li {
+    &:hover > a,
+    > a.active,
+    > a:hover {
+      &:before,
+      &:after{
+        content: "";
+        position: absolute;
+        background-image: url("/media/bracket.svg");
+        background-repeat: no-repeat;
+        background-size: 1em;
+        display: inline-block;
+        height: 55px;
+        width: 50px;
+      }
+      &:before{
+        left: 0;
+        top: -8px;
+        -webkit-filter: drop-shadow(4px 3px 3px #bfbebe);
+        filter: drop-shadow(4px 3px 3px #bfbebe);
+      }
+      &:after{
+        left: auto;
+        right: 0;
+        top: -17px;
+        transform: rotate(180deg);
+        -webkit-filter: drop-shadow(-4px -3px 3px #bfbebe);
+        filter: drop-shadow(-4px -3px 3px #bfbebe);
+      }
     }
   }
 }
