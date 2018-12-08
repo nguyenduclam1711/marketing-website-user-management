@@ -109,9 +109,3 @@ section {
   margin-right: auto;
   margin-left: auto;
 }
-
-.container::after {
-  display: table;
-  clear: both;
-  content: "";
-}

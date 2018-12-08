@@ -7,16 +7,12 @@
 
 /*NAVIGATION-BRACKETS*/
 #headernav  {
-  > li > a.active {
+  > li:not(.admin) > a.active {
     content: "";
     position: relative;
   }
 
-  .nav-link {
-    color: $blue !important;
-  }
-
-  > li {
+  > li:not(.admin) {
     &:hover > a,
     > a.active,
     > a:hover {
