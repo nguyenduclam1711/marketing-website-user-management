@@ -1,4 +1,5 @@
-@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+$blue: #1d3b8b;
+@import "../../node_modules/bootstrap/scss/bootstrap";
 /* @import url("https://fonts.googleapis.com/css?family=Didact+Gothic");
 
 @font-face {
@@ -6,29 +7,57 @@
   src: url("fonts/Didact_Gothic/DidactGothic-Regular.ttf");
   src: url("fonts/Didact_Gothic/DidactGothic-Regular.ttf") format("ttf");
 } */
-
-.startYour,
-.digitalCarrer {
-  font-size: 1rem;
+.left {
+  left: 0;
 }
 
+.right {
+  right: 0;
+}
+.top {
+  top: 0;
+}
+.bottom {
+  bottom: 0;
+}
+.z-minus {
+  z-index: -1;
+}
+.bg-primary-transparent {
+  background-color: $blue;
+}
+.half-transparent {
+  opacity: .5;
+}
+.startYour,
+.digitalCareer {
+  font-size: 1rem;
+}
+.alert {
+  border-radius: 0;
+  position: fixed;
+  z-index: 9999999999;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 0;
+}
 @include media-breakpoint-up(sm) {
   .startYour,
-  .digitalCarrer {
+  .digitalCareer {
     font-size: 3rem;
   }
 }
 
 @include media-breakpoint-up(md) {
   .startYour,
-  .digitalCarrer {
+  .digitalCareer {
     font-size: 4.5rem;
   }
 }
 
 @include media-breakpoint-up(lg) {
   .startYour,
-  .digitalCarrer {
+  .digitalCareer {
     font-size: 6rem;
   }
 }
@@ -54,8 +83,8 @@ body:not(.admin).btn {
   font-weight: 500;
   border-width: 3px;
   line-height: 1.5;
-  background-color: #007aff;
-  border-color: #007aff;
+  background-color: $blue;
+  border-color: $blue;
   color: white;
   line-height: 36px;
   padding-top: 0;
@@ -79,10 +108,4 @@ section {
   padding-left: 0.9375rem;
   margin-right: auto;
   margin-left: auto;
-}
-
-.container::after {
-  display: table;
-  clear: both;
-  content: "";
 }

@@ -8,8 +8,6 @@ module.exports.getContacts = async function (req, res) {
     .exec();
 
   res.render("admin/contacts", {
-    contacts: contacts,
-    message: res.locals.message,
-    color: res.locals.color
+    contacts,
   });
 }

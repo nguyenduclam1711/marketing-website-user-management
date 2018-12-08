@@ -78,18 +78,15 @@ module.exports.createStory = async (req, res) => {
   // save the story and check for errors
   story.save(function (err) {
     if (err) res.send(err);
-    console.log("Story created:", story);
-    res.redirect("/admin/stories?alert=created");
+    req.flash("success", `Successfully created ${story.name}`);    
+    res.redirect("/admin/stories");
   });
 }
 module.exports.deleteStory = async (req, res) => {
   try {
-    console.log("", req.params.slug);
-    const story = await Story.findOne({ "slug": req.params.slug })
-    console.log("", story);
     await Story.remove({ slug: req.params.slug})
-    console.log("Story deleted");
-    res.redirect("/admin/stories?alert=deleted");
+    req.flash("success", `Successfully deleted ${story.name}`);
+    res.redirect("/admin/stories");
   } catch (err) {
     console.log(err);
   }
@@ -103,7 +100,8 @@ module.exports.updateStory = async function (req, res) {
     { new: true, runValidators: true }
   ).exec()
 
-  res.redirect("/admin/stories/edit/" + req.params.slug + "?alert=updated");
+  req.flash("success", `Successfully updated ${story.name}`);
+  res.redirect("/admin/stories/edit/" + req.params.slug);
 }
 
 
@@ -154,14 +152,11 @@ exports.resizeImages = async (request, response, next) => {
   } catch (error) {
     console.log(error);
   }
-
   next()
 }
 
 // Validate profile data and save
 exports.updateProfile = async (request, response) => {
-  console.log(request.body);
-
   await User.findOneAndUpdate(
     { _id: request.story.slug },
     request.body,
@@ -171,6 +166,5 @@ exports.updateProfile = async (request, response) => {
     }
   ).exec()
 
-  console.log('success', `Successfully updated your profile.`)
-  response.redirect('/admin/stories/edit' + story.slug + "?alert=updated")
+  response.redirect('/admin/stories/edit' + story.slug)
 }

@@ -32,8 +32,8 @@ module.exports.createLocation = (req, res) => {
   location.name = req.body.name; 
   location.save((err) => {
     if (err) res.send(err);
-    console.log("Location created:", location);
-    res.redirect("/admin/locations?alert=created");
+    req.flash("success", `Successfully created ${location.name}`);
+    res.redirect("/admin/locations");
   });
 }
 module.exports.deleteLocation = (req, res) => {
@@ -44,8 +44,8 @@ module.exports.deleteLocation = (req, res) => {
     (err, location) => {
       if (err) res.send(err);
 
-      console.log("Location deleted");
-      res.redirect("/admin/locations?alert=deleted");
+      req.flash("success", `Successfully deleted Location`);
+      res.redirect("/admin/locations");
     }
   );
 }
@@ -58,8 +58,8 @@ module.exports.updateLocation = (req, res) => {
     location.save((err) => {
       if (err) res.send(err);
 
-      console.log("Location updated:", location);
-      res.redirect("/admin/locations/edit/" + location._id + "?alert=updated");
+      req.flash("success", `Successfully updated ${location.name}`);
+      res.redirect("/admin/locations/edit/" + location._id);
     });
   });
 }

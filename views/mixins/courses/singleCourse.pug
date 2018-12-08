@@ -1,24 +1,26 @@
 mixin singleCourse
   .body-scroll
-    .jumbotron.jumbotron-fluid.text-center
-      .jumbotron-courses-container    
+    .jumbotron.jumbotron-fluid.text-center.bg-transparent
+      .bg-primary-transparent.position-fixed.left.top.z-minus.h-100
+        img.half-transparent.h-100(src='/media/team.jpg')
+      .jumbotron-courses-container.text-white
         h1.display-1.mt-5.mb-3=course.headline
         p.mb-5=course.subheading
         button.btn.btn-apply.mt-3.mb-5(type='button' data-toggle='modal', data-target='#contactFormModal') Apply
 
-    .container-fluid.container-fluid-courses
+    .container.bg-white.position-relative
       .row
         nav#myScrollspy.col-sm-3.col-4
           ul.nav.nav-pills.flex-column.nav-courses-pills
             h4=course.headline
             li.nav-item
-              a.nav-link.nav-link-spy.active(href='#section1') Overview
+              a.nav-link.nav-link-spy.mb-2.active(href='#section1') Overview
             li.nav-item
-              a.nav-link.nav-link-spy(href='#section2') What you will learn
+              a.nav-link.nav-link-spy.mb-2(href='#section2') What you will learn
             li.nav-item
-              a.nav-link.nav-link-spy(href='#section3') Day at DCI
+              a.nav-link.nav-link-spy.mb-2(href='#section3') Day at DCI
             li.nav-item
-              a.nav-link.nav-link-spy(href='#section4') How to Apply
+              a.nav-link.nav-link-spy.mb-2(href='#section4') How to Apply
             button.btn.btn-primary.btn-spy(type='button' data-toggle='modal', data-target='#contactFormModal') Apply Now
 
         .col-sm-9.col-8

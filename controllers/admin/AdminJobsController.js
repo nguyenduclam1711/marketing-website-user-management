@@ -1,4 +1,4 @@
-require('dotenv').config({ path: __dirname + '/../.env' });
+require("dotenv").config({ path: __dirname + "/../.env" });
 const request = require("request");
 const Job = require("../../models/job");
 const Location = require("../../models/location");
@@ -9,34 +9,31 @@ module.exports.getJobs = async (req, res) => {
       .populate("locations")
       .sort("order")
       .exec();
-    let locations = await Location.find({})
-      .exec();
+    let locations = await Location.find({}).exec();
 
+    
     res.render("admin/jobs", {
       jobs,
       locations,
-      message: res.locals.message,
-      color: res.locals.color
     });
-
   } catch (err) {
     console.log(err);
   }
-}
+};
 
 module.exports.getSingleJob = async (req, res) => {
   try {
-    const job = await Job.findOne({ "slug": req.params.slug })
+    const job = await Job.findOne({ slug: req.params.slug });
     res.render(`job`, {
       job
     });
   } catch (err) {
     console.log(err);
   }
-}
+};
 module.exports.editJob = async (req, res) => {
   try {
-    const job = await Job.findOne({ "slug": req.params.slug })
+    const job = await Job.findOne({ slug: req.params.slug });
     let alllocations = await Location.find({}).exec();
     all = alllocations.map(loc => {
       let match = job.locations
@@ -49,51 +46,49 @@ module.exports.editJob = async (req, res) => {
         return loc._doc;
       }
     });
-    let locations = await Location.find({})
-      .exec();
+
     res.render("admin/editJob", {
+      title: "Home",
       locations: all,
-      job,
-      message: res.locals.message,
-      color: res.locals.color
+      job
     });
   } catch (err) {
     console.log(err);
   }
-}
+};
 module.exports.createJob = async (req, res) => {
   try {
-    var job = new Job(); 
-    console.log('body', req.body);
-    job.name = req.body.name; 
-    job.content = req.body.content; 
+    var job = new Job();
+    job.name = req.body.name;
+    job.content = req.body.content;
     job.locations = req.body.locations;
-    job.save(function (err) {
+    job.save(function(err) {
       if (err) res.send(err);
-      console.log("Job created:", job);
-      res.redirect("/admin/jobs?alert=created");
+      
+      req.flash("success", `Successfully created ${job.name}`);
+      res.redirect("/admin/jobs");
     });
   } catch (err) {
     console.log(err);
   }
-}
+};
 module.exports.deleteJob = async (req, res) => {
-  await Job.remove( { slug: req.params.slug })
-  console.log("Job deleted");
-  res.redirect("/admin/jobs?alert=deleted");
-}
+  await Job.remove({ slug: req.params.slug });
+  req.flash("warning", `Successfully deleted Job`);
+  res.redirect("/admin/jobs");
+};
+
 module.exports.updateJob = async (req, res) => {
   try {
-    const job = await Job.findOne({ "slug": req.params.slug })
-
+    const job = await Job.findOne({ slug: req.params.slug });
+    req.flash("success", `Successfully updated ${job.name}`);
     job.name = req.body.name;
     job.content = req.body.content;
     job.locations = req.body.locations;
 
-    await job.save()
-    console.log("Job updated:", job);
-    res.redirect("/admin/jobs/edit/" + job.slug + "?alert=updated");
+    await job.save();
+    res.redirect("/admin/jobs/edit/" + job.slug);
   } catch (err) {
     console.log(err);
   }
-}
+};

@@ -5,8 +5,6 @@ module.exports.getCategories = async function (req, res) {
   let categories = await Category.find({}).exec();
   res.render("admin/categories", {
     categories: categories,
-    message: res.locals.message,
-    color: res.locals.color
   });
 }
 
@@ -15,8 +13,6 @@ module.exports.editCategory = function (req, res) {
   Category.findById(req.params.id, function (err, category) {
     res.render("admin/editCategory", {
       category: category,
-      message: res.locals.message,
-      color: res.locals.color
     });
   });
 }
@@ -27,8 +23,8 @@ module.exports.createCategory = function (req, res) {
   // save the category and check for errors
   category.save(function (err) {
     if (err) res.send(err);
-    console.log("Category created:", category);
-    res.redirect("/admin/categories?alert=created");
+    req.flash("success", `Successfully safed ${category.name}`);
+    res.redirect("/admin/categories");
   });
 }
 
@@ -40,8 +36,8 @@ module.exports.deleteCategory = function (req, res) {
     function (err, category) {
       if (err) res.send(err);
 
-      console.log("Category deleted");
-      res.redirect("/admin/categories?alert=deleted");
+      req.flash("success", `Successfully deleted ${category.name}`);
+      res.redirect("/admin/categories");
     }
   );
 }
@@ -56,8 +52,8 @@ module.exports.updateCategory = function (req, res) {
     category.save(function (err) {
       if (err) res.send(err);
 
-      console.log("Category updated:", category);
-      res.redirect("/admin/categories/edit/" + category._id + "?alert=deleted");
+      req.flash("success", `Successfully updated ${category.name}`);
+      res.redirect("/admin/categories/edit/" + category._id );
     });
   });
 }

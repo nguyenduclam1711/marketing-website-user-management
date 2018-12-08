@@ -18,12 +18,12 @@
 
 .mainHome {
   position: relative;
-  background: rgba(29, 59, 139, 0.5);
+  background: transparentize($blue, .5);
   min-height: calc(100vh - 5rem);
 }
 
 .startYour,
-.digitalCarrer {
+.digitalCareer {
   font-weight: bold;
   color: #fff;
 }
@@ -58,6 +58,50 @@ JUMBOTRON SECTION
   text-transform: uppercase;
   color: white;
 }
+/******************************************
+//////////////////////////////////////////
+ ONE YEAR COURSE STYLING
+//////////////////////////////////////////
+*******************************************/
+.body-scroll {
+  position: relative;
+}
+
+/******************************************
+  SUB-CONTAINER WITH SCROLLSPY AND SECTIONS
+*******************************************/
+.container-fluid-courses {
+  width: 66%;
+}
+.col-sm-9 {
+  padding-left: 45px;
+}
+
+/******************************************
+  SCROLLSPY
+*******************************************/
+
+ul.nav-courses-pills {
+  max-width: 50rem;
+  word-wrap: break-word;
+  top: 20%;
+  padding: 10px;
+  position: sticky;
+  list-style: none;
+  color: $blue;
+  background-color: white;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+}
+
+a.nav-link {
+  font-size: 1rem;
+  padding: 5px;
+}
+
+#myScrollspy {
+  margin-top: 4.7%;
+}
+
 .jumbotron-header {
   color: white;
   margin-bottom: 100px;
@@ -135,23 +179,7 @@ OUR COURSES SECTION
 .service-item:hover {
   box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
 }
-a,
-area,
-button,
-input,
-label,
-select,
-summary,
-textarea {
-  -ms-touch-action: manipulation;
-  touch-action: manipulation;
-}
-pre,
-code,
-input,
-textarea {
-  font: inherit;
-}
+
 
 /******************************************
 OUR COURSES TESTIMONIALS
@@ -217,7 +245,7 @@ STATS COUNTER
 .counter-item .counter-number {
   font-size: 5rem;
   font-weight: 400;
-  color: #007aff;
+  color: $blue;
   line-height: 1;
 }
 .counter-item .counter-title {
@@ -246,7 +274,7 @@ QUOTE
 }
 
 .mission-title {
-  color: #007aff;
+  color: $blue;
   font-size: 3rem;
   text-align: center;
   font-weight: 400;
@@ -802,7 +830,7 @@ input[type="week"] {
 
 .applyDiv:not(:last-child):before {
   content: "";
-  background: #007aff;
+  background: $blue;
   height: 3px;
   width: 130%;
   position: absolute;
@@ -813,7 +841,7 @@ input[type="week"] {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: #007aff;
+  background: $blue;
   color: white;
   font-weight: 600;
   text-align: center;
@@ -975,7 +1003,7 @@ input[type="week"] {
 
 .headingSection {
   font-size: 3rem;
-  color: #1f3d87;
+  color: $blue;
 }
 
 @include media-breakpoint-up(sm) {
