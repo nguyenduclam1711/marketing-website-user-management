@@ -1,0 +1,11 @@
+extends layout.pug
+block content
+  .container
+    h1= job.name
+    .row
+      .col-md-8
+        each loc in job.locations
+          = loc.name
+        p
+          =job.content
+        

@@ -1,6 +1,6 @@
 mixin jobform
   - var editPath = currentPath.includes('admin/jobs/edit')
-  form(method='POST', action=editPath ? '/admin/jobs/update/'+job.slug+'?_method=PUT' : '/admin/jobs?alert=create')
+  form.mb-5(method='POST', action=editPath ? '/admin/jobs/update/'+job.slug+'?_method=PUT' : '/admin/jobs?alert=create')
     
     h2=editPath ? "Edit job" :"Create a new Job"
 
@@ -18,3 +18,5 @@ mixin jobform
         label.custom-control-label(for=location.name)=location.name
 
     button.btn.btn-lg.btn-primary.btn-block(type='submit')=editPath ? "Update" :"Create a new Job" 
+
+  a(href="/admin/jobs") Back

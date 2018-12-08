@@ -30,7 +30,7 @@ mixin contactform
             
           p.mt-4
           
-            select.custom-select
+            select.custom-select(name="location")
               option(selected="") Select your location here...
               each location in locations
                 option(value=(location._id))=location.name

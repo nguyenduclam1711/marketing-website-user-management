@@ -1,18 +1,19 @@
-var { url, mongopath, getAsyncRedis } = require("./helper.js");
+const { url, mongopath, getAsyncRedis } = require("./helper.js");
 const express = require("express");
 const app = express();
-var path = require("path");
-var bodyParser = require("body-parser");
-var expressValidator = require("express-validator");
-var session = require("express-session");
-var passport = require("passport");
-var LocalStrategy = require("passport-local").Strategy;
+const path = require("path");
+const bodyParser = require("body-parser");
+const expressValidator = require("express-validator");
+const session = require("express-session");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
 const MongoStore = require("connect-mongo")(session);
 // const promisify = require('es6-promisify');
 const { promisify } = require("util");
 const Course = require("./models/course");
 const Page = require("./models/page");
 const Location = require("./models/location");
+const flash = require("connect-flash");
 
 // connect to redis server and get an extended client with promisified
 // methods getAsync() and setAsync()
@@ -23,53 +24,13 @@ if (process.env.USE_REDIS === "true") {
   redis = require("redis");
   redisClient = getAsyncRedis();
 }
+const mongoose = require("mongoose");
+mongoose.set("useCreateIndex", true);
+mongoose.connect(
+  process.env.MONGOURL,
+  { useNewUrlParser: true }
+);
 
-// configure app to use bodyParser()
-// this will let us get the data from a POST
-
-//app.use(express.static('./css'));
-app.use(express.static("public"));
-app.use("/assets", express.static(path.join(__dirname, "node_modules/")));
-app.use("/assets", express.static(path.join(__dirname, "assets/css/")));
-app.use("/assets", express.static(path.join(__dirname, "assets/icons/")));
-app.use("/media", express.static(path.join(__dirname, "assets/media/")));
-app.use("/images", express.static(path.join(__dirname, "uploads/images")));
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(expressValidator());
-
-app.use(function(req, res, next) {
-  app.locals.pathclass = req.url
-    .replace(/^\//g, "")
-    .replace(/\//g, "-")
-    .toLowerCase();
-  console.log(req.method, req.headers.host + req.url);
-  next();
-});
-app.use(function(req, res, next) {
-  if (req.query.alert === "created") {
-    res.locals.message = "Story created successfully!";
-    res.locals.color = "alert-success";
-  } else if (req.query.alert === "deleted") {
-    res.locals.message = "Story deleted successfully!";
-    res.locals.color = "alert-success";
-  } else if (req.query.alert === "updated") {
-    res.locals.message = "Story updated successfully!";
-    res.locals.color = "alert-success";
-  } else if (req.query.alert === "success_msg") {
-    res.locals.message = "You are registered and can now login!";
-    res.locals.color = "alert-success";
-  }
-  next();
-});
-var methodOverride = require("method-override");
-app.use(methodOverride("_method"));
-
-var mongoose = require("mongoose");
-mongoose.connect(process.env.MONGOURL);
-
-// Express Session
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "notaverysecuresecret",
@@ -80,11 +41,45 @@ app.use(
   })
 );
 
-// Passport init
+app.use(express.static("public"));
+app.use("/assets", express.static(path.join(__dirname, "node_modules/")));
+app.use("/assets", express.static(path.join(__dirname, "assets/css/")));
+app.use("/assets", express.static(path.join(__dirname, "assets/icons/")));
+app.use("/media", express.static(path.join(__dirname, "assets/media/")));
+app.use("/images", express.static(path.join(__dirname, "uploads/images")));
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(expressValidator());
+app.use(flash());
+
+app.use(function(req, res, next) {
+  (res.locals.messages = {
+    danger: req.flash("danger"),
+    warning: req.flash("warning"),
+    success: req.flash("success")
+  }),
+    (app.locals.pathclass = req.url
+      .replace(/^\//g, "")
+      .replace(/\//g, "-")
+      .replace(/\-$/g, "")
+      .toLowerCase());
+  let match = req.url.match("[^/]+(?=/$|$)");
+  res.locals.title = "DigitalCareerInstitute";
+  if (match) {
+    match = match[0].replace(/\//g, " ");
+    res.locals.title =
+      res.locals.title + " | " + match.charAt(0).toUpperCase() + match.slice(1);
+  }
+  console.log(req.method, req.headers.host + req.url);
+  next();
+});
+const methodOverride = require("method-override");
+app.use(methodOverride("_method"));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-// pass variables to our templates + all requests
 app.use(async (req, res, next) => {
   let navData = null;
 
@@ -132,7 +127,6 @@ app.use(async (req, res, next) => {
   next();
 });
 
-// promisify some callback based APIs
 app.use((req, res, next) => {
   req.login = promisify(req.login, req);
   next();
@@ -202,7 +196,7 @@ function split(thing) {
   } else if (thing.fast_slash) {
     return "";
   } else {
-    var match = thing
+    const match = thing
       .toString()
       .replace("\\/?", "")
       .replace("(?=\\/|$)", "$")

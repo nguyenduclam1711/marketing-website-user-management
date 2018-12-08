@@ -1,5 +1,4 @@
 require("dotenv").config({ path: __dirname + "/../.env" });
-const request = require("request");
 const Job = require("../models/job");
 const Location = require("../models/location");
 
@@ -22,8 +21,10 @@ module.exports.getJobs = async function(req, res) {
 
 module.exports.getSingleJob = async (req, res) => {
   try {
-    const page = await Page.findOne({ slug: req.params.slug });
-    res.render(`job`, {
+    const job = await Job.findOne({ slug: req.params.slug }).populate(
+      "locations"
+    );
+    res.render(`singleJob`, {
       job
     });
   } catch (err) {

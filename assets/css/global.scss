@@ -33,7 +33,14 @@ $blue: #1d3b8b;
 .digitalCareer {
   font-size: 1rem;
 }
-
+.alert {
+  border-radius: 0;
+  position: fixed;
+  z-index: 9999999999;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 0;
+}
 @include media-breakpoint-up(sm) {
   .startYour,
   .digitalCareer {

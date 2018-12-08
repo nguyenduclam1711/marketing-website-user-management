@@ -39,7 +39,7 @@ html.h-100(lang='en')
     meta(name='twitter:title', content='Home - DCI Digital Career Institute')
     meta(name='twitter:site', content='@devugeesorgi')
     meta(name='twitter:creator', content='@devugeesorgi')
-    title Signin Template for Bootstrap
+    title=title
     //- link(rel='stylesheet', href='/assets/bootstrap/dist/css/bootstrap.min.css')
     //link (rel='stylesheet', href="/assets/@fortawesome/fontawesome-free/css/fontawesome.mincss")
     //link(rel="stylesheet", href="/assets/global.css")
@@ -63,11 +63,15 @@ html.h-100(lang='en')
 
   body.h-100(data-spy='scroll', data-target='#myScrollspy', data-offset='1', class=pathclass+(currentPath.includes('admin') ? ' admin' : '' ))
 
-    if message
-      .alert.alert-dismissible.fade.show(role='alert', class=color, style="z-index: 1")
-        strong= message
-        button.close(type='button', data-dismiss='alert', aria-label='Close')
-          span(aria-hidden='true') ×
+    if messages
+      - const categories = Object.keys(locals.messages)
+        each category in categories
+          each message in messages[category]
+            .flash(class=`alert alert-${category} ${category === 'error' ? 'alert-danger' : ''}`)
+              != message
+              button.close.ml-3(type='button', data-dismiss='alert', aria-label='Close')
+                span(aria-hidden='true') ×
+
     .h-100.d-flex.flex-column
       div
         if currentPath !== "/"
