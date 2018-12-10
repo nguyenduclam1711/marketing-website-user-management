@@ -1,10 +1,12 @@
 mixin upcomingEvents
-  section#events.section-counter
-    .container.container-events
-      .section-title-area
-        h5.section-subtitle Come see us
-        h4.section-title Upcoming Event
-    
-
-      each event in events
-        +singleEvent(event)
+    section#events
+      .container.container-courses
+        .section-title-area
+          h1.display-1.text-left.ml-5
+            div.headingSection.display-1.font-weight-bold.text-left
+              | UPCOMING
+            div.headingSection.display-1.font-weight-bold.text-left
+              | EVENTS
+        .row.mx-5
+          each event in events
+            +singleEvent(event)
