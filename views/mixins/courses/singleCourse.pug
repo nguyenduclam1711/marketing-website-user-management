@@ -1,6 +1,6 @@
 mixin singleCourse
   .body-scroll
-    .jumbotron.jumbotron-fluid.text-center.bg-transparent
+    .jumbotron.jumbotron-fluid.jumbotron-singleCourse.text-center.bg-transparent
       .bg-primary-transparent.position-fixed.left.top.z-minus.h-100
         img.half-transparent.h-100(src='/media/team.jpg')
       .jumbotron-courses-container.text-white
@@ -8,10 +8,10 @@ mixin singleCourse
         p.mb-5=course.subheading
         button.btn.btn-apply.mt-3.mb-5(type='button' data-toggle='modal', data-target='#contactFormModal') Apply
 
-    .container.bg-white.position-relative
-      .row
-        nav#myScrollspy.col-sm-3.col-4
-          ul.nav.nav-pills.flex-column.nav-courses-pills
+    .container.container-fluid-courses.bg-white.position-relative
+      .row.row-courses
+        nav#myScrollspy.courses-scroll.col-sm-3.col-4
+          ul.nav.nav-pills.flex-column.nav-courses-pills.p-4.text-center
             h4=course.headline
             li.nav-item
               a.nav-link.nav-link-spy.mb-2.active(href='#section1') Overview
@@ -23,7 +23,7 @@ mixin singleCourse
               a.nav-link.nav-link-spy.mb-2(href='#section4') How to Apply
             button.btn.btn-primary.btn-spy(type='button' data-toggle='modal', data-target='#contactFormModal') Apply Now
 
-        .col-sm-9.col-8
+        .col-sm-9.col-8.col-courses
           #section1.my-5
             h2.mt-5.mb-3.text-left=courses.title
             p.text-left=courses.subtitle  
@@ -47,8 +47,8 @@ mixin singleCourse
             h2 Want more details about our Web Development Course?
             p We will send you the full course information to your email
             
-          #section3.my-5
-            h2.text-left.mb-5 A day at DCI
+          #section3.my-5.day-at-dci
+            h2.mb-5 A day at DCI
             -
             each object in course.timeline
               .row.container.timelineRow            
@@ -59,7 +59,7 @@ mixin singleCourse
                     h3.ml-5.pt-2.text-left=object.title 
                     p.ml-5.text-left=object.subtitle
                         
-          section.my-5.text-center
+          section.my-5
             div.my-5
               h2 More than just classwork
               p Beyond building the hard skills in class, you need to get involved in the local tech scene and market yourself. We’re here to help you succeed with career development support and opportunities to get into the community.
@@ -76,25 +76,25 @@ mixin singleCourse
               h2 Company Tours
               p Take a tour of a local startup and see what the work environment is all about.
           
-          #section4.my-5 
-            h2.text-left How to apply?
-            .row.container.mt-5.applyRow
-              .col-3.m-auto.applyDiv
-                span.m-auto.apply-step-number 1    
-              .col-3.m-auto.applyDiv
-                span.m-auto.apply-step-number 2            
-              .col-3.m-auto.applyDiv
-                span.m-auto.apply-step-number 3            
-            .row.container.mb-5
-              .col-3.m-auto
-                p.mt-3 Complete the application form
-              .col-3.m-auto
-                p.mt-3.pt-4 Visit DCI and chat with our admissions team
-              .col-3.m-auto
-                p.mt-3 Reserve your spot
+          #section4.my-5.courseSection
+            .container
+              .row
+                .col-lg-8.col-lg-offset-3
+                  h2.how-to-apply How To Apply
+                  .courseApply
+                    .courseApply-step
+                      span.courseApply-stepCount 1
+                      p.courseApply-stepTitle Complete the application form
+                    .courseApply-step
+                      span.courseApply-stepCount 2
+                      p.courseApply-stepTitle Visit DCI and chat with our admissions team
+                    .courseApply-step
+                      span.courseApply-stepCount 3
+                      p.courseApply-stepTitle Reserve your spot
+
             
-          section.my-5.text-left
-            h2 Come see our campus!
-            p Have questions? Want to see the student life for yourself? Book a one-on-one visit with our admissions team and we’ll show you around.
-            p Vulkanstraße 1
-            p 10367 Berlin
+              section.my-5
+                h2 Come see our campus!
+                p Have questions? Want to see the student life for yourself? Book a one-on-one visit with our admissions team and we’ll show you around.
+                p Vulkanstraße 1
+                p 10367 Berlin
