@@ -9,16 +9,19 @@ block content
     +testimonialsDevugees
     +statsCounter
     +quote
-    +upcomingEvents
-    +partners
-    .container.mt-5.text-left
-      .row
-        .col
-          h1.my-5.display-1 STORIES
-          h2.mb-5 Meet our happy students 
-            span.orange-dot .
-      +storylist
+    +upcomingEvents    
+    section#stories.my-5
+      .container
+        .section-title-area
+          h1.display-1.text-left.ml-5
+            div.headingSection.display-1.font-weight-bold.text-left
+              | STORIES
+            
+          h2.my-5.text-left.ml-5 Meet our happy students.
+          .row.mx-5
+            +storylist
     +getinvolved
+    +partners
     +contactform
     
     //+storylist(true)
