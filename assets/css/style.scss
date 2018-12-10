@@ -70,9 +70,6 @@ JUMBOTRON SECTION
 /******************************************
   SUB-CONTAINER WITH SCROLLSPY AND SECTIONS
 *******************************************/
-.container-fluid-courses {
-  width: 66%;
-}
 .col-sm-9 {
   padding-left: 45px;
 }
@@ -773,7 +770,7 @@ input[type="week"] {
   transform: rotate(45deg);
 }
 
-////////////////////////*COURSES*////////////////////////
+////////////////////////*COURSES TEMPLATE USE THIS*////////////////////////
 
 .btn-apply {
   background: #d3ba30;
@@ -786,7 +783,9 @@ input[type="week"] {
 }
 
 /*timeline*/
-
+.timelineRow {
+  padding: 0;
+}
 .timelineRow:last-child .timelineDiv {
   padding-bottom: 0;
 }
@@ -821,23 +820,29 @@ input[type="week"] {
   margin-right: 1.5rem;
 }
 
-/*steps to apply*/
+/*************steps to apply***************/
 
-.apply-step-number {
-  margin: 0;
-  padding: 0;
+.courseApply {
+  display: flex;
+  margin-top: 2rem;
+}
+.courseApply-step {
+  flex: 1;
+  padding-right: 1rem;
+  position: relative;
 }
 
-.applyDiv:not(:last-child):before {
+.courseApply-step:not(:last-child):before {
   content: "";
   background: $blue;
   height: 3px;
-  width: 130%;
+  width: 100%;
   position: absolute;
   top: 30px;
+  left: 0;
 }
 
-.apply-step-number {
+.courseApply-stepCount {
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -850,6 +855,74 @@ input[type="week"] {
   display: block;
   position: relative;
 }
+
+/********************************************************
+  MEDIA QUERY BREAKPOINT | SINGLE PAGE COURSES !WORK HERE
+********************************************************/
+@media (max-width: 1199.98px) {
+
+  .courses-scroll {
+    display: none;
+  }
+  .container-fluid-courses {
+    width: 100%;
+  }
+ 
+  .blue-headline {
+    font-size: 2.5rem !important;
+  }
+  .jumbotron-singleCourse {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  
+  .col-courses {
+    padding: 0;
+    flex: 0 0 90.66667%;
+    max-width: 90.66667%;
+  }
+}
+
+@media (min-width: 767.98px) and (max-width: 1560px) {
+  #courses-scroll {
+    position: absolute;
+    margin-top: 2.8%;
+    width: 200px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .container::after {
+    display: table;
+    clear: both;
+    content: "";
+}
+
+  .courseApply-step:not(:last-child):before {
+    visibility: hidden;
+    clear: both;
+  }
+  .courseApply {
+    display: block;
+  }
+  .courseApply-stepCount {
+    margin-left: auto;
+    margin-right: auto;
+  } 
+  .container-fluid-courses,
+  .row-courses,
+  .col-courses {
+    justify-content: center;
+    text-align: center;
+  }
+
+ 
+}
+
+/****************************************************************************/
+
+
+
 
 /*CONTACT-FORM*/
 #contactForm-box {
