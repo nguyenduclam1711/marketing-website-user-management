@@ -1,5 +1,4 @@
 require('dotenv').config({ path: __dirname + '/../.env' });
-const request = require("request");
 const Page = require("../models/page");
 
 module.exports.getPages = async function(req, res) {
