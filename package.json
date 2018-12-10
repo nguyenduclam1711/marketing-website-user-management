@@ -56,7 +56,7 @@
     "webpack-cli": "^3.1.2"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "webpack -p && node index.js",
     "dev": "concurrently \"redis-server\" \"webpack --mode development --watch\" \"nodemon index.js --ignore 'assets' --ignore 'public'\"  -n \"REDIS,WEBPACK,NODE\" --prefix name -c \"green.bold,red.bold,blue.bold\"",
     "seed": "node seeds.js",
     "seed:delete": "node seeds.js --delete",
