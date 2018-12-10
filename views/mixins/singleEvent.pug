@@ -1,19 +1,14 @@
 mixin singleEvent(event)
-  .newEvent
-    .newEvent-media
-      // media container
-      .newEvent-media-object-cont
-        img.newEvent-media-object(src=event.imageurl)
-      // body container
-      .newEvent-media-body
-        .newEvent-media-body-top
-          h5.subtle= event.name
-        span.newEvent-media-body-heading This Thing Called Life: A Celebration of Prince and His Legacy at MEZZANINE SF
-        .newEvent-media-body-supporting-bottom
-          span.newEvent-media-body-supporting-bottom-text.subtle= event.location.street
-          span.newEvent-media-body-supporting-bottom-text.subtle.u-float-right= event.location.name
-        .newEvent-media-body-supporting-bottom.newEvent-media-body-supporting-bottom-reveal
-          span.newEvent-media-body-supporting-bottom-text.subtle=event.location.name
-          a.newEvent-media-body-supporting-bottom-text.newEvent-media-link.u-float-right(data-toggle='modal', data-target='#contactFormModal') Contact Us
-
-
+  li.list-group-item.mb-3.p-5
+    .row
+      pre.pre-xs-customise
+        h2.mb-2.ml-3
+          a.responsiveH2.linkHover.linksInvolved.animationLink(href=event.url target='_blank')=event.name
+        p.responsiveP.ml-3.lead=event.start
+    .row.mt-3
+      .col-sm-12.col-md-12.col-lg-3.mb-4
+        img.img-xs-customise.img-fluid.rounded.mt-3(src=event.imageurl)
+      .col-sm-12.col-md-12.col-lg-9
+        p.responsiveP.float-right.text-justify=event.text
+        p:a.warningColorDark.responsiveP.float-right.mt-3(data-toggle='modal', data-target='#contactFormModal') 
+          | Contact Us
