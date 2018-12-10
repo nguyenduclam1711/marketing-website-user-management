@@ -3,9 +3,10 @@ mixin footer
     .footer-connect
       .container
         .footer-subscribe
-          form(novalidate='', target='', name='', method='post', action='')
-            input(type='text', placeholder='Email address', name='EMAIL')
-            button.btn.btn-primary Subscribe
+          form#mc-embedded-subscribe-form(name='mc-embedded-subscribe-form', method='post', action='/newsletter-signup')
+            input#mce-EMAIL.subs_input(type='email', required, placeholder='Email address', name='EMAIL')
+            button#btn.btn.btn-primary(type="submit")
+              span Subscribe
     .site-info
       .container.container-footer
         .row.footer-flex

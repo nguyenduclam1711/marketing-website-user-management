@@ -1,7 +1,7 @@
 /******************************************
         FOOTER SECTION
 *******************************************/
-
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
 
 .site-footer .footer-connect {
   padding: 1.5rem 0px;
@@ -67,4 +67,19 @@ ul.footer-ul li {
 .site-footer .footer-suf .legal-links li {
   display: inline-block;
   margin: 0 0 0 0.5rem;
+}
+
+.newsletter-success-message {
+  border: 20px groove #35008b;
+  color:rgb(50, 139, 117); 
+  font-family: Brush Script MT; 
+  font-size: 36px;
+}
+
+.newsletter-error-message {
+  border: 20px groove #35008b;
+  color:red; 
+  font-family: 'Indie Flower', cursive !important;
+  font-size: 36px;
+  // font-weight: bold;
 }
