@@ -10,8 +10,8 @@ mixin storylist(public)
           .col
             h3=story.alumniName          
             p=story.workPosition
-          each category in story.categories
-            span.badge.badge-primary.mr-2= category.name
+          //-each category in story.categories
+            //-span.badge.badge-primary.mr-2= category.name
 
         form.d-flex.justify-content-between(method='POST', action='/admin/stories/delete/'+story.slug +'?_method=DELETE')
           a.btn.mt-2(href="/stories/"+story.slug) +Show more
