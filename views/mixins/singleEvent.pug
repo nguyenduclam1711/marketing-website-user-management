@@ -1,14 +1,15 @@
 mixin singleEvent(event)
-  li.list-group-item.mb-3.p-5
-    .row
-      pre.pre-xs-customise
-        h2.mb-2.ml-3
-          a.responsiveH2.linkHover.linksInvolved.animationLink(href=event.url target='_blank')=event.name
-        p.responsiveP.ml-3.lead=event.start
-    .row.mt-3
-      .col-sm-12.col-md-12.col-lg-3.mb-4
+  li.list-group-item.mb-3.py-3
+    .row.m-auto
+      .col-sm-12.col-md-11
+        p.xs-customise
+          h2.responsiveH2.mt-3
+            a.linkHover.linksInvolved.animationLink(href=event.url target='_blank')=event.name
+          p.responsiveP.lead.mt-1=event.start
+    .row.m-auto
+      .col-sm-12.col-md-11.col-lg-3
         img.img-xs-customise.img-fluid.rounded.mt-3(src=event.imageurl)
-      .col-sm-12.col-md-12.col-lg-9
-        p.responsiveP.float-right.text-justify=event.text
-        p:a.warningColorDark.responsiveP.float-right.mt-3(data-toggle='modal', data-target='#contactFormModal') 
+      .col-sm-12.col-md-11.col-lg-9
+        p.responsiveP.float-right.text-justify.mt-3=event.text
+        p:a.warningColorDark.responsiveP.float-right.mt-2.mb-3(data-toggle='modal', data-target='#contactFormModal') 
           | Contact Us
