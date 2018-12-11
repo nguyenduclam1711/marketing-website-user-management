@@ -504,6 +504,7 @@ UPCOMING EVENTS
   }
   .warningColorDark:hover{
     color: #e65100;
+    text-decoration: none !important;
   }
 
   /*responsive typography*/
@@ -570,8 +571,28 @@ UPCOMING EVENTS
       font-size: 1rem;
     }
   }
+  /******************************************
+  STORIES
+   *******************************************/
+#imgStudents {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
 
+#startYellow {
+  color: #FDD023;
+}
+#storiesH2 {
+  color: #1d3b8b;
+}
+.storyLinks{
+  font-size: 1rem;
+}
 
+#orangeDot{
+  color: #FF8800;
+}
   /******************************************
   OUR PARTNERS SECTION
    *******************************************/

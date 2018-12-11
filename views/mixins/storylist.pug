@@ -1,25 +1,28 @@
+-let starts= [1, 2, 3, 4, 5];
+
 mixin storylist(public)
  ul.row.story-cards-ul
   each story in stories
-    li.col-sm.d-flex.story-cards-li
-      div.story-item.p-2.mb-3.d-flex.flex-column.justify-content-between
-        p.text-justify=story.excerpt
-        .row.mt-4
-          .col-5.align-items-center
-            img.img-fluid.rounded-circle.mt-2(src='/images/'+story.image)
-          .col
+    li.col-md-6.col-sm-12.col-lg-4.d-flex.story-cards-li
+      div.story-item.p-2.mb-3.d-flex.flex-column.justify-content-between.p-5
+        div.text-left
+          each start in starts
+            i#startYellow.fas.fa-star.mb-3(aria-hidden='true')
+        p.text-left=story.excerpt
+        .row
+          .col-6.align-items-center
+            img#imgStudents.img-fluid.mt-2(src='/images/'+story.image)
+          .col-6
             h3=story.alumniName          
             p=story.workPosition
-          //-each category in story.categories
-            //-span.badge.badge-primary.mr-2= category.name
-
-        form.d-flex.justify-content-between(method='POST', action='/admin/stories/delete/'+story.slug +'?_method=DELETE')
-          a.btn.mt-2(href="/stories/"+story.slug) +Show more
-
-          if !public
-            .d-flex.align-items-center
-              
-              a.btn.btn-outline-primary.mr-2(href="/admin/stories/edit/"+story.slug) Edit
-              button.btn.btn-outline-danger(type='submit') delete
+        div.text-right
+          a.warningColorDark(href="/stories/"+story.slug) +Show more
+        
+        //- form.d-flex.justify-content-between(method='POST', action='/admin/stories/delete/'+story.slug +'?_method=DELETE')
+          //- if !public
+          //-   .d-flex.align-items-center
+          //- 
+          //-     a.btn.btn-outline-primary.mr-2(href="/admin/stories/edit/"+story.slug) Edit
+          //-     button.btn.btn-outline-danger(type='submit') delete
 
   
