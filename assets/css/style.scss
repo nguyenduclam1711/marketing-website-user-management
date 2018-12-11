@@ -510,6 +510,12 @@ UPCOMING EVENTS
   /*responsive typography*/
 
   @media (max-width: 575px) {
+    .display-1 {
+      font-size: 4.1rem;
+    }
+    .subtitle{
+      font-size: 1.9rem;
+    }
     .img-xs-customise{
       margin-top: 0;
     }
@@ -569,6 +575,12 @@ UPCOMING EVENTS
     }
     .responsiveP {
       font-size: 1rem;
+    }
+    .display-1 {
+      font-size: 7.5rem;
+    }
+    .subtitle {
+      font-size: 2.5rem;
     }
   }
   /******************************************
