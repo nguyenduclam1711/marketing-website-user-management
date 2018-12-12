@@ -586,6 +586,17 @@ UPCOMING EVENTS
   /******************************************
   STORIES
    *******************************************/
+#imgStudentSingle {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+}
+
+#containerStorieSingle {
+  // max-width: 69%;
+  box-shadow: 10px 10px 10px #bfbebe) ;
+}
+
 #imgStudents {
   height: 100px;
   width: 100px;
@@ -904,7 +915,7 @@ input[type="week"] {
   .container-fluid-courses {
     width: 100%;
   }
- 
+
   .blue-headline {
     font-size: 2.5rem !important;
   }
@@ -912,7 +923,7 @@ input[type="week"] {
     margin-bottom: 0;
     padding-bottom: 0;
   }
-  
+
   .col-courses {
     padding: 0;
     flex: 0 0 90.66667%;
@@ -945,7 +956,7 @@ input[type="week"] {
   .courseApply-stepCount {
     margin-left: auto;
     margin-right: auto;
-  } 
+  }
   .container-fluid-courses,
   .row-courses,
   .col-courses {
@@ -953,7 +964,7 @@ input[type="week"] {
     text-align: center;
   }
 
- 
+
 }
 
 /****************************************************************************/

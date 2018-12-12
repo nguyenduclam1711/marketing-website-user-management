@@ -63,7 +63,7 @@ Erstellung neuer Werbemittel
 Unterstützung bei der Koordination
 Tägliches Controlling der Kampagnen
 Begleitung und Durchführung der Events
- 
+
 
 Anforderungen
 
@@ -74,7 +74,7 @@ Schnelle Auffassungsgabe
 Sehr gute Kommunikationsfähigkeit und ein sicheres Auftreten, auch am Telefon (auf Englisch und auf Deutsch)
 Ein besonders hohes Interesse an Online-Produkten udn Bildung
 Zahlenaffinität
- 
+
 
 Unser Angebot
 

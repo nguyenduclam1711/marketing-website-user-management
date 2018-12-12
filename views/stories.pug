@@ -1,9 +1,23 @@
 extends layout.pug
 block content
-  .container.mt-5.text-left
-    .row
-      .col
-        h1.my-5.display-1 STORIES
-        h2.mb-5 Meet our happy students 
-          span.orange-dot .
-    +storylist(true)
+  
+  each story in stories
+    section#storie
+      .container#containerStorieSingle.rounded.my-5.p-5
+        .row
+          .col   
+            h1.headingSection.font-weight-bold.text-left=story.alumniName       
+            h2#storiesH2.my-3.text-left=story.workPosition
+             span#orangeDot .
+            div.text-left
+             each start in starts
+               i#startYellow.fas.fa-star.mb-3(aria-hidden='true') 
+            p.text-left=story.excerpt
+            
+          //- .col-6.align-items-center
+          //-   img#imgStudentSingle.img-fluid.mt-3(src='/images/'+story.image)                  
+                  
+        
+        
+          
+  
