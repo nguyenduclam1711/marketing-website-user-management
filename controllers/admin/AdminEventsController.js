@@ -41,16 +41,9 @@ module.exports.getEventsByLocation = async (req, res) => {
 };
 
 module.exports.fetchevents = async (req, res) => {
-  try {
   const url = `https://www.eventbriteapi.com/v3/organizers/16608751086/events/?order_by=start_desc&expand=venue&token=${
-      process.env.EVENTBRIDE_API_KEY
+    process.env.EVENTBRIDE_API_KEY
     }`;
-  }
-  catch(err) {
-    console.log(`problem with eventbride_api\n\n${err}`)
-  }
-
-
   try {
     return new Promise(function(resolve, reject) {
       request(url, async (error, response, body) => {
