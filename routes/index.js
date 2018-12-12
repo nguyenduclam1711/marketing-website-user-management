@@ -7,11 +7,14 @@ const Location = require("../models/location");
 const Course = require("../models/course");
 const Event = require("../models/event");
 const request = require("request");
-
 const express = require("express");
 const router = express.Router();
 
 const nodemailer = require("nodemailer");
+if(!process.env.AUTHORIZATION || !process.env.URL) {
+  console.error("Please set a Mailchimp URL or AUTHORIZATION ApiKey in .env file")
+  process.exit()
+}
 
 router.get("/", async (req, res) => {
   try {
@@ -68,9 +71,9 @@ router.post("/contact", async (req, res) => {
         user: process.env.MAILUSER,
         pass: process.env.MAILPW
       }
-  
+
     });
-  
+
     let mailOptions = {
       from: 'mailer@digitalcareerinstitute.org',
       to: process.env.MAILRECEIVER,
@@ -78,7 +81,7 @@ router.post("/contact", async (req, res) => {
       text: `${contact.body}`,
       html: `${contact.body}`
     };
-  
+
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         return console.log(error, info);
@@ -118,40 +121,43 @@ router.post("/newsletter-signup", function (req, res) {
     ]
   };
 
-  const postData = JSON.stringify(data);
+  try {
+    const postData = JSON.stringify(data);
 
-  const options = {
-    url: process.env.URL,
-    method: 'POST',
-    headers: {
-      Authorization: process.env.AUTHORIZATION
-    },
-    body: postData
-  };
+    const options = {
+      url: process.env.URL,
+      method: 'POST',
+      headers: {
+        Authorization: process.env.AUTHORIZATION
+      },
+      body: postData
+    };
 
-  request(options, (err, response) => {
-    if (err) {
-      return res.json({
-        code: response.statusCode,
-        message: error.message
-      });
-    } else {
-      const json = JSON.parse(response.body);
-      console.log(json)
-      if (response.statusCode === 200 && json.errors.length === 0) {
-        return res.status(200).json({
-          code: 200,
-          message: "Successfully subscribed to the newsletter!"
+    request(options, (err, response) => {
+      if (err) {
+        return res.json({
+          code: response.statusCode,
+          message: error.message
         });
       } else {
-        return res.status(422).json({
-          code: json.errors ? 422 : response.statusCode,
-          message: "error"
-        });
+        const json = JSON.parse(response.body);
+        console.log(json)
+        if (response.statusCode === 200 && json.errors.length === 0) {
+          return res.status(200).json({
+            code: 200,
+            message: "Successfully subscribed to the newsletter!"
+          });
+        } else {
+          return res.status(422).json({
+            code: json.errors ? 422 : response.statusCode,
+            message: "error"
+          });
+        }
       }
-    }
-  });
-}
-)
+    });
+  } catch (err) {
+    console.log(`A error occured in the newsletter subscription route \n\n ${err}`)
+  }
+})
 
 module.exports = router;

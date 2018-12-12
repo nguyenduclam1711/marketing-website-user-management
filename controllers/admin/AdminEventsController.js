@@ -3,6 +3,12 @@ const request = require("request");
 const Event = require("../../models/event");
 const Location = require("../../models/location");
 
+// to catch the error if 'EVENTBRIDE_API_KEY' path not exist in .env file
+if(!process.env.EVENTBRIDE_API_KEY) {
+  console.error("EVENTBRIDE_API_KEY MISSING")
+  process.exit()
+}
+
 module.exports.getEvents = async (req, res) => {
   let events = await Event.find().populate("location");
 
@@ -35,9 +41,15 @@ module.exports.getEventsByLocation = async (req, res) => {
 };
 
 module.exports.fetchevents = async (req, res) => {
+  try {
   const url = `https://www.eventbriteapi.com/v3/organizers/16608751086/events/?order_by=start_desc&expand=venue&token=${
-    process.env.EVENTBRIDE_API_KEY
-  }`;
+      process.env.EVENTBRIDE_API_KEY
+    }`;
+  }
+  catch(err) {
+    console.log(`problem with eventbride_api\n\n${err}`)
+  }
+
 
   try {
     return new Promise(function(resolve, reject) {
