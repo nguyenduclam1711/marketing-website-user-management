@@ -586,17 +586,17 @@ UPCOMING EVENTS
   /******************************************
   STORIES
    *******************************************/
-#imgStudentSingle {
-  height: 150px;
-  width: 150px;
-  border-radius: 50%;
-}
-
 #containerStorieSingle {
   // max-width: 69%;
-  box-shadow: 10px 10px 10px #bfbebe) ;
+  box-shadow: 10px 10px 10px #bfbebe ;
 }
-
+.square{
+    width: 100%;
+    height: 0;
+    padding-top: 100%;
+    background-size: cover;
+    background-position: center;
+  }
 #imgStudents {
   height: 100px;
   width: 100px;
@@ -1236,4 +1236,7 @@ input[type="week"] {
   visibility: visible;
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
+}
+.object-fit-cover {
+  object-fit: cover
 }

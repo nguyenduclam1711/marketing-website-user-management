@@ -3,18 +3,11 @@ block content
   .container.mt-5.p-5
     div.story-item.p-5.d-flex.flex-column.justify-content-between
       .row
-        .col-2
-          img.img-fluid.rounded-circle.mt-2(src='/images/'+story.image)
+        .col-2.pl-0
+          img.object-fit-cover.img-fluid.rounded-circle.square(style="background-image: url('/images/"+story.image+"')")
         .col 
           h2=story.alumniName
           p.text-justify=story.workPosition     
       .row.mt-4
         p.text-justify=story.content
-        a.btn.mt-2(href='/admin/stories') +Back
-        
-        
-    
-    
-    
-    
-  
+        a.btn.mt-2(href='/stories') +Back
