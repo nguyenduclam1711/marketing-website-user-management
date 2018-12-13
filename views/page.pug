@@ -1,8 +1,9 @@
 extends layout.pug
 block content
   
-  .container.mt-5.text-left
-    h2.my-5=page.title
-    - var str = page.content.replace(/[\r\n]/g, '<br/>');
-    p.pSize !{str}
+  .container.my-5.p-5.text-left.getInvolved-container
+    .row.getInvolved-content
+      h2.mainTexts.my-5=page.title
+      - var str = page.content.replace(/[\r\n]/g, '<br/>');
+      p.lead.pSize !{str}
   

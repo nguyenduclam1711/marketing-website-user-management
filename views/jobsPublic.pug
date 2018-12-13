@@ -1,9 +1,10 @@
 extends layout.pug
 block content
   
-  .container
-    h1 Jobs
+  .container.my-5.p-5.text-left
     .row
-      .col-md-8
-        +joblist(true)
-         
+      h1.mainTexts.ml-5.mb-3 Jobs
+      .row
+        .col-md-8
+          +joblist(true)
+           

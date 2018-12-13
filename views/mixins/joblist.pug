@@ -1,9 +1,9 @@
 mixin joblist(public)
   ul.list-group
     each job in jobs
-      li.list-group-item.mb-3
-        h2.mr-3=job.name
-        p.mr-3=job.content
+      li.list-group-item.mb-3.p-5
+        h2.mainTexts.mr-3=job.name
+        p.mr-3.my-5=job.content
           each location in job.locations
             .badge.badge-primary.mr-2=location.name
 
@@ -16,5 +16,3 @@ mixin joblist(public)
             a.btn.btn-outline-primary.mr-2(href="/admin/jobs/edit/"+job.slug) Edit
             form.d-flex.justify-content-between(method='POST', action='/admin/jobs/delete/'+job.slug +'?_method=DELETE')
               button.btn.btn-outline-danger(type='submit') delete
-
-
