@@ -16,22 +16,34 @@ const Location = require("./models/location");
 const flash = require("connect-flash");
 const cron = require('node-cron');
 const EventsController = require('./controllers/admin/AdminEventsController');
+const mongoose = require("mongoose");
 
 // connect to redis server and get an extended client with promisified
 // methods getAsync() and setAsync()
-let redis = null;
 let redisClient = null;
+console.log(typeof process.env.USE_REDIS)
+if(process.env.USE_REDIS !== undefined && process.env.USE_REDIS === "true") {
+  console.log("Redis enabled")
 
-if (process.env.USE_REDIS === "true") {
   redis = require("redis");
   redisClient = getAsyncRedis();
+} else if(process.env.USE_REDIS === "false") {
+  console.log("Redis disabled")
+}else{ 
+  console.error("USE_REDIS is not defined in .env")
+  process.exit()
 }
-const mongoose = require("mongoose");
+
 mongoose.set("useCreateIndex", true);
-mongoose.connect(
-  process.env.MONGOURL,
-  { useNewUrlParser: true }
-);
+try {
+  mongoose.connect(
+    mongopath,
+    { useNewUrlParser: true }
+  );
+}
+catch(err) {
+  console.log(`Please set a mongo path in your .env \n\n${err}`)
+}
 
 app.use(
   session({

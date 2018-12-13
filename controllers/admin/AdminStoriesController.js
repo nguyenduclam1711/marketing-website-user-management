@@ -9,7 +9,11 @@ const jimp = require('jimp');
 const uuid = require('uuid');
 const fs = require('fs');
 
-const IMAGE_UPLOAD_DIR = process.env.IMAGE_UPLOAD_DIR;
+// to catch the error if 'IMAGE_UPLOAD_DIR' path not exist in .env file
+if(!process.env.IMAGE_UPLOAD_DIR) {
+  console.error("IMAGE_UPLOAD_DIR MISSING")
+  process.exit()
+}
 
 module.exports.getStories = async function (req, res) {
   //here we get the whole collection and sort by order
@@ -105,8 +109,6 @@ module.exports.updateStory = async function (req, res) {
 }
 
 
-const imageUploadDir = IMAGE_UPLOAD_DIR;
-
 // Storage settings for project images
 const storage = multer.diskStorage({
   destination: function (request, file, next) {
@@ -147,7 +149,7 @@ exports.resizeImages = async (request, response, next) => {
   try {
     const image = await jimp.read(request.file.path)
     await image.cover(350, 180)
-    await image.write(`${imageUploadDir}${request.body.image}`)
+    await image.write(`${process.env.IMAGE_UPLOAD_DIR}${request.body.image}`)
     fs.unlinkSync(request.file.path)
   } catch (error) {
     console.log(error);
