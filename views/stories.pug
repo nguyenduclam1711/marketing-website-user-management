@@ -1,9 +1,7 @@
 extends layout.pug
 block content
-  .container.mt-5.text-left
+  .container.py-5
+    h1 Stories
     .row
-      .col
-        h1.my-5.display-1 STORIES
-        h2.mb-5 Meet our happy students 
-          span.orange-dot .
-    +storylist(true)
+      each story in stories
+        +singleStory(story)
