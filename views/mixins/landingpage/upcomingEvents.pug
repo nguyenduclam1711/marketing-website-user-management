@@ -2,11 +2,9 @@ mixin upcomingEvents
     section#events
       .container.container-courses
         .section-title-area
-          h1.display-1.text-left.ml-5
-            div.headingSection.display-1.font-weight-bold.text-left
-              | UPCOMING
-            div.headingSection.display-1.font-weight-bold.text-left
-              | EVENTS
+          h1.display-1.ml-5
+            div.headingSection.display-1.headingSection
+              | UPCOMING EVENTS
         .row.mx-5
           each event in events
             +singleEvent(event)

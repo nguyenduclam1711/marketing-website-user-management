@@ -1,7 +1,19 @@
 /******************************************
         FOOTER SECTION
 *******************************************/
-
+footer {
+  display: block;
+}
+.footer-flex {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: space-around;
+}
+.footer-flex-col {
+  margin-left: auto;
+  margin-right: auto;
+}
 .site-footer .footer-connect {
   padding: 1.5rem 0px;
 }
@@ -22,8 +34,11 @@
   padding: 0;
   margin-bottom: 1rem;
 }
+.footer-list {
+  margin-bottom: 2rem;
+}
 ul.footer-ul {
-  display: block;
+  margin-bottom: 20px;
   list-style-type: disc;
   list-style: none;
   margin-block-start: 1em;
@@ -33,11 +48,15 @@ ul.footer-ul {
   padding-inline-start: 40px;
 }
 ul.footer-ul li {
+  width: 100%;
   margin: 8px 0;
-  display: list-item;
+  display: inline-block;
+  font-size: 1rem;
+  float: left;
+  clear: left;
 }
 
-.site-footer .site-info ul a {
+.site-info ul a {
   color: #555;
 }
 
@@ -45,13 +64,17 @@ ul.footer-ul li {
 .suf-row {
   justify-content: center;
 }
-.site-footer .footer-suf {
+
+.site-footer {
   background-color: #f3f3f3;
-  padding: 1.25rem 0 1rem;
+  padding: 1.25rem 1rem;
 }
 
-.site-footer .footer-suf .last-line {
+/*.site-footer .footer-suf .last-line {
   float: left;
+}
+.last-line {
+  width: 100%;
 }
 .site-footer .footer-suf p {
   margin: 0;
@@ -60,24 +83,75 @@ ul.footer-ul li {
 .site-footer .footer-suf .legal-links {
   float: right;
   list-style: none;
-  margin: 0;
-  padding: 0;
 }
 .site-footer .footer-suf .legal-links li {
   display: inline-block;
   margin: 0 0 0 0.5rem;
+}*/
+.legal-links{
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
+.legal-links-left {
+  float:left;
+}
+.legal-links-right {
+  float:right;
+}
+.legal-links-right li {
+  display: inline;
+    padding: 0 1.5em;
+    line-height:30px;
+}
+
 
 .newsletter-success-message {
   border: 20px groove #35008b;
-  color:rgb(50, 139, 117); 
-  font-family: Brush Script MT; 
+  color: rgb(50, 139, 117);
+  font-family: Brush Script MT;
   font-size: 36px;
 }
 
 .newsletter-error-message {
   border: 20px groove #35008b;
-  color:red; 
+  color: red;
   font-size: 36px;
   // font-weight: bold;
+}
+
+
+@media (max-width: 960px) and (min-width: 501px) {
+
+  ul.footer-ul li {
+    margin: 8px 0;
+  
+  }
+  .last-line {
+    float: none;
+    text-align: center;
+  }
+
+}
+
+
+@media (max-width: 500px) {
+  .last-line {
+    float: none;
+    text-align: center;
+  }
+  .suf-row{
+    font-size: 70%;
+  }
+  .container-footer {
+    text-align: center;
+    font-size: 20%;
+  }
+  ul.footer-ul li {
+    margin: 8px 8px;
+  }
+  .footer-ul, .footer-suf{ 
+    width: 100%; 
+  } /* On small screens, show one logo per row */
+
 }
