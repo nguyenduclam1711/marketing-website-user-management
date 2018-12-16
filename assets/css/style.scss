@@ -920,6 +920,21 @@ input[type="week"] {
 /********************************************************
   MEDIA QUERY BREAKPOINT | SINGLE PAGE COURSES !WORK HERE
 ********************************************************/
+/* ----------- iPad Pro Start----------- */
+/* Portrait and Landscape */
+@media only screen 
+  and (min-width: 1024px) 
+  and (max-height: 1366px) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+    .row-courses{
+      margin: 0 5%;
+    }
+  
+
+}
+/* ----------- iPad Pro End----------- */
+
+
 @media (max-width: 1199.98px) {
 
   .courses-scroll {
@@ -950,6 +965,9 @@ input[type="week"] {
     margin-top: 2.8%;
     width: 200px;
   }
+  .row-courses{
+    margin: 0 5%;
+  }
 }
 
 @media (max-width: 767.98px) {
@@ -970,14 +988,13 @@ input[type="week"] {
     margin-left: auto;
     margin-right: auto;
   }
+  
   .container-fluid-courses,
   .row-courses,
   .col-courses {
     justify-content: center;
     text-align: center;
   }
-
-
 }
 
 /****************************************************************************/
