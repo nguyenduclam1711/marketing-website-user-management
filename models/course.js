@@ -10,12 +10,12 @@ var CourseSchema = new Schema({
   headline: {
     type: String,
     trim: true,
-    required: 'Please enter a course name!'
+    required: 'Please enter a headline!'
   },
   subheading: {
     type: String,
     trim: true,
-    required: 'Please enter a course content !'
+    required: 'Please enter a subheading !'
   },  
   title: {
     type: String

@@ -1,6 +1,6 @@
 mixin storyForm
   - var editPath = currentPath.includes('admin/stories/edit')
-  form.form-signin(method='POST', action=editPath ? '/admin/stories/update/'+story.slug+'?_method=PUT' : '/admin/stories?alert=create', enctype="multipart/form-data")
+  form.form-signin(method='POST', action=editPath ? '/admin/stories/update/'+story.slug+'?_method=PUT' : '/admin/stories', enctype="multipart/form-data")
     
     h2=editPath ? "Edit story" :"Create a new Story"
     

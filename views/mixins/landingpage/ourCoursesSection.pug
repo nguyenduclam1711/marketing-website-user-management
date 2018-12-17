@@ -13,7 +13,7 @@ mixin ourCoursesSection
                 span.screen-reader-text
                   = course.title
               .service-image.icon-image.mb-5
-                img.h-100(src=course.icon, alt=course.title)
+                img.h-100(src="/images/"+course.icon, alt=course.title)
               .service-content
                 h4.service-title= course.headline
                 p=course.title

@@ -22,13 +22,13 @@ mixin navigation
             a.dropdown-item(href='/admin/jobs') Jobs
 
       li.position-relative.nav-item.dropdown
-        a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mx-2.mainTexts(class= currentPath.includes('/courses') ? "active" : "" data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+        a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mx-2.mainTexts(class= currentPath.includes('/courses') && !currentPath.includes('admin') ? "active" : "" data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
           | COURSES
         .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
           each course in courses
             a.dropdown-item(class= currentPath === ("/courses/" + course.slug) ? "active" : "" href='/courses/'+ course.slug)=course.slug
       li.position-relative.nav-item.dropdown
-        a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mx-2.mainTexts(class=currentPath.includes('/events') ? "active" : "" href='/events' data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+        a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mx-2.mainTexts(class=currentPath.includes('/events') && !currentPath.includes('admin') ? "active" : "" href='/events' data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
           | EVENTS
 
         .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
@@ -39,7 +39,7 @@ mixin navigation
         a.nav-link.mx-2.mainTexts(class=currentPath == "/stories" ? "active" : "" href='/stories') STORIES
     
       li.position-relative.nav-item.dropdown
-        a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mx-2.mainTexts(data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' class= currentPath.includes('/pages') ? "active" : ""  href='/admin/contacts')
+        a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mx-2.mainTexts(data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' class= currentPath.includes('/pages') && !currentPath.includes('admin') ? "active" : ""  href='/admin/contacts')
           | GET INVOLVED
         .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
           each page in pages
@@ -53,7 +53,3 @@ mixin navigation
         if user
           li.position-relative.nav-item
             a.nav-link.mx-2.mainTexts(href='/users/logout') LOGOUT
-        else
-          
-          li.position-relative.nav-item
-            a.nav-link.mainTexts(class=currentPath == "/users/login" ? "active" : "" href='/users/login') LOGIN

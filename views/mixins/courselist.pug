@@ -10,13 +10,13 @@ mixin courselist(public)
               p=course.title
               each object in course.archivements
                 figure.col-md-4
-                  img.img-fluid(src=object.icon, alt=object.description)
+                  img.img-fluid(src="/images/"+object.icon, alt=object.description)
                   p=object.description
 
               each object in course.features
                 .row.container            
                   .col-12.d.flex.m-auto
-                    img.img-fluid.float-left.mr-5.icons(src=object.icon, alt=object.title)
+                    img.img-fluid.float-left.mr-5.icons(src="/images/"+object.icon, alt=object.title)
                     h3.text-left=object.title
                     p.text-left=object.subtitle
               each object in course.timeline
