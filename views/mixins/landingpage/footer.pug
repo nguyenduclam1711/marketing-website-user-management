@@ -7,67 +7,69 @@ mixin footer
             input#mce-EMAIL.subs_input(type='email', required, placeholder='Email address', name='EMAIL')
             button#btn.btn.btn-primary(type="submit")
               span Subscribe
-    .site-info
-      .container.container-footer
-        .col-xl-10.col-xl-offset-1.footer-flex-col
-          .row.footer-flex
-            .col-xs-6.col-md-3.footer-list
-              h5 Company
-                ul.footer-ul
-                  li
-                    a(href='https://digitalcareerinstitute.org/en/about-us/') About us
-                  li
-                    a(href='https://digitalcareerinstitute.org/en/jobs/') Jobs
-                  li
-                    a(href='https://digitalcareerinstitute.org/en/faq/') FAQ
-                  li
-                    a(href='https://digitalcareerinstitute.org/en/press/') Press
-                  li
-                    a(href='https://digitalcareerinstitute.org/contact/') Contact
-            .col-xs-6.col-md-3.footer-list
-              h5 Community
-                ul.footer-ul
-                  li
-                    a(href='https://digitalcareerinstitute.org/en/scholarship/') Scholarship
-                  li
-                    a(href='https://digitalcareerinstitute.org/en/hire/') Hire your digital talents with DCI
-                  li
-                    a(href='https://digitalcareerinstitute.org/en/stories/') Stories
-            .col-xs-6.col-md-3.footer-list
-              h5 Courses
-                ul.footer-ul
-                  li
-                    a(href='https://digitalcareerinstitute.org/en/onetoone-coaching/') One to One Coaching
-                  li
-                    a(href='https://digitalcareerinstitute.org/en/orientiation-course/') Orientation Course
-                  li
-                    a(href='https://digitalcareerinstitute.org/en/courses/one-year-program/') Web Development Course
-                  li
-                    a(href='https://digitalcareerinstitute.org/en/courses/digital-marketing-e-commerce/')
-                      | Digital Marketing
-                      | / E-Commerce
-            .col-xs-6.col-md-3.footer-list
-              h5 Follow
-                ul.footer-ul
-                  li
-                    a(href='https://www.facebook.com/devugees') Facebook
-                  li
-                    a(href='https://twitter.com/DevugeesOrg') Twitter
-                  li
-                    a(href='https://medium.com/devugees') Medium
-                  li
-                    a(href='https://www.youtube.com/channel/UCSM_3ldxjcclGTcXaJRBYTw') YouTube
-    .footer-suf
-      .container
-        ul.legal-links
-          div.legal-links-left
-            li DCI Digital Career Institute
-          div.legal-links-right
-            li
-              a(href='https://digitalcareerinstitute.org/en/disclaimer/') Disclaimer
-            li
-              a(href='https://digitalcareerinstitute.org/en/imprint/') Imprint
-            li
-              a(href='https://digitalcareerinstitute.org/datenschutz/') Datenschutz
-            li
-              a(href='https://digitalcareerinstitute.org/en/data-privacy/') Data Privacy
+    section.footers.bg-light.pb-3
+      .container.pt-5
+        .row
+          .col-xs-12.col-sm-6.col-md-4.footers-one
+            .footers-logo
+              p.font-weight-bold DCI Digital Career Institute
+            .footers-info.mt-3
+              p
+                | The Digital Career Institute was born as an initiative to integrate refugees into digital jobs. Today it is
+                | committed to train anyone who wants to pursue a tech career.
+            .social-icons.mb-5
+              a.mr-2(href='https://medium.com/devugees')
+                i#social-em.fab.fa-medium.fa-2x
+              a.mr-2(href='https://www.facebook.com/devugees')
+                i#social-fb.fab.fa-facebook.fa-2x.social
+              a.mr-2(href='https://twitter.com/DevugeesOrg')
+                i#social-tw.fab.fa-twitter-square.fa-2x
+              a(href='https://www.youtube.com/channel/UCSM_3ldxjcclGTcXaJRBYTw')
+                i#social-gp.fab.fa-youtube-square.fa-2x
+
+          .col-xs-12.col-sm-6.col-md-2.footers-two
+            p.font-weight-bold Company 
+            ul.list-unstyled
+              li
+                a(href='https://digitalcareerinstitute.org/en/about-us/') About us
+              li
+                a(href='https://digitalcareerinstitute.org/en/jobs/') Jobs
+              li
+                a(href='https://digitalcareerinstitute.org/en/faq/') FAQ
+              li
+                a(href='https://digitalcareerinstitute.org/en/press/') Press
+              li
+                a(href='https://digitalcareerinstitute.org/en/press/') Contact
+          .col-xs-12.col-sm-6.col-md-2.footers-three
+            p.font-weight-bold Courses 
+            ul.list-unstyled
+              li
+                a(href='https://digitalcareerinstitute.org/en/onetoone-coaching/') One to One Coaching
+              li
+                a(href='https://digitalcareerinstitute.org/en/orientiation-course/') Orientation Course
+              li
+                a(href='https://digitalcareerinstitute.org/en/courses/one-year-program/')  Web Development Course
+              li
+                a(href='https://digitalcareerinstitute.org/en/courses/digital-marketing-e-commerce/')
+                  | Digital Marketing /
+                  | E-Commerce
+          .col-xs-12.col-sm-6.col-md-2.footers-four
+            p.font-weight-bold Community 
+            ul.list-unstyled
+              li
+                a(href='https://digitalcareerinstitute.org/en/scholarship/') Scholarship
+              li
+                a(href='https://digitalcareerinstitute.org/en/hire/') Hire your digital talents with DCI
+              li
+                a(href='https://digitalcareerinstitute.org/en/stories/') Stories
+          .col-xs-12.col-sm-6.col-md-2.footers-five
+            p.font-weight-bold Legacy & Privacy 
+            ul.list-unstyled
+              li
+                a(href='https://digitalcareerinstitute.org/en/disclaimer/') Disclaimer
+              li
+                a(href='https://digitalcareerinstitute.org/en/imprint/') Imprint
+              li
+                a(href='https://digitalcareerinstitute.org/datenschutz/') Data Protection
+              li
+                a(href='https://digitalcareerinstitute.org/en/data-privacy/') Policy

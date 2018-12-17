@@ -1149,24 +1149,28 @@ input[type="week"] {
 /*responsive*/
 
 .headingSection {
+  text-align: center;
   font-size: 3rem;
   color: $blue;
 }
 
 @include media-breakpoint-up(sm) {
   .headingSection {
+    text-align: center;
     font-size: 3rem;
   }
 }
 
 @include media-breakpoint-up(md) {
   .headingSection {
+    text-align: center;
     font-size: 6rem;
   }
 }
 
 @include media-breakpoint-up(lg) {
   .headingSection {
+    text-align: center;
     font-size: 4rem;
   }
 }
