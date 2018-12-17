@@ -11,7 +11,7 @@ router.get("/:id", ensureAuthenticated, AdminCoursesController.getSingleCourse);
 
 router.get("/edit/:id", ensureAuthenticated, AdminCoursesController.editCourse);
 
-router.post("/", ensureAuthenticated, AdminCoursesController.createCourse);
+router.post("/", ensureAuthenticated, AdminCoursesController.uploadImages, AdminCoursesController.resizeImages, AdminCoursesController.createCourse);
 
 router.delete("/delete/:id", ensureAuthenticated, AdminCoursesController.deleteCourse);
 router.put("/update/:id", ensureAuthenticated, AdminCoursesController.updateCourse);
