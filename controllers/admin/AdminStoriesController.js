@@ -82,7 +82,7 @@ module.exports.createStory = async (req, res) => {
   // save the story and check for errors
   story.save(function (err) {
     if (err) res.send(err);
-    req.flash("success", `Successfully created ${story.name}`);    
+    req.flash("success", `Successfully created ${story.title}`);    
     res.redirect("/admin/stories");
   });
 }

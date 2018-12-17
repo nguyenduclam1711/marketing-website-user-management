@@ -1,4 +1,5 @@
 mixin storylist(public)
  ul.row.story-cards-ul.mx-2
   each story in stories
-    +singleStory(story)
+    li.col-md-6.col-sm-12.col-lg-4.d-flex.story-cards-li
+      +singleStory(story)
