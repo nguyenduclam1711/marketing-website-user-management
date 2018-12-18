@@ -18,14 +18,14 @@ module.exports.getCourses = async function(req, res) {
 };
 
 module.exports.getSingleCourse = function(req, res) {
-  Course.findById(req.params.id, function(err, course) {
+  Course.findOne({ slug: req.params.slug }, function(err, course) {
     res.render("course", {
       course
     });
   });
 };
 module.exports.editCourse = async function(req, res) {
-  const course = await Course.findById(req.params.id);
+  const course = await Course.findOne({ slug: req.params.slug });
   let alllocations = await Location.find({}).exec();
   all = alllocations.map(loc => {
     let match = course.locations
@@ -46,7 +46,6 @@ module.exports.editCourse = async function(req, res) {
 };
 module.exports.createCourse = async function(req, res) {
   var course = await new Course();
-
   course.headline = req.body.headline;
   course.title = req.body.title;
   course.subheading = req.body.subheading;
@@ -99,7 +98,7 @@ module.exports.createCourse = async function(req, res) {
 module.exports.deleteCourse = function(req, res) {
   Course.remove(
     {
-      _id: req.params.id
+      slug: req.params.slug
     },
     function(err, course) {
       if (err) res.send(err);
@@ -159,15 +158,47 @@ exports.resizeImages = async (request, response, next) => {
 };
 
 module.exports.updateCourse = async function(req, res) {
+  req.body.archivements = [
+    {
+      icon: req.body.archivement_icon_1,
+      description: req.body.archivement_description_1
+    },
+    {
+      icon: req.body.archivement_icon_2,
+      description: req.body.archivement_description_2
+    },
+    {
+      icon: req.body.archivement_icon_3,
+      description: req.body.archivement_description_3
+    }
+  ];
+  req.body.timeline = [
+    {
+      title: req.body.timeline_time_1,
+      subtitle: req.body.timeline_subtitle_1,
+      time: req.body.timeline_time_1
+    },
+    {
+      title: req.body.timeline_time_2,
+      subtitle: req.body.timeline_subtitle_2,
+      time: req.body.timeline_time_2
+    },
+    {
+      title: req.body.timeline_time_3,
+      subtitle: req.body.timeline_subtitle_3,
+      time: req.body.timeline_time_3
+    }
+  ];
   const course = await Course.findOneAndUpdate(
-    { _id: req.params.id },
+    { slug: req.params.slug },
     req.body,
     {
       new: true,
       runValidators: true
     }
   ).exec();
+
   req.flash("success", `Successfully updated ${course.title}`);
 
-  res.redirect("/admin/courses/edit/" + req.params.id);
+  res.redirect("/admin/courses/edit/" + req.params.slug);
 };
