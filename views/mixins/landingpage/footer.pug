@@ -26,30 +26,24 @@ mixin footer
             ul.list-unstyled
               each page in pages
                 li
-                  a(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
+                  a(href='/pages/'+ page.slug)=page.title
           .col-xs-12.col-sm-6.col-md-2.footers-three
             p.font-weight-bold Courses 
             ul.list-unstyled
               each course in courses
                 li
-                  a.dropdown-item(class= currentPath === ("/courses/" + course.slug) ? "active" : "" href='/courses/'+ course.slug)=course.slug
+                  a(href='/courses/'+ course.slug)=course.slug
           .col-xs-12.col-sm-6.col-md-2.footers-four
             p.font-weight-bold Community 
             ul.list-unstyled
               li
-                a(href='https://digitalcareerinstitute.org/en/scholarship/') Scholarship
-              li
-                a(href='https://digitalcareerinstitute.org/en/hire/') Hire your digital talents with DCI
-              li
-                a(href='https://digitalcareerinstitute.org/en/stories/') Stories
+                a(data-toggle='modal', data-target='#contactFormModal') Contact
+          
           .col-xs-12.col-sm-6.col-md-2.footers-five
-            p.font-weight-bold Legacy & Privacy 
+            p.font-weight-bold Events 
             ul.list-unstyled
               li
-                a(href='https://digitalcareerinstitute.org/en/disclaimer/') Disclaimer
-              li
-                a(href='https://digitalcareerinstitute.org/en/imprint/') Imprint
-              li
-                a(href='https://digitalcareerinstitute.org/datenschutz/') Data Protection
-              li
-                a(href='https://digitalcareerinstitute.org/en/data-privacy/') Policy
+                a(href='/events') All Events
+              each location in locations
+                li
+                  a(href='/events/'+ location.name)=location.name
