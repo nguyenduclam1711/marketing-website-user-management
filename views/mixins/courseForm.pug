@@ -56,20 +56,20 @@ mixin courseForm
     .form-group
       label(for='archivement1') Timeline 1
       
-      input(type="text", name="timeline_title_1", placeholder="timeline title 1")
-      input(type="text", name="timeline_subtitle_1", placeholder="timeline subtitle 1")
-      input(type="text", name="timeline_time_1", placeholder="timeline time 1")
+      input(type="text", name="timeline_title_1", placeholder="timeline title 1", value= editPath ? course.timeline[0].title : "")
+      input(type="text", name="timeline_subtitle_1", placeholder="timeline subtitle 1", value= editPath ? course.timeline[0].subtitle : "")
+      input(type="text", name="timeline_time_1", placeholder="timeline time 1", value= editPath ? course.timeline[0].time : "")
     .form-group
       label(for='archivement2') Timeline 2
       
-      input(type="text", name="timeline_title_2", placeholder="timeline title 2")
-      input(type="text", name="timeline_subtitle_2", placeholder="timeline subtitle 2")
-      input(type="text", name="timeline_time_2", placeholder="timeline time 2")
+      input(type="text", name="timeline_title_2", placeholder="timeline title 2", value= editPath ? course.timeline[1].title : "")
+      input(type="text", name="timeline_subtitle_2", placeholder="timeline subtitle 2", value= editPath ? course.timeline[1].subtitle : "")
+      input(type="text", name="timeline_time_2", placeholder="timeline time 2", value= editPath ? course.timeline[1].time : "")
     .form-group
       label(for='archivement3') Timeline 3
       
-      input(type="text", name="timeline_title_3", placeholder="timeline title 3")
-      input(type="text", name="timeline_subtitle_3", placeholder="timeline subtitle 3")
-      input(type="text", name="timeline_time_3", placeholder="timeline time 3")
+      input(type="text", name="timeline_title_3", placeholder="timeline title 3", value= editPath ? course.timeline[2].title : "")
+      input(type="text", name="timeline_subtitle_3", placeholder="timeline subtitle 3", value= editPath ? course.timeline[2].subtitle : "")
+      input(type="text", name="timeline_time_3", placeholder="timeline time 3", value= editPath ? course.timeline[2].time : "")
 
     button.btn.btn-lg.btn-primary.btn-block(type='submit')=editPath ? "Update" :"Create a new course" 

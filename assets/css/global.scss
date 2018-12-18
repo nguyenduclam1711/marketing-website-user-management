@@ -1,4 +1,6 @@
 $blue: #1d3b8b;
+$red: #FF4200;
+$yellow: #FFDB00;
 @import "../../node_modules/bootstrap/scss/bootstrap";
 /* @import url("https://fonts.googleapis.com/css?family=Didact+Gothic");
 
@@ -25,6 +27,15 @@ $blue: #1d3b8b;
 }
 .z-1 {
   z-index: 1;
+}
+.z-0 {
+  z-index: 0;
+}
+.border-radius-0 {
+  border-radius: 0;
+}
+.overflow-hidden {
+  overflow: hidden;
 }
 .bg-primary-transparent {
   background-color: $blue;

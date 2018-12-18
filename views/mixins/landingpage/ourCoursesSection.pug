@@ -1,22 +1,13 @@
 mixin ourCoursesSection
-<<<<<<< HEAD
-  section#services.section-services
-    .container.container-courses
-      .section-title-area
-        h1.display-1.mx-5
-          div.h2.section-title.mainTexts
-            | OUR COURSES
-=======
   section#services.section-services.bg-light.py-5.mt-5
     .container
       h2.display-1 Our courses
       
->>>>>>> refurbish everything
       .row.mx-5
         each course in courses
           .col-md-6.col-lg-4
             .service-item.p-4
-              a.service-link(href="/courses/"+course.slug)
+              a.card-link(href="/courses/"+course.slug)
                 .service-image.icon-image.mb-5
                   img.h-100(src="/images/"+course.icon, alt=course.title)
                 .service-content

@@ -1,8 +1,8 @@
 extends layout.pug
 block content
-  .container
-    h1
-      = "See our recent Events from "
+  .container.py-5
+    h1.display-1
+      = "Events in "
       =location.name
     each event in events
       +singleEvent(event)

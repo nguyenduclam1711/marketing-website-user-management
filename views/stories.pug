@@ -7,4 +7,5 @@ block content
         h3.mb-5 Meet our happy students.
         .row
           each story in stories
-            +singleStory(story)
+            li.col-md-6.col-sm-12.col-lg-4.d-flex.story-cards-li
+              +singleStory(story)

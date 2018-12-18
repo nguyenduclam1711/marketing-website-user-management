@@ -6,6 +6,7 @@
 }
 
 /*NAVIGATION-BRACKETS*/
+@include media-breakpoint-up(md) {
 #headernav  {
   > li:not(.admin) > a.active {
     content: "";
@@ -43,7 +44,7 @@
       }
     }
   }
-}
+}}
 
 
 

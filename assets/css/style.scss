@@ -3,32 +3,38 @@
 @import "header";
 @import "contact";
 @import "footer";
-@import "storylist";
 @import "typography";
 
-.bg-gradient{
-  background: linear-gradient(to left, #FF4200, #FFDB00) !important
+@mixin btn-color($color-pri, $color-sec, $color-border)  {
+  background-color: $color-pri;
+  color: $color-sec !important;
+  border: 1px solid;
+  border-color: $color-border;
+  &:hover,
+  &:focus,
+  &:active,
+  &.active{
+    background-color: darken($color-pri, 10%) !important;
+    color: $color-sec !important;
+    border-color: darken($color-border, 10%) !important;
+  }
+}
+.btn-gradient{
+  background: linear-gradient(to left, $red, $yellow) !important;
+  background-repeat: repeat;  
+  background-size: 200% 100% !important;
+  transition: all .2s;  
+  background-position: 5% 0 !important;
+  &:hover{
+    background-position: 95% 0 !important;
+  }
 }
 
-.btn-border {
-  border: 1px solid #fff;
-  color: #fff;
-  background: transparent;
+code {color: $red;}
+nav.container:after {
+  display: none !important;
 }
 
-.btn-border:hover {
-  border: 1px solid #8db5f8;
-  color: #8db5f8;
-}
-
-.secondaryLinks {
-  color: #4285f4;
-}
-
-.secondaryLinks:hover {
-  color: #0d47a1;
-  text-decoration: none;
-}
 /*******************HOME****************************
 *********************************'********/
 .homeSection {
@@ -58,22 +64,6 @@
   color: #dce0f2;
 }
 
-.browserCourses .contactUs{
-  -webkit-transition-duration: 0.2s; /* Safari */
-  transition-duration: 0.2s;
-
-}
-
-.browserCourses:hover {
-  background-color: #dce0f2;
-  color: #3963ad;
-  border-color: #dce0f2;
-}
-.contactUs:hover {
-  background-color: #dce0f2;
-  color: #da9446;
-  border-color: #dce0f2;
-}
 /******************************************
 VIDEO SECTION
  *******************************************/
@@ -278,7 +268,7 @@ QUOTE
 }
 
 .mission-title {
-  color: #da9446;
+  color: #da9446 !important;
   text-align: center;
 
 }

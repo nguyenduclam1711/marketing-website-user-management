@@ -1,13 +1,17 @@
 extends layout.pug
 block content
-  .container.mt-5.p-5
-    div.story-item.p-5.d-flex.flex-column.justify-content-between
+  .container.my-5
+    div.story-item.py-5
       .row
-        .col-2.pl-0
+        .col-2
           img.object-fit-cover.img-fluid.rounded-circle.square(style="background-image: url('/images/"+story.image+"')")
         .col 
           h2=story.alumniName
           p.text-justify=story.workPosition     
-      .row.mt-4
+      .mt-4
         p.text-justify=story.content
-        a.secondaryLinks(href='/stories') +Back
+      
+      a(href='/stories') +Back
+      if user
+        div.mt-3
+          a.btn.btn-outline-info(href='/admin/stories/edit/'+story.slug) Edit story

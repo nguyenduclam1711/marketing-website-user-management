@@ -24,29 +24,15 @@ mixin footer
           .col-xs-12.col-sm-6.col-md-2.footers-two
             p.font-weight-bold Company 
             ul.list-unstyled
-              li
-                a(href='https://digitalcareerinstitute.org/en/about-us/') About us
-              li
-                a(href='https://digitalcareerinstitute.org/en/jobs/') Jobs
-              li
-                a(href='https://digitalcareerinstitute.org/en/faq/') FAQ
-              li
-                a(href='https://digitalcareerinstitute.org/en/press/') Press
-              li
-                a(href='https://digitalcareerinstitute.org/en/press/') Contact
+              each page in pages
+                li
+                  a(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
           .col-xs-12.col-sm-6.col-md-2.footers-three
             p.font-weight-bold Courses 
             ul.list-unstyled
-              li
-                a(href='https://digitalcareerinstitute.org/en/onetoone-coaching/') One to One Coaching
-              li
-                a(href='https://digitalcareerinstitute.org/en/orientiation-course/') Orientation Course
-              li
-                a(href='https://digitalcareerinstitute.org/en/courses/one-year-program/')  Web Development Course
-              li
-                a(href='https://digitalcareerinstitute.org/en/courses/digital-marketing-e-commerce/')
-                  | Digital Marketing /
-                  | E-Commerce
+              each course in courses
+                li
+                  a.dropdown-item(class= currentPath === ("/courses/" + course.slug) ? "active" : "" href='/courses/'+ course.slug)=course.slug
           .col-xs-12.col-sm-6.col-md-2.footers-four
             p.font-weight-bold Community 
             ul.list-unstyled

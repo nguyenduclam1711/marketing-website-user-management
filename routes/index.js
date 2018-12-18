@@ -21,6 +21,7 @@ router.get("/", async (req, res) => {
     const stories = await Story.find({})
       .populate("categories")
       .sort("order")
+      .limit(3)
       .exec({});
     const locations = await Location.find({});
 

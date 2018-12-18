@@ -1,11 +1,12 @@
 mixin singleStory(story, showFullContent)
-  div.story-item.p-2.mb-3.d-flex.flex-column.justify-content-between.p-5
-    p.text-left=story.excerpt
+  div.story-item.p-2.mb-3.d-flex.flex-column.justify-content-between.bg-light.w-100
     .row
-      .col-6.px-0.align-items-center
+      .col-3.align-items-center
         img.object-fit-cover.img-fluid.rounded-circle.square(style="background-image: url('/images/"+story.image+"')")
-      .col-6
+      .col-9
         h3=story.alumniName          
-        p=story.workPosition
+        code=story.workPosition
+        p.text-left=story.excerpt
+
     div.text-right
       a.warningColorDark(href="/stories/"+story.slug) +Show more

@@ -1,8 +1,11 @@
 extends layout.pug
 block content
   
-  .container.my-5.py-5.text-left
-    h1.display-1.d-block.my-5=page.title
+  .container.py-5
+    h1.display-1.d-block=page.title
     - var str = page.content.replace(/[\r\n]/g, '<br/>');
     p.lead.pSize !{str}
-  
+
+    if user
+      div.mt-3
+      a.btn.btn-outline-info(href='/admin/pages/edit/'+page.slug) Edit page
