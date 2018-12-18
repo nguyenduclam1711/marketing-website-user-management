@@ -5,7 +5,7 @@ block content
     .row
       .col
         h1 Edit page
-        form.mb-3.form-signin(method='POST', action='/admin/pages/update/'+page._id+'?_method=PUT')
+        form.mb-3.form-signin(method='POST', action='/admin/pages/update/'+page.slug+'?_method=PUT')
           
           .mb-3
             label.sr-only(for='inputTitle') Title

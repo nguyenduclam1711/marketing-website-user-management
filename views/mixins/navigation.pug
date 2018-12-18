@@ -22,13 +22,13 @@ mixin navigation
             a.dropdown-item(href='/admin/jobs') Jobs
 
       li.position-relative.nav-item.dropdown
-        a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mx-2.mainTexts(class= currentPath.includes('/courses') && !currentPath.includes('admin') ? "active" : "" data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+        a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mx-2(class= currentPath.includes('/courses') && !currentPath.includes('admin') ? "active" : "" data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
           | COURSES
         .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
           each course in courses
             a.dropdown-item(class= currentPath === ("/courses/" + course.slug) ? "active" : "" href='/courses/'+ course.slug)=course.slug
       li.position-relative.nav-item.dropdown
-        a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mx-2.mainTexts(class=currentPath.includes('/events') && !currentPath.includes('admin') ? "active" : "" href='/events' data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+        a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mx-2(class=currentPath.includes('/events') && !currentPath.includes('admin') ? "active" : "" href='/events' data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
           | EVENTS
 
         .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
@@ -36,10 +36,10 @@ mixin navigation
           each location in locations
             a.dropdown-item(class= currentPath === ("/events/" + location.name) ? "active" : "" href='/events/'+ location.name)=location.name
       li.position-relative.nav-item
-        a.nav-link.mx-2.mainTexts(class=currentPath == "/stories" ? "active" : "" href='/stories') STORIES
+        a.nav-link.mx-2(class=currentPath == "/stories" ? "active" : "" href='/stories') STORIES
     
       li.position-relative.nav-item.dropdown
-        a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mx-2.mainTexts(data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' class= currentPath.includes('/pages') && !currentPath.includes('admin') ? "active" : ""  href='/admin/contacts')
+        a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mx-2(data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' class= currentPath.includes('/pages') && !currentPath.includes('admin') ? "active" : ""  href='/admin/contacts')
           | GET INVOLVED
         .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
           each page in pages
@@ -48,8 +48,8 @@ mixin navigation
             
 
       li.position-relative.nav-item
-        a.nav-link.mx-2.mainTexts(data-toggle='modal', data-target='#contactFormModal') CONTACT US
+        a.nav-link.mx-2(data-toggle='modal', data-target='#contactFormModal') CONTACT US
 
         if user
           li.position-relative.nav-item
-            a.nav-link.mx-2.mainTexts(href='/users/logout') LOGOUT
+            a.nav-link.mx-2(href='/users/logout') LOGOUT

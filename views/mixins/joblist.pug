@@ -2,7 +2,7 @@ mixin joblist(public)
   ul.list-group
     each job in jobs
       li.list-group-item.mb-3.p-5
-        h2.mainTexts.mr-3=job.name
+        h2.mr-3=job.name
         p.mr-3.my-5=job.content
           each location in job.locations
             .badge.badge-primary.mr-2=location.name

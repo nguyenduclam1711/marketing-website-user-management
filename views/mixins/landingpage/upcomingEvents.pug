@@ -1,10 +1,7 @@
 mixin upcomingEvents
-    section#events
-      .container.container-courses
-        .section-title-area
-          h1.display-1.ml-5
-            div.h2.section-title.mainTexts.mb-3
-              | UPCOMING EVENTS
-        .row.mx-5
+    section#events.bg-light.py-5
+      .container
+        h2.mb-5.display-1 Upcoming events
+        .row.mx-md-5
           each event in events
             +singleEvent(event)

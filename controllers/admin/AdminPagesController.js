@@ -71,12 +71,14 @@ module.exports.deletePage = async (req, res) => {
 module.exports.updatePage = async (req, res) => {
   try {
     const page = await Page.findOne({ slug: req.params.slug });
+    console.log('page', page);
+    
     page.title = req.body.title;
     page.content = req.body.content;
     page.order = req.body.order;
     await page.save();
 
-    req.flash("success", `Successfully updated ${page.name}`);
+    req.flash("success", `Successfully updated ${page.title}`);
     res.redirect("/admin/pages/edit/" + page.slug);
   } catch (err) {
     console.log(err);

@@ -3,6 +3,6 @@ mixin eventlist(public)
     .row.my-5
       each location, locationname in locationEvents
         .col-md-6
-          h2.mainTexts.my-3.ml-4=locationname
+          h2=locationname
           each event in location
             +singleEvent(event)

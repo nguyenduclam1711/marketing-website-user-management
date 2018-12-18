@@ -21,6 +21,7 @@ include mixins/courses/singleCourse
 include mixins/landingpage/getinvolved
 include mixins/landingpage/home
 include mixins/singleStory
+include mixins/newsletter
 
 doctype html
 //saved from url=(0051)https://getbootstrap.com/docs/4.0/examples/sign-in/
@@ -40,18 +41,12 @@ html.h-100(lang='en')
     meta(name='twitter:title', content='Home - DCI Digital Career Institute')
     meta(name='twitter:site', content='@devugeesorgi')
     meta(name='twitter:creator', content='@devugeesorgi')
+
     title=title
     link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
     crossorigin="anonymous")
-    link(rel="stylesheet", href="/assets/footer.scss")
-    link(rel="stylesheet", href="/assets/singleCourse.css")
-    //link(rel="stylesheet", href="/assets/storylist.css")
 
-    //TODO this should be the only stylesheet we require. All above should be removed
     link(rel="stylesheet", href="/frontend.css")
-    // Custom styles for this template
-
-    //favicons
     link(rel="apple-touch-icon", sizes="180x180", href="/assets/apple-touch-icon.png")
     link(rel="icon", type="image/png", sizes="32x32", href="/assets/favicon-32x32.png")
     link(rel="icon", type="image/png", sizes="16x16", href="/assets/favicon-16x16.png")
@@ -80,10 +75,38 @@ html.h-100(lang='en')
         block content
       if !currentPath.includes('admin')
         +footer
-    .modal#contactFormModal
-      +contactform
+    .modal.container.px-md-5#contactFormModal
+      .mx-md-5
+        .modal-content.px-5
+          .mb-2
+            h2.display-1 Contact us!
+            p.mb-3.text-center Let’s connect! Our admissions team will call you soon to chat about our courses and your goals.
+          +contactform
     .modal#dataPrivacy
-      +dataPrivacy  
+      +dataPrivacy
+
     script(src="/frontend.bundle.js")
-  
     
+    // Global site tag (gtag.js) - Google Analytics
+    script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-54516992-1')
+      script.
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-54516992-1');
+    
+    // Facebook Pixel Code
+    script.
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '1296683973774299');
+      fbq('track', 'PageView');
+    noscript
+      img(height='1', width='1', style='display:none', src='https://www.facebook.com/tr?id=1296683973774299&ev=PageView&noscript=1')
+    // End Facebook Pixel Code

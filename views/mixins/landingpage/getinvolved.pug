@@ -1,20 +1,16 @@
 mixin getinvolved
-  section#services.section-services
-    .container
-      .section-title-area
-        h1.display-1.mx-5
-          div.h2.section-title.mainTexts
-            | GET INVOLVED
-      .row.justify-center
-        each page in pages
-          .col-sm-6.col-md-3.involved-boxes
-            .service-item.border
-              a.service-link(href="/pages/" + page.slug)
-                span.screen-reader-text
-                  = page.title
-              .service-content
-                p=page.title
-
-             
-     
+  .bg-light.py-md-5
+    .container.py-5.text-left.getInvolved-container
+      h2.display-1.mb-5 Get Involved
+      .ml-5.position-relative.z-1
+        div.verticalLineGetInv.bg-light.d-inline-block
+          each page in pages
+          
+            div.mx-5
+              a.linksInvolved(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
+          
+          div.mx-5.mb-5
+            a.linksInvolved(href='/jobs/') Jobs
+              
       
+        
