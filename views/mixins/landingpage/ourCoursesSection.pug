@@ -3,7 +3,7 @@ mixin ourCoursesSection
     .container.container-courses
       .section-title-area
         h1.display-1.mx-5
-          div.headingSection.display-1
+          div.h2.section-title.mainTexts
             | OUR COURSES
       .row.mx-5
         each course in courses
@@ -19,4 +19,4 @@ mixin ourCoursesSection
                 p=course.title
 
       .section-button-wrap
-        a.btn.btn-lg.btn-primary.browserCourses.mx-5(href='/courses/', role='button', aria-pressed='true') Browse Courses
+        a.btn.btn-lg.btn-outline-primary.browserCourses.mx-5(href='/courses/', role='button', aria-pressed='true') Browse Courses

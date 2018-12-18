@@ -1,17 +1,20 @@
 mixin getinvolved
-  .container.my-5.p-5.text-left.getInvolved-container
-    .row.getInvolved-content
-      h1.display-1.text-right.mx-5
-        div.headingSection.display-1 GET INVOLVED
-    .row.ml-5
-      div.verticalLineGetInv.pt-5.mt-5
+  section#services.section-services
+    .container
+      .section-title-area
+        h1.display-1.mx-5
+          div.h2.section-title.mainTexts
+            | GET INVOLVED
+      .row.justify-center
         each page in pages
-        
-          div.mx-5
-             a.linksInvolved.animationLink(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
-        
-        div.mx-5.mb-5
-          a.linksInvolved.animationLink(href='/jobs/') Jobs
+          .col-sm-6.col-md-3.involved-boxes
+            .service-item.border
+              a.service-link(href="/pages/" + page.slug)
+                span.screen-reader-text
+                  = page.title
+              .service-content
+                p=page.title
+
              
      
       
