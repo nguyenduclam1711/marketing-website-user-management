@@ -32,17 +32,19 @@ mixin navigation
           | EVENTS
 
         .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
-          a.dropdown-item(class= currentPath === ("/events") ? "active" : "" href='/events') All locations 
+          a.dropdown-item(class= currentPath === ("/events") ? "active" : "" href='/events') All events
           each location in locations
             a.dropdown-item(class= currentPath === ("/events/" + location.name) ? "active" : "" href='/events/'+ location.name)=location.name
       li.position-relative.nav-item
         a.nav-link.mx-2(class=currentPath == "/stories" ? "active" : "" href='/stories') STORIES
+      li.position-relative.nav-item
+        a.nav-link.mx-2(class=currentPath == "/tour" ? "active" : "" href='/tour') COMPANY
     
       li.position-relative.nav-item.dropdown
         a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mx-2(data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' class= currentPath.includes('/pages') && !currentPath.includes('admin') ? "active" : ""  href='/admin/contacts')
           | GET INVOLVED
         .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
-          each page in pages
+          each page in headerPages
             a.dropdown-item(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
           a.dropdown-item(href='/jobs/') Jobs
             

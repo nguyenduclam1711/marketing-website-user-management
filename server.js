@@ -12,6 +12,7 @@ const MongoStore = require("connect-mongo")(session);
 const { promisify } = require("util");
 const Course = require("./models/course");
 const Page = require("./models/page");
+const Category = require("./models/category");
 const Location = require("./models/location");
 const flash = require("connect-flash");
 const cron = require('node-cron');
@@ -68,6 +69,11 @@ app.use(expressValidator());
 app.use(flash());
 
 app.use(function(req, res, next) {
+  (res.locals.messages = {
+    danger: req.flash("danger"),
+    warning: req.flash("warning"),
+    success: req.flash("success")
+  }),
     (app.locals.pathclass = req.url
       .replace(/^\//g, "")
       .replace(/\//g, "-")
@@ -107,16 +113,21 @@ app.use(async (req, res, next) => {
       .sort("order")
       .exec();
     let locations = await Location.find({}).exec();
-    let pages = await Page.find({})
-      .sort("order")
-      .exec();
 
+    let footerCat = await Category.findOne({name: "footer"})
+    let footerPages = await Page.find({categories: {$in: [footerCat]}})
+    
+    let headerCat = await Category.findOne({name: "header"})
+    let headerPages = await Page.find({categories: {$in: [headerCat]}})
+    
+    
     navData = {
       courses,
       locations,
-      pages
+      headerPages,
+      footerPages
     };
-
+    
     console.log("saving data");
     try {
       await redisClient.setAsync("navData", JSON.stringify(navData));
@@ -127,13 +138,14 @@ app.use(async (req, res, next) => {
     console.log("using cached data");
   }
 
-  const { courses, locations, pages } = navData;
+  const { courses, locations, headerPages,footerPages } = navData;
 
   res.locals.user = req.user || null;
   res.locals.currentPath = req.path;
   res.locals.locations = locations;
   res.locals.courses = courses;
-  res.locals.pages = pages;
+  res.locals.headerPages = headerPages
+  res.locals.footerPages = footerPages
   next();
 });
 

@@ -6,3 +6,6 @@ mixin upcomingEvents
         .row.mx-md-5
           each event in events
             +singleEvent(event)
+
+      .section-button-wrap
+        a.btn.btn-lg.btn-gradient-secondary.mx-5(href='/events/') All Events

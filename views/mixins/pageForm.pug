@@ -5,17 +5,25 @@ mixin pageForm
     h2=editPath ? "Edit Page " :"Create a new Page"
     
     .mb-3
-      label.sr-only(for='inputName') Title
+      label(for='title') Title
       input#inputName.form-control(name='title', type='text', placeholder='Title', required='', autofocus='', value=editPath ? page.title : "")
     
     .mb-3
-      label.sr-only(for='inputContent') Content
+      label(for='content') Content
       textarea#inputContent.form-control(name='content', type='password', placeholder='Content', required='', )=editPath ? page.content : ""
     .mb-3
-      label.sr-only(for='inputContent') Order
+      label(for='order') 
+        | Order
+        button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Defines the order the pages are displayed.')
+          | ?
       input#inputOrder.form-control(name='order', type='number', placeholder='Order', required='', autofocus='', value=editPath ? page.order : "")
 
     .my-3
+      label(for="categories") Page Location (category)
+      button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Defines the location where the pages are displayed.')
+        | ?
+
+      
       each category in categories
         .custom-control.custom-checkbox
           input.custom-control-input(name="categories" type='checkbox' id=category.name value=category._id  checked=(category.selected))

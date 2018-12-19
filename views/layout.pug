@@ -63,7 +63,7 @@ html.h-100(lang='en')
       - const categories = Object.keys(locals.messages)
         each category in categories
           each message in messages[category]
-            .flash(class=`alert alert-${category} ${category === 'error' ? 'alert-danger' : ''}`)
+            .flash.m-0(class=`alert fade show alert-${category} ${category === 'error' ? 'alert-danger' : ''}`)
               != message
               button.close.ml-3(type='button', data-dismiss='alert', aria-label='Close')
                 span(aria-hidden='true') ×
@@ -80,7 +80,7 @@ html.h-100(lang='en')
       .mx-md-5
         .modal-content.bg-light.border-radius-0.overflow-hidden.px-5.position-relative.z-0
           .pb-5
-            .mb-2
+            .mb-2.px-lg-5
               h2.display-1 Contact us!
               p.mb-3.text-center Let’s connect! Our admissions team will call you soon to chat about our courses and your goals.
             +contactform
@@ -88,7 +88,9 @@ html.h-100(lang='en')
       +dataPrivacy
 
     script(src="/frontend.bundle.js")
-    
+    if currentPath.includes('admin')    
+      script(src="/backend.bundle.js")
+
     if live
       // Global site tag (gtag.js) - Google Analytics
       script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-54516992-1')

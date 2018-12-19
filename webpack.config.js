@@ -8,7 +8,7 @@ module.exports = (env, argv) => {
     // Define the entry points of our application (can be multiple for different sections of a website)
     entry: {
       frontend: "./assets/scripts/frontend.js",
-      // backend: "./src/backend.js",
+      backend: "./assets/scripts/backend.js",
     },
 
     // Define the destination directory and filenames of compiled resources

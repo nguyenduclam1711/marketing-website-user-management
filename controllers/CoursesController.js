@@ -14,7 +14,6 @@ module.exports.getSingleCourse = async (req, res) => {
     .populate(
       "locations"
     ).exec();
-    console.log('course', course);
     
     res.render(`course`, {
       course

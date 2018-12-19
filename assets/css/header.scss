@@ -9,8 +9,8 @@
 @include media-breakpoint-up(md) {
 #headernav  {
   > li:not(.admin) > a.active {
-    content: "";
-    position: relative;
+    // content: "";
+    // position: relative;
   }
 
   > li:not(.admin) {
