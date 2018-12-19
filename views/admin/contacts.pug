@@ -14,7 +14,10 @@ block content
               p.mr-3=contact.body
               a.mr-3(href='mailto:'+ contact.email)=contact.email
               hr
-              h4 
+              
+              if contact.locations.length
                 span Interested in: 
                 each location in contact.locations
                   .badge.badge-primary.mr-2=location.name
+              if contact.isCompany
+                span.badge.badge-warning= "Is Companytour request"

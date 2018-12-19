@@ -1,0 +1,32 @@
+mixin pageForm
+  - var editPath = currentPath.includes('admin/pages/edit')
+  form.mb-5(method='POST', action=editPath ? '/admin/pages/update/'+page.slug+'?_method=PUT' : '/admin/pages?alert=create')
+
+    h2=editPath ? "Edit Page " :"Create a new Page"
+    
+    .mb-3
+      label(for='title') Title
+      input#inputName.form-control(name='title', type='text', placeholder='Title', required='', autofocus='', value=editPath ? page.title : "")
+    
+    .mb-3
+      label(for='content') Content
+      textarea#inputContent.form-control(name='content', type='password', placeholder='Content', required='', )=editPath ? page.content : ""
+    .mb-3
+      label(for='order') 
+        | Order
+        button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Defines the order the pages are displayed.')
+          | ?
+      input#inputOrder.form-control(name='order', type='number', placeholder='Order', required='', autofocus='', value=editPath ? page.order : "")
+
+    .my-3
+      label(for="categories") Page Location (category)
+      button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Defines the location where the pages are displayed.')
+        | ?
+
+      
+      each category in categories
+        .custom-control.custom-checkbox
+          input.custom-control-input(name="categories" type='checkbox' id=category.name value=category._id  checked=(category.selected))
+          label.custom-control-label(for=category.name)=category.name
+  
+    button.btn.btn-lg.btn-primary.mb-3(type='submit')=editPath ? "Update" :"Create a new Page" 

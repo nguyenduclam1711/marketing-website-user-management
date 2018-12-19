@@ -1,74 +1,79 @@
 mixin courseForm
   - var editPath = currentPath.includes('admin/courses/edit')
-  form.form-signin(method='POST', action=editPath ? '/admin/courses/update/'+course.slug+'?_method=PUT' : '/admin/courses', enctype="x-www-form-urlencoded")
+  form.mb-5.form-signin(method='POST', action=editPath ? '/admin/courses/update/'+course.slug+'?_method=PUT' : '/admin/courses', enctype="multipart/form-data")
     
     h2=editPath ? "Edit course" :"Create a new course"
-    
-    .form-group
-      label(for='exampleFormControlFile1') Course Title Icon
-      input#exampleFormControlFile1.form-control-file(type='file' name='icon')
+    .row
+      .col-md-6
+        .form-group
+          label(for='exampleFormControlFile1') Course Title Icon
+          if course && course.icon
+            img(src="/images/"+course.icon)
+          input#exampleFormControlFile1.form-control-file(type='file' name='icon')
 
-    .mb-3
-      label.sr-only(for='headline') Headline
-      input#headline.form-control(name='headline', type='text', placeholder='Headline', value=editPath ? course.headline :"" required='', autofocus='')
+        .mb-3
+          label.sr-only(for='headline') Headline
+          input#headline.form-control(name='headline', type='text', placeholder='Headline', value=editPath ? course.headline :"" required='', autofocus='')
 
-    .mb-3
-      label.sr-only(for='subheading') subheading
-      input#subheading.form-control(name='subheading', type='text', placeholder='subheading', value=editPath ? course.subheading :"" required='', autofocus='')
+        .mb-3
+          label.sr-only(for='subheading') subheading
+          input#subheading.form-control(name='subheading', type='text', placeholder='subheading', value=editPath ? course.subheading :"" required='', autofocus='')
 
-    .mb-3
-      label.sr-only(for='title') Title
-      input#title.form-control(name='title', type='text', placeholder='Title', value=editPath ? course.title :"" required='', autofocus='')
+        .mb-3
+          label.sr-only(for='title') Title
+          input#title.form-control(name='title', type='text', placeholder='Title', value=editPath ? course.title :"" required='', autofocus='')
 
-    .mb-3
-      label.sr-only(for='subtitle') Subtitle
-      input#subtitle.form-control(name='subtitle', type='text', placeholder='subtitle', value=editPath ? course.subtitle :"" required='', autofocus='')
-
-    each location in locations
-      .custom-control.custom-checkbox
-        input.custom-control-input(name="locations" type='checkbox' id=location.name value=location._id  checked=(location.selected))
-        label.custom-control-label(for=location.name)=location.name
-
-    .form-group
-      label(for='archivement1') Archivements 1
-      if course && course.archivements[0].icon
-        img(src="/images/"+course.archivements[0].icon)
-      input#exampleFormControlFile1.form-control-file(type='file' name='archivement_icon_1')
-      
-      input(type="text", name="archivement_description_1",  value=editPath ? course.archivements[0].description : '', placeholder="archivement description 1" )
-    .form-group
-      label(for='archivement2') Archivements 2
-      if course && course.archivements[1].icon
-        img(src="/images/"+course.archivements[1].icon)
-      input#exampleFormControlFile1.form-control-file(type='file' name='archivement_icon_2')
-      
-      input(type="text", name="archivement_description_2",  value=editPath ? course.archivements[1].description : '', placeholder="archivement description 2" )
-    .form-group
-      label(for='archivement3') Archivements 3
-      if course && course.archivements[2].icon
-        img(src="/images/"+course.archivements[2].icon)
-      input#exampleFormControlFile1.form-control-file(type='file' name='archivement_icon_3')
-      
-      input(type="text", name="archivement_description_3",  value=editPath ? course.archivements[2].description : '' placeholder="archivement description 3")
+        .mb-3
+          label.sr-only(for='subtitle') Subtitle
+          input#subtitle.form-control(name='subtitle', type='text', placeholder='subtitle', value=editPath ? course.subtitle :"" required='', autofocus='')
 
 
-    .form-group
-      label(for='archivement1') Timeline 1
-      
-      input(type="text", name="timeline_title_1", placeholder="timeline title 1", value= editPath ? course.timeline[0].title : "")
-      input(type="text", name="timeline_subtitle_1", placeholder="timeline subtitle 1", value= editPath ? course.timeline[0].subtitle : "")
-      input(type="text", name="timeline_time_1", placeholder="timeline time 1", value= editPath ? course.timeline[0].time : "")
-    .form-group
-      label(for='archivement2') Timeline 2
-      
-      input(type="text", name="timeline_title_2", placeholder="timeline title 2", value= editPath ? course.timeline[1].title : "")
-      input(type="text", name="timeline_subtitle_2", placeholder="timeline subtitle 2", value= editPath ? course.timeline[1].subtitle : "")
-      input(type="text", name="timeline_time_2", placeholder="timeline time 2", value= editPath ? course.timeline[1].time : "")
-    .form-group
-      label(for='archivement3') Timeline 3
-      
-      input(type="text", name="timeline_title_3", placeholder="timeline title 3", value= editPath ? course.timeline[2].title : "")
-      input(type="text", name="timeline_subtitle_3", placeholder="timeline subtitle 3", value= editPath ? course.timeline[2].subtitle : "")
-      input(type="text", name="timeline_time_3", placeholder="timeline time 3", value= editPath ? course.timeline[2].time : "")
+        .form-group
+          label(for='archivement1') Archivements 1
+          if course && course.archivements[0].icon
+            img(src="/images/"+course.archivements[0].icon)
+          input#exampleFormControlFile1.form-control-file(type='file' name='archivement_icon_1')
+          
+          input(type="text", name="archivement_description_1",  value=editPath ? course.archivements[0].description : '', placeholder="archivement description 1" )
+        .form-group
+          label(for='archivement2') Archivements 2
+          if course && course.archivements[1].icon
+            img(src="/images/"+course.archivements[1].icon)
+          input#exampleFormControlFile1.form-control-file(type='file' name='archivement_icon_2')
+          
+          input(type="text", name="archivement_description_2",  value=editPath ? course.archivements[1].description : '', placeholder="archivement description 2" )
+        .form-group
+          label(for='archivement3') Archivements 3
+          if course && course.archivements[2].icon
+            img(src="/images/"+course.archivements[2].icon)
+          input#exampleFormControlFile1.form-control-file(type='file' name='archivement_icon_3')
+          
+          input(type="text", name="archivement_description_3",  value=editPath ? course.archivements[2].description : '' placeholder="archivement description 3")
+
+      .col-md-6
+
+        .form-group
+          label(for='archivement1') Timeline 1
+          
+          input(type="text", name="timeline_title_1", placeholder="timeline title 1", value= editPath ? course.timeline[0].title : "")
+          input(type="text", name="timeline_subtitle_1", placeholder="timeline subtitle 1", value= editPath ? course.timeline[0].subtitle : "")
+          input(type="text", name="timeline_time_1", placeholder="timeline time 1", value= editPath ? course.timeline[0].time : "")
+        .form-group
+          label(for='archivement2') Timeline 2
+          
+          input(type="text", name="timeline_title_2", placeholder="timeline title 2", value= editPath ? course.timeline[1].title : "")
+          input(type="text", name="timeline_subtitle_2", placeholder="timeline subtitle 2", value= editPath ? course.timeline[1].subtitle : "")
+          input(type="text", name="timeline_time_2", placeholder="timeline time 2", value= editPath ? course.timeline[1].time : "")
+        .form-group
+          label(for='archivement3') Timeline 3
+          
+          input(type="text", name="timeline_title_3", placeholder="timeline title 3", value= editPath ? course.timeline[2].title : "")
+          input(type="text", name="timeline_subtitle_3", placeholder="timeline subtitle 3", value= editPath ? course.timeline[2].subtitle : "")
+          input(type="text", name="timeline_time_3", placeholder="timeline time 3", value= editPath ? course.timeline[2].time : "")
+        label Course available in locations:
+        each location in locations
+          .custom-control.custom-checkbox
+            input.custom-control-input(name="locations" type='checkbox' id=location.name value=location._id  checked=(location.selected))
+            label.custom-control-label(for=location.name)=location.name
 
     button.btn.btn-lg.btn-primary.btn-block(type='submit')=editPath ? "Update" :"Create a new course" 

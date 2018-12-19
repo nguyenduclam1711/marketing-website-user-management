@@ -12,6 +12,7 @@ const MongoStore = require("connect-mongo")(session);
 const { promisify } = require("util");
 const Course = require("./models/course");
 const Page = require("./models/page");
+const Category = require("./models/category");
 const Location = require("./models/location");
 const flash = require("connect-flash");
 const cron = require('node-cron');
@@ -80,6 +81,7 @@ app.use(function(req, res, next) {
       .toLowerCase());
   let match = req.url.match("[^/]+(?=/$|$)");
   res.locals.title = "DigitalCareerInstitute";
+  res.locals.live = req.headers.host.includes("digitalcareerinstitute.org")
   if (match) {
     match = match[0].replace(/\//g, " ");
     res.locals.title =
@@ -111,16 +113,21 @@ app.use(async (req, res, next) => {
       .sort("order")
       .exec();
     let locations = await Location.find({}).exec();
-    let pages = await Page.find({})
-      .sort("order")
-      .exec();
 
+    let footerCat = await Category.findOne({name: "footer"})
+    let footerPages = await Page.find({categories: {$in: [footerCat]}})
+    
+    let headerCat = await Category.findOne({name: "header"})
+    let headerPages = await Page.find({categories: {$in: [headerCat]}})
+    
+    
     navData = {
       courses,
       locations,
-      pages
+      headerPages,
+      footerPages
     };
-
+    
     console.log("saving data");
     try {
       await redisClient.setAsync("navData", JSON.stringify(navData));
@@ -131,13 +138,14 @@ app.use(async (req, res, next) => {
     console.log("using cached data");
   }
 
-  const { courses, locations, pages } = navData;
+  const { courses, locations, headerPages,footerPages } = navData;
 
   res.locals.user = req.user || null;
   res.locals.currentPath = req.path;
   res.locals.locations = locations;
   res.locals.courses = courses;
-  res.locals.pages = pages;
+  res.locals.headerPages = headerPages
+  res.locals.footerPages = footerPages
   next();
 });
 
@@ -181,50 +189,6 @@ app.use("/admin/contacts", contactsAdminRoutes);
 
 app.set("views", path.join(__dirname, "views/"));
 app.set("view engine", "pug");
-
-//List of routes printed on server start
-function print(path, layer) {
-  if (layer.route) {
-    layer.route.stack.forEach(
-      print.bind(null, path.concat(split(layer.route.path)))
-    );
-  } else if (layer.name === "router" && layer.handle.stack) {
-    layer.handle.stack.forEach(
-      print.bind(null, path.concat(split(layer.regexp)))
-    );
-  } else if (layer.method) {
-    console.log(
-      "%s /%s",
-      layer.method.toUpperCase(),
-      path
-        .concat(split(layer.regexp))
-        .filter(Boolean)
-        .join("/")
-    );
-  }
-}
-
-function split(thing) {
-  if (typeof thing === "string") {
-    return thing.split("/");
-  } else if (thing.fast_slash) {
-    return "";
-  } else {
-    const match = thing
-      .toString()
-      .replace("\\/?", "")
-      .replace("(?=\\/|$)", "$")
-      .match(/^\/\^((?:\\[.*+?^${}()|[\]\\\/]|[^.*+?^${}()|[\]\\\/])*)\$\//);
-    return match
-      ? match[1].replace(/\\(.)/g, "$1").split("/")
-      : "<complex:" + thing.toString() + ">";
-  }
-}
-
-console.log("");
-console.log("Routes:");
-app._router.stack.forEach(print.bind(null, []));
-console.log("");
 
 // scheduling cron job:
 cron.schedule('0 0 * * * *', () => {

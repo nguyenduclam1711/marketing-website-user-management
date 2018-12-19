@@ -3,7 +3,6 @@ var mongoose = require("mongoose"),
   URLSlugs = require('mongoose-url-slugs');
 
 var StorySchema = new Schema({
-  categories: [{ type: Schema.ObjectId, ref: "Category" }],
   title: String,
   alumniName: String,
   workPosition: String,

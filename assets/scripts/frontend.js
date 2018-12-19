@@ -1,10 +1,15 @@
 // import $ from "jquery";
 // import Popper from "popper.js";
-import bootstrap from "bootstrap";
-import Typed from "typed.js";
-require("../css/style.scss");
+import 'bootstrap/js/dist/util';
+import 'bootstrap/js/dist/modal';
+import 'bootstrap/js/dist/scrollspy';
+import 'bootstrap/js/dist/dropdown';
+import 'bootstrap/js/dist/collapse';
+import 'bootstrap/js/dist/alert';
 
-console.log("js file loaded");
+
+
+require("../css/style.scss");
 
 $(function() {
   if (typeof Storage != "undefined") {
@@ -35,18 +40,22 @@ $(function() {
         .then(response => {
           if (response.code === 200) {
             var img = `<img src='/media/spinner.svg' class="mx-auto d-block"/>`
-            var html = `<h2 class="text-center newsletter-success-message">Danke dass du dich angemeldet hast. Bitte check deine E-Mail!</h2>`
+            var html = `
+            <div class="alert alert-success" role="alert">
+              Thanks for subscribing. Please check your Mail.
+            </div>
+            `
             document.getElementById("mc-embedded-subscribe-form").innerHTML = img
             setTimeout(() => {
-              console.log('%cResponse:','color:green; font-size: 16px',response.message)
               document.getElementById("mc-embedded-subscribe-form").parentElement.innerHTML = html          
             }, 3000)
           } else {
             let img = `<img src='/media/spinner.svg' class="mx-auto d-block"/>`
-            let html = `<h2 class="text-center newsletter-error-message"}>Ein unerwarteter Fehler ist passiert. Versuche es später noch einmal.</h2>`
+            let html = `<div class="alert alert-danger" role="alert">
+                An error occured. Please try again later!
+              </div>`
             document.getElementById("mc-embedded-subscribe-form").innerHTML = img
             setTimeout(() => {
-              console.log('%cResponse:','color:red; font-size: 16px',response.message)
               document.getElementById("mc-embedded-subscribe-form").parentElement.innerHTML = html
             }, 3000)
           }

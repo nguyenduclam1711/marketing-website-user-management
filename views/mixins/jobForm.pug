@@ -2,7 +2,7 @@ mixin jobform
   - var editPath = currentPath.includes('admin/jobs/edit')
   form.mb-5(method='POST', action=editPath ? '/admin/jobs/update/'+job.slug+'?_method=PUT' : '/admin/jobs?alert=create')
     
-    h2=editPath ? "Edit job" :"Create a new Job"
+    h2=editPath ? "Edit Job" :"Create a new Job"
 
     .mb-3
       label.sr-only(for='inputName') Name
@@ -11,12 +11,12 @@ mixin jobform
     .mb-3
       label.sr-only(for='inputContent') Content
       textarea#inputContent.form-control(name='content', placeholder='Content', required='')=editPath ? job.content : "" 
+    .my-3
+      each location in locations
+        .custom-control.custom-checkbox
+          input.custom-control-input(name="locations" type='checkbox' id=location.name value=location._id  checked=(location.selected))
+          label.custom-control-label(for=location.name)=location.name
 
-    each location in locations
-      .custom-control.custom-checkbox
-        input.custom-control-input(name="locations" type='checkbox' id=location.name value=location._id  checked=(location.selected))
-        label.custom-control-label(for=location.name)=location.name
+    button.btn.btn-lg.btn-primary.mb-3(type='submit')=editPath ? "Update" :"Create a new Job" 
 
-    button.btn.btn-lg.btn-primary.btn-block(type='submit')=editPath ? "Update" :"Create a new Job" 
 
-  a(href="/admin/jobs") Back

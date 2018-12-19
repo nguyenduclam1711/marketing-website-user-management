@@ -1,8 +1,6 @@
 require('dotenv').config({ path: __dirname + '/../.env' });
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
-const request = require("request");
-const Category = require("../../models/category");
 const Story = require("../../models/story");
 const multer = require('multer');
 const jimp = require('jimp');
@@ -20,13 +18,10 @@ module.exports.getStories = async function (req, res) {
   let stories = await Story.find({})
     .sort("order")
     .exec();
-  let categories = await Category.find({}).exec();
 
   res.render("admin/stories", {
-    stories: stories,
-    categories: categories,
-    message: res.locals.message,
-    color: res.locals.color
+    stories: stories
+ 
   });
 }
 
@@ -46,26 +41,12 @@ module.exports.editStory = async function (req, res) {
     .sort("order")
     .exec();
   const story = await Story.findOne({slug: req.params.slug})
-  let allcategories = await Category.find({}).exec();
-  all = allcategories.map(cat => {
-    let match = story.categories
-      .map(pcat => pcat.toString())
-      .includes(cat._id.toString());
-
-    if (match) {
-      return Object.assign({ selected: true }, cat._doc);
-    } else {
-      return cat._doc;
-    }
-  });
+  
   const shiftStoryBack = stories.length + 1
 
   res.render("admin/editStory", {
     story,
-    maxOrder: shiftStoryBack,
-    categories: all,
-    message: res.locals.message,
-    color: res.locals.color
+    maxOrder: shiftStoryBack
   });
 }
 module.exports.createStory = async (req, res) => {
@@ -77,7 +58,6 @@ module.exports.createStory = async (req, res) => {
   story.content = req.body.content; // set the stories content (comes from the request)
   story.order = req.body.order; // set the stories order (comes from the
   story.image = req.body.image; // set the avatar image
-  story._categories = req.body.categories; // set the stories category (comes from the
 
   // save the story and check for errors
   story.save(function (err) {
@@ -88,8 +68,8 @@ module.exports.createStory = async (req, res) => {
 }
 module.exports.deleteStory = async (req, res) => {
   try {
-    await Story.remove({ slug: req.params.slug})
-    req.flash("success", `Successfully deleted ${story.name}`);
+    const story = await Story.remove({ slug: req.params.slug})
+    req.flash("success", `Successfully deleted ${story.title}`);
     res.redirect("/admin/stories");
   } catch (err) {
     console.log(err);
@@ -97,14 +77,13 @@ module.exports.deleteStory = async (req, res) => {
 }
 
 module.exports.updateStory = async function (req, res) {
-  // use our story model to find the story we want
-  await Story.findOneAndUpdate(
+  const story = await Story.findOneAndUpdate(
     { slug: req.params.slug },
     req.body,
     { new: true, runValidators: true }
   ).exec()
 
-  req.flash("success", `Successfully updated ${story.name}`);
+  req.flash("success", `Successfully updated ${story.title}`);
   res.redirect("/admin/stories/edit/" + req.params.slug);
 }
 

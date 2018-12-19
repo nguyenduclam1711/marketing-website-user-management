@@ -47,12 +47,12 @@ $yellow: #FFDB00;
 .digitalCareer {
   font-size: 1rem;
 }
-.alert {
+.flashalert {
   border-radius: 0;
   position: fixed;
+  bottom: 50px;
   z-index: 9999999999;
-  left: 50%;
-  transform: translateX(-50%);
+  right: 50px;
   border: 0;
 }
 @include media-breakpoint-up(sm) {

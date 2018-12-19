@@ -2,7 +2,7 @@
 extends ../layout.pug
 block content
   .container.mt-5.text-left
-          
-    .row.py-5
-      .col
-        +courseForm
+    +courseForm
+    if !editPath
+      a.btn.btn-outline-primary.mr-3(href="/admin/courses")="Back"
+      a.btn.btn-outline-primary(target="_blank" href="/courses/"+course.slug)="Show"

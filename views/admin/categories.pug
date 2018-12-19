@@ -1,13 +1,14 @@
 extends ../layout.pug
 block content
   .container
-    h1 Admin Categories (currently unused)
+    h1 Page categories
     .row
       .col-md-8
         ul.list-group
           each category in categories
             li.list-group-item.mb-3
               h2.mr-3=category.name
+              = category.pages
               form.d-flex.justify-content-between(method='POST', action='/admin/categories/delete/'+category._id +'?_method=DELETE')
                 if !public
                   .d-flex.align-items-center

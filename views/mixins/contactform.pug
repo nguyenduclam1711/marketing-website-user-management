@@ -1,42 +1,43 @@
 mixin contactform
-  
-    form#contactForm.mt-3(method="POST" action="/contact")
-      .row
-        .col-md-6.mb-3
-          //label(for='name') Name
-          input#name.form-control(name="name" type='text', placeholder='Name', value='', required='')
-          .invalid-feedback
-            | Valid first name is required.
-        .col-md-6.mb-3
-          //label(for='email') Email
-          span.text-muted
-          input#email.form-control(name="email" type='email', placeholder='your@example.com')
+  form#contactForm.mt-3.px-lg-5(method="POST" action="/contact")
+    .row
+      .col-md-6.mb-3
+        //label(for='name') Name
+        input#name.form-control(name="name" type='text', placeholder='Name', value='', required='')
         .invalid-feedback
-          | Please enter a valid email address for shipping updates.
+          | Valid first name is required.
+      .col-md-6.mb-3
+        //label(for='email') Email
+        span.text-muted
+        input#email.form-control(name="email" type='email', placeholder='your@example.com')
+      .invalid-feedback
+        | Please enter a valid email address for shipping updates.
 
-      .mb-3
-        //label(for='body') Message
-        textarea#body.form-control(name="body" placeholder='Please, write your message here...', value='', required='')
-        .invalid-feedback
-          | Valid last name is required.
+    .mb-3
+      //label(for='body') Message
+      textarea#body.form-control(name="body" placeholder='Please, write your message here...', value='', required='')
+      .invalid-feedback
+        | Valid last name is required.
 
-          
-        p.mt-4
         
-          select.custom-select(name="location")
-            option(selected="") Select your location here...
-            each location in locations
-              option(value=(location._id))=location.name
+      p.mt-4
       
-  
-        p.dataPrivacyLink
-          label.checkbox.TermsofService
-            | I have read and agree to the
-            input(type='checkbox', name='TermsofService[]', value='I have read and agree to the', required='')
-            span.checkmark
-          a.ml-1(data-toggle='modal', data-target='#dataPrivacy')
-            | Data
-            | Privacy
-            
-        button#btn-contactForm.btn.btn-primary.m-auto(type="submit") SEND   
-      
+        select.custom-select(name="locations")
+          option(selected="") Select your location here...
+          each location in locations
+            option(value=(location._id))=location.name
+    
+
+      p.dataPrivacyLink
+        label.checkbox.TermsofService
+          | I have read and agree to the
+          input(type='checkbox', name='TermsofService[]', value='I have read and agree to the', required='')
+          span.checkmark
+        a.ml-1(data-toggle='modal', data-target='#dataPrivacy')
+          | Data
+          | Privacy
+      if companytour
+        input(type="hidden" name='companytour' value=true)
+          
+      button#btn-contactForm.btn.btn-primary.m-auto(type="submit") SEND   
+    

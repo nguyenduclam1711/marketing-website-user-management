@@ -37,7 +37,6 @@ module.exports.register = (req, res) => {
     });
     User.createUser(newUser, (err, user) => {
       if (err) throw err;
-      console.log(user);
     });
     res.redirect('/users/login');
   }

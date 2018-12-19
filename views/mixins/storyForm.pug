@@ -31,10 +31,7 @@ mixin storyForm
       label(for='exampleFormControlFile1') Upload Photo
       input#exampleFormControlFile1.form-control-file(type='file' name='avatar')
 
-
-    each category in categories
-      .custom-control.custom-checkbox
-        input.custom-control-input(name="categories" type='checkbox' id=category.name value=category._id  checked=(category.selected))
-        label.custom-control-label(for=category.name)=category.name
+      if story && story.image
+        img(src="/images/"+story.image)
 
     button.btn.btn-lg.btn-primary.btn-block(type='submit')=editPath ? "Update" :"Create a new Story" 

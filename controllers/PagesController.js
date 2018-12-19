@@ -3,6 +3,7 @@ const Page = require("../models/page");
 
 module.exports.getPages = async function(req, res) {
   let pages = await Page.find({})
+    .populate("categories")
     .sort("order")
     .exec();
 

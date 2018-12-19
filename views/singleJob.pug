@@ -1,11 +1,13 @@
 extends layout.pug
 block content
-  .container
+  .container.py-5
     h1= job.name
     .row
       .col-md-8
-        each loc in job.locations
-          = loc.name
+        .mb-3
+          = "Available in: "
+          each loc in job.locations
+            = loc.name
         p
           =job.content
         

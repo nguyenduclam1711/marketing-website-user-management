@@ -4,12 +4,16 @@ mixin pagelist(public)
       li.list-group-item.mb-3
         h2.mr-3=page.title
         p.mr-3=page.content
-        div.mr-3=page.order
+        div.mr-3
+          span.mr-2.mb-2
+            = "Order: "
+            =page.order
+          each category in page.categories
+            span.badge.badge-primary.mb-2.mr-2=category.name
+        if !public
+          form.d-flex.justify-content-between(method='POST', action='/admin/pages/delete/'+page.slug +'?_method=DELETE')
+            a.btn.btn-outline-primary.mr-2(href="/pages/"+page.slug) Show
 
-        form.d-flex.justify-content-between(method='POST', action='/admin/pages/delete/'+page.slug +'?_method=DELETE')
-          a.btn.btn-outline-primary.mr-2(href="/pages/"+page.slug) Show
-
-          if !public
             .d-flex.align-items-center
               a.btn.btn-outline-primary.mr-2(href="/admin/pages/edit/"+page.slug) Edit
               button.btn.btn-outline-danger(type='submit') delete

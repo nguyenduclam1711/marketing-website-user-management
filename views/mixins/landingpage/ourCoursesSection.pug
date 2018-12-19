@@ -1,5 +1,5 @@
 mixin ourCoursesSection
-  section#services.section-services.bg-light.py-5.mt-5
+  section#services.section-services.py-5.mt-5
     .container
       h2.display-1.text-center.text-uppercase Our courses
       h3.mb-5.text-center.text-muted We offer many interesting educational trainings
@@ -14,6 +14,3 @@ mixin ourCoursesSection
                 .service-content
                   h4.service-title= course.headline
                   p=course.title
-
-      .section-button-wrap
-        a.btn.btn-lg.btn-gradient-secondary.mx-5(href='/courses/', role='button', aria-pressed='true') Browse Courses
