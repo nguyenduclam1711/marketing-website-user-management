@@ -1,8 +1,8 @@
 mixin newsletter
 	.footer-connect.py-5.bg-primary
 		.container.py-5
-			h2.display-2.mb-5.text-white Subscribe to our newsletter
-			.footer-subscribe
+			h2.display-2.mb-5.text-white.text-center Subscribe to our newsletter
+			.footer-subscribe.d-flex.justify-content-center
 				form#mc-embedded-subscribe-form(name='mc-embedded-subscribe-form', method='post', action='/newsletter-signup')
 					input#mce-EMAIL.subs_input(type='email', required, placeholder='Email address', name='EMAIL')
 					button#btn.btn.btn-white(type="submit")

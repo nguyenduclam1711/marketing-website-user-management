@@ -1,7 +1,8 @@
 mixin upcomingEvents
     section#events.bg-light.py-5
       .container
-        h2.mb-5.display-1 Upcoming events
+        h2.display-1.text-center.text-uppercase Upcoming events
+        h3.mb-5.text-center.text-muted Meet us in person in several locations in Germany.
         .row.mx-md-5
           each event in events
             +singleEvent(event)

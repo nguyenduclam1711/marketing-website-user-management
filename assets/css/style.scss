@@ -179,6 +179,9 @@ OUR COURSES SECTION
 .section-services .service-item p {
   min-height: 63px;
 }
+.section-services .service-item:hover {
+  box-shadow: 0 0 5px #0000002e;
+}
 
 
 
@@ -241,9 +244,6 @@ STATS COUNTER
   font-weight: 400;
   color: $blue;
   line-height: 1;
-}
-.counter-item .counter-title {
-  font-size: 1.2rem;
 }
 
 .row::after {
