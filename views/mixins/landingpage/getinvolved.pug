@@ -1,16 +1,12 @@
 mixin getinvolved
-  .bg-light.py-md-5
-    .container.py-5.text-left.getInvolved-container
-      h2.display-1.mb-5 Get Involved
-      .ml-5.position-relative.z-1
-        div.verticalLineGetInv.bg-light.d-inline-block
-          each page in pages
-          
-            div.mx-5
-              a.linksInvolved(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
-          
-          div.mx-5.mb-5
-            a.linksInvolved(href='/jobs/') Jobs
-              
-      
+  section#services.section-services.bg-light
+    .container.text-center
+      h2.display-1.text-uppercase GET INVOLVED
+      h3.mb-5.text-muted Please contact us to learn more how you can be involved
+      .div.d-inline-block
+        each page in pages
+          div.story-item.get-involved.py-4.px-3.mb-3.d-inline-block.justify-content-between
+            a.service-link.text-muted(href="/pages/" + page.slug)
+              span.screen-reader-text
+                = page.title
         
