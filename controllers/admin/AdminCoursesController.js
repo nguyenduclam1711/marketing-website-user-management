@@ -158,45 +158,36 @@ exports.resizeImages = async (request, response, next) => {
 };
 
 module.exports.updateCourse = async function(req, res) {
-  req.body.archivements = [
-    {
-      icon: req.body.archivement_icon_1,
-      description: req.body.archivement_description_1
-    },
-    {
-      icon: req.body.archivement_icon_2,
-      description: req.body.archivement_description_2
-    },
-    {
-      icon: req.body.archivement_icon_3,
-      description: req.body.archivement_description_3
-    }
-  ];
-  req.body.timeline = [
-    {
-      title: req.body.timeline_time_1,
-      subtitle: req.body.timeline_subtitle_1,
-      time: req.body.timeline_time_1
-    },
-    {
-      title: req.body.timeline_time_2,
-      subtitle: req.body.timeline_subtitle_2,
-      time: req.body.timeline_time_2
-    },
-    {
-      title: req.body.timeline_time_3,
-      subtitle: req.body.timeline_subtitle_3,
-      time: req.body.timeline_time_3
-    }
-  ];
-  const course = await Course.findOneAndUpdate(
-    { slug: req.params.slug },
-    req.body,
-    {
-      new: true,
-      runValidators: true
-    }
-  ).exec();
+  let course = await Course.findOne({ slug: req.params.slug });
+
+  //TODO thats fucking verbose
+  course.icon = req.body.icon;
+  course.headline = req.body.headline;
+  course.title = req.body.title;
+  course.subheading = req.body.subheading;
+  course.subtitle = req.body.subtitle;
+  course.locations = req.body.locations;
+
+  course.archivements[0].icon = req.files.archivement_icon_1 ? req.body.archivement_icon_1 : course.archivements[0].icon
+  course.archivements[0].description = req.body.archivement_description_1 ? req.body.archivement_description_1 : course.archivements[0].description
+  course.archivements[1].icon = req.files.archivement_icon_2 ? req.body.archivement_icon_2 : course.archivements[1].icon
+  course.archivements[1].description = req.body.archivement_description_2 ? req.body.archivement_description_2 : course.archivements[1].description
+  course.archivements[2].icon = req.files.archivement_icon_3 ? req.body.archivement_icon_3 : course.archivements[2].icon
+  course.archivements[2].description = req.body.archivement_description_3 ? req.body.archivement_description_3 : course.archivements[2].description
+
+  course.timeline[0].title = req.body.timeline_title_1 ? req.body.timeline_title_1 : course.timeline[0].title
+  course.timeline[0].subtitle = req.body.timeline_subtitle_1 ? req.body.timeline_subtitle_1 : course.timeline[0].subtitle
+  course.timeline[0].time = req.body.timeline_time_1 ? req.body.timeline_time_1 : course.timeline[0].time
+  
+  course.timeline[1].title = req.body.timeline_title_2 ? req.body.timeline_title_2 : course.timeline[1].title
+  course.timeline[1].subtitle = req.body.timeline_subtitle_2 ? req.body.timeline_subtitle_2 : course.timeline[1].subtitle
+  course.timeline[1].time = req.body.timeline_time_2 ? req.body.timeline_time_2 : course.timeline[1].time
+  
+  course.timeline[2].title = req.body.timeline_title_3 ? req.body.timeline_title_3 : course.timeline[2].title
+  course.timeline[2].subtitle = req.body.timeline_subtitle_3 ? req.body.timeline_subtitle_3 : course.timeline[2].subtitle
+  course.timeline[2].time = req.body.timeline_time_3 ? req.body.timeline_time_3 : course.timeline[2].time
+
+  await course.save();
 
   req.flash("success", `Successfully updated ${course.title}`);
 

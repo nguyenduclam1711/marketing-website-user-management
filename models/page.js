@@ -5,7 +5,8 @@ var mongoose = require("mongoose"),
 var PageSchema = new Schema({
   title: String,
   content: String,
-  order: Number
+  order: Number,
+  categories: [{ type: Schema.ObjectId, ref: "Category" }]
 });
 
 PageSchema.plugin(URLSlugs('title'));

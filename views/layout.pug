@@ -22,6 +22,7 @@ include mixins/landingpage/getinvolved
 include mixins/landingpage/home
 include mixins/singleStory
 include mixins/newsletter
+include mixins/pageForm
 
 doctype html
 //saved from url=(0051)https://getbootstrap.com/docs/4.0/examples/sign-in/
@@ -88,26 +89,27 @@ html.h-100(lang='en')
 
     script(src="/frontend.bundle.js")
     
-    // Global site tag (gtag.js) - Google Analytics
-    script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-54516992-1')
+    if live
+      // Global site tag (gtag.js) - Google Analytics
+      script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-54516992-1')
+        script.
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'UA-54516992-1');
+      
+      // Facebook Pixel Code
       script.
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-54516992-1');
-    
-    // Facebook Pixel Code
-    script.
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '1296683973774299');
-      fbq('track', 'PageView');
-    noscript
-      img(height='1', width='1', style='display:none', src='https://www.facebook.com/tr?id=1296683973774299&ev=PageView&noscript=1')
-    // End Facebook Pixel Code
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1296683973774299');
+        fbq('track', 'PageView');
+      noscript
+        img(height='1', width='1', style='display:none', src='https://www.facebook.com/tr?id=1296683973774299&ev=PageView&noscript=1')
+      // End Facebook Pixel Code

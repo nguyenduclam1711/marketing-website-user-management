@@ -68,11 +68,6 @@ app.use(expressValidator());
 app.use(flash());
 
 app.use(function(req, res, next) {
-  (res.locals.messages = {
-    danger: req.flash("danger"),
-    warning: req.flash("warning"),
-    success: req.flash("success")
-  }),
     (app.locals.pathclass = req.url
       .replace(/^\//g, "")
       .replace(/\//g, "-")
@@ -80,6 +75,7 @@ app.use(function(req, res, next) {
       .toLowerCase());
   let match = req.url.match("[^/]+(?=/$|$)");
   res.locals.title = "DigitalCareerInstitute";
+  res.locals.live = req.headers.host.includes("digitalcareerinstitute.org")
   if (match) {
     match = match[0].replace(/\//g, " ");
     res.locals.title =
@@ -181,50 +177,6 @@ app.use("/admin/contacts", contactsAdminRoutes);
 
 app.set("views", path.join(__dirname, "views/"));
 app.set("view engine", "pug");
-
-//List of routes printed on server start
-function print(path, layer) {
-  if (layer.route) {
-    layer.route.stack.forEach(
-      print.bind(null, path.concat(split(layer.route.path)))
-    );
-  } else if (layer.name === "router" && layer.handle.stack) {
-    layer.handle.stack.forEach(
-      print.bind(null, path.concat(split(layer.regexp)))
-    );
-  } else if (layer.method) {
-    console.log(
-      "%s /%s",
-      layer.method.toUpperCase(),
-      path
-        .concat(split(layer.regexp))
-        .filter(Boolean)
-        .join("/")
-    );
-  }
-}
-
-function split(thing) {
-  if (typeof thing === "string") {
-    return thing.split("/");
-  } else if (thing.fast_slash) {
-    return "";
-  } else {
-    const match = thing
-      .toString()
-      .replace("\\/?", "")
-      .replace("(?=\\/|$)", "$")
-      .match(/^\/\^((?:\\[.*+?^${}()|[\]\\\/]|[^.*+?^${}()|[\]\\\/])*)\$\//);
-    return match
-      ? match[1].replace(/\\(.)/g, "$1").split("/")
-      : "<complex:" + thing.toString() + ">";
-  }
-}
-
-console.log("");
-console.log("Routes:");
-app._router.stack.forEach(print.bind(null, []));
-console.log("");
 
 // scheduling cron job:
 cron.schedule('0 0 * * * *', () => {
