@@ -68,8 +68,8 @@ module.exports.createStory = async (req, res) => {
 }
 module.exports.deleteStory = async (req, res) => {
   try {
-    await Story.remove({ slug: req.params.slug})
-    req.flash("success", `Successfully deleted ${story.name}`);
+    const story = await Story.remove({ slug: req.params.slug})
+    req.flash("success", `Successfully deleted ${story.title}`);
     res.redirect("/admin/stories");
   } catch (err) {
     console.log(err);
@@ -77,14 +77,13 @@ module.exports.deleteStory = async (req, res) => {
 }
 
 module.exports.updateStory = async function (req, res) {
-  // use our story model to find the story we want
-  await Story.findOneAndUpdate(
+  const story = await Story.findOneAndUpdate(
     { slug: req.params.slug },
     req.body,
     { new: true, runValidators: true }
   ).exec()
 
-  req.flash("success", `Successfully updated ${story.name}`);
+  req.flash("success", `Successfully updated ${story.title}`);
   res.redirect("/admin/stories/edit/" + req.params.slug);
 }
 

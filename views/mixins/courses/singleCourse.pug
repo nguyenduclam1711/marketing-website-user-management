@@ -94,6 +94,9 @@ mixin singleCourse
 
             
             section.my-5
+              h3 This course is available in: 
+                each location in course.locations
+                  span.mr-2=location.name
               h2 Come see our campus!
               p.lead Have questions? Want to see the student life for yourself? Book a one-on-one visit with our admissions team and we’ll show you around.
               p Vulkanstraße 1

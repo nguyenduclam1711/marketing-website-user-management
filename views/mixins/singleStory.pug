@@ -10,3 +10,10 @@ mixin singleStory(story, showFullContent)
 
     div.text-right
       a.warningColorDark(href="/stories/"+story.slug) +Show more
+    if !public
+      form.d-flex.justify-content-between(method='POST', action='/admin/stories/delete/'+story.slug +'?_method=DELETE')
+        a.btn.btn-outline-primary.mr-2(href="/stories/"+story.slug) Show
+
+        .d-flex.align-items-center
+          a.btn.btn-outline-primary.mr-2(href="/admin/stories/edit/"+story.slug) Edit
+          button.btn.btn-outline-danger(type='submit') delete

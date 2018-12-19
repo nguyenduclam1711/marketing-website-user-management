@@ -31,4 +31,7 @@ mixin storyForm
       label(for='exampleFormControlFile1') Upload Photo
       input#exampleFormControlFile1.form-control-file(type='file' name='avatar')
 
+      if story && story.image
+        img(src="/images/"+story.image)
+
     button.btn.btn-lg.btn-primary.btn-block(type='submit')=editPath ? "Update" :"Create a new Story" 
