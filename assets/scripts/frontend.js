@@ -11,10 +11,10 @@ import 'bootstrap/js/dist/alert';
 
 require("../css/style.scss");
 
-$(function() {
+$(function () {
   if (typeof Storage != "undefined") {
     if (!sessionStorage.getItem("done")) {
-      setTimeout(function() {
+      setTimeout(function () {
         $("#contactFormModal").modal("show");
         sessionStorage.setItem("done", true);
       }, 5000);
@@ -27,14 +27,14 @@ $(function() {
   if (newsletterForm) {
     newsletterForm.addEventListener("submit", function (e) {
       var email = document.querySelector("#mce-EMAIL").value.trim();
-    if(email){
-      e.preventDefault();
-      fetch("/newsletter-signup", {
-        method: 'POST',
-        headers: {
-          "content-type": "application/json"
-        },
-        body: JSON.stringify({ email }) // data can be `string` or {object}!
+      if (email) {
+        e.preventDefault();
+        fetch("/newsletter-signup", {
+          method: 'POST',
+          headers: {
+            "content-type": "application/json"
+          },
+          body: JSON.stringify({ email }) // data can be `string` or {object}!
 
       }).then(res => res.json())
         .then(response => {
@@ -69,6 +69,17 @@ $(function() {
 })();
 //
 
+$('.counter-count').each(function () {
+  $(this).prop('Counter', 0).animate({
+    Counter: $(this).text()
+  }, {
+      duration: 5000,
+      easing: 'swing',
+      step: function (now) {
+        $(this).text(Math.ceil(now));
+      }
+    });
+});
 //
 // let typedCursor = new Typed('.subtitle', {
 //   strings: ["Learn digital skills with us to get the most fulfilling jobs."],

@@ -1,6 +1,13 @@
 $blue: #1d3b8b;
+$green: #7AFF29;
 $red: #FF4200;
 $yellow: #FFDB00;
+$purple: #5C00FF;
+$pink: #A800FF;
+$turquoise: #3DBAF7;
+$textOrange: #da9446;
+
+
 @import "../../node_modules/bootstrap/scss/bootstrap";
 /* @import url("https://fonts.googleapis.com/css?family=Didact+Gothic");
 
@@ -9,6 +16,9 @@ $yellow: #FFDB00;
   src: url("fonts/Didact_Gothic/DidactGothic-Regular.ttf");
   src: url("fonts/Didact_Gothic/DidactGothic-Regular.ttf") format("ttf");
 } */
+a:link {
+  text-decoration: none !important;
+}
 .left {
   left: 0;
 }
