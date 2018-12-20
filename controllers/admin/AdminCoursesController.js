@@ -68,19 +68,36 @@ module.exports.createCourse = async function(req, res) {
   ];
   course.timeline = [
     {
-      title: req.body.timeline_time_1,
+      title: req.body.timeline_title_1,
       subtitle: req.body.timeline_subtitle_1,
       time: req.body.timeline_time_1
     },
     {
-      title: req.body.timeline_time_2,
+      title: req.body.timeline_title_2,
       subtitle: req.body.timeline_subtitle_2,
       time: req.body.timeline_time_2
     },
     {
-      title: req.body.timeline_time_3,
+      title: req.body.timeline_title_3,
       subtitle: req.body.timeline_subtitle_3,
       time: req.body.timeline_time_3
+    }
+  ];
+  course.features = [
+    {
+      title: req.body.features_icon_1,
+      subtitle: req.body.features_subtitle_1,
+      time: req.body.features_time_1
+    },
+    {
+      title: req.body.features_icon_2,
+      subtitle: req.body.features_subtitle_2,
+      time: req.body.features_time_2
+    },
+    {
+      title: req.body.features_icon_3,
+      subtitle: req.body.features_subtitle_3,
+      time: req.body.features_time_3
     }
   ];
 
@@ -186,6 +203,18 @@ module.exports.updateCourse = async function(req, res) {
   course.timeline[2].title = req.body.timeline_title_3 ? req.body.timeline_title_3 : course.timeline[2].title
   course.timeline[2].subtitle = req.body.timeline_subtitle_3 ? req.body.timeline_subtitle_3 : course.timeline[2].subtitle
   course.timeline[2].time = req.body.timeline_time_3 ? req.body.timeline_time_3 : course.timeline[2].time
+
+  course.features[0].title = req.body.features_title_1 ? req.body.features_title_1 : course.features[0].title
+  course.features[0].subtitle = req.body.features_subtitle_1 ? req.body.features_subtitle_1 : course.features[0].subtitle
+  course.features[0].time = req.body.features_icon_1 ? req.body.features_icon_1 : course.features[0].icon
+  
+  course.features[1].title = req.body.features_title_2 ? req.body.features_title_2 : course.features[1].title
+  course.features[1].subtitle = req.body.features_subtitle_2 ? req.body.features_subtitle_2 : course.features[1].subtitle
+  course.features[1].time = req.body.features_icon_2 ? req.body.features_icon_2 : course.features[1].icon
+  
+  course.features[2].title = req.body.features_title_3 ? req.body.features_title_3 : course.features[2].title
+  course.features[2].subtitle = req.body.features_subtitle_3 ? req.body.features_subtitle_3 : course.features[2].subtitle
+  course.features[2].time = req.body.features_icon_3 ? req.body.features_icon_3 : course.features[2].icon
 
   await course.save();
 

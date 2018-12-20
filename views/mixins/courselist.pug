@@ -31,7 +31,7 @@ mixin courselist(public)
           form.d-flex.justify-content-between(method='POST', action='/admin/courses/delete/'+course.slug +'?_method=DELETE')
             a.btn.mt-2(href="/courses/"+course.slug) +Show more
 
-            if !public
+            if user
               .d-flex.align-items-center
                 
                 a.btn.btn-outline-primary.mr-2(href="/admin/courses/edit/"+course.slug) Edit
