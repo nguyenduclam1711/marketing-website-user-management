@@ -7,13 +7,13 @@ mixin singleEvent(event)
       // body container
       .newEvent-media-body.w-100
         .newEvent-media-body-top
-          h5.subtle= event.name
+          h5.subtle.text-muted.font-weight-bold= event.name
         //- span.newEvent-media-body-heading This Thing Called Life: A Celebration of Prince and His Legacy at MEZZANINE SF
         .newEvent-media-body-supporting-bottom
-          span.newEvent-media-body-supporting-bottom-text.subtle= event.location.street
-          span.newEvent-media-body-supporting-bottom-text.subtle.u-float-right= event.location.name
+          span.newEvent-media-body-supporting-bottom-text.text-muted.subtle= event.location.street
+          span.newEvent-media-body-supporting-bottom-text.subtle.u-float-right.text-muted= event.location.name
         .newEvent-media-body-supporting-bottom.newEvent-media-body-supporting-bottom-reveal
-          span.newEvent-media-body-supporting-bottom-text.subtle=event.location.name
+          span.newEvent-media-body-supporting-bottom-text.subtle.text-muted=event.location.name
           a.newEvent-media-body-supporting-bottom-text.newEvent-media-link.u-float-right(data-toggle='modal', data-target='#contactFormModal') Contact Us
 
 
