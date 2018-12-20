@@ -10,7 +10,7 @@ block content
               h2.mr-3=category.name
               = category.pages
               form.d-flex.justify-content-between(method='POST', action='/admin/categories/delete/'+category._id +'?_method=DELETE')
-                if !public
+                if user
                   .d-flex.align-items-center
                     a.btn.btn-outline-primary.mr-2(href="categories/edit/"+category._id) Edit
                     button.btn.btn-outline-danger(type='submit') delete

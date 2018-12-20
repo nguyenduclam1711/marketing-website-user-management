@@ -10,7 +10,7 @@ mixin pagelist(public)
             =page.order
           each category in page.categories
             span.badge.badge-primary.mb-2.mr-2=category.name
-        if !public
+        if user
           form.d-flex.justify-content-between(method='POST', action='/admin/pages/delete/'+page.slug +'?_method=DELETE')
             a.btn.btn-outline-primary.mr-2(href="/pages/"+page.slug) Show
 
