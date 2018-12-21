@@ -1,7 +1,6 @@
 extends ../layout.pug
 block content
-  .container.mt-5.text-left
+  .container.mt-5
     +pageForm
-    if !editPath
-      a.btn.btn-outline-primary.mr-3(href="/admin/pages")="Back"
-      a.btn.btn-outline-primary(target="_blank" href="/pages/"+page.slug)="Show"
+    a.btn.btn-outline-primary.mr-3(href="/admin/pages")="Back"
+    a.btn.btn-outline-primary(target="_blank" href="/pages/"+page.slug)="Show"

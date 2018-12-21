@@ -1,14 +1,21 @@
 /*responsive typography*/
 body {
- font-family: monospace;
+  font-family: "Calibri";
 }
-h1,h2,h3,h4,h5,h6,div[class^='display-'] {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div[class^="display-"] {
   font-family: "Roboto", sans-serif;
   font-weight: 500 !important;
-  color: $blue  !important;
+  color: $blue !important;
 }
 a:link {
-  text-decor
+  text-decoration: none !important;
+}
 .display-1 {
   font-size: 2.5rem;
 }
@@ -51,24 +58,24 @@ a:link {
   .display-1 {
     font-size: 2.5rem;
   }
-  .subtitle{
+  .subtitle {
     font-size: 1.9rem;
   }
-  .img-xs-customise{
+  .img-xs-customise {
     margin-top: 0;
   }
   .responsiveD-3 {
     font-size: 1.3rem;
   }
   .responsiveH2 {
-    font-size: 0.50rem;
-
+    font-size: 0.5rem;
   }
-  .xs-customise,.responsiveH2{
+  .xs-customise,
+  .responsiveH2 {
     margin-bottom: 0;
     overflow: unset;
   }
-  .responsiveP{
+  .responsiveP {
     font-size: 0.8rem;
     white-space: initial;
     margin-bottom: 0;
@@ -95,22 +102,22 @@ a:link {
   }
 }
 @include media-breakpoint-up(lg) {
-    .display-1 {
-      font-size: 4.5rem;
-    }
-    .display-2 {
-      font-size: 3.5rem;
-    }
-    .responsiveD-3 {
-      font-size: 3.8rem;
-    }
-    .responsiveH2 {
-      font-size: 2rem;
-    }
-    .responsiveP {
-      font-size: 1rem;
-    }
-    .subtitle {
-      font-size: 2.5rem;
-    }
+  .display-1 {
+    font-size: 4.5rem;
   }
+  .display-2 {
+    font-size: 3.5rem;
+  }
+  .responsiveD-3 {
+    font-size: 3.8rem;
+  }
+  .responsiveH2 {
+    font-size: 2rem;
+  }
+  .responsiveP {
+    font-size: 1rem;
+  }
+  .subtitle {
+    font-size: 2.5rem;
+  }
+}

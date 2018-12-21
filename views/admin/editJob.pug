@@ -1,7 +1,6 @@
 extends ../layout.pug
 block content
-  .container.mt-5.text-left
+  .container.mt-5
     +jobform
-    if !editPath
-      a.btn.btn-outline-primary.mr-3(href="/admin/jobs")="Back"
-      a.btn.btn-outline-primary(target="_blank" href="/jobs/"+job.slug)="Show"
+    a.btn.btn-outline-primary.mr-3(href="/admin/jobs")="Back"
+    a.btn.btn-outline-primary(target="_blank" href="/jobs/"+job.slug)="Show"

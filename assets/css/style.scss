@@ -489,11 +489,11 @@ UPCOMING EVENTS
   STORIES
 *******************************************/
 
-.story-item:hover {
+body:not(.admin).story-item:hover {
   box-shadow: 0 0 5px #0000002e;
   cursor: pointer;
 }
-.story-item:hover a {
+body:not(.admin).story-item:hover a {
   color: #da9446 !important;
 }
 
