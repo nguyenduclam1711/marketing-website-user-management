@@ -8,7 +8,6 @@ import 'bootstrap/js/dist/collapse';
 import 'bootstrap/js/dist/alert';
 
 
-
 require("../css/style.scss");
 
 $(function () {
@@ -80,6 +79,14 @@ $('.counter-count').each(function () {
       }
     });
 });
+var scrollbuttons = document.getElementsByClassName('scrollbutton');
+for (var i = 0, len = scrollbuttons.length; i < len; i++) {
+  scrollbuttons[i].addEventListener('click', function (event) {
+    event.preventDefault()
+    document.querySelector(event.target.attributes.href.value).scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'})
+  })
+}
+
 //
 // let typedCursor = new Typed('.subtitle', {
 //   strings: ["Learn digital skills with us to get the most fulfilling jobs."],

@@ -85,19 +85,19 @@ module.exports.createCourse = async function(req, res) {
   ];
   course.features = [
     {
-      title: req.body.features_icon_1,
+      icon: req.body.features_icon_1,
       subtitle: req.body.features_subtitle_1,
-      time: req.body.features_time_1
+      title: req.body.features_title_1
     },
     {
-      title: req.body.features_icon_2,
+      icon: req.body.features_icon_2,
       subtitle: req.body.features_subtitle_2,
-      time: req.body.features_time_2
+      title: req.body.features_title_2
     },
     {
-      title: req.body.features_icon_3,
+      icon: req.body.features_icon_3,
       subtitle: req.body.features_subtitle_3,
-      time: req.body.features_time_3
+      title: req.body.features_title_3
     }
   ];
 
@@ -149,7 +149,10 @@ module.exports.uploadImages = multer({
   { name: "icon", maxCount: 1 },
   { name: "archivement_icon_1", maxCount: 1 },
   { name: "archivement_icon_2", maxCount: 1 },
-  { name: "archivement_icon_3", maxCount: 1 }
+  { name: "archivement_icon_3", maxCount: 1 },
+  { name: "features_icon_1", maxCount: 1 },
+  { name: "features_icon_2", maxCount: 1 },
+  { name: "features_icon_3", maxCount: 1 }
 ]);
 
 // Resize the images with different thumbnail sizes

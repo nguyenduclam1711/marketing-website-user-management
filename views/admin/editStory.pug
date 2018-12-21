@@ -1,8 +1,7 @@
 extends ../layout.pug
 block content
   
-  .container.mt-5.text-left
-          
-    .row
-      .col
-        +storyForm
+  .container.mt-5
+    +storyForm
+    a.btn.btn-outline-primary.mr-3(href="/admin/stories")="Back"
+    a.btn.btn-outline-primary(target="_blank" href="/stories/"+story.slug)="Show"

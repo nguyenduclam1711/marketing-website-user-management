@@ -76,16 +76,18 @@ html.h-100(lang='en')
         block content
       if !currentPath.includes('admin')
         +footer
-    .modal.container.px-md-5#contactFormModal
-      .mx-md-5
-        .modal-content.bg-light.border-radius-0.overflow-hidden.px-5.position-relative.z-0
-          .pb-5
-            .mb-2
-              h2.display-1.text-center.text-uppercase Contact us!
-              p.mb-3.text-center.text-muted Let’s connect! Our admissions team will call you soon to chat about our courses and your goals.
-            +contactform
-    .modal#dataPrivacy
-      +dataPrivacy
+
+    if currentPath !== "/tour"
+      #contactFormModal.modal(tabindex='-1', role='dialog', aria-labelledby='contactFormModal', aria-hidden='true')
+        .modal-dialog.modal-dialog-centered.modal-lg
+          .bg-light.border-radius-0.modal-content
+            .pb-5
+              .mb-2
+                h2.display-1.text-center.text-uppercase Contact us!
+                p.mb-3.text-center.text-muted Let’s connect! Our admissions team will call you soon to chat about our courses and your goals.
+              +contactform
+      .modal#dataPrivacy
+        +dataPrivacy
 
     script(src="/frontend.bundle.js")
     if currentPath.includes('admin')    

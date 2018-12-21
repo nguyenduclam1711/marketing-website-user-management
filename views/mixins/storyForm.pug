@@ -5,30 +5,30 @@ mixin storyForm
     h2=editPath ? "Edit story" :"Create a new Story"
     
     .mb-3
-      label.sr-only(for='inputTitle') Title
+      label(for='title') Title
       input#inputTitle.form-control(name='title', type='text', placeholder='Title', value=editPath ? story.title :"" required='', autofocus='')
 
     .mb-3
-      label.sr-only(for='inputAlumniName') Title
+      label(for='alumniName') Title
       input#inputAlumniName.form-control(name='alumniName', type='text', placeholder='Alumni Name', value=editPath ? story.alumniName :"" required='', autofocus='')
 
     .mb-3
-      label.sr-only(for='inputWorkPosition') Title
+      label(for='workPosition') Title
       input#inputWorkPosition.form-control(name='workPosition', type='text', placeholder='Work Position', value=editPath ? story.workPosition :"" required='', autofocus='')
 
     .mb-3
-      label.sr-only(for='inputExcerpt') Title
+      label(for='excerpt') Title
       input#inputExcerpt.form-control(name='excerpt', type='text', placeholder='excerpt (teaser text)', value=editPath ? story.excerpt :"" required='', autofocus='')
 
     .mb-3
-      label.sr-only(for='inputContent') Content
+      label(for='content') Content
       textarea#inputContent.form-control(name='content', type='password', placeholder='Content', required='')=editPath ? story.content :""
     .mb-3
-      label.sr-only(for='inputOrder') Order
+      label(for='order') Order
       input#inputOrder.form-control(name='order', type='number', placeholder='Order', required='', value=editPath ? story.order :"" autofocus='')
 
     .form-group
-      label(for='exampleFormControlFile1') Upload Photo
+      label(for='avatar') Upload Photo
       input#exampleFormControlFile1.form-control-file(type='file' name='avatar')
 
       if story && story.image
