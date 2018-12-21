@@ -3,8 +3,10 @@ block content
   .container
     h1 Admin Stories
     .row
-      each story in stories
-        .col-sm-12.col-lg-4.d-flex.story-cards-li
-          +singleStory(story)
-      .col-md-12
+      .col-md-8
+        .row
+          each story in stories
+            .col-sm-12.d-flex.story-cards-li
+              +singleStory(story)
+      .col-md-4
         +storyForm
