@@ -1,17 +1,4 @@
 extends ../layout.pug
 block content
-  .container.mt-5.text-left
-          
-    .row
-      .col
-        h1 Edit location
-        form.mb-3.form-signin(method='POST', action='/admin/locations/update/'+location._id+'?_method=PUT')
-          
-          .mb-3
-            label(for='inputName') Name
-            input#inputName.form-control(name='name', type='text', placeholder='Name', value=location.name required='', autofocus='')
-            
-          button.btn.btn-lg.btn-primary.btn-block(type='submit') Update
-
-    a.btn.btn-outline-primary.mr-3(href="/admin/locations")="Back"
-
+  .container.my-5
+    +formLocation

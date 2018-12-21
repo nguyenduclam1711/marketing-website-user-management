@@ -1,0 +1,16 @@
+mixin formLocation
+  - var editPath = currentPath.includes('admin/locations/edit')
+
+  form.form-signin(method='POST', action='/admin/locations?alert=create')
+
+    h2
+      =editPath ? "Edit Location " :"Create a new Location"
+      .btn-group
+        if editPath
+          a.btn.btn-outline-primary(href="/admin/locations")="Back"
+        button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Location" 
+    
+    .mb-3
+      label(for='inputName') Name
+      input#inputName.form-control(name='name', type='text', placeholder='Name', required='', autofocus='' value=editPath ? location.name : "")
+      
