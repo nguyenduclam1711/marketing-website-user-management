@@ -168,7 +168,7 @@ exports.resizeImages = async (request, response, next) => {
     }.${extension}`;
 
     const image = await jimp.read(singleFile[0].path);
-    await image.cover(350, 180);
+    // await image.cover(350, 180);
     await image.write(
       `${process.env.IMAGE_UPLOAD_DIR}/${request.body[singleFile[0].fieldname]}`
     );

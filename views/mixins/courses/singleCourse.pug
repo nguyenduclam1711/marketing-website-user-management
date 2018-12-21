@@ -30,7 +30,7 @@ mixin singleCourse
             .row.mt-5
               - 
               each object in course.archivements
-                figure.col-md-4
+                figure.col-md-4.text-center
                   img.img-fluid(src="/images/"+object.icon, alt=object.description)
                   p.lead=object.description
             
@@ -39,7 +39,7 @@ mixin singleCourse
             each object in course.features
               .row.container            
                 .col-12.d.flex.m-auto
-                  img.img-fluid.float-left.mr-5.icons(src="/images/"+object.icon, alt=object.title)
+                  img.img-fluid.float-left.mr-3.icons(src="/images/"+object.icon, alt=object.title)
                   h3.text-left=object.title
                   p.text-left.lead=object.subtitle
                   
