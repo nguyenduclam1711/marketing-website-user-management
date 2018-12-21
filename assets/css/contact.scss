@@ -1,17 +1,16 @@
 /******************************************
      CONTACT FORM SECTION
 *******************************************/
-.modal-content {
-  // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  padding: 3rem 0;
-  clip-path: polygon(2% 0%, 97% 3%, 98% 92%, 62% 96%, 0% 94%, 2% 0%)
-}
+
 .modal.show {
-  display: flex !important;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  align-items: flex-start;
+  // display: flex !important;
+  // flex-direction: column;
+  // justify-content: center;
+  // align-content: center;
+  // align-items: flex-start;
+}
+.modal-backdrop.show {
+  background: linear-gradient(to left, darken(#3DBAF7, 10), darken(#1d3b8b, 10)) !important;
 }
 .cf-title {
   text-align: center;

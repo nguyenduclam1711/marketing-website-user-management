@@ -3,9 +3,11 @@ mixin courselist(public)
     each course in courses
       .card
         div.course-item.p-5.d-flex.flex-column.justify-content-between
-          p.text-justify=course.headline
+          h1.text-justify=course.headline
           .row.mt-4
             .col
+              img.img-fluid(src="/images/"+course.icon, alt=course.description)
+
               h3=course.subheadline          
               p=course.title
               each object in course.archivements

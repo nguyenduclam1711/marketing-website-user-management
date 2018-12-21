@@ -1,13 +1,48 @@
 /*responsive typography*/
-h1,h2,h3,h4, div[class^='display-'] {
-    font-weight: 500 !important;
-    color: $blue  !important;
+body {
+ font-family: monospace;
 }
+h1,h2,h3,h4,h5,h6,div[class^='display-'] {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500 !important;
+  color: $blue  !important;
+}
+a:link {
+  text-decor
 .display-1 {
   font-size: 2.5rem;
 }
 .display-2 {
   font-size: 2rem;
+}
+@include media-breakpoint-up(sm) {
+  .responsiveD-3 {
+    font-size: 1.5rem;
+  }
+  .responsiveH2 {
+    font-size: 1rem;
+  }
+  .pre-xs-customise,
+  .responsiveH2 {
+    margin-bottom: 0;
+    overflow: unset;
+  }
+  .responsiveP {
+    font-size: 0.8rem;
+    white-space: initial;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .responsiveD-3 {
+    font-size: 3.4rem;
+  }
+  .responsiveH2 {
+    font-size: 2rem;
+  }
+  .responsiveP {
+    font-size: 1rem;
+  }
 }
 @include media-breakpoint-up(md) {
   .display-1 {
@@ -37,6 +72,26 @@ h1,h2,h3,h4, div[class^='display-'] {
     font-size: 0.8rem;
     white-space: initial;
     margin-bottom: 0;
+  }
+}
+@include media-breakpoint-up(sm) {
+  .startYour,
+  .digitalCareer {
+    font-size: 3rem;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .startYour,
+  .digitalCareer {
+    font-size: 4.5rem;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .startYour,
+  .digitalCareer {
+    font-size: 6rem;
   }
 }
 @include media-breakpoint-up(lg) {

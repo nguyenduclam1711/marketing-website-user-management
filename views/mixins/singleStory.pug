@@ -10,7 +10,7 @@ mixin singleStory(story, showFullContent)
   
     div.text-right
       a.text-muted.font-weight-bold(href="/stories/"+story.slug) Show More
-    if !public
+    if user
       form.d-flex.justify-content-between(method='POST', action='/admin/stories/delete/'+story.slug +'?_method=DELETE')
         a.btn.btn-outline-primary.mr-2(href="/stories/"+story.slug) Show
 

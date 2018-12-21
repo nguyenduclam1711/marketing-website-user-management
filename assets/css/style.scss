@@ -100,7 +100,6 @@ JUMBOTRON SECTION
   top: 25%;
   height: 500px;
   background: rgba(0, 0, 0, 0.3);
-  font-family: Arial, sans-serif;
   font-weight: lighter;
   text-transform: uppercase;
   color: white;
@@ -376,9 +375,7 @@ UPCOMING EVENTS
 }
 
 .newEvent {
-  background-color: #fefefe;
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
   font-size: 14px;
   font-weight: 500;
   border: none;
@@ -404,16 +401,13 @@ UPCOMING EVENTS
   width: 100%;
 }
 
-.newEvent-media:hover {
-  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.2);
-}
-
 .newEvent-media-object-cont {
   background: none;
   float: left;
   height: 100%;
   position: relative;
 }
+
 .newEvent-media-object {
     width:  200px;
     height: 100%;
@@ -434,31 +428,9 @@ UPCOMING EVENTS
   z-index: 10;
 }
 
-.newEvent-media:hover .newEvent-media-object:after {
-  background: -moz-linear-gradient(
-    top,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0) 52%,
-    rgba(0, 0, 0, 0.4) 100%
-  );
-  background: -webkit-linear-gradient(
-    top,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0) 52%,
-    rgba(0, 0, 0, 0.4) 100%
-  );
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0) 52%,
-    rgba(0, 0, 0, 0.4) 100%
-  );
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 );
-  opacity: 1;
-}
+
 
 .newEvent-media-body {
-  background-color: #F8F9FA;
   float: left;
   height: 100%;
   padding: 0 15px;
@@ -511,35 +483,7 @@ UPCOMING EVENTS
   font-weight: bold;
 }
 
-@include media-breakpoint-up(sm) {
-  .responsiveD-3 {
-    font-size: 1.5rem;
-  }
-  .responsiveH2 {
-    font-size: 1rem;
-  }
-  .pre-xs-customise,
-  .responsiveH2 {
-    margin-bottom: 0;
-    overflow: unset;
-  }
-  .responsiveP {
-    font-size: 0.8rem;
-    white-space: initial;
-  }
-}
 
-@include media-breakpoint-up(md) {
-  .responsiveD-3 {
-    font-size: 3.4rem;
-  }
-  .responsiveH2 {
-    font-size: 2rem;
-  }
-  .responsiveP {
-    font-size: 1rem;
-  }
-}
 
 /******************************************
   STORIES

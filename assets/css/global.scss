@@ -16,8 +16,7 @@ $textOrange: #da9446;
   src: url("fonts/Didact_Gothic/DidactGothic-Regular.ttf");
   src: url("fonts/Didact_Gothic/DidactGothic-Regular.ttf") format("ttf");
 } */
-a:link {
-  text-decoration: none !important;
+ation: none !important;
 }
 .left {
   left: 0;
@@ -65,26 +64,7 @@ a:link {
   right: 50px;
   border: 0;
 }
-@include media-breakpoint-up(sm) {
-  .startYour,
-  .digitalCareer {
-    font-size: 3rem;
-  }
-}
 
-@include media-breakpoint-up(md) {
-  .startYour,
-  .digitalCareer {
-    font-size: 4.5rem;
-  }
-}
-
-@include media-breakpoint-up(lg) {
-  .startYour,
-  .digitalCareer {
-    font-size: 6rem;
-  }
-}
 
 html {
   scroll-behavior: smooth;

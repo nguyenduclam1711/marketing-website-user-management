@@ -51,28 +51,28 @@ mixin courseForm
           input(type="text", name="archivement_description_3",  value=editPath ? course.archivements[2].description : '' placeholder="archivement description 3")
         .form-group
           label(for='features1') Features 1
-          if course && features[0].icon
-            img(src="/images/"+features[0].icon)
+          if course && course.features[0].icon
+            img(src="/images/"+course.features[0].icon)
           input#exampleFormControlFile1.form-control-file(type='file' name='features_icon_1')
           
-          input(type="text", name="features_subtitle_1",  value=editPath ? features[0].title : '', placeholder="features title 1" )
-          input(type="text", name="features_subtitle_1",  value=editPath ? features[0].subtitle : '', placeholder="feature subtitle 1" )
+          input(type="text", name="features_title_1",  value=editPath ? course.features[0].title : '', placeholder="features title 1" )
+          input(type="text", name="features_subtitle_1",  value=editPath ? course.features[0].subtitle : '', placeholder="feature subtitle 1" )
         .form-group
           label(for='features2') Features 2
-          if course && features[1].icon
-            img(src="/images/"+features[1].icon)
+          if course && course.features[1].icon
+            img(src="/images/"+course.features[1].icon)
           input#exampleFormControlFile1.form-control-file(type='file' name='features_icon_2')
           
-          input(type="text", name="features_subtitle_2",  value=editPath ? features[1].title : '', placeholder="features title 2" )
-          input(type="text", name="features_subtitle_2",  value=editPath ? features[1].subtitle : '', placeholder="feature subtitle 2" )
+          input(type="text", name="features_title_2",  value=editPath ? course.features[1].title : '', placeholder="features title 2" )
+          input(type="text", name="features_subtitle_2",  value=editPath ? course.features[1].subtitle : '', placeholder="feature subtitle 2" )
         .form-group
           label(for='features3') Features 3
-          if course && features[2].icon
-            img(src="/images/"+features[2].icon)
+          if course && course.features[2].icon
+            img(src="/images/"+course.features[2].icon)
           input#exampleFormControlFile1.form-control-file(type='file' name='features_icon_3')
           
-          input(type="text", name="features_subtitle_3",  value=editPath ? features[2].title : '' placeholder="features title 3")
-          input(type="text", name="features_subtitle_3",  value=editPath ? features[2].subtitle : '' placeholder="feature subtitlen 3")
+          input(type="text", name="features_title_3",  value=editPath ? course.features[2].title : '' placeholder="features title 3")
+          input(type="text", name="features_subtitle_3",  value=editPath ? course.features[2].subtitle : '' placeholder="feature subtitlen 3")
       .col-md-6
 
         .form-group

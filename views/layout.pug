@@ -76,9 +76,11 @@ html.h-100(lang='en')
         block content
       if !currentPath.includes('admin')
         +footer
-    .modal.container.px-md-5#contactFormModal
-      .mx-md-5
-        .modal-content.bg-light.border-radius-0.overflow-hidden.px-5.position-relative.z-0
+
+    #contactFormModal.modal(tabindex='-1', role='dialog', aria-labelledby='contactFormModal', aria-hidden='true')
+
+      .modal-dialog.modal-dialog-centered.modal-lg
+        .bg-light.border-radius-0.modal-content
           .pb-5
             .mb-2
               h2.display-1.text-center.text-uppercase Contact us!
