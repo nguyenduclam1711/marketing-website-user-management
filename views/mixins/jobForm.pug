@@ -2,7 +2,13 @@ mixin jobform
   - var editPath = currentPath.includes('admin/jobs/edit')
   form.mb-5(method='POST', action=editPath ? '/admin/jobs/update/'+job.slug+'?_method=PUT' : '/admin/jobs?alert=create')
     
-    h2=editPath ? "Edit Job" :"Create a new Job"
+    h2
+      =editPath ? "Edit Job " :"Create a new Job"
+      .btn-group
+        if editPath
+          a.btn.btn-outline-primary(href="/admin/jobs")="Back"
+          a.btn.btn-outline-primary(target="_blank" href="/jobs/"+job.slug)="Show"
+        button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Job" 
 
     .mb-3
       label(for='name') Name
@@ -17,6 +23,5 @@ mixin jobform
           input.custom-control-input(name="locations" type='checkbox' id=location.name value=location._id  checked=(location.selected))
           label.custom-control-label(for=location.name)=location.name
 
-    button.btn.btn-lg.btn-primary.mb-3(type='submit')=editPath ? "Update" :"Create a new Job" 
 
 

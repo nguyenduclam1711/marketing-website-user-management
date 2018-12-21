@@ -1,9 +1,12 @@
 mixin pageForm
   - var editPath = currentPath.includes('admin/pages/edit')
   form.mb-5(method='POST', action=editPath ? '/admin/pages/update/'+page.slug+'?_method=PUT' : '/admin/pages?alert=create')
-
-    h2=editPath ? "Edit Page " :"Create a new Page"
-    
+    h2
+      =editPath ? "Edit Page " :"Create a new Page"
+      .btn-group
+        a.btn.btn-outline-primary(href="/admin/pages")="Back"
+        a.btn.btn-outline-primary(target="_blank" href="/pages/"+page.slug)="Show"
+        button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Page" 
     .mb-3
       label(for='title') Title
       input#inputName.form-control(name='title', type='text', placeholder='Title', required='', autofocus='', value=editPath ? page.title : "")
@@ -29,4 +32,3 @@ mixin pageForm
           input.custom-control-input(name="categories" type='checkbox' id=category.name value=category._id  checked=(category.selected))
           label.custom-control-label(for=category.name)=category.name
   
-    button.btn.btn-lg.btn-primary.mb-3(type='submit')=editPath ? "Update" :"Create a new Page" 

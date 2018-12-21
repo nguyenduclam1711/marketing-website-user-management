@@ -31,9 +31,10 @@ router.get("/", async (req, res) => {
       if (!events) {
         events[await Event.findOne({ location: loc._id }).populate("location")];
       } else {
-        events.push(
-          await Event.findOne({ location: loc._id }).populate("location")
-        );
+        const event = await Event.findOne({ location: loc._id }).populate("location")
+        if (event) {
+          events.push(event)
+        }
       }
     }
 

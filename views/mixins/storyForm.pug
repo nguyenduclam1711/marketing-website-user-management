@@ -13,18 +13,21 @@ mixin storyForm
       input#inputAlumniName.form-control(name='alumniName', type='text', placeholder='Alumni Name', value=editPath ? story.alumniName :"" required='', autofocus='')
 
     .mb-3
-      label(for='workPosition') Title
+      label(for='workPosition') Work Position
       input#inputWorkPosition.form-control(name='workPosition', type='text', placeholder='Work Position', value=editPath ? story.workPosition :"" required='', autofocus='')
 
     .mb-3
-      label(for='excerpt') Title
+      label(for='excerpt') Excerpt
       input#inputExcerpt.form-control(name='excerpt', type='text', placeholder='excerpt (teaser text)', value=editPath ? story.excerpt :"" required='', autofocus='')
 
     .mb-3
       label(for='content') Content
-      textarea#inputContent.form-control(name='content', type='password', placeholder='Content', required='')=editPath ? story.content :""
+      textarea#inputContent.form-control(name='content' placeholder='Content', required='')=editPath ? story.content :""
     .mb-3
-      label(for='order') Order
+      label(for='order') 
+        | Order
+        button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='In which order the stories are displayed.')
+          | ?
       input#inputOrder.form-control(name='order', type='number', placeholder='Order', required='', value=editPath ? story.order :"" autofocus='')
 
     .form-group

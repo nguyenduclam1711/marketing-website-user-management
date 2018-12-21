@@ -2,7 +2,14 @@ mixin courseForm
   - var editPath = currentPath.includes('admin/courses/edit')
   form.mb-5.form-signin(method='POST', action=editPath ? '/admin/courses/update/'+course.slug+'?_method=PUT' : '/admin/courses', enctype="multipart/form-data")
     
-    h2=editPath ? "Edit course" :"Create a new course"
+    h2
+      =editPath ? "Edit course" :"Create a new course"
+      .btn-group
+        if editPath
+          a.btn.btn-outline-primary(href="/admin/courses")="Back"
+          a.btn.btn-outline-primary(target="_blank" href="/courses/"+course.slug)="Show"
+
+        button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Course" 
     .row
       .col-md-6
         .form-group
@@ -118,4 +125,8 @@ mixin courseForm
             input.custom-control-input(name="locations" type='checkbox' id=location.name value=location._id  checked=(location.selected))
             label.custom-control-label(for=location.name)=location.name
 
-    button.btn.btn-lg.btn-primary.btn-block(type='submit')=editPath ? "Update" :"Create a new course" 
+        .btn-group
+          if editPath
+            a.btn.btn-outline-primary(href="/admin/courses")="Back"
+            a.btn.btn-outline-primary(target="_blank" href="/courses/"+course.slug)="Show"
+          button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Course" 
