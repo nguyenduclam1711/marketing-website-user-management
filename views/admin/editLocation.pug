@@ -8,7 +8,7 @@ block content
         form.mb-3.form-signin(method='POST', action='/admin/locations/update/'+location._id+'?_method=PUT')
           
           .mb-3
-            label.sr-only(for='inputName') Name
+            label(for='inputName') Name
             input#inputName.form-control(name='name', type='text', placeholder='Name', value=location.name required='', autofocus='')
             
           button.btn.btn-lg.btn-primary.btn-block(type='submit') Update

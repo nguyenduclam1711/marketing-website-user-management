@@ -5,11 +5,11 @@ mixin jobform
     h2=editPath ? "Edit Job" :"Create a new Job"
 
     .mb-3
-      label.sr-only(for='inputName') Name
+      label(for='name') Name
       input#inputName.form-control(name='name', type='text', placeholder='Name', value=editPath ? job.name :"" required='', autofocus='')
 
     .mb-3
-      label.sr-only(for='inputContent') Content
+      label(for='content') Content
       textarea#inputContent.form-control(name='content', placeholder='Content', required='')=editPath ? job.content : "" 
     .my-3
       each location in locations

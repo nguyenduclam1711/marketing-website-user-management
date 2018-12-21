@@ -1,10 +1,15 @@
 extends layout.pug
 block content
   .container.py-5
-    .px-md-5    
+    .px-md-5.py-5    
       .px-md-5
         .px-md-5
           .px-lg-5
             h1.text-center Company Tours
             h3.mb-5.text-center.text-muted We organize tours with our students on a regular basis. Every Wednesday we perform a trip through the digital-sector and visit some of the tech startups to give our students a feeling what it means to be  a developer. Are you or your company interested in hosting on of this events? Write us a message!
+            h4 We offer company tours in the following locations: 
+              br
+              each location in locations
+                =location.name
+                br
           +contactform
