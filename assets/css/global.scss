@@ -1,10 +1,10 @@
 $blue: #1d3b8b;
-$green: #7AFF29;
-$red: #FF4200;
-$yellow: #FFDB00;
-$purple: #5C00FF;
-$pink: #A800FF;
-$turquoise: #3DBAF7;
+$green: #7aff29;
+$red: #ff4200;
+$yellow: #ffdb00;
+$purple: #5c00ff;
+$pink: #a800ff;
+$turquoise: #3dbaf7;
 $textOrange: #da9446;
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
@@ -41,7 +41,7 @@ $textOrange: #da9446;
   background-color: $blue;
 }
 .half-transparent {
-  opacity: .5;
+  opacity: 0.5;
 }
 .startYour,
 .digitalCareer {
@@ -56,7 +56,6 @@ $textOrange: #da9446;
   border: 0;
 }
 
-
 html {
   scroll-behavior: smooth;
 }
@@ -64,12 +63,6 @@ html {
 body {
   /* font-family: "Didact Gothic", sans-serif !important; */
   overflow-x: hidden;
-}
-
-.navbar.landingpage {
-  position: absolute;
-  width: 100%;
-  z-index: +1;
 }
 
 body:not(.admin).btn {

@@ -5,7 +5,7 @@
 @import "footer";
 @import "typography";
 
-@mixin btn-color($color-pri, $color-sec, $color-border)  {
+@mixin btn-color($color-pri, $color-sec, $color-border) {
   background-color: $color-pri;
   color: $color-sec !important;
   border: 1px solid;
@@ -13,44 +13,54 @@
   &:hover,
   &:focus,
   &:active,
-  &.active{
+  &.active {
     background-color: darken($color-pri, 10%) !important;
     color: $color-sec !important;
     border-color: darken($color-border, 10%) !important;
   }
 }
 
-.btn-gradient-secondary{
-  color:white;
+.btn-gradient-secondary {
+  color: white;
   border: none;
-  background: linear-gradient(to left,$turquoise,  $blue) !important;
-  background-repeat: repeat;  
+  background: linear-gradient(to left, $turquoise, $blue) !important;
+  background-repeat: repeat;
   background-size: 200% 100% !important;
-  transition: all .2s;  
+  transition: all 0.2s;
   background-position: 5% 0 !important;
-  &:hover{
-    color:white;
+  &:hover {
+    color: white;
     background-position: 95% 0 !important;
   }
 }
-.btn-gradient-primary{
-  color:white;
+.btn-gradient-primary {
+  color: white;
   border: none;
   background: linear-gradient(to left, $yellow, $red) !important;
-  background-repeat: repeat;  
+  background-repeat: repeat;
   background-size: 200% 100% !important;
-  transition: all .2s;  
+  transition: all 0.2s;
   background-position: 5% 0 !important;
-  &:hover{
+  &:hover {
     background-position: 95% 0 !important;
   }
 }
 
-code {color: $textOrange;}
+code {
+  color: $textOrange;
+}
 nav.container:after {
   display: none !important;
 }
 
+/***********************************************
+      NAVIGATION
+*********************************'********/
+.sticky-top {
+  background-color: white;
+  padding-left: 20%;
+  padding-right: 20%;
+}
 /*******************HOME****************************
 *********************************'********/
 .homeSection {
@@ -78,16 +88,6 @@ nav.container:after {
 .subtitle {
   font-weight: lighter;
   color: #dce0f2;
-}
-
-/******************************************
-VIDEO SECTION
- *******************************************/
-video {
-  min-width: 100%;
-  min-height: 100%;
-  z-index: -100;
-  background-size: cover;
 }
 
 /******************************************
@@ -166,12 +166,12 @@ a:hover {
 /******************************************
 OUR COURSES SECTION
  *******************************************/
- .service-item {
+.service-item {
   height: 100%;
- }
- a.card-link {
+}
+a.card-link {
   color: #6c757d;
- }
+}
 .section-services {
   padding: 5rem 0;
 }
@@ -204,12 +204,10 @@ OUR COURSES SECTION
   box-shadow: 0 0 5px #0000002e;
 }
 
-
-
 /******************************************
 OUR COURSES TESTIMONIALS
  *******************************************/
-.container-testimonials:hover a{
+.container-testimonials:hover a {
   color: #da9446 !important;
   cursor: pointer;
 }
@@ -219,27 +217,6 @@ OUR COURSES TESTIMONIALS
 
 .testimonials-button-wrap {
   margin: 2rem 0;
-}
-.video-placeholder a:hover {
-  transform: scale(1.2);
-}
-.video-placeholder a {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  font-size: 3rem;
-}
-.video-placeholder {
-  width: 100%;
-  height: 0;
-  padding-bottom: 56.25%;
-  background: url("https://www.digitalcareerinstitute.org/wp-content/uploads/2017/04/13585027_272721593085119_8828473191326822457_o.jpg");
-  background-size: cover;
-  background-position: center;
-  border-radius: 3px;
-  position: relative;
 }
 
 .fa {
@@ -409,10 +386,10 @@ UPCOMING EVENTS
 }
 
 .newEvent-media-object {
-    width:  200px;
-    height: 100%;
-    background-repeat:   no-repeat;
-    background-size:     cover;
+  width: 200px;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .newEvent-media-object:after {
@@ -427,8 +404,6 @@ UPCOMING EVENTS
   transition: all 300ms ease-out;
   z-index: 10;
 }
-
-
 
 .newEvent-media-body {
   float: left;
@@ -483,7 +458,48 @@ UPCOMING EVENTS
   font-weight: bold;
 }
 
+/******************************************
+  LAST UPDATED EVENT
+*******************************************/
+.single-event-card:hover {
+  box-shadow: 0 0 15px #0000002e;
+  cursor: pointer;
+}
+.card-img-top {
+  width: 100%;
+  height: 8vw;
+  object-fit: cover;
+}
+.card-body {
+  display: flex;
+  flex-direction: row;
+  font-size: 1.2rem;
+  padding: 24px 0;
+}
 
+.card-date {
+  text-transform: uppercase;
+}
+.card-date-month {
+  color: #da9446;
+  font-size: 13px;
+}
+
+.card-text {
+  color: #6f7287;
+}
+
+.event-name {
+  font-size: 1.2rem;
+  text-transform: capitalize;
+}
+.event-date,
+.event-location {
+  font-size: 13px;
+}
+.card-date-day {
+  color: #6f7287;
+}
 
 /******************************************
   STORIES
@@ -800,12 +816,16 @@ input[type="week"] {
   .courses-scroll {
     display: none;
   }
+  .sticky-top {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
   .container-fluid-courses {
     width: 100%;
   }
 
   .blue-headline {
-    font-size: 2.5rem !important;
+    font-size: 2.5rem;
   }
   .jumbotron-singleCourse {
     margin-bottom: 0;
@@ -820,6 +840,9 @@ input[type="week"] {
 }
 
 @media (min-width: 767.98px) and (max-width: 1560px) {
+  .card-img-top {
+    height: 10vw;
+  }
   #courses-scroll {
     position: absolute;
     margin-top: 2.8%;
@@ -828,9 +851,38 @@ input[type="week"] {
   .row-courses {
     margin: 0 5%;
   }
+  .homeSection {
+    min-width: 50vw;
+    height: 30vh;
+  }
+  .startYour,
+  .digitalCareer {
+    font-size: 4.5rem;
+  }
+  .subtitle-jumbotron {
+    font-size: 3rem;
+  }
 }
 
 @media (max-width: 767.98px) {
+  .startYour,
+  .digitalCareer {
+    font-size: 2.5rem;
+  }
+  .subtitle-jumbotron {
+    font-size: 1.5rem;
+  }
+  .homeSection {
+    min-width: 50vw;
+    height: 30vh;
+  }
+  .sticky-top {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+  .card-img-top {
+    height: 25vw;
+  }
   .container::after {
     display: table;
     clear: both;
