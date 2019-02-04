@@ -15,7 +15,7 @@ mixin courseForm
         .form-group
           label(for='icon') Course Title Icon
           if course && course.icon
-            img(src="/images/"+course.icon)
+            img.w-100(src="/images/"+course.icon)
           input#exampleFormControlFile1.form-control-file(type='file' name='icon')
 
         .mb-3
