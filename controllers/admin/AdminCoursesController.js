@@ -181,7 +181,7 @@ module.exports.updateCourse = async function(req, res) {
   let course = await Course.findOne({ slug: req.params.slug });
 
   //TODO thats fucking verbose
-  course.icon = req.body.icon;
+  course.icon = req.body.icon ? req.body.icon : course.icon;
   course.headline = req.body.headline;
   course.title = req.body.title;
   course.subheading = req.body.subheading;
