@@ -1,0 +1,26 @@
+version: '3'
+services:
+  
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - /data:/data/db
+    ports:
+      - "27018:27017"
+
+  marketing-website:
+    container_name: marketing-website
+    restart: always
+    build: .
+    depends_on:
+      - mongo
+    ports:
+      - 7000:7000
+    links:
+      - mongo
+    environment:
+      - MONGOURL=mongodb://mongo:27017/marketing-website
+    volumes:
+      - './:/home/node/app'
+      - '/home/node/app/node_modules'
