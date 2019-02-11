@@ -132,7 +132,7 @@ router.post("/newsletter-signup", function(req, res) {
         } else {
           return res.status(422).json({
             code: json.errors ? 422 : response.statusCode,
-            message: "error"
+            message: json.errors
           });
         }
       }
