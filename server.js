@@ -23,14 +23,14 @@ const mongoose = require("mongoose");
 // methods getAsync() and setAsync()
 let redisClient = null;
 console.log(typeof process.env.USE_REDIS)
-if(process.env.USE_REDIS !== undefined && process.env.USE_REDIS === "true") {
+if (process.env.USE_REDIS !== undefined && process.env.USE_REDIS === "true") {
   console.log("Redis enabled")
 
   redis = require("redis");
   redisClient = getAsyncRedis();
-} else if(process.env.USE_REDIS === "false") {
+} else if (process.env.USE_REDIS === "false") {
   console.log("Redis disabled")
-}else{ 
+} else {
   console.error("USE_REDIS is not defined in .env")
   process.exit()
 }
@@ -42,7 +42,7 @@ try {
     { useNewUrlParser: true }
   );
 }
-catch(err) {
+catch (err) {
   console.log(`Please set a mongo path in your .env \n\n${err}`)
 }
 
@@ -55,8 +55,8 @@ app.use(
     store: new MongoStore({ mongooseConnection: mongoose.connection })
   })
 );
-app.use(bodyParser.json({limit: '50mb'}));
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 app.use(express.static("public"));
 app.use("/assets", express.static(path.join(__dirname, "node_modules/")));
@@ -68,7 +68,7 @@ app.use("/images", express.static(path.join(__dirname, "uploads/images")));
 app.use(expressValidator());
 app.use(flash());
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   (res.locals.messages = {
     danger: req.flash("danger"),
     warning: req.flash("warning"),
@@ -81,6 +81,7 @@ app.use(function(req, res, next) {
       .toLowerCase());
   let match = req.url.match("[^/]+(?=/$|$)");
   res.locals.title = "DigitalCareerInstitute";
+  app.locals.moment = require('moment');
   res.locals.live = req.headers.host.includes("digitalcareerinstitute.org")
   if (match) {
     match = match[0].replace(/\//g, " ");
@@ -114,20 +115,20 @@ app.use(async (req, res, next) => {
       .exec();
     let locations = await Location.find({}).exec();
 
-    let footerCat = await Category.findOne({name: "footer"})
-    let footerPages = await Page.find({categories: {$in: [footerCat]}})
-    
-    let headerCat = await Category.findOne({name: "header"})
-    let headerPages = await Page.find({categories: {$in: [headerCat]}})
-    
-    
+    let footerCat = await Category.findOne({ name: "footer" })
+    let footerPages = await Page.find({ categories: { $in: [footerCat] } })
+
+    let headerCat = await Category.findOne({ name: "header" })
+    let headerPages = await Page.find({ categories: { $in: [headerCat] } })
+
+
     navData = {
       courses,
       locations,
       headerPages,
       footerPages
     };
-    
+
     console.log("saving data");
     try {
       await redisClient.setAsync("navData", JSON.stringify(navData));
@@ -138,7 +139,7 @@ app.use(async (req, res, next) => {
     console.log("using cached data");
   }
 
-  const { courses, locations, headerPages,footerPages } = navData;
+  const { courses, locations, headerPages, footerPages } = navData;
 
   res.locals.user = req.user || null;
   res.locals.currentPath = req.path;
@@ -193,7 +194,7 @@ app.set("view engine", "pug");
 // scheduling cron job:
 cron.schedule('0 0 * * * *', () => {
   console.log('Runing a job at 00:00 at Europe/Berlin timezone');
-   // Fetching Events
+  // Fetching Events
   async function loadData() {
     try {
       const response = await EventsController.fetchevents();
@@ -208,7 +209,7 @@ cron.schedule('0 0 * * * *', () => {
       process.exit();
     }
   }
-   loadData();
+  loadData();
 }, {
     scheduled: true,
     timezone: "Europe/Berlin"
