@@ -4,9 +4,10 @@ const Event = require('../models/event');
 const Location = require('../models/location');
 
 module.exports.getEvents = async (req, res) => {
-  let events = await Event.find().populate("location").sort({'start': -1}).limit(8);
+  let events = await Event.find().populate("location").sort({ 'start': -1 }).limit(8);
 
   locationEvents = events.reduce(function (acc, obj) {
+    //console.log('from Events Controller', acc)
     if (obj.location) {
       if (!acc[obj.location.name]) {
         acc[obj.location.name] = [];
@@ -16,16 +17,16 @@ module.exports.getEvents = async (req, res) => {
     } else {
       return acc
     }
-    }, {});
+  }, {});
 
   res.render('events', {
     locationEvents
   })
 }
 module.exports.getEventsByLocation = async (req, res) => {
-  let location = await Location.findOne( { "name" : { $regex : new RegExp(req.params.location, "i") } } ) 
+  let location = await Location.findOne({ "name": { $regex: new RegExp(req.params.location, "i") } })
 
-  let events = await Event.find({location: location._id})
+  let events = await Event.find({ location: location._id })
 
   res.render('eventsByLocation', {
     events,

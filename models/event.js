@@ -8,7 +8,8 @@ var EventSchema = new Schema({
   start: Date,
   location: { type: Schema.ObjectId, ref: "Location" },
   url: String,
-  imageurl: String
+  imageurl: String,
+  isEvent: String
 });
 
 module.exports = mongoose.model("Event", EventSchema);

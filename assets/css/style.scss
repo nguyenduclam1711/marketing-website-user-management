@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Didact+Gothic");
+@import url("https://fonts.googleapis.com/css?family=Roboto");
 @import "global";
 @import "header";
 @import "contact";
@@ -202,15 +202,24 @@ a.card-link {
 }
 .section-services .service-item:hover {
   box-shadow: 0 0 5px #0000002e;
+  .service-title {
+    color: #da9446 !important;
+    cursor: pointer;
+  }
 }
 
 /******************************************
 OUR COURSES TESTIMONIALS
  *******************************************/
-.container-testimonials:hover a {
-  color: #da9446 !important;
-  cursor: pointer;
+
+ .container-testimonials-text:hover{
+  box-shadow: 0 0 5px #0000002e;
+  div {
+    color: #da9446 !important;
+    cursor: pointer;
+  }
 }
+
 .section-padding {
   padding: 5rem 0;
 }
@@ -461,9 +470,13 @@ UPCOMING EVENTS
 /******************************************
   LAST UPDATED EVENT
 *******************************************/
-.single-event-card:hover {
+.single-event-card:hover{
   box-shadow: 0 0 15px #0000002e;
   cursor: pointer;
+  .event-name {
+    color: #da9446 !important;
+    cursor: pointer;
+  }
 }
 .card-img-top {
   width: 100%;
@@ -505,13 +518,15 @@ UPCOMING EVENTS
   STORIES
 *******************************************/
 
-body:not(.admin).story-item:hover {
+body:not(.admin).story-item:hover, .story-cards-li:hover  {
   box-shadow: 0 0 5px #0000002e;
   cursor: pointer;
 }
-body:not(.admin).story-item:hover a {
+body:not(.admin).story-item:hover a,  .story-cards-li:hover a  {
   color: #da9446 !important;
+  cursor: pointer;
 }
+
 
 #containerStorieSingle {
   // max-width: 69%;

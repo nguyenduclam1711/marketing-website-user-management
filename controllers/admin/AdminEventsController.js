@@ -12,7 +12,7 @@ if (!process.env.EVENTBRIDE_API_KEY) {
 module.exports.getEvents = async (req, res) => {
   let events = await Event.find().populate("location");
 
-  locationEvents = events.reduce(function(acc, obj) {
+  locationEvents = events.reduce(function (acc, obj) {
     if (obj.location) {
       if (!acc[obj.location.name]) {
         acc[obj.location.name] = [];
@@ -43,9 +43,9 @@ module.exports.getEventsByLocation = async (req, res) => {
 module.exports.fetchevents = async (req, res) => {
   const url = `https://www.eventbriteapi.com/v3/organizers/16608751086/events/?order_by=start_desc&expand=venue&token=${
     process.env.EVENTBRIDE_API_KEY
-  }`;
+    }`;
   try {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       request(url, async (error, response, body) => {
         body = JSON.parse(body);
         if (error) {

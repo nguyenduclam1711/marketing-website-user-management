@@ -5,7 +5,6 @@ block content
     h1 Admin Contacts
     .row
       .col-md-8
-
         ul.list-group
           each contact in contacts
             li.list-group-item.mb-3
@@ -19,5 +18,7 @@ block content
                 span Interested in: 
                 each location in contact.locations
                   .badge.badge-primary.mr-2=location.name
+              if contact.isEvent
+                span.badge.badge-danger= "Event participation request"
               if contact.isCompany
                 span.badge.badge-warning= "Is Companytour request"

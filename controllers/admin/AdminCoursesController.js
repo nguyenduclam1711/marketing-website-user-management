@@ -156,6 +156,7 @@ module.exports.uploadImages = multer({
 ]);
 
 // Resize the images with different thumbnail sizes
+//
 exports.resizeImages = async (request, response, next) => {
   if (!request.files) {
     next();
@@ -188,36 +189,85 @@ module.exports.updateCourse = async function(req, res) {
   course.subtitle = req.body.subtitle;
   course.locations = req.body.locations;
 
-  course.archivements[0].icon = req.files.archivement_icon_1 ? req.body.archivement_icon_1 : course.archivements[0].icon
-  course.archivements[0].description = req.body.archivement_description_1 ? req.body.archivement_description_1 : course.archivements[0].description
-  course.archivements[1].icon = req.files.archivement_icon_2 ? req.body.archivement_icon_2 : course.archivements[1].icon
-  course.archivements[1].description = req.body.archivement_description_2 ? req.body.archivement_description_2 : course.archivements[1].description
-  course.archivements[2].icon = req.files.archivement_icon_3 ? req.body.archivement_icon_3 : course.archivements[2].icon
-  course.archivements[2].description = req.body.archivement_description_3 ? req.body.archivement_description_3 : course.archivements[2].description
+  course.icon = req.files.icon ? req.body.icon : course.icon;
+  course.archivements[0].icon = req.files.archivement_icon_1
+    ? req.body.archivement_icon_1
+    : course.archivements[0].icon;
+  course.archivements[0].description = req.body.archivement_description_1
+    ? req.body.archivement_description_1
+    : course.archivements[0].description;
+  course.archivements[1].icon = req.files.archivement_icon_2
+    ? req.body.archivement_icon_2
+    : course.archivements[1].icon;
+  course.archivements[1].description = req.body.archivement_description_2
+    ? req.body.archivement_description_2
+    : course.archivements[1].description;
+  course.archivements[2].icon = req.files.archivement_icon_3
+    ? req.body.archivement_icon_3
+    : course.archivements[2].icon;
+  course.archivements[2].description = req.body.archivement_description_3
+    ? req.body.archivement_description_3
+    : course.archivements[2].description;
 
-  course.timeline[0].title = req.body.timeline_title_1 ? req.body.timeline_title_1 : course.timeline[0].title
-  course.timeline[0].subtitle = req.body.timeline_subtitle_1 ? req.body.timeline_subtitle_1 : course.timeline[0].subtitle
-  course.timeline[0].time = req.body.timeline_time_1 ? req.body.timeline_time_1 : course.timeline[0].time
-  
-  course.timeline[1].title = req.body.timeline_title_2 ? req.body.timeline_title_2 : course.timeline[1].title
-  course.timeline[1].subtitle = req.body.timeline_subtitle_2 ? req.body.timeline_subtitle_2 : course.timeline[1].subtitle
-  course.timeline[1].time = req.body.timeline_time_2 ? req.body.timeline_time_2 : course.timeline[1].time
-  
-  course.timeline[2].title = req.body.timeline_title_3 ? req.body.timeline_title_3 : course.timeline[2].title
-  course.timeline[2].subtitle = req.body.timeline_subtitle_3 ? req.body.timeline_subtitle_3 : course.timeline[2].subtitle
-  course.timeline[2].time = req.body.timeline_time_3 ? req.body.timeline_time_3 : course.timeline[2].time
+  course.timeline[0].title = req.body.timeline_title_1
+    ? req.body.timeline_title_1
+    : course.timeline[0].title;
+  course.timeline[0].subtitle = req.body.timeline_subtitle_1
+    ? req.body.timeline_subtitle_1
+    : course.timeline[0].subtitle;
+  course.timeline[0].time = req.body.timeline_time_1
+    ? req.body.timeline_time_1
+    : course.timeline[0].time;
 
-  course.features[0].title = req.body.features_title_1 ? req.body.features_title_1 : course.features[0].title
-  course.features[0].subtitle = req.body.features_subtitle_1 ? req.body.features_subtitle_1 : course.features[0].subtitle
-  course.features[0].icon = req.body.features_icon_1 ? req.body.features_icon_1 : course.features[0].icon
-  
-  course.features[1].title = req.body.features_title_2 ? req.body.features_title_2 : course.features[1].title
-  course.features[1].subtitle = req.body.features_subtitle_2 ? req.body.features_subtitle_2 : course.features[1].subtitle
-  course.features[1].icon = req.body.features_icon_2 ? req.body.features_icon_2 : course.features[1].icon
-  
-  course.features[2].title = req.body.features_title_3 ? req.body.features_title_3 : course.features[2].title
-  course.features[2].subtitle = req.body.features_subtitle_3 ? req.body.features_subtitle_3 : course.features[2].subtitle
-  course.features[2].icon = req.body.features_icon_3 ? req.body.features_icon_3 : course.features[2].icon
+  course.timeline[1].title = req.body.timeline_title_2
+    ? req.body.timeline_title_2
+    : course.timeline[1].title;
+  course.timeline[1].subtitle = req.body.timeline_subtitle_2
+    ? req.body.timeline_subtitle_2
+    : course.timeline[1].subtitle;
+  course.timeline[1].time = req.body.timeline_time_2
+    ? req.body.timeline_time_2
+    : course.timeline[1].time;
+
+  course.timeline[2].title = req.body.timeline_title_3
+    ? req.body.timeline_title_3
+    : course.timeline[2].title;
+  course.timeline[2].subtitle = req.body.timeline_subtitle_3
+    ? req.body.timeline_subtitle_3
+    : course.timeline[2].subtitle;
+  course.timeline[2].time = req.body.timeline_time_3
+    ? req.body.timeline_time_3
+    : course.timeline[2].time;
+
+  course.features[0].title = req.body.features_title_1
+    ? req.body.features_title_1
+    : course.features[0].title;
+  course.features[0].subtitle = req.body.features_subtitle_1
+    ? req.body.features_subtitle_1
+    : course.features[0].subtitle;
+  course.features[0].icon = req.body.features_icon_1
+    ? req.body.features_icon_1
+    : course.features[0].icon;
+
+  course.features[1].title = req.body.features_title_2
+    ? req.body.features_title_2
+    : course.features[1].title;
+  course.features[1].subtitle = req.body.features_subtitle_2
+    ? req.body.features_subtitle_2
+    : course.features[1].subtitle;
+  course.features[1].icon = req.body.features_icon_2
+    ? req.body.features_icon_2
+    : course.features[1].icon;
+
+  course.features[2].title = req.body.features_title_3
+    ? req.body.features_title_3
+    : course.features[2].title;
+  course.features[2].subtitle = req.body.features_subtitle_3
+    ? req.body.features_subtitle_3
+    : course.features[2].subtitle;
+  course.features[2].icon = req.body.features_icon_3
+    ? req.body.features_icon_3
+    : course.features[2].icon;
 
   await course.save();
 

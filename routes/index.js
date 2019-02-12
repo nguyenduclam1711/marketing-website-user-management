@@ -31,9 +31,11 @@ router.get("/", async (req, res) => {
       if (!events) {
         events[await Event.findOne({ location: loc._id }).populate("location")];
       } else {
-        const event = await Event.findOne({ location: loc._id }).populate("location")
+        const event = await Event.findOne({ location: loc._id }).populate(
+          "location"
+        );
         if (event) {
-          events.push(event)
+          events.push(event);
         }
       }
     }
@@ -44,6 +46,7 @@ router.get("/", async (req, res) => {
       locations,
       courses
     });
+    //console.log('From index.js router', events);
   } catch (err) {
     console.log(err);
   }
@@ -51,38 +54,39 @@ router.get("/", async (req, res) => {
 
 router.post("/contact", async (req, res, next) => {
   var contact = new Contact();
-
   contact.name = req.body.name;
   contact.email = req.body.email;
   contact.body = req.body.body;
   contact.createdAt = new Date();
-  contact.isCompany = req.body.companytour ? true : false
-
+  contact.isCompany = req.body.companytour ? true : false;
   contact.locations = req.body.locations;
   if (!contact.email) {
     res.redirect(req.headers.referer);
   }
 
-  contact.save(async function(err) {
+  contact.save(async function (err) {
     if (err) res.send(err);
     var info = await sendMail(req);
-    req.flash("success", `Thanks for your message. We will reply to you as soon as possible.`);
+    req.flash(
+      "success",
+      `Thanks for your message. We will reply to you as soon as possible.`
+    );
     console.log("Message sent: %s", info.messageId);
     res.redirect(req.headers.referer);
     next();
   });
 });
 
-
 router.get("/tour", async (req, res) => {
   try {
-    res.render("tour", {companytour: true});
+    res.render("tour", { companytour: true });
   } catch (err) {
     console.log(err);
   }
 });
 
-router.post("/newsletter-signup", function(req, res) {
+
+router.post("/newsletter-signup", function (req, res) {
   const { email } = req.body;
 
   // Make sure fields are filled
