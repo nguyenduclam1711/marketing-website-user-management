@@ -7,7 +7,7 @@ module.exports.getEvents = async (req, res) => {
   let events = await Event.find().populate("location").sort({ 'start': -1 }).limit(8);
 
   locationEvents = events.reduce(function (acc, obj) {
-    console.log('from Events Controller', acc)
+    //console.log('from Events Controller', acc)
     if (obj.location) {
       if (!acc[obj.location.name]) {
         acc[obj.location.name] = [];
