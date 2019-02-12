@@ -3,13 +3,11 @@ mixin singleEvent(event)
     img.card-img-top(src=event.imageurl)
     .card-body.p-1
       .card-date.mr-2
-        p.card-date-month.mb-0.mt-1 FEB
-        p.card-date-day.text-center 6
+        p.card-date-month.mb-0.mt-1=moment(event.start).format('MMM')
+        p.card-date-day.text-center=moment(event.start).format('DD')
       .card-text
         p.event-name.mb-0= event.name
-        p.event-date.mb-0=event.start
+        p.event-date.mb-0=moment(event.start).format('MMMM Do YYYY, h:mm a')
         span.event-location=event.location.street
         span.event-location.ml-1=event.location.name
           
-
-

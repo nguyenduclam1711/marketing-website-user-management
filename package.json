@@ -27,6 +27,7 @@
     "jquery": "^3.3.1",
     "method-override": "^3.0.0",
     "mini-css-extract-plugin": "^0.4.4",
+    "moment": "^2.24.0",
     "mongodb": "*",
     "mongoose": "^5.2.8",
     "mongoose-url-slugs": "^1.0.2",
