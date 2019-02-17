@@ -41,3 +41,7 @@ Run seed script:
 
 Run the `seed:delete` script:  
 `npm run seed:delete`
+
+
+## Run in docker dev environment
+`docker-compose up`
