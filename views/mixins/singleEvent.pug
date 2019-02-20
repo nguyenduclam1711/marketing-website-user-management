@@ -1,5 +1,5 @@
 mixin singleEvent(event)
-  a.card.single-event-card.rounded-top.border-0.mb-4(data-toggle='modal', data-target='#contactFormModal')
+  a.card.single-event-card.rounded-top.border-0.mb-4(href=event.url, target="_blank")
     img.card-img-top(src=event.imageurl)
     .card-body.p-1
       .card-date.mr-2
