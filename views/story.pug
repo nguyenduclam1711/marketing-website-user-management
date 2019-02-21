@@ -4,7 +4,9 @@ block content
     div.story-item.py-5
       .row
         .col-2
-          img.object-fit-cover.img-fluid.rounded-circle.square(style="background-image: url('/images/"+story.image+"')")
+          img.object-fit-cover.img-fluid.rounded-circle.square(style="background-image: url('/images/"+story.avatar+"')")
+        .col-2
+          img.object-fit-cover.img-fluid.rounded-circle.square(style="background-image: url('/images/"+story.companylogo+"')")
         .col 
           h2=story.alumniName
           p.text-justify=story.workPosition     

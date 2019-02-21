@@ -166,14 +166,18 @@ exports.resizeImages = async (request, response, next) => {
     const extension = singleFile[0].mimetype.split("/")[1];
     request.body[singleFile[0].fieldname] = `${
       singleFile[0].filename
-    }.${extension}`;
+      }.${extension}`;
+    try {
 
-    const image = await jimp.read(singleFile[0].path);
-    // await image.cover(350, 180);
-    await image.write(
-      `${process.env.IMAGE_UPLOAD_DIR}/${request.body[singleFile[0].fieldname]}`
-    );
-    fs.unlinkSync(singleFile[0].path);
+      const image = await jimp.read(singleFile[0].path);
+      // await image.cover(350, 180);
+      await image.write(
+        `${process.env.IMAGE_UPLOAD_DIR}/${request.body[singleFile[0].fieldname]}`
+      );
+      fs.unlinkSync(singleFile[0].path);
+    } catch (error) {
+      console.log(error);
+    }
   }
   next();
 };

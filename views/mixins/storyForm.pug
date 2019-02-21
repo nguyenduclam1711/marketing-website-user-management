@@ -1,8 +1,14 @@
 mixin storyForm
   - var editPath = currentPath.includes('admin/stories/edit')
-  form.form-signin(method='POST', action=editPath ? '/admin/stories/update/'+story.slug+'?_method=PUT' : '/admin/stories', enctype="multipart/form-data")
+  form.mb-5.form-signin(method='POST', action=editPath ? '/admin/stories/update/'+story.slug+'?_method=PUT' : '/admin/stories', enctype="multipart/form-data")
     
-    h2=editPath ? "Edit story" :"Create a new Story"
+    h2
+      span.mr-3=editPath ? "Edit story" :"Create a new Story"
+      .btn-group
+        if editPath
+          a.btn.btn-outline-primary(href="/admin/stories")="Back"
+          a.btn.btn-outline-primary(target="_blank" href="/storys/"+story.slug)="Show"
+        button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Story" 
     
     .mb-3
       label(for='title') Title
@@ -29,12 +35,22 @@ mixin storyForm
         button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='In which order the stories are displayed.')
           | ?
       input#inputOrder.form-control(name='order', type='number', placeholder='Order', required='', value=editPath ? story.order :"" autofocus='')
+    .row
+      .form-group.col-md-6
+        label(for='avatar') Upload Photo
+        input#exampleFormControlFile1.form-control-file(type='file' name='avatar')
 
-    .form-group
-      label(for='avatar') Upload Photo
-      input#exampleFormControlFile1.form-control-file(type='file' name='avatar')
+        if story && story.avatar
+          img.w-100.mw-150.mh-150.object-fit-cover(src="/images/"+story.avatar)
+      .form-group.col-md-6
+        label(for='avatar') Upload Company Logo
+        input#exampleFormControlFile1.form-control-file(type='file' name='companylogo')
 
-      if story && story.image
-        img(src="/images/"+story.image)
+        if story && story.companylogo
+          img.w-100.mw-150.mh-150.object-fit-cover(src="/images/"+story.companylogo)
 
-    button.btn.btn-lg.btn-primary.btn-block(type='submit')=editPath ? "Update" :"Create a new Story" 
+    .btn-group
+      if editPath
+        a.btn.btn-outline-primary(href="/admin/stories")="Back"
+        a.btn.btn-outline-primary(target="_blank" href="/stories/"+story.slug)="Show"
+      button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Story" 
