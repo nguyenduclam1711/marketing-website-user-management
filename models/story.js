@@ -9,7 +9,8 @@ var StorySchema = new Schema({
   excerpt: String,
   content: String,
   order: Number,
-  image: String
+  avatar: String,
+  companylogo: String,
 });
 
 StorySchema.plugin(URLSlugs('title'));

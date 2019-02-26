@@ -51,18 +51,22 @@ module.exports.editStory = async function (req, res) {
 }
 module.exports.createStory = async (req, res) => {
   var story = new Story(); // create a new instance of the story model
+  //TODO this could be refactored
   story.title = req.body.title; // set the stories title (comes from the request)
   story.alumniName = req.body.alumniName; // set the stories alumni name (comes from the request)
   story.workPosition = req.body.workPosition; // set the stories work position (comes from the request)
   story.excerpt = req.body.excerpt; // set the stories excerpt (comes from the request)
   story.content = req.body.content; // set the stories content (comes from the request)
   story.order = req.body.order; // set the stories order (comes from the
-  story.image = req.body.image; // set the avatar image
+  story.avatar = req.files.avatar ? req.body.avatar : story.avatar;
+  story.companylogo = req.files.companylogo ? req.body.companylogo : story.companylogo;
+
 
   // save the story and check for errors
   story.save(function (err) {
     if (err) res.send(err);
     req.flash("success", `Successfully created ${story.title}`);    
+    
     res.redirect("/admin/stories");
   });
 }
@@ -77,14 +81,25 @@ module.exports.deleteStory = async (req, res) => {
 }
 
 module.exports.updateStory = async function (req, res) {
-  const story = await Story.findOneAndUpdate(
-    { slug: req.params.slug },
-    req.body,
-    { new: true, runValidators: true }
-  ).exec()
+  let story = await Story.findOne({ slug: req.params.slug }).exec()
+  
+  story.title = req.body.title;
+  story.alumniName = req.body.alumniName;
+  story.workPosition = req.body.workPosition;
+  story.excerpt = req.body.excerpt;
+  story.content = req.body.content;
+  story.order = req.body.order;
 
-  req.flash("success", `Successfully updated ${story.title}`);
-  res.redirect("/admin/stories/edit/" + req.params.slug);
+  story.avatar = req.files.avatar ? req.body.avatar : story.avatar;
+  story.companylogo = req.files.companylogo ? req.body.companylogo : story.companylogo;
+  
+  try {
+    await story.save();
+    req.flash("success", `Successfully updated ${story.title}`);
+    res.redirect("/admin/stories/edit/" + req.params.slug);
+  } catch (error) {
+    console.log('error', error);
+  }
 }
 
 
@@ -112,29 +127,37 @@ module.exports.uploadImages = multer({
       next({ message: 'That filetype is not allowed!' }, false)
     }
   }
-})
-  .single("avatar")
+}).fields([
+  { name: "avatar", maxCount: 1 },
+  { name: "companylogo", maxCount: 1 }
+]);
 
 // Resize the images with different thumbnail sizes
 exports.resizeImages = async (request, response, next) => {
-  if (!request.file) {
-    next()
-    return
+  
+  if (!request.files) {
+    next();
+    return;
   }
+  for await (const singleFile of Object.values(request.files)) {
+    const extension = singleFile[0].mimetype.split("/")[1];
+    request.body[singleFile[0].fieldname] = `${
+      singleFile[0].filename
+      }.${extension}`;
+    try {
 
-  const extension = request.file.mimetype.split('/')[1]
-  request.body.image = `${uuid.v4()}.${extension}`
-
-  try {
-    const image = await jimp.read(request.file.path)
-    await image.cover(350, 180)
-    await image.write(`${process.env.IMAGE_UPLOAD_DIR}${request.body.image}`)
-    fs.unlinkSync(request.file.path)
-  } catch (error) {
-    console.log(error);
+      const image = await jimp.read(singleFile[0].path);
+      // await image.cover(350, 180);
+      await image.write(
+        `${process.env.IMAGE_UPLOAD_DIR}/${request.body[singleFile[0].fieldname]}`
+      );
+      fs.unlinkSync(singleFile[0].path);
+    } catch (error) {
+      console.log(error);
+    }
   }
-  next()
-}
+  next();
+};
 
 // Validate profile data and save
 exports.updateProfile = async (request, response) => {

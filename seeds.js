@@ -69,6 +69,9 @@ async function seedRandomImages(arrayOfRecords, relationship, model) {
     'http://place-hoff.com/400/300',
     'http://place-hoff.com/400/301',
     'http://place-hoff.com/400/302',
+    'http://place-hoff.com/400/303',
+    'http://place-hoff.com/400/304',
+    'http://place-hoff.com/400/305',
   ]
   let index = 0
   var promises = []

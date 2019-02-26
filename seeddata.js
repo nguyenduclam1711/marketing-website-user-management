@@ -184,7 +184,8 @@ exports.stories = [
     excerpt: "Daniela is one of our best students and an important part of the student community here at DCI campus.",
     content: "The story of Jenny which has a super cool job as a Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum.",
     order: 1,
-    image: 'example_image_1.jpg'
+    avatar: 'example_image_1.jpg',
+    companylogo: 'example_image_2.jpg'
   },
   {
     title: "Volsggdsg sytyt sgfdhgfhgjg ",
@@ -193,7 +194,8 @@ exports.stories = [
     excerpt: "Jürgen recently landed a job as a Junior Front-End Engineer at streaming provider Loots here in Berlin.",
     content:  "Back in the days she was a bit introvert but now she can handle a lot of strange situations with her colleagues without any problem. Talking in front of many people Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum.",
     order: 2,
-    image: 'example_image_2.jpg'
+    avatar: 'example_image_3.jpg',
+    companylogo: 'example_image_4.jpg'
   },
   {
     title: "Qui mollt itia sit animi quisquam et nostrud consequatur Facilis dignissimo",
@@ -202,7 +204,8 @@ exports.stories = [
     excerpt: "Manny recently landed a job as a Junior Full-Stack Engineer at streaming provider Loots here in Berlin.",
     content:  "Stuart bit introvert but now she can handle a lot of strange situations with her colleagues without any problem. Talking in front of many people Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum.",
     order: 3,
-    image: 'example_image_3.jpg'
+    avatar: 'example_image_5.jpg',
+    companylogo: 'example_image_6.jpg'
   }
 ];
 
@@ -215,15 +218,15 @@ exports.courses = [
     subtitle: "Take special one to one 40 hours of coaching to find out what digital jobs suits you best. We learn hands-on from people working in the tech scene",
     archivements: [
       {
-        icon: "https://digitalcareerinstitute.org/wp-content/uploads/2017/04/students-on-class.png",
+        icon: "example_image_1.jpg",
         description: "Write here something..."
       },
       {
-        icon: "https://digitalcareerinstitute.org/wp-content/uploads/2017/04/students-on-class.png",
+        icon: "example_image_2.jpg",
         description: "Write here something..."
       },
       {
-        icon: "https://digitalcareerinstitute.org/wp-content/uploads/2017/04/students-on-class.png",
+        icon: "example_image_3.jpg",
         description: "Write here something..."
       }
     ],
@@ -231,22 +234,22 @@ exports.courses = [
       {
         title: "Write here something...",
         subtitle: "Write here something...",
-        icon:"https://digitalcareerinstitute.org/wp-content/uploads/2017/04/javascript-hand-drawn-file.png"
+        icon:"example_image_3.jpg"
       },
       {
         title: "Write here something...",
         subtitle: "Write here something...",
-        icon:"https://digitalcareerinstitute.org/wp-content/uploads/2017/04/sql-file-format-symbol.png"
+        icon:"example_image_3.jpg"
       },
       {
         title: "Write here something...",
         subtitle: "Write here something...",
-        icon:"https://digitalcareerinstitute.org/wp-content/uploads/2017/04/github-logo.png"
+        icon:"example_image_3.jpg"
       },
       {
         title: "Write here something...",
         subtitle: "Write here something...",
-        icon:"https://digitalcareerinstitute.org/wp-content/uploads/2017/04/project-manager.png"
+        icon:"example_image_3.jpg"
       }
     ],
     timeline: [
@@ -279,21 +282,21 @@ exports.courses = [
   },
   {
     headline: "Orientation Course",
-    icon: "https://digitalcareerinstitute.org/wp-content/uploads/2017/04/Center-Direction-96.png",
+    icon: "example_image_3.jpg,
     subheading: "Find out what tech job are you passionate about",
     title: "In this immersive 12 month course you will acquire the skills to become a job-ready Full stake developer.   ",
     subtitle: "Take 4 weeks and find out which digital jobs suits you best. We visit the best tech companies and learn hands-on from people working there.",
     archivements: [
       {
-        icon: "https://digitalcareerinstitute.org/wp-content/uploads/2017/04/students-on-class.png",
+        icon: "example_image_.jpg",
         description: "Introduction to Tech"
       },
       {
-        icon: "https://digitalcareerinstitute.org/wp-content/uploads/2017/04/students-on-class.png",
+        icon: "example_image_.jpg",
         description: "Company Tours"
       },
       {
-        icon: "https://digitalcareerinstitute.org/wp-content/uploads/2017/04/students-on-class.png",
+        icon: "example_image_.jpg",
         description: "Soft Skills"
       }
     ],
@@ -301,22 +304,22 @@ exports.courses = [
       {
         title: "Technical Introduction",
         subtitle: "Internet, Browser, Coding Languages and Web Development",
-        icon:"https://digitalcareerinstitute.org/wp-content/uploads/2017/04/javascript-hand-drawn-file.png"
+        icon:"example_image_3.jpg"
       },
       {
         title: "Soft skills",
         subtitle: "Discover and Measure one’s Personality, Behaviour as Employee and Teamwork",
-        icon:"https://digitalcareerinstitute.org/wp-content/uploads/2017/04/sql-file-format-symbol.png"
+        icon:"example_image_3.jpg"
       },
       {
         title: "Company Tours",
         subtitle: "Take a tour of a local startup and see what the work environment is all about",
-        icon:"https://digitalcareerinstitute.org/wp-content/uploads/2017/04/github-logo.png"
+        icon:"example_image_3.jpg"
       },
       {
         title: "Find your passion",
         subtitle: "Figure out which career path you want to take to achieve your dreams",
-        icon:"https://digitalcareerinstitute.org/wp-content/uploads/2017/04/project-manager.png"
+        icon:"example_image_3.jpg"
       }
     ],
     timeline: [
@@ -349,21 +352,21 @@ exports.courses = [
   },
   {
     headline: "Web Development Course",
-    icon: "https://digitalcareerinstitute.org/wp-content/uploads/2017/05/Web-Design-64.png",
+    icon: "example_image_3.jpg,
     subheading: "Become a web developer in 12 months",
     title: "Start Your Career in Web Development",
     subtitle: "Want to become a professional web developer? This is how it’s done. In this intensive, fully immersive 12-months course with 11-months of learning and 3-months internship, we’ll teach you everything you need to know to unlock your spot in one of the fastest-growing industries.",
     archivements: [
       {
-        icon: "https://digitalcareerinstitute.org/wp-content/uploads/2017/04/students-on-class.png",
+        icon: "example_image_.jpg",
         description: "Learn from professional developers"
       },
       {
-        icon: "https://digitalcareerinstitute.org/wp-content/uploads/2017/04/students-on-class.png",
+        icon: "example_image_.jpg",
         description: "Develop your own project"
       },
       {
-        icon: "https://digitalcareerinstitute.org/wp-content/uploads/2017/04/students-on-class.png",
+        icon: "example_image_.jpg",
         description: "Ongoing career placement support"
       }
     ],
@@ -376,22 +379,22 @@ exports.courses = [
       {
         title: "Specialisation",
         subtitle: "Specialise in technologies like Angular, Node.js and Databases",
-        icon:"https://digitalcareerinstitute.org/wp-content/uploads/2017/04/sql-file-format-symbol.png"
+        icon:"example_image_3.jpg"
       },
       {
         title: "Team Work in Development",
         subtitle: "Learn to work on a project with other developers",
-        icon:"https://digitalcareerinstitute.org/wp-content/uploads/2017/04/github-logo.png"
+        icon:"example_image_3.jpg"
       },
       {
         title: "Project Management",
         subtitle: "Learn agile project management and tools like scrum",
-        icon:"https://digitalcareerinstitute.org/wp-content/uploads/2017/04/project-manager.png"
+        icon:"example_image_3.jpg"
       },
       {
         title: "Internship",
         subtitle: "your steps into the job, do an internship in a tech company to apply what you have learned",
-        icon:"https://digitalcareerinstitute.org/wp-content/uploads/2017/04/project-manager.png"
+        icon:"example_image_3.jpg"
       }
     ],
     timeline: [
