@@ -2,6 +2,7 @@ require("dotenv").config({ path: __dirname + "/../.env" });
 const request = require("request");
 const Event = require("../../models/event");
 const Location = require("../../models/location");
+const fetchEventsByLocation = require("../../helpers/fetch_events_by_location");
 
 // to catch the error if 'EVENTBRIDE_API_KEY' path not exist in .env file
 if (!process.env.EVENTBRIDE_API_KEY) {
@@ -10,22 +11,10 @@ if (!process.env.EVENTBRIDE_API_KEY) {
 }
 
 module.exports.getEvents = async (req, res) => {
-  let events = await Event.find().populate("location");
-
-  locationEvents = events.reduce(function (acc, obj) {
-    if (obj.location) {
-      if (!acc[obj.location.name]) {
-        acc[obj.location.name] = [];
-      }
-      acc[obj.location.name].push(obj);
-      return acc;
-    } else {
-      return acc;
-    }
-  }, {});
+  const eventsByLocation = await fetchEventsByLocation()
 
   res.render("admin/events", {
-    locationEvents
+    eventsByLocation
   });
 };
 module.exports.getEventsByLocation = async (req, res) => {
