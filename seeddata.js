@@ -9,10 +9,11 @@ exports.categories = [
 ];
 
 exports.adminUser = {
-  name: 'admin',
   email: 'admin@example.com',
   username: 'admin',
+  admin: true,
   password: '$2a$10$.D.ObRTjFkv4X0zyLCOE3ui9FKU1GveILRgvhQMWlIl2q3jbgnNoi', //password
+  verifiedAt: Date.new()
 };
 
 exports.jobs = [
