@@ -66,7 +66,14 @@ router.post("/contact", async (req, res, next) => {
 
   contact.save(async function (err) {
     if (err) res.send(err);
-    var info = await sendMail(req);
+    const mailOptions = {
+      from: 'mailer@digitalcareerinstitute.org',
+      to: req.body.companytour ? process.env.TOURMAILRECEIVER : process.env.MAILRECEIVER,
+      subject: req.body.companytour ? `Company Tour request from website` : `Message on website`,
+      text: `${req.body.body}`,
+      html: `${req.body.body}`
+    }
+    var info = await sendMail(req, mailOptions);
     req.flash(
       "success",
       `Thanks for your message. We will reply to you as soon as possible.`

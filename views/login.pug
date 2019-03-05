@@ -1,15 +1,16 @@
 extends layout.pug
 block content
-  
-  .container.my-5
-
-    h1.my-5 Login
-
-    form(method='post' action='/users/login')
-      .form-group
-        label Username
-        input.form-control(type='text' name='username' placeholder='Username')
-      .form-group
-        label Password
-        input.form-control(type='password' name='password' placeholder='Password')
-      button.btn.btn-primary(type='submit') Submit
+  .bg-light
+    .container.py-5
+      .row.py-5
+        .col-md-6.offset-md-3.p-3.card
+            h1 Login
+            form.mb-3(method='post' action='/users/login')
+              .form-group
+                label Email
+                input.form-control(type='text' name='email' placeholder='Email')
+              .form-group
+                label Password
+                input.form-control(type='password' name='password' placeholder='Password')
+              button.btn.btn-primary(type='submit') Signin
+            a(href="/users/register") No account? Register
