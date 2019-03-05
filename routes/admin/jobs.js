@@ -1,16 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const { ensureAuthenticated } = require('../../helpers/passport')
+const { ensureAuthenticated, redirectNonAdmin } = require('../../helpers/passport')
 
 const AdminJobsController = require("../../controllers/admin/AdminJobsController");
-router.get("/", ensureAuthenticated, AdminJobsController.getJobs);
+router.get("/", ensureAuthenticated, redirectNonAdmin, AdminJobsController.getJobs);
 
-router.get("/:slug", ensureAuthenticated, AdminJobsController.getSingleJob);
+router.get("/:slug", ensureAuthenticated, redirectNonAdmin, AdminJobsController.getSingleJob);
 
-router.get("/edit/:slug", ensureAuthenticated, AdminJobsController.editJob);
+router.get("/edit/:slug", ensureAuthenticated, redirectNonAdmin, AdminJobsController.editJob);
 
-router.post("/", ensureAuthenticated, AdminJobsController.createJob);
+router.post("/", ensureAuthenticated, redirectNonAdmin, AdminJobsController.createJob);
 
-router.delete("/delete/:slug", ensureAuthenticated, AdminJobsController.deleteJob);
-router.put("/update/:slug", ensureAuthenticated, AdminJobsController.updateJob);
+router.delete("/delete/:slug", ensureAuthenticated, redirectNonAdmin, AdminJobsController.deleteJob);
+router.put("/update/:slug", ensureAuthenticated, redirectNonAdmin, AdminJobsController.updateJob);
 module.exports = router;

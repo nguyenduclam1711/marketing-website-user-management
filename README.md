@@ -34,7 +34,7 @@ Start development: `nodemon index.js`
 
 ## Insert optional example data
 
-##### Create a few Stories and Categories in the selected DB.
+##### Create a few Stories and Menulocations in the selected DB.
 
 Run seed script:  
 `npm run seed`

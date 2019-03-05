@@ -60,7 +60,7 @@ module.exports.createStory = async (req, res) => {
   story.order = req.body.order; // set the stories order (comes from the
   story.avatar = req.files.avatar ? req.body.avatar : story.avatar;
   story.companylogo = req.files.companylogo ? req.body.companylogo : story.companylogo;
-
+  story.userId = req.user.admin !== "true" ? req.user.id : null
 
   // save the story and check for errors
   story.save(function (err) {

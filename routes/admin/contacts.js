@@ -2,8 +2,8 @@ const AdminContactsController = require("../../controllers/admin/AdminContactsCo
 
 const express = require("express");
 const router = express.Router();
-const { ensureAuthenticated } = require('../../helpers/passport')
+const { ensureAuthenticated, redirectNonAdmin } = require('../../helpers/passport')
 
-router.get("/", ensureAuthenticated, AdminContactsController.getContacts);
+router.get("/", ensureAuthenticated, redirectNonAdmin, AdminContactsController.getContacts);
 
 module.exports = router;

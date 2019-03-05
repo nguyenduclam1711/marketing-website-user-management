@@ -7,20 +7,6 @@ mixin navigation
     span.navbar-toggler-icon
   #collapsingNavbar3.navbar-collapse.collapse.w-100
     ul.nav.navbar-nav.ml-auto.w-100.justify-content-end#headernav
-      if user
-        li.position-relative.nav-item.dropdown.admin
-          a#navbarDropdownMenuLink.btn.btn-primary.text-white.nav-link.dropdown-toggle.mx-2(data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-            | ADMIN
-          .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
-            a.dropdown-item(href='/admin/contacts') Contacts
-            a.dropdown-item(href='/admin/categories') Categories
-            a.dropdown-item(href='/admin/locations') Locations
-            a.dropdown-item(href='/admin/stories') Stories
-            a.dropdown-item(href='/admin/pages') Pages
-            a.dropdown-item(href='/admin/events') Events
-            a.dropdown-item(href='/admin/courses') Courses
-            a.dropdown-item(href='/admin/jobs') Jobs
-
       li.position-relative.nav-item.dropdown
         a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mx-2(class= currentPath.includes('/courses') && !currentPath.includes('admin') ? "active" : "" data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
           | COURSES
@@ -51,7 +37,3 @@ mixin navigation
 
       li.position-relative.nav-item
         a.nav-link.mx-2(data-toggle='modal', data-target='#contactFormModal') CONTACT US
-
-        if user
-          li.position-relative.nav-item
-            a.nav-link.mx-2(href='/users/logout') LOGOUT

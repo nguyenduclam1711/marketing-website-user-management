@@ -10,6 +10,20 @@ module.exports.renderLogin = (req, res) => {
 module.exports.renderRegister = (req, res) => {
   res.render("register");
 };
+sendVerificationMail = async (req, userToken ) => {
+  const verificationLink = `${getRequestUrl(
+    req
+  )}/users/verify/${userToken}`;
+  const mailOptions = {
+    from: "verification@digitalcareerinstitute.org",
+    to: req.body.email,
+    subject: "Verify your account on digitalcareerinstitute.org",
+    text: `By clicking on the following link, you verify your account <a href="${verificationLink}">${verificationLink}</a>`,
+    html: `By clicking on the following link, you verify your account <a href="${verificationLink}">${verificationLink}</a>`
+  };
+  return await sendMail(req, mailOptions);
+
+}
 module.exports.register = async (req, res) => {
   var email = req.body.email;
   var username = req.body.username;
@@ -44,17 +58,7 @@ module.exports.register = async (req, res) => {
 
       User.createUser(newUser, async (err, user) => {
         if (err) throw err;
-        const verificationLink = `${getRequestUrl(
-          req
-        )}/users/verify/${userToken}`;
-        const mailOptions = {
-          from: "verification@digitalcareerinstitute.org",
-          to: email,
-          subject: "Verify your account on digitalcareerinstitute.org",
-          text: `By clicking on the following link, you verify your account <a href="${verificationLink}">${verificationLink}</a>`,
-          html: `By clicking on the following link, you verify your account <a href="${verificationLink}">${verificationLink}</a>`
-        };
-        await sendMail(req, mailOptions);
+        const response = await sendVerificationMail(req, userToken )
 
         req.flash(
           "success",
@@ -73,14 +77,18 @@ module.exports.login = function(req, res, next) {
     if (!user) {
       req.flash("danger", `${info.message}`);
       return res.redirect("/users/login");
+    } else if (!user.verifiedAt) {
+      req.flash("danger", `Account not verified`);
+      return res.redirect("/users/login");
+    } else {
+      req.logIn(user, function(err) {
+        if (err) {
+          return next(err);
+        }
+        req.flash("success", `Welcome ${user.username}!`);
+        return res.redirect("/admin/contacts");
+      });
     }
-    req.logIn(user, function(err) {
-      if (err) {
-        return next(err);
-      }
-      req.flash("success", `Welcome ${user.username}!`);
-      return res.redirect("/admin/contacts");
-    });
   })(req, res, next);
 };
 

@@ -1,17 +1,17 @@
 require("dotenv").config({ path: __dirname + "/../.env" });
 const Page = require("../../models/page");
-const Category = require("../../models/category");
+const Menulocation = require("../../models/menulocation");
 
 module.exports.getPages = async (req, res) => {
   try {
     let pages = await Page.find({})
       .sort("order")
-      .populate("categories")
+      .populate("menulocations")
       .exec();
-    let categories = await Category.find({}).exec();
+    let menulocations = await Menulocation.find({}).exec();
 
     res.render("admin/pages", {
-      categories,
+      menulocations,
       pages
     });
   } catch (err) {
@@ -35,13 +35,13 @@ module.exports.editPage = async (req, res) => {
 
     let pages = await Page.find({})
       .sort("order")
-      .populate("categories")
+      .populate("menulocations")
       .exec();
-    let categories = await Category.find({}).exec();
-    let allcategories = await Category.find({}).exec();
+    let menulocations = await Menulocation.find({}).exec();
+    let allmenulocations = await Menulocation.find({}).exec();
 
-    all = allcategories.map(cat => {
-      let match = page.categories
+    all = allmenulocations.map(cat => {
+      let match = page.menulocations
         .map(pcat => pcat.toString())
         .includes(cat._id.toString());
 
@@ -55,7 +55,7 @@ module.exports.editPage = async (req, res) => {
 
     res.render("admin/editPage", {
       page,
-      categories: all,
+      menulocations: all,
       maxOrder: shiftPageBack
     });
   } catch (err) {
@@ -69,7 +69,7 @@ module.exports.createPage = async (req, res) => {
     page.title = req.body.title;
     page.content = req.body.content;
     page.order = req.body.order;
-    page.categories = req.body.categories;
+    page.menulocations = req.body.menulocations;
 
     await page.save();
     req.flash("success", `Successfully created ${page.title}`);
@@ -94,7 +94,7 @@ module.exports.updatePage = async (req, res) => {
     page.title = req.body.title;
     page.content = req.body.content;
     page.order = req.body.order;
-    page.categories = req.body.categories;
+    page.menulocations = req.body.menulocations;
     await page.save();
 
     req.flash("success", `Successfully updated ${page.title}`);
