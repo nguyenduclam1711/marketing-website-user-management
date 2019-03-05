@@ -12,7 +12,7 @@ const MongoStore = require("connect-mongo")(session);
 const { promisify } = require("util");
 const Course = require("./models/course");
 const Page = require("./models/page");
-const Category = require("./models/category");
+const Menulocation = require("./models/menulocation");
 const Location = require("./models/location");
 const flash = require("connect-flash");
 const cron = require('node-cron');
@@ -115,11 +115,11 @@ app.use(async (req, res, next) => {
       .exec();
     let locations = await Location.find({}).exec();
 
-    let footerCat = await Category.findOne({ name: "footer" })
-    let footerPages = await Page.find({ categories: { $in: [footerCat] } })
+    let footerCat = await Menulocation.findOne({ name: "footer" })
+    let footerPages = await Page.find({ menulocations: { $in: [footerCat] } })
 
-    let headerCat = await Category.findOne({ name: "header" })
-    let headerPages = await Page.find({ categories: { $in: [headerCat] } })
+    let headerCat = await Menulocation.findOne({ name: "header" })
+    let headerPages = await Page.find({ menulocations: { $in: [headerCat] } })
 
 
     navData = {
@@ -163,7 +163,7 @@ let jobsRoutes = require("./routes/jobs");
 let eventsRoutes = require("./routes/events");
 let coursesRoutes = require("./routes/courses");
 
-let categoryAdminRoutes = require("./routes/admin/categories");
+let menulocationAdminRoutes = require("./routes/admin/menulocations");
 let storiesAdminRoutes = require("./routes/admin/stories");
 let coursesAdminRoutes = require("./routes/admin/courses");
 let pagesAdminRoutes = require("./routes/admin/pages");
@@ -185,7 +185,7 @@ app.use("/admin/pages", pagesAdminRoutes);
 app.use("/admin/jobs", jobsAdminRoutes);
 app.use("/admin/locations", locationsAdminRoutes);
 app.use("/admin/events", eventsAdminRoutes);
-app.use("/admin/categories", categoryAdminRoutes);
+app.use("/admin/menulocations", menulocationAdminRoutes);
 app.use("/admin/contacts", contactsAdminRoutes);
 
 app.set("views", path.join(__dirname, "views/"));

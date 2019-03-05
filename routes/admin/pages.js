@@ -1,19 +1,19 @@
-const Category = require("../../models/category");
+const Menulocation = require("../../models/menulocation");
 const Page = require("../../models/page");
 
 const express = require("express");
 const router = express.Router();
-const { ensureAuthenticated } = require('../../helpers/passport')
+const { ensureAuthenticated, redirectNonAdmin } = require('../../helpers/passport')
 
 const AdminPagesController = require("../../controllers/admin/AdminPagesController");
-router.get("/", ensureAuthenticated, AdminPagesController.getPages);
+router.get("/", ensureAuthenticated, redirectNonAdmin, AdminPagesController.getPages);
 
-router.get("/:slug", ensureAuthenticated, AdminPagesController.getSinglePage);
+router.get("/:slug", ensureAuthenticated, redirectNonAdmin, AdminPagesController.getSinglePage);
 
-router.get("/edit/:slug", ensureAuthenticated, AdminPagesController.editPage);
+router.get("/edit/:slug", ensureAuthenticated, redirectNonAdmin, AdminPagesController.editPage);
 
-router.post("/", ensureAuthenticated, AdminPagesController.createPage);
+router.post("/", ensureAuthenticated, redirectNonAdmin, AdminPagesController.createPage);
 
-router.delete("/delete/:slug", ensureAuthenticated, AdminPagesController.deletePage);
-router.put("/update/:slug", ensureAuthenticated, AdminPagesController.updatePage);
+router.delete("/delete/:slug", ensureAuthenticated, redirectNonAdmin, AdminPagesController.deletePage);
+router.put("/update/:slug", ensureAuthenticated, redirectNonAdmin, AdminPagesController.updatePage);
 module.exports = router;

@@ -1,5 +1,5 @@
 
-exports.categories = [
+exports.menulocations = [
   {
     name: "Hard"
   },

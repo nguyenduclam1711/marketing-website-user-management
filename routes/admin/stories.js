@@ -1,4 +1,4 @@
-const Category = require("../../models/category");
+const Menulocation = require("../../models/menulocation");
 const Story = require("../../models/story");
 
 const express = require("express");

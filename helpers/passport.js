@@ -8,6 +8,17 @@ module.exports.ensureAuthenticated = (req, res, next) => {
     res.redirect("/users/login");
   }
 };
+module.exports.redirectNonAdmin = (req, res, next) => {
+  const isAdmin = req.user.admin === "true";
+  console.log(req.user)
+  console.log("isAdmin", isAdmin);
+
+  if (isAdmin) {
+    return next();
+  } else {
+    return res.redirect("/admin/stories");
+  }
+};
 
 passport.use(
   new LocalStrategy(

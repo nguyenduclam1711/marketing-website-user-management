@@ -11,6 +11,7 @@ var StorySchema = new Schema({
   order: Number,
   avatar: String,
   companylogo: String,
+  userId: String,
 });
 
 StorySchema.plugin(URLSlugs('title'));
