@@ -6,6 +6,8 @@ router.get('/register', UserController.renderRegister);
 
 router.get('/login', UserController.renderLogin);
 
+router.get('/verify/:token', UserController.verify);
+
 router.post('/register', UserController.register);
 
 router.post( '/login', UserController.login);

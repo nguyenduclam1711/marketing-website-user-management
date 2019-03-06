@@ -5,10 +5,10 @@ const PORT = process.env.PORT || 3000
 const { promisify } = require('util');
 const nodemailer = require("nodemailer");
 
-var mongopath = process.env.MONGOURL || "mongodb://localhost:27017/marketing-website"
+exports.mongopath = process.env.MONGOURL || "mongodb://localhost:27017/marketing-website"
 var url = `${DOMAIN}:${PORT}`
 
-const getAsyncRedis = () => {
+exports.getAsyncRedis = () => {
   try {
     const redis = require("redis");
     const redisClient = redis.createClient({
@@ -30,7 +30,11 @@ const getAsyncRedis = () => {
     console.log(`Error occured in helper.js \n${err}`)
   }
 }
-const sendMail = async (req) => {
+exports.getRequestUrl = (req) => {
+  return req.protocol + '://' + req.get('Host');
+
+}
+exports.sendMail = async (req, mailOptions) => {
   
   return new Promise((resolve, reject) => {
     let transporter = nodemailer.createTransport({
@@ -42,13 +46,7 @@ const sendMail = async (req) => {
       }
     });
 
-    let mailOptions = {
-      from: 'mailer@digitalcareerinstitute.org',
-      to: req.body.companytour ? process.env.TOURMAILRECEIVER : process.env.MAILRECEIVER,
-      subject: req.body.companytour ? `Company Tour request from website` : `Message on website`,
-      text: `${req.body.body}`,
-      html: `${req.body.body}`
-    };
+    
 
     transporter.sendMail(mailOptions, async (error, info) => {
 
@@ -63,4 +61,3 @@ const sendMail = async (req) => {
   })
 
 }
-module.exports = { url, mongopath, getAsyncRedis, sendMail }

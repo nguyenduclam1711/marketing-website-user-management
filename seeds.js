@@ -11,7 +11,7 @@ mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 
 const Story = require("./models/story");
 const User = require("./models/user");
-const Category = require("./models/category");
+const Menulocation = require("./models/menulocation");
 const Contact = require("./models/contact");
 const Course = require("./models/course");
 const Location = require("./models/location");
@@ -23,12 +23,12 @@ const EventsController = require('./controllers/admin/AdminEventsController');
 
 const IMAGE_UPLOAD_DIR = process.env.IMAGE_UPLOAD_DIR;
 
-const {categories, stories, jobs, pages, courses, users, events, adminUser, contacts} = require('./seeddata')
+const {menulocations, stories, jobs, pages, courses, users, events, adminUser, contacts} = require('./seeddata')
 
 async function deleteData() {
   console.log("😢 Goodbye Data...");
   await Story.deleteMany();
-  await Category.deleteMany();
+  await Menulocation.deleteMany();
   await Location.deleteMany();
   await Course.deleteMany();
   await Contact.deleteMany();
@@ -85,7 +85,7 @@ async function loadData() {
   try {
     const resp = await Promise.all(await seedRandomImages())
     console.log(`Images saved to ${imageUploadDir}`);
-    const createdCategories = await Category.insertMany(categories);
+    const createdMenulocations = await Menulocation.insertMany(menulocations);
     const response = await EventsController.fetchevents();
     const createdLocations = await Location.find();
     const createdCourse = await Course.insertMany(courses);
@@ -95,11 +95,11 @@ async function loadData() {
     console.log(`You can now login as:`)
     console.log(adminUser)
 
-    var associatedCategories = await seedRandomNtoN(stories, createdCategories, Category)
+    var associatedMenulocations = await seedRandomNtoN(stories, createdMenulocations, Menulocation)
     var associatedLocations = await seedRandomNtoN(contacts, createdLocations, Location)
     var associatedJobs = await seedRandomNtoN(jobs, createdLocations, Location)
 
-    await Story.insertMany(associatedCategories)
+    await Story.insertMany(associatedMenulocations)
     await Contact.insertMany(associatedLocations)
     await Job.insertMany(associatedJobs)
 

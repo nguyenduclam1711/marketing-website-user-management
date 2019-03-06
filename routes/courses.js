@@ -1,4 +1,4 @@
-const Category = require("../models/category");
+const Menulocation = require("../models/menulocation");
 const CoursesController = require("../controllers/CoursesController");
 
 const express = require("express");

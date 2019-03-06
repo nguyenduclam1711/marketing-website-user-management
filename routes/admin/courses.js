@@ -2,26 +2,26 @@ const Course = require("../../models/course");
 
 const express = require("express");
 const router = express.Router();
-const { ensureAuthenticated } = require("../../helpers/passport");
+const { ensureAuthenticated, redirectNonAdmin } = require("../../helpers/passport");
 
 const AdminCoursesController = require("../../controllers/admin/AdminCoursesController");
-router.get("/", ensureAuthenticated, AdminCoursesController.getCourses);
+router.get("/", ensureAuthenticated, redirectNonAdmin, AdminCoursesController.getCourses);
 
 router.get(
   "/:slug",
-  ensureAuthenticated,
+  ensureAuthenticated, redirectNonAdmin,
   AdminCoursesController.getSingleCourse
 );
 
 router.get(
   "/edit/:slug",
-  ensureAuthenticated,
+  ensureAuthenticated, redirectNonAdmin,
   AdminCoursesController.editCourse
 );
 
 router.post(
   "/",
-  ensureAuthenticated,
+  ensureAuthenticated, redirectNonAdmin,
   AdminCoursesController.uploadImages,
   AdminCoursesController.resizeImages,
   AdminCoursesController.createCourse
@@ -29,12 +29,12 @@ router.post(
 
 router.delete(
   "/delete/:slug",
-  ensureAuthenticated,
+  ensureAuthenticated, redirectNonAdmin,
   AdminCoursesController.deleteCourse
 );
 router.put(
   "/update/:slug",
-  ensureAuthenticated,
+  ensureAuthenticated, redirectNonAdmin,
   AdminCoursesController.uploadImages,
   AdminCoursesController.resizeImages,
   AdminCoursesController.updateCourse

@@ -1,15 +1,17 @@
 const express = require("express");
 const router = express.Router();
 const AdminLocationsController = require('../../controllers/admin/AdminLocationsController')
+const { ensureAuthenticated, redirectNonAdmin } = require("../../helpers/passport");
 
-router.get("/", AdminLocationsController.getLocations);
 
-router.get("/:id", AdminLocationsController.getSingleLocation);
+router.get("/", ensureAuthenticated, redirectNonAdmin, AdminLocationsController.getLocations);
 
-router.get("/edit/:id", AdminLocationsController.editLocation);
+router.get("/:id", ensureAuthenticated, redirectNonAdmin, AdminLocationsController.getSingleLocation);
 
-router.post("/", AdminLocationsController.createLocation);
+router.get("/edit/:id", ensureAuthenticated, redirectNonAdmin, AdminLocationsController.editLocation);
 
-router.delete("/delete/:id", AdminLocationsController.deleteLocation);
-router.put("/update/:id", AdminLocationsController.updateLocation);
+router.post("/", ensureAuthenticated, redirectNonAdmin, AdminLocationsController.createLocation);
+
+router.delete("/delete/:id", ensureAuthenticated, redirectNonAdmin, AdminLocationsController.deleteLocation);
+router.put("/update/:id", ensureAuthenticated, redirectNonAdmin, AdminLocationsController.updateLocation);
 module.exports = router;

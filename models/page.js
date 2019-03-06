@@ -6,7 +6,7 @@ var PageSchema = new Schema({
   title: String,
   content: String,
   order: Number,
-  categories: [{ type: Schema.ObjectId, ref: "Category" }]
+  menulocations: [{ type: Schema.ObjectId, ref: "Menulocation" }]
 });
 
 PageSchema.plugin(URLSlugs('title'));
