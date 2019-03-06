@@ -187,6 +187,7 @@ app.use("/admin/locations", locationsAdminRoutes);
 app.use("/admin/events", eventsAdminRoutes);
 app.use("/admin/categories", categoryAdminRoutes);
 app.use("/admin/contacts", contactsAdminRoutes);
+app.use("/admin*", contactsAdminRoutes);
 
 app.set("views", path.join(__dirname, "views/"));
 app.set("view engine", "pug");
