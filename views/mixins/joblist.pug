@@ -1,11 +1,13 @@
 mixin joblist(public)
   ul.list-group
     each job in jobs
-      li.list-group-item.mb-3.p-5
+      li.list-group-item.mb-5.bg-light.border-0
         h2.mr-3=job.name
-        p.mr-3.my-5=job.content
+        p
+          span.mr-2 Location:
           each location in job.locations
-            .badge.badge-primary.mr-2=location.name
+            span.badge.badge-primary.mr-2=location.name
+        p.mr-3=job.content
 
 
         if public

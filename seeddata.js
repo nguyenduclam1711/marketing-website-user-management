@@ -289,15 +289,15 @@ exports.courses = [
     subtitle: "Take 4 weeks and find out which digital jobs suits you best. We visit the best tech companies and learn hands-on from people working there.",
     archivements: [
       {
-        icon: "example_image_.jpg",
+        icon: "example_image_1.jpg",
         description: "Introduction to Tech"
       },
       {
-        icon: "example_image_.jpg",
+        icon: "example_image_2.jpg",
         description: "Company Tours"
       },
       {
-        icon: "example_image_.jpg",
+        icon: "example_image_3.jpg",
         description: "Soft Skills"
       }
     ],
@@ -359,15 +359,15 @@ exports.courses = [
     subtitle: "Want to become a professional web developer? This is how it’s done. In this intensive, fully immersive 12-months course with 11-months of learning and 3-months internship, we’ll teach you everything you need to know to unlock your spot in one of the fastest-growing industries.",
     archivements: [
       {
-        icon: "example_image_.jpg",
+        icon: "example_image_1.jpg",
         description: "Learn from professional developers"
       },
       {
-        icon: "example_image_.jpg",
+        icon: "example_image_2.jpg",
         description: "Develop your own project"
       },
       {
-        icon: "example_image_.jpg",
+        icon: "example_image_3.jpg",
         description: "Ongoing career placement support"
       }
     ],
@@ -380,12 +380,12 @@ exports.courses = [
       {
         title: "Specialisation",
         subtitle: "Specialise in technologies like Angular, Node.js and Databases",
-        icon:"example_image_3.jpg"
+        icon:"example_image_1.jpg"
       },
       {
         title: "Team Work in Development",
         subtitle: "Learn to work on a project with other developers",
-        icon:"example_image_3.jpg"
+        icon:"example_image_2.jpg"
       },
       {
         title: "Project Management",

@@ -1,9 +1,9 @@
 mixin menuFooter
 
- nav.fixed-bottom.navbar.navbar-expand-md.navbar-dark.bg-primary(class=currentPath == "/" ? "" : "")
-  button.navbar-toggler(type='button', data-toggle='collapse', data-target='')
+ nav.fixed-bottom.navbar.navbar-expand-md.navbar-dark.bg-primary
+  button.navbar-toggler(type='button', data-toggle='collapse', data-target='#menuFooter')
     span.navbar-toggler-icon
-  .navbar-collapse.collapse.w-100
+  #menuFooter.navbar-collapse.collapse.w-100
     span.navbar-brand.p-0= "Logged in as "+user.username
     ul.nav.navbar-nav.ml-auto.w-100.justify-content-end
       li.nav-item
@@ -26,5 +26,6 @@ mixin menuFooter
           a.nav-link(href='/admin/courses') Courses
         li.nav-item
           a.nav-link(href='/admin/jobs') Jobs
-        li.position-relative.nav-item
-          a.nav-link.mx-2.border-left.pl-3.border-secondary(href='/users/logout') Logout
+      li.position-relative.nav-item
+        a.d-none.d-md-block.nav-link.mx-2.border-left.pl-3.border-secondary(href='/users/logout') Logout
+        a.d-md-none.nav-link.mx-md-2.pl-md-3(href='/users/logout') Logout

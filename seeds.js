@@ -85,13 +85,15 @@ async function loadData() {
   try {
     await Promise.all(await seedRandomImages())
     console.log(`Images saved to ${imageUploadDir}`);
-    const createdMenulocations = await Menulocation.insertMany(menulocations);
+
     await EventsController.fetchevents();
+
+    const createdMenulocations = await Menulocation.insertMany(menulocations);
     const createdLocations = await Location.find();
     await Course.insertMany(courses);
-    await Page.insertMany(pages);
+    await Story.insertMany(stories);
 
-   const user = await User.create(adminUser)
+    await User.create(adminUser)
     console.log(`You can now login as: `)
     console.log(`Email: ${adminUser.email} Password: password`)
 

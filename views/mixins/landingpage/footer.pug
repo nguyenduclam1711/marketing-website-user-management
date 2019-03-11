@@ -1,6 +1,7 @@
 mixin footer
-  footer.bg-white.site-footer(role='contentinfo')
-    +newsletter
+  footer.bg-white.site-footer(role='contentinfo' class=user ? "pb-5" : "")
+    if currentPath !== "/users/login" && currentPath !== "/users/register"
+      +newsletter
     section.footers.bg-light.pb-3
       .container.pt-5
         .row
