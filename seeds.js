@@ -6,7 +6,7 @@ const fs = require("fs");
 const request = require('request');
 
 const mongoose = require("mongoose");
-mongoose.connect(process.env.MONGOURL, { useNewUrlParser: true });
+mongoose.connect(process.env.MONGOURL, { useNewUrlParser: true, useCreateIndex: true });
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 
 const Story = require("./models/story");
@@ -83,23 +83,23 @@ async function seedRandomImages(arrayOfRecords, relationship, model) {
 }
 async function loadData() {
   try {
-    const resp = await Promise.all(await seedRandomImages())
+    await Promise.all(await seedRandomImages())
     console.log(`Images saved to ${imageUploadDir}`);
     const createdMenulocations = await Menulocation.insertMany(menulocations);
-    const response = await EventsController.fetchevents();
+    await EventsController.fetchevents();
     const createdLocations = await Location.find();
-    const createdCourse = await Course.insertMany(courses);
-    const createdPages = await Page.insertMany(pages);
+    await Course.insertMany(courses);
+    await Page.insertMany(pages);
 
    const user = await User.create(adminUser)
-    console.log(`You can now login as:`)
-    console.log(adminUser)
+    console.log(`You can now login as: `)
+    console.log(`Email: ${adminUser.email} Password: password`)
 
-    var associatedMenulocations = await seedRandomNtoN(stories, createdMenulocations, Menulocation)
+    var associatedMenulocations = await seedRandomNtoN(pages, createdMenulocations, Menulocation)
     var associatedLocations = await seedRandomNtoN(contacts, createdLocations, Location)
     var associatedJobs = await seedRandomNtoN(jobs, createdLocations, Location)
 
-    await Story.insertMany(associatedMenulocations)
+    await Page.insertMany(associatedMenulocations)
     await Contact.insertMany(associatedLocations)
     await Job.insertMany(associatedJobs)
 

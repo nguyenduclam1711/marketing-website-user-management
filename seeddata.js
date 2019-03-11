@@ -1,10 +1,10 @@
-
+``
 exports.menulocations = [
   {
-    name: "Hard"
+    name: "header"
   },
   {
-    name: "Easy"
+    name: "footer"
   }
 ];
 
@@ -13,7 +13,7 @@ exports.adminUser = {
   username: 'admin',
   admin: true,
   password: '$2a$10$.D.ObRTjFkv4X0zyLCOE3ui9FKU1GveILRgvhQMWlIl2q3jbgnNoi', //password
-  verifiedAt: Date.new()
+  verifiedAt: new Date()
 };
 
 exports.jobs = [
@@ -213,7 +213,7 @@ exports.stories = [
 exports.courses = [
   {
     headline: "Digital Marketing / E-Commerce",
-    icon: "https://digitalcareerinstitute.org/wp-content/uploads/2018/10/shop-bag-1.png",
+    icon: "example_image_1.jpg",
     subheading: "Write here something...",
     title: "Take 4 weeks to find out what digital jobs suits you best by visiting the best tech companies and learning the basics.",
     subtitle: "Take special one to one 40 hours of coaching to find out what digital jobs suits you best. We learn hands-on from people working in the tech scene",
@@ -283,7 +283,7 @@ exports.courses = [
   },
   {
     headline: "Orientation Course",
-    icon: "example_image_3.jpg,
+    icon: "example_image_2.jpg",
     subheading: "Find out what tech job are you passionate about",
     title: "In this immersive 12 month course you will acquire the skills to become a job-ready Full stake developer.   ",
     subtitle: "Take 4 weeks and find out which digital jobs suits you best. We visit the best tech companies and learn hands-on from people working there.",
@@ -353,7 +353,7 @@ exports.courses = [
   },
   {
     headline: "Web Development Course",
-    icon: "example_image_3.jpg,
+    icon: "example_image_3.jpg",
     subheading: "Become a web developer in 12 months",
     title: "Start Your Career in Web Development",
     subtitle: "Want to become a professional web developer? This is how it’s done. In this intensive, fully immersive 12-months course with 11-months of learning and 3-months internship, we’ll teach you everything you need to know to unlock your spot in one of the fastest-growing industries.",
