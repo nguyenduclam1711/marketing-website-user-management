@@ -92,7 +92,7 @@ exports.pages = [
   {
     title: "Devugees",
     content:
-      `Das Digital Career Institute hat das Devugees-Programm aufgelegt, um interessierten Geflüchteten die Möglichkeit zu geben, sich für Jobs in der Digitalwirtschaft zu qualifizieren. Wir sind davon überzeugt, dass das Devugees-Programm dazu beiträgt, Geflüchtete schnell und umfassend in den deutschen Arbeitsmarkt und die deutsche Gesellschaft zu integrieren. Wir halten Bildung für den Schlüssel zu einem erfolgreichen sozialen und Arbeitsleben.
+      `The Digital Career Institute operates the Devugees training program for refugees who are interested in technical qualifications for the German job market. We are convinced that Devugees will help integrate refugees more effectively into German society. In our opinion, education is the most important key to a successful life anywhere.
 
 `,
     order: 0
@@ -100,30 +100,7 @@ exports.pages = [
   {
     title: "Jobcenter/AA",
     content:
-      `DCI Digital Career Institute gGmbH
-        \n\r
-        Zugelassener Träger für die Förderung der Beruflichen Weiterbildung nach dem Recht der Arbeitsförderung.
-        \n\r
-        Maßnahmen\n\r
-        ERPROBUNGSCENTER DIGITALE BERUFE\n\r
-        Berlin Maßnahmenummer:            922/0108/16\n\r
-        \n\r
-        Düsseldorf Maßnahmenummer:   337/31/17
-        \n\r
-        Hamburg Maßnahmenummer:     123/7195/18
-        \n\r
-        Dauer: 4 Wochen Vollzeit (160 UE)
-        \n\r
-
-        Diese Aktivierungs- und Vermittlungsmaßnahme nach §45 Abs. 1 Satz 1 Nr. 2 SGB III soll einen Einblick in den Bereich der digitalen Berufe gewähren. Hierbei ist die individuelle Betreuung und Förderung der Teilnehmer sowie der direkte Kontakt und Dialog mit Unternehmen maßgeblich. Um einen transparenten Eindruck der digitalen Arbeitswelt zu vermitteln, stehen unter anderem verschiedene, außergewöhnliche Exkursionen zu regionalen IT-Firmen im Fokus. Dadurch soll das persönliche Engagement und Leistungsbestreben der Teilnehmer gesteigert werden. Die praktischen und theoretischen Vermittlungseinheiten werden durch verschiedene Lehrkräfte und Dozenten aus regionalen ITUnternehmen realisiert. Bei Bedarf erhalten diese Unterstützung von einem Dolmetscher (Arabisch und Farsi), um sprachliche Barrieren abzubauen. Unsere Analyse der Teilnehmer arbeitet ihr Potential heraus, sodass aufbauend auf ihrem Persönlichkeitsprofil eine individuelle Selbstvermarktungs- und Bewerbungsstrategie entworfen werden kann.
-        \n\r
-        DIE WEITERBILDUNG ZUM WEB-PROGRAMMIERER (W/M)
-        Berlin Maßnahmenummer:            922/0360/17
-        \n\r
-        Düsseldorf Maßnahmenummer:   337/1314/17
-        \n\r
-
-        Unsere Weiterbildung nach §81 SGB III ist modular aufgebaut und dauert maximal 13 Monate. Die Anzahl der Module richtet sich nach der persönlichen Vorerfahrung, sodass sich bei entsprechenden Vorkenntnissen die Ausbildungsdauer verkürzt. Die Module umfassen Grundlagen, Frontend-, Backend- und Datenbank-Entwicklung sowie QuellcodeVerwaltung, Entwicklungsverfahren und Projektmanagement.`,
+      `{"ops":[{"insert":"DCI Digital Career Institute gGmbH"},{"attributes":{"header":1},"insert":"\n"},{"attributes":{"height":"150","width":"150"},"insert":{"image":"https://www.digitalcareerinstitute.org/wp-content/uploads/2017/04/AZAV_schwarz-wei%C3%9F-ICG-300x274-1-150x150.png"}},{"attributes":{"header":1},"insert":"\n"},{"insert":"\nZugelassener Träger für die Förderung der Beruflichen Weiterbildung nach dem Recht der Arbeitsförderung.\n \nMaßnahmen"},{"attributes":{"header":2},"insert":"\n"},{"insert":"\nERPROBUNGSCENTER DIGITALE BERUFE\n"},{"attributes":{"bold":true},"insert":"Berlin Maßnahmenummer:      922/0108/16"},{"insert":"\n"},{"attributes":{"bold":true},"insert":"Düsseldorf Maßnahmenummer:  337/31/17"},{"insert":"\n"},{"attributes":{"bold":true},"insert":"Hamburg Maßnahmenummer:   123/7195/18"},{"insert":"\n \nDauer: 4 Wochen Vollzeit (160 UE)\n \nDiese Aktivierungs- und Vermittlungsmaßnahme nach §45 Abs. 1 Satz 1 Nr. 2 SGB III soll einen Einblick in den Bereich der digitalen Berufe gewähren. Hierbei ist die individuelle Betreuung und Förderung der Teilnehmer sowie der direkte Kontakt und Dialog mit Unternehmen maßgeblich. Um einen transparenten Eindruck der digitalen Arbeitswelt zu vermitteln, stehen unter anderem verschiedene, außergewöhnliche Exkursionen zu regionalen IT-Firmen im Fokus. Dadurch soll das persönliche Engagement und Leistungsbestreben der Teilnehmer gesteigert werden. Die praktischen und theoretischen Vermittlungseinheiten werden durch verschiedene Lehrkräfte und Dozenten aus regionalen ITUnternehmen realisiert. Bei Bedarf erhalten diese Unterstützung von einem Dolmetscher (Arabisch und Farsi), um sprachliche Barrieren abzubauen. Unsere Analyse der Teilnehmer arbeitet ihr Potential heraus, sodass aufbauend auf ihrem Persönlichkeitsprofil eine individuelle Selbstvermarktungs- und Bewerbungsstrategie entworfen werden kann.\n \n \nDIE WEITERBILDUNG ZUM WEB-PROGRAMMIERER (W/M)"},{"attributes":{"list":"bullet"},"insert":"\n"},{"attributes":{"bold":true},"insert":"Berlin Maßnahmenummer:      922/0360/16"},{"insert":"\n"},{"attributes":{"bold":true},"insert":"Düsseldorf Maßnahmenummer:  337/1314/17"},{"insert":"\n \nUnsere Weiterbildung nach §81 SGB III ist modular aufgebaut und dauert maximal 13 Monate. Die Anzahl der Module richtet sich nach der persönlichen Vorerfahrung, sodass sich bei entsprechenden Vorkenntnissen die Ausbildungsdauer verkürzt. Die Module umfassen Grundlagen, Frontend-, Backend- und Datenbank-Entwicklung sowie QuellcodeVerwaltung, Entwicklungsverfahren und Projektmanagement.\nHaben Sie noch Fragen?\n\nIch erkläre mich mit der Speicherung meiner Daten einverstanden und stimme zu, den Newsletter zu erhalten.\nIch habe die "},{"attributes":{"color":"#007aff","link":"https://www.digitalcareerinstitute.org/datenschutz/"},"insert":"Datenschutzerklärung"},{"insert":"\ngelesen und akzeptiere sie.\"]\nSenden\n \nDCI Digital Career Institute gGmbH (Devugees)\nGrünberger Str. 54, 10245 Berlin\nTel.: +49 30 – 364286190\ninfo@devugees.org\nGeschäftsführer: Steffen Zoller\nEingetragen: Amtsgericht Berlin Charlottenburg HRB 177854 B\nBankinstitute: Deutsche Bank\nIBAN: DE88 8607 0024 0314 9507 00\nSWIFT-BIC: DEUTDEDBLEG\n"}]}`,
     order: 1
   },
   {
@@ -138,41 +115,12 @@ exports.pages = [
   {
     title: "Become a buddy",
     content:
-      `Digital Career Institute doesn’t only qualify refugees but also helps to integrate them. To keep ambitions and motivation of the participants high, we want to place a spiritual coach, a buddy, at their sides – you!
-
-        \n\r
-        Become a buddy
-        Become part of the integration process. Take them by the hand. Light their path and keep them focused on their goals.
-
-        \n\r
-        What you bring with you
-        Some practical experience in one or more of the following technologies or programming languages:
-
-        \n\r
-        HTML
-        CSS
-        Bootstrap
-        jQuery
-        Ruby on Rails
-        Javascript
-        Regardless of how much time you can commit, we are happy about everyone who can support our participants technically. Whether as a regular available buddy or hourly for questions in between.`,
+      `{"ops":[{"insert":"Digital Career Institute doesn’t only qualify refugees but also helps to integrate them. To keep ambitions and motivation of the participants high, we want to place a spiritual coach, a buddy, at their sides – you!\n"},{"attributes":{"bold":true},"insert":"Become a buddy"},{"insert":"\nBecome part of the integration process. Take them by the hand. Light their path and keep them focused on their goals.\n"},{"attributes":{"bold":true},"insert":"What you bring with you"},{"insert":"\nSome practical experience in one or more of the following technologies or programming languages:\nHTML"},{"attributes":{"list":"bullet"},"insert":"\n"},{"insert":"CSS"},{"attributes":{"list":"bullet"},"insert":"\n"},{"insert":"Bootstrap"},{"attributes":{"list":"bullet"},"insert":"\n"},{"insert":"jQuery"},{"attributes":{"list":"bullet"},"insert":"\n"},{"insert":"Ruby on Rails"},{"attributes":{"list":"bullet"},"insert":"\n"},{"insert":"Javascript"},{"attributes":{"list":"bullet"},"insert":"\n"},{"insert":"Regardless of how much time you can commit, we are happy about everyone who can support our participants technically. Whether as a regular available buddy or hourly for questions in between.\n"}]}`,
     order: 3
   },
   {
     title: "Teach at DCI",
-    content: `Become an Instructor
-      EMPOWER PEOPLE TO PURSUE THE DIGITAL CAREERS THEY LOVE.
-      Teach when you want
-      FULL-TIME
-      Join a talented team of instructors that teach daily.
-
-      PART-TIME
-      Lead a multi-week course.
-
-      IN YOUR SPARE-TIME
-      Share your knowledge in a class or workshop whenever it fits your schedule.
-
-      Check out our open Positions`,
+    content: `{"ops":[{"insert":"Become an Instructor"},{"attributes":{"header":2},"insert":"\n"},{"insert":"EMPOWER PEOPLE TO PURSUE THE DIGITAL CAREERS THEY LOVE."},{"attributes":{"header":6},"insert":"\n"},{"insert":"Teach when you want"},{"attributes":{"header":3},"insert":"\n"},{"insert":"FULL-TIME"},{"attributes":{"header":5},"insert":"\n"},{"insert":"Join a talented team of instructors that teach daily.\nPART-TIME"},{"attributes":{"header":5},"insert":"\n"},{"insert":"Lead a multi-week course.\nIN YOUR SPARE-TIME"},{"attributes":{"header":5},"insert":"\n"},{"insert":"Share your knowledge in a class or workshop whenever it fits your schedule.\n \n"},{"attributes":{"color":"#007aff","link":"https://www.digitalcareerinstitute.org/en/jobs/"},"insert":"Check out our open Positions"},{"insert":"\n"}]}`,
     order: 3
   }
 ];

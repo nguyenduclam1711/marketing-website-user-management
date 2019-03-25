@@ -1,6 +1,7 @@
 mixin pageForm
   - var editPath = currentPath.includes('admin/pages/edit')
   form.mb-5(method='POST', action=editPath ? '/admin/pages/update/'+page.slug+'?_method=PUT' : '/admin/pages?alert=create')
+
     h2
       =editPath ? "Edit Page " :"Create a new Page"
       .btn-group
@@ -14,7 +15,8 @@ mixin pageForm
     
     .mb-3
       label(for='content') Content
-      textarea#inputContent.form-control(name='content', type='password', placeholder='Content', required='', )=editPath ? page.content : ""
+      #editor(value=editPath ? page.content : "")
+      textarea#inputContent.d-none(name='content', type='password', placeholder='Content', required='', )=editPath ? page.content : ""
     .mb-3
       label(for='order') 
         | Order
