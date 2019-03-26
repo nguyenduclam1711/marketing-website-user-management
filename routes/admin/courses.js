@@ -1,8 +1,6 @@
-const Course = require("../../models/course");
-
 const express = require("express");
 const router = express.Router();
-const { ensureAuthenticated, redirectNonAdmin } = require("../../helpers/passport");
+const { ensureAuthenticated, redirectNonAdmin } = require("../../helpers/helper");
 
 const AdminCoursesController = require("../../controllers/admin/AdminCoursesController");
 router.get("/", ensureAuthenticated, redirectNonAdmin, AdminCoursesController.getCourses);

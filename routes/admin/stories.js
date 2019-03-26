@@ -1,9 +1,6 @@
-const Menulocation = require("../../models/menulocation");
-const Story = require("../../models/story");
-
 const express = require("express");
 const router = express.Router();
-const { ensureAuthenticated } = require('../../helpers/passport')
+const { ensureAuthenticated } = require('../../helpers/helper')
 
 const AdminStoriesController = require("../../controllers/admin/AdminStoriesController");
 router.get("/", ensureAuthenticated, AdminStoriesController.getStories);

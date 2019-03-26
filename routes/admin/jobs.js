@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { ensureAuthenticated, redirectNonAdmin } = require('../../helpers/passport')
+const { ensureAuthenticated, redirectNonAdmin } = require('../../helpers/helper')
 
 const AdminJobsController = require("../../controllers/admin/AdminJobsController");
 router.get("/", ensureAuthenticated, redirectNonAdmin, AdminJobsController.getJobs);

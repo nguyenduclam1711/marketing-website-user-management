@@ -1,8 +1,8 @@
-var passport = require("passport");
+const passport = require("passport");
 const uuid = require("uuid");
 
-var User = require("../models/user");
-var { sendMail, getRequestUrl } = require("../helper.js");
+const User = require("../models/user");
+const { sendMail, getRequestUrl } = require("../helpers/helper");
 
 module.exports.renderLogin = (req, res) => {
   res.render("login");
@@ -25,9 +25,9 @@ sendVerificationMail = async (req, userToken ) => {
 
 }
 module.exports.register = async (req, res) => {
-  var email = req.body.email;
-  var username = req.body.username;
-  var password = req.body.password;
+  const email = req.body.email;
+  const username = req.body.username;
+  const password = req.body.password;
 
   // Validation
   req.checkBody("email", "Email is required").notEmpty();
@@ -38,7 +38,7 @@ module.exports.register = async (req, res) => {
     .checkBody("password2", "Passwords do not match")
     .equals(req.body.password);
 
-  var errors = req.validationErrors();
+  const errors = req.validationErrors();
   if (errors) {
     req.flash("danger", errors.map(i => i.msg).join(", "));
     res.render("register");
@@ -49,7 +49,7 @@ module.exports.register = async (req, res) => {
       res.redirect("/users/register");
     } else {
       const userToken = uuid(4);
-      var newUser = new User({
+      const newUser = new User({
         email: email,
         username: username,
         password: password,

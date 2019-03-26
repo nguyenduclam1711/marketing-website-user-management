@@ -2,7 +2,7 @@ require('dotenv').config({ path: __dirname + '/../.env' });
 const request = require("request");
 const Event = require('../models/event');
 const Location = require('../models/location');
-const fetchEventsByLocation = require("../helpers/fetch_events_by_location");
+const {fetchEventsByLocation} = require("../helpers/helper");
 
 module.exports.getEvents = async (req, res) => {
   const eventsByLocation = await fetchEventsByLocation()

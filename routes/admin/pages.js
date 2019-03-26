@@ -1,9 +1,6 @@
-const Menulocation = require("../../models/menulocation");
-const Page = require("../../models/page");
-
 const express = require("express");
 const router = express.Router();
-const { ensureAuthenticated, redirectNonAdmin } = require('../../helpers/passport')
+const { ensureAuthenticated, redirectNonAdmin } = require('../../helpers/helper')
 
 const AdminPagesController = require("../../controllers/admin/AdminPagesController");
 router.get("/", ensureAuthenticated, redirectNonAdmin, AdminPagesController.getPages);

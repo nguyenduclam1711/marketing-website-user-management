@@ -2,7 +2,7 @@ const AdminMenulocationsController = require("../../controllers/admin/AdminMenul
 
 const express = require("express");
 const router = express.Router();
-const { ensureAuthenticated, redirectNonAdmin } = require('../../helpers/passport')
+const { ensureAuthenticated, redirectNonAdmin } = require('../../helpers/helper')
 
 router.get("/", ensureAuthenticated, redirectNonAdmin, AdminMenulocationsController.getMenulocations);
 

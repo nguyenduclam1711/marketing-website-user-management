@@ -1,5 +1,4 @@
 require("dotenv").config({ path: __dirname + "/../.env" });
-const request = require("request");
 const Job = require("../../models/job");
 const Location = require("../../models/location");
 
@@ -11,10 +10,9 @@ module.exports.getJobs = async (req, res) => {
       .exec();
     let locations = await Location.find({}).exec();
 
-    
     res.render("admin/jobs", {
       jobs,
-      locations,
+      locations
     });
   } catch (err) {
     console.log(err);

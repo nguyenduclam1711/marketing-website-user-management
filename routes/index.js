@@ -8,7 +8,7 @@ const Event = require("../models/event");
 const request = require("request");
 const express = require("express");
 const router = express.Router();
-var { sendMail } = require("../helper.js");
+const { sendMail } = require("../helpers/helper");
 
 if (!process.env.AUTHORIZATION || !process.env.URL) {
   console.error(
@@ -53,7 +53,7 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/contact", async (req, res, next) => {
-  var contact = new Contact();
+  const contact = new Contact();
   contact.name = req.body.name;
   contact.email = req.body.email;
   contact.body = req.body.body;
@@ -73,7 +73,7 @@ router.post("/contact", async (req, res, next) => {
       text: `${req.body.body}`,
       html: `${req.body.body}`
     }
-    var info = await sendMail(req, mailOptions);
+    const info = await sendMail(req, mailOptions);
     req.flash(
       "success",
       `Thanks for your message. We will reply to you as soon as possible.`

@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const EventsController = require('../../controllers/admin/AdminEventsController');
-const { ensureAuthenticated, redirectNonAdmin } = require("../../helpers/passport");
+const { ensureAuthenticated, redirectNonAdmin } = require("../../helpers/helper");
 
 router.get('/', ensureAuthenticated, redirectNonAdmin, EventsController.getEvents)
 router.get('/fetchevents', ensureAuthenticated, redirectNonAdmin, EventsController.fetchevents);
