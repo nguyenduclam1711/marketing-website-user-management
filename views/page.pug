@@ -3,8 +3,7 @@ block content
   
   .container.py-5
     h1.display-1.d-block=page.title
-    - var str = page.content.replace(/[\r\n]/g, '<br/>');
-    p.lead.pSize !{str}
+    p.lead.pSize !{page.toHTML}
 
   
 
