@@ -6,5 +6,16 @@ block content
       h1.mb-3 Would you like to work with DCI?
       p We offer on a roling basis different jobs in teaching and administration at DCI. Become part of an amazing team in one of German’s most interesting social impact companies.
       .mt-5
+        .mb-3
+          h2 Our locations
+          ul.nav.nav-tabs.mb-3
+            a.nav-link(href="/jobs")="All"
+            each location in locations
+              li.nav-item
+                a.nav-link(class=(query.location === location.name ? "active" : "") href="/jobs?location="+location.name)=location.name
+        if query.location
+          h2="Showing jobs for " + query.location
+        else
+          h2="Showing all jobs"
         +joblist(true)
            

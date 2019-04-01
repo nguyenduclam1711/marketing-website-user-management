@@ -3,11 +3,17 @@ block content
   .container.py-5
     h1= job.name
     .row
-      .col-md-8
-        .mb-3
-          = "Available in: "
-          each loc in job.locations
-            = loc.name
-        p
-          =job.content
+      .col-md-12
+        .p-3.mb-5.bg-light.border-0.shadow
+          p
+            span.mr-2 Location:
+            each location in job.locations
+              span.badge.badge-primary.mr-2=location.name
         
+          each description in job.description
+            h3.mr-3=description.name
+            p.mr-3 !{description.value}
+
+          .d-flex.align-items-center
+            a.btn.btn-outline-primary.mr-2(href="/jobs") Back
+            a.btn.btn-outline-primary(target="_blank" href="https://dci-jobs.personio.de/job/"+ job.personio_id+"#apply") Apply

@@ -1,92 +1,85 @@
 require("dotenv").config({ path: __dirname + "/../.env" });
+const request = require("request");
+const { promisify } = require("util");
+const promisifiedRequest = promisify(request);
 const Job = require("../../models/job");
 const Location = require("../../models/location");
+const parser = require("xml2json");
 
+module.exports.fetchJobs = async (req, res) => {
+  try {
+    return new Promise(async (resolve, reject) => {
+      const xml = await promisifiedRequest("https://dci-jobs.personio.de/xml");
+      const jobsResponse = JSON.parse(parser.toJson(xml.body));
+      const allJobs = jobsResponse["workzag-jobs"].position;
+
+      for (let job of allJobs) {
+        try {
+          const existingJob = await Job.findOne({
+            personio_id: job.id
+          });
+          if (!existingJob) {
+            let location = await Location.findOne({
+              name: { $regex: new RegExp(job.office, "i") }
+            });
+            if (!location) {
+              location = new Location({
+                name: job.office
+              });
+              location = await location.save();
+            }
+
+            const newjob = new Job({
+              personio_id: job.id,
+              locations: [location.id],
+              name: job.name,
+              description: job.jobDescriptions.jobDescription,
+              department: job.department,
+              employmentType: job.employmentType,
+              schedule: job.schedule,
+              seniority: job.seniority
+            });
+            await newjob.save();
+          }
+        } catch (err) {
+          console.log(err);
+          reject("Jobs cronjob dont fetched");
+        }
+      }
+      resolve("Jobs cronjob fetched");
+      if (res) {
+        res.redirect("/admin/jobs?alert=created");
+      }
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
 module.exports.getJobs = async (req, res) => {
   try {
     let jobs = await Job.find({})
       .populate("locations")
       .sort("order")
       .exec();
+
     let locations = await Location.find({}).exec();
 
     res.render("admin/jobs", {
       jobs,
-      locations
+      locations,
+      query: req.query
     });
   } catch (err) {
     console.log(err);
   }
 };
 
-module.exports.getSingleJob = async (req, res) => {
+module.exports.deleteJobs = async (req, res) => {
   try {
-    const job = await Job.findOne({ slug: req.params.slug });
-    res.render(`job`, {
-      job
-    });
+    Job.collection.drop();
+    res.redirect("/admin/jobs?alert=created");
   } catch (err) {
     console.log(err);
-  }
-};
-module.exports.editJob = async (req, res) => {
-  try {
-    const job = await Job.findOne({ slug: req.params.slug });
-    let alllocations = await Location.find({}).exec();
-    all = alllocations.map(loc => {
-      let match = job.locations
-        .map(pcat => pcat.toString())
-        .includes(loc._id.toString());
-
-      if (match) {
-        return Object.assign({ selected: true }, loc._doc);
-      } else {
-        return loc._doc;
-      }
-    });
-
-    res.render("admin/editJob", {
-      title: "Home",
-      locations: all,
-      job
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
-module.exports.createJob = async (req, res) => {
-  try {
-    var job = new Job();
-    job.name = req.body.name;
-    job.content = req.body.content;
-    job.locations = req.body.locations;
-    job.save(function(err) {
-      if (err) res.send(err);
-      
-      req.flash("success", `Successfully created ${job.name}`);
-      res.redirect("/admin/jobs");
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
-module.exports.deleteJob = async (req, res) => {
-  await Job.remove({ slug: req.params.slug });
-  req.flash("warning", `Successfully deleted Job`);
-  res.redirect("/admin/jobs");
-};
-
-module.exports.updateJob = async (req, res) => {
-  try {
-    const job = await Job.findOne({ slug: req.params.slug });
-    req.flash("success", `Successfully updated ${job.name}`);
-    job.name = req.body.name;
-    job.content = req.body.content;
-    job.locations = req.body.locations;
-
-    await job.save();
-    res.redirect("/admin/jobs/edit/" + job.slug);
-  } catch (err) {
-    console.log(err);
+    res.redirect("/admin/jobs?alert=created");
   }
 };

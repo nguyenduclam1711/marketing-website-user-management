@@ -16,77 +16,7 @@ exports.adminUser = {
   verifiedAt: new Date()
 };
 
-exports.jobs = [
-  {
-    name: "Lecturer Web Development Berlin (m/w)",
-    content: `Who are we looking for?
-    For our program start in Berlin we are looking for an experienced Fronted Developer / Web Developer who wants to operate teaching. As lecturer you are part of the team which pushes Devugees forward and wants to make it the number one for contemporary further and vocational training in the technical area.
 
-    We are looking for a lecturer for the following tasks:
-    Your main task will be the organization of the teaching units for the Frontend-Development / Web Development field. Thereby you will be in charge of the following areas:
-
-    Teaching Devugees participants with main focus Frontend-Development / Web Development
-    Coordination of lectureship
-    Contribution on further structure and process development for Devugees
-
-    Your profile
-    Beside your passion for Frontend-Development you show strong interest in teaching. Furthermore, the following skills are of advantage:
-
-    At least 1 – 2 years experience in the field Frontend-Development (HTML, CSS, Javascript) / Web Development
-    Ideally already first experience in teaching, tutorials or extra tuition
-    Pragmatic overall approach and functioning
-    Commitment
-    Preferably very good knowledge in English, where appropriate basic knowledge in Arabic
-    Interest and absolute motivation to help refugees and foreign course participants
-
-    Your application
-
-    If you are technical experienced, if you want to contribute something to the refugees´ integration and if you want to support Devugees at the Berlin location, please send your application including your CV to:
-
-    Name of contact person: Maria Courmont
-
-    E-Mail address: jobs@devugees.org`
-  },
-  {
-    name: "Praktikum (m/w) Event Marketing",
-    content: `Über diesen Job
-
-Du bist mitten im Studium, du weißt schon so einiges über das “Wie”, “Warum” und “Überhaupt” des Marketings und möchtest dich neuen Herausforderungen in einem spannenden Praktikum stellen? Du bist ein Ass im Organisieren und hast Lust auf eine Herausforderung im Digital-Bereich? Ganz wunderbar, dann bist du hier total richtig!
-
-Zum nächstmöglichen Zeitpunkt suchen wir Verstärkung im Event-Marketing, der/die sich mutig und begeistert in die spannenden Wellen der täglichen Marketing-Herausforderungen wirft. Werde Teil des Devugees-Teams und finde im Bereich Marketing dein Spielfeld zum Mitgestalten, vielseitige spannende Aufgaben und offene Ohren für deine Ideen!
-
-Aufgaben
-
-Dein Fokus wird darauf liegen, neue Projekte im Bereich Marketing gemeinsam mit dem Team anzustoßen sowie neue Kooperationspartner zu finden. Zu deinen Aufgaben gehören im Detail:
-
-Einarbeiten verschiedene Bereiche des Marketings mit einem Schwerpunkt auf Event & Kooperationen
-Erstellung neuer Werbemittel
-Unterstützung bei der Koordination
-Tägliches Controlling der Kampagnen
-Begleitung und Durchführung der Events
-
-
-Anforderungen
-
-Im besten Fall hast du erste Erfahrungen im Bereich Marketing, Sales, Kommunikation oder Vertrieb schon gesammelt. Nun brennst du darauf  kommunikativen Aufgaben zu übernehmen und überzeugst durch ein sicheres Auftreten. Im Einzelnen bedeutet das:
-
-Erste Erfahrungen in (Online) Marketing, Sales, Communications oder Events
-Schnelle Auffassungsgabe
-Sehr gute Kommunikationsfähigkeit und ein sicheres Auftreten, auch am Telefon (auf Englisch und auf Deutsch)
-Ein besonders hohes Interesse an Online-Produkten udn Bildung
-Zahlenaffinität
-
-
-Unser Angebot
-
-Anleitung und Coaching durch unseren Marketing Manager
-Verantwortungsvoller Job mit viel Platz für Eigeninitiative und Kreativität
-Dynamische Arbeitsatmosphäre in einem hochmotivierten Team
-Das DCI Digital Career Institute ist ein Bildungsträger, der sich auf die Qualifizierung von Talenten für die Digitalbranche spezialisiert hat. Mit dem Fort- und Weiterbildungsprogramm Devugees.org wenden wir uns insbesondere an Geflüchtete, die sich für eine technische Qualifizierung am deutschen Arbeitsmarkt  interessieren. Berufliche Qualifizierung sehen wir als Schlüssel für einen erfolgreichen Lebens- und Arbeitsstart. Wir haben das Ziel höchster Ausbildungsqualität stets fest im Blick und entwickeln daher unsere Konzepte ständig weiter.
-
-Wenn du dich für unsere Stelle am Berliner Standort interessierst und die passenden Erfahrungen mitbringst, dann schick gerne deine Unterlagen (Motivationsschreiben, Lebenslauf) an Maria Courmont: jobs@devugees.org`
-  }
-]
 
 exports.pages = [
   {

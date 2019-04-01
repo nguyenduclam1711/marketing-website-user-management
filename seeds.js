@@ -16,14 +16,13 @@ const Contact = require("./models/contact");
 const Course = require("./models/course");
 const Location = require("./models/location");
 const Page = require("./models/page");
-const Job = require("./models/job");
 const Event = require("./models/event");
 
 const EventsController = require('./controllers/admin/AdminEventsController');
 
 const IMAGE_UPLOAD_DIR = process.env.IMAGE_UPLOAD_DIR;
 
-const {menulocations, stories, jobs, pages, courses, users, events, adminUser, contacts} = require('./seeddata')
+const {menulocations, stories, pages, courses, users, events, adminUser, contacts} = require('./seeddata')
 
 async function deleteData() {
   console.log("😢 Goodbye Data...");
@@ -35,7 +34,6 @@ async function deleteData() {
   await Page.deleteMany();
   await User.deleteMany();
   await Event.deleteMany();
-  await Job.deleteMany();
   console.log("Data Deleted. To load sample data, run\n\n\t npm run seeds\n\n");
   process.exit();
 }
@@ -99,11 +97,9 @@ async function loadData() {
 
     var associatedMenulocations = await seedRandomNtoN(pages, createdMenulocations, Menulocation)
     var associatedLocations = await seedRandomNtoN(contacts, createdLocations, Location)
-    var associatedJobs = await seedRandomNtoN(jobs, createdLocations, Location)
 
     await Page.insertMany(associatedMenulocations)
     await Contact.insertMany(associatedLocations)
-    await Job.insertMany(associatedJobs)
 
     console.log("👍 Done!\n\n Successfully loaded sample data");
     process.exit();
