@@ -16,7 +16,6 @@ include mixins/contactform
 include mixins/dataPrivacy
 include mixins/storyForm
 include mixins/courseForm
-include mixins/jobForm
 include mixins/singleCourse
 include mixins/landingpage/getinvolved
 include mixins/landingpage/home
@@ -72,7 +71,7 @@ html.h-100(lang='en')
                 span(aria-hidden='true') ×
 
     .h-100.d-flex.flex-column
-      div
+      div.container
         if currentPath !== "/"
           +navigation
       .flex-grow-1

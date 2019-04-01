@@ -4,14 +4,25 @@ const Location = require("../models/location");
 
 module.exports.getJobs = async function(req, res) {
   try {
-    let jobs = await Job.find({})
-      .populate("locations")
-      .sort("order")
-      .exec();
     let locations = await Location.find({}).exec();
-
+    let jobs;
+    if (req.query.location) {
+      location = await Location.findOne({
+        name: req.query.location
+      }).exec();
+      jobs = await Job.find({ locations: location._id })
+        .populate("locations")
+        .sort("order")
+        .exec();
+    } else {
+      jobs = await Job.find({})
+        .populate("locations")
+        .sort("order")
+        .exec();
+    }
     res.render("jobsPublic", {
       jobs,
+      query: req.query,
       locations
     });
   } catch (err) {

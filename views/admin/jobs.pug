@@ -3,10 +3,9 @@ block content
   
   .container
     h1 Admin Jobs
+    .btn-group.mt-3(role="group" aria-label="Basic example" )
+      a.btn.btn-outline-primary(href="/admin/jobs/fetchjobs")="Fetch jobs from Personio"
+      a.btn.btn-outline-danger(href="/admin/jobs/deletejobs")="Delete all"
     .row
-      .col-md-8
+      .col-md-12
         +joblist
-
-      .col-md-4
-        +jobform
-        

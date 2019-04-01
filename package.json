@@ -46,7 +46,8 @@
     "redis": "^2.8.0",
     "sass-loader": "^7.1.0",
     "webpack": "^4.25.1",
-    "webpack-cli": "^3.2.3"
+    "webpack-cli": "^3.2.3",
+    "xml2json": "^0.11.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",

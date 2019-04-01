@@ -37,10 +37,10 @@ module.exports.fetchevents = async (req, res) => {
     return new Promise(function (resolve, reject) {
       request(url, async (error, response, body) => {
         body = JSON.parse(body);
-        if (error) {
-          console.log("error:", error);
+        if (body.error) {
+          console.log("error:", body);
         }
-        //const events = await body.events.map(async event => {
+          
         for await (let event of body.events) {
           try {
             const existingEvent = await Event.findOne({
@@ -75,11 +75,11 @@ module.exports.fetchevents = async (req, res) => {
             }
           } catch (err) {
             console.log(err);
-            reject("dont worked");
+            reject("Events cronjob dont fetched");
             res.redirect("/admin/events?alert=created");
           }
         }
-        resolve("worked");
+        resolve("Events cronjob fetched");
         if (res) {
           res.redirect("/admin/events?alert=created");
         }

@@ -14,35 +14,32 @@ const Page = require("./models/page");
 const Menulocation = require("./models/menulocation");
 const Location = require("./models/location");
 const flash = require("connect-flash");
-const cron = require('node-cron');
-const EventsController = require('./controllers/admin/AdminEventsController');
+const cron = require("node-cron");
+const EventsController = require("./controllers/admin/AdminEventsController");
+const JobsController = require("./controllers/admin/AdminJobsController");
 const mongoose = require("mongoose");
 
 // connect to redis server and get an extended client with promisified
 // methods getAsync() and setAsync()
 let redisClient = null;
-console.log(typeof process.env.USE_REDIS)
+
 if (process.env.USE_REDIS !== undefined && process.env.USE_REDIS === "true") {
-  console.log("Redis enabled")
+  console.log("Redis enabled");
 
   redis = require("redis");
   redisClient = getAsyncRedis();
 } else if (process.env.USE_REDIS === "false") {
-  console.log("Redis disabled")
+  console.log("Redis disabled");
 } else {
-  console.error("USE_REDIS is not defined in .env")
-  process.exit()
+  console.error("USE_REDIS is not defined in .env");
+  process.exit();
 }
 
 mongoose.set("useCreateIndex", true);
 try {
-  mongoose.connect(
-    mongopath,
-    { useNewUrlParser: true }
-  );
-}
-catch (err) {
-  console.log(`Please set a mongo path in your .env \n\n${err}`)
+  mongoose.connect(mongopath, { useNewUrlParser: true });
+} catch (err) {
+  console.log(`Please set a mongo path in your .env \n\n${err}`);
 }
 
 app.use(
@@ -54,8 +51,8 @@ app.use(
     store: new MongoStore({ mongooseConnection: mongoose.connection })
   })
 );
-app.use(bodyParser.json({ limit: '50mb' }));
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 app.use(express.static("public"));
 app.use("/assets", express.static(path.join(__dirname, "node_modules/")));
@@ -67,7 +64,7 @@ app.use("/images", express.static(path.join(__dirname, "uploads/images")));
 app.use(expressValidator());
 app.use(flash());
 
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
   (res.locals.messages = {
     danger: req.flash("danger"),
     warning: req.flash("warning"),
@@ -80,8 +77,8 @@ app.use(function (req, res, next) {
       .toLowerCase());
   let match = req.url.match("[^/]+(?=/$|$)");
   res.locals.title = "DigitalCareerInstitute";
-  app.locals.moment = require('moment');
-  res.locals.live = req.headers.host.includes("digitalcareerinstitute.org")
+  app.locals.moment = require("moment");
+  res.locals.live = req.headers.host.includes("digitalcareerinstitute.org");
   if (match) {
     match = match[0].replace(/\//g, " ");
     res.locals.title =
@@ -114,12 +111,11 @@ app.use(async (req, res, next) => {
       .exec();
     let locations = await Location.find({}).exec();
 
-    let footerCat = await Menulocation.findOne({ name: "footer" })
-    let footerPages = await Page.find({ menulocations: { $in: [footerCat] } })
+    let footerCat = await Menulocation.findOne({ name: "footer" });
+    let footerPages = await Page.find({ menulocations: { $in: [footerCat] } });
 
-    let headerCat = await Menulocation.findOne({ name: "header" })
-    let headerPages = await Page.find({ menulocations: { $in: [headerCat] } })
-
+    let headerCat = await Menulocation.findOne({ name: "header" });
+    let headerPages = await Page.find({ menulocations: { $in: [headerCat] } });
 
     navData = {
       courses,
@@ -144,8 +140,8 @@ app.use(async (req, res, next) => {
   res.locals.currentPath = req.path;
   res.locals.locations = locations;
   res.locals.courses = courses;
-  res.locals.headerPages = headerPages
-  res.locals.footerPages = footerPages
+  res.locals.headerPages = headerPages;
+  res.locals.footerPages = footerPages;
   next();
 });
 
@@ -192,27 +188,32 @@ app.set("views", path.join(__dirname, "views/"));
 app.set("view engine", "pug");
 
 // scheduling cron job:
-cron.schedule('0 0 * * * *', () => {
-  console.log('Runing a job at 00:00 at Europe/Berlin timezone');
-  // Fetching Events
-  async function loadData() {
-    try {
-      const response = await EventsController.fetchevents();
-      console.log(
-        "👍 Done!\n\n Successfully Fetching data"
-      );
-    } catch (e) {
-      console.log(
-        "\n👎 Error! The Error info is below !!!"
-      );
-      console.log(e);
-      process.exit();
+if (process.env.CRONINTERVAL) {
+  console.log(`Cron scheduled for ${process.env.CRONINTERVAL}`)
+  cron.schedule(
+    process.env.CRONINTERVAL,
+    () => {
+      console.log(`Runing a job at ${new Date()}`);
+      async function loadData() {
+        try {
+          const jobsResponse = await JobsController.fetchJobs();
+          const response = await EventsController.fetchevents();
+          console.log("👍 Done!\n\n Successfully Fetching data");
+        } catch (e) {
+          console.log("\n👎 Error! The Error info is below !!!");
+          console.log(e);
+          process.exit();
+        }
+      }
+      loadData();
+    },
+    {
+      scheduled: true,
+      timezone: "Europe/Berlin"
     }
-  }
-  loadData();
-}, {
-    scheduled: true,
-    timezone: "Europe/Berlin"
-  });
+  );
+} else {
+  console.log(`No cron interval set in the .env. No cron started.`);
+}
 
 module.exports = app;

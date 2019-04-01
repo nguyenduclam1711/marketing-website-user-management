@@ -5,7 +5,12 @@ var mongoose = require("mongoose"),
 var JobSchema   = new Schema({
   name: String,
   locations: [{ type: Schema.ObjectId, ref: "Location" }],
-  content: String,
+  personio_id: String,
+  description: [Object],
+  department: String,
+  employmentType: String,
+  schedule: String,
+  seniority: String,
   updatedAt: {
     type: Date,
     default: Date.now 

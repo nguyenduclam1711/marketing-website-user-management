@@ -8,7 +8,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const Location = require("../models/location");
 const Event = require("../models/event");
 
-exports.fetch_events_by_location = async () => {
+exports.fetchEventsByLocation = async () => {
   const locations = await Location.find({});
   let eventsByLocation = [];
 
@@ -80,38 +80,6 @@ passport.deserializeUser((id, done) => {
 
 exports.mongopath =
   process.env.MONGOURL || "mongodb://localhost:27017/marketing-website";
-
-exports.xml2json = srcDOM => {
-  let children = [...srcDOM.children];
-
-  // base case for recursion.
-  if (!children.length) {
-    return srcDOM.innerHTML;
-  }
-
-  // initializing object to be returned.
-  let jsonResult = {};
-
-  for (let child of children) {
-    // checking is child has siblings of same name.
-    let childIsArray =
-      children.filter(eachChild => eachChild.nodeName === child.nodeName)
-        .length > 1;
-
-    // if child is array, save the values as array, else as strings.
-    if (childIsArray) {
-      if (jsonResult[child.nodeName] === undefined) {
-        jsonResult[child.nodeName] = [xml2json(child)];
-      } else {
-        jsonResult[child.nodeName].push(xml2json(child));
-      }
-    } else {
-      jsonResult[child.nodeName] = xml2json(child);
-    }
-  }
-
-  return jsonResult;
-};
 
 exports.getAsyncRedis = () => {
   try {
