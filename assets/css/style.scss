@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 @import "global";
 @import "header";
-@import "contact";
 @import "footer";
 @import "typography";
 
@@ -19,7 +18,9 @@
     border-color: darken($color-border, 10%) !important;
   }
 }
-
+.btn {
+  border-radius: 0 !important;
+}
 .btn-gradient-secondary {
   color: white;
   border: none;
@@ -42,6 +43,7 @@
   transition: all 0.2s;
   background-position: 5% 0 !important;
   &:hover {
+    color: white !important;
     background-position: 95% 0 !important;
   }
 }
@@ -197,22 +199,6 @@ a.card-link {
     color: #da9446 !important;
     cursor: pointer;
   }
-}
-
-/******************************************
-OUR COURSES TESTIMONIALS
- *******************************************/
-
- .container-testimonials-text:hover{
-  box-shadow: 0 0 5px #0000002e;
-  div {
-    color: #da9446 !important;
-    cursor: pointer;
-  }
-}
-
-.section-padding {
-  padding: 5rem 0;
 }
 
 .testimonials-button-wrap {
@@ -461,13 +447,8 @@ UPCOMING EVENTS
 /******************************************
   LAST UPDATED EVENT
 *******************************************/
-.single-event-card:hover{
-  box-shadow: 0 0 15px #0000002e;
-  cursor: pointer;
-  .event-name {
-    color: #da9446 !important;
-    cursor: pointer;
-  }
+.card, .card-img-top {
+  border-radius: 0 !important;
 }
 .card-img-top {
   width: 100%;
@@ -508,17 +489,12 @@ UPCOMING EVENTS
 /******************************************
   STORIES
 *******************************************/
-
-body:not(.admin).story-item:hover, .story-cards-li:hover  {
-  box-shadow: 0 0 5px #0000002e;
-  cursor: pointer;
+.hover-shadow {
+  transition: box-shadow 0.3s ease;
+  &:hover {
+    box-shadow: 0 0 5px #0000002e;
+  }
 }
-body:not(.admin).story-item:hover a,  .story-cards-li:hover a  {
-  color: #da9446 !important;
-  cursor: pointer;
-}
-
-
 #containerStorieSingle {
   // max-width: 69%;
   box-shadow: 10px 10px 10px #bfbebe;
@@ -642,7 +618,6 @@ input[type="week"] {
   border: 2px solid #d9d9d9;
   box-shadow: none;
   padding: 12px;
-  border-radius: 4px;
   font-size: 16px;
   font-weight: normal;
   width: 100%;
@@ -650,6 +625,8 @@ input[type="week"] {
   outline: none;
   box-sizing: border-box;
   height: 42px;
+  border-radius: 0 !important;
+  border: none !important;
 }
 .dataPrivacyLink {
   text-decoration: underline;
@@ -975,8 +952,8 @@ input[type="week"] {
 }
 
 .mw-150 {
-  max-width: 150px;  
+  max-width: 150px;
 }
 .mh-150 {
-  max-height: 150px;  
+  max-height: 150px;
 }

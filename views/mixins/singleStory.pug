@@ -2,7 +2,7 @@ mixin singleStory(story, showFullContent)
   div.story-item.py-4.px-3.mb-3.d-flex.flex-column.justify-content-between.w-100
     a(href="/stories/"+story.slug)
       .row.position-relative
-        .col-12.align-items-center
+        .col-10.offset-1.col-md-8.offset-md-2.align-items-center
           img.object-fit-cover.img-fluid.rounded-circle.square(style="background-image: url('/images/"+story.avatar+"')")
         .col-5.position-absolute.align-items-center.bottom.right
           img.object-fit-cover.img-fluid.rounded-circle.square(style="background-image: url('/images/"+story.companylogo+"')")

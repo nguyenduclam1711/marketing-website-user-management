@@ -1,5 +1,10 @@
 mixin storylist(public)
- ul.row.story-cards-ul.mx-2
-  each story in stories
-    li.col-md-6.col-sm-12.col-lg-4.d-flex.story-cards-li
-      +singleStory(story)
+  div
+    ul.row.story-cards-ul.mx-2
+      each story in stories
+        li.col-md-6.col-sm-12.col-lg-4.d-flex.story-cards-li
+          .hover-shadow.bg-light
+            +singleStory(story)
+    .pt-4.text-center
+      a.btn.btn-lg.btn-gradient-secondary.mx-5(href="/stories") Show all Stories
+

@@ -7,60 +7,69 @@
 
 /*NAVIGATION-BRACKETS*/
 @include media-breakpoint-up(md) {
-#headernav  {
-  > li:not(.admin) > a.active {
-    // content: "";
-    // position: relative;
-  }
+  #headernav {
+    > li:not(.admin) > a.active {
+      // content: "";
+      // position: relative;
+    }
 
-  > li:not(.admin) {
-    &:hover > a,
-    > a.active,
-    > a:hover {
-      &:before,
-      &:after{
-        content: "";
-        position: absolute;
-        background-image: url("/media/bracket.svg");
-        background-repeat: no-repeat;
-        background-size: 1em;
-        display: inline-block;
-        height: 55px;
-        width: 50px;
-      }
-      &:before{
-        left: 0;
-        top: -8px;
-        -webkit-filter: drop-shadow(4px 3px 3px #bfbebe);
-        filter: drop-shadow(4px 3px 3px #bfbebe);
-      }
-      &:after{
-        left: auto;
-        right: 0;
-        top: -17px;
-        transform: rotate(180deg);
-        -webkit-filter: drop-shadow(-4px -3px 3px #bfbebe);
-        filter: drop-shadow(-4px -3px 3px #bfbebe);
+    > li:not(.admin) {
+      &:hover > a,
+      > a.active,
+      > a:hover {
+        &:before,
+        &:after {
+          content: "";
+          position: absolute;
+          background-image: url("/media/bracket.svg");
+          background-repeat: no-repeat;
+          background-size: 1em;
+          display: inline-block;
+          height: 55px;
+          width: 50px;
+          z-index: 999999;
+        }
+        &:before {
+          left: 0;
+          top: -8px;
+          -webkit-filter: drop-shadow(4px 3px 3px #bfbebe);
+          filter: drop-shadow(4px 3px 3px #bfbebe);
+        }
+        &:after {
+          left: auto;
+          right: 0;
+          top: -17px;
+          transform: rotate(180deg);
+          -webkit-filter: drop-shadow(-4px -3px 3px #bfbebe);
+          filter: drop-shadow(-4px -3px 3px #bfbebe);
+        }
       }
     }
   }
-}}
+}
 .dropdown-menu {
   border: none;
 }
-
 
 .dropdown-toggle::after {
   border: 0;
   margin-left: 0;
 }
 .dropdown-item.active {
-  background-color: #eee
+  color: inherit;
+  background-color: #eee;
 }
-.dropdown-toggle:hover  ~.dropdown-menu, .dropdown-menu:hover {
+.dropdown-toggle:hover ~ .dropdown-menu,
+.dropdown-menu:hover {
   display: block;
 }
 
 .navbar-light .navbar-toggler {
   border-color: transparent;
+}
+.navbar-light .navbar-nav .show > .nav-link,
+.navbar-light .navbar-nav .active > .nav-link,
+.navbar-light .navbar-nav .nav-link.show,
+.navbar-light .navbar-nav .nav-link.active {
+  color: rgba(0, 0, 0, 0.5);
 }

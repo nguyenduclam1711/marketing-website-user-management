@@ -7,7 +7,7 @@ mixin ourCoursesSection
       .row.mx-5
         each course in courses
           .col-md-6.col-lg-4
-            .service-item.p-4
+            .service-item.bg-light.p-4
               a.card-link(href="/courses/"+course.slug)
                 .service-image.icon-image.mb-5
                   img.h-100(src="/images/"+course.icon, alt=course.title)
