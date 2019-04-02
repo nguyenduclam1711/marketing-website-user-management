@@ -8,7 +8,7 @@ mixin courselist(public)
                     
           form.d-flex.justify-content-between(method='POST', action='/admin/courses/delete/'+course.slug +'?_method=DELETE')
 
-            if user.admin === "true"
+            if user && user.admin === "true"
               .d-flex.align-items-center
                 a.btn.btn-outline-primary.mr-2(href="/courses/"+course.slug) Show
                 

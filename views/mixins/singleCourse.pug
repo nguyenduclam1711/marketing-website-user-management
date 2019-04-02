@@ -11,7 +11,7 @@ mixin singleCourse
     .container.container-fluid-courses.bg-white.position-relative
       .row.row-courses
         nav#myScrollspy.courses-scroll.col-sm-3.col-4
-          ul.nav.nav-pills.flex-column.nav-courses-pills.p-4.text-center
+          ul.nav.nav-pills.flex-column.nav-courses-pills.p-4.text-center.bg-light
             h4=course.headline
             li.nav-item
               a.nav-link.nav-link-spy.mb-2.active(href='#section1') Overview
@@ -24,10 +24,10 @@ mixin singleCourse
             button.btn.btn-gradient-primary.btn-spy(type='button' data-toggle='modal', data-target='#contactFormModal') Apply Now
 
         .col-sm-9.col-8.col-courses
-          #section1.my-5
-            h2.mt-5.mb-3.text-left=courses.title
-            p.lead.text-left=courses.subtitle  
-            .row.mt-5
+          #section1.mb-5
+            h2.mt-5.mb-3.text-left=course.title
+            p.lead.text-left=course.subtitle  
+            .row
               - 
               each object in course.archivements
                 figure.col-md-4.text-center
@@ -101,6 +101,6 @@ mixin singleCourse
               p.lead Have questions? Want to see the student life for yourself? Book a one-on-one visit with our admissions team and we’ll show you around.
               p Vulkanstraße 1
               p 10367 Berlin
-      if user.admin === "true"
+      if user && user.admin === "true"
         div.py-3
           a.btn.btn-outline-primary(target="_blank" href='/admin/courses/edit/'+course.slug) Edit course

@@ -10,7 +10,7 @@ block content
               h2.mr-3=menulocation.name
               = menulocation.pages
               form.d-flex.justify-content-between(method='POST', action='/admin/menulocations/delete/'+menulocation._id +'?_method=DELETE')
-                if user.admin === "true"
+                if user && user.admin === "true"
                   .d-flex.align-items-center
                     a.btn.btn-outline-primary.mr-2(href="menulocations/edit/"+menulocation._id) Edit
                     button.btn.btn-outline-danger(type='submit') Delete

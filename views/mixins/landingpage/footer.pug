@@ -29,7 +29,7 @@ mixin footer
                 li
                   a(href='/pages/'+ page.slug)
                     =page.title
-                  if user.admin === "true"
+                  if user && user.admin === "true"
                     a(href='/admin/pages/edit/'+ page.slug)
                       small.text-monospace= " (Edit)"
                     
@@ -39,7 +39,7 @@ mixin footer
               each course in courses
                 li
                   a(href='/courses/'+ course.slug)=course.headline
-                  if user.admin === "true"
+                  if user && user.admin === "true"
                     a(href='/admin/courses/edit/'+ course.slug)
                       small.text-monospace= " (Edit)"
           .col-xs-12.col-sm-6.col-md-2.footers-four

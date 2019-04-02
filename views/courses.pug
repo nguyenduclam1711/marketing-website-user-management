@@ -1,19 +1,28 @@
 extends layout.pug
 block content
-  section#services.section-services
-    .container
-      h1.display-2
-        | Our Courses
-      .row
-        each course in courses
-          .col-md-6.col-lg-4
-            .service-item
-              a.service-link(href="/courses/"+course.slug)
-                span.screen-reader-text
-                  = course.title
-              .service-image.icon-image
-                img.h-100(src="/images/"+course.icon, alt=course.title)
-              .service-content
-                h4.service-title= course.headline
-                p=course.title
+  .jumbotron.jumbotron-fluid.jumbotron-singleCourse.text-center.bg-transparent
+    .bg-primary-transparent.position-fixed.left.top.z-minus.h-100.w-100
+      video.half-transparent.w-100(autoplay='', muted='', loop='')
+        source(src='/media/video.mp4', type='video/mp4')
+
+    .jumbotron-courses-container.text-white
+      h1.display-1.mt-5.mb-3.text-white Courses
+      p.lead.mb-3 Varios possibilities
     
+  section#services.h-100
+    .container.h-100
+      .bg-light.h-100
+        .row
+          each course in courses
+            .col-md-6.col-lg-4
+              .bg-light.hover-shadow
+                .service-item
+                  a.service-link(href="/courses/"+course.slug)
+                    span.sr-only
+                      = course.title
+                  .service-image.icon-image
+                    img.h-100(src="/images/"+course.icon, alt=course.title)
+                  .service-content
+                    h4.service-title= course.headline
+                    p=course.title
+        

@@ -125,8 +125,6 @@ ul.nav-courses-pills {
   position: sticky;
   list-style: none;
   color: $blue;
-  background-color: white;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
 }
 
 a.nav-link {
@@ -165,35 +163,32 @@ OUR COURSES SECTION
 a.card-link {
   color: #6c757d;
 }
-.section-services {
-  padding: 5rem 0;
-}
 
-.section-services .service-item .service-image {
+.service-item .service-image {
   margin-bottom: 1rem;
   height: 100px;
 }
-.section-services .service-item .service-content {
+.service-item .service-content {
   overflow: hidden;
 }
 
-.section-services .service-item {
+.service-item {
   padding: 1rem;
   margin-bottom: 1rem;
   position: relative;
   text-align: center;
   transition: all 100ms ease-out 0s;
 }
-.section-services .service-item .service-title {
+.service-item .service-title {
   margin-bottom: 1rem;
   color: #333;
   min-height: 56px;
 }
 
-.section-services .service-item p {
+.service-item p {
   min-height: 63px;
 }
-.section-services .service-item:hover {
+.service-item:hover {
   box-shadow: 0 0 5px #0000002e;
   .service-title {
     color: #da9446 !important;
@@ -447,7 +442,8 @@ UPCOMING EVENTS
 /******************************************
   LAST UPDATED EVENT
 *******************************************/
-.card, .card-img-top {
+.card,
+.card-img-top {
   border-radius: 0 !important;
 }
 .card-img-top {
@@ -530,6 +526,13 @@ UPCOMING EVENTS
 *******************************************/
 .modal-content {
   border: none;
+}
+.modal-backdrop.show {
+  background: linear-gradient(
+    to left,
+    darken(#3dbaf7, 10),
+    darken(#1d3b8b, 10)
+  ) !important;
 }
 .cf-title {
   text-align: center;
@@ -787,12 +790,7 @@ input[type="week"] {
 ********************************************************/
 /* ----------- iPad Pro Start----------- */
 /* Portrait and Landscape */
-@media only screen and (min-width: 1024px) and (max-height: 1366px) and (-webkit-min-device-pixel-ratio: 1.5) {
-  .row-courses {
-    margin: 0 5%;
-  }
-}
-/* ----------- iPad Pro End----------- */
+
 
 @media (max-width: 1199.98px) {
   .courses-scroll {
@@ -829,9 +827,6 @@ input[type="week"] {
     position: absolute;
     margin-top: 2.8%;
     width: 200px;
-  }
-  .row-courses {
-    margin: 0 5%;
   }
   .homeSection {
     min-width: 50vw;

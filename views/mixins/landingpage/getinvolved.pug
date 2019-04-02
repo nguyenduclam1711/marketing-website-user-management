@@ -7,6 +7,6 @@ mixin getinvolved
         each page in headerPages
           div.story-item.get-involved.py-4.px-3.mb-3.d-inline-block.justify-content-between
             a.service-link.text-muted(href="/pages/" + page.slug)
-              span.screen-reader-text
+              span.sr-only
                 = page.title
         
