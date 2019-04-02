@@ -1,11 +1,12 @@
 mixin singleStory(story, showFullContent)
   div.story-item.py-4.px-3.mb-3.d-flex.flex-column.justify-content-between.w-100
-    a.row(href="/stories/"+story.slug)
-      .col-3.align-items-center
-        img.object-fit-cover.img-fluid.rounded-circle.square(style="background-image: url('/images/"+story.avatar+"')")
-      .col-3.align-items-center
-        img.object-fit-cover.img-fluid.rounded-circle.square(style="background-image: url('/images/"+story.companylogo+"')")
-      .col-9
+    a(href="/stories/"+story.slug)
+      .row.position-relative
+        .col-12.align-items-center
+          img.object-fit-cover.img-fluid.rounded-circle.square(style="background-image: url('/images/"+story.avatar+"')")
+        .col-5.position-absolute.align-items-center.bottom.right
+          img.object-fit-cover.img-fluid.rounded-circle.square(style="background-image: url('/images/"+story.companylogo+"')")
+      div
         h3.font-weight-bold=story.alumniName          
         code=story.workPosition
         p.text-left.text-muted=story.excerpt
@@ -15,7 +16,7 @@ mixin singleStory(story, showFullContent)
     if user
       form.d-flex.justify-content-between(method='POST', action='/admin/stories/delete/'+story.slug +'?_method=DELETE')
         a.btn.btn-outline-primary.mr-2(target="_blank" href="/stories/"+story.slug) Show
-
-        .d-flex.align-items-center
-          a.btn.btn-outline-primary.mr-2(href="/admin/stories/edit/"+story.slug) Edit
-          button.btn.btn-outline-danger(type='submit') Delete
+        if user.id === story.userId
+          .d-flex.align-items-center
+            a.btn.btn-outline-primary.mr-2(href="/admin/stories/edit/"+story.slug) Edit
+            button.btn.btn-outline-danger(type='submit') Delete

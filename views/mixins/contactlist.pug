@@ -8,7 +8,7 @@ mixin contactlist(public)
         
         form.d-flex.justify-content-between(method='POST', action='/contacts/delete/'+contact._id +'?_method=DELETE')
           a.btn.btn-outline-primary.mr-2(target="_blank" href="contacts/"+contact._id) Show
-          if user
+          if user.admin === "true"
             .d-flex.align-items-center
               
               a.btn.btn-outline-primary.mr-2(href="contacts/edit/"+contact._id) Edit

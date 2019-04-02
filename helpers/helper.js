@@ -23,6 +23,7 @@ exports.fetchEventsByLocation = async () => {
   }
   return eventsByLocation;
 };
+exports.isAdmin = req => req.user.admin !== "true";
 
 module.exports.ensureAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {

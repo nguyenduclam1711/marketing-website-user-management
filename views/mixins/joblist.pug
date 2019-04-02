@@ -9,11 +9,5 @@ mixin joblist(public)
         span.mr-2 Location:
         each location in job.locations
           span.badge.badge-primary.mr-2=location.name
-    
-      each description in job.description
-        h3.mr-3=description.name
-        p.mr-3 !{description.value}
-
-
-      
+          
       a.btn.btn-outline-primary.mr-2(href="/jobs/"+job.slug) Show

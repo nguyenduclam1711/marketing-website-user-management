@@ -1,8 +1,8 @@
 mixin singleCourse
   .body-scroll
     .jumbotron.jumbotron-fluid.jumbotron-singleCourse.text-center.bg-transparent
-      .bg-primary-transparent.position-fixed.left.top.z-minus.h-100
-        img.half-transparent.h-100(src='/media/team.jpg')
+      .bg-primary-transparent.position-fixed.left.top.z-minus.h-100.w-100
+        img.half-transparent.w-100.h-100.object-fit-cover(src='/media/team.jpg')
       .jumbotron-courses-container.text-white
         h1.display-1.mt-5.mb-3.text-white=course.headline
         p.lead.mb-5=course.subheading
@@ -92,7 +92,7 @@ mixin singleCourse
                       span.courseApply-stepCount 3
                       p.courseApply-stepTitle Reserve your spot
 
-            
+                  button.btn.btn-lg.btn-gradient-primary.mt-3.mb-5(type='button' data-toggle='modal', data-target='#contactFormModal') Apply
             section.my-5
               h3 This course is available in: 
                 each location in course.locations
@@ -101,6 +101,6 @@ mixin singleCourse
               p.lead Have questions? Want to see the student life for yourself? Book a one-on-one visit with our admissions team and we’ll show you around.
               p Vulkanstraße 1
               p 10367 Berlin
-      if user
+      if user.admin === "true"
         div.py-3
           a.btn.btn-outline-primary(target="_blank" href='/admin/courses/edit/'+course.slug) Edit course

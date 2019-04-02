@@ -20,13 +20,13 @@ mixin pageForm
     .mb-3
       label(for='order') 
         | Order
-        button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Defines the order the pages are displayed.')
+        button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Defines the order the pages are displayed. 0,1,2,3,4')
           | ?
       input#inputOrder.form-control(name='order', type='number', placeholder='Order', required='', autofocus='', value=editPath ? page.order : "")
 
     .my-3
       label(for="menulocations") Page Location
-      button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Defines the Menulocation where the pages are displayed. If no location is defined, the page is "hidden" but accessible per direct url. Show the page with lower Show button.')
+      button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Defines the Menulocation where the pages are displayed. Headerpages appear in the Header and on the landingpages "Get Involved" section. Footerpages just in the footer. If no location is defined, the page is "hidden" but accessible per direct url.')
         | ?
 
       

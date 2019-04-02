@@ -10,7 +10,6 @@ include mixins/storylist
 include mixins/courselist
 include mixins/pagelist
 include mixins/joblist
-include mixins/eventlist
 include mixins/singleEvent
 include mixins/contactform
 include mixins/dataPrivacy
@@ -82,15 +81,14 @@ html.h-100(lang='en')
         +menuFooter
       
 
-    if currentPath !== "/tour"
-      #contactFormModal.modal(tabindex='-1', role='dialog', aria-labelledby='contactFormModal', aria-hidden='true')
-        .modal-dialog.modal-dialog-centered
-          .modal-content.bg-light.border-radius-0
-            .p-4
-              .mb-2
-                h2.display-1.text-center.text-uppercase Contact us!
-                p.mb-3.text-center.text-muted Let’s connect! Our admissions team will call you soon to chat about our courses and your goals.
-              +contactform
+    #contactFormModal.modal(tabindex='-1', role='dialog', aria-labelledby='contactFormModal', aria-hidden='true')
+      .modal-dialog.modal-dialog-centered
+        .modal-content.bg-light.border-radius-0
+          .p-4
+            .mb-2
+              h2.display-1.text-center.text-uppercase Contact us!
+              p.mb-3.text-center.text-muted Let’s connect! Our admissions team will call you soon to chat about our courses and your goals.
+            +contactform
       .modal#dataPrivacy
         +dataPrivacy
 

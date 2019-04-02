@@ -2,6 +2,7 @@ require('dotenv').config({ path: __dirname + '/../.env' });
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 const Story = require("../../models/story");
+const {isAdmin} = require("../../helpers/helper");
 const multer = require('multer');
 const jimp = require('jimp');
 const uuid = require('uuid');
@@ -15,7 +16,9 @@ if(!process.env.IMAGE_UPLOAD_DIR) {
 
 module.exports.getStories = async function (req, res) {
   //here we get the whole collection and sort by order
-  let stories = await Story.find({})
+  const query = isAdmin(req) ? {userId: req.user._id} : {}
+  
+  let stories = await Story.find(query)
     .sort("order")
     .exec();
 
@@ -37,10 +40,9 @@ module.exports.getSingleStory = async (req, res) => {
   }
 }
 module.exports.editStory = async function (req, res) {
-  let stories = await Story.find({})
-    .sort("order")
-    .exec();
-  const story = await Story.findOne({slug: req.params.slug})
+  const query = isAdmin(req) ? {userId: req.user._id, slug: req.params.slug} : {slug: req.params.slug}
+
+  const story = await Story.findOne(query)
   
   const shiftStoryBack = stories.length + 1
 
@@ -60,7 +62,8 @@ module.exports.createStory = async (req, res) => {
   story.order = req.body.order; // set the stories order (comes from the
   story.avatar = req.files.avatar ? req.body.avatar : story.avatar;
   story.companylogo = req.files.companylogo ? req.body.companylogo : story.companylogo;
-  story.userId = req.user.admin !== "true" ? req.user.id : null
+  
+  story.userId = isAdmin(req) ? req.user.id : null
 
   // save the story and check for errors
   story.save(function (err) {
@@ -72,7 +75,8 @@ module.exports.createStory = async (req, res) => {
 }
 module.exports.deleteStory = async (req, res) => {
   try {
-    const story = await Story.remove({ slug: req.params.slug})
+    const query = isAdmin(req) ? {userId: req.user._id, slug: req.params.slug} : {slug: req.params.slug}
+    const story = await Story.remove(query)
     req.flash("success", `Successfully deleted ${story.title}`);
     res.redirect("/admin/stories");
   } catch (err) {
@@ -81,7 +85,9 @@ module.exports.deleteStory = async (req, res) => {
 }
 
 module.exports.updateStory = async function (req, res) {
-  let story = await Story.findOne({ slug: req.params.slug }).exec()
+  const query = isAdmin(req) ? {userId: req.user._id, slug: req.params.slug} : {slug: req.params.slug}
+
+  let story = await Story.findOne(query).exec()
   
   story.title = req.body.title;
   story.alumniName = req.body.alumniName;

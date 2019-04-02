@@ -45,10 +45,22 @@
     }
   }
 }}
-
+.dropdown-menu {
+  border: none;
+}
 
 
 .dropdown-toggle::after {
   border: 0;
   margin-left: 0;
+}
+.dropdown-item.active {
+  background-color: #eee
+}
+.dropdown-toggle:hover  ~.dropdown-menu, .dropdown-menu:hover {
+  display: block;
+}
+
+.navbar-light .navbar-toggler {
+  border-color: transparent;
 }

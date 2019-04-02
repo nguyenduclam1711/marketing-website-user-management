@@ -1,10 +1,15 @@
 extends layout.pug
 block content
-  .container.py-5
+  .jumbotron.jumbotron-fluid.jumbotron-singleCourse.text-center.bg-transparent
+    .bg-primary-transparent.position-fixed.left.top.z-minus.h-100
+      img.half-transparent.w-100.h-100.object-fit-cover(src='/media/bg2.jpg')
+    .jumbotron-courses-container.text-white
+      h1.display-1.mt-5.mb-3.text-white Stories
+      p.lead.mb-3 Lets transform your future into one of our successtories
+
+  .container.py-5.bg-white
     .row
       .col
-        h1.display-1 Stories
-        h3.mb-5 Meet our happy students
         .row
           each story in stories
             li.col-md-6.col-sm-12.col-lg-4.d-flex.story-cards-li

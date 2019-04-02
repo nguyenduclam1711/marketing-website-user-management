@@ -888,11 +888,6 @@ input[type="week"] {
   .card-img-top {
     height: 25vw;
   }
-  .container::after {
-    display: table;
-    clear: both;
-    content: "";
-  }
 
   .courseApply-step:not(:last-child):before {
     visibility: hidden;

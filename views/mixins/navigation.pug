@@ -1,39 +1,40 @@
 mixin navigation
 
  nav.sticky-top.navbar.navbar-expand-md.navbar-light.bg-white(class=currentPath == "/" ? "" : "")
-  a.navbar-brand.d-flex.pt-0(href="/")
-    img(src='/media/dci.svg' alt='dci-logo' id='dci-logo')
-  button.navbar-toggler(type='button', data-toggle='collapse', data-target='#collapsingNavbar3')
-    span.navbar-toggler-icon
-  #collapsingNavbar3.navbar-collapse.collapse.w-100
-    ul.nav.navbar-nav.ml-auto.w-100.justify-content-end#headernav
-      li.position-relative.nav-item.dropdown
-        a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mx-2(class= currentPath.includes('/courses') && !currentPath.includes('admin') ? "active" : "" data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-          | COURSES
-        .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
-          each course in courses
-            a.dropdown-item(class= currentPath === ("/courses/" + course.slug) ? "active" : "" href='/courses/'+ course.slug)=course.headline
-      li.position-relative.nav-item.dropdown
-        a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mx-2(class=currentPath.includes('/events') && !currentPath.includes('admin') ? "active" : "" href='/events' data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-          | EVENTS
+  .container
+    a.navbar-brand.d-flex.pt-0(href="/")
+      img(src='/media/dci.svg' alt='dci-logo' id='dci-logo')
+    button.navbar-toggler(type='button', data-toggle='collapse', data-target='#collapsingNavbar3')
+      span.navbar-toggler-icon
+    #collapsingNavbar3.navbar-collapse.collapse.w-100.mt-5.mt-md-0
+      ul.nav.navbar-nav.ml-auto.w-100.justify-content-end#headernav
+        li.position-relative.nav-item.dropdown
+          a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mx-2(class= currentPath.includes('/courses') && !currentPath.includes('admin') ? "active" : "" data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+            | COURSES
+          .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
+            each course in courses
+              a.dropdown-item.nav-link.px-2(class= currentPath === ("/courses/" + course.slug) ? "active" : "" href='/courses/'+ course.slug)=course.headline
+        li.position-relative.nav-item.dropdown
+          a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mx-2(class=currentPath.includes('/events') && !currentPath.includes('admin') ? "active" : "" href='/events' data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+            | EVENTS
 
-        .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
-          a.dropdown-item(class= currentPath === ("/events") ? "active" : "" href='/events') All events
-          each location in locations
-            a.dropdown-item(class= currentPath === ("/events/" + location.name) ? "active" : "" href='/events/'+ location.name)=location.name
-      li.position-relative.nav-item
-        a.nav-link.mx-2(class=currentPath == "/stories" ? "active" : "" href='/stories') STORIES
-      li.position-relative.nav-item
-        a.nav-link.mx-2(class=currentPath == "/tour" ? "active" : "" href='/tour') COMPANY
-    
-      li.position-relative.nav-item.dropdown
-        a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mx-2(data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' class= currentPath.includes('/pages') && !currentPath.includes('admin') ? "active" : ""  href='/admin/contacts')
-          | GET INVOLVED
-        .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
-          each page in headerPages
-            a.dropdown-item(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
-          a.dropdown-item(href='/jobs/') Jobs
-            
+          .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
+            a.dropdown-item.px-2(class= currentPath === ("/events") ? "active" : "" href='/events') All events
+            each location in locations
+              a.dropdown-item.nav-link.px-2(class= currentPath === ("/events/" + location.name) ? "active" : "" href='/events/'+ location.name)=location.name
+        li.position-relative.nav-item
+          a.nav-link.mx-2(class=currentPath == "/stories" ? "active" : "" href='/stories') STORIES
+        li.position-relative.nav-item
+          a.nav-link.mx-2(class=currentPath == "/tour" ? "active" : "" href='/tour') COMPANYTOUR
+      
+        li.position-relative.nav-item.dropdown
+          a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mx-2(data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' class= currentPath.includes('/pages') && !currentPath.includes('admin') ? "active" : ""  href='/admin/contacts')
+            | GET INVOLVED
+          .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
+            each page in headerPages
+              a.dropdown-item.nav-link.px-2(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
+            a.dropdown-item.px-2.nav-link(href='/jobs/') Jobs
+              
 
-      li.position-relative.nav-item
-        a.nav-link.mx-2(data-toggle='modal', data-target='#contactFormModal') CONTACT US
+        li.position-relative.nav-item
+          a.nav-link.mx-2(data-toggle='modal', data-target='#contactFormModal') CONTACT US
