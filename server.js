@@ -1,4 +1,4 @@
-const { mongopath, getAsyncRedis } = require("./helpers/helper");
+const { mongopath, getAsyncRedis, fetchTeam } = require("./helpers/helper");
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -186,26 +186,30 @@ app.use("/admin*", contactsAdminRoutes);
 
 app.set("views", path.join(__dirname, "views/"));
 app.set("view engine", "pug");
+async function worker() {
+  try {
+    const jobsResponse = await JobsController.fetchJobs();
+    console.log(jobsResponse)
+    const response = await EventsController.fetchevents();
+    console.log(response)
+    const team = await fetchTeam()
+    console.log(team)
 
+    console.log("👍 Done! Successfully Fetching data\n");
+  } catch (e) {
+    console.log("👎 Error! The Error info is below !!!\n");
+    console.log(e);
+    process.exit();
+  }
+}
 // scheduling cron job:
 if (process.env.CRONINTERVAL) {
   console.log(`Cron scheduled for ${process.env.CRONINTERVAL}`)
   cron.schedule(
     process.env.CRONINTERVAL,
     () => {
-      console.log(`Runing a job at ${new Date()}`);
-      async function loadData() {
-        try {
-          const jobsResponse = await JobsController.fetchJobs();
-          const response = await EventsController.fetchevents();
-          console.log("👍 Done!\n\n Successfully Fetching data");
-        } catch (e) {
-          console.log("\n👎 Error! The Error info is below !!!");
-          console.log(e);
-          process.exit();
-        }
-      }
-      loadData();
+      console.log(`${new Date()} Started Cronjobs`);
+      worker();
     },
     {
       scheduled: true,
@@ -215,5 +219,5 @@ if (process.env.CRONINTERVAL) {
 } else {
   console.log(`No cron interval set in the .env. No cron started.`);
 }
-
+worker();
 module.exports = app;
