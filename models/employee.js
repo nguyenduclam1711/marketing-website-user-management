@@ -5,6 +5,7 @@ var EmployeeSchema = new Schema({
   name: String,
   locations: [{ type: Schema.ObjectId, ref: "Location" }],
   position: String,
+  active: String,
   updatedAt: {
     type: Date,
     default: Date.now
@@ -16,7 +17,9 @@ var EmployeeSchema = new Schema({
 });
 EmployeeSchema.pre("save", function preSave(next) {
   const employee = this;
-  employee.updatedAt(Date.now());
+  console.log('employee', employee);
+  
+  employee.update({updatedAt: Date.now()});
   next();
 });
 

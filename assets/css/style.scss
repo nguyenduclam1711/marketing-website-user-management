@@ -61,6 +61,7 @@ nav.container:after {
   min-width: 100vw;
   min-height: calc(100vh - 5rem);
   background-image: url("/media/header.jpg");
+  background-attachment: fixed;
   background-size: cover;
   -webkit-clip-path: polygon(50% 0%, 100% 0, 100% 88%, 50% 100%, 0 92%, 0 0);
   clip-path: polygon(50% 0%, 100% 0, 100% 88%, 50% 100%, 0 92%, 0 0);

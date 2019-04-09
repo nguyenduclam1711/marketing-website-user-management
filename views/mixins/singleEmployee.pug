@@ -1,0 +1,13 @@
+mixin singleEmployee(employee)
+  li.col-md-6.col-sm-12.col-lg-4.d-flex.mb-4.text-center
+    .hover-shadow.bg-light.w-100
+      =employee.name
+      br
+      =employee.position
+      .mb-1
+        each loc in employee.locations
+          span.badge.badge-primary= loc.name
+        if user && user.admin === "true"
+          .d-flex.align-items-center
+            a.btn.btn-outline-primary.mr-2(href="employees/edit/"+employee._id) Edit
+            button.btn.btn-outline-danger(type='submit') Delete

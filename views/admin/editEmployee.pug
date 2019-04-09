@@ -1,0 +1,31 @@
+extends ../layout.pug
+block content
+  .container.mt-5
+    - var editPath = currentPath.includes('admin/employees/edit')
+      form.mb-5(method='POST', action=editPath ? '/admin/employees/update/'+employee.id+'?_method=PUT' : '/admin/employees?alert=create')
+
+        h2
+          =editPath ? "Edit Employee " :"Create a new Employee"
+          .btn-group
+            if editPath
+              a.btn.btn-outline-primary(href="/admin/employees")="Back"
+              a.btn.btn-outline-primary(target="_blank" href="/employees/"+employee.id)="Show"
+            button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Employee" 
+        .mb-3
+          label(for='name') Name
+          input#name.form-control(name='name', type='text', placeholder='Name', required='', autofocus='', value=editPath ? employee.name : "")
+        
+        .mb-3
+          label(for='position') Name
+          input#position.form-control(name='position', type='text', placeholder='Position', required='', autofocus='', value=editPath ? employee.position : "")
+
+        .my-3
+          label Person available in locations:
+          each location in locations
+            .custom-control.custom-checkbox
+              input.custom-control-input(name="locations" type='checkbox' id=location.name value=location._id  checked=(location.selected))
+              label.custom-control-label(for=location.name)=location.name
+      
+
+          button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Course" 
+    a.btn.btn-outline-primary.mr-3(href="/admin/employees")="Back"

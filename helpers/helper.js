@@ -8,9 +8,6 @@ const LocalStrategy = require("passport-local").Strategy;
 const Location = require("../models/location");
 const Event = require("../models/event");
 
-const EmployeeController = require("../controllers/admin/AdminEmployeesController");
-const fetch = require("node-fetch");
-
 exports.fetchEventsByLocation = async () => {
   const locations = await Location.find({});
   let eventsByLocation = [];
@@ -25,55 +22,6 @@ exports.fetchEventsByLocation = async () => {
     });
   }
   return eventsByLocation;
-};
-console.log('process.env.CLIENT_SECRET', process.env.CLIENT_SECRET);
-console.log('process.env.CLIENT_SECRET', process.env.CLIENT_ID);
-
-
-exports.fetchTeam = async () => {
-  if (process.env.CLIENT_ID && process.env.CLIENT_SECRET) {
-    const url = `https://api.personio.de/v1/auth`;
-    const body = {
-      client_id: process.env.CLIENT_ID,
-      client_secret: process.env.CLIENT_SECRET
-    };
-    try {
-      return new Promise(async function (resolve, reject) {
-        fetch(url, {
-          method: "post",
-          body: JSON.stringify(body),
-          headers: { "Content-Type": "application/json" }
-        })
-          .then(res => res.json())
-          .then(personioResponse => {
-            if(personioResponse.error){
-              console.log(error)
-            }
-            const employeeUrl = `https://api.personio.de/v1/company/employees?token=${personioResponse.data.token}`
-
-            fetch(
-              employeeUrl,
-              {
-                headers: { "Content-Type": "application/json" }
-              }
-            )
-              .then(res => res.json())
-              .then(async employeesFromPersonio => {
-                await EmployeeController.fetchEmployees(employeesFromPersonio)
-                resolve("Employees cronjob fetched");
-              });
-          }).catch(e => console.error(e));
-      });
-    } catch (err) {
-      console.log(err);
-      res.redirect("/admin/events?alert=created");
-    }
-
-    return team;
-  } else {
-    console.log(`No personio API credentials provided. process.env.CLIENT_ID process.env.CLIENT_SECRET must be declared in .env`)
-  }
-
 };
 exports.isAdmin = req => req.user.admin !== "true";
 

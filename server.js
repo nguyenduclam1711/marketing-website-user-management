@@ -1,4 +1,4 @@
-const { mongopath, getAsyncRedis, fetchTeam } = require("./helpers/helper");
+const { mongopath, getAsyncRedis } = require("./helpers/helper");
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -17,6 +17,7 @@ const flash = require("connect-flash");
 const cron = require("node-cron");
 const EventsController = require("./controllers/admin/AdminEventsController");
 const JobsController = require("./controllers/admin/AdminJobsController");
+const EmployeesController = require("./controllers/admin/AdminEmployeesController");
 const mongoose = require("mongoose");
 
 // connect to redis server and get an extended client with promisified
@@ -164,6 +165,7 @@ let storiesAdminRoutes = require("./routes/admin/stories");
 let coursesAdminRoutes = require("./routes/admin/courses");
 let pagesAdminRoutes = require("./routes/admin/pages");
 let jobsAdminRoutes = require("./routes/admin/jobs");
+let employeesAdminRoutes = require("./routes/admin/employees");
 let locationsAdminRoutes = require("./routes/admin/locations");
 let eventsAdminRoutes = require("./routes/admin/events");
 let contactsAdminRoutes = require("./routes/admin/contacts");
@@ -180,6 +182,7 @@ app.use("/admin/stories", storiesAdminRoutes);
 app.use("/admin/courses", coursesAdminRoutes);
 app.use("/admin/pages", pagesAdminRoutes);
 app.use("/admin/jobs", jobsAdminRoutes);
+app.use("/admin/employees", employeesAdminRoutes);
 app.use("/admin/locations", locationsAdminRoutes);
 app.use("/admin/events", eventsAdminRoutes);
 app.use("/admin/menulocations", menulocationAdminRoutes);
@@ -194,7 +197,7 @@ async function worker() {
     console.log(jobsResponse)
     const response = await EventsController.fetchevents();
     console.log(response)
-    const team = await fetchTeam()
+    const team = await EmployeesController.fetchEmployees()
     console.log(team)
 
     console.log("👍 Done! Successfully Fetching data\n");
