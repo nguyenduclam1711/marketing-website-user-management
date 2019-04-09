@@ -4,7 +4,7 @@ var mongoose = require("mongoose"),
 var EmployeeSchema = new Schema({
   name: String,
   locations: [{ type: Schema.ObjectId, ref: "Location" }],
-  department: String,
+  position: String,
   updatedAt: {
     type: Date,
     default: Date.now

@@ -155,6 +155,7 @@ let usersRoutes = require("./routes/users");
 let storiesRoutes = require("./routes/stories");
 let pagesRoutes = require("./routes/pages");
 let jobsRoutes = require("./routes/jobs");
+let employeesRoutes = require("./routes/employees");
 let eventsRoutes = require("./routes/events");
 let coursesRoutes = require("./routes/courses");
 
@@ -172,6 +173,7 @@ app.use("/users", usersRoutes);
 app.use("/stories", storiesRoutes);
 app.use("/pages", pagesRoutes);
 app.use("/jobs", jobsRoutes);
+app.use("/employees", employeesRoutes);
 app.use("/events", eventsRoutes);
 app.use("/courses", coursesRoutes);
 app.use("/admin/stories", storiesAdminRoutes);

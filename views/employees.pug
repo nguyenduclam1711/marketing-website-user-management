@@ -1,0 +1,24 @@
+extends layout.pug
+block content
+	.jumbotron.jumbotron-fluid.jumbotron-singleCourse.text-center.bg-transparent
+		.bg-primary-transparent.position-fixed.left.top.z-minus.h-100
+			img.half-transparent.w-100.h-100.object-fit-cover(src='/media/team.jpg')
+		.jumbotron-courses-container.text-white.container
+			.px-md-5
+				h1.display-1.mt-5.mb-3.text-white Our Team
+				p.lead.mb-3 Our team consists of entrepreneurs, employees and freelancers of the Berlin Start-up scene. What we all have in common is our willingness to help, our professional networks and the opportunity to connect the tech scene with people who had to flee their homeland.
+
+
+	.container.mt-md-5
+		.bg-light
+			.row
+				each employee in employees
+
+					li.col-md-6.col-sm-12.col-lg-4.d-flex.mb-4.text-center
+						.hover-shadow.bg-light.w-100
+							=employee.name
+							br
+							=employee.position
+							.mb-1
+								each loc in employee.locations
+									span.badge.badge-primary= loc.name
