@@ -34,6 +34,7 @@ mixin navigation
             each page in headerPages
               a.dropdown-item.nav-link.px-2(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
             a.dropdown-item.px-2.nav-link(href='/jobs/') Jobs
+            a.dropdown-item.px-2.nav-link(href='/employees/') Team
               
 
         li.position-relative.nav-item

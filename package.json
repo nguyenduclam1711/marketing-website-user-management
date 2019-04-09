@@ -33,6 +33,7 @@
     "mongoose-url-slugs": "^1.0.2",
     "multer": "*",
     "node-cron": "^2.0.3",
+    "node-fetch": "^2.3.0",
     "node-sass": "^4.10.0",
     "nodemailer": "^4.7.0",
     "passport": "*",

@@ -17,6 +17,7 @@ const flash = require("connect-flash");
 const cron = require("node-cron");
 const EventsController = require("./controllers/admin/AdminEventsController");
 const JobsController = require("./controllers/admin/AdminJobsController");
+const EmployeesController = require("./controllers/admin/AdminEmployeesController");
 const mongoose = require("mongoose");
 
 // connect to redis server and get an extended client with promisified
@@ -155,6 +156,7 @@ let usersRoutes = require("./routes/users");
 let storiesRoutes = require("./routes/stories");
 let pagesRoutes = require("./routes/pages");
 let jobsRoutes = require("./routes/jobs");
+let employeesRoutes = require("./routes/employees");
 let eventsRoutes = require("./routes/events");
 let coursesRoutes = require("./routes/courses");
 
@@ -163,6 +165,7 @@ let storiesAdminRoutes = require("./routes/admin/stories");
 let coursesAdminRoutes = require("./routes/admin/courses");
 let pagesAdminRoutes = require("./routes/admin/pages");
 let jobsAdminRoutes = require("./routes/admin/jobs");
+let employeesAdminRoutes = require("./routes/admin/employees");
 let locationsAdminRoutes = require("./routes/admin/locations");
 let eventsAdminRoutes = require("./routes/admin/events");
 let contactsAdminRoutes = require("./routes/admin/contacts");
@@ -172,12 +175,14 @@ app.use("/users", usersRoutes);
 app.use("/stories", storiesRoutes);
 app.use("/pages", pagesRoutes);
 app.use("/jobs", jobsRoutes);
+app.use("/employees", employeesRoutes);
 app.use("/events", eventsRoutes);
 app.use("/courses", coursesRoutes);
 app.use("/admin/stories", storiesAdminRoutes);
 app.use("/admin/courses", coursesAdminRoutes);
 app.use("/admin/pages", pagesAdminRoutes);
 app.use("/admin/jobs", jobsAdminRoutes);
+app.use("/admin/employees", employeesAdminRoutes);
 app.use("/admin/locations", locationsAdminRoutes);
 app.use("/admin/events", eventsAdminRoutes);
 app.use("/admin/menulocations", menulocationAdminRoutes);
@@ -186,26 +191,30 @@ app.use("/admin*", contactsAdminRoutes);
 
 app.set("views", path.join(__dirname, "views/"));
 app.set("view engine", "pug");
+async function worker() {
+  try {
+    const jobsResponse = await JobsController.fetchJobs();
+    console.log(jobsResponse)
+    const response = await EventsController.fetchevents();
+    console.log(response)
+    const team = await EmployeesController.fetchEmployees()
+    console.log(team)
 
+    console.log("👍 Done! Successfully Fetching data\n");
+  } catch (e) {
+    console.log("👎 Error! The Error info is below !!!\n");
+    console.log(e);
+    process.exit();
+  }
+}
 // scheduling cron job:
 if (process.env.CRONINTERVAL) {
   console.log(`Cron scheduled for ${process.env.CRONINTERVAL}`)
   cron.schedule(
     process.env.CRONINTERVAL,
     () => {
-      console.log(`Runing a job at ${new Date()}`);
-      async function loadData() {
-        try {
-          const jobsResponse = await JobsController.fetchJobs();
-          const response = await EventsController.fetchevents();
-          console.log("👍 Done!\n\n Successfully Fetching data");
-        } catch (e) {
-          console.log("\n👎 Error! The Error info is below !!!");
-          console.log(e);
-          process.exit();
-        }
-      }
-      loadData();
+      console.log(`${new Date()} Started Cronjobs`);
+      worker();
     },
     {
       scheduled: true,
@@ -215,5 +224,5 @@ if (process.env.CRONINTERVAL) {
 } else {
   console.log(`No cron interval set in the .env. No cron started.`);
 }
-
+worker();
 module.exports = app;
