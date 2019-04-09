@@ -1,12 +1,12 @@
 mixin getinvolved
-  section#services.section-services.bg-light
+  section#services.section-services.bg-light.pt-5
     .container.text-center
       h2.display-1.text-uppercase GET INVOLVED
-      h3.mb-5.text-muted Please contact us to learn more how you can be involved
+      h3.text-muted Please contact us to learn more how you can be involved
       .div.d-inline-block
         each page in headerPages
           div.story-item.get-involved.py-4.px-3.mb-3.d-inline-block.justify-content-between
             a.service-link.text-muted(href="/pages/" + page.slug)
-              span.sr-only
+              span
                 = page.title
         
