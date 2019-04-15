@@ -56,6 +56,7 @@ router.post("/contact", async (req, res, next) => {
   const contact = new Contact();
   contact.name = req.body.name;
   contact.email = req.body.email;
+  contact.phone = req.body.phone;
   contact.body = req.body.body;
   contact.createdAt = new Date();
   contact.isCompany = req.body.companytour ? true : false;
@@ -64,15 +65,34 @@ router.post("/contact", async (req, res, next) => {
     res.redirect(req.headers.referer);
   }
 
-  contact.save(async function (err) {
+  const mailTemplate = `Contact from: <table>
+    <tr>
+      <td>Name: </td>
+      <td>${req.body.name}</td>
+    </tr>
+    <tr>
+      <td>Phone: </td>
+      <td>${req.body.phone}</td>
+    </tr>
+    <tr>
+      <td>Content: </td>
+      <td>${req.body.body}</td>
+    </tr>
+    </table>
+  `;
+  contact.save(async function(err) {
     if (err) res.send(err);
     const mailOptions = {
-      from: 'mailer@digitalcareerinstitute.org',
-      to: req.body.companytour ? process.env.TOURMAILRECEIVER : process.env.MAILRECEIVER,
-      subject: req.body.companytour ? `Company Tour request from website` : `Message on website`,
-      text: `${req.body.body}`,
-      html: `${req.body.body}`
-    }
+      from: "contact@digitalcareerinstitute.org",
+      to: req.body.companytour
+        ? process.env.TOURMAILRECEIVER
+        : process.env.MAILRECEIVER,
+      subject: req.body.companytour
+        ? `Company Tour request from website`
+        : `Message on website`,
+      text: mailTemplate,
+      html: mailTemplate
+    };
     const info = await sendMail(req, mailOptions);
     req.flash(
       "success",
@@ -92,8 +112,7 @@ router.get("/tour", async (req, res) => {
   }
 });
 
-
-router.post("/newsletter-signup", function (req, res) {
+router.post("/newsletter-signup", function(req, res) {
   const { email } = req.body;
 
   // Make sure fields are filled

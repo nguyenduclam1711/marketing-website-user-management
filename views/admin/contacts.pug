@@ -11,6 +11,7 @@ block content
                 h2.mr-3=contact.name
                 small.text-muted=contact.createdAt
                 p.mr-3=contact.body
+                tel.mr-3=contact.phone
                 a.mr-3(href='mailto:'+ contact.email)=contact.email
                 
                 if contact.locations.length

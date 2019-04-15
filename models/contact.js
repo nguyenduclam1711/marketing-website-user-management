@@ -5,6 +5,7 @@ var ContactSchema   = new Schema({
     name: String,
     locations: [{ type: Schema.ObjectId, ref: "Location" }],
     email: String,
+    phone: String,
     body: String,
     updatedAt: {
       type: Date,

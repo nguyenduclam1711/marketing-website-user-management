@@ -328,6 +328,7 @@ exports.contacts = [
   {
     name: "Brian Willson",
     email: "fijiwypoh@mailinator.net",
+    phone: "01741832134231",
     body:
       "Fugit quia excepteur ipsam anim molestiae est elit animi ut ad est ut",
     createdAt: new Date(date - 86400000).toISOString(),
@@ -336,6 +337,7 @@ exports.contacts = [
   {
     name: "Jasper Wynn",
     email: "blablu@gmail.com",
+    phone: "01741832134231",
     body:
       "Fugit quia excepteur ipsam anim molestiae est elit animi ut ad est ut",
     createdAt: new Date(date - 86400000).toISOString(),
@@ -344,6 +346,7 @@ exports.contacts = [
   {
     name: "Sonia Romero",
     email: "fritz@gmx.com",
+    phone: "01741832134231",
     body:
       "Quidem dolorum ex qui quis rerum culpa laboriosam doloremque excepturi voluptatum blanditiis cum",
     createdAt: new Date(date - 86400000).toISOString(),
