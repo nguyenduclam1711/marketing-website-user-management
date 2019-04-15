@@ -6,7 +6,7 @@ const mongoose = require("mongoose"),
 
 const PageSchema = new Schema({
   title: String,
-  content: String,
+  content: Object,
   order: Number,
   menulocations: [{ type: Schema.ObjectId, ref: "Menulocation" }]
 });
@@ -15,10 +15,12 @@ PageSchema.plugin(URLSlugs("title"));
 
 PageSchema.virtual("toHTML").get(function() {
   try {
-    const content = JSON.parse(this.content).ops;
+    const content = this.content.ops;
+    
     const converter = new QuillDeltaToHtmlConverter(content);
     return converter.convert();
   } catch (e) {
+    console.log('error', e);
     return this.content;
   }
 });

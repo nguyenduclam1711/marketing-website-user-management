@@ -13,6 +13,7 @@ const Story = require("./models/story");
 const User = require("./models/user");
 const Menulocation = require("./models/menulocation");
 const Contact = require("./models/contact");
+const Employee = require("./models/employee");
 const Course = require("./models/course");
 const Location = require("./models/location");
 const Page = require("./models/page");
@@ -22,13 +23,14 @@ const EventsController = require('./controllers/admin/AdminEventsController');
 
 const IMAGE_UPLOAD_DIR = process.env.IMAGE_UPLOAD_DIR;
 
-const {menulocations, stories, pages, courses, users, events, adminUser, contacts} = require('./seeddata')
+const {menulocations, stories, pages, courses, users, events, adminUser, contacts, employees} = require('./seeddata')
 
 async function deleteData() {
   console.log("😢 Goodbye Data...");
   await Story.deleteMany();
   await Menulocation.deleteMany();
   await Location.deleteMany();
+  await Employee.deleteMany();
   await Course.deleteMany();
   await Contact.deleteMany();
   await Page.deleteMany();
@@ -89,6 +91,7 @@ async function loadData() {
     const createdMenulocations = await Menulocation.insertMany(menulocations);
     const createdLocations = await Location.find();
     await Course.insertMany(courses);
+    await Employee.insertMany(employees);
     await Story.insertMany(stories);
 
     await User.create(adminUser)
@@ -97,9 +100,11 @@ async function loadData() {
 
     var associatedMenulocations = await seedRandomNtoN(pages, createdMenulocations, Menulocation)
     var associatedLocations = await seedRandomNtoN(contacts, createdLocations, Location)
+    var associatedEmployees = await seedRandomNtoN(employees, createdLocations, Location)
 
     await Page.insertMany(associatedMenulocations)
     await Contact.insertMany(associatedLocations)
+    await Employee.insertMany(associatedEmployees)
 
     console.log("👍 Done!\n\n Successfully loaded sample data");
     process.exit();

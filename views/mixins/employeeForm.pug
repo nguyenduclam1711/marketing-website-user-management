@@ -19,7 +19,7 @@ mixin employeeForm
           input#name.form-control(name='name', type='text', placeholder='Name', required='', autofocus='', value=editPath ? employee.name : "")
         
         .mb-3
-          label(for='position') Name
+          label(for='position') Position
           input#position.form-control(name='position', type='text', placeholder='Position', required='', autofocus='', value=editPath ? employee.position : "")
 
         .my-3
@@ -33,4 +33,4 @@ mixin employeeForm
           .d-flex.align-items-center
             a.btn.btn-outline-primary.mr-2(href="/admin/employees/edit/"+employee._id) Edit
             a.btn.btn-outline-primary.mr-2(href="/admin/employees/delete/"+employee._id) Delete
-        button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Course" 
+        button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Employee" 
