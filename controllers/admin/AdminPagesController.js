@@ -92,7 +92,7 @@ module.exports.updatePage = async (req, res) => {
     const page = await Page.findOne({ slug: req.params.slug });
 
     page.title = req.body.title;
-    page.content = req.body.content;
+    page.content = JSON.parse(req.body.content);
     page.order = req.body.order;
     page.menulocations = req.body.menulocations;
     await page.save();
