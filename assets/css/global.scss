@@ -6,9 +6,24 @@ $purple: #5c00ff;
 $pink: #a800ff;
 $turquoise: #3dbaf7;
 $textOrange: #da9446;
-
+$transition: .15s;
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
+
+@mixin btn-color($color-pri, $color-sec, $color-border) {
+  background-color: $color-pri;
+  color: $color-sec !important;
+  border: 1px solid;
+  border-color: $color-border;
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    background-color: darken($color-pri, 10%) !important;
+    color: $color-sec !important;
+    border-color: darken($color-border, 10%) !important;
+  }
+}
 .left {
   left: 0;
 }
@@ -33,67 +48,4 @@ $textOrange: #da9446;
 }
 .border-radius-0 {
   border-radius: 0;
-}
-.overflow-hidden {
-  overflow: hidden;
-}
-.bg-primary-transparent {
-  background-color: $blue;
-}
-.half-transparent {
-  opacity: 0.5;
-}
-.startYour,
-.digitalCareer {
-  font-size: 1rem;
-}
-.flashalert {
-  border-radius: 0;
-  position: fixed;
-  bottom: 50px;
-  z-index: 9999999999;
-  right: 50px;
-  border: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  /* font-family: "Didact Gothic", sans-serif !important; */
-  overflow-x: hidden;
-}
-
-body:not(.admin).btn {
-  border-radius: 2px;
-  font-size: 1rem;
-  font-weight: 500;
-  border-width: 3px;
-  line-height: 1.5;
-  background-color: $blue;
-  border-color: $blue;
-  color: white;
-  line-height: 36px;
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-section {
-  display: block;
-}
-
-.section-button-wrap {
-  text-align: center;
-  margin-top: 40px;
-  display: block;
-}
-
-.container {
-  width: 100%;
-  max-width: 1140px;
-  padding-right: 0.9375rem;
-  padding-left: 0.9375rem;
-  margin-right: auto;
-  margin-left: auto;
 }

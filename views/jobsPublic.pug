@@ -1,7 +1,7 @@
 extends layout.pug
 block content
   .jumbotron.jumbotron-fluid.jumbotron-singleCourse.text-center.bg-transparent
-    .bg-primary-transparent.position-fixed.left.top.z-minus.h-100.w-100
+    .bg-primary.position-fixed.left.top.z-minus.h-100.w-100
       video.half-transparent.w-100(autoplay='', muted='', loop='')
         source(src='/media/video.mp4', type='video/mp4')
 
@@ -11,20 +11,20 @@ block content
     
 
   
-  .container
-    .bg-white.my-5.p-5.text-left
+  .container.bg-white
+    .mt-5.text-left
+      .mb-3.sticky-top.bg-white.d-flex.justify-content-between.border-bottom.py-2
+        h2.mb-0 Our locations
+        ul.nav.nav-tabs.border-0
+          a.nav-link(href="/jobs")="All"
+          each location in locations
+            li.nav-item
+              a.nav-link(class=(query.location === location.name ? "active" : "") href="/jobs?location="+location.name)=location.name
       .row
-        .mt-5
-          .mb-3
-            h2 Our locations
-            ul.nav.nav-tabs.mb-3
-              a.nav-link(href="/jobs")="All"
-              each location in locations
-                li.nav-item
-                  a.nav-link(class=(query.location === location.name ? "active" : "") href="/jobs?location="+location.name)=location.name
+        .col
           if query.location
-            h2="Showing jobs for " + query.location
+            h3="Showing jobs for " + query.location
           else
-            h2="Showing all jobs"
+            h3="Showing all jobs"
           +joblist(true)
             

@@ -1,24 +1,23 @@
 extends ../layout.pug
 block content
-  //
-  .container.text-left
-    h1 Admin Contacts
-    .row
-      .col-md-8
-        ul.list-group
-          each contact in contacts
-            li.list-group-item.mb-3
-              h2.mr-3=contact.name
-              small.text-muted=contact.createdAt
-              p.mr-3=contact.body
-              a.mr-3(href='mailto:'+ contact.email)=contact.email
-              hr
-              
-              if contact.locations.length
-                span Interested in: 
-                each location in contact.locations
-                  .badge.badge-primary.mr-2=location.name
-              if contact.isEvent
-                span.badge.badge-danger= "Event participation request"
-              if contact.isCompany
-                span.badge.badge-warning= "Is Companytour request"
+  .bg-light
+    .container.text-left
+      h1 Admin Contacts
+      .row
+        .col-md-8
+          ul.list-group
+            each contact in contacts
+              li.list-group-item.mb-3.hover-shadow.bg-white
+                h2.mr-3=contact.name
+                small.text-muted=contact.createdAt
+                p.mr-3=contact.body
+                a.mr-3(href='mailto:'+ contact.email)=contact.email
+                
+                if contact.locations.length
+                  span Interested in: 
+                  each location in contact.locations
+                    .badge.badge-primary.mr-2=location.name
+                if contact.isEvent
+                  span.badge.badge-danger= "Event participation request"
+                if contact.isCompany
+                  span.badge.badge-warning= "Is Companytour request"

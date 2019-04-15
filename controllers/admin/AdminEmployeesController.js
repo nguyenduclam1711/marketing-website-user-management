@@ -1,7 +1,10 @@
 require("dotenv").config({ path: __dirname + "/../.env" });
+const multer = require("multer");
+const fs = require("fs");
+const jimp = require("jimp");
 const Employee = require("../../models/employee");
 const Location = require("../../models/location");
-const fetch = require("node-fetch");
+const uuid = require("uuid");
 
 module.exports.getEmployees = async function(req, res) {
   try {
@@ -18,78 +21,14 @@ module.exports.getEmployees = async function(req, res) {
   }
 };
 
-module.exports.fetchEmployees = async (req, res) => {
-  // const activeEmployees = employeesFromPersonio.data.filter(employee => employee.attributes.status.value === 'active')
-
-  if (process.env.CLIENT_ID && process.env.CLIENT_SECRET) {
-    const url = `https://api.personio.de/v1/auth`;
-    const body = {
-      client_id: process.env.CLIENT_ID,
-      client_secret: process.env.CLIENT_SECRET
-    };
-    try {
-      return new Promise(async function(resolve, reject) {
-        fetch(url, {
-          method: "post",
-          body: JSON.stringify(body),
-          headers: { "Content-Type": "application/json" }
-        })
-          .then(res => res.json())
-          .then(personioResponse => {
-            if (personioResponse.error) {
-              console.log(error);
-            }
-            const employeeUrl = `https://api.personio.de/v1/company/employees?token=${
-              personioResponse.data.token
-            }`;
-
-            fetch(employeeUrl, {
-              headers: { "Content-Type": "application/json" }
-            })
-              .then(res => res.json())
-              .then(async employeesFromPersonio => {
-                const locations = await Location.find({});
-
-                const employeeInstances = employeesFromPersonio.data.map(e => {
-                  if (e.attributes.office.value && e.attributes.first_name.value) {
-                    const employeeLocations = locations
-                      .filter(
-                        l =>
-                          l.name === e.attributes.office.value.attributes.name
-                      )
-                      .map(e => e._id);
-                    return {
-                      name: `${e.attributes.first_name.value} ${
-                        e.attributes.last_name.value
-                      }`,
-                      active: false,
-                      locations: employeeLocations,
-                      position: e.attributes.position.value
-                    };
-                  }
-                });
-
-                await Employee.deleteMany({});
-                await Employee.insertMany(employeeInstances);
-                if (res) {
-                  res.redirect("/admin/employees?alert=created");
-                }
-                resolve("Employees cronjob fetched");
-              });
-          })
-          .catch(e => console.error(e));
-      });
-    } catch (err) {
-      console.log(err);
-      res.redirect("/admin/events?alert=created");
-    }
-
-    return team;
-  } else {
-    console.log(
-      `No personio API credentials provided. process.env.CLIENT_ID process.env.CLIENT_SECRET must be declared in .env`
-    );
-  }
+module.exports.deleteEmployee = async function(req, res) {
+  
+  const employee = await Employee.deleteOne({
+    _id: req.params.id
+  })
+  
+  req.flash("success", `Successfully deleted Employee`);
+  res.redirect("/admin/employees");
 };
 
 module.exports.editEmployee = async function(req, res) {
@@ -113,30 +52,78 @@ module.exports.editEmployee = async function(req, res) {
     locations: all
   });
 };
-module.exports.updateEmployee = (req, res) => {
-  console.log("employee", req.params.id);
 
-  Employee.findById(req.params.id, (err, employee) => {
-    if (err) console.error(err);
-
-    employee.name = req.body.name;
-    employee.position = req.body.position;
-    employee.locations = req.body.locations;
-
-    employee.save(err => {
-      if (err) console.error(err);
-
-      req.flash("success", `Successfully updated ${employee.name}`);
-      res.redirect("/admin/employees/edit/" + employee._id);
-    });
-  });
+module.exports.updateEmployee = async (req, res) => {
+  const employee = await Employee.findById(req.params.id)
+  employee.name = req.body.name;
+  employee.position = req.body.position;
+  employee.locations = req.body.locations;
+  employee.avatar = req.body.avatar ? req.body.avatar : employee.avatar;
+  employee.avatar = req.files.avatar ? req.body.avatar : employee.avatar;
+  await employee.save()
+  req.flash("success", `Successfully updated ${employee.name}`);
+  res.redirect("/admin/employees/edit/" + employee._id);
 };
-module.exports.deleteemployees = async (req, res) => {
-  try {
-    Employee.collection.drop();
-    res.redirect("/admin/employees?alert=created");
-  } catch (err) {
-    console.log(err);
-    res.redirect("/admin/employees?alert=created");
+
+module.exports.createEmployee = async function(req, res) {
+  var employee = await new Employee();
+  
+  employee.name = req.body.name;
+  employee.locations = req.body.locations;
+  employee.position = req.body.position;
+  employee.avatar = req.body.avatar ? req.body.avatar : employee.avatar;
+
+  const result = await employee.save()
+  req.flash("success", `Successfully created ${employee.title}`);
+  res.redirect("/admin/employees");
+}
+const storage = multer.diskStorage({
+  destination: function(request, file, next) {
+    next(null, "./temp");
+  },
+  filename: function(request, file, next) {
+    next(null, uuid(4));
   }
+});
+
+module.exports.uploadImages = multer({
+  storage,
+  limits: {
+    fileSize: 10000000 // 10 MB
+  },
+  fileFilter(req, file, next) {
+    if (file.mimetype.startsWith("image/")) {
+      next(null, true);
+    } else {
+      next({ message: "That filetype is not allowed!" }, false);
+    }
+  }
+}).fields([
+  { name: "avatar", maxCount: 1 }
+]);
+
+exports.resizeImages = async (request, response, next) => {
+  if (!request.files) {
+    next();
+    return;
+  }
+  for await (const singleFile of Object.values(request.files)) {
+    const extension = singleFile[0].mimetype.split("/")[1];
+    request.body[singleFile[0].fieldname] = `${
+      singleFile[0].filename
+    }.${extension}`;
+    try {
+      const image = await jimp.read(singleFile[0].path);
+      // await image.cover(350, 180);
+      await image.write(
+        `${process.env.IMAGE_UPLOAD_DIR}/${
+          request.body[singleFile[0].fieldname]
+        }`
+      );
+      fs.unlinkSync(singleFile[0].path);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  next();
 };

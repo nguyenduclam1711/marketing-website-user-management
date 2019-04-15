@@ -12,6 +12,7 @@ mixin navigation
           a#navbarDropdownMenuLink.nav-link.dropdown-toggle.z-1.mx-2(class= currentPath.includes('/courses') && !currentPath.includes('admin') ? "active" : "" data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
             | COURSES
           .dropdown-menu.shadow-sm.z-0(aria-labelledby='navbarDropdownMenuLink')
+            a.dropdown-item.nav-link.px-2(class= currentPath === ("/courses") ? "active" : "" href='/courses') All courses
             each course in courses
               a.dropdown-item.nav-link.px-2(class= currentPath === ("/courses/" + course.slug) ? "active" : "" href='/courses/'+ course.slug)=course.headline
         li.position-relative.nav-item.dropdown

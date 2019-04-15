@@ -4,16 +4,17 @@ mixin ourCoursesSection
       h2.display-1.text-center.text-uppercase Our courses
       h3.mb-5.text-center.text-muted We offer many interesting educational trainings
       
-      .row.mx-5
+      .row.mx-5.justify-content-center
         each course in courses
-          .col-md-6.col-lg-4
-            .service-item.bg-light.p-4
+          .col-md-6.col-lg-4.mb-3
+            .bg-light.p-4.text-center.hover-shadow
               a.card-link(href="/courses/"+course.slug)
-                .service-image.icon-image.mb-5
-                  img.h-100(src="/images/"+course.icon, alt=course.title)
-                .service-content
-                  h4.service-title= course.headline
-                  p=course.title
+                .m-3.row.position-relative
+                  .col-10.offset-1.col-md-8.offset-md-2.align-items-center
+                    img.object-fit-cover.img-fluid.rounded-circle.square(style="background-image: url('/images/"+course.icon+"')")
 
-      .section-button-wrap
-        a.btn.btn-lg.btn-gradient-secondary.mx-5(href='/courses/', role='button', aria-pressed='true') All Courses
+                h4.service-title= course.headline
+                p.text-muted=course.title
+
+      .section-button-wrap.text-center
+        a.btn.btn-lg.btn-gradient-secondary(href='/courses/', role='button', aria-pressed='true') All Courses

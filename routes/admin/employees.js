@@ -7,9 +7,20 @@ const {
   redirectNonAdmin
 } = require("../../helpers/helper");
 
-router.get("/", AdminEmployeesController.getEmployees);
-// router.get("/:id", ensureAuthenticated, redirectNonAdmin, AdminEmployeesController.getSingleEmployee);
-
+router.get(
+  "/",
+  ensureAuthenticated,
+  redirectNonAdmin,
+  AdminEmployeesController.getEmployees
+);
+router.post(
+  "/",
+  ensureAuthenticated,
+  redirectNonAdmin,
+  AdminEmployeesController.uploadImages,
+  AdminEmployeesController.resizeImages,
+  AdminEmployeesController.createEmployee
+);
 router.get(
   "/edit/:id",
   ensureAuthenticated,
@@ -20,19 +31,16 @@ router.put(
   "/update/:id",
   ensureAuthenticated,
   redirectNonAdmin,
+  AdminEmployeesController.uploadImages,
+  AdminEmployeesController.resizeImages,
   AdminEmployeesController.updateEmployee
 );
-router.get(
-  "/deleteemployees",
+
+router.delete(
+  "/delete/:id",
   ensureAuthenticated,
   redirectNonAdmin,
-  AdminEmployeesController.deleteemployees
-);
-router.get(
-  "/fetchemployees",
-  ensureAuthenticated,
-  redirectNonAdmin,
-  AdminEmployeesController.fetchEmployees
+  AdminEmployeesController.deleteEmployee
 );
 
 module.exports = router;

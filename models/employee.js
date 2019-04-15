@@ -3,6 +3,9 @@ var mongoose = require("mongoose"),
 
 var EmployeeSchema = new Schema({
   name: String,
+  avatar: {
+    type: String
+  },
   locations: [{ type: Schema.ObjectId, ref: "Location" }],
   position: String,
   active: String,
@@ -17,8 +20,6 @@ var EmployeeSchema = new Schema({
 });
 EmployeeSchema.pre("save", function preSave(next) {
   const employee = this;
-  console.log('employee', employee);
-  
   employee.update({updatedAt: Date.now()});
   next();
 });

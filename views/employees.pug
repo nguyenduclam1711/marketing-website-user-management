@@ -1,7 +1,7 @@
 extends layout.pug
 block content
   .jumbotron.jumbotron-fluid.jumbotron-singleCourse.text-center.bg-transparent
-    .bg-primary-transparent.position-fixed.left.top.z-minus.h-100
+    .bg-primary.position-fixed.left.top.z-minus.h-100
       img.half-transparent.w-100.h-100.object-fit-cover(src='/media/team.jpg')
     .jumbotron-courses-container.text-white.container
       .px-md-5
@@ -10,7 +10,7 @@ block content
 
 
   .container.mt-md-5
-    .bg-light
-      .row
+    .bg-light.p-3
+      .row.justify-content-center
         each employee in employees
                 +singleEmployee(employee)

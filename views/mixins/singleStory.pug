@@ -3,7 +3,7 @@ mixin singleStory(story, showFullContent)
     a(href="/stories/"+story.slug)
       .row.position-relative
         .col-10.offset-1.col-md-8.offset-md-2.align-items-center
-          img.object-fit-cover.img-fluid.rounded-circle.square(style="background-image: url('/images/"+story.avatar+"')")
+          img.object-fit-cover.img-fluid.rounded-circle.square(style="background-image: url('/images/"+story.avatar+"')" alt=story.icon)
         .col-5.position-absolute.align-items-center.bottom.right
           img.object-fit-cover.img-fluid.rounded-circle.square(style="background-image: url('/images/"+story.companylogo+"')")
       div

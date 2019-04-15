@@ -24,6 +24,7 @@ include mixins/newsletter
 include mixins/pageForm
 include mixins/formLocation
 include mixins/menuFooter
+include mixins/employeeForm
 include mixins/landingpage/video
 
 doctype html
@@ -60,7 +61,7 @@ html.h-100(lang='en')
     meta(name="theme-color", content="#ffffff")
   
 
-  body.h-100(data-spy='scroll', data-target='#myScrollspy', data-offset='1', class=pathclass+(currentPath.includes('admin') ? ' admin' : '' ))
+  body.h-100(data-spy='scroll', data-target='#courseScrollspy', data-offset='1', class=pathclass+(currentPath.includes('admin') ? ' admin' : '' ))
 
     if messages
       - const menulocations = Object.keys(locals.messages)

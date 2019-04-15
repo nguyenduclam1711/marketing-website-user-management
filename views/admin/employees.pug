@@ -1,9 +1,12 @@
 extends ../layout.pug
 block content
-  .container.mt-md-5
-    a.btn.btn-outline-primary(href="/admin/employees/fetchemployees")="Fetch employees from Personio"
-        a.btn.btn-outline-danger(href="/admin/employees/deleteemployees")="Delete all"
-    .bg-light
+  .bg-light.py-5
+    .container
+      +employeeForm
+
+  .bg-white.py-5
+    .container
+      h2 All employees
       .row
         each employee in employees
           +singleEmployee(employee)

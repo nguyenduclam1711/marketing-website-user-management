@@ -3,10 +3,10 @@ mixin getinvolved
     .container.text-center
       h2.display-1.text-uppercase GET INVOLVED
       h3.text-muted Please contact us to learn more how you can be involved
-      .div.d-inline-block
+      .py-5
         each page in headerPages
-          div.story-item.get-involved.py-4.px-3.mb-3.d-inline-block.justify-content-between
-            a.service-link.text-muted(href="/pages/" + page.slug)
-              span
+          div.p-2.mb-3.d-inline-block.justify-content-between.hover-shadow
+            a.text-muted(href="/pages/" + page.slug)
+              h4.mb-0.text-muted
                 = page.title
         

@@ -1,0 +1,36 @@
+mixin employeeForm
+    - var editPath = currentPath.includes('admin/employees/edit')
+      form.mb-5(method='POST', action=editPath ? '/admin/employees/update/'+employee.id+'?_method=PUT' : '/admin/employees', enctype="multipart/form-data")
+
+        h2
+          = editPath ? "Edit Employee " :"Create a new Employee"
+          .btn-group.ml-3
+            if editPath
+              a.btn.btn-outline-primary(href="/admin/employees")="Back"
+            button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Employee" 
+        .form-group
+          label.d-block(for='avatar') Employee Icon
+          if employee && employee.avatar !== "false"
+            img.w-100.mw-150.mh-150.object-fit-cover(src="/images/"+employee.avatar)
+          input#avatar.form-control-file(type='file' name='avatar')
+
+        .mb-3
+          label(for='name') Name
+          input#name.form-control(name='name', type='text', placeholder='Name', required='', autofocus='', value=editPath ? employee.name : "")
+        
+        .mb-3
+          label(for='position') Name
+          input#position.form-control(name='position', type='text', placeholder='Position', required='', autofocus='', value=editPath ? employee.position : "")
+
+        .my-3
+          label Person available in locations:
+          .d-flex
+            each location in locations
+              .custom-control.custom-checkbox.mr-3
+                input.custom-control-input(name="locations" type='checkbox' id=location.name value=location._id  checked=(location.selected))
+                label.custom-control-label(for=location.name)=location.name
+        if editPath
+          .d-flex.align-items-center
+            a.btn.btn-outline-primary.mr-2(href="/admin/employees/edit/"+employee._id) Edit
+            a.btn.btn-outline-primary.mr-2(href="/admin/employees/delete/"+employee._id) Delete
+        button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Course" 

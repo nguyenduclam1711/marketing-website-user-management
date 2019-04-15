@@ -109,7 +109,7 @@ router.post("/newsletter-signup", function (req, res) {
     members: [
       {
         email_address: email,
-        status: "subscribed"
+        status: "pending"
         // merge_fields: {}
       }
     ]
