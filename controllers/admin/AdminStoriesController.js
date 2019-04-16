@@ -41,7 +41,9 @@ module.exports.getSingleStory = async (req, res) => {
 }
 module.exports.editStory = async function (req, res) {
   const query = isAdmin(req) ? {userId: req.user._id, slug: req.params.slug} : {slug: req.params.slug}
-
+  let stories = await Story.find({})
+    .sort("order")
+    .exec();
   const story = await Story.findOne(query)
   
   const shiftStoryBack = stories.length + 1
