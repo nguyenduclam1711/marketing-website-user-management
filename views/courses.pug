@@ -2,7 +2,7 @@ extends layout.pug
 block content
   .jumbotron.jumbotron-fluid.jumbotron-singleCourse.text-center.bg-transparent
     .bg-primary.position-fixed.left.top.z-minus.h-100.w-100
-      video.half-transparent.w-100(autoplay='', muted='', loop='')
+      video.object-fit-cover.h-100.half-transparent.w-100(autoplay='', muted='', loop='')
         source(src='/media/video.mp4', type='video/mp4')
 
     .jumbotron-courses-container.text-white.container.px-md-5
@@ -27,7 +27,7 @@ block content
                 a(href="/courses/"+course.slug)                  
                   .m-3.row.position-relative
                     .col-10.offset-1.col-md-8.offset-md-2.align-items-center
-                      img.object-fit-cover.img-fluid.rounded-circle.square(alt=course.headline style="background-image: url('/images/"+course.icon+"')")
+                      img.object-fit-cover.img-fluid.rounded-circle.square(alt=course.headline src="/media/pixel.gif" style="background-image: url('/images/"+course.icon+"')")
                   
                   h4.service-title= course.headline
                   p=course.title

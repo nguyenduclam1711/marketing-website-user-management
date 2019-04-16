@@ -11,7 +11,7 @@ mixin ourCoursesSection
               a.card-link(href="/courses/"+course.slug)
                 .m-3.row.position-relative
                   .col-10.offset-1.col-md-8.offset-md-2.align-items-center
-                    img.object-fit-cover.img-fluid.rounded-circle.square(alt=course.headline style="background-image: url('/images/"+course.icon+"')")
+                    img.object-fit-cover.img-fluid.rounded-circle.square(src="/media/pixel.gif" alt=course.headline style="background-image: url('/images/"+course.icon+"')")
 
                 h4.service-title= course.headline
                 p.text-muted=course.title
