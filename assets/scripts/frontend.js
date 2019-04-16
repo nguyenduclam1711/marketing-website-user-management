@@ -10,17 +10,6 @@ import 'bootstrap/js/dist/alert';
 
 require("../css/style.scss");
 
-$(function () {
-  if (typeof Storage != "undefined") {
-    if (!sessionStorage.getItem("done")) {
-      setTimeout(function () {
-        $("#contactFormModal").modal("show");
-        sessionStorage.setItem("done", true);
-      }, 5000);
-    }
-  }
-});
-
 (function () {
   var newsletterForm = document.querySelector("#mc-embedded-subscribe-form");
   if (newsletterForm) {

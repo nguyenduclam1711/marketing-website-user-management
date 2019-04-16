@@ -1,13 +1,13 @@
 mixin joblist(public)
 
-
-  each job in jobs
-    div
-      a(href="/jobs/"+job.slug)
-        .p-3.mb-3.bg-light.border-0.hover-shadow
-          h2.mr-3=job.name
-          p
-            span.mr-2 Location:
-            each location in job.locations
-              span.badge.badge-primary.mr-2=location.name
-              
+  .row
+    each job in jobs
+      .col-md-6
+        a(href="/jobs/"+job.slug)
+          .p-3.mb-3.bg-light.border-0.hover-shadow
+            h2.mr-3=job.name
+            p
+              span.mr-2 Location:
+              each location in job.locations
+                span.badge.badge-primary.mr-2=location.name
+                
