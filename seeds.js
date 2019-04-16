@@ -1,12 +1,15 @@
-'use strict';
+"use strict";
 require("dotenv").config({
   path: __dirname + "/.env"
 });
 const fs = require("fs");
-const request = require('request');
+const path = require("path");
 
 const mongoose = require("mongoose");
-mongoose.connect(process.env.MONGOURL, { useNewUrlParser: true, useCreateIndex: true });
+mongoose.connect(process.env.MONGOURL, {
+  useNewUrlParser: true,
+  useCreateIndex: true
+});
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 
 const Story = require("./models/story");
@@ -16,20 +19,47 @@ const Contact = require("./models/contact");
 const Employee = require("./models/employee");
 const Course = require("./models/course");
 const Location = require("./models/location");
+const Partner = require("./models/partner");
 const Page = require("./models/page");
 const Event = require("./models/event");
 
-const EventsController = require('./controllers/admin/AdminEventsController');
+const EventsController = require("./controllers/admin/AdminEventsController");
 
 const IMAGE_UPLOAD_DIR = process.env.IMAGE_UPLOAD_DIR;
 
-const {menulocations, stories, pages, courses, users, events, adminUser, contacts, employees} = require('./seeddata')
+const {
+  menulocations,
+  stories,
+  pages,
+  courses,
+  users,
+  events,
+  partners,
+  adminUser,
+  contacts,
+  employees
+} = require("./seeddata");
+const imageUploadDir = IMAGE_UPLOAD_DIR;
 
 async function deleteData() {
+  const files = await fs.readdirSync(imageUploadDir);
+  let images = [];
+  for (const file of files) {
+    console.log('file', file);
+    
+    if (file !== ".gitignore") {
+      images.push(fs.unlinkSync(path.join(imageUploadDir, file)));
+    }
+  }
+  console.log("files", images);
+  
+  await Promise.all(images);
+
   console.log("😢 Goodbye Data...");
   await Story.deleteMany();
   await Menulocation.deleteMany();
   await Location.deleteMany();
+  await Partner.deleteMany();
   await Employee.deleteMany();
   await Course.deleteMany();
   await Contact.deleteMany();
@@ -42,50 +72,37 @@ async function deleteData() {
 
 async function seedRandomNtoN(arrayOfRecords, relationship, model) {
   arrayOfRecords.map((record, index) => {
-    var randomSetter = Math.floor(Math.random(relationship.length) * relationship.length + 1);
+    var randomSetter = Math.floor(
+      Math.random(relationship.length) * relationship.length + 1
+    );
     record[model.collection.name] = [];
     for (let i = 0; i < randomSetter; i++) {
-      return record[model.collection.name][i] = relationship[randomSetter - 1]._id.toString();
+      return (record[model.collection.name][i] = relationship[
+        randomSetter - 1
+      ]._id.toString());
     }
   });
   return arrayOfRecords;
 }
-const downloadImages = async function (uri, filename, callback) {
-  return new Promise(function (resolve, reject) {
-    request.head(uri, function (err, res, body) {
-      if (err) {
-        console.log('error', err);
-      }
-      request(uri).pipe(fs.createWriteStream(filename)).on('close', () => {
-        resolve()
-      });
-    });
-  });
-};
 
-const imageUploadDir = IMAGE_UPLOAD_DIR;
-async function seedRandomImages(arrayOfRecords, relationship, model) {
+async function seedRandomImages() {
   var images = [
-    'http://place-hoff.com/400/300',
-    'http://place-hoff.com/400/301',
-    'http://place-hoff.com/400/302',
-    'http://place-hoff.com/400/303',
-    'http://place-hoff.com/400/304',
-    'http://place-hoff.com/400/305',
-  ]
-  let index = 0
-  var promises = []
+    "./assets/media/bg1.jpg",
+    "./assets/media/bg2.jpg",
+    "./assets/media/bg3.jpg"
+  ];
+  let index = 0;
+  var promises = [];
   for await (let image of images) {
-    index++
-    promises.push(downloadImages(image, `${imageUploadDir}/example_image_${index}.jpg`))
+    index++;
+    await fs.copyFileSync(image, `${imageUploadDir}example_image_${index}.jpg`);
   }
-  return promises
+  return promises;
 }
 async function loadData() {
   try {
-    await Promise.all(await seedRandomImages())
+    await Promise.all(await seedRandomImages());
     console.log(`Images saved to ${imageUploadDir}`);
-
     await EventsController.fetchevents();
 
     const createdMenulocations = await Menulocation.insertMany(menulocations);
@@ -93,18 +110,31 @@ async function loadData() {
     await Course.insertMany(courses);
     await Employee.insertMany(employees);
     await Story.insertMany(stories);
+    await Partner.insertMany(partners);
 
-    await User.create(adminUser)
-    console.log(`You can now login as: `)
-    console.log(`Email: ${adminUser.email} Password: password`)
+    await User.create(adminUser);
+    console.log(`You can now login as: `);
+    console.log(`Email: ${adminUser.email} Password: password`);
 
-    var associatedMenulocations = await seedRandomNtoN(pages, createdMenulocations, Menulocation)
-    var associatedLocations = await seedRandomNtoN(contacts, createdLocations, Location)
-    var associatedEmployees = await seedRandomNtoN(employees, createdLocations, Location)
+    var associatedMenulocations = await seedRandomNtoN(
+      pages,
+      createdMenulocations,
+      Menulocation
+    );
+    var associatedLocations = await seedRandomNtoN(
+      contacts,
+      createdLocations,
+      Location
+    );
+    var associatedEmployees = await seedRandomNtoN(
+      employees,
+      createdLocations,
+      Location
+    );
 
-    await Page.insertMany(associatedMenulocations)
-    await Contact.insertMany(associatedLocations)
-    await Employee.insertMany(associatedEmployees)
+    await Page.insertMany(associatedMenulocations);
+    await Contact.insertMany(associatedLocations);
+    await Employee.insertMany(associatedEmployees);
 
     console.log("👍 Done!\n\n Successfully loaded sample data");
     process.exit();

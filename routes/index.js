@@ -5,6 +5,7 @@ const Contact = require("../models/contact");
 const Location = require("../models/location");
 const Course = require("../models/course");
 const Event = require("../models/event");
+const Partner = require("../models/partner");
 const request = require("request");
 const express = require("express");
 const router = express.Router();
@@ -24,6 +25,9 @@ router.get("/", async (req, res) => {
       .limit(3)
       .exec({});
     const locations = await Location.find({});
+    const partners = await Partner.find({})
+      .sort("order")
+      .exec({});
 
     let courses = await Course.find({});
     let events = [];
@@ -43,6 +47,7 @@ router.get("/", async (req, res) => {
     res.render("index", {
       events,
       stories,
+      partners,
       locations,
       courses
     });
