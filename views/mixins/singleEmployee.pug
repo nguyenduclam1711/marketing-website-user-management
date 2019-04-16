@@ -5,7 +5,7 @@ mixin singleEmployee(employee)
         .mb-3
           .m-3.row.position-relative
             .col-10.offset-1.col-md-8.offset-md-2.align-items-center
-              img.object-fit-cover.img-fluid.rounded-circle.square(style="background-image: url('/images/"+employee.avatar+"')")
+              img.object-fit-cover.img-fluid.rounded-circle.square(alt=employee.name style="background-image: url('/images/"+employee.avatar+"')")
           //- img.rounded-circle.w-100.mw-150.mh-150.object-fit-cover(src="/images/"+employee.avatar)
       h3=employee.name
       h4=employee.position

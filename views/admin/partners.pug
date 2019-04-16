@@ -9,7 +9,7 @@ block content
         li.list-group-item.mb-3.hover-shadow
           h2.mr-3=partner.title
           if partner && partner.partnerlogo
-            img.w-100.mw-150.mh-150.object-fit-cover(src="/images/"+partner.partnerlogo)
+            img.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title src="/images/"+partner.partnerlogo)
           div.mr-3
             span.mr-2.mb-2
               = "Order: "

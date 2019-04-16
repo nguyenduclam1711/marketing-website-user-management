@@ -9,6 +9,7 @@ $turquoise: #3dbaf7;
 $textOrange: #da9446;
 $transition: .15s;
 @import "../../node_modules/bootstrap/scss/bootstrap";
+@import "../../node_modules/quill/dist/quill.snow.css";
 
 
 @mixin btn-color($color-pri, $color-sec, $color-border) {
