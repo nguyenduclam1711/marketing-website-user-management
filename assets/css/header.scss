@@ -68,6 +68,11 @@
 .navbar-light .navbar-toggler {
   border-color: transparent;
 }
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: $blue;
+  background-color: $bluetrans;
+}
 .navbar-light .navbar-nav .show > .nav-link,
 .navbar-light .navbar-nav .active > .nav-link,
 .navbar-light .navbar-nav .nav-link.show,

@@ -9,38 +9,36 @@ const parser = require("xml2json");
 module.exports.fetchJobs = async (req, res) => {
   try {
     return new Promise(async (resolve, reject) => {
-      const xml = await promisifiedRequest("https://dci-jobs.personio.de/xml");
+      const xml = await promisifiedRequest(
+        "https://dci-jobs.personio.de/xml"
+      );
       const jobsResponse = JSON.parse(parser.toJson(xml.body));
       const allJobs = jobsResponse["workzag-jobs"].position;
+      await Job.deleteMany();
 
       for (let job of allJobs) {
         try {
-          const existingJob = await Job.findOne({
-            personio_id: job.id
+          let location = await Location.findOne({
+            name: { $regex: new RegExp(job.office, "i") }
           });
-          if (!existingJob) {
-            let location = await Location.findOne({
-              name: { $regex: new RegExp(job.office, "i") }
+          if (!location) {
+            location = new Location({
+              name: job.office
             });
-            if (!location) {
-              location = new Location({
-                name: job.office
-              });
-              location = await location.save();
-            }
-
-            const newjob = new Job({
-              personio_id: job.id,
-              locations: [location.id],
-              name: job.name,
-              description: job.jobDescriptions.jobDescription,
-              department: job.department,
-              employmentType: job.employmentType,
-              schedule: job.schedule,
-              seniority: job.seniority
-            });
-            await newjob.save();
+            location = await location.save();
           }
+
+          const newjob = new Job({
+            personio_id: job.id,
+            locations: [location.id],
+            name: job.name,
+            description: job.jobDescriptions.jobDescription,
+            department: job.department,
+            employmentType: job.employmentType,
+            schedule: job.schedule,
+            seniority: job.seniority
+          });
+          await newjob.save();
         } catch (err) {
           console.log(err);
           reject("Jobs cronjob dont fetched");

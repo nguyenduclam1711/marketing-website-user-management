@@ -9,15 +9,14 @@ block content
     +quote
     +testimonialsDevugees
     +statsCounter
-    if events.length > 0
-      +upcomingEvents
     section#stories.my-5
       .container
         h2.display-1.text-center.text-uppercase Stories
         h3.mb-5.text-center.text-muted Meet our happy students
         .row
           +storylist
-    +getinvolved
+    if events.length > 0
+      +upcomingEvents
     +partners
     
     section.bg-light.py-5
