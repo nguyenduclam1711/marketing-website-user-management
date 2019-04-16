@@ -8,6 +8,7 @@ var EmployeeSchema = new Schema({
   },
   locations: [{ type: Schema.ObjectId, ref: "Location" }],
   position: String,
+  content: String,
   active: String,
   updatedAt: {
     type: Date,

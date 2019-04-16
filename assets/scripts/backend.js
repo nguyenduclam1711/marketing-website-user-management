@@ -10,37 +10,39 @@ $(function() {
   $('[data-toggle="popover"]').popover();
 });
 
-const editor = new Quill("#editor", {
-  modules: {
-    toolbar: [
-      ["bold", "italic", "underline"],
-      ["blockquote"],
-      [{ header: 1 }, { header: 2 }],
-      [{ list: "ordered" }, { list: "bullet" }],
-      // [{ script: "sub" }, { script: "super" }],
-      // [{ indent: "-1" }, { indent: "+1" }],
-      // [{ direction: "rtl" }],
+const editorContainer = document.getElementById("editor");
+if (editorContainer) {
+  const editor = new Quill(editorContainer, {
+    modules: {
+      toolbar: [
+        ["bold", "italic", "underline"],
+        ["blockquote"],
+        [{ header: 1 }, { header: 2 }],
+        [{ list: "ordered" }, { list: "bullet" }],
+        // [{ script: "sub" }, { script: "super" }],
+        // [{ indent: "-1" }, { indent: "+1" }],
+        // [{ direction: "rtl" }],
 
-      // [{ size: ["small", false, "large", "huge"] }],
+        // [{ size: ["small", false, "large", "huge"] }],
 
-      // [{ color: [] }, { background: [] }],
-      // [{ font: [] }],
-      // [{ align: [] }],
+        // [{ color: [] }, { background: [] }],
+        // [{ font: [] }],
+        // [{ align: [] }],
 
-      ["clean"]
-    ]
-  },
-  placeholder: "Content...",
-  theme: "snow"
-});
+        ["clean"]
+      ]
+    },
+    placeholder: "Content...",
+    theme: "snow"
+  });
 
-const about = document.querySelector("textarea[name=content]");
+  const about = document.querySelector("textarea[name=content]");
 
-editor.on("editor-change", function(eventName, ...args) {
-  about.value = JSON.stringify(editor.getContents());
-});
-console.log('about.value', about.value);
-
-if (about && about.value) {
-  editor.setContents(JSON.parse(about.value).ops, "api");
+  editor.on("editor-change", function(eventName, ...args) {
+    about.value = JSON.stringify(editor.getContents());
+  });
+  console.log("about.value", about.value);
+  if (about && about.value) {
+    editor.setContents(JSON.parse(about.value).ops, "api");
+  }
 }

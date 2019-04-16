@@ -14,11 +14,14 @@ mixin employeeForm
             img.w-100.mw-150.mh-150.object-fit-cover(src="/images/"+employee.avatar)
           input#avatar.form-control-file(type='file' name='avatar')
 
-        .mb-3
+        .form-group
           label(for='name') Name
           input#name.form-control(name='name', type='text', placeholder='Name', required='', autofocus='', value=editPath ? employee.name : "")
         
-        .mb-3
+        .form-group
+          textarea#content(name='content', placeholder='Optional - Say something about that person' )=editPath ? employee.content : ""
+
+        .form-group
           label(for='position') Position
           input#position.form-control(name='position', type='text', placeholder='Position', required='', autofocus='', value=editPath ? employee.position : "")
 
@@ -30,7 +33,8 @@ mixin employeeForm
                 input.custom-control-input(name="locations" type='checkbox' id=location.name value=location._id  checked=(location.selected))
                 label.custom-control-label(for=location.name)=location.name
         if editPath
-          .d-flex.align-items-center
-            a.btn.btn-outline-primary.mr-2(href="/admin/employees/edit/"+employee._id) Edit
-            a.btn.btn-outline-primary.mr-2(href="/admin/employees/delete/"+employee._id) Delete
-        button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Employee" 
+          .btn-group
+            a.btn.btn-outline-primary(href="/admin/employees/edit/"+employee._id) Edit
+            a.btn.btn-outline-danger(href="/admin/employees/delete/"+employee._id) Delete
+            a.btn.btn-outline-primary(href="/employees" target="_blank") Show
+            button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Employee" 

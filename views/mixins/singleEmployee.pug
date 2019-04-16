@@ -9,6 +9,7 @@ mixin singleEmployee(employee)
           //- img.rounded-circle.w-100.mw-150.mh-150.object-fit-cover(src="/images/"+employee.avatar)
       h3=employee.name
       h4=employee.position
+      p=employee.content
       .mb-3
         each loc in employee.locations
           span.badge.badge-primary.mr-3= loc.name

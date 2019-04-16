@@ -75,7 +75,7 @@ html.h-100(lang='en')
       div.container
         if currentPath !== "/"
           +navigation
-      .flex-grow-1(class=currentPath.includes('admin') ? ' mb-5' : '' )
+      .flex-grow-1(class=currentPath.includes('admin') ? ' bg-light mb-5' : '' )
         block content
       if !currentPath.includes('admin')
         +footer

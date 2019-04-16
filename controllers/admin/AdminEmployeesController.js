@@ -57,6 +57,7 @@ module.exports.updateEmployee = async (req, res) => {
   const employee = await Employee.findById(req.params.id)
   employee.name = req.body.name;
   employee.position = req.body.position;
+  employee.content = req.body.content;
   employee.locations = req.body.locations;
   employee.avatar = req.body.avatar ? req.body.avatar : employee.avatar;
   employee.avatar = req.files.avatar ? req.body.avatar : employee.avatar;
@@ -114,7 +115,7 @@ exports.resizeImages = async (request, response, next) => {
     }.${extension}`;
     try {
       const image = await jimp.read(singleFile[0].path);
-      // await image.cover(350, 180);
+      await image.cover(600, 600);
       await image.write(
         `${process.env.IMAGE_UPLOAD_DIR}/${
           request.body[singleFile[0].fieldname]
