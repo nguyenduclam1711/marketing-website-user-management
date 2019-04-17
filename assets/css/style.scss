@@ -17,10 +17,11 @@ body:not(.admin).btn {
   padding-top: 0;
   padding-bottom: 0;
 }
-.btn, .nav-pills .nav-link {
+.btn,
+.nav-pills .nav-link {
   border-radius: 0 !important;
 }
-.nav-pills .nav-link:hover, 
+.nav-pills .nav-link:hover,
 .nav-pills .show > .nav-link:hover {
   background-color: $blue !important;
   color: white;
@@ -131,7 +132,6 @@ a:hover {
   color: #222;
   text-decoration: underline;
 }
-
 
 .testimonials-button-wrap {
   margin: 2rem 0;
@@ -448,7 +448,6 @@ UPCOMING EVENTS
   filter: grayscale(100%);
 }
 
-
 /******************************************
     CONTACT FORM SECTION
 *******************************************/
@@ -569,7 +568,7 @@ input[type="week"] {
   width: auto;
   display: inline-block;
   position: relative;
-  padding-left: 35px;
+  padding-left: 25px;
   margin-bottom: 13px;
   cursor: pointer;
   font-size: 16px;
@@ -719,7 +718,6 @@ input[type="week"] {
 /* ----------- iPad Pro Start----------- */
 /* Portrait and Landscape */
 
-
 @media (max-width: 1199.98px) {
   .courses-scroll {
     display: none;
@@ -812,11 +810,6 @@ input[type="week"] {
     }
   }
 }
-
-#btn-contactForm {
-  width: 100%;
-}
-
 .verticalLineGetInv {
   --borderWidth: 3px;
   background: #fff;
@@ -872,18 +865,28 @@ input[type="week"] {
 }
 
 $class-slug: square !default;
-div[class*=" #{$class-slug}"]{
+div[class*=" #{$class-slug}"] {
   object-fit: cover;
 }
-@for $i from 1 through 5{
-  .#{$class-slug}-#{$i}{
+@for $i from 1 through 5 {
+  .#{$class-slug}-#{$i} {
     max-width: 100px * $i;
     max-height: 100px * $i;
   }
   @media (min-width: 767px) {
-    .#{$class-slug}-md-#{$i}{
+    .#{$class-slug}-md-#{$i} {
       max-width: 100px * $i !important;
       max-height: 100px * $i !important;
     }
   }
+}
+
+.floatings {
+  transform: translateY(100px);
+  opacity: 0;
+  transition: transform .3s ease, opacity .3s ease;
+}
+.floatings.floated {
+  opacity: 1;
+  transform: translateY(0);
 }

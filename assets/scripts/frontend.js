@@ -72,15 +72,69 @@ var scrollbuttons = document.getElementsByClassName("scrollbutton");
 for (var i = 0, len = scrollbuttons.length; i < len; i++) {
   scrollbuttons[i].addEventListener("click", function(event) {
     event.preventDefault();
-    document
-      .querySelector(event.target.attributes.href.value)
-      .scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest"
-      });
+    document.querySelector(event.target.attributes.href.value).scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest"
+    });
   });
 }
+const throttle = (func, limit) => {
+  let lastFunc;
+  let lastRan;
+  return function() {
+    const context = this;
+    const args = arguments;
+    if (!lastRan) {
+      func.apply(context, args);
+      lastRan = Date.now();
+    } else {
+      clearTimeout(lastFunc);
+      lastFunc = setTimeout(function() {
+        if (Date.now() - lastRan >= limit) {
+          func.apply(context, args);
+          lastRan = Date.now();
+        }
+      }, limit - (Date.now() - lastRan));
+    }
+  };
+};
+
+
+var floatings = [...document.querySelectorAll(".floatings")];
+function myFunction() {
+  let timeout = 0;
+  floatings.forEach(item => {
+    if (elementInViewport2(item) && window.innerWidth > 800) {
+      setTimeout(() => {
+        item.classList.add("floated");
+      }, timeout);
+      timeout += 150;
+    }
+  });
+}
+function elementInViewport2(el) {
+  var top = el.offsetTop;
+  var left = el.offsetLeft;
+  var width = el.offsetWidth;
+  var height = el.offsetHeight;
+
+  while (el.offsetParent) {
+    el = el.offsetParent;
+    top += el.offsetTop;
+    left += el.offsetLeft;
+  }
+
+  return (
+    top < window.pageYOffset + window.innerHeight - window.innerHeight / 5 &&
+    left < window.pageXOffset + window.innerWidth &&
+    top + height > window.pageYOffset &&
+    left + width > window.pageXOffset
+  );
+}
+window.onscroll = throttle(function() {
+  myFunction();
+}, 10);
 
 //
 // let typedCursor = new Typed('.subtitle', {
