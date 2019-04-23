@@ -176,7 +176,7 @@ app.use("/users", usersRoutes);
 app.use("/stories", storiesRoutes);
 app.use("/pages", pagesRoutes);
 app.use("/jobs", jobsRoutes);
-app.use("/employees", employeesRoutes);
+app.use("/about-us", employeesRoutes);
 app.use("/events", eventsRoutes);
 app.use("/courses", coursesRoutes);
 app.use("/admin/stories", storiesAdminRoutes);

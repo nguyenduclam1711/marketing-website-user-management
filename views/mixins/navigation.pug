@@ -30,11 +30,11 @@ mixin navigation
           a#navbarDropdownMenuLink.nav-link.dropdown-toggle.z-1.mx-2(data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' class= currentPath.includes('/pages') && !currentPath.includes('admin') ? "active" : ""  href='/admin/contacts')
             | GET INVOLVED
           .dropdown-menu.shadow-sm.z-0(aria-labelledby='navbarDropdownMenuLink')
+            a.dropdown-item.px-2.nav-link(href='/about-us/' class=currentPath == "/about-us" ? "active" : "") About us
+            a.dropdown-item.px-2.nav-link(class=currentPath == "/tour" ? "active" : "" href='/tour') Give us a tour of your company
+            a.dropdown-item.px-2.nav-link(href='/jobs/' class=currentPath == "/jobs" ? "active" : "") Jobs
             each page in headerPages
               a.dropdown-item.nav-link.px-2(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
-            a.dropdown-item.px-2.nav-link(href='/jobs/') Jobs
-            a.dropdown-item.px-2.nav-link(href='/employees/') Team
-            a.dropdown-item.px-2.nav-link(class=currentPath == "/tour" ? "active" : "" href='/tour') Give us a tour of your company
       
               
 
