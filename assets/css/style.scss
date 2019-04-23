@@ -564,7 +564,9 @@ input[type="week"] {
   left: 0;
   cursor: pointer;
 }
-
+.cursor-pointer {
+  cursor: pointer;
+}
 /* Create a custom checkbox */
 .checkmark {
   position: absolute;
@@ -702,10 +704,6 @@ input[type="week"] {
   .courses-scroll {
     display: none;
   }
-  .sticky-top {
-    padding-left: 5%;
-    padding-right: 5%;
-  }
   .container-fluid-courses {
     width: 100%;
   }
@@ -745,14 +743,9 @@ input[type="week"] {
     min-width: 50vw;
     height: 30vh;
   }
-  .sticky-top {
-    padding-left: 5%;
-    padding-right: 5%;
-  }
   .card-img-top {
     height: 25vw;
   }
-
   .courseApply-step:not(:last-child):before {
     visibility: hidden;
     clear: both;

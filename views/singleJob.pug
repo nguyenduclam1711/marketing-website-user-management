@@ -2,7 +2,7 @@ extends layout.pug
 block content
   .jumbotron.jumbotron-fluid.jumbotron-singleCourse.text-center.bg-transparent
     .bg-primary.position-fixed.left.top.z-minus.h-100.w-100
-      video.half-transparent.w-100(autoplay='', muted='', loop='')
+      video.half-transparent.w-100.h-100.object-fit-cover(autoplay='', muted='', loop='')
         source(src='/media/video.mp4', type='video/mp4')
 
     .jumbotron-courses-container.text-white

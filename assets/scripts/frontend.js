@@ -53,7 +53,9 @@ const toggleNL = (remove = false) => {
 
 let counted = false;
 const countUp = () => {
-  if (elementInViewport2(document.querySelector(".section-counter")) && !counted) {
+  const counter = document.querySelector(".section-counter")
+
+  if (counter &&elementInViewport2(counter) && !counted) {
     counted = true;
     $(".counter-count").each(function() {
       $(this)

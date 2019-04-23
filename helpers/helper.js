@@ -7,7 +7,12 @@ const User = require("../models/user");
 const LocalStrategy = require("passport-local").Strategy;
 const Location = require("../models/location");
 const Event = require("../models/event");
-
+exports.groupByKey = (items, key) => {
+  return items.reduce(function(group, x) {
+    (group[x[key]] = group[x[key]] || []).push(x);
+    return group;
+  }, {});
+};
 exports.fetchEventsByLocation = async () => {
   const locations = await Location.find({});
   let eventsByLocation = [];

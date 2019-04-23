@@ -1,11 +1,13 @@
 require("dotenv").config({ path: __dirname + "/../.env" });
 const Job = require("../models/job");
 const Location = require("../models/location");
+const { groupByKey } = require("../helpers/helper");
 
 module.exports.getJobs = async function(req, res) {
   try {
     let locations = await Location.find({}).exec();
     let jobs;
+    let sortedJobs;
     if (req.query.location) {
       location = await Location.findOne({
         name: req.query.location
@@ -14,14 +16,16 @@ module.exports.getJobs = async function(req, res) {
         .populate("locations")
         .sort("order")
         .exec();
+      sortedJobs = groupByKey(jobs, "department");
     } else {
       jobs = await Job.find({})
         .populate("locations")
         .sort("order")
         .exec();
+      sortedJobs = groupByKey(jobs, "department");
     }
     res.render("jobsPublic", {
-      jobs,
+      sortedJobs,
       query: req.query,
       locations
     });
