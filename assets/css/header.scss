@@ -1,3 +1,25 @@
+$headerheight: calc(100vh - 10rem);
+.homeSection {
+  position: relative;
+  min-width: 100vw;
+  min-height: $headerheight;
+  background-image: url("/media/header.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  -webkit-clip-path: polygon(50% 0%, 100% 0, 100% 88%, 50% 100%, 0 92%, 0 0);
+  clip-path: polygon(50% 0%, 100% 0, 100% 88%, 50% 100%, 0 92%, 0 0);
+}
+
+.mainHome {
+  position: relative;
+  background: transparentize($blue, 0.5);
+  min-height: $headerheight;
+}
+
+.subtitle {
+  font-weight: lighter;
+  color: #dce0f2;
+}
 #dci-logo {
   width: 50px;
   height: 50px;

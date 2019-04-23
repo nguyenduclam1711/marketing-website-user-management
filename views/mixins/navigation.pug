@@ -25,9 +25,7 @@ mixin navigation
               a.dropdown-item.nav-link.px-2(class= currentPath === ("/events/" + location.name) ? "active" : "" href='/events/'+ location.name)=location.name
         li.position-relative.nav-item
           a.nav-link.mx-2(class=currentPath == "/stories" ? "active" : "" href='/stories') STORIES
-        li.position-relative.nav-item
-          a.nav-link.mx-2(class=currentPath == "/tour" ? "active" : "" href='/tour') COMPANYTOUR
-      
+        
         li.position-relative.nav-item.dropdown
           a#navbarDropdownMenuLink.nav-link.dropdown-toggle.z-1.mx-2(data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' class= currentPath.includes('/pages') && !currentPath.includes('admin') ? "active" : ""  href='/admin/contacts')
             | GET INVOLVED
@@ -36,6 +34,8 @@ mixin navigation
               a.dropdown-item.nav-link.px-2(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
             a.dropdown-item.px-2.nav-link(href='/jobs/') Jobs
             a.dropdown-item.px-2.nav-link(href='/employees/') Team
+            a.dropdown-item.px-2.nav-link(class=currentPath == "/tour" ? "active" : "" href='/tour') Give us a tour of your company
+      
               
 
         li.position-relative.nav-item
