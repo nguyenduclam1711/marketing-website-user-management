@@ -265,6 +265,7 @@ exports.stories = [
 exports.courses = [
   {
     headline: "Digital Marketing / E-Commerce",
+    order: 2,
     icon: "example_image_1.jpg",
     subheading: "Write here something...",
     title:
@@ -339,6 +340,7 @@ exports.courses = [
   },
   {
     headline: "Orientation Course",
+    order: 1,
     icon: "example_image_2.jpg",
     subheading: "Find out what tech job are you passionate about",
     title:
@@ -416,6 +418,7 @@ exports.courses = [
   },
   {
     headline: "Web Development Course",
+    order: 3,
     icon: "example_image_3.jpg",
     subheading: "Become a web developer in 12 months",
     title: "Start Your Career in Web Development",

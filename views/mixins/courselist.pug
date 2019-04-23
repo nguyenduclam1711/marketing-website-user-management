@@ -1,9 +1,21 @@
 mixin courselist(public)
-  ul.row
+  .row
     each course in courses
-      .card
-        div.course-item.p-5.d-flex.flex-column.justify-content-between
-          h1.text-justify=course.headline
+      .card.mb-3.w-100
+        div.course-item.p-5
+          h1.text-justify
+            =course.headline
+            p.text-muted=course.title
+          .row
+            .col-md-3
+              if course.icon
+                img.object-fit-cover.img-fluid.square(src="/media/pixel.gif" alt=course.headline style="background-image: url('/images/"+course.icon+"')")
+              else
+                span No image uploaded
+            .col-md-9
+              if course.order
+                span Order: 
+                span.badge.badge-primary.text-justify=course.order
 
                     
           form.d-flex.justify-content-between(method='POST', action='/admin/courses/delete/'+course.slug +'?_method=DELETE')

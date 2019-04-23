@@ -8,9 +8,8 @@ const Location = require("../../models/location");
 const Course = require("../../models/course");
 
 module.exports.getCourses = async function(req, res) {
-  console.log('req.user.admin', req.user.admin);
   let courses = await Course.find({})
-    .sort("order")
+    .sort({"order": 1})
     .exec();
 
   res.render("admin/adminCourses", {
@@ -27,6 +26,9 @@ module.exports.getSingleCourse = function(req, res) {
 };
 module.exports.editCourse = async function(req, res) {
   const course = await Course.findOne({ slug: req.params.slug });
+  const courses = await Course.find({})
+    .sort("order")
+    .exec();
   let alllocations = await Location.find({}).exec();
   all = alllocations.map(loc => {
     let match = course.locations
@@ -51,6 +53,7 @@ module.exports.createCourse = async function(req, res) {
   course.title = req.body.title;
   course.subheading = req.body.subheading;
   course.subtitle = req.body.subtitle;
+  course.order = req.body.order;
   course.locations = req.body.locations;
   course.icon = req.body.icon;
   course.archivements = [
@@ -103,11 +106,20 @@ module.exports.createCourse = async function(req, res) {
   ];
 
   // save the course and check for errors
-  course.save(function(err) {
+  course.save( async function(err) {
     if (err) {
-      console.log("err", err);
-
-      res.send(err);
+      console.log("error", err);
+      console.log('course', course);
+      
+      req.flash("danger", `Error ${err}`);
+      let courses = await Course.find({})
+        .sort({"order": 1})
+        .exec();
+      res.render("admin/adminCourses", {
+        courses,
+        course
+      });
+      return
     }
     req.flash("success", `Successfully created ${course.title}`);
     res.redirect("/admin/courses");
@@ -192,7 +204,7 @@ module.exports.updateCourse = async function(req, res) {
   course.headline = req.body.headline;
   course.title = req.body.title;
   course.subheading = req.body.subheading;
-  course.subtitle = req.body.subtitle;
+  course.order = req.body.order;
   course.locations = req.body.locations;
 
   course.icon = req.files.icon ? req.body.icon : course.icon;

@@ -1,8 +1,6 @@
 var mongoose = require("mongoose"),
   Schema = mongoose.Schema,
-  URLSlugs = require('mongoose-url-slugs');
-
-
+  URLSlugs = require("mongoose-url-slugs");
 var CourseSchema = new Schema({
   icon: {
     type: String
@@ -10,15 +8,19 @@ var CourseSchema = new Schema({
   headline: {
     type: String,
     trim: true,
-    required: 'Please enter a headline!'
+    required: "Please enter a headline!"
   },
   subheading: {
     type: String,
     trim: true,
-    required: 'Please enter a subheading !'
-  },  
+    required: "Please enter a subheading !"
+  },
   title: {
     type: String
+  },
+  order: {
+    type: Number,
+    unique: true
   },
   subtitle: {
     type: String
@@ -27,7 +29,7 @@ var CourseSchema = new Schema({
   archivements: [
     {
       icon: String,
-      description: String,
+      description: String
     }
   ],
   features: [
@@ -37,12 +39,15 @@ var CourseSchema = new Schema({
       icon: String
     }
   ],
-  timeline: [{
-    title: String,
-    subtitle: String,
-    time: String
-  }],
+  timeline: [
+    {
+      title: String,
+      subtitle: String,
+      time: String
+    }
+  ]
 });
 
-CourseSchema.plugin(URLSlugs('headline'));
+CourseSchema.plugin(URLSlugs("headline"));
+
 module.exports = mongoose.model("Course", CourseSchema);

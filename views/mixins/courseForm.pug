@@ -1,15 +1,14 @@
 mixin courseForm
-  - var editPath = currentPath.includes('admin/courses/edit')
-  form.mb-5.form-signin(method='POST', action=editPath ? '/admin/courses/update/'+course.slug+'?_method=PUT' : '/admin/courses', enctype="multipart/form-data")
+  form.mb-5.form-signin(method='POST', action=course ? '/admin/courses/update/'+course.slug+'?_method=PUT' : '/admin/courses', enctype="multipart/form-data")
     
     h2
-      =editPath ? "Edit course" :"Create a new course"
+      =course ? "Edit course" :"Create a new course"
       .btn-group
-        if editPath
+        if course
           a.btn.btn-outline-primary(href="/admin/courses")="Back"
           a.btn.btn-outline-primary(target="_blank" href="/courses/"+course.slug)="Show"
 
-        button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Course" 
+        button.btn.btn-primary(type='submit')=course ? "Update" :"Create a new Course" 
     .row
       .col-md-6
         .form-group
@@ -20,19 +19,25 @@ mixin courseForm
 
         .mb-3
           label(for='headline') Headline
-          input#headline.form-control(name='headline', type='text', placeholder='Headline', value=editPath ? course.headline :"" required='', autofocus='')
+          input#headline.form-control(name='headline', type='text', placeholder='Headline', value=course ? course.headline :"" required='', autofocus='')
 
         .mb-3
           label(for='subheading') Subheading
-          input#subheading.form-control(name='subheading', type='text', placeholder='subheading', value=editPath ? course.subheading :"" required='', autofocus='')
+          input#subheading.form-control(name='subheading', type='text', placeholder='subheading', value=course ? course.subheading :"" required='', autofocus='')
 
         .mb-3
           label(for='title') Title
-          input#title.form-control(name='title', type='text', placeholder='Title', value=editPath ? course.title :"" required='', autofocus='')
+          input#title.form-control(name='title', type='text', placeholder='Title', value=course ? course.title :"" required='', autofocus='')
 
         .mb-3
           label(for='subtitle') Subtitle
-          input#subtitle.form-control(name='subtitle', type='text', placeholder='subtitle', value=editPath ? course.subtitle :"" required='', autofocus='')
+          input#subtitle.form-control(name='subtitle', type='text', placeholder='subtitle', value=course ? course.subtitle :"" required='', autofocus='')
+        .mb-3
+          label(for='order') 
+            | Order
+          button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Defines the order the courses are displayed. 0,1,2,3,4')
+            | ?
+          input#inputOrder.form-control(name='order', type='number', placeholder='Order', autofocus='', value=course ? course.order : "")
 
         .form-group
           label.d-block(for='archivement_description_1') Archivements icon 1
@@ -40,21 +45,21 @@ mixin courseForm
             img.mw-150.mh-150(src="/images/"+course.archivements[0].icon)
           input#exampleFormControlFile1.form-control-file(type='file' name='archivement_icon_1')
           
-          input(type="text", name="archivement_description_1",  value=editPath ? course.archivements[0].description : '', placeholder="archivement description 1" )
+          input(type="text", name="archivement_description_1",  value=course ? course.archivements[0].description : '', placeholder="archivement description 1" )
         .form-group
           label.d-block(for='archivement_description_2') Archivements icon 2
           if course && course.archivements[1].icon
             img.mw-150.mh-150(src="/images/"+course.archivements[1].icon)
           input#exampleFormControlFile1.form-control-file(type='file' name='archivement_icon_2')
           
-          input(type="text", name="archivement_description_2",  value=editPath ? course.archivements[1].description : '', placeholder="archivement description 2" )
+          input(type="text", name="archivement_description_2",  value=course ? course.archivements[1].description : '', placeholder="archivement description 2" )
         .form-group
           label.d-block(for='archivement_icon_3') Archivements icon 3
           if course && course.archivements[2].icon
             img.mw-150.mh-150(src="/images/"+course.archivements[2].icon)
           input#exampleFormControlFile1.form-control-file(type='file' name='archivement_icon_3')
           
-          input(type="text", name="archivement_description_3",  value=editPath ? course.archivements[2].description : '' placeholder="archivement description 3")
+          input(type="text", name="archivement_description_3",  value=course ? course.archivements[2].description : '' placeholder="archivement description 3")
         .form-group
           label.d-block(for='features1') Features icon 1
           if course && course.features[0].icon
@@ -62,10 +67,10 @@ mixin courseForm
           input#exampleFormControlFile1.form-control-file(type='file' name='features_icon_1')
 
           label(for='features_title_1') Features title 1
-          input(type="text", name="features_title_1",  value=editPath ? course.features[0].title : '', placeholder="features title 1" )
+          input(type="text", name="features_title_1",  value=course ? course.features[0].title : '', placeholder="features title 1" )
 
           label(for='features_subtitle_1') Features subtitle 1
-          input(type="text", name="features_subtitle_1",  value=editPath ? course.features[0].subtitle : '', placeholder="feature subtitle 1" )
+          input(type="text", name="features_subtitle_1",  value=course ? course.features[0].subtitle : '', placeholder="feature subtitle 1" )
         .form-group
           label.d-block(for='features2') Features icon 2
           if course && course.features[1].icon
@@ -73,10 +78,10 @@ mixin courseForm
           input#exampleFormControlFile1.form-control-file(type='file' name='features_icon_2')
 
           label(for='features_title_2') Features Title 2
-          input(type="text", name="features_title_2",  value=editPath ? course.features[1].title : '', placeholder="features title 2" )
+          input(type="text", name="features_title_2",  value=course ? course.features[1].title : '', placeholder="features title 2" )
 
           label(for='features_subtitle_3') Features Subtitle 3
-          input(type="text", name="features_subtitle_2",  value=editPath ? course.features[1].subtitle : '', placeholder="feature subtitle 2" )
+          input(type="text", name="features_subtitle_2",  value=course ? course.features[1].subtitle : '', placeholder="feature subtitle 2" )
         .form-group
           label.d-block(for='features3') Features icon 3
           if course && course.features[2].icon
@@ -85,43 +90,43 @@ mixin courseForm
           label(for='features_title_3') Features Title 3
           
           label(for='features_title_3') Features Subtitle 3
-          input(type="text", name="features_title_3",  value=editPath ? course.features[2].title : '' placeholder="features title 3")
+          input(type="text", name="features_title_3",  value=course ? course.features[2].title : '' placeholder="features title 3")
 
           label(for='features_subtitle_3') Features Subtitle 3
-          input(type="text", name="features_subtitle_3",  value=editPath ? course.features[2].subtitle : '' placeholder="feature subtitlen 3")
+          input(type="text", name="features_subtitle_3",  value=course ? course.features[2].subtitle : '' placeholder="feature subtitlen 3")
           
       .col-md-6
         .form-group
           label(for='timeline_title_1') Timeline title 1
-          input(type="text", id='timeline_title_1' name="timeline_title_1", placeholder="timeline title 1", value= editPath ? course.timeline[0].title : "")
+          input(type="text", id='timeline_title_1' name="timeline_title_1", placeholder="timeline title 1", value= course ? course.timeline[0].title : "")
 
         .form-group
           label(for='timeline_subtitle_1') Timeline subtitle 1
-          input(type="text", id='timeline_subtitle_1' name="timeline_subtitle_1", placeholder="timeline subtitle 1", value= editPath ? course.timeline[0].subtitle : "")
+          input(type="text", id='timeline_subtitle_1' name="timeline_subtitle_1", placeholder="timeline subtitle 1", value= course ? course.timeline[0].subtitle : "")
 
         .form-group
           label(for='timeline_time_1') Timeline time 1
-          input(type="text", id='timeline_time_1' name="timeline_time_1", placeholder="timeline time 1", value= editPath ? course.timeline[0].time : "")
+          input(type="text", id='timeline_time_1' name="timeline_time_1", placeholder="timeline time 1", value= course ? course.timeline[0].time : "")
 
         .form-group
           label(for='timeline_title_2') Timeline title 2
-          input(type="text", id='timeline_title_2' name="timeline_title_2", placeholder="timeline title 2", value= editPath ? course.timeline[1].title : "")
+          input(type="text", id='timeline_title_2' name="timeline_title_2", placeholder="timeline title 2", value= course ? course.timeline[1].title : "")
         .form-group
           label(for='timeline_subtitle_2') Timeline subtitle 2
-          input(type="text", id='timeline_subtitle_2' name="timeline_subtitle_2", placeholder="timeline subtitle 2", value= editPath ? course.timeline[1].subtitle : "")
+          input(type="text", id='timeline_subtitle_2' name="timeline_subtitle_2", placeholder="timeline subtitle 2", value= course ? course.timeline[1].subtitle : "")
         .form-group
           label(for='timeline_time_2') Timeline time 2
-          input(type="text", id='timeline_time_2' name="timeline_time_2", placeholder="timeline time 2", value= editPath ? course.timeline[1].time : "")
+          input(type="text", id='timeline_time_2' name="timeline_time_2", placeholder="timeline time 2", value= course ? course.timeline[1].time : "")
           
         .form-group
           label(for='timeline_title_3') Timeline title 3
-          input(type="text", id='timeline_title_3' name="timeline_title_3", placeholder="timeline title 3", value= editPath ? course.timeline[2].title : "")
+          input(type="text", id='timeline_title_3' name="timeline_title_3", placeholder="timeline title 3", value= course ? course.timeline[2].title : "")
         .form-group
           label(for='timeline_subtitle_3') Timeline subtitle 3
-          input(type="text", id='timeline_subtitle_3' name="timeline_subtitle_3", placeholder="timeline subtitle 3", value= editPath ? course.timeline[2].subtitle : "")
+          input(type="text", id='timeline_subtitle_3' name="timeline_subtitle_3", placeholder="timeline subtitle 3", value= course ? course.timeline[2].subtitle : "")
         .form-group
           label(for='timeline_time_3') Timeline time 3
-          input(type="text", id='timeline_time_3' name="timeline_time_3", placeholder="timeline time 3", value= editPath ? course.timeline[2].time : "")
+          input(type="text", id='timeline_time_3' name="timeline_time_3", placeholder="timeline time 3", value= course ? course.timeline[2].time : "")
         label Course available in locations:
         each location in locations
           .custom-control.custom-checkbox
@@ -129,7 +134,7 @@ mixin courseForm
             label.custom-control-label(for=location.name)=location.name
 
         .btn-group
-          if editPath
+          if course
             a.btn.btn-outline-primary(href="/admin/courses")="Back"
             a.btn.btn-outline-primary(target="_blank" href="/courses/"+course.slug)="Show"
-          button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Course" 
+          button.btn.btn-primary(type='submit')=course ? "Update" :"Create a new Course" 

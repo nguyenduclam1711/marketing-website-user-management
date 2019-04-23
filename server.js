@@ -108,7 +108,7 @@ app.use(async (req, res, next) => {
 
   if (navData === null) {
     let courses = await Course.find({})
-      .sort("order")
+      .sort({"order": 1})
       .exec();
     let locations = await Location.find({}).exec();
 
