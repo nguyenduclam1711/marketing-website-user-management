@@ -15,10 +15,16 @@ a:link {
   text-decoration: none !important;
 }
 
+.display-1 {
+  font-size: 3rem;
+}
 .display-2 {
   font-size: 2rem;
 }
 @include media-breakpoint-up(sm) {
+  .display-1 {
+    font-size: 4rem;
+  }
   .responsiveD-3 {
     font-size: 1.5rem;
   }
@@ -37,6 +43,9 @@ a:link {
 }
 
 @include media-breakpoint-up(md) {
+  .display-1 {
+    font-size: 6rem;
+  }
   .responsiveD-3 {
     font-size: 3.4rem;
   }

@@ -757,7 +757,7 @@ input[type="week"] {
   }
 }
 
-@media (max-width: 767.98px) {
+@include media-breakpoint-down(md) {
   .subtitle-jumbotron {
     font-size: 1.5rem;
   }
@@ -873,7 +873,7 @@ div[class*=" #{$class-slug}"] {
     max-width: 100px * $i;
     max-height: 100px * $i;
   }
-  @media (min-width: 767px) {
+  @include media-breakpoint-up(md) {
     .#{$class-slug}-md-#{$i} {
       max-width: 100px * $i !important;
       max-height: 100px * $i !important;
@@ -881,12 +881,14 @@ div[class*=" #{$class-slug}"] {
   }
 }
 
-.floatings {
-  transform: translateY(100px);
-  opacity: 0;
-  transition: transform .3s ease, opacity .3s ease;
-}
-.floatings.floated {
-  opacity: 1;
-  transform: translateY(0);
+@include media-breakpoint-up(sm) {
+  .floatings {
+    transform: translateY(100px);
+    opacity: 0;
+    transition: transform .3s ease, opacity .3s ease;
+  }
+  .floatings.floated {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

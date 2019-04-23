@@ -105,7 +105,7 @@ var floatings = [...document.querySelectorAll(".floatings")];
 function myFunction() {
   let timeout = 0;
   floatings.forEach(item => {
-    if (elementInViewport2(item) && window.innerWidth > 800) {
+    if (elementInViewport2(item) && window.innerWidth > 576) {
       setTimeout(() => {
         item.classList.add("floated");
       }, timeout);
