@@ -50,24 +50,29 @@ const toggleNL = (remove = false) => {
     });
   }
 })();
-//
 
-$(".counter-count").each(function() {
-  $(this)
-    .prop("Counter", 0)
-    .animate(
-      {
-        Counter: $(this).text()
-      },
-      {
-        duration: 5000,
-        easing: "swing",
-        step: function(now) {
-          $(this).text(Math.ceil(now));
-        }
-      }
-    );
-});
+let counted = false;
+const countUp = () => {
+  if (elementInViewport2(document.querySelector(".section-counter")) && !counted) {
+    counted = true;
+    $(".counter-count").each(function() {
+      $(this)
+        .prop("Counter", 0)
+        .animate(
+          {
+            Counter: $(this).text()
+          },
+          {
+            duration: 5000,
+            easing: "swing",
+            step: function(now) {
+              $(this).text(Math.ceil(now));
+            }
+          }
+        );
+    });
+  }
+};
 var scrollbuttons = document.getElementsByClassName("scrollbutton");
 for (var i = 0, len = scrollbuttons.length; i < len; i++) {
   scrollbuttons[i].addEventListener("click", function(event) {
@@ -102,7 +107,7 @@ const throttle = (func, limit) => {
 
 
 var floatings = [...document.querySelectorAll(".floatings")];
-function myFunction() {
+function showFloatings() {
   let timeout = 0;
   floatings.forEach(item => {
     if (elementInViewport2(item) && window.innerWidth > 576) {
@@ -133,7 +138,8 @@ function elementInViewport2(el) {
   );
 }
 window.onscroll = throttle(function() {
-  myFunction();
+  showFloatings();
+  countUp();
 }, 10);
 
 //
