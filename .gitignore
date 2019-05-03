@@ -6,3 +6,5 @@ uploads/images/*
 dump.rdb
 *.map
 public/*
+backup.sh
+backup
