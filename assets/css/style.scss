@@ -131,13 +131,25 @@ a:hover {
 STATS COUNTER
  *******************************************/
 
+#stats {
+  .sidepanel {
+    transition: transform .3s ease;
+  }
+  &:hover {
+    .sidepanel {
+      transform: translateX(-100%);
+    }
+  }
+}
 .counter-item {
   text-align: center;
 }
-.counter-count {
+.text-orange {
   color: $textOrange;
 }
-
+.text-shadow {
+  text-shadow: 1px 2px 3px black;
+}
 .section-counter {
   padding: 3rem 0;
 }
@@ -155,40 +167,6 @@ STATS COUNTER
 .row {
   margin-right: -0.9375rem;
   margin-left: -0.9375rem;
-}
-
-/******************************************
-QUOTE
- *******************************************/
-
-.section-mission {
-  margin: 0 auto;
-  width: 100%;
-  max-width: 900px;
-  padding: 6rem 3rem;
-}
-
-.mission-title {
-  color: #da9446 !important;
-  text-align: center;
-}
-
-.mission-title::before,
-.mission-title::after {
-  content: "";
-  width: 40px;
-  height: 40px;
-  background-image: url(https://png.pngtree.com/svg/20170529/ic_zixun_quote_1245666.png);
-  background-size: cover;
-  display: block;
-  opacity: 0.25;
-  margin: 0 auto 1rem;
-}
-
-.mission-title::after {
-  transform: rotateY(180deg);
-  margin-top: 1.5rem;
-  margin-bottom: 0;
 }
 
 /******************************************
