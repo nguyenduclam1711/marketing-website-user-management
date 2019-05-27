@@ -1,5 +1,15 @@
-/*responsive typography*/
-
+::selection {
+    background-color: $blue;
+    color: #fff
+}
+.bg-primary ::selection {
+    background-color: #fff;
+    color: $blue
+}
+::-moz-selection {
+    background-color: $blue;
+    color: #fff
+}
 h1,
 h2,
 h3,

@@ -3,7 +3,6 @@
 @import "header";
 @import "footer";
 @import "typography";
-
 body:not(.admin).btn {
   border-radius: 2px;
   font-size: 1rem;
@@ -117,13 +116,6 @@ a:hover {
   margin: 2rem 0;
 }
 
-.fa {
-  display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
-  font-size: inherit;
-  text-rendering: auto;
-}
-
 #linkButton {
   font-size: 1rem;
 }
@@ -212,14 +204,6 @@ UPCOMING EVENTS
   text-align: center;
   margin-right: 0.5rem;
 }
-.fa {
-  display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
-  font-size: inherit;
-  text-rendering: auto;
-}
-
-/*'''''''''''''''''''''''EVENT CARD'''''''''''''''''*/
 
 *:before,
 *:after {
