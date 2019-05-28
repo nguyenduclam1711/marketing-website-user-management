@@ -688,10 +688,6 @@ input[type="week"] {
     margin-top: 2.8%;
     width: 200px;
   }
-  .homeSection {
-    min-width: 50vw;
-    height: 30vh;
-  }
   .subtitle-jumbotron {
     font-size: 3rem;
   }
@@ -700,10 +696,6 @@ input[type="week"] {
 @include media-breakpoint-down(md) {
   .subtitle-jumbotron {
     font-size: 1.5rem;
-  }
-  .homeSection {
-    min-width: 50vw;
-    height: 30vh;
   }
   .card-img-top {
     height: 25vw;
@@ -791,9 +783,6 @@ input[type="week"] {
 .mw-150 {
   max-width: 150px;
 }
-.mh-150 {
-  max-height: 150px;
-}
 .list-group-item {
   border: none;
   border-radius: 0;
@@ -804,6 +793,10 @@ div[class*=" #{$class-slug}"] {
   object-fit: cover;
 }
 @for $i from 1 through 5 {
+  .mh-#{ 30 * $i } {
+    max-height: 30px * $i;
+  }
+
   .#{$class-slug}-#{$i} {
     max-width: 100px * $i;
     max-height: 100px * $i;
