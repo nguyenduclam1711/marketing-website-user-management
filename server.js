@@ -159,6 +159,7 @@ let jobsRoutes = require("./routes/jobs");
 let employeesRoutes = require("./routes/employees");
 let eventsRoutes = require("./routes/events");
 let coursesRoutes = require("./routes/courses");
+let redirects = require("./routes/redirects");
 
 let menulocationAdminRoutes = require("./routes/admin/menulocations");
 let storiesAdminRoutes = require("./routes/admin/stories");
@@ -190,6 +191,7 @@ app.use("/admin/events", eventsAdminRoutes);
 app.use("/admin/menulocations", menulocationAdminRoutes);
 app.use("/admin/contacts", contactsAdminRoutes);
 app.use("/admin*", contactsAdminRoutes);
+app.use(redirects);
 
 app.set("views", path.join(__dirname, "views/"));
 app.set("view engine", "pug");

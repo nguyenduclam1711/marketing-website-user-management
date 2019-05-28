@@ -14,10 +14,13 @@ module.exports.getSingleCourse = async (req, res) => {
     .populate(
       "locations"
     ).exec();
-    
-    res.render(`course`, {
-      course
-    });
+    if(course){
+      res.render(`course`, {
+        course
+      });
+    } else {
+      res.redirect("/course")
+    }
   } catch (err) {
     console.log(err);
   }

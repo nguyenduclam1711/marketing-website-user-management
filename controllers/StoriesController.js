@@ -14,8 +14,11 @@ module.exports.getStories = async function(req, res) {
 
 module.exports.getSingleStory = async (req, res) => {
   const story = await Story.findOne({ slug: req.params.id })
-  res.render("story", {
-    story
-  });
-
+  if(story){
+    res.render("story", {
+      story
+    });
+  } else {
+    res.redirect("/stories")
+  }
 }

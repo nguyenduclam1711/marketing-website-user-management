@@ -39,9 +39,13 @@ module.exports.getSingleJob = async (req, res) => {
     const job = await Job.findOne({ slug: req.params.slug }).populate(
       "locations"
     );
-    res.render(`singleJob`, {
-      job
-    });
+    if(job){
+      res.render(`singleJob`, {
+        job
+      });
+    } else {
+      res.redirect("/jobs")
+    }
   } catch (err) {
     console.log(err);
   }
