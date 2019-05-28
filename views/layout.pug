@@ -24,6 +24,7 @@ include mixins/menuFooter
 include mixins/employeeForm
 include mixins/partnerForm
 include mixins/landingpage/video
+include mixins/storyImages
 
 doctype html
 //saved from url=(0051)https://getbootstrap.com/docs/4.0/examples/sign-in/
@@ -73,7 +74,7 @@ html.h-100(lang='en')
       if currentPath !== "/"
         div
           +navigation
-      .content-container.flex-grow-1.bg-white(class=currentPath.includes('admin') ? ' bg-light mb-5' : '' )
+      .flex-grow-1(class=currentPath.includes('admin') ? ' bg-light mb-5' : '' )
         block content
       if !currentPath.includes('admin')
         +footer
@@ -98,12 +99,12 @@ html.h-100(lang='en')
 
     if live
       // Global site tag (gtag.js) - Google Analytics
-      script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-54516992-1')
+      script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-140962410-1')
         script.
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'UA-54516992-1');
+          gtag('config', 'UA-140962410-1');
       
       // Facebook Pixel Code
       script.
