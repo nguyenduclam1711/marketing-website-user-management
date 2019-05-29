@@ -18,7 +18,7 @@ module.exports.landingpage = async (req, res) => {
     let events = [];
     for await (let loc of locations) {
       if (!events) {
-        events[await Event.findOne({ location: loc._id, start: { $gt: new Date() } }).populate("location")];
+        events[await Event.findOne({ location: loc._id, start: { $gt: new Date() } }).sort({ start: 1 }).populate("location")];
       } else {
         const event = await Event.findOne({ location: loc._id }).populate(
           "location"

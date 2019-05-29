@@ -10,7 +10,7 @@ module.exports = async (justFuture = false) => {
       name: loc.name,
       events: await Event.find(query)
         .populate("location")
-        .sort({ start: -1 })
+        .sort({ start: 1 })
         .limit(3)
     });
   }
