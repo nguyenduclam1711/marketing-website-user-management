@@ -96,7 +96,7 @@ exports.getAsyncRedis = () => {
 exports.getRequestUrl = req => {
   return req.protocol + "://" + req.get("Host");
 };
-exports.sendMail = async (req, mailOptions) => {
+exports.sendMail = async (res, req, mailOptions) => {
   return new Promise((resolve, reject) => {
     let transporter = nodemailer.createTransport({
       host: process.env.MAILHOST,
@@ -109,7 +109,7 @@ exports.sendMail = async (req, mailOptions) => {
 
     transporter.sendMail(mailOptions, async (error, info) => {
       if (error) {
-        console.log(error, info);
+        console.log("Mailerror: ", error, info);
         req.flash("danger", `A error occured, please try it later again!`);
         res.redirect(req.headers.referer);
         reject(error);

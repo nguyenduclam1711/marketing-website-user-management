@@ -4,7 +4,6 @@ const request = require("request");
 const express = require("express");
 const router = express.Router();
 const IndexController = require("../controllers/IndexController");
-const { sendMail } = require("../helpers/helper");
 
 if (!process.env.AUTHORIZATION || !process.env.URL) {
   console.error(

@@ -4,6 +4,8 @@ const Course = require("../models/course");
 const Event = require("../models/event");
 const Location = require("../models/location");
 const Partner = require("../models/partner");
+const { sendMail } = require("../helpers/helper");
+
 module.exports.landingpage = async (req, res) => {
   try {
     const stories = await Story.find({})
@@ -83,7 +85,7 @@ module.exports.contact = async (req, res, next) => {
       text: mailTemplate,
       html: mailTemplate
     };
-    const info = await sendMail(req, mailOptions);
+    const info = await sendMail(res, req, mailOptions);
     req.flash(
       "success",
       `Thanks for your message. We will reply to you as soon as possible.`
