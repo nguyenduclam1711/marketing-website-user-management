@@ -12,6 +12,9 @@ var LocationSchema   = new Schema({
   street: {
     type: String
   },
+  email: {
+    type: String
+  },
   zip: {
     type: Number
   },
@@ -19,6 +22,9 @@ var LocationSchema   = new Schema({
     type: Number
   },
   longitude: {
+    type: Number
+  },
+  phone: {
     type: Number
   },
   updatedAt: {

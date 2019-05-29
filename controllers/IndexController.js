@@ -44,6 +44,12 @@ module.exports.landingpage = async (req, res) => {
     console.log(err);
   }
 }
+module.exports.contactLocations = async (req, res) => {
+  const locations = await Location.find({});
+  res.render("contactLocations", {
+    locations,
+  });
+}
 module.exports.contact = async (req, res, next) => {
   const contact = new Contact();
   contact.name = req.body.name;

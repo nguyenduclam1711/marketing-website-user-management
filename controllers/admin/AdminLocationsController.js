@@ -30,6 +30,12 @@ module.exports.editLocation = (req, res) => {
 module.exports.createLocation = (req, res) => {
   var location = new Location();
   location.name = req.body.name; 
+  location.street = req.body.street; 
+  location.email = req.body.email; 
+  location.zip = req.body.zip; 
+  location.longitude = req.body.longitude; 
+  location.latitude = req.body.latitude; 
+  location.phone = req.body.phone; 
   location.save((err) => {
     if (err) res.send(err);
     req.flash("success", `Successfully created ${location.name}`);
@@ -51,12 +57,24 @@ module.exports.deleteLocation = (req, res) => {
 }
 module.exports.updateLocation = (req, res) => {
   Location.findById(req.params.id, (err, location) => {
-    if (err) res.send(err);
-
+    if (err) { 
+      console.log(err);
+      res.send(err) 
+      return;
+    };
     location.name = req.body.name; 
-
+    location.street = req.body.street; 
+    location.email = req.body.email; 
+    location.zip = req.body.zip; 
+    location.longitude = req.body.longitude; 
+    location.latitude = req.body.latitude; 
+    location.phone = req.body.phone; 
     location.save((err) => {
-      if (err) res.send(err);
+      if (err) { 
+        console.log(err);
+        res.send(err) 
+        return;
+      };
 
       req.flash("success", `Successfully updated ${location.name}`);
       res.redirect("/admin/locations/edit/" + location._id);

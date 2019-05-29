@@ -14,6 +14,8 @@ if (!process.env.AUTHORIZATION || !process.env.URL) {
 
 router.get("/", IndexController.landingpage);
 
+router.get("/contact", IndexController.contactLocations);
+
 router.post("/contact", IndexController.contact);
 
 router.get("/tour", IndexController.tour);

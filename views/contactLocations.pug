@@ -1,0 +1,31 @@
+extends layout.pug
+block content
+
+  .bg-light
+    .container.py-5
+      div.story-item.py-5
+
+        .row
+          .col-md-8.offset-md-2
+            h2.display-1.text-center.text-uppercase Contact us
+            p.mb-5.text-center.text-muted Let’s connect! Our admissions team will call you soon to chat about our courses and your goals
+            +contactform
+              
+    .bg-white      
+      .container.py-5
+        .mt-5
+          h1 Our campuses
+          .row.mt-5
+            each location in locations
+              .col-sm-6.mb-5
+                h3=location.name
+                if location.email
+                  div
+                    strong
+                      ="Email: "
+                    a(href= "mailto:"+location.email)=location.email
+                if location.phone
+                  div
+                    strong
+                      ="Phone: "
+                    tel= location.phone
