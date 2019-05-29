@@ -1,4 +1,5 @@
 const Story = require("../models/story");
+const Contact = require("../models/contact");
 const Course = require("../models/course");
 const Event = require("../models/event");
 const Location = require("../models/location");
