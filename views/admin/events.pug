@@ -15,5 +15,8 @@ block content
             table.table.table-striped
               each event in location.events
                 tr
-                  td=event.start.toISOString()
+                  td
+                    span=event.start.toISOString().slice(0,16)
+                    if event.start < new Date()
+                      strong= " - Past"
                   td=event.name

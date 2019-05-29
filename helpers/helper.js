@@ -13,21 +13,6 @@ exports.groupByKey = (items, key) => {
     return group;
   }, {});
 };
-exports.fetchEventsByLocation = async () => {
-  const locations = await Location.find({});
-  let eventsByLocation = [];
-
-  for await (let loc of locations) {
-    eventsByLocation.push({
-      name: loc.name,
-      events: await Event.find({ location: loc._id })
-        .populate("location")
-        .sort({ start: -1 })
-        .limit(3)
-    });
-  }
-  return eventsByLocation;
-};
 exports.isAdmin = req => req.user.admin !== "true";
 
 module.exports.ensureAuthenticated = (req, res, next) => {

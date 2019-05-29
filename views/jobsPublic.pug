@@ -18,7 +18,7 @@ block content
               ul.nav.nav-pills.border-0mt-2
                 each jobs, department in sortedJobs
                   li.nav-item.w-100
-                    - theDepartment = department !== 'undefined' ? department : 'random'
+                    - theDepartment = department !== 'undefined' ? department : 'Initiative'
                     a.scrollbutton.nav-link.nav-link-spy(href='#'+theDepartment)= theDepartment
           .col-6
             ul.nav.nav-pills.border-0.flex-column
@@ -30,7 +30,7 @@ block content
       .col-md-8
         .row
           each jobs, department in sortedJobs
-            - theDepartment = department !== 'undefined' ? department : 'random'
+            - theDepartment = department !== 'undefined' ? department : 'Initiative'
             .w-100(id=theDepartment)
               h1.pt-3.sticky-top.bg-white= theDepartment
               each job in jobs
