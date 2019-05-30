@@ -8,6 +8,10 @@ mixin navigation
       span.sr-only="Toggle menu"
     #collapsingNavbar3.navbar-collapse.collapse.w-100.mt-5.mt-md-0
       ul.nav.navbar-nav.ml-auto.w-100.justify-content-end#headernav
+        li.position-relative.nav-item
+          a.nav-link.mx-2(class=currentPath == "/contact" ? "active" :
+          "" href='/contact') CAMPUSES
+        
         li.position-relative.nav-item.dropdown
           a#navbarDropdownMenuLink.nav-link.dropdown-toggle.z-1.mx-2(class= currentPath.includes('/courses') && !currentPath.includes('admin') ? "active" : "" data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
             | COURSES
