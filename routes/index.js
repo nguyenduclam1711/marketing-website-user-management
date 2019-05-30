@@ -1,6 +1,5 @@
 "use strict";
 require("dotenv").config({ path: __dirname + "/../.env" });
-const request = require("request");
 const express = require("express");
 const router = express.Router();
 const IndexController = require("../controllers/IndexController");

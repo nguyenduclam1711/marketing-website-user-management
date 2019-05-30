@@ -21,7 +21,7 @@ const toggleNL = (remove = false) => {
   if (newsletterForm) {
     newsletterForm.addEventListener("submit", function(e) {
       e.preventDefault();
-      var email = document.querySelector("#mce-EMAIL").value.trim();
+      var email = document.querySelector("#newsletter_email").value.trim();
       if (email) {
         toggleNL();
         fetch("/newsletter-signup", {

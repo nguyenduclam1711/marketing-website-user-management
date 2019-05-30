@@ -4,6 +4,7 @@ const Course = require("../models/course");
 const Event = require("../models/event");
 const Location = require("../models/location");
 const Partner = require("../models/partner");
+const request = require("request");
 const { sendMail } = require("../helpers/helper");
 
 module.exports.landingpage = async (req, res) => {

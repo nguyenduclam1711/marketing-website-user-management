@@ -83,7 +83,7 @@ app.use(function(req, res, next) {
   if (match) {
     match = match[0].replace(/\//g, " ");
     res.locals.title =
-      res.locals.title + " | " + match.charAt(0).toUpperCase() + match.slice(1);
+      match.charAt(0).toUpperCase() + match.slice(1) + " | " + res.locals.title;
   }
   console.log(req.method, req.headers.host + req.url);
   next();
@@ -172,6 +172,13 @@ let locationsAdminRoutes = require("./routes/admin/locations");
 let eventsAdminRoutes = require("./routes/admin/events");
 let contactsAdminRoutes = require("./routes/admin/contacts");
 
+//app.get('/', function(req, res) {
+  //let clang = req.query.lang;
+  //console.log("", clang);
+  ////if (!!clang) {
+    ////res.redirect('/' + clang);
+  ////}
+//});
 app.use("/", indexRoutes);
 app.use("/users", usersRoutes);
 app.use("/stories", storiesRoutes);
