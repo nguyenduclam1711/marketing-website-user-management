@@ -5,12 +5,18 @@ const User = require("../models/user");
 const { sendMail, getRequestUrl } = require("../helpers/helper");
 
 module.exports.renderLogin = (req, res) => {
+  if(req.user){
+    res.redirect("/admin");
+  }
   res.render("login");
 };
 module.exports.renderRegister = (req, res) => {
+  if(req.user){
+    res.redirect("/admin");
+  }
   res.render("register");
 };
-sendVerificationMail = async (req, userToken ) => {
+sendVerificationMail = async (res, req, userToken ) => {
   const verificationLink = `${getRequestUrl(
     req
   )}/users/verify/${userToken}`;
@@ -21,7 +27,7 @@ sendVerificationMail = async (req, userToken ) => {
     text: `By clicking on the following link, you verify your account <a href="${verificationLink}">${verificationLink}</a>`,
     html: `By clicking on the following link, you verify your account <a href="${verificationLink}">${verificationLink}</a>`
   };
-  return await sendMail(req, mailOptions);
+  return await sendMail(res, req, mailOptions);
 
 }
 module.exports.register = async (req, res) => {
@@ -58,13 +64,17 @@ module.exports.register = async (req, res) => {
 
       User.createUser(newUser, async (err, user) => {
         if (err) throw err;
-        const response = await sendVerificationMail(req, userToken )
-
-        req.flash(
-          "success",
-          `Email ${email} registered. Please check your mails for verification.`
-        );
-        res.redirect("/users/login");
+        try {
+          const response = await sendVerificationMail(res, req, userToken )
+          req.flash(
+            "success",
+            `Email ${email} registered. Please check your mails for verification.`
+          );
+          res.redirect("/users/login");
+        } catch (e) {
+          req.flash("danger", `A error occured, please try it later again!`);
+          res.redirect(req.headers.referer);
+        }
       });
     }
   }
@@ -94,7 +104,6 @@ module.exports.login = function(req, res, next) {
 
 module.exports.verify = async function(req, res, next) {
   const user = await User.findOne({ token: req.params.token });
-  console.log("user", user);
   if (!user) {
     req.flash("danger", `Token ${req.parmas.token} not found!`);
     return res.redirect("/users/register");

@@ -110,10 +110,10 @@ exports.sendMail = async (res, req, mailOptions) => {
     transporter.sendMail(mailOptions, async (error, info) => {
       if (error) {
         console.log("Mailerror: ", error, info);
-        req.flash("danger", `A error occured, please try it later again!`);
-        res.redirect(req.headers.referer);
         reject(error);
       }
+
+      console.log("Mail send out ", info);
       resolve(info);
     });
   });
