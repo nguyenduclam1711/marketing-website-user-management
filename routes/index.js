@@ -23,7 +23,7 @@ router.post("/newsletter-signup", IndexController.newsletter);
 
 router.get('/robots.txt', function (req, res) {
   res.type('text/plain');
-  res.send("User-agent: *\nSitemap: https://digitalcareerinstitute.org");
+  res.send("User-agent: *");
 });
 
 module.exports = router;
