@@ -1,7 +1,5 @@
 mixin formLocation
   - var editPath = currentPath.includes('admin/locations/edit')
-
-  //-form.form-signin(method='POST', action='/admin/locations?alert=create')
   form.mb-5.form-signin(method='POST', action=location ?
     '/admin/locations/update/'+location.id+'?_method=PUT' :
     '/admin/locations')
@@ -20,27 +18,27 @@ mixin formLocation
     .mb-3
       label(for='phone') Phone
       input#street.form-control(name='phone', type='number',
-      placeholder='Phone', required='', autofocus='' value=editPath ?
+      placeholder='Phone',  autofocus='' value=editPath ?
       location.phone : "")
       
     .mb-3
       label(for='email') Email
       input#street.form-control(name='email', type='email',
-      placeholder='Email', required='', autofocus='' value=editPath ?
+      placeholder='Email', autofocus='' value=editPath ?
       location.email : "")
     .mb-3
       label(for='street') Street
-      input#street.form-control(name='street', type='text', placeholder='Street', required='', autofocus='' value=editPath ?  location.street : "")
+      input#street.form-control(name='street', type='text', placeholder='Street',  autofocus='' value=editPath ?  location.street : "")
       
     .mb-3
       label(for='zip') Zip
-      input#zip.form-control(name='zip', type='number', placeholder='Zip', required='', autofocus='' value=editPath ?  location.zip : "")
+      input#zip.form-control(name='zip', type='number', placeholder='Zip',  autofocus='' value=editPath ?  location.zip : "")
       
     .mb-3
       label(for='longitude') Longitude
-      input#longitude.form-control(name='longitude', type='number', placeholder='Longitude', required='', autofocus='' value=editPath ? location.longitude : "")
+      input#longitude.form-control(name='longitude', type='number', placeholder='Longitude', autofocus='' value=editPath ? location.longitude : "")
       
     .mb-3
       label(for='longitude') Latitude
-      input#longitude.form-control(name='latitude', type='number', placeholder='Latitude', required='', autofocus='' value=editPath ?  location.latitude : "")
+      input#longitude.form-control(name='latitude', type='number', placeholder='Latitude', autofocus='' value=editPath ?  location.latitude : "")
       
