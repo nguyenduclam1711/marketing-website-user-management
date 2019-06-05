@@ -25,7 +25,7 @@ var LocationSchema   = new Schema({
     type: Number
   },
   phone: {
-    type: Number
+    type: String
   },
   updatedAt: {
     type: Date,
