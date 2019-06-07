@@ -52,6 +52,13 @@ module.exports.contactLocations = async (req, res) => {
   });
 }
 module.exports.contact = async (req, res, next) => {
+  if(req.body.age){
+    req.flash( "success", `Thanks for your message. We will reply to you as soon as possible.`);
+
+    res.redirect(req.headers.referer);
+    next();
+    return;
+  }
   const contact = new Contact();
   contact.name = req.body.name;
   contact.email = req.body.email;
