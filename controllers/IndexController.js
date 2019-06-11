@@ -24,7 +24,7 @@ module.exports.landingpage = async (req, res) => {
       if (!events) {
         events[await Event.findOne({ location: loc._id, start: { $gt: new Date() } }).sort({ start: 1 }).populate("location")];
       } else {
-        const event = await Event.findOne({ location: loc._id }).populate(
+        const event = await Event.findOne({ location: loc._id , start: { $gt: new Date() } }).sort({ start: 1 }).populate(
           "location"
         );
         if (event) {
