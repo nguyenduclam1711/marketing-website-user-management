@@ -81,6 +81,10 @@ module.exports.contact = async (req, res, next) => {
       <td>${req.body.phone}</td>
     </tr>
     <tr>
+      <td>Email: </td>
+      <td>${req.body.email}</td>
+    </tr>
+    <tr>
       <td>Content: </td>
       <td>${req.body.body}</td>
     </tr>
