@@ -63,7 +63,7 @@
   "scripts": {
     "start": "node ./index.js",
     "build": "webpack -p",
-    "dev": "concurrently \"redis-server\" \"webpack --mode development --watch\" \"nodemon index.js --ignore 'assets' --ignore 'public'\"  -n \"REDIS,WEBPACK,NODE\" --prefix name -c \"green.bold,red.bold,blue.bold\"",
+    "dev": "concurrently \"redis-server\" \"webpack --mode development --watch\" \"nodemon index.js --ignore 'assets' --ignore --inspect 'public'\"  -n \"REDIS,WEBPACK,NODE\" --prefix name -c \"green.bold,red.bold,blue.bold\"",
     "seed": "node seeds.js",
     "seed:delete": "node seeds.js --delete",
     "test": "NODE_ENV=test mocha test/ --timeout 10000 --exit"
