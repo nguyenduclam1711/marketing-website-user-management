@@ -20,5 +20,5 @@ block content
                     .badge.badge-primary.mr-2=location.name
                 if contact.isEvent
                   span.badge.badge-danger= "Event participation request"
-                if contact.isCompany
+                if contact.isCompany === 'true'
                   span.badge.badge-warning= "Is Companytour request"

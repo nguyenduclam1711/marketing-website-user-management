@@ -53,6 +53,7 @@ module.exports.contactLocations = async (req, res) => {
 }
 module.exports.contact = async (req, res, next) => {
   if(req.body.age){
+    console.log('Bot stepped into honeypot!')
     req.flash( "success", `Thanks for your message. We will reply to you as soon as possible.`);
 
     res.redirect(req.headers.referer);
@@ -87,6 +88,10 @@ module.exports.contact = async (req, res, next) => {
     <tr>
       <td>Content: </td>
       <td>${req.body.body}</td>
+    </tr>
+    <tr>
+      <td>Locations: </td>
+      <td>${contact.populate('locations').locations.map(l => l.name + ", ")}</td>
     </tr>
     </table>
   `;
