@@ -71,7 +71,7 @@ module.exports.contact = async (req, res, next) => {
   if (!contact.email) {
     res.redirect(req.headers.referer);
   }
-
+  const location = await Location.findById(req.body.locations);
   const mailTemplate = `Contact from: <table>
     <tr>
       <td>Name: </td>
@@ -91,7 +91,7 @@ module.exports.contact = async (req, res, next) => {
     </tr>
     <tr>
       <td>Locations: </td>
-      <td>${contact.populate('locations').locations.map(l => l.name + ", ")}</td>
+      <td>${location.name}</td>
     </tr>
     </table>
   `;
