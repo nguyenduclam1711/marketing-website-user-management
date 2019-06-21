@@ -1,6 +1,6 @@
 const Location = require("../models/location");
 const Event = require("../models/event");
-module.exports = async (justFuture = false) => {
+module.exports = async (justFuture = false, limit = 3) => {
   const locations = await Location.find({});
   let eventsByLocation = [];
 
@@ -11,7 +11,7 @@ module.exports = async (justFuture = false) => {
       events: await Event.find(query)
         .populate("location")
         .sort({ start: 1 })
-        .limit(3)
+        .limit(limit)
     });
   }
   return eventsByLocation;

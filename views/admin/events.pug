@@ -6,17 +6,14 @@ block content
       a.btn.btn-outline-primary(href="/admin/events/fetchevents")="Fetch events from Eventbride"
       a.btn.btn-outline-danger(href="/admin/events/deleteevents")="Delete all"
 
-  .container.py-5.bg-white
-      h1.display-1 All events in our locations
-      .row.my-5
-        each location in eventsByLocation
-          .col-md-6
-            h2=location.name
-            table.table.table-striped
-              each event in location.events
-                tr
-                  td
-                    span=event.start.toISOString().slice(0,16)
-                    if event.start < new Date()
-                      strong= " - Past"
-                  td=event.name
+  .container.py-3.bg-white
+    .row
+      each location in eventsByLocation
+        .col-md-6.table-responsive
+          h2=location.name
+          table.table.table-striped
+            each event in location.events
+              tr.white-space-nowrap(class=event.start < new Date() ? "text-lightgrey" : "")
+                td.py-0
+                  span=event.start.toISOString().replace(/-/g, "").replace("T", " ").slice(0,14)
+                td.py-0=event.name

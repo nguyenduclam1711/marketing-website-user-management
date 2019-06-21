@@ -11,7 +11,7 @@ if (!process.env.EVENTBRIDE_API_KEY) {
 }
 
 module.exports.getEvents = async (req, res) => {
-  const eventsByLocation = await fetchEventsByLocation()
+  const eventsByLocation = await fetchEventsByLocation(false, 0)
 
   res.render("admin/events", {
     eventsByLocation
