@@ -41,7 +41,6 @@ if (editorContainer) {
   editor.on("editor-change", function(eventName, ...args) {
     about.value = JSON.stringify(editor.getContents());
   });
-  console.log("about.value", about.value);
   if (about && about.value) {
     editor.setContents(JSON.parse(about.value).ops, "api");
   }

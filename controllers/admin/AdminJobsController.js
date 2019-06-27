@@ -6,17 +6,25 @@ const Job = require("../../models/job");
 const Location = require("../../models/location");
 const parser = require("xml2json");
 
+let responses = [];
 module.exports.fetchJobs = async (req, res) => {
   try {
     return new Promise(async (resolve, reject) => {
-      const xml = await promisifiedRequest(
-        "https://dci-jobs.personio.de/xml"
-      );
-      const jobsResponse = JSON.parse(parser.toJson(xml.body));
-      const allJobs = jobsResponse["workzag-jobs"].position;
       await Job.deleteMany();
+      const queryLangs = ["en", "de"];
+      for (let queryLang of queryLangs) {
+        const url = `https://dci-jobs.personio.de/xml${
+          queryLang === "en" ? `?language=en` : ``
+        }`;
+        responses.push(promisifiedRequest(url));
+      }
+      const responseResult = await Promise.all(responses);
+      const xml = responseResult
+        .map(r => JSON.parse(parser.toJson(r.body)))
+        .map(x => x["workzag-jobs"].position)
+        .flat();
 
-      for (let job of allJobs) {
+      for (let job of xml) {
         try {
           let location = await Location.findOne({
             name: { $regex: new RegExp(job.office, "i") }
@@ -27,24 +35,32 @@ module.exports.fetchJobs = async (req, res) => {
             });
             location = await location.save();
           }
+          const existingJob = await Job.findOne({ personio_id: job.id });
 
-          const newjob = new Job({
-            personio_id: job.id,
-            locations: [location.id],
-            name: job.name,
-            description: job.jobDescriptions.jobDescription,
-            department: job.department,
-            employmentType: job.employmentType,
-            schedule: job.schedule,
-            seniority: job.seniority
-          });
-          await newjob.save();
+          if (existingJob) {
+            await Job.update(
+              { personio_id: job.id},
+              {"$push": { "description": job.jobDescriptions.jobDescription } }
+            ).exec();
+          } else {
+            const newjob = new Job({
+              personio_id: job.id,
+              locations: [location.id],
+              name: job.name,
+              description: job.jobDescriptions.jobDescription,
+              department: job.department,
+              employmentType: job.employmentType,
+              schedule: job.schedule,
+              seniority: job.seniority
+            });
+            await newjob.save();
+          }
         } catch (err) {
           console.log(err);
-          reject("Jobs cronjob dont fetched");
+          reject("👎 Jobs cronjob dont fetched");
         }
       }
-      resolve("Jobs cronjob fetched");
+      resolve("👍 Jobs cronjob fetched");
       if (res) {
         res.redirect("/admin/jobs?alert=created");
       }
@@ -74,7 +90,7 @@ module.exports.getJobs = async (req, res) => {
 
 module.exports.deleteJobs = async (req, res) => {
   try {
-    Job.collection.drop();
+    await Job.collection.drop();
     res.redirect("/admin/jobs?alert=created");
   } catch (err) {
     console.log(err);

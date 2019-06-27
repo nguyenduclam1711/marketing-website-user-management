@@ -62,7 +62,6 @@ app.use("/assets", express.static(path.join(__dirname, "assets/icons/")));
 app.use("/media", express.static(path.join(__dirname, "assets/media/")));
 app.use("/images", express.static(path.join(__dirname, "uploads/images")));
 
-app.use(expressValidator());
 app.use(flash());
 
 app.use(function(req, res, next) {

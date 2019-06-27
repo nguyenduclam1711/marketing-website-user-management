@@ -109,7 +109,6 @@ module.exports.createCourse = async function(req, res) {
   course.save( async function(err) {
     if (err) {
       console.log("error", err);
-      console.log('course', course);
       
       req.flash("danger", `Error ${err}`);
       let courses = await Course.find({})

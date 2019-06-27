@@ -40,7 +40,6 @@ module.exports.landingpage = async (req, res) => {
       locations,
       courses
     });
-    //console.log('From index.js router', events);
   } catch (err) {
     console.log(err);
   }
