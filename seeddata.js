@@ -211,7 +211,7 @@ exports.pages = [
         {
           attributes: {
             color: "#007aff",
-            link: "https://www.digitalcareerinstitute.org/en/jobs/"
+            link: "https://dci-jobs.personio.de"
           },
           insert: "Check out our open Positions"
         },

@@ -16,7 +16,7 @@ const Location = require("./models/location");
 const flash = require("connect-flash");
 const cron = require("node-cron");
 const EventsController = require("./controllers/admin/AdminEventsController");
-const JobsController = require("./controllers/admin/AdminJobsController");
+// const JobsController = require("./controllers/admin/AdminJobsController");
 const EmployeesController = require("./controllers/admin/AdminEmployeesController");
 const mongoose = require("mongoose");
 
@@ -154,7 +154,7 @@ let indexRoutes = require("./routes/index");
 let usersRoutes = require("./routes/users");
 let storiesRoutes = require("./routes/stories");
 let pagesRoutes = require("./routes/pages");
-let jobsRoutes = require("./routes/jobs");
+// let jobsRoutes = require("./routes/jobs");
 let employeesRoutes = require("./routes/employees");
 let eventsRoutes = require("./routes/events");
 let coursesRoutes = require("./routes/courses");
@@ -182,14 +182,14 @@ app.use("/", indexRoutes);
 app.use("/users", usersRoutes);
 app.use("/stories", storiesRoutes);
 app.use("/pages", pagesRoutes);
-app.use("/jobs", jobsRoutes);
+// app.use("/jobs", jobsRoutes);
 app.use("/about-us", employeesRoutes);
 app.use("/events", eventsRoutes);
 app.use("/courses", coursesRoutes);
 app.use("/admin/stories", storiesAdminRoutes);
 app.use("/admin/courses", coursesAdminRoutes);
 app.use("/admin/pages", pagesAdminRoutes);
-app.use("/admin/jobs", jobsAdminRoutes);
+// app.use("/admin/jobs", jobsAdminRoutes);
 app.use("/admin/partners", partnersAdminRoutes);
 app.use("/admin/employees", employeesAdminRoutes);
 app.use("/admin/locations", locationsAdminRoutes);
@@ -203,8 +203,8 @@ app.set("views", path.join(__dirname, "views/"));
 app.set("view engine", "pug");
 async function worker() {
   try {
-    const jobsResponse = await JobsController.fetchJobs();
-    console.log(jobsResponse)
+    // const jobsResponse = await JobsController.fetchJobs();
+    // console.log(jobsResponse)
     const response = await EventsController.fetchevents();
     console.log(response)
 
