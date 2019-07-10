@@ -32,7 +32,7 @@ mixin navigation
           .dropdown-menu.border-radius-0.shadow-sm.z-0(aria-labelledby='navbarDropdownMenuLink')
             a.dropdown-item.px-2.nav-link(href='/about-us/' class=currentPath == "/about-us" ? "active" : "") About us
             a.dropdown-item.px-2.nav-link(class=currentPath == "/tour" ? "active" : "" href='/tour') Give us a tour of your company
-            a.dropdown-item.px-2.nav-link(href='/jobs/' class=currentPath == "/jobs" ? "active" : "") Jobs
+            a.dropdown-item.px-2.nav-link(href='https://dci-jobs.personio.de/' target="_blank" class=currentPath == "/jobs" ? "active" : "") Jobs
             each page in headerPages
               a.dropdown-item.nav-link.px-2(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
       
