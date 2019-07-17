@@ -30,6 +30,17 @@ doctype html
 //saved from url=(0051)https://getbootstrap.com/docs/4.0/examples/sign-in/
 html.h-100(lang='en')
   head
+    if live
+      // Google Tag Manager
+      script.
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KS4DGK3');
+      // End Google Tag Manager
+      // Google Tag Manager (noscript)
+
     meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
     meta(name='viewport', content='width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86')
     meta(name='description', content='Start your digital Career. Learn digital skills with us to get the most fulfilling jobs. At our Institute you learn the most relevant technology skills of today from Web Development, Digital Marketing, Product Management to Data.')
@@ -60,6 +71,11 @@ html.h-100(lang='en')
   
 
   body.h-100(data-spy='scroll', data-target='#courseScrollspy', data-offset='1', class=pathclass+(currentPath.includes('admin') ? ' admin mb-5' : '' ))
+
+    if live
+      noscript
+        iframe(src='https://www.googletagmanager.com/ns.html?id=GTM-KS4DGK3' height='0' width='0' style='display:none;visibility:hidden')
+      // End Google Tag Manager (noscript)
 
     if messages
       - const menulocations = Object.keys(locals.messages)
