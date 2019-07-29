@@ -22,11 +22,18 @@ module.exports.landingpage = async (req, res) => {
     let events = [];
     for await (let loc of locations) {
       if (!events) {
-        events[await Event.findOne({ location: loc._id, start: { $gt: new Date() } }).sort({ start: 1 }).populate("location")];
+        events[
+          await Event.findOne({ location: loc._id, start: { $gt: new Date() } })
+            .sort({ start: 1 })
+            .populate("location")
+        ];
       } else {
-        const event = await Event.findOne({ location: loc._id , start: { $gt: new Date() } }).sort({ start: 1 }).populate(
-          "location"
-        );
+        const event = await Event.findOne({
+          location: loc._id,
+          start: { $gt: new Date() }
+        })
+          .sort({ start: 1 })
+          .populate("location");
         if (event) {
           events.push(event);
         }
@@ -43,18 +50,27 @@ module.exports.landingpage = async (req, res) => {
   } catch (err) {
     console.log(err);
   }
-}
+};
 module.exports.contactLocations = async (req, res) => {
   const locations = await Location.find({});
   res.render("contactLocations", {
-    locations,
+    locations
   });
-}
+};
 module.exports.contact = async (req, res, next) => {
-  if(req.body.age){
-    console.log('Bot stepped into honeypot!')
-    req.flash( "success", `Thanks for your message. We will reply to you as soon as possible.`);
-
+  const { name, email, body, phone, locations, TermsofService } = req.body;
+  if (req.body.age) {
+    console.log("Bot stepped into honeypot!");
+    req.flash(
+      "success",
+      `Thanks for your message. We will reply to you as soon as possible.`
+    );
+    res.redirect(req.headers.referer);
+    next();
+    return;
+  }
+  if (!email || !name || !body || !phone || !locations || !TermsofService) {
+    req.flash("danger", `Please fill out all form fields`);
     res.redirect(req.headers.referer);
     next();
     return;
@@ -116,14 +132,14 @@ module.exports.contact = async (req, res, next) => {
     res.redirect(req.headers.referer);
     next();
   });
-}
+};
 module.exports.tour = async (req, res) => {
   try {
     res.render("tour", { companytour: true });
   } catch (err) {
     console.log(err);
   }
-}
+};
 module.exports.newsletter = (req, res) => {
   const { email } = req.body;
 
@@ -184,4 +200,4 @@ module.exports.newsletter = (req, res) => {
       `A error occured in the newsletter subscription route \n\n ${err}`
     );
   }
-}
+};
