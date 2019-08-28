@@ -21,8 +21,5 @@ router.get('/jobs', function(req, res) {
 router.get('/en/:path', function(req, res) {
   res.redirect(301, '/'+req.param('path'))
 });
-router.get("*", (req, res, next) => {
-  res.redirect(301, "/")
-})
 
 module.exports = router
