@@ -1,4 +1,5 @@
 const passport = require("passport");
+const { check, validationResult } = require('express-validator');
 const uuid = require("uuid");
 
 const User = require("../models/user");
@@ -36,17 +37,17 @@ module.exports.register = async (req, res) => {
   const password = req.body.password;
 
   // Validation
-  req.checkBody("email", "Email is required").notEmpty();
-  req.checkBody("email", "Email is not valid").isEmail();
-  req.checkBody("username", "Username is required").notEmpty();
-  req.checkBody("password", "Password is required").notEmpty();
-  req
-    .checkBody("password2", "Passwords do not match")
-    .equals(req.body.password);
+  //TODO validate user registration input
+  // check("email", "Email is required").notEmpty();
+  check("email", "Email is not valid").isEmail();
+  // check("username", "Username is required").notEmpty();
+  // check("password", "Password is required").notEmpty();
+  // check("password2", "Passwords do not match").equals(req.body.password);
 
-  const errors = req.validationErrors();
-  if (errors) {
-    req.flash("danger", errors.map(i => i.msg).join(", "));
+  const errors = validationResult(req);
+  console.log('errors', errors);
+  if (!errors.isEmpty()) {
+    req.flash("danger", errors.array().map(i => i.msg).join(", "));
     res.render("register");
   } else {
     const user = await User.findOne({ email: req.body.email });
