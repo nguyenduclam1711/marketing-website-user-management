@@ -9,7 +9,7 @@ const Course = require("../../models/course");
 
 module.exports.getCourses = async function(req, res) {
   let courses = await Course.find({})
-    .sort({"order": 1})
+    .sort({ order: 1 })
     .exec();
 
   res.render("admin/adminCourses", {
@@ -56,6 +56,7 @@ module.exports.createCourse = async function(req, res) {
   course.order = req.body.order;
   course.locations = req.body.locations;
   course.icon = req.body.icon;
+  course.curriculumPdf = req.body.curriculumPdf;
   course.archivements = [
     {
       icon: req.body.archivement_icon_1,
@@ -106,19 +107,19 @@ module.exports.createCourse = async function(req, res) {
   ];
 
   // save the course and check for errors
-  course.save( async function(err) {
+  course.save(async function(err) {
     if (err) {
       console.log("error", err);
-      
+
       req.flash("danger", `Error ${err}`);
       let courses = await Course.find({})
-        .sort({"order": 1})
+        .sort({ order: 1 })
         .exec();
       res.render("admin/adminCourses", {
         courses,
         course
       });
-      return
+      return;
     }
     req.flash("success", `Successfully created ${course.title}`);
     res.redirect("/admin/courses");
@@ -151,13 +152,17 @@ module.exports.uploadImages = multer({
     fileSize: 10000000 // 10 MB
   },
   fileFilter(req, file, next) {
-    if (file.mimetype.startsWith("image/")) {
+    if (
+      file.mimetype.startsWith("image/") ||
+      file.mimetype === "application/pdf"
+    ) {
       next(null, true);
     } else {
       next({ message: "That filetype is not allowed!" }, false);
     }
   }
 }).fields([
+  { name: "curriculumPdf", maxCount: 1 },
   { name: "icon", maxCount: 1 },
   { name: "archivement_icon_1", maxCount: 1 },
   { name: "archivement_icon_2", maxCount: 1 },
@@ -176,18 +181,29 @@ exports.resizeImages = async (request, response, next) => {
   }
   for await (const singleFile of Object.values(request.files)) {
     const extension = singleFile[0].mimetype.split("/")[1];
-    request.body[singleFile[0].fieldname] = `${
-      singleFile[0].filename
-    }.${extension}`;
+    request.body[
+      singleFile[0].fieldname
+    ] = `${singleFile[0].filename}.${extension}`;
     try {
-      const image = await jimp.read(singleFile[0].path);
-      await image.cover(500, 500);
-      await image.write(
-        `${process.env.IMAGE_UPLOAD_DIR}/${
-          request.body[singleFile[0].fieldname]
-        }`
-      );
-      fs.unlinkSync(singleFile[0].path);
+      if (singleFile[0].mimetype === "application/pdf") {
+        const pdfFile = fs.readFileSync(singleFile[0].path);
+        fs.writeFileSync(
+          `${process.env.IMAGE_UPLOAD_DIR}/${
+            request.body[singleFile[0].fieldname]
+          }`,
+          pdfFile
+        );
+      }
+      if (singleFile[0].mimetype.startsWith("image/")) {
+        const image = await jimp.read(singleFile[0].path);
+        await image.cover(500, 500);
+        await image.write(
+          `${process.env.IMAGE_UPLOAD_DIR}/${
+            request.body[singleFile[0].fieldname]
+          }`
+        );
+        fs.unlinkSync(singleFile[0].path);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -205,6 +221,7 @@ module.exports.updateCourse = async function(req, res) {
   course.subheading = req.body.subheading;
   course.order = req.body.order;
   course.locations = req.body.locations;
+  course.curriculumPdf = req.body.curriculumPdf;
 
   course.icon = req.files.icon ? req.body.icon : course.icon;
   course.archivements[0].icon = req.files.archivement_icon_1
