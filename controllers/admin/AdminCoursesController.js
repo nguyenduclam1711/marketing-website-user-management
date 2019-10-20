@@ -4,6 +4,7 @@ const uuid = require("uuid");
 const fs = require("fs");
 const jimp = require("jimp");
 const Location = require("../../models/location");
+const courseFormConfig = require("../../formsConfig/courseFormConfig")();
 
 const Course = require("../../models/course");
 
@@ -13,7 +14,8 @@ module.exports.getCourses = async function(req, res) {
     .exec();
 
   res.render("admin/adminCourses", {
-    courses
+    courses,
+    courseFormConfig
   });
 };
 
@@ -44,6 +46,7 @@ module.exports.editCourse = async function(req, res) {
 
   res.render("admin/editCourse", {
     course,
+    courseFormConfig,
     locations: all
   });
 };
@@ -56,6 +59,30 @@ module.exports.createCourse = async function(req, res) {
   course.order = req.body.order;
   course.locations = req.body.locations;
   course.icon = req.body.icon;
+
+  course.archivements = [1, 2, 3, 4, 5].map(item => {
+    return {
+      icon: req.body[`archivement_icon_${item}`],
+      description: req.body[`archivement_description_${item}`]
+    };
+  });
+
+  course.timeline = [1, 2, 3, 4, 5].map(item => {
+    return {
+      title: req.body[`timeline_title_${item}`],
+      subtitle: req.body[`timeline_subtitle_${item}`],
+      time: req.body[`timeline_time_${item}`]
+    };
+  });
+
+  course.features = [1, 2, 3, 4, 5].map(item => {
+    return {
+      icon: req.body[`features_icon_${item}`],
+      subtitle: req.body[`features_subtitle_${item}`],
+      title: req.body[`features_title_${item}`]
+    };
+  });
+
   course.curriculumPdf = req.body.curriculumPdf;
   course.archivements = [
     {
@@ -105,6 +132,7 @@ module.exports.createCourse = async function(req, res) {
       title: req.body.features_title_3
     }
   ];
+
 
   // save the course and check for errors
   course.save(async function(err) {
@@ -167,9 +195,13 @@ module.exports.uploadImages = multer({
   { name: "archivement_icon_1", maxCount: 1 },
   { name: "archivement_icon_2", maxCount: 1 },
   { name: "archivement_icon_3", maxCount: 1 },
+  { name: "archivement_icon_4", maxCount: 1 },
+  { name: "archivement_icon_5", maxCount: 1 },
   { name: "features_icon_1", maxCount: 1 },
   { name: "features_icon_2", maxCount: 1 },
-  { name: "features_icon_3", maxCount: 1 }
+  { name: "features_icon_3", maxCount: 1 },
+  { name: "features_icon_4", maxCount: 1 },
+  { name: "features_icon_5", maxCount: 1 }
 ]);
 
 // Resize the images with different thumbnail sizes
@@ -221,87 +253,88 @@ module.exports.updateCourse = async function(req, res) {
   course.subheading = req.body.subheading;
   course.order = req.body.order;
   course.locations = req.body.locations;
+
   course.curriculumPdf = req.body.curriculumPdf;
 
+
   course.icon = req.files.icon ? req.body.icon : course.icon;
-  course.archivements[0].icon = req.files.archivement_icon_1
-    ? req.body.archivement_icon_1
-    : course.archivements[0].icon;
-  course.archivements[0].description = req.body.archivement_description_1
-    ? req.body.archivement_description_1
-    : course.archivements[0].description;
-  course.archivements[1].icon = req.files.archivement_icon_2
-    ? req.body.archivement_icon_2
-    : course.archivements[1].icon;
-  course.archivements[1].description = req.body.archivement_description_2
-    ? req.body.archivement_description_2
-    : course.archivements[1].description;
-  course.archivements[2].icon = req.files.archivement_icon_3
-    ? req.body.archivement_icon_3
-    : course.archivements[2].icon;
-  course.archivements[2].description = req.body.archivement_description_3
-    ? req.body.archivement_description_3
-    : course.archivements[2].description;
 
-  course.timeline[0].title = req.body.timeline_title_1
-    ? req.body.timeline_title_1
-    : course.timeline[0].title;
-  course.timeline[0].subtitle = req.body.timeline_subtitle_1
-    ? req.body.timeline_subtitle_1
-    : course.timeline[0].subtitle;
-  course.timeline[0].time = req.body.timeline_time_1
-    ? req.body.timeline_time_1
-    : course.timeline[0].time;
+  function verbose(inputs) {
+    let items = [];
+    let { itemsAmount, model, titles } = inputs;
+    for (let i = 1; i <= itemsAmount; i++) {
+      items.push(i);
+    }
 
-  course.timeline[1].title = req.body.timeline_title_2
-    ? req.body.timeline_title_2
-    : course.timeline[1].title;
-  course.timeline[1].subtitle = req.body.timeline_subtitle_2
-    ? req.body.timeline_subtitle_2
-    : course.timeline[1].subtitle;
-  course.timeline[1].time = req.body.timeline_time_2
-    ? req.body.timeline_time_2
-    : course.timeline[1].time;
+    if (items.length == itemsAmount) {
+      items.map((_, i) => {
+        titles.map(title => {
+          course[model][i][title.dbChild] = req[
+            model == "archivements" && title.dbChild == "icon"
+              ? "files"
+              : "body"
+          ][`${title.reqChild}${i + 1}`]
+            ? req.body[`${title.reqChild}${i + 1}`]
+            : course[model][i][title.dbChild];
+        });
+      });
+    }
+  }
+  const archivements = {
+    itemsAmount: 5,
+    model: "archivements",
+    titles: [
+      {
+        dbChild: "icon",
+        reqChild: "archivement_icon_"
+      },
+      {
+        dbChild: "description",
+        reqChild: "archivement_description_"
+      }
+    ]
+  };
 
-  course.timeline[2].title = req.body.timeline_title_3
-    ? req.body.timeline_title_3
-    : course.timeline[2].title;
-  course.timeline[2].subtitle = req.body.timeline_subtitle_3
-    ? req.body.timeline_subtitle_3
-    : course.timeline[2].subtitle;
-  course.timeline[2].time = req.body.timeline_time_3
-    ? req.body.timeline_time_3
-    : course.timeline[2].time;
+  const timeline = {
+    itemsAmount: 3,
+    model: "timeline",
+    titles: [
+      {
+        dbChild: "title",
+        reqChild: "timeline_title_"
+      },
+      {
+        dbChild: "subtitle",
+        reqChild: "timeline_subtitle_"
+      },
+      {
+        dbChild: "time",
+        reqChild: "timeline_time_"
+      }
+    ]
+  };
 
-  course.features[0].title = req.body.features_title_1
-    ? req.body.features_title_1
-    : course.features[0].title;
-  course.features[0].subtitle = req.body.features_subtitle_1
-    ? req.body.features_subtitle_1
-    : course.features[0].subtitle;
-  course.features[0].icon = req.body.features_icon_1
-    ? req.body.features_icon_1
-    : course.features[0].icon;
-
-  course.features[1].title = req.body.features_title_2
-    ? req.body.features_title_2
-    : course.features[1].title;
-  course.features[1].subtitle = req.body.features_subtitle_2
-    ? req.body.features_subtitle_2
-    : course.features[1].subtitle;
-  course.features[1].icon = req.body.features_icon_2
-    ? req.body.features_icon_2
-    : course.features[1].icon;
-
-  course.features[2].title = req.body.features_title_3
-    ? req.body.features_title_3
-    : course.features[2].title;
-  course.features[2].subtitle = req.body.features_subtitle_3
-    ? req.body.features_subtitle_3
-    : course.features[2].subtitle;
-  course.features[2].icon = req.body.features_icon_3
-    ? req.body.features_icon_3
-    : course.features[2].icon;
+  const features = {
+    itemsAmount: 5,
+    model: "features",
+    titles: [
+      {
+        dbChild: "title",
+        reqChild: "features_title_"
+      },
+      {
+        dbChild: "subtitle",
+        reqChild: "features_subtitle_"
+      },
+      {
+        dbChild: "icon",
+        reqChild: "features_icon_"
+      }
+    ]
+  };
+  verbose(archivements);
+  verbose(timeline);
+  verbose(features);
 
   await course.save();
 
