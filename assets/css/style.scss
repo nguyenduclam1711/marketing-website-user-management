@@ -652,6 +652,22 @@ input[type="week"] {
   position: relative;
 }
 
+/******************************************
+   SUPER ADMIN/ USERS SECTION
+*******************************************/
+.usersListContainer {
+  border-bottom: 1px solid;
+  .usersList {
+    border-top: 1px solid;
+    .userInfoHalfWidth {
+      width: 50%;
+    }
+    .userInfoFullWidth {
+      width: 100%;
+    }
+  }
+}
+
 /********************************************************
   MEDIA QUERY BREAKPOINT | SINGLE PAGE COURSES !WORK HERE
 ********************************************************/
