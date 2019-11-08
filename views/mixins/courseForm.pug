@@ -48,7 +48,7 @@ mixin courseForm
           select#successStory.form-control(for='successStory' name='successStory')
             option(value="") -- Select --
             each story in storys
-             option(value=story._id, selected=!!course.successStory && course.successStory._id.toString() === story._id.toString() ?  "selected" :  false )=story.title
+             option(value=story._id, selected=!!course && !!course.successStory && course.successStory._id.toString() === story._id.toString() ?  "selected" :  false )=story.title
           
         .mb-3
           label(for='order') 
