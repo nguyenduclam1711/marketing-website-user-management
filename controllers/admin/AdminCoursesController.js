@@ -207,7 +207,6 @@ module.exports.updateCourse = async function(req, res) {
 
   course.curriculumPdf = req.body.curriculumPdf;
 
-
   course.icon = req.files.icon ? req.body.icon : course.icon;
 
   function verbose(inputs) {
