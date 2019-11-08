@@ -72,7 +72,12 @@ module.exports.createCourse = async function (req, res) {
   course.order = req.body.order;
   course.locations = req.body.locations;
   course.icon = req.body.icon;
+  course.massnahmeNumber = req.body.massnahmenummer;
+  course.massnahmeDetails = req.body.massnahmedetails;
+
+
   course.successStory = req.body.successStory;
+
   course.archivements = [1, 2, 3, 4, 5].map(item => {
     return {
       icon: req.body[`archivement_icon_${item}`],
@@ -211,14 +216,17 @@ exports.resizeImages = async (request, response, next) => {
 
 module.exports.updateCourse = async function (req, res) {
   let course = await Course.findOne({ slug: req.params.slug });
-
-  //TODO thats fucking verbose
   course.icon = req.body.icon ? req.body.icon : course.icon;
   course.headline = req.body.headline;
   course.title = req.body.title;
   course.subheading = req.body.subheading;
   course.order = req.body.order;
   course.locations = req.body.locations;
+  course.massnahmeNumber = req.body.massnahmenummer;
+  course.massnahmeDetails = req.body.massnahmedetails;
+  course.curriculumPdf = req.body.curriculumPdf;
+ course.icon = req.files.icon ? req.body.icon : course.icon;
+
   course.successStory = !!req.body.successStory ? req.body.successStory : undefined;
   course.curriculumPdf = req.body.curriculumPdf;
 
@@ -306,10 +314,15 @@ module.exports.updateCourse = async function (req, res) {
   verbose(archivements);
   verbose(timeline);
   verbose(features);
+  try {
+    await course.save();
+    req.flash("success", `Successfully updated ${course.title}`);
+    
+  } catch (error) {
+    req.flash("danger", JSON.stringify(error));
+    console.debug('error', error);
+  }
 
-  await course.save();
-
-  req.flash("success", `Successfully updated ${course.title}`);
 
   res.redirect("/admin/courses/edit/" + req.params.slug);
 };
