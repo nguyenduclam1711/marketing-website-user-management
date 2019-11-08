@@ -22,6 +22,7 @@ const Location = require("./models/location");
 const Partner = require("./models/partner");
 const Page = require("./models/page");
 const Event = require("./models/event");
+const Language = require("./models/language");
 
 const EventsController = require("./controllers/admin/AdminEventsController");
 
@@ -31,13 +32,15 @@ const {
   menulocations,
   stories,
   pages,
+  pagesgerman,
   courses,
   users,
   events,
   partners,
   adminUser,
   contacts,
-  employees
+  employees,
+  languages
 } = require("./seeddata");
 const imageUploadDir = IMAGE_UPLOAD_DIR;
 
@@ -66,6 +69,7 @@ async function deleteData() {
   await Page.deleteMany();
   await User.deleteMany();
   await Event.deleteMany();
+  await Language.deleteMany();
   console.log("Data Deleted. To load sample data, run\n\n\t npm run seeds\n\n");
   process.exit();
 }
@@ -111,6 +115,7 @@ async function loadData() {
     await Employee.insertMany(employees);
     await Story.insertMany(stories);
     await Partner.insertMany(partners);
+    const createdLanguages = await Language.insertMany(languages);
 
     await User.create(adminUser);
     console.log(`You can now login as: `);
@@ -133,6 +138,14 @@ async function loadData() {
     );
 
     await Page.insertMany(associatedMenulocations);
+    await Page.insertMany(pagesgerman);
+    const devugees = await Page.find({title: "Devugees"})
+    devugees[0].languageVersion = devugees[1]._id;
+    devugees[0].language = createdLanguages[0]._id;
+    devugees[1].languageVersion = devugees[0]._id;
+    devugees[1].language = createdLanguages[1]._id;
+    await devugees[0].save()
+    await devugees[1].save()
     await Contact.insertMany(associatedLocations);
     await Employee.insertMany(associatedEmployees);
 

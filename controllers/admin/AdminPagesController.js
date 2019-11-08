@@ -1,14 +1,18 @@
 require("dotenv").config({ path: __dirname + "/../.env" });
 const Page = require("../../models/page");
 const Menulocation = require("../../models/menulocation");
+const AbstractController = require("./AbstractController");
 
 module.exports.getPages = async (req, res) => {
   try {
     let pages = await Page.find({})
       .sort("order")
       .populate("menulocations")
+      .populate("language")
+      .populate("languageVersion")
       .exec();
     let menulocations = await Menulocation.find({}).exec();
+
 
     res.render("admin/pages", {
       menulocations,
@@ -21,7 +25,8 @@ module.exports.getPages = async (req, res) => {
 
 module.exports.getSinglePage = async (req, res) => {
   try {
-    const page = await Page.findOne({ slug: req.params.slug });
+    const page = await Page.findOne({ slug: req.params.slug })
+
     res.render(`page`, {
       page
     });
@@ -31,11 +36,13 @@ module.exports.getSinglePage = async (req, res) => {
 };
 module.exports.editPage = async (req, res) => {
   try {
-    const page = await Page.findOne({ slug: req.params.slug });
+    const page = await Page
+      .findOne({ slug: req.params.slug })
+      .populate("language")
+      .populate("languageVersion");
 
     let pages = await Page.find({})
       .sort("order")
-      .populate("menulocations")
       .exec();
     let menulocations = await Menulocation.find({}).exec();
     let allmenulocations = await Menulocation.find({}).exec();
@@ -78,11 +85,17 @@ module.exports.createPage = async (req, res) => {
     console.log(err);
   }
 };
-module.exports.deletePage = async (req, res) => {
+module.exports.deletePage = async (req, res, next) => {
   try {
-    const page = await Page.remove({ slug: req.params.slug });
-    req.flash("success", `Successfully deleted ${page.title}`);
-    res.redirect("/admin/pages");
+    Page.findOne({ slug: req.params.slug })
+      .populate('language')
+      .populate('languageVersion')
+      .exec((err, doc) => {
+        if (err) res.send(err);
+        doc.remove(next);
+        req.flash("success", `Successfully deleted ${doc.title}`);
+        res.redirect("/admin/pages");
+      })
   } catch (err) {
     console.log(err);
   }
@@ -94,6 +107,7 @@ module.exports.updatePage = async (req, res) => {
     page.title = req.body.title;
     page.content = JSON.parse(req.body.content);
     page.order = req.body.order;
+    page.slug = req.body.slug;
     page.menulocations = req.body.menulocations;
     await page.save();
 
@@ -102,4 +116,7 @@ module.exports.updatePage = async (req, res) => {
   } catch (err) {
     console.log(err);
   }
+};
+module.exports.setL18n = async (req, res) => {
+  AbstractController.cloneSite(req, res, Page)
 };

@@ -4,12 +4,7 @@ mixin storyForm
     
     h2
       span.mr-3=editPath ? "Edit story" :"Create a new Story"
-      .btn-group
-        if editPath
-          a.btn.btn-outline-primary(href="/admin/stories")="Back"
-          a.btn.btn-outline-primary(target="_blank" href="/stories/"+story.slug)="Show"
-        button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Story" 
-    
+    +adminButtonGroup(story, 'stories')   
     .mb-3
       label(for='title') Title
       input#inputTitle.form-control(name='title', type='text', placeholder='Title', value=editPath ? story.title :"" required='', autofocus='')

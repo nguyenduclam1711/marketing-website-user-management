@@ -1,6 +1,8 @@
 const { mongopath, getAsyncRedis } = require("./helpers/helper");
 const express = require("express");
 const app = express();
+const i18n = require("i18n");
+
 const path = require("path");
 const bodyParser = require("body-parser");
 const expressValidator = require("express-validator");
@@ -13,16 +15,37 @@ const Course = require("./models/course");
 const Page = require("./models/page");
 const Menulocation = require("./models/menulocation");
 const Location = require("./models/location");
+const Language = require("./models/language");
+const { languages } = require("./seeddata");
 const flash = require("connect-flash");
 const cron = require("node-cron");
 const EventsController = require("./controllers/admin/AdminEventsController");
 // const JobsController = require("./controllers/admin/AdminJobsController");
 const EmployeesController = require("./controllers/admin/AdminEmployeesController");
 const mongoose = require("mongoose");
+const { getAvailableTranslations } = require("./controllers/AbstractController");
 
 // connect to redis server and get an extended client with promisified
 // methods getAsync() and setAsync()
 let redisClient = null;
+
+(async () => {
+  const en = Language.findOne({ title: 'en' })
+  const de = Language.findOne({ title: 'de' })
+  const res = await Promise.all([en, de])
+  if (!res[0]) {
+    console.log("no english language created. Seeding EN lang into mongoose");
+    await Language.create(languages[0])
+  }
+  if (!res[1]) {
+    console.log("no german language created. Seeding DE lang into mongoose");
+    await Language.create(languages[1])
+  }
+
+  if (Object.keys(await Course.collection.getIndexes()).includes('order_1')) {
+    await Course.collection.dropIndex("order_1");
+  }
+})()
 
 if (process.env.USE_REDIS !== undefined && process.env.USE_REDIS === "true") {
   console.log("Redis enabled");
@@ -38,11 +61,18 @@ if (process.env.USE_REDIS !== undefined && process.env.USE_REDIS === "true") {
 
 mongoose.set("useCreateIndex", true);
 try {
-  mongoose.connect(mongopath, { useNewUrlParser: true });
+  mongoose.connect(mongopath, { useNewUrlParser: true, useUnifiedTopology: true }).then(res => {
+  });
 } catch (err) {
   console.log(`Please set a mongo path in your .env \n\n${err}`);
 }
-
+i18n.configure({
+  objectNotation: true,
+  locales: ['en', 'de'],
+  queryParameter: 'lang',
+  directory: __dirname + '/locales'
+});
+app.use(i18n.init);
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "notaverysecuresecret",
@@ -64,7 +94,7 @@ app.use("/images", express.static(path.join(__dirname, "uploads/images")));
 
 app.use(flash());
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   (res.locals.messages = {
     danger: req.flash("danger"),
     warning: req.flash("warning"),
@@ -101,21 +131,23 @@ app.use(async (req, res, next) => {
       getNavData = await redisClient.getAsync("navData");
       navData = JSON.parse(getNavData);
     } catch (error) {
-      console.error("Redis ERROR: Could not get navigation data: " + error);
+      // console.error("Redis ERROR: Could not get navigation data: " + error);
     }
   }
 
   if (navData === null) {
-    let courses = await Course.find({})
+    const query = await getAvailableTranslations(req, res)
+    const courses = await Course
+      .find(query)
       .sort({ order: 1 })
       .exec();
     let locations = await Location.find({}).exec();
 
     let footerCat = await Menulocation.findOne({ name: "footer" });
-    let footerPages = await Page.find({ menulocations: { $in: [footerCat] } });
+    let footerPages = await Page.find(Object.assign(query, { menulocations: { $in: [footerCat] } }));
 
     let headerCat = await Menulocation.findOne({ name: "header" });
-    let headerPages = await Page.find({ menulocations: { $in: [headerCat] } });
+    let headerPages = await Page.find(Object.assign(query, { menulocations: { $in: [headerCat] } }));
 
     navData = {
       courses,
@@ -124,11 +156,10 @@ app.use(async (req, res, next) => {
       footerPages
     };
 
-    console.log("saving data");
     try {
       await redisClient.setAsync("navData", JSON.stringify(navData));
     } catch (error) {
-      console.error("Redis ERROR: Could not save navigation data: " + error);
+      // console.error("Redis ERROR: Could not save navigation data: " + error);
     }
   } else {
     console.log("using cached data");
@@ -136,8 +167,10 @@ app.use(async (req, res, next) => {
 
   const { courses, locations, headerPages, footerPages } = navData;
 
+  
   res.locals.user = req.user || null;
-  res.locals.currentPath = req.path;
+  const rawPath = req.path.replace(`${req.session.locale}/`, '')
+  res.locals.currentPath = rawPath;
   res.locals.locations = locations;
   res.locals.courses = courses;
   res.locals.headerPages = headerPages;
@@ -150,6 +183,7 @@ app.use((req, res, next) => {
   next();
 });
 
+let i18nRoutes = require("./routes/i18n");
 let indexRoutes = require("./routes/index");
 let usersRoutes = require("./routes/users");
 let storiesRoutes = require("./routes/stories");
@@ -172,13 +206,8 @@ let eventsAdminRoutes = require("./routes/admin/events");
 let contactsAdminRoutes = require("./routes/admin/contacts");
 let usersAdminRoutes = require("./routes/admin/users");
 
-//app.get('/', function(req, res) {
-//let clang = req.query.lang;
-//console.log("", clang);
-////if (!!clang) {
-////res.redirect('/' + clang);
-////}
-//});
+
+app.use(i18nRoutes);
 app.use("/", indexRoutes);
 app.use("/users", usersRoutes);
 app.use("/stories", storiesRoutes);
@@ -202,6 +231,9 @@ app.use("/admin/users", usersAdminRoutes);
 
 app.use("/admin*", contactsAdminRoutes);
 app.use(redirects);
+app.get('*', function (req, res) {
+  res.redirect('/')
+})
 
 app.set("views", path.join(__dirname, "views/"));
 app.set("view engine", "pug");

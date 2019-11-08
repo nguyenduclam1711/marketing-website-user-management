@@ -31,8 +31,7 @@ var CourseSchema = new Schema({
     type: Schema.ObjectId, ref: "Story",
   },
   order: {
-    type: Number,
-    unique: true
+    type: Number
   },
   subtitle: {
     type: String
@@ -57,9 +56,17 @@ var CourseSchema = new Schema({
       subtitle: String,
       time: String
     }
-  ]
+  ],
+  language: { type: Schema.ObjectId, ref: "Language" },
+  languageVersion: { type: Schema.ObjectId, ref: "Course" }
 });
-
-CourseSchema.plugin(URLSlugs("headline"));
+CourseSchema.plugin(URLSlugs("title"));
+CourseSchema.pre("remove", function (next) {
+  if (!!this.languageVersion) {
+    this.languageVersion.update({ $unset: { language: 1, languageVersion: 1 } }, next)
+  } else {
+    next();
+  }
+});
 
 module.exports = mongoose.model("Course", CourseSchema);

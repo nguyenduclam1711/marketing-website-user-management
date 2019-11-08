@@ -1,10 +1,10 @@
 mixin storylist(public)
-  div
-    ul.row.story-cards-ul.mx-2.justify-content-center
+  div.w-100
+    ul.row.story-cards-ul.mx-2.justify-content-center.p-0
       each story in stories
         li.mb-5.mb-sm-4.col-md-6.col-sm-12.col-lg-4.d-flex.story-cards-li.floatings
           .hover-shadow.bg-light
             +singleStory(story)
     .pt-4.text-center
-      a.btn.btn-lg.btn-gradient-secondary.mx-5(href="/stories") Show all Stories
+      a.btn.btn-lg.btn-gradient-secondary.mx-5(href="/stories")=__("Show all Stories") 
 

@@ -2,17 +2,19 @@ mixin pageForm
   - var editPath = currentPath.includes('admin/pages/edit')
   form.mb-5(method='POST', action=editPath ? '/admin/pages/update/'+page.slug+'?_method=PUT' : '/admin/pages?alert=create')
 
-    h2
-      =editPath ? "Edit Page " :"Create a new Page"
-      .btn-group
-        if editPath
-          a.btn.btn-outline-primary(href="/admin/pages")="Back"
-          a.btn.btn-outline-primary(target="_blank" href="/pages/"+page.slug)="Show"
-        button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Page" 
+    h2=editPath ? "Edit Page " :"Create a new Page"
+    +adminButtonGroup(page, 'pages')
     .mb-3
       label(for='title') Title
       input#inputName.form-control(name='title', type='text', placeholder='Title', required='', autofocus='', value=editPath ? page.title : "")
     
+    if !editpath && page && page.slug
+      .mb-3
+        label(for='slug') 
+          | Slug
+          button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Changing this has negative effects on SEO if it not fresh created. To regenerate the slug, clear the fields and update the record.')
+            | ?
+        input#inputTitle.form-control(name='slug', type='text', placeholder='Slug', value=page.slug) 
     .mb-3
       label(for='content') Content
       #editor(value=editPath ? page.content : "")
@@ -22,16 +24,14 @@ mixin pageForm
         | Order
         button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Defines the order the pages are displayed. 0,1,2,3,4')
           | ?
-      input#inputOrder.form-control(name='order', type='number', placeholder='Order', required='', autofocus='', value=editPath ? page.order : "")
+      input#inputOrder.form-control(name='order', type='number', placeholder='Order', autofocus='', value=editPath ? page.order : "")
 
     .my-3
       label(for="menulocations") Page Location
       button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Defines the Menulocation where the pages are displayed. Headerpages appear in the Header and on the landingpages "Get Involved" section. Footerpages just in the footer. If no location is defined, the page is "hidden" but accessible per direct url.')
         | ?
 
-      
       each menulocation in menulocations
         .custom-control.custom-checkbox
           input.custom-control-input(name="menulocations" type='checkbox' id=menulocation.name value=menulocation._id  checked=(menulocation.selected))
           label.custom-control-label(for=menulocation.name)=menulocation.name
-  

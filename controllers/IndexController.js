@@ -4,21 +4,30 @@ const Course = require("../models/course");
 const Event = require("../models/event");
 const Location = require("../models/location");
 const Partner = require("../models/partner");
+const Language = require("../models/language");
 const request = require("request");
 const { sendMail } = require("../helpers/helper");
+const { getAvailableTranslations } = require("./AbstractController");
 
 module.exports.landingpage = async (req, res) => {
   try {
-    const stories = await Story.find({})
+    const query = await getAvailableTranslations(req, res)
+    const stories = await Story
+      .find(query)
       .sort("order")
       .limit(3)
-      .exec({});
+      .exec();
+
     const locations = await Location.find({});
     const partners = await Partner.find({})
       .sort("order")
       .exec({});
 
-    let courses = await Course.find({});
+    const courses = await Course
+      .find(query)
+      .sort({ order: 1 })
+      .exec();
+
     let events = [];
     for await (let loc of locations) {
       if (!events) {
@@ -118,7 +127,7 @@ module.exports.contact = async (req, res, next) => {
     </tr>
     </table>
   `;
-  contact.save(async function(err) {
+  contact.save(async function (err) {
     if (err) res.send(err);
     const mailOptions = {
       from: "contact@digitalcareerinstitute.org",
