@@ -21,15 +21,13 @@ mixin singleCourse
               a.scrollbutton.nav-link.nav-link-spy.mb-2(href='#section2') What you will learn
             li.nav-item
               a.scrollbutton.nav-link.nav-link-spy.mb-2(href='#section3') Day at DCI
+            if model.successStory
+              li.nav-item
+                a.scrollbutton.nav-link.nav-link-spy.mb-2(href='#section4') A success story
             li.nav-item
-
-              a.scrollbutton.nav-link.nav-link-spy.mb-2(href='#section4')=__("How to Apply") 
+              a.scrollbutton.nav-link.nav-link-spy.mb-2(href='#section5')=__("How to Apply") 
             button.btn.btn-gradient-secondary.btn-spy(type='button' data-toggle='modal', data-target='#contactFormModal' )=__("Apply Now")
 
-              a.scrollbutton.nav-link.nav-link-spy.mb-2(href='#section4') A success story
-            li.nav-item
-              a.scrollbutton.nav-link.nav-link-spy.mb-2(href='#section5') How to Apply
-            button.btn.btn-gradient-secondary.btn-spy(type='button' data-toggle='modal', data-target='#contactFormModal' ) Apply Now
 
         .col-12.col-xl-9.py-3
           #section1.mb-5
@@ -38,20 +36,22 @@ mixin singleCourse
             .row
               - 
               each object in model.archivements
-                figure.col-md-4.text-center
-                  .m-3.row.position-relative
-                    .col-10.offset-1.col-md-8.offset-md-2.align-items-center
-                      img.object-fit-cover.img-fluid.square(alt=object.description src="/media/pixel.gif" style="background-image: url('/images/"+object.icon+"')")
-                  p.lead=object.description
+                if object.icon
+                  figure.col-md-4.text-center
+                    .m-3.row.position-relative
+                      .col-10.offset-1.col-md-8.offset-md-2.align-items-center
+                        img.object-fit-cover.img-fluid.square(alt=object.description src="/media/pixel.gif" style="background-image: url('/images/"+object.icon+"')")
+                    p.lead=object.description
             
           #section2.my-5
             - 
             each object in model.features
-              .row.container            
-                .col-12.d.flex.m-auto
-                  img.img-fluid.float-left.mr-3.icons(src="/images/"+object.icon, alt=object.title)
-                  h3.text-left=object.title
-                  p.text-left.lead=object.subtitle
+              if object.icon
+                .row.container            
+                  .col-12.d.flex.m-auto
+                    img.img-fluid.float-left.mr-3.icons(src="/images/"+object.icon, alt=object.title)
+                    h3.text-left=object.title
+                    p.text-left.lead=object.subtitle
                   
           section.my-5
             h2=__("Want more details about our Web Development Course?")
