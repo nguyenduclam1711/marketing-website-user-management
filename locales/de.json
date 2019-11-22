@@ -80,10 +80,8 @@
 	"Subscribe": "Anmelden",
 	"All events in our locations": "Alle Veranstaltung in unseren Standorten",
 	"Hackthons, Infoevents and Jobfairs": "Hackathons, Infoveranstaltungen, und Karrieremesssen",
-	"footer": {
-		"Company": "Institut",
-		"Community": "Socialmedia"
-	},
+	"Company": "Institut",
+	"Community": "Socialmedia",
 	"All courses": "Alle Kurse",
 	"Events": "Events",
 	"Contact": "Contact"
