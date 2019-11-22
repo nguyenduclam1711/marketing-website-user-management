@@ -1,29 +1,30 @@
-const { mongopath, getAsyncRedis } = require("./helpers/helper");
-const express = require("express");
-const app = express();
-const i18n = require("i18n");
+const { mongopath, getAsyncRedis } = require('./helpers/helper')
+const express = require('express')
+const app = express()
+const i18n = require('i18n')
 
-const path = require("path");
-const bodyParser = require("body-parser");
-const expressValidator = require("express-validator");
-const session = require("express-session");
-const passport = require("passport");
-const MongoStore = require("connect-mongo")(session);
+const path = require('path')
+const bodyParser = require('body-parser')
+const expressValidator = require('express-validator')
+const session = require('express-session')
+const passport = require('passport')
+const MongoStore = require('connect-mongo')(session)
 // const promisify = require('es6-promisify');
-const { promisify } = require("util");
-const Course = require("./models/course");
-const Page = require("./models/page");
-const Menulocation = require("./models/menulocation");
-const Location = require("./models/location");
-const Language = require("./models/language");
-const { languages } = require("./seeddata");
-const flash = require("connect-flash");
-const cron = require("node-cron");
-const EventsController = require("./controllers/admin/AdminEventsController");
+const { promisify } = require('util')
+const Course = require('./models/course')
+const Page = require('./models/page')
+const Menulocation = require('./models/menulocation')
+const Location = require('./models/location')
+const Language = require('./models/language')
+const { languages } = require('./seeddata')
+const flash = require('connect-flash')
+const cron = require('node-cron')
+const EventsController = require('./controllers/admin/AdminEventsController')
 // const JobsController = require("./controllers/admin/AdminJobsController");
-const EmployeesController = require("./controllers/admin/AdminEmployeesController");
-const mongoose = require("mongoose");
-const { getAvailableTranslations } = require("./controllers/AbstractController");
+const EmployeesController = require('./controllers/admin/AdminEmployeesController')
+const mongoose = require('mongoose')
+const { getAvailableTranslations } = require('./controllers/AbstractController')
+const compression = require('compression')
 
 // connect to redis server and get an extended client with promisified
 // methods getAsync() and setAsync()
@@ -34,241 +35,249 @@ let redisClient = null;
   const de = Language.findOne({ title: 'de' })
   const res = await Promise.all([en, de])
   if (!res[0]) {
-    console.log("no english language created. Seeding EN lang into mongoose");
+    console.log('no english language created. Seeding EN lang into mongoose')
     await Language.create(languages[0])
   }
   if (!res[1]) {
-    console.log("no german language created. Seeding DE lang into mongoose");
+    console.log('no german language created. Seeding DE lang into mongoose')
     await Language.create(languages[1])
   }
 
   if (Object.keys(await Course.collection.getIndexes()).includes('order_1')) {
-    await Course.collection.dropIndex("order_1");
+    await Course.collection.dropIndex('order_1')
   }
 })()
 
-if (process.env.USE_REDIS !== undefined && process.env.USE_REDIS === "true") {
-  console.log("Redis enabled");
-
-  redis = require("redis");
-  redisClient = getAsyncRedis();
-} else if (process.env.USE_REDIS === "false") {
-  console.log("Redis disabled");
+if (process.env.USE_REDIS !== undefined && process.env.USE_REDIS === 'true') {
+  console.log('Redis enabled')
+  redisClient = getAsyncRedis()
+} else if (process.env.USE_REDIS === 'false') {
+  console.log('Redis disabled')
 } else {
-  console.error("USE_REDIS is not defined in .env");
-  process.exit();
+  console.error('USE_REDIS is not defined in .env')
+  process.exit()
 }
 
-mongoose.set("useCreateIndex", true);
+mongoose.set('useCreateIndex', true)
 try {
   mongoose.connect(mongopath, { useNewUrlParser: true, useUnifiedTopology: true }).then(res => {
-  });
+  })
 } catch (err) {
-  console.log(`Please set a mongo path in your .env \n\n${err}`);
+  console.log(`Please set a mongo path in your .env \n\n${err}`)
 }
+
+app.use(compression())
+
 i18n.configure({
   objectNotation: true,
   locales: ['en', 'de'],
   queryParameter: 'lang',
   directory: __dirname + '/locales'
-});
-app.use(i18n.init);
+})
+app.use(i18n.init)
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || "notaverysecuresecret",
-    key: process.env.SESSION_KEY || "notaverysecurekey",
+    secret: process.env.SESSION_SECRET || 'notaverysecuresecret',
+    key: process.env.SESSION_KEY || 'notaverysecurekey',
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({ mongooseConnection: mongoose.connection })
   })
-);
-app.use(bodyParser.json({ limit: "50mb" }));
-app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+)
+app.use(bodyParser.json({ limit: '50mb' }))
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 
-app.use(express.static("public"));
-app.use("/assets", express.static(path.join(__dirname, "node_modules/")));
-app.use("/assets", express.static(path.join(__dirname, "assets/css/")));
-app.use("/assets", express.static(path.join(__dirname, "assets/icons/")));
-app.use("/media", express.static(path.join(__dirname, "assets/media/")));
-app.use("/images", express.static(path.join(__dirname, "uploads/images")));
+app.use(express.static('public'))
+app.use('/assets', express.static(path.join(__dirname, 'node_modules/')))
+app.use('/assets', express.static(path.join(__dirname, 'assets/css/')))
+app.use('/assets', express.static(path.join(__dirname, 'assets/icons/')))
+app.use('/media', express.static(path.join(__dirname, 'assets/media/')))
+app.use('/images', express.static(path.join(__dirname, 'uploads/images')))
 
-app.use(flash());
+app.use(flash())
 
 app.use(function (req, res, next) {
   (res.locals.messages = {
-    danger: req.flash("danger"),
-    warning: req.flash("warning"),
-    success: req.flash("success")
+    danger: req.flash('danger'),
+    warning: req.flash('warning'),
+    success: req.flash('success')
   }),
-    (app.locals.pathclass = req.url
-      .replace(/^\//g, "")
-      .replace(/\//g, "-")
-      .replace(/\-$/g, "")
-      .toLowerCase());
-  let match = req.url.match("[^/]+(?=/$|$)");
-  res.locals.title = "DigitalCareerInstitute";
-  app.locals.moment = require("moment");
-  res.locals.live = req.headers.host.includes("digitalcareerinstitute.org");
+  (app.locals.pathclass = req.url
+    .replace(/^\//g, '')
+    .replace(/\//g, '-')
+    .replace(/\-$/g, '')
+    .toLowerCase())
+  let match = req.url.match('[^/]+(?=/$|$)')
+  res.locals.title = 'DigitalCareerInstitute'
+  app.locals.moment = require('moment')
+  res.locals.live = req.headers.host.includes('digitalcareerinstitute.org')
   if (match) {
-    match = match[0].replace(/\//g, " ");
+    match = match[0].replace(/\//g, ' ')
     res.locals.title =
-      match.charAt(0).toUpperCase() + match.slice(1) + " | " + res.locals.title;
+      match.charAt(0).toUpperCase() + match.slice(1) + ' | ' + res.locals.title
   }
-  console.log(req.method, req.headers.host + req.url);
-  next();
-});
-const methodOverride = require("method-override");
-app.use(methodOverride("_method"));
+  console.log(req.method, req.headers.host + req.url)
+  next()
+})
+const methodOverride = require('method-override')
+app.use(methodOverride('_method'))
 
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use(async (req, res, next) => {
-  let navData = null;
+  let navData = null
 
-  if (process.env.USE_REDIS === "true") {
+  if (process.env.USE_REDIS === 'true') {
     try {
-      getNavData = await redisClient.getAsync("navData");
-      navData = JSON.parse(getNavData);
+      const getNavData = await redisClient.getAsync('navData')
+      navData = JSON.parse(getNavData)
     } catch (error) {
-      // console.error("Redis ERROR: Could not get navigation data: " + error);
+      console.error('Redis ERROR: Could not get navigation data: ' + error)
     }
   }
-
   if (navData === null) {
     const query = await getAvailableTranslations(req, res)
     const courses = await Course
       .find(query)
       .sort({ order: 1 })
-      .exec();
-    let locations = await Location.find({}).exec();
-
-    let footerCat = await Menulocation.findOne({ name: "footer" });
-    let footerPages = await Page.find(Object.assign(query, { menulocations: { $in: [footerCat] } }));
-
-    let headerCat = await Menulocation.findOne({ name: "header" });
-    let headerPages = await Page.find(Object.assign(query, { menulocations: { $in: [headerCat] } }));
+      .exec()
+    const footerCat = await Menulocation.findOne({ name: 'footer' })
+    const headerCat = await Menulocation.findOne({ name: 'header' })
+    const [locations, footerPages, headerPages] = await Promise.all([
+      Location.find({}).exec(),
+      Page.find(Object.assign(query, { menulocations: { $in: [footerCat] } })),
+      Page.find(Object.assign(query, { menulocations: { $in: [headerCat] } }))
+    ])
 
     navData = {
       courses,
       locations,
       headerPages,
       footerPages
-    };
+    }
 
     try {
-      await redisClient.setAsync("navData", JSON.stringify(navData));
+      await redisClient.setAsync('navData', JSON.stringify(navData))
     } catch (error) {
-      // console.error("Redis ERROR: Could not save navigation data: " + error);
+      console.error('Redis ERROR: Could not save navigation data: ' + error)
     }
   } else {
-    console.log("using cached data");
+    console.log('using cached data')
   }
 
-  const { courses, locations, headerPages, footerPages } = navData;
+  const { courses, locations, headerPages, footerPages } = navData
 
-  
-  res.locals.user = req.user || null;
+  res.locals.user = req.user || null
   const rawPath = req.path.replace(`${req.session.locale}/`, '')
-  res.locals.currentPath = rawPath;
-  res.locals.locations = locations;
-  res.locals.courses = courses;
-  res.locals.headerPages = headerPages;
-  res.locals.footerPages = footerPages;
-  next();
-});
-
+  res.locals.currentPath = rawPath
+  res.locals.locations = locations
+  res.locals.courses = courses
+  res.locals.headerPages = headerPages
+  res.locals.footerPages = footerPages
+  next()
+})
 app.use((req, res, next) => {
-  req.login = promisify(req.login, req);
-  next();
-});
+  req.login = promisify(req.login, req)
+  next()
+})
+app.use((req, res, next) => {
+  var start = new Date()
+  if (res._responseTime) return next()
+  res._responseTime = true
+  res.on('header', function () {
+    var duration = new Date() - start
+    res.setHeader('X-Response-Time', duration + 'ms')
+  })
+  req.login = promisify(req.login, req)
+  next()
+})
 
-let i18nRoutes = require("./routes/i18n");
-let indexRoutes = require("./routes/index");
-let usersRoutes = require("./routes/users");
-let storiesRoutes = require("./routes/stories");
-let pagesRoutes = require("./routes/pages");
+const i18nRoutes = require('./routes/i18n')
+const indexRoutes = require('./routes/index')
+const usersRoutes = require('./routes/users')
+const storiesRoutes = require('./routes/stories')
+const pagesRoutes = require('./routes/pages')
 // let jobsRoutes = require("./routes/jobs");
-let employeesRoutes = require("./routes/employees");
-let eventsRoutes = require("./routes/events");
-let coursesRoutes = require("./routes/courses");
-let redirects = require("./routes/redirects");
+const employeesRoutes = require('./routes/employees')
+const eventsRoutes = require('./routes/events')
+const coursesRoutes = require('./routes/courses')
+const redirects = require('./routes/redirects')
 
-let menulocationAdminRoutes = require("./routes/admin/menulocations");
-let storiesAdminRoutes = require("./routes/admin/stories");
-let coursesAdminRoutes = require("./routes/admin/courses");
-let pagesAdminRoutes = require("./routes/admin/pages");
-let partnersAdminRoutes = require("./routes/admin/partners");
+const menulocationAdminRoutes = require('./routes/admin/menulocations')
+const storiesAdminRoutes = require('./routes/admin/stories')
+const coursesAdminRoutes = require('./routes/admin/courses')
+const pagesAdminRoutes = require('./routes/admin/pages')
+const partnersAdminRoutes = require('./routes/admin/partners')
 // let jobsAdminRoutes = require("./routes/admin/jobs");
-let employeesAdminRoutes = require("./routes/admin/employees");
-let locationsAdminRoutes = require("./routes/admin/locations");
-let eventsAdminRoutes = require("./routes/admin/events");
-let contactsAdminRoutes = require("./routes/admin/contacts");
-let usersAdminRoutes = require("./routes/admin/users");
+const employeesAdminRoutes = require('./routes/admin/employees')
+const locationsAdminRoutes = require('./routes/admin/locations')
+const eventsAdminRoutes = require('./routes/admin/events')
+const contactsAdminRoutes = require('./routes/admin/contacts')
+const usersAdminRoutes = require('./routes/admin/users')
 
-
-app.use(i18nRoutes);
-app.use("/", indexRoutes);
-app.use("/users", usersRoutes);
-app.use("/stories", storiesRoutes);
-app.use("/pages", pagesRoutes);
+app.use(i18nRoutes)
+app.use('/', indexRoutes)
+app.use('/users', usersRoutes)
+app.use('/stories', storiesRoutes)
+app.use('/pages', pagesRoutes)
 // app.use("/jobs", jobsRoutes);
-app.use("/about-us", employeesRoutes);
-app.use("/events", eventsRoutes);
-app.use("/courses", coursesRoutes);
-app.use("/admin/stories", storiesAdminRoutes);
-app.use("/admin/courses", coursesAdminRoutes);
-app.use("/admin/pages", pagesAdminRoutes);
+app.use('/about-us', employeesRoutes)
+app.use('/events', eventsRoutes)
+app.use('/courses', coursesRoutes)
+app.use('/admin/stories', storiesAdminRoutes)
+app.use('/admin/courses', coursesAdminRoutes)
+app.use('/admin/pages', pagesAdminRoutes)
 // app.use("/admin/jobs", jobsAdminRoutes);
-app.use("/admin/partners", partnersAdminRoutes);
-app.use("/admin/employees", employeesAdminRoutes);
-app.use("/admin/locations", locationsAdminRoutes);
-app.use("/admin/events", eventsAdminRoutes);
-app.use("/admin/menulocations", menulocationAdminRoutes);
-app.use("/admin/contacts", contactsAdminRoutes);
+app.use('/admin/partners', partnersAdminRoutes)
+app.use('/admin/employees', employeesAdminRoutes)
+app.use('/admin/locations', locationsAdminRoutes)
+app.use('/admin/events', eventsAdminRoutes)
+app.use('/admin/menulocations', menulocationAdminRoutes)
+app.use('/admin/contacts', contactsAdminRoutes)
 
-app.use("/admin/users", usersAdminRoutes);
+app.use('/admin/users', usersAdminRoutes)
 
-app.use("/admin*", contactsAdminRoutes);
-app.use(redirects);
+app.use('/admin*', contactsAdminRoutes)
+app.use(redirects)
 app.get('*', function (req, res) {
   res.redirect('/')
 })
 
-app.set("views", path.join(__dirname, "views/"));
-app.set("view engine", "pug");
-async function worker() {
+app.set('views', path.join(__dirname, 'views/'))
+app.set('view engine', 'pug')
+async function worker () {
   try {
     // const jobsResponse = await JobsController.fetchJobs();
     // console.log(jobsResponse)
-    const response = await EventsController.fetchevents();
-    console.log(response);
+    const response = await EventsController.fetchevents()
+    console.log(response)
 
-    console.log("👍 Done! Successfully Fetching data\n");
+    console.log('👍 Done! Successfully Fetching data\n')
   } catch (e) {
-    console.log("👎 Error! The Error info is below !!!\n");
-    console.log(e);
-    process.exit();
+    console.log('👎 Error! The Error info is below !!!\n')
+    console.log(e)
+    process.exit()
   }
 }
 
 // scheduling cron job:
 if (process.env.CRONINTERVAL) {
-  console.log(`Cron scheduled for ${process.env.CRONINTERVAL}`);
+  console.log(`Cron scheduled for ${process.env.CRONINTERVAL}`)
   cron.schedule(
     process.env.CRONINTERVAL,
     () => {
-      console.log(`${new Date()} Started Cronjobs`);
-      worker();
+      console.log(`${new Date()} Started Cronjobs`)
+      worker()
     },
     {
       scheduled: true,
-      timezone: "Europe/Berlin"
+      timezone: 'Europe/Berlin'
     }
-  );
+  )
 } else {
-  console.log(`No cron interval set in the .env. No cron started.`);
+  console.log('No cron interval set in the .env. No cron started.')
 }
 
-worker();
-module.exports = app;
+worker()
+module.exports = app
