@@ -40,6 +40,9 @@ body:not(.admin).btn {
     background-position: 95% 0 !important;
   }
 }
+.mh-100 {
+  min-height: 100vw;
+}
 code {
   color: $textOrange;
 }

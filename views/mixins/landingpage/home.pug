@@ -1,13 +1,16 @@
 mixin home 
-  .homeSection(style="background-image: url('/media/header"+Math.floor( Math.random() * 2 )+".jpg');")
-    div.mainHome.d-flex 
-      div.contentHome.m-auto
-        .col.mx-1.text-center.py-5
-          p.text-uppercase.h1.text-white.font-weight-bold.display-1.text-uppercase=__('Start_your') 
-          p.digitalCareer.h1.mb-5.display-1.text-white.font-weight-bold.text-uppercase=__('Digital_career')  
-          p.subtitle.subtitle-jumbotron.h2.mb-5=__( "Learn digital skills with us to get the most fulfilling jobs" )
-          .m-auto.buttonRow.text-center
-             a.mb-3.btn.btn-lg.btn-gradient-secondary.mr-2.mr-md-4(href='#ourcourses', role='button')=__( "Browse Courses" )      
-             button.mb-3.btn.btn-lg.btn-gradient-secondary(data-toggle='modal', data-target='#contactFormModal')=__("Contact us")
-      
-    
+  .homeSection.mh-100.d-flex.position-relative.z-index-minus-1
+    div.mainHome.d-flex.w-100
+      div.m-auto.container
+        .row
+          .col-md-6.py-5
+            p.text-uppercase.h1.font-weight-bold.display-1.text-uppercase=__('Start_your') 
+            p.digitalCareer.h1.mb-5.display-1.font-weight-bold.text-uppercase=__('Digital_career')  
+            p.subtitle.subtitle-jumbotron.h2.mb-5=__( "Learn digital skills with us to get the most fulfilling jobs" )
+            .m-auto.buttonRow.text-center
+              a.mb-3.btn.btn-lg.btn-gradient-secondary.mr-2.mr-md-4(href='#ourcourses', role='button')=__( "Browse Courses" )      
+              button.mb-3.btn.btn-lg.btn-gradient-secondary(data-toggle='modal', data-target='#contactFormModal')=__("Contact us")
+          .col-md-6.py-5
+            img.w-100(src="/media/hero.png", alt="")
+
+

@@ -228,9 +228,11 @@ $("#downloadCSV").on("click", function(e) {
     .catch(error => console.log("error ===>", error));
 });
 
-window.onload = function() {
-  document.querySelector(".cont_principal").className =
-    "cont_principal cont_error_active";
+window.onload = function () {
+  const notFoundBox = document.querySelector(".cont_principal")
+  if (notFoundBox) {
+    notFoundBox.className = "cont_principal cont_error_active";
+  }
 };
 //
 // let typedCursor = new Typed('.subtitle', {
