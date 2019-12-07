@@ -9,3 +9,4 @@ public/*
 backup.sh
 restore.sh
 backup
+*.log
