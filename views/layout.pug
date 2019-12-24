@@ -1,9 +1,4 @@
 include mixins/navigation
-include mixins/landingpage/ourCoursesSection
-include mixins/landingpage/quote
-include mixins/landingpage/upcomingEvents
-include mixins/landingpage/partners
-include mixins/landingpage/footer
 include mixins/storylist
 include mixins/courselist
 include mixins/pagelist
@@ -15,7 +10,6 @@ include mixins/dataPrivacy
 include mixins/storyForm
 include mixins/courseForm
 include mixins/singleCourse
-include mixins/landingpage/home
 include mixins/singleStory
 include mixins/newsletter
 include mixins/pageForm
@@ -71,7 +65,7 @@ html.h-100(lang='en')
     link(rel="icon", type="image/png", sizes="16x16", href="/assets/favicon-16x16.png")
     link(rel="manifest", href="/assets/site.webmanifest")
     link(rel="mask-icon", href="/assets/safari-pinned-tab.svg", color="#5bbad5")
-  
+
 
   body.h-100(data-spy='scroll', data-target='#courseScrollspy', data-offset='1', class=pathclass+(currentPath.includes('admin') ? ' admin mb-5' : '' ))
 
@@ -96,10 +90,65 @@ html.h-100(lang='en')
       .flex-grow-1(class=currentPath.includes('admin') ? ' bg-light mb-5' : '' )
         block content
       if !currentPath.includes('admin')
-        +footer
+        footer.site-footer(role='contentinfo' class=user ? "pb-5" : "")
+          section.bg-primary.pb-3
+            .shift-up-container.mt-5
+              if currentPath !== "/users/login" && currentPath !== "/users/register"
+                +newsletter
+            .container.pt-5
+              .row
+                .col-xs-12.col-sm-2.footers-two
+                  p.font-weight-bold=__("Company")
+                  ul.list-unstyled
+                    li
+                      a(href='/about-us/')=__("navigation.About us")
+                    li
+                      a(href='https://dci-jobs.personio.de/') Jobs
+                    li
+                      a(data-toggle='modal',data-target='#contactFormModal')=__("Contact")
+                    each page in footerPages
+                      li
+                        a(href='/pages/' + page.slug)
+                          =page.title
+                        if user && user.admin === "true"
+                          a(href='/admin/pages/edit/' + page.slug)
+                            small.text-monospace= " (Edit)"
+
+                .col-xs-12.col-sm-3.footers-three
+                  p.font-weight-bold=__("Courses")
+                  ul.list-unstyled
+                    li
+                      a(href='/courses')=__("All courses")
+                    each course in courses
+                      li
+                        a(href='/courses/' + course.slug)=course.headline
+                        if user && user.admin === "true"
+                          a(href='/admin/courses/edit/' + course.slug)
+                            small.text-monospace= " (Edit)"
+                .col-xs-12.col-sm-3.footers-four
+                  p.font-weight-bold=__("Community")
+                  ul.list-unstyled
+                    li
+                      a(target="_blank" href="https://www.facebook.com/digitalcareerinstitute") Facebook
+                    li
+                      a(target="_blank" href="https://twitter.com/DevugeesOrg") Twitter
+                    li
+                      a(target="_blank" href="https://medium.com/devugees") Medium
+                    li
+                      a(target="_blank" href="https://www.youtube.com/channel/UCSM_3ldxjcclGTcXaJRBYTw") YouTube
+
+                .col-xs-12.col-sm-2.footers-five
+                  p.font-weight-bold=__("Events")
+                  ul.list-unstyled
+                    li
+                      a(href='/events')=__("All Events")
+                    each location in locations
+                      li
+                        a(href='/events/' + location.name)=location.name
+
       if user
         +menuFooter
-      
+
 
     #contactFormModal.modal(tabindex='-1', role='dialog', aria-labelledby='contactFormModal', aria-hidden='true')
       .modal-dialog.modal-dialog-centered
@@ -113,7 +162,7 @@ html.h-100(lang='en')
       +dataPrivacy
 
     script(src="/frontend.bundle.js")
-    if currentPath.includes('admin')    
+    if currentPath.includes('admin')
       script(src="/backend.bundle.js")
 
     if live
@@ -124,7 +173,7 @@ html.h-100(lang='en')
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'UA-140962410-1');
-      
+
       // Facebook Pixel Code
       script.
         !function(f,b,e,v,n,t,s)

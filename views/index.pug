@@ -15,20 +15,118 @@ block content
     if currentPath == "/"
       +navigation
     .content.overflow-hidden
-      +home
-      +ourCoursesSection
-      +quote
-      section#stories.my-5
-        .container
-          h2.display-1.text-center.text-uppercase=__("Stories")
-          h3.mb-5.text-center.text-muted=__("Meet our happy students")
-          .row
-            +storylist
+      section.homeSection.d-flex.position-relative.py-5
+        div.mainHome.d-flex.w-100.z-1.py-5
+          div.m-auto.container.py-5
+            .row
+              .col-md-6.py-5
+                p.text-uppercase.h1.font-weight-bold.display-1.text-uppercase=__('Start_your')
+                p.digitalCareer.h1.mb-5.display-1.font-weight-bold.text-uppercase=__('Digital_career')
+                p.subtitle.subtitle-jumbotron.h2.mb-5=__("Learn digital skills with us to get the most fulfilling jobs")
+                .m-auto.buttonRow.text-center
+                  a.mb-3.btn.btn-lg.btn-gradient-secondary.mr-2.mr-md-4(href='#ourcourses', role='button')=__("Browse Courses")
+                  button.mb-3.btn.btn-lg.btn-gradient-secondary(data-toggle='modal', data-target='#contactFormModal')=__("Contact us")
+              .col-md-6.py-5
+                img.w-100(src="/media/hero.png", alt="")
+
+
+      section#ourcourses.position-relative.offset_title.pb-3
+        header.offset_header.text-center
+          .d-inline-block.position-relative
+            .bluepolygon.z-index-minus-1
+            h2.position-relative.d-inline-block.display-1.text-center.text-uppercase.text-white
+              =__("Our courses")
+            h3.mb-5.text-center.text-muted=__("We offer many interesting educational trainings")
+        .container.pt-5
+          .row.mx-md-5.justify-content-center
+            each course in courses
+              .col-md-6.col-lg-4.mb-5.mb-sm-4.floatings
+                .bg-light.p-4.text-center.hover-shadow
+                  a.card-link(href="/courses/" + course.slug)
+                    .m-3.row.position-relative
+                      .col-10.offset-1.col-md-8.offset-md-2.align-items-center.my-4
+                        img.object-fit-cover.img-fluid.square(src="/media/pixel.gif" alt=course.headline style="background-image: url('/images/" + course.icon + "')")
+
+                    h4.service-title= course.headline
+                    p.text-muted=course.title
+            a.btn.btn-lg.btn-gradient-secondary(href='/courses/', role='button', aria-pressed='true')=__("All") + " " + __("Courses")
+
+      section#mission.bg-light
+        .position-relative.offset_title
+          header.offset_header.text-left
+            .d-inline-block.position-relative
+              .bluepolygon.z-index-minus-1.right
+              h2.position-relative.d-inline-block.display-1.text-center.text-uppercase.text-white
+                =__("Mission")
+          .position-relative.container.overflow-hidden.my-5
+            section#stats.section-counter.py-5.mb-5.row
+              div.col-lg-9
+                //-iframe(frameborder='0', height='100%', width='100%', src='https://youtube.com/embed/BLUfMfcN82c?controls=0&showinfo=0&autohide=1')
+                img.h-100.w-100.object-fit-cover(alt="people programming" src='/media/bg1.jpg')
+              .col-lg-3
+                .p-3.h-100.d-flex.flex-column.justify-content-center
+                  i.h3.m-0
+                    ="\""
+                    = __("The Digital Career Institute was born as an initiative to integrate refugees into digital jobs. Today it is committed to train anyone who wants to pursue a tech career.")
+
+              .container.container-counter.mt-4
+                .col-12.py-5
+                  .row
+                    .col-sm-6.col-md-3
+                      .counter-item
+                        .counter-number.font-weight-bold
+                          span.counter-count 300
+                        span=__("Students")
+                    .col-sm-6.col-md-3
+                      .counter-item
+                        .counter-number.font-weight-bold
+                          span.counter-count 30
+                        span=__("Courses started")
+                    .col-sm-6.col-md-3
+                      .counter-item
+                        .counter-number.font-weight-bold
+                          span.counter-count 250
+                        span=__("Company tours")
+                    .col-sm-6.col-md-3
+                      .counter-item
+                        .counter-number.font-weight-bold
+                          span.counter-count 4
+                        span=__("Locations")
+
+
+      section#stories.my-5.offset_title.position-relative
+        header.offset_header.text-right
+          .d-inline-block.position-relative
+            .bluepolygon.z-index-minus-1.left
+            h2.position-relative.d-inline-block.display-1.text-center.text-uppercase.text-white
+              =__("Stories")
+        +storylist
+
       if events.length > 0
-        +upcomingEvents
-      +partners
-      
-      section.bg-light.py-5
+        section#events.bg-light.py-5
+          .container
+            h2.display-1.text-center.text-uppercase=__("Upcoming events")
+            h3.mb-5.text-center.text-muted=__("Meet us in person in several locations in Germany")
+            .row.mx-md-5
+              each event in events
+                .col-sm-6
+                  +singleEvent(event)
+
+          .text-center
+            a.btn.btn-lg.btn-gradient-secondary.mx-5(href='/events/')=__("All Events")
+      section.py-5.section-services
+        .container.py-5.text-center
+          h2.display-1.text-center.text-uppercase=__("Our Partners")
+          h3.mb-5.text-center.text-muted=__("Meet our partners")
+          each partner in partners
+            if partner.link
+              a(href=partner.link target="_blank")
+                img.partners-logo.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, title=partner.title, src="/images/" + partner.partnerlogo)
+            else
+              img.partners-logo.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, title=partner.title, src="/images/" + partner.partnerlogo)
+
+
+      section#contact.bg-light.py-5
         .container.py-5
           .px-lg-5
             .px-lg-5

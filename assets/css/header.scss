@@ -1,33 +1,47 @@
 .homeSection {
   background: $primary-light;
 }
+.offset_title {
+  padding-top: 10em;
+  header.offset_header {
+    padding: 5em 0;
+    z-index: 0;
+    position: relative;
+    transform: translateY(-10%);
+  }
+}
+
 .bluepolygon {
   background: $primary;
-  clip-path: polygon(100% 80%, 50% 70%, 100% 0%);
-  position: absolute;
-  height: 100%;
-  width: 100%;
-}
-.bluepolygon2 {
-  background: $primary;
-  border-radius: 2em;
+  border-radius: 8vh;
   position: absolute;
   height: 100vw;
   width: 100vw;
-  top: 0;
-  left: 0%;
-  margin-inline-start: -50%;
+  top: 50%;
   transform: rotate(-45deg);
   transform-origin: top left;
+  left: -50%;
 }
+.bluepolygon.left {
+}
+.bluepolygon.right {
+  right: -100%;
+  top: -50%;
+  transform: rotate(25deg);
+  transform-origin: top right;
+  left: auto;
+}
+
 .z-index-minus-1 {
   z-index: -1;
 }
+
 #svg {
   width: 100%;
   height: 100%;
   position: absolute;
 }
+
 @include media-breakpoint-up(md) {
   #headernav {
     > li:not(.admin) {
@@ -37,7 +51,7 @@
           transition: transform 0.3s ease, color 0.3s ease, opacity 0.3s ease;
           transform: skew(-45deg) scale(1, 0);
           background: $blue;
-          height: 100%;
+          height: 120%;
           width: 100%;
           top: 0;
           opacity: 0;
@@ -47,15 +61,18 @@
           z-index: -1;
         }
       }
+
       &:hover > a,
       > a.active,
       > a:hover {
         // &:before,
         color: white;
+
         &:after {
           opacity: 1;
-          transform: skew(-45deg);
+          transform: skew(-45deg) scale(1.04, 1);
         }
+
         // &:before {
         // }
         &:after {
