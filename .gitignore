@@ -10,3 +10,4 @@ backup.sh
 restore.sh
 backup
 *.log
+.idea
