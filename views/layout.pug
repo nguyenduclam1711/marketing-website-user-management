@@ -90,63 +90,87 @@ html.h-100(lang='en')
       .flex-grow-1(class=currentPath.includes('admin') ? ' bg-light mb-5' : '' )
         block content
       if !currentPath.includes('admin')
-        footer.site-footer(role='contentinfo' class=user ? "pb-5" : "")
-          section.bg-primary.pb-3
-            .shift-up-container.mt-5
-              if currentPath !== "/users/login" && currentPath !== "/users/register"
-                +newsletter
-            .container.pt-5
-              .row
-                .col-xs-12.col-sm-2.footers-two
-                  p.font-weight-bold=__("Company")
-                  ul.list-unstyled
-                    li
-                      a(href='/about-us/')=__("navigation.About us")
-                    li
-                      a(href='https://dci-jobs.personio.de/') Jobs
-                    li
-                      a(data-toggle='modal',data-target='#contactFormModal')=__("Contact")
-                    each page in footerPages
+        footer.site-footer.pt-5.bg-light(role='contentinfo' class=user ? "pb-5" : "")
+          .pt-5
+            section.bg-primary
+              .shift-up-container
+                if currentPath !== "/users/login" && currentPath !== "/users/register"
+                  +newsletter
+              .container.pb-5
+                .row
+                  .col-xs-12.col-sm-2.footers-two
+                    p.font-weight-bold.text-lightgrey=__("Company")
+                    ul.list-unstyled
                       li
-                        a(href='/pages/' + page.slug)
-                          =page.title
-                        if user && user.admin === "true"
-                          a(href='/admin/pages/edit/' + page.slug)
-                            small.text-monospace= " (Edit)"
-
-                .col-xs-12.col-sm-3.footers-three
-                  p.font-weight-bold=__("Courses")
-                  ul.list-unstyled
-                    li
-                      a(href='/courses')=__("All courses")
-                    each course in courses
+                        a.text-light(href='/about-us/')=__("navigation.About us")
                       li
-                        a(href='/courses/' + course.slug)=course.headline
-                        if user && user.admin === "true"
-                          a(href='/admin/courses/edit/' + course.slug)
-                            small.text-monospace= " (Edit)"
-                .col-xs-12.col-sm-3.footers-four
-                  p.font-weight-bold=__("Community")
-                  ul.list-unstyled
-                    li
-                      a(target="_blank" href="https://www.facebook.com/digitalcareerinstitute") Facebook
-                    li
-                      a(target="_blank" href="https://twitter.com/DevugeesOrg") Twitter
-                    li
-                      a(target="_blank" href="https://medium.com/devugees") Medium
-                    li
-                      a(target="_blank" href="https://www.youtube.com/channel/UCSM_3ldxjcclGTcXaJRBYTw") YouTube
-
-                .col-xs-12.col-sm-2.footers-five
-                  p.font-weight-bold=__("Events")
-                  ul.list-unstyled
-                    li
-                      a(href='/events')=__("All Events")
-                    each location in locations
+                        a.text-light(href='https://dci-jobs.personio.de/') Jobs
                       li
-                        a(href='/events/' + location.name)=location.name
+                        a.text-light(data-toggle='modal',data-target='#contactFormModal')=__("Contact")
+                      each page in footerPages
+                        li
+                          a.text-light(href='/pages/' + page.slug)
+                            =page.title
+                          if user && user.admin === "true"
+                            a.text-light(href='/admin/pages/edit/' + page.slug)
+                              small.text-monospace= " (Edit)"
 
-      if user
+                  .col-xs-12.col-sm-3.footers-three
+                    p.font-weight-bold.text-lightgrey=__("Courses")
+                    ul.list-unstyled
+                      li
+                        a.text-light(href='/courses')=__("All courses")
+                      each course in courses
+                        li
+                          a.text-light(href='/courses/' + course.slug)=course.headline
+                          if user && user.admin === "true"
+                            a.text-light(href='/admin/courses/edit/' + course.slug)
+                              small.text-monospace= " (Edit)"
+                  .col-xs-12.col-sm-3.footers-four
+                    p.font-weight-bold.text-lightgrey=__("Community")
+                    ul.list-unstyled
+                      li
+                        a.text-light(target="_blank" href="https://www.facebook.com/digitalcareerinstitute") Facebook
+                      li
+                        a.text-light(target="_blank" href="https://twitter.com/DevugeesOrg") Twitter
+                      li
+                        a.text-light(target="_blank" href="https://medium.com/devugees") Medium
+                      li
+                        a.text-light(target="_blank" href="https://www.youtube.com/channel/UCSM_3ldxjcclGTcXaJRBYTw") YouTube
+
+                  .col-xs-12.col-sm-2.footers-five
+                    p.font-weight-bold.text-lightgrey=__("Events")
+                    ul.list-unstyled
+                      li
+                        a.text-light(href='/events')=__("All Events")
+                      each location in locations
+                        li
+                          a.text-light(href='/events/' + location.name)=location.name
+                  .col-xs-12.col-sm-2.footers-five
+                    p.font-weight-bold.text-lightgrey=__("Social media")
+                    ul.list-unstyled
+                      li
+                        a.text-light(href='/events') Facebook
+                      li
+                        a.text-light(href='/events') Insta
+                      li
+                        a.text-light(href='/events') Twitter
+                      li
+                        a.text-light(href='/events') Facebook
+
+                nav.d-flex.justify-content-between.align-items-center.pt-5
+                  div.pt-md-5
+                    a.navbar-brand.text-white.h-60.mr-md-5(href="/")
+                      include ../assets/media/dci.svg
+                    span.text-white.mr-md-5
+                      ="© 2019 DCI gGmbH."
+                    span.text-white
+                      ="All Rights Reserved"
+                  div
+                    a.text-white.mr-md-5(href="/") Impressum
+                    a.text-white(href="/") Copyright
+
+    if user
         +menuFooter
 
 

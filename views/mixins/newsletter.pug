@@ -1,12 +1,16 @@
 mixin newsletter
   #newsletter.container.shift-up-item
-    .bg-light.box-shadow
-      h2#nlheadline.display-2.mb-5.text-center=__("Subscribe to our newsletter")
-      .row
-        .footer-subscribe.d-flex.justify-content-center.col-md-8.offset-md-2
-          .w-100.px-sm-5
-            form#mc-embedded-subscribe-form(name='mc-embedded-subscribe-form', method='post', action='/newsletter-signup')
-              label.sr-only(for='newsletter_email')=__("Location")
-              input#newsletter_email.subs_input(type='email', required, placeholder=__("Email"), name='email')
-              button#nlbtn.btn.btn-light(type="submit")
-                span=__("Subscribe")
+    .bg-light-grey.box-shadow.p-5
+      .p-5
+        .row
+          .col-md-5
+            h2#nlheadline.display-2.font-weight-bold.text-dark=__("Stay up to date on the latest")
+            p.mb-5=__("Get the latest news on events, project presentations and more")
+          .col-md-7
+            .w-100.px-sm-5
+              form#mc-embedded-subscribe-form(name='mc-embedded-subscribe-form', method='post', action='/newsletter-signup')
+                div.mb-3
+                  label.px-2(for='newsletter_email')=__("Email")
+                  input#newsletter_email.subs_input(type='email', required, name='email')
+                button.float-right#nlbtn.btn.btn-outline-primary(type="submit")
+                  span=__("Subscribe")

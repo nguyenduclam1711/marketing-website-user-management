@@ -1,5 +1,6 @@
-$primary: #1b39ca;
-$primary-light: #dce0f2;
+$primary: #1f3fc7;
+$primary-light: #4266fb;
+$light-grey: #DCE0F2;
 
 $blue: #1d3b8b;
 $bluetrans: #1d3a8b25;
@@ -14,6 +15,10 @@ $transition: .15s;
 @import "../../node_modules/bootstrap/scss/bootstrap";
 @import "../../node_modules/quill/dist/quill.snow.css";
 
+
+.bg-light-grey {
+  background-color: $light-grey !important;
+}
 
 @mixin btn-color($color-pri, $color-sec, $color-border) {
   background-color: $color-pri;

@@ -39,3 +39,10 @@
     text-align: center;
   }
 }
+.shift-up-container {
+  height: -50%;
+
+  .shift-up-item {
+    transform: translateY(-50%);
+  }
+}
