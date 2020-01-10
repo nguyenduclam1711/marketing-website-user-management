@@ -143,7 +143,8 @@ function elementInViewport2(el) {
 window.onscroll = throttle(function() {
   showFloatings();
   countUp();
-}, 10);
+  stickyNavigation()
+}, 50);
 
 $("#contactFormModal").on("shown.bs.modal", function(e) {
   window.document.querySelector("#track").value = window.location.href;
@@ -243,22 +244,18 @@ window.onload = function () {
 // });
 // console.log(typedCursor)
 
-//nav-sticky
-// const nav = document.querySelector('#headernav');
-// const navTop = nav.offsetTop;
-//
-// function stickyNavigation() {
-//   console.log('navTop = ' + navTop);
-//   console.log('scrollY = ' + window.scrollY);
-//
-//   if (window.scrollY >= navTop) {
-//     // nav offsetHeight = height of nav
-//     document.body.style.paddingTop = nav.offsetHeight + 'px';
-//     document.body.classList.add('fixed-nav');
-//   } else {
-//     document.body.style.paddingTop = 0;
-//     document.body.classList.remove('fixed-nav');
-//   }
-// }
-//
+const nav = document.querySelector('nav.fixed-top');
+const homesection = document.querySelector('section.homeSection');
+
+function stickyNavigation() {
+  console.log('navTop = ' + homesection.offsetTop + homesection.offsetHeight);
+  console.log('scrollY = ' + window.scrollY);
+
+  if (window.scrollY >= homesection.offsetHeight / 2) {
+    nav.classList.add('bg-white');
+  } else {
+    nav.classList.remove('bg-white');
+  }
+}
+
 // window.addEventListener('scroll', stickyNavigation);

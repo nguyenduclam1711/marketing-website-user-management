@@ -2,8 +2,13 @@ $primary: #1f3fc7;
 $primary-light: #4266fb;
 $light-grey: #DCE0F2;
 
+$secondary: #f2793c;
+
 $blue: #1d3b8b;
+$bluedark: #040a3b;
+$bluepale: #3d4269;
 $bluetrans: #1d3a8b25;
+
 $green: #7aff29;
 $red: #ff4200;
 $yellow: #ffdb00;
@@ -12,6 +17,9 @@ $pink: #a800ff;
 $turquoise: #3dbaf7;
 $textOrange: #da9446;
 $transition: .15s;
+$theme-colors: (
+  "secondary": $secondary
+);
 @import "../../node_modules/bootstrap/scss/bootstrap";
 @import "../../node_modules/quill/dist/quill.snow.css";
 
@@ -20,6 +28,9 @@ $transition: .15s;
   background-color: $light-grey !important;
 }
 
+.btn-secondary {
+  color: $light-grey;
+}
 @mixin btn-color($color-pri, $color-sec, $color-border) {
   background-color: $color-pri;
   color: $color-sec !important;
@@ -34,27 +45,35 @@ $transition: .15s;
     border-color: darken($color-border, 10%) !important;
   }
 }
+
 .left {
   left: 0;
 }
+
 .right {
   right: 0;
 }
+
 .top {
   top: 0;
 }
+
 .bottom {
   bottom: 0;
 }
+
 .z-minus {
   z-index: -1;
 }
+
 .z-1 {
   z-index: 1;
 }
+
 .z-0 {
   z-index: 0;
 }
+
 .border-radius-0 {
   border-radius: 0;
 }

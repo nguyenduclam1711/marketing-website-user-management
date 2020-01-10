@@ -34,6 +34,13 @@
   position: absolute;
 }
 
+nav.fixed-top {
+  font-family: "Gordita", sans-serif;
+  font-weight: 500;
+}
+.navbar-light .navbar-nav .nav-link {
+  color: $bluedark;
+}
 @include media-breakpoint-up(md) {
   #headernav {
     > li:not(.admin) {

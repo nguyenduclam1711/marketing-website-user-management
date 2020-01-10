@@ -6,9 +6,9 @@ mixin singleCourse
       .jumbotron-courses-container.text-white
         h1.display-1.mt-5.mb-3.text-white=model.headline
         p.lead.mb-5=model.subheading
-        button.btn.btn-lg.btn-gradient-secondary.mt-3.mb-5(type='button' data-toggle='modal', data-target='#contactFormModal')=__("Apply") 
+        button.btn.btn-lg.btn-secondary.mt-3.mb-5(type='button' data-toggle='modal', data-target='#contactFormModal')=__("Apply")
       if model.curriculumPdf
-        a.btn.btn-lg.btn-gradient-secondary.mt-3.mb-5(href='/images/'+ model.curriculumPdf target='_blank' ) Download Curriculum 
+        a.btn.btn-lg.btn-secondary.mt-3.mb-5(href='/images/'+ model.curriculumPdf target='_blank' ) Download Curriculum
 
     .container.container-fluid-courses.bg-white.position-relative
       .row.row-courses
@@ -25,16 +25,16 @@ mixin singleCourse
               li.nav-item
                 a.scrollbutton.nav-link.nav-link-spy.mb-2(href='#section4') A success story
             li.nav-item
-              a.scrollbutton.nav-link.nav-link-spy.mb-2(href='#section5')=__("How to Apply") 
-            button.btn.btn-gradient-secondary.btn-spy(type='button' data-toggle='modal', data-target='#contactFormModal' )=__("Apply Now")
+              a.scrollbutton.nav-link.nav-link-spy.mb-2(href='#section5')=__("How to Apply")
+            button.btn.btn-secondary.btn-spy(type='button' data-toggle='modal', data-target='#contactFormModal' )=__("Apply Now")
 
 
         .col-12.col-xl-9.py-3
           #section1.mb-5
             h2.mt-3.mb-3.text-left=model.title
-            p.lead.text-left=model.subtitle  
+            p.lead.text-left=model.subtitle
             .row
-              - 
+              -
               each object in model.archivements
                 if object.icon
                   figure.col-md-4.text-center
@@ -42,46 +42,46 @@ mixin singleCourse
                       .col-10.offset-1.col-md-8.offset-md-2.align-items-center
                         img.object-fit-cover.img-fluid.square(alt=object.description src="/media/pixel.gif" style="background-image: url('/images/"+object.icon+"')")
                     p.lead=object.description
-            
+
           #section2.my-5
-            - 
+            -
             each object in model.features
               if object.icon
-                .row.container            
+                .row.container
                   .col-12.d.flex.m-auto
                     img.img-fluid.float-left.mr-3.icons(src="/images/"+object.icon, alt=object.title)
                     h3.text-left=object.title
                     p.text-left.lead=object.subtitle
-                  
+
           section.my-5
             h2=__("Want more details about our Web Development Course?")
             p.lead=__("We will send you the full course information to your email")
-            
+
           #section3.my-5.day-at-dci
-            h2.mb-5=__("A day at DCI") 
+            h2.mb-5=__("A day at DCI")
             -
             each object in model.timeline
-              .row.container.timelineRow            
+              .row.container.timelineRow
                 .col-12.d.flex.m-auto
                   div.timelineDiv.float-left.text-center
                     span.timeline=object.time
                   div.ml-5
-                    h3.ml-5.pt-2.text-left=object.title 
+                    h3.ml-5.pt-2.text-left=object.title
                     p.ml-5.text-left=object.subtitle
-                      
+
           section.my-5.row.bg-light.p-5
             div.my-2
               h2=__("More than just classwork")
               p.lead=__("Beyond building the hard skills in class, you need to get involved in the local tech scene and market yourself. We’re here to help you succeed with career development support and opportunities to get into the community.")
-              
+
             div.my-2
               h2=__("Career workshops")
               p.lead=__("preparing an industry-specific resume to creating an online presence, you’ll pick up the skills to stand out.")
-            
+
             div.my-2
               h2=__("Guest speakers")
               p.lead=__("additional specialised sessions from top professionals and get tips from DCI alumni.")
-            
+
             div.my-2
 
               h2=__("Company Tours")
@@ -99,11 +99,11 @@ mixin singleCourse
                 .col-6.offset-3
                   +singleStory(model.successStory)
 
-          
+
           #section5.my-5.courseSection
             .container
               .row
-                .col-lg-8.col-lg-offset-3                
+                .col-lg-8.col-lg-offset-3
                   h2.how-to-apply=__("How To Apply")
                   .courseApply
                     .courseApply-step
@@ -116,11 +116,11 @@ mixin singleCourse
                       span.courseApply-stepCount 3
                       p.courseApply-stepTitle Reserve your spot
 
-                  button.btn.btn-lg.btn-gradient-secondary.mt-3.mb-5(type='button' data-toggle='modal', data-target='#contactFormModal') Apply
+                  button.btn.btn-lg.btn-secondary.mt-3.mb-5(type='button' data-toggle='modal', data-target='#contactFormModal') Apply
             section.my-5.pr-md-5
               if model.locations.length > 0
                 .mb-5
-                  h3 This course is available in: 
+                  h3 This course is available in:
                   each location in model.locations
                     span.badge.badge-primary.mr-2=location.name
                   if model.massnahmeNumber

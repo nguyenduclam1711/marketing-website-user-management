@@ -91,6 +91,7 @@ app.use(express.static('public'))
 app.use('/assets', express.static(path.join(__dirname, 'node_modules/')))
 app.use('/assets', express.static(path.join(__dirname, 'assets/css/')))
 app.use('/assets', express.static(path.join(__dirname, 'assets/icons/')))
+app.use('/fonts', express.static(path.join(__dirname, 'assets/fonts/')))
 app.use('/media', express.static(path.join(__dirname, 'assets/media/')))
 app.use('/images', express.static(path.join(__dirname, 'uploads/images')))
 

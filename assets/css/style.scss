@@ -1,13 +1,40 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto");
+@font-face {
+  font-family: 'Gordita-Regular';
+  src: url('~/fonts/Gordita-Regular.eot'); /* IE9 Compat Modes */
+  src: url('~/fonts/Gordita-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('~/fonts/Gordita-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+  url('~/fonts/Gordita-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+  url('~/fonts/Gordita-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Gordita-Light';
+  src: url('~/foGordita-Bold nts/Gordita-Light.eot'); /* IE9 Compat Modes */
+  src: url('~/fonts/Gordita-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('~/fonts/Gordita-Light.woff2') format('woff2'), /* Super Modern Browsers */
+  url('~/fonts/Gordita-Light.woff') format('woff'), /* Pretty Modern Browsers */
+  url('~/fonts/Gordita-Light.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Gordita-Bold';
+  src: url('~/foGordita-Bold nts/Gordita-Bold.eot'); /* IE9 Compat Modes */
+  src: url('~/fonts/Gordita-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('~/fonts/Gordita-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+  url('~/fonts/Gordita-Bold.woff') format('woff'), /* Pretty Modern Browsers */
+  url('~/fonts/Gordita-Bold.ttf') format('truetype');
+}
 @import "global";
 @import "header";
 @import "footer";
 @import "typography";
 
+body {
+  font-family: "Gordita-Regular", sans-serif;
+  color: $bluedark !important;
+  font-weight: 200;
+}
 body:not(.admin).btn {
   border-radius: 2px;
   font-size: 1rem;
-  font-weight: 500;
   border-width: 3px;
   line-height: 1.5;
   background-color: $blue;
@@ -34,16 +61,8 @@ body:not(.admin).btn {
   transition: color $transition ease, background-color $transition ease;
 }
 
-.btn-gradient-secondary {
-  color: white;
-  border: none;
-  background-color: $textOrange !important;
-  transition: background-color 0.2s ease;
-
-  &:hover {
-    color: white;
-    backdrop-color: darken($textOrange, 10);
-  }
+.bg-secondary{
+  background-color: $secondary !important;
 }
 
 .mh-100 {
@@ -412,6 +431,7 @@ UPCOMING EVENTS
   background-repeat: no-repeat;
   transition: filter 0.3s ease;
   filter: grayscale(100%);
+
   &:hover {
     filter: grayscale(0);
   }
@@ -546,6 +566,7 @@ input[type="week"] {
   border: none !important;
   border-bottom: 1px solid lighten($dark, 10) !important;
 }
+
 ::placeholder {
   color: $gray-800;
 }
@@ -1166,6 +1187,11 @@ div[class*=" #{$class-slug}"] {
 #employercarousel {
   transform: translateY(-20%);
 }
+
 .box-shadow {
   box-shadow: 0 5px 10px #0005;
+}
+
+.bg-tranition {
+  transition: background-color $transition ease;
 }

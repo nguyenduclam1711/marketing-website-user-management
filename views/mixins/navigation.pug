@@ -1,9 +1,8 @@
 mixin navigation
- nav.sticky-top.navbar.navbar-expand-lg.navbar-light.bg-white.py-0.h-100(class=currentPath == "/" ? "" : "")
+ nav.navbar.navbar-expand-lg.navbar-light.py-0.fixed-top.bg-tranition(class=currentPath == "/" ? "" : "")
   .container.align-items-stretch
     a.navbar-brand.text-primary.h-60(href="/")
       include ../../assets/media/dci.svg
-      //img.h-100.w-auto.mh-60.text-primary(src='/media/dci.svg' alt='dci-logo' id='dci-logo')
     button.navbar-toggler(type='button', data-toggle='collapse', data-target='#collapsingNavbar3')
       span.navbar-toggler-icon
       span.sr-only="Toggle menu"
@@ -18,32 +17,14 @@ mixin navigation
         li.position-relative.nav-item.dropdown
           a.mx-0.mx-md-2#navbarDropdownMenuLink.nav-link.d-flex.align-items-center.h-100.text-uppercase.z-1(class= currentPath.includes('/courses') && !currentPath.includes('admin') ? "active" : "" data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
             =__("navigation.Courses")
-          //- .dropdown-menu.border-radius-0.shadow-sm.z-0(aria-labelledby='navbarDropdownMenuLink')
-          //-   a.dropdown-item.nav-link.d-flex.align-items-center.h-100.px-2.text-uppercase(class= currentPath === ("/courses") ? "active" : "" href='/courses')=__("navigation.All courses")
-            //- each course in courses
-            //-   a.dropdown-item.nav-link.d-flex.align-items-center.h-100.px-2.text-uppercase(class= currentPath === ("/courses/" + course.slug) ? "active" : "" href='/courses/'+ course.slug)=course.headline
         li.position-relative.nav-item.dropdown
-          a.active.mx-0.mx-md-2.nav-link#navbarDropdownMenuLink.d-flex.align-items-center.h-100.z-1.text-uppercase(class=currentPath.includes('/events') && !currentPath.includes('admin') ? "active" : "" href='/events' data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+          a.mx-0.mx-md-2.nav-link#navbarDropdownMenuLink.d-flex.align-items-center.h-100.z-1.text-uppercase(class=currentPath.includes('/events') && !currentPath.includes('admin') ? "active" : "" href='/events' data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
             =__("navigation.Events")
-
-          //- .dropdown-menu.border-radius-0.shadow-sm.z-0(aria-labelledby='navbarDropdownMenuLink')
-          //-   a.dropdown-item.nav-link.d-flex.align-items-center.h-100.px-2.text-uppercase(class= currentPath === ("/events") ? "active" : "" href='/events')=__("navigation.All events")
-          //-   each location in locations
-          //-     a.dropdown-item.nav-link.d-flex.align-items-center.h-100.px-2.text-uppercase(class= currentPath === ("/events/" + location.name) ? "active" : "" href='/events/'+ location.name)=location.name
         li.position-relative.nav-item
           a.mx-0.mx-md-2.nav-link.d-flex.align-items-center.h-100.text-uppercase(class=currentPath == "/stories" ? "active" : "" href='/stories')=__("navigation.Stories")
-
         li.position-relative.nav-item.dropdown
           a.mx-0.mx-md-2.nav-link#navbarDropdownMenuLink.d-flex.align-items-center.h-100.z-1.text-uppercase(data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' class= currentPath.includes('/pages') || currentPath.includes("/about-us") && !currentPath.includes('admin') ? "active" : ""  href='/admin/contacts')
             =__("navigation.Get involved")
-          //- .dropdown-menu.border-radius-0.shadow-sm.z-0(aria-labelledby='navbarDropdownMenuLink')
-          //-   a.dropdown-item.px-2.nav-link.d-flex.align-items-center.h-100.text-uppercase(href='/about-us/' class=currentPath == "/about-us" ? "active" : "")=__("navigation.About us")
-          //-   a.dropdown-item.px-2.nav-link.d-flex.align-items-center.h-100.text-uppercase(class=currentPath == "/tour" ? "active" : "" href='/tour')=__("navigation.Give us a tour of your company")
-          //-   a.dropdown-item.px-2.nav-link.d-flex.align-items-center.h-100.text-uppercase(href='https://dci-jobs.personio.de/' class=currentPath == "/jobs" ? "active" : "")=__("navigation.Jobs")
-          //-   each page in headerPages
-          //-     a.dropdown-item.nav-link.d-flex.align-items-center.h-100.px-2.text-uppercase(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
-
-
         li.position-relative.nav-item
           a.mx-0.mx-md-2.nav-link.d-flex.align-items-center.h-100(class=currentPath == "/contact" ? "active" :
           "" href='/contact') CAMPUSES

@@ -9,12 +9,12 @@ block content
           div.m-auto.container.py-5
             .row
               .col-md-6.py-5
-                p.h1.font-weight-bold.display-1=__('Start_your')
-                p.digitalCareer.h1.mb-5.display-1.font-weight-bold=__('Digital_career')
+                h1.font-weight-bold.display-1=__('Start_your')
+                h2.mb-5.display-1.font-weight-bold=__('Digital_career')
                 p.subtitle.subtitle-jumbotron.h2.mb-5=__("Learn digital skills with us to get the most fulfilling jobs")
-                .m-auto.buttonRow.text-center
-                  a.mb-3.btn.btn-lg.btn-gradient-secondary.mr-2.mr-md-4(href='#ourcourses', role='button')=__("Browse Courses")
-                  button.mb-3.btn.btn-lg.btn-gradient-secondary(data-toggle='modal', data-target='#contactFormModal')=__("Contact us")
+                .d-flex
+                  a.mb-3.btn.btn-lg.btn-secondary.mr-2.mr-md-4(href='#ourcourses', role='button')=__("Browse Courses")
+                  button.mb-3.btn.btn-lg.btn-secondary(data-toggle='modal', data-target='#contactFormModal')=__("Contact us")
               .col-md-6.py-5
                 img.w-100(src="/media/hero.png", alt="")
 
@@ -28,15 +28,18 @@ block content
           .row.mx-md-5.justify-content-center
             each course in courses
               .col-md-6.col-lg-4.mb-5.mb-sm-4.floatings
-                .bg-light.p-4.text-center.hover-shadow
-                  a.card-link(href="/courses/" + course.slug)
+                .bg-white.p-4.text-center.hover-shadow.h-100.d-flex.flex-column
+                  a.card-link.d-block(href="/courses/" + course.slug).flex-grow.justify-content-between.h-100
                     .m-3.row.position-relative
                       .col-10.offset-1.col-md-8.offset-md-2.align-items-center.my-4
                         img.object-fit-cover.img-fluid.square(src="/media/pixel.gif" alt=course.headline style="background-image: url('/images/" + course.icon + "')")
 
                     h4.service-title= course.headline
                     p.text-muted=course.title
-          a.z-1.btn.btn-lg.btn-gradient-secondary(href='/courses/', role='button', aria-pressed='true')=__("All") + " " + __("Courses")
+                  div
+                    hr
+                    a(href="/courses/" + course.slug)=__("View course details")
+          a.z-1.btn.btn-lg.btn-secondary(href='/courses/', role='button', aria-pressed='true')=__("All") + " " + __("Courses")
 
       section#mission.bg-light
         .position-relative.offset_title
@@ -45,6 +48,8 @@ block content
               .bluepolygon.z-minus.right
               h2.position-relative.d-inline-block.display-1.text-center.text-white.ml-3
                 =__("Mission")
+
+
           .position-relative.container.overflow-hidden.my-5
             section#stats.section-counter.py-5.mb-5.row
               div.col-lg-9
@@ -89,7 +94,7 @@ block content
               =__("Stories")
         +storylist
         .pt-4.text-center
-          a.btn.btn-lg.btn-gradient-secondary.mx-5(href="/stories")=__("Show all Stories")
+          a.btn.btn-lg.btn-secondary.mx-5(href="/stories")=__("Show all Stories")
 
       if events.length > 0
         section#events.bg-light.py-5
@@ -102,7 +107,7 @@ block content
                   +singleEvent(event)
 
           .text-center
-            a.btn.btn-lg.btn-gradient-secondary.mx-5(href='/events/')=__("All Events")
+            a.btn.btn-lg.btn-secondary.mx-5(href='/events/')=__("All Events")
       section.py-5.section-services
         .container.py-5.text-center
           h2.display-1.text-center=__("Our Partners")

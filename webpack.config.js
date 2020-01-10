@@ -14,7 +14,8 @@ module.exports = (env, argv) => {
     // Define the destination directory and filenames of compiled resources
     output: {
       filename: "[name].bundle.js",
-      path: path.resolve(__dirname, "public")
+      path: path.resolve(__dirname, "public"),
+      publicPath: 'assets/'
     },
 
     // Define development options
@@ -40,7 +41,7 @@ module.exports = (env, argv) => {
               options: {
                 ident: "postcss",
                 plugins: [
-                  require("autoprefixer")({ browsers: "last 3 versions" })
+                  require("autoprefixer")({browsers: "last 3 versions"})
                 ]
               }
             },
@@ -56,7 +57,7 @@ module.exports = (env, argv) => {
         },
         {
           test: /\.css$/,
-          use: [ 'style-loader', 'css-loader' ]
+          use: ['style-loader', 'css-loader']
         },
         {
           test: /\.svg$/,
@@ -84,7 +85,15 @@ module.exports = (env, argv) => {
           test: /\.jsx?$/,
           exclude: /node_modules/,
           use: "babel-loader"
-        }
+        }, {
+          test: /\.svg$/,
+          use: ['svg-loader']
+        },
+        {
+          test: /\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/,
+          use: ['file-loader']
+        },
+        {test: /\.(png|woff|woff2|eot|ttf|svg)$/, use: ['url-loader?limit=100000']}
       ]
     },
 
