@@ -18,7 +18,7 @@ mixin contactform
           input#phone.form-control(name="phone" type='text', placeholder='+49 151 123 456 78' required)
           input#age.agefield.form-control(name="age" type='text', placeholder='25')
         label.sr-only(for='location') Location
-        select.mb-3.custom-select.text-muted(required='', name="locations")
+        select.mb-3.custom-select.text-muted.form-control(required='', name="locations")
           option( selected disabled value="")=__("Select your location here...")
           each location in locations
             option(value=(location._id))=location.name

@@ -40,7 +40,7 @@ html.h-100(lang='en')
 
     meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
     meta(name='viewport', content='width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86')
-    meta(name='description', content='Start your digital Career. Learn digital skills with us to get the most fulfilling jobs. At our Institute you learn the most relevant technology skills of today from Web Development, Digital Marketing, Product Management to Data.')
+    meta(name='description', content='Start your digital Career. Learn digital skills with us to get the most fulfilling jobs. At our Institute you learn the most relevant technology skills of today from Web Development, Digital Marketing, Product Management to Data.font-weight-bold.')
     meta(name='keywords', content='Web Development, Digital Marketing, Product Management, Data Science, School, Jobs')
     meta(property='og:locale', content='en_GB')
     meta(property='og:locale:alternate', content='de_DE')
@@ -99,76 +99,76 @@ html.h-100(lang='en')
               .container.pb-5
                 .row
                   .col-xs-12.col-sm-2.footers-two
-                    p.font-weight-bold.text-lightgrey=__("Company")
+                    p.font-weight-bold.mb-4.text-lightgrey=__("Company")
                     ul.list-unstyled
-                      li
-                        a.text-light(href='/about-us/')=__("navigation.About us")
-                      li
-                        a.text-light(href='https://dci-jobs.personio.de/') Jobs
-                      li
-                        a.text-light(data-toggle='modal',data-target='#contactFormModal')=__("Contact")
+                      li.my-2
+                        a.font-weight-bold.text-light(href='/about-us/')=__("About us")
+                      li.my-2
+                        a.font-weight-bold.text-light(href='https://dci-jobs.personio.de/') Jobs
+                      li.my-2
+                        a.font-weight-bold.text-light(data-toggle='modal',data-target='#contactFormModal')=__("Contact")
                       each page in footerPages
-                        li
-                          a.text-light(href='/pages/' + page.slug)
+                        li.my-2
+                          a.font-weight-bold.text-light(href='/pages/' + page.slug)
                             =page.title
                           if user && user.admin === "true"
-                            a.text-light(href='/admin/pages/edit/' + page.slug)
+                            a.font-weight-bold.text-light(href='/admin/pages/edit/' + page.slug)
                               small.text-monospace= " (Edit)"
 
                   .col-xs-12.col-sm-3.footers-three
-                    p.font-weight-bold.text-lightgrey=__("Courses")
+                    p.font-weight-bold.mb-4.text-lightgrey=__("Courses")
                     ul.list-unstyled
-                      li
-                        a.text-light(href='/courses')=__("All courses")
+                      li.my-2
+                        a.font-weight-bold.text-light(href='/courses')=__("All courses")
                       each course in courses
-                        li
-                          a.text-light(href='/courses/' + course.slug)=course.headline
+                        li.my-2
+                          a.font-weight-bold.text-light(href='/courses/' + course.slug)=course.headline
                           if user && user.admin === "true"
-                            a.text-light(href='/admin/courses/edit/' + course.slug)
+                            a.font-weight-bold.text-light(href='/admin/courses/edit/' + course.slug)
                               small.text-monospace= " (Edit)"
                   .col-xs-12.col-sm-3.footers-four
-                    p.font-weight-bold.text-lightgrey=__("Community")
+                    p.font-weight-bold.mb-4.text-lightgrey=__("Community")
                     ul.list-unstyled
-                      li
-                        a.text-light(target="_blank" href="https://www.facebook.com/digitalcareerinstitute") Facebook
-                      li
-                        a.text-light(target="_blank" href="https://twitter.com/DevugeesOrg") Twitter
-                      li
-                        a.text-light(target="_blank" href="https://medium.com/devugees") Medium
-                      li
-                        a.text-light(target="_blank" href="https://www.youtube.com/channel/UCSM_3ldxjcclGTcXaJRBYTw") YouTube
+                      li.my-2
+                        a.font-weight-bold.text-light(target="_blank" href="https://www.facebook.com/digitalcareerinstitute") Facebook
+                      li.my-2
+                        a.font-weight-bold.text-light(target="_blank" href="https://twitter.com/DevugeesOrg") Twitter
+                      li.my-2
+                        a.font-weight-bold.text-light(target="_blank" href="https://medium.com/devugees") Medium
+                      li.my-2
+                        a.font-weight-bold.text-light(target="_blank" href="https://www.youtube.com/channel/UCSM_3ldxjcclGTcXaJRBYTw") YouTube
 
                   .col-xs-12.col-sm-2.footers-five
-                    p.font-weight-bold.text-lightgrey=__("Events")
+                    p.font-weight-bold.mb-4.text-lightgrey=__("Events")
                     ul.list-unstyled
-                      li
-                        a.text-light(href='/events')=__("All Events")
+                      li.my-2
+                        a.font-weight-bold.text-light(href='/events')=__("All Events")
                       each location in locations
-                        li
-                          a.text-light(href='/events/' + location.name)=location.name
+                        li.my-2
+                          a.font-weight-bold.text-light(href='/events/' + location.name)=location.name
                   .col-xs-12.col-sm-2.footers-five
-                    p.font-weight-bold.text-lightgrey=__("Social media")
+                    p.font-weight-bold.mb-4.text-lightgrey=__("Social media")
                     ul.list-unstyled
-                      li
-                        a.text-light(href='/events') Facebook
-                      li
-                        a.text-light(href='/events') Insta
-                      li
-                        a.text-light(href='/events') Twitter
-                      li
-                        a.text-light(href='/events') Facebook
+                      li.my-2
+                        a.font-weight-bold.text-light(href='/events') Facebook
+                      li.my-2
+                        a.font-weight-bold.text-light(href='/events') Insta
+                      li.my-2
+                        a.font-weight-bold.text-light(href='/events') Twitter
+                      li.my-2
+                        a.font-weight-bold.text-light(href='/events') Facebook
 
                 nav.d-flex.justify-content-between.align-items-center.pt-5
                   div.pt-md-5
-                    a.navbar-brand.text-white.h-60.mr-md-5(href="/")
+                    a.font-weight-bold.navbar-brand.text-white.h-60.mr-md-5(href="/")
                       include ../assets/media/dci.svg
                     span.text-white.mr-md-5
                       ="© 2019 DCI gGmbH."
                     span.text-white
                       ="All Rights Reserved"
                   div
-                    a.text-white.mr-md-5(href="/") Impressum
-                    a.text-white(href="/") Copyright
+                    a.font-weight-bold.text-white.mr-md-5(href="/") Impressum
+                    a.font-weight-bold.text-white(href="/") Copyright
 
     if user
         +menuFooter

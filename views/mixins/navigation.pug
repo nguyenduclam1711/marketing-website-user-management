@@ -16,19 +16,19 @@ mixin navigation
             a.mx-0.mx-md-2.nav-link.d-flex.align-items-center.h-100.text-uppercase(href="/i18n/en") English
         li.position-relative.nav-item.dropdown
           a.mx-0.mx-md-2#navbarDropdownMenuLink.nav-link.d-flex.align-items-center.h-100.text-uppercase.z-1(class= currentPath.includes('/courses') && !currentPath.includes('admin') ? "active" : "" data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-            =__("navigation.Courses")
+            =__("Courses")
         li.position-relative.nav-item.dropdown
           a.mx-0.mx-md-2.nav-link#navbarDropdownMenuLink.d-flex.align-items-center.h-100.z-1.text-uppercase(class=currentPath.includes('/events') && !currentPath.includes('admin') ? "active" : "" href='/events' data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-            =__("navigation.Events")
+            =__("Events")
         li.position-relative.nav-item
-          a.mx-0.mx-md-2.nav-link.d-flex.align-items-center.h-100.text-uppercase(class=currentPath == "/stories" ? "active" : "" href='/stories')=__("navigation.Stories")
+          a.mx-0.mx-md-2.nav-link.d-flex.align-items-center.h-100.text-uppercase(class=currentPath == "/stories" ? "active" : "" href='/stories')=__("Stories")
         li.position-relative.nav-item.dropdown
           a.mx-0.mx-md-2.nav-link#navbarDropdownMenuLink.d-flex.align-items-center.h-100.z-1.text-uppercase(data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' class= currentPath.includes('/pages') || currentPath.includes("/about-us") && !currentPath.includes('admin') ? "active" : ""  href='/admin/contacts')
-            =__("navigation.Get involved")
+            =__("Get involved")
         li.position-relative.nav-item
           a.mx-0.mx-md-2.nav-link.d-flex.align-items-center.h-100(class=currentPath == "/contact" ? "active" :
           "" href='/contact') CAMPUSES
 
 
         li.position-relative.nav-item
-          a.mx-0.mx-md-2.nav-link.d-flex.align-items-center.h-100.text-uppercase(data-toggle='modal', data-target='#contactFormModal')=__("navigation.Contact us")
+          a.mx-0.mx-md-2.nav-link.d-flex.align-items-center.h-100.text-uppercase(data-toggle='modal', data-target='#contactFormModal')=__("Contact us")

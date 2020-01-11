@@ -1195,3 +1195,6 @@ div[class*=" #{$class-slug}"] {
 .bg-tranition {
   transition: background-color $transition ease;
 }
+.form-control{
+  background-color: transparent;
+}
