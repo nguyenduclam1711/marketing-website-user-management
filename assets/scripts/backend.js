@@ -50,3 +50,6 @@ if (editorContainer) {
     }
   }
 }
+
+const deleteButtons = document.querySelectorAll("button.btn-danger, button.btn-outline-danger");
+Array.from(deleteButtons).map(button => button.addEventListener("click", (e) => !confirm("are you sure?") && e.preventDefault()))

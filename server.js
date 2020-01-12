@@ -19,8 +19,7 @@ const Language = require('./models/language')
 const { languages } = require('./seeddata')
 const flash = require('connect-flash')
 const cron = require('node-cron')
-const EventsController = require('./controllers/admin/AdminEventsController')
-// const JobsController = require("./controllers/admin/AdminJobsController");
+const EventsController = require('./controllers/admin/AdminEventsController') // const JobsController = require("./controllers/admin/AdminJobsController");
 const EmployeesController = require('./controllers/admin/AdminEmployeesController')
 const mongoose = require('mongoose')
 const { getAvailableTranslations } = require('./controllers/AbstractController')
@@ -72,6 +71,7 @@ i18n.configure({
   objectNotation: true,
   locales: ['en', 'de'],
   queryParameter: 'lang',
+  autoReload: true,
   directory: __dirname + '/locales'
 })
 app.use(i18n.init)
@@ -216,6 +216,7 @@ const locationsAdminRoutes = require('./routes/admin/locations')
 const eventsAdminRoutes = require('./routes/admin/events')
 const contactsAdminRoutes = require('./routes/admin/contacts')
 const usersAdminRoutes = require('./routes/admin/users')
+const settingsAdminRoutes = require('./routes/admin/settings')
 
 app.use(i18nRoutes)
 app.use('/', indexRoutes)
@@ -236,6 +237,7 @@ app.use('/admin/locations', locationsAdminRoutes)
 app.use('/admin/events', eventsAdminRoutes)
 app.use('/admin/menulocations', menulocationAdminRoutes)
 app.use('/admin/contacts', contactsAdminRoutes)
+app.use('/admin/settings', settingsAdminRoutes)
 
 app.use('/admin/users', usersAdminRoutes)
 
