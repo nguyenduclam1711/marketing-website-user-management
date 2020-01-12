@@ -4,14 +4,12 @@ const Language = require("../../models/language");
 
 module.exports.getSettings = async (req, res) => {
   try {
-    let settings = await Setting.find({})
     let stringtranslations = await Stringtranslation.find({})
       .populate("translations.language")
       .exec();
     let languages = await Language.find({})
       .exec();
     res.render("admin/adminSettings", {
-      settings,
       stringtranslations,
       languages
     });
