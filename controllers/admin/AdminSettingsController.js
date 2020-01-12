@@ -1,5 +1,4 @@
 require("dotenv").config({path: __dirname + "/../.env"});
-const Setting = require("../../models/setting");
 const Stringtranslation = require("../../models/stringtranslation");
 const Language = require("../../models/language");
 
