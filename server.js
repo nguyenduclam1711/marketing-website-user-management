@@ -24,6 +24,7 @@ const EmployeesController = require('./controllers/admin/AdminEmployeesControlle
 const mongoose = require('mongoose')
 const { getAvailableTranslations } = require('./controllers/AbstractController')
 const compression = require('compression')
+const {updateLocaleFile} = require('./helpers/helper')
 
 // connect to redis server and get an extended client with promisified
 // methods getAsync() and setAsync()
@@ -32,7 +33,7 @@ let redisClient = null;
 (async () => {
   const en = Language.findOne({ title: 'en' })
   const de = Language.findOne({ title: 'de' })
-  const res = await Promise.all([en, de])
+  const res = await Promise.all([en, de, updateLocaleFile()])
   if (!res[0]) {
     console.log('no english language created. Seeding EN lang into mongoose')
     await Language.create(languages[0])

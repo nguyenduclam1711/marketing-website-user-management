@@ -11,3 +11,4 @@ restore.sh
 backup
 *.log
 .idea
+locales/*
