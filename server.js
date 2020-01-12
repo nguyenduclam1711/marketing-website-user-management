@@ -33,7 +33,7 @@ let redisClient = null;
 (async () => {
   const en = Language.findOne({ title: 'en' })
   const de = Language.findOne({ title: 'de' })
-  const res = await Promise.all([en, de, updateLocaleFile()])
+  const res = await Promise.all([en, de, updateLocaleFile])
   if (!res[0]) {
     console.log('no english language created. Seeding EN lang into mongoose')
     await Language.create(languages[0])
@@ -95,6 +95,7 @@ app.use('/assets', express.static(path.join(__dirname, 'assets/icons/')))
 app.use('/fonts', express.static(path.join(__dirname, 'assets/fonts/')))
 app.use('/media', express.static(path.join(__dirname, 'assets/media/')))
 app.use('/images', express.static(path.join(__dirname, 'uploads/images')))
+
 
 app.use(flash())
 

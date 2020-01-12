@@ -1,6 +1,5 @@
 const mongoose = require("mongoose"),
   Schema = mongoose.Schema;
-const {updateLocaleFile} = require('../helpers/helper')
 
 const StringtranslationSchema = new Schema({
   title: String,
@@ -9,9 +8,9 @@ const StringtranslationSchema = new Schema({
     title: String
   }]
 });
-
-StringtranslationSchema.pre("findOneAndUpdate", async function (doc, next) {
-  await updateLocaleFile()
-  next();
+StringtranslationSchema.post("findOneAndUpdate", async function (doc, next) {
+  const {updateLocaleFile} = require("../helpers/helper");
+  await updateLocaleFile();
+  next()
 });
 module.exports = mongoose.model("Stringtranslation", StringtranslationSchema);
