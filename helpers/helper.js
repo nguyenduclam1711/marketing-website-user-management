@@ -1,6 +1,6 @@
 const path = require("path");
-require("dotenv").config({ path: path.resolve(__dirname, ".env") });
-const { promisify } = require("util");
+require("dotenv").config({path: path.resolve(__dirname, ".env")});
+const {promisify} = require("util");
 const fs = require('fs')
 const nodemailer = require("nodemailer");
 const passport = require("passport");
@@ -8,12 +8,13 @@ const User = require("../models/user");
 const LocalStrategy = require("passport-local").Strategy;
 const Stringtranslation = require("../models/stringtranslation");
 exports.groupByKey = (items, key) => {
-  return items.reduce(function(group, x) {
+  return items.reduce(function (group, x) {
     (group[x[key]] = group[x[key]] || []).push(x);
     return group;
   }, {});
 };
 exports.isAdmin = req => req.user.admin !== "true";
+
 
 module.exports.ensureAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -88,7 +89,7 @@ exports.getAsyncRedis = () => {
       port: 6379
     });
 
-    redisClient.on("error", function(error) {
+    redisClient.on("error", function (error) {
       console.error("Redis ERROR: " + error);
       process.exit();
     });
@@ -126,21 +127,27 @@ exports.sendMail = async (res, req, mailOptions) => {
     });
   });
 };
+
+
 exports.updateLocaleFile = async () => {
-  const stringtranslations = await Stringtranslation.find({})
-    .populate("translations.language")
-    .exec();
-  let locales = []
-  stringtranslations.map(strTrans => {
-    strTrans.translations.map(string => {
-      locales[string.language.title] = locales[string.language.title] ? {
-        ...locales[string.language.title],
-        [strTrans.translations[0].title]: string.title
-      } : {[strTrans.translations[0].title]: string.title}
-    })
-  })
-  let localesFolder = "./locales";
-  Object.entries(locales).map(([loc, value]) => {
-    fs.writeFileSync(`${localesFolder}/${loc}.json`, JSON.stringify(value));
-  })
+  return new Promise(async (resolve, reject) => {
+    const stringtranslations = await Stringtranslation.find({})
+      .populate("translations.language")
+      .exec();
+    let locales = [];
+    stringtranslations.map(strTrans => {
+      strTrans.translations.map(string => {
+        locales[string.language.title] = locales[string.language.title] ? {
+          ...locales[string.language.title],
+          [strTrans.title]: string.title
+        } : {[strTrans.title]: string.title}
+      })
+    });
+    let localesFolder = path.resolve(__dirname, "../locales");
+    const promises = Object.entries(locales).map(([loc, value]) => {
+      fs.writeFileSync(`${localesFolder}/${loc}.json`, JSON.stringify(value));
+    });
+    await Promise.all(promises)
+    resolve();
+  });
 }

@@ -15,11 +15,11 @@ mixin footer
             p.font-weight-bold=__("Company")
             ul.list-unstyled
               li
-                a(href='/about-us/')=__("navigation.About us")
+                a(href='/about-us/')=__("About us")
               li
                 a(href='https://dci-jobs.personio.de/') Jobs
               li
-                a(data-toggle='modal',data-target='#contactFormModal')=__("Contact") 
+                a(data-toggle='modal',data-target='#contactFormModal')=__("Contact")
               each page in footerPages
                 li
                   a(href='/pages/'+ page.slug)
@@ -27,9 +27,9 @@ mixin footer
                   if user && user.admin === "true"
                     a(href='/admin/pages/edit/'+ page.slug)
                       small.text-monospace= " (Edit)"
-                    
+
           .col-xs-12.col-sm-6.col-md-2.footers-three
-            p.font-weight-bold=__("Courses") 
+            p.font-weight-bold=__("Courses")
             ul.list-unstyled
               li
                 a(href='/courses')=__("All courses")
@@ -40,7 +40,7 @@ mixin footer
                     a(href='/admin/courses/edit/'+ course.slug)
                       small.text-monospace= " (Edit)"
           .col-xs-12.col-sm-6.col-md-2.footers-four
-            p.font-weight-bold=__("Community") 
+            p.font-weight-bold=__("Community")
             ul.list-unstyled
               li
                 a(target="_blank" href="https://www.facebook.com/digitalcareerinstitute") Facebook
@@ -50,9 +50,9 @@ mixin footer
                 a(target="_blank" href="https://medium.com/devugees") Medium
               li
                 a(target="_blank" href="https://www.youtube.com/channel/UCSM_3ldxjcclGTcXaJRBYTw") YouTube
-          
+
           .col-xs-12.col-sm-6.col-md-2.footers-five
-            p.font-weight-bold=__("Events") 
+            p.font-weight-bold=__("Events")
             ul.list-unstyled
               li
                 a(href='/events')=__("All Events")

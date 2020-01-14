@@ -6,7 +6,7 @@ block content
         source(src='/media/video.mp4', type='video/mp4')
 
     .jumbotron-courses-container.text-white.container.px-md-5
-      h1.display-1.mt-5.mb-3.text-white=__('navigation.Courses')
+      h1.display-1.mt-5.mb-3.text-white=__('Courses')
       h2.text-white=__("Learn hands-on with technology right from the start.")
       p.lead.mb-5=__("We have designed an immersive and intense curriculum to get you working fast and learning the skills and powerful tools needed for your digital career.")
 
@@ -15,7 +15,7 @@ block content
       =__("The program requires passion, dedication, and grit­ in order to succeed.")
 
 
-    
+
   section#services.h-100
     .container.h-100
       .bg-white.h-100
@@ -23,11 +23,11 @@ block content
           each course in courses
             .col-md-6.col-lg-4
               .bg-light.hover-shadow.text-center.p-3
-                a(href="/courses/"+course.slug)                  
+                a(href="/courses/"+course.slug)
                   .m-3.row.position-relative
                     .col-10.offset-1.col-md-8.offset-md-2.align-items-center
                       img.object-fit-cover.img-fluid.square(alt=course.headline src="/media/pixel.gif" style="background-image: url('/images/"+course.icon+"')")
-                  
+
                   h4.service-title= course.headline
                   p=course.title
-      
+

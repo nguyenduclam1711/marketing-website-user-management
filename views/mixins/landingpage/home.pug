@@ -1,13 +1,13 @@
-mixin home 
+mixin home
   .homeSection(style="background-image: url('/media/header"+Math.floor( Math.random() * 2 )+".jpg');")
-    div.mainHome.d-flex 
+    div.mainHome.d-flex
       div.contentHome.m-auto
         .col.mx-1.text-center.py-5
-          p.text-uppercase.h1.text-white.font-weight-bold.display-1.text-uppercase=__('Start_your') 
-          p.digitalCareer.h1.mb-5.display-1.text-white.font-weight-bold.text-uppercase=__('Digital_career')  
+          p.text-uppercase.h1.text-white.font-weight-bold.display-1.text-uppercase=__('Start your')
+          p.digitalCareer.h1.mb-5.display-1.text-white.font-weight-bold.text-uppercase=__('Digital career')
           p.subtitle.subtitle-jumbotron.h2.mb-5=__( "Learn digital skills with us to get the most fulfilling jobs" )
           .m-auto.buttonRow.text-center
-             a.mb-3.btn.btn-lg.btn-gradient-secondary.mr-2.mr-md-4(href='#ourcourses', role='button')=__( "Browse Courses" )      
+             a.mb-3.btn.btn-lg.btn-gradient-secondary.mr-2.mr-md-4(href='#ourcourses', role='button')=__( "Browse Courses" )
              button.mb-3.btn.btn-lg.btn-gradient-secondary(data-toggle='modal', data-target='#contactFormModal')=__("Contact us")
-      
-    
+
+

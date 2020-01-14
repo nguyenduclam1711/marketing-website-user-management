@@ -61,6 +61,7 @@ module.exports.deleteStringtranslation = async (req, res, next) => {
 module.exports.updateStringtranslation = async (req, res) => {
   try {
     await Stringtranslation.findOneAndUpdate({_id: req.params.id}, {
+      title: req.body.title,
       translations: Object.keys(req.body.translations).map(trans => ({
         language: trans,
         title: req.body.translations[trans]
