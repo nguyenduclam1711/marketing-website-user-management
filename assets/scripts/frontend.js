@@ -229,6 +229,7 @@ $("#downloadCSV").on("click", function(e) {
 });
 
 window.onload = function() {
+  showFloatings();
   document.querySelector(".cont_principal").className =
     "cont_principal cont_error_active";
 };
