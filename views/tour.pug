@@ -1,6 +1,6 @@
 extends layout.pug
 block content
-  .jumbotron.jumbotron-fluid.jumbotron-singleCourse.text-center.bg-transparent
+  .jumbotron.jumbotron-fluid.text-center.bg-transparent
     .bg-primary.position-fixed.left.top.z-minus.h-100.right
       img.half-transparent.w-100.h-100.object-fit-cover(alt="people programming" src='/media/bg1.jpg')
     .jumbotron-courses-container.text-white
@@ -9,7 +9,7 @@ block content
   .container.bg-light
     .row.py-3
       .col.py-md-5
-        .px-md-5.py-md-5    
+        .px-md-5.py-md-5
           .px-md-5
             .px-md-5
               .px-lg-5.pb-lg-5.text-center
@@ -17,7 +17,7 @@ block content
                 h3.mb-5.text-muted=__("Every Wednesday we perform a trip through the digital-sector and visit some of the tech startups to give our students a feeling what it means to be a developer.")
                 h3.mb-5.text-muted=__("Are you or your company interested in hosting on of this events? Write us a message!")
                 h3.mb-5.text-muted=__("We offer company tours in the following locations: ")
-                h4  
+                h4
                   .mb-3
                   each location in locations
                     span.badge.badge-primary.mr-3.mb-3=location.name

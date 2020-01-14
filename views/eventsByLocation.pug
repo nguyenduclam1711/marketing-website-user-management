@@ -1,9 +1,8 @@
 extends layout.pug
 block content
-  .bg-light
-    .container.py-5
-      h1.display-1
-        = "Events in "
-        =location.name
-      each event in events
-        +singleEvent(event)
+  .container
+    h1.display-1
+      = "Events in "
+      =location.name
+    each event in events
+      +singleEvent(event)

@@ -1,13 +1,9 @@
 extends layout.pug
 block content
-  .jumbotron.jumbotron-fluid.jumbotron-singleCourse.text-center.bg-transparent
-    .bg-primary.position-fixed.left.top.z-minus.h-100.w-100
-      video.object-fit-cover.h-100.half-transparent.w-100(autoplay='', muted='', loop='')
-        source(src='/media/video.mp4', type='video/mp4')
-
-    .jumbotron-courses-container.text-white.container.px-md-5
-      h1.display-1.mt-5.mb-3.text-white=__('Courses')
-      h2.text-white=__("Learn hands-on with technology right from the start.")
+  .jumbotron.jumbotron-fluid.text-center
+    .jumbotron-courses-container.container.px-md-5.pb-md-5.pb-5
+      h1.display-1.mt-5.mb-3=__('Courses')
+      h2=__("Learn hands-on with technology right from the start.")
       p.lead.mb-5=__("We have designed an immersive and intense curriculum to get you working fast and learning the skills and powerful tools needed for your digital career.")
 
       =__("Our courses are all about upgrading your skills with flexible formats and self-propelled home learning.")
