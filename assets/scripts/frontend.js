@@ -159,7 +159,6 @@ $("#contactFormModal").on("hidden.bs.modal", function(e) {
 const getFileElements = document.querySelectorAll("[type='file']");
 getFileElements.forEach(el => {
   el.addEventListener("change", () => {
-    console.log("getFileElements MAP   ==>", el.files[0]);
     const Filetype = el.files[0].type;
     let alert = document.querySelector("#invalidFile");
     if (
@@ -230,10 +229,11 @@ $("#downloadCSV").on("click", function(e) {
     .catch(error => console.log("error ===>", error));
 });
 
-window.onload = function () {
-  const notFoundBox = document.querySelector(".cont_principal")
-  if (notFoundBox) {
-    notFoundBox.className = "cont_principal cont_error_active";
+window.onload = function() {
+  showFloatings();
+  const errorContainer = document.querySelector(".cont_principal")
+  if(errorContainer){
+    errorContainer.className = "cont_principal cont_error_active";
   }
 };
 //
@@ -248,9 +248,6 @@ const nav = document.querySelector('nav.fixed-top');
 const homesection = document.querySelector('section.homeSection');
 
 function stickyNavigation() {
-  console.log('navTop = ' + homesection.offsetTop + homesection.offsetHeight);
-  console.log('scrollY = ' + window.scrollY);
-
   if (window.scrollY >= homesection.offsetHeight / 2) {
     nav.classList.add('bg-white');
   } else {
@@ -258,4 +255,3 @@ function stickyNavigation() {
   }
 }
 
-// window.addEventListener('scroll', stickyNavigation);

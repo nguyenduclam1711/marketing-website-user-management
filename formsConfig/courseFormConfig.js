@@ -46,7 +46,7 @@ const featuresConfig = [1, 2, 3, 4, 5].map(item => {
   };
 });
 
-const timelineConfig = [1, 2, 3].map(item => {
+const timelineConfig = [1, 2, 3, 4, 5].map(item => {
   return {
     title: {
       name: `timeline_title_${item}`,
