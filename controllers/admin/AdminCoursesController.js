@@ -40,17 +40,16 @@ module.exports.getSingleCourse = function(req, res) {
 };
 module.exports.editCourse = async function(req, res) {
   try {
-    const course = await Course.findOne({ slug: req.params.slug }).populate(
-      "successStory"
-    );
+    const course = await Course.findOne({slug: req.params.slug})
+      .populate("successStory")
+      .populate("language")
+      .populate("languageVersion")
+      .exec();
     const storys = await Story.find()
       .select("title slug")
       .exec();
-    const courses = await Course.find({})
-      .sort("order")
-      .exec();
     let alllocations = await Location.find({}).exec();
-    all = alllocations.map(loc => {
+    const all = alllocations.map(loc => {
       let match = course.locations
         .map(pcat => pcat.toString())
         .includes(loc._id.toString());
@@ -135,14 +134,13 @@ module.exports.createCourse = async function(req, res) {
     res.redirect("/admin/courses");
   });
 };
-module.exports.deleteCourse = function(req, res) {
+module.exports.deleteCourse = function(req, res, next) {
   Course.remove(
     {
       slug: req.params.slug
     },
-    function(err, course) {
+    function(err, doc) {
       if (err) res.send(err);
-      doc.remove(next);
       req.flash("success", `Successfully deleted ${doc.name}`);
       res.redirect("/admin/courses");
     }
@@ -228,26 +226,21 @@ exports.resizeImages = async (request, response, next) => {
 
 module.exports.updateCourse = async function(req, res) {
   let course = await Course.findOne({ slug: req.params.slug });
-  course.icon = req.body.icon ? req.body.icon : course.icon;
-  course.headline = req.body.headline;
-  course.title = req.body.title;
-  course.subheading = req.body.subheading;
-  course.order = req.body.order;
-  course.locations = req.body.locations;
-
-  course.slug = req.body.slug;
-  course.massnahmeNumber = req.body.massnahmenummer;
-  course.massnahmeDetails = req.body.massnahmedetails;
-  course.curriculumPdf = req.body.curriculumPdf;
-  course.icon = req.files.icon ? req.body.icon : course.icon;
-
-  course.successStory = !!req.body.successStory
-    ? req.body.successStory
-    : undefined;
-
-  course.curriculumPdf = req.body.curriculumPdf;
-
-  course.icon = req.files.icon ? req.body.icon : course.icon;
+  const {slug, massnahmedetails, massnahmenummer, subtitle, order, successStory, subheading, locations, headline, title, icon, curriculumPdf} = req.body;
+  course.slug = slug;
+  course.icon = icon ? icon : course.icon;
+  course.headline = headline;
+  course.subheading = subheading;
+  course.title = title;
+  course.subtitle = subtitle;
+  course.successStory = !!successStory ? successStory : undefined;
+  course.order = order;
+  course.massnahmeNumber = massnahmenummer;
+  course.massnahmeDetails = massnahmedetails;
+  course.curriculumPdf = curriculumPdf;
+  course.locations = locations;
+  course.curriculumPdf = curriculumPdf;
+  course.icon = req.files.icon ? icon : course.icon;
 
   function verbose(inputs) {
     let items = [];
@@ -292,7 +285,7 @@ module.exports.updateCourse = async function(req, res) {
   };
 
   const timeline = {
-    itemsAmount: 3,
+    itemsAmount: 5,
     model: "timeline",
     titles: [
       {
@@ -334,13 +327,13 @@ module.exports.updateCourse = async function(req, res) {
   try {
     await course.save();
     req.flash("success", `Successfully updated ${course.title}`);
+    res.redirect("/admin/courses/edit/" + course.slug);
   } catch (error) {
     req.flash("danger", JSON.stringify(error));
     console.debug("error", error);
-    res.render("admin/notFoundPage");
+    res.redirect("/admin/courses/edit/" + course.slug);
   }
 
-  res.redirect("/admin/courses/edit/" + course.slug);
 };
 
 module.exports.setL18n = async (req, res) => {

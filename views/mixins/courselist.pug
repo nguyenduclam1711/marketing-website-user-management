@@ -1,22 +1,25 @@
-mixin courselist(public)
+mixin courselist(isPublic)
   .row
     each course in courses
       .card.mb-3.w-100
         div.course-item.p-3
           .row
             .col-md-3
-              if course.icon
-                img.object-fit-cover.img-fluid.square(src="/media/pixel.gif" alt=course.headline style="background-image: url('/images/"+course.icon+"')")
-              else
-                span No image uploaded
+              a(href="/admin/courses/edit/"+course.slug)
+                if course.icon
+                  img.object-fit-cover.img-fluid.square(src="/media/pixel.gif" alt=course.headline style="background-image: url('/images/"+course.icon+"')")
+                else
+                  span No image uploaded
             .col-md-9
-              h2
-                = course.headline
-              if course.order
-                .text-muted
-                  +displayLanguage(course, `courses`)
-                  span.ml-2="Order: "
-                  span=course.order
-              h4.text-muted=course.title
-              p.text-muted=course.subtitle
+              .position-relative
+                h2
+                  a.stretched-link(href="/admin/courses/edit/"+course.slug)
+                    = course.headline
+                if course.order
+                  .text-muted
+                    +displayLanguage(course, `courses`)
+                    span.ml-2="Order: "
+                    span=course.order
+                h4.text-muted=course.title
+                p.text-muted=course.subtitle
               +buttonGroup(course, `courses`)

@@ -1,13 +1,13 @@
 mixin courseForm
   form.mb-5.form-signin(method='POST', action=course ? '/admin/courses/update/'+course.slug+'?_method=PUT' : '/admin/courses', enctype="multipart/form-data")
-    
+
     h2
       =course ? "Edit course" :"Create a new course"
-    +adminButtonGroup(course, 'courses')   
+    +adminButtonGroup(course, 'courses')
     .row
       .col-md-6
         .form-group
-        
+
           label.d-block.d-block(for='icon') Course Curriculum PDF
           if course && course.curriculumPdf
             input#curriculumPdf.hidePlaceholder.form-control-file(type='file' name='curriculumPdf')
@@ -16,17 +16,17 @@ mixin courseForm
             input#curriculumPdf.form-control-file(type='file' name='curriculumPdf')
         if !editpath && course && course.slug
           .mb-3
-            label(for='slug') 
+            label(for='slug')
               | Slug
               button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Changing this has negative effects on SEO if it not fresh created. To regenerate the slug, clear the fields and update the record.')
                 | ?
-            input#inputTitle.form-control(name='slug', type='text', placeholder='Slug', value=course.slug) 
+            input#slug.form-control(name='slug', type='text', placeholder='Slug', value=course.slug)
         .mb-3
           label.d-block.d-block(for='icon') Course Title Icon
           if course && course.icon
             img.mw-150.mh-150.w-100.mw-150.mh-150.object-fit-cover(src="/images/"+course.icon)
           input#exampleFormControlFile1.form-control-file(type='file' name='icon')
-          
+
 
         .mb-3
           label(for='headline') Headline
@@ -50,20 +50,20 @@ mixin courseForm
             option(value="") -- Select --
             each story in storys
              option(value=story._id, selected=!!course && !!course.successStory && course.successStory._id.toString() === story._id.toString() ?  "selected" :  false )=story.title
-          
+
         .mb-3
-          label(for='order') 
+          label(for='order')
             | Order
           button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Defines the order the courses are displayed. 0,1,2,3,4')
             | ?
-          input#inputOrder.form-control(name='order', type='number', placeholder='Order', autofocus='', value=course ? course.order : "")
+          input#order.form-control(name='order', type='number', placeholder='Order', autofocus='', value=course ? course.order : "")
         .mb-3
           label(for='massnahme') Massnahmenummer
           input#massnahme.form-control(name='massnahmenummer', type='text', placeholder='massnahmenummer', value=course &&course.massnahmeNumber ? course.massnahmeNumber :"")
         .mb-3
           label(for='massnahmedetails') Massnahme details
-          textarea#massnahme.form-control(name='massnahmedetails', placeholder='massnahmedetails')=course &&course.massnahmeDetails ? course.massnahmeDetails :""
-            
+          textarea#massnahmedetails.form-control(name='massnahmedetails', placeholder='massnahmedetails')=course &&course.massnahmeDetails ? course.massnahmeDetails :""
+
 
         each archivementGroup, i in courseFormConfig.archivementConfig
          .form-group
@@ -71,7 +71,7 @@ mixin courseForm
           if course && course.archivements[i] && course.archivements[i].icon
            img.mw-150.mh-150(src="/images/"+course.archivements[i].icon)
           input#exampleFormControlFile1.form-control-file(type=archivementGroup.fileField.type name=archivementGroup.fileField.name)
-  
+
           input(type=archivementGroup.textField.type , name=archivementGroup.textField.name,  value=course && course.archivements[i] ? course.archivements[i].description : '', placeholder=archivementGroup.textField.placeholder )
         each featuresGroup, i in courseFormConfig.featuresConfig
          .form-group
@@ -99,7 +99,7 @@ mixin courseForm
          .form-group
           label(for=timelineGroup.time.name)=timelineGroup.time.label
           input(type="text", id=timelineGroup.time.name name=timelineGroup.time.name, placeholder=timelineGroup.time.label, value= course && course.timeline[i]? course.timeline[i].time : "")
-          
+
         label Course available in locations:
         each location in locations
           .custom-control.custom-checkbox
@@ -110,4 +110,4 @@ mixin courseForm
           if course
             a.btn.btn-outline-primary(href="/admin/courses")="Back"
             a.btn.btn-outline-primary(target="_blank" href="/courses/"+course.slug)="Show"
-          button.btn.btn-primary(type='submit')=course ? "Update" :"Create a new Course" 
+          button.btn.btn-primary(type='submit')=course ? "Update" :"Create a new Course"

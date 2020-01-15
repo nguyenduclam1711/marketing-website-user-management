@@ -230,8 +230,10 @@ $("#downloadCSV").on("click", function(e) {
 
 window.onload = function() {
   showFloatings();
-  document.querySelector(".cont_principal").className =
-    "cont_principal cont_error_active";
+  const errorContasiner = document.querySelector(".cont_principal")
+  if(errorContasiner){
+    errorContasiner.className = "cont_principal cont_error_active";
+  }
 };
 //
 // let typedCursor = new Typed('.subtitle', {
