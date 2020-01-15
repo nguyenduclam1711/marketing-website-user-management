@@ -18,7 +18,7 @@ if(!process.env.IMAGE_UPLOAD_DIR) {
 module.exports.getStories = async function (req, res) {
   //here we get the whole collection and sort by order
   const query = isAdmin(req) ? {userId: req.user._id} : {}
-  
+
   let stories = await Story.find(query)
     .sort("order")
     .populate("language")
@@ -27,7 +27,7 @@ module.exports.getStories = async function (req, res) {
 
   res.render("admin/stories", {
     stories: stories
- 
+
   });
 }
 
@@ -40,7 +40,7 @@ module.exports.editStory = async function (req, res) {
     .findOne(query)
     .populate("language")
     .populate("languageVersion")
-  
+
   const shiftStoryBack = stories.length + 1
 
   res.render("admin/editStory", {
@@ -57,16 +57,17 @@ module.exports.createStory = async (req, res) => {
   story.excerpt = req.body.excerpt; // set the stories excerpt (comes from the request)
   story.content = req.body.content; // set the stories content (comes from the request)
   story.order = req.body.order; // set the stories order (comes from the
+  story.isCompanyStory = !!req.body.isCompanyStory; // set the stories order (comes from the
   story.avatar = req.files.avatar ? req.body.avatar : story.avatar;
   story.companylogo = req.files.companylogo ? req.body.companylogo : story.companylogo;
-  
+
   story.userId = isAdmin(req) ? req.user.id : null
 
   // save the story and check for errors
   story.save(function (err) {
     if (err) res.send(err);
-    req.flash("success", `Successfully created ${story.title}`);    
-    
+    req.flash("success", `Successfully created ${story.title}`);
+
     res.redirect("/admin/stories");
   });
 }
@@ -91,7 +92,7 @@ module.exports.updateStory = async function (req, res) {
   const query = isAdmin(req) ? {userId: req.user._id, slug: req.params.slug} : {slug: req.params.slug}
 
   let story = await Story.findOne(query).exec()
-  
+
   story.title = req.body.title;
   story.subtitle = req.body.subtitle;
   story.slug = req.body.slug;
@@ -99,10 +100,11 @@ module.exports.updateStory = async function (req, res) {
   story.excerpt = req.body.excerpt;
   story.content = JSON.parse(req.body.content);
   story.order = req.body.order;
+  story.isCompanyStory = !!req.body.isCompanyStory;
 
   story.avatar = req.files.avatar ? req.body.avatar : story.avatar;
   story.companylogo = req.files.companylogo ? req.body.companylogo : story.companylogo;
-  
+
   try {
     await story.save();
     req.flash("success", `Successfully updated ${story.title}`);
@@ -144,7 +146,7 @@ module.exports.uploadImages = multer({
 
 // Resize the images with different thumbnail sizes
 exports.resizeImages = async (request, response, next) => {
-  
+
   if (!request.files) {
     next();
     return;

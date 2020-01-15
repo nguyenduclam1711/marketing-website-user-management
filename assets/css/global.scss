@@ -8,6 +8,7 @@ $blue: #1d3b8b;
 $bluedark: #040a3b;
 $bluepale: #3d4269;
 $bluetrans: #1d3a8b25;
+$light-blue: lighten($blue, 60);
 
 $green: #7aff29;
 $red: #ff4200;
@@ -26,6 +27,9 @@ $theme-colors: (
 
 .bg-light-grey {
   background-color: $light-grey !important;
+}
+.bg-light-blue {
+  background-color: $light-blue;
 }
 
 .btn-secondary {

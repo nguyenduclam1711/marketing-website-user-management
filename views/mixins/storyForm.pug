@@ -1,21 +1,26 @@
 mixin storyForm
   - var editPath = currentPath.includes('admin/stories/edit')
   form.mb-5.form-signin(method='POST', action=editPath ? '/admin/stories/update/'+story.slug+'?_method=PUT' : '/admin/stories', enctype="multipart/form-data")
-    
+
     h2
       span.mr-3=editPath ? "Edit story" :"Create a new Story"
-    +adminButtonGroup(story, 'stories')   
+    +adminButtonGroup(story, 'stories')
+
+    label.checkbox.text-muted
+      ="Company story?"
+      input(type='checkbox', name='isCompanyStory', value="on", checked=story ? story.isCompanyStory: false, )
+      span.checkmark
     .mb-3
       label(for='title') Title
       input#inputTitle.form-control(name='title', type='text', placeholder='Title', value=editPath ? story.title :"" required='', autofocus='')
 
     if !editpath && story && story.slug
       .mb-3
-        label(for='slug') 
+        label(for='slug')
           | Slug
           button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Changing this has negative effects on SEO if it not fresh created. To regenerate the slug, clear the fields and update the record.')
             | ?
-        input#inputTitle.form-control(name='slug', type='text', placeholder='Slug', value=story.slug) 
+        input#inputTitle.form-control(name='slug', type='text', placeholder='Slug', value=story.slug)
     .mb-3
       label(for='subtitle') Subtitle
       input#subtitle.form-control(name='subtitle', type='text', placeholder='Subtitle', value=editPath ? story.subtitle :"" required='', autofocus='')
@@ -33,7 +38,7 @@ mixin storyForm
       #editor(value=editPath ? story.content : "")
       textarea#inputContent.d-none(name='content', type='password', placeholder='Content', required='', )=editPath ? JSON.stringify(story.content) : ""
     .mb-3
-      label(for='order') 
+      label(for='order')
         | Order
         button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='In which order the stories are displayed.')
           | ?
@@ -56,4 +61,4 @@ mixin storyForm
       if editPath
         a.btn.btn-outline-primary(href="/admin/stories")="Back"
         a.btn.btn-outline-primary(target="_blank" href="/stories/"+story.slug)="Show"
-      button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Story" 
+      button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Story"

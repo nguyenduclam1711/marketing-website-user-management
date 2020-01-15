@@ -74,7 +74,12 @@ body:not(.admin).btn {
 }
 
 code {
-  color: $textOrange;
+  color: $dark;
+  font-size: 100%;
+  font-family: "Gordita-Bold", sans-serif;
+  &:before{
+    content: "- "
+  }
 }
 
 nav.container:after {
@@ -1141,12 +1146,46 @@ div[class*=" #{$class-slug}"] {
         left: 25%;
       }
     }
+    .aspect_ratio {
+      box-shadow: 2px 2px 5px #0003;
+      margin: 10px;
+    }
 
+    .shape-outside {
+      shape-outside: polygon(200px 0px, 200px 200px, 60px 200px);
+      width: 200px;
+      height: 200px;
+      float: right;
+      opacity: .2;
+      &.shape-left {
+        shape-outside: polygon(200px 0px, 60px 0px, 60px 200px);
+        float: left;
+      }
+    }
+
+    .carousel-indicators {
+      li {
+        width: 10px;
+        height: 10px;
+        margin: 0 10px;
+        border-radius: 50%;
+
+        &.active {
+          background-color: $blue;
+        }
+      }
+    }
+
+    .carousel-caption {
+      left: auto;
+      right: auto;
+      bottom: auto;
+    }
     .carousel-inner {
       clip-path: polygon(100% 0, 50% 100%, 0 100%, 0 0);
 
       .carousel-item {
-        background-color: #ddd;
+
         box-shadow: 0 0 3px #00000033;
       }
     }
@@ -1174,6 +1213,9 @@ div[class*=" #{$class-slug}"] {
 
 #employercarousel {
   transform: translateY(-20%);
+}
+.carousel-caption {
+  position: relative;
 }
 
 .box-shadow {
@@ -1237,4 +1279,16 @@ div[class*=" #{$class-slug}"] {
     border: 5px solid $blue;
     transform: translate(-27px, 31.5px);
   }
+}
+.call-to-action{
+  width: 100%;
+  height: 33vh;
+}
+canvas#polygons{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: $primary;
 }

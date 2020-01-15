@@ -1,54 +1,63 @@
-mixin storylist(public)
+mixin storylist(isPublic)
   .container
     .row
       .col-sm-8
-        #studentscarousel.carousel.slide(data-ride='carousel')
-          ol.carousel-indicators
-            li.active(data-target='#studentscarousel' data-slide-to='0')
-            li(data-target='#studentscarousel' data-slide-to='1')
-            li(data-target='#studentscarousel' data-slide-to='2')
+        #studentscarousel.carousel.slide(data-ride='')
+          h3 Students
           .carousel-inner
-            each story, index in stories
-              if index === 0
-                .carousel-item(class= index === 0 ? `active` : ``)
-                  .aspect_ratio
-                    .row
-                      .col-8
-                        +storyImages(story)
-                        .carousel-caption.d-none.d-md-block
-                          h5=story.title
-                          p=story.excerpt
-                          code=story.workPosition
-                      .col-4
+            each story, index in nonComanyStories
+              //if index === 0
+              .carousel-item(class= index === 0 ? ` active` : ``)
+                .aspect_ratio.bg-light-blue
+                  .row
+                    .col-8
+                      .row
+                        .col-8.offset-2
+                          +storyImages(story)
+                      .carousel-caption.d-none.d-md-block.text-left.text-dark.text-shadow-light-blue.px-5
+                        .shape-outside
+                        h5=story.title
+                        p=story.excerpt
+                        code=story.workPosition
+                    .col-4
+          .row
+            .col-7
+              ol.carousel-indicators
+                each story, index in nonComanyStories
+                  li(data-target='#studentscarousel', data-slide-to=index, class= index === 0 ? `active` : ``)
 
-          a.carousel-control-prev(href='#studentscarousel' role='button' data-slide='prev')
-            span.carousel-control-prev-icon(aria-hidden='true')
-            span.sr-only Previous
-          a.carousel-control-next(href='#studentscarousel' role='button' data-slide='next')
-            span.carousel-control-next-icon(aria-hidden='true')
-            span.sr-only Next
+          //a.carousel-control-prev(href='#studentscarousel' role='button' data-slide='prev')
+          //  span.carousel-control-prev-icon(aria-hidden='true')
+          //  span.sr-only Previous
+          //a.carousel-control-next(href='#studentscarousel' role='button' data-slide='next')
+          //  span.carousel-control-next-icon(aria-hidden='true')
+          //  span.sr-only Next
 
     .row
       .offset-sm-4.col-sm-8
-        #employercarousel.py-5.carousel.leftCut.slide(data-ride='carousel')
-          ol.carousel-indicators
-            li.active(data-target='#employercarousel' data-slide-to='0')
-            li(data-target='#employercarousel' data-slide-to='1')
-            li(data-target='#employercarousel' data-slide-to='2')
+        #employercarousel.py-5.carousel.leftCut.slide(data-ride='')
+          if companyStories[0].isCompanyStory
+            h3.text-right Companies
           .carousel-inner
-            each story, index in stories
-              //if index === 0
-              .carousel-item(class= index === 0 ? `active` : ``)
-                +storyImages(story)
-                .carousel-caption.d-none.d-md-block
-                  h5=story.title
-                  p=story.excerpt
-                  code=story.workPosition
+            each story, index in companyStories
+              .carousel-item(class= index === 0 ? ` active` : ``)
+                .aspect_ratio
+                  .row
+                    .col-8.offset-3.d-flex.flex-column.justify-content-center
+                      .carousel-caption.text-left.text-dark.text-shadow-light-blue.pr-5
+                        .shape-outside.shape-left
+                        p=story.excerpt
+                    .col-10.offset-2
+                      .row
+                        .col-12.d-flex.align-items-end
+                          div.text-right
+                            h5=story.title
+                            code=story.workPosition
+                          .w-50
+                            +storyImages(story)
 
-          a.carousel-control-prev(href='#employercarousel' role='button' data-slide='prev')
-            span.carousel-control-prev-icon(aria-hidden='true')
-            span.sr-only Previous
-          a.carousel-control-next(href='#employercarousel' role='button' data-slide='next')
-            span.carousel-control-next-icon(aria-hidden='true')
-            span.sr-only Next
-
+            .row
+              .col-7
+                ol.carousel-indicators
+                  each story, index in companyStories
+                    li(data-target='#employercarousel', data-slide-to=index, class= index === 0 ? `active` : ``)

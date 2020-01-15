@@ -31,11 +31,19 @@ module.exports.landingpage = async (req, res) => {
       }
     }
     if (indexData === null) {
-      const query = await getAvailableTranslations(req, res)
-      const stories = Story
-        .find(query)
+      let query = await getAvailableTranslations(req, res)
+      const companyStoriesQuery = {...query, isCompanyStory: true}
+      const nonCompanyStoriesQuery = {...query, isCompanyStory:  { $ne: true }}
+
+      const companyStories = Story
+        .find(companyStoriesQuery)
         .sort('order')
         .limit(3)
+        .exec()
+      const nonCompanyStories = Story
+        .find(nonCompanyStoriesQuery)
+        .sort('order')
+        .limit(6)
         .exec()
 
       const locations = Location.find({})
@@ -47,7 +55,7 @@ module.exports.landingpage = async (req, res) => {
         .find(query)
         .sort({ order: 1 })
         .exec()
-      indexData = await Promise.all([stories, locations, partners, courses])
+      indexData = await Promise.all([nonCompanyStories, companyStories, locations, partners, courses])
 
       const events = []
       for await (let loc of indexData[1]) {
@@ -76,11 +84,12 @@ module.exports.landingpage = async (req, res) => {
         console.error('Redis ERROR: Could not save IndexController data: ' + error)
       }
     }
-    const [storiesRes, locationsRes, partnersRes, coursesRes, events] = indexData
+    const [nonComanyStoriesRes, companyStoriesRes, locationsRes, partnersRes, coursesRes, events] = indexData
 
     res.render('index', {
       events,
-      stories: storiesRes,
+      companyStories: companyStoriesRes.length !== 0 ? companyStoriesRes : nonComanyStoriesRes.splice(3,6),
+      nonComanyStories: nonComanyStoriesRes.splice(0,3),
       partners: partnersRes,
       locations: locationsRes,
       courses: coursesRes

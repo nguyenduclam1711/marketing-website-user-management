@@ -14,6 +14,10 @@ var StorySchema = new Schema({
   avatar: String,
   companylogo: String,
   userId: String,
+  isCompanyStory: {
+    type: Boolean,
+    default: false
+  },
   language: { type: Schema.ObjectId, ref: "Language" },
   languageVersion: { type: Schema.ObjectId, ref: "Story"}
 });
