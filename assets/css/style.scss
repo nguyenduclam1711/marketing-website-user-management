@@ -1187,3 +1187,54 @@ div[class*=" #{$class-slug}"] {
 .form-control {
   background-color: transparent;
 }
+
+.blue-overlay {
+  position: relative;
+  &:after{
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: $blue;
+    opacity: .3;
+    z-index: 1;
+  }
+}
+
+.blended {
+  background-color: $blue;
+  background-blend-mode: multiply;
+}
+.rounded {
+  border-radius: 0.5rem !important;
+}
+.history-line{
+  hr {
+    border-top: 5px solid $blue;
+  }
+  hr.arrow {
+    &:after {
+      content: "";
+      width: 0;
+      height: 0;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-left: 10px solid $blue;
+      display: block;
+      float: right;
+      transform: translate(100%, calc(-50% - 2.5px));
+    }
+  }
+  .line {
+    transform: translateX(calc(50% + 12.5px));
+  }
+  .circle {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 5px solid $blue;
+    transform: translate(-27px, 31.5px);
+  }
+}

@@ -51,10 +51,58 @@ block content
 
 
           .position-relative.container.overflow-hidden.my-5
+            .history-line.row.text-center.text-shadow-white
+              .offset-md-1
+              .col-md-2.d-flex.flex-column.justify-content-end
+                div.font-weight-bold.h3-md 2016
+                div 1st Campus in Berlin
+              .col-md-2
+                div.d-md-none.font-weight-bold.h3-md 2017
+                div.d-md-none New Campuses in Düsseldorf & Hamburg
+              .col-md-2.flex-column.justify-content-end
+                div.d-none.d-md-block.font-weight-bold.h3-md 2018
+                div.d-none.d-md-block Partnership with Facebook
+              .col-md-2
+
+            .history-line.row.text-center.text-shadow-white.pb-3.d-none.d-md-flex
+              .offset-md-1
+              .col-md-2
+                .line
+                  .circle
+                  hr
+              .col-md-2
+                .line
+                  .circle
+                  hr
+              .col-md-2
+                .line
+                  .circle
+                  hr
+              .col-md-2
+                .line
+                  .circle
+                  hr.arrow
+
+            .history-line.row.text-center.text-shadow-white
+              .offset-md-1
+              .col-md-2
+              .col-md-2
+                div.d-md-block.d-none.font-weight-bold.h3-md 2017
+                div.d-md-block.d-none New Campuses in Düsseldorf & Hamburg
+              .col-md-2.flex-column.justify-content-end
+                div.d-md-none.font-weight-bold.h3-md 2018
+                div.d-md-none Partnership with Facebook
+              .col-md-2
+                div.font-weight-bold.h3-md 2019
+                div Launched Online Marketing course and Leipzig Campus
+
+
+
             section#stats.section-counter.py-5.mb-5.row
               div.col-lg-9
                 //-iframe(frameborder='0', height='100%', width='100%', src='https://youtube.com/embed/BLUfMfcN82c?controls=0&showinfo=0&autohide=1')
-                img.h-100.w-100.object-fit-cover(alt="people programming" src='/media/bg1.jpg')
+                .bg-primary.rounded
+                  img.rounded.h-100.w-100.object-fit-cover.half-transparent(alt="people programming" src='/media/bg4.jpg')
               .col-lg-3
                 .p-3.h-100.d-flex.flex-column.justify-content-center
                   i.h3.m-0
@@ -67,23 +115,23 @@ block content
                     .col-sm-6.col-md-3
                       .counter-item
                         .counter-number.font-weight-bold
-                          span.counter-count 300
-                        span=__("Students")
+                          h2.counter-count.display-1 300
+                        h4.font-weight-bold=__("Students")
                     .col-sm-6.col-md-3
                       .counter-item
                         .counter-number.font-weight-bold
-                          span.counter-count 30
-                        span=__("Courses started")
+                          h2.counter-count.display-1 30
+                        h4.font-weight-bold=__("Courses started")
                     .col-sm-6.col-md-3
                       .counter-item
                         .counter-number.font-weight-bold
-                          span.counter-count 250
-                        span=__("Company tours")
+                          h2.counter-count.display-1 260
+                        h4.font-weight-bold=__("Company tours")
                     .col-sm-6.col-md-3
                       .counter-item
                         .counter-number.font-weight-bold
-                          span.counter-count 4
-                        span=__("Locations")
+                          h2.counter-count.display-1 4
+                        h4.font-weight-bold=__("Locations")
 
 
       section#stories.my-5.offset_title.position-relative
