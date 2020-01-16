@@ -58,7 +58,7 @@ module.exports.landingpage = async (req, res) => {
       indexData = await Promise.all([nonCompanyStories, companyStories, locations, partners, courses])
 
       const events = []
-      for await (let loc of indexData[1]) {
+      for await (let loc of indexData[2]) {
         if (!events) {
           events[
             await Event.findOne({ location: loc._id, start: { $gt: new Date() } })
@@ -87,7 +87,7 @@ module.exports.landingpage = async (req, res) => {
     const [nonComanyStoriesRes, companyStoriesRes, locationsRes, partnersRes, coursesRes, events] = indexData
 
     res.render('index', {
-      events,
+      events: events.length > 0 ? events : undefined,
       companyStories: companyStoriesRes.length !== 0 ? companyStoriesRes : nonComanyStoriesRes.splice(3,6),
       nonComanyStories: nonComanyStoriesRes.splice(0,3),
       partners: partnersRes,
