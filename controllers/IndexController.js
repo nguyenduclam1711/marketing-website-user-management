@@ -87,7 +87,7 @@ module.exports.landingpage = async (req, res) => {
     const [nonComanyStoriesRes, companyStoriesRes, locationsRes, partnersRes, coursesRes, events] = indexData
 
     res.render('index', {
-      events: events.length > 0 ? events : undefined,
+      events,
       companyStories: companyStoriesRes.length !== 0 ? companyStoriesRes : nonComanyStoriesRes.splice(3,6),
       nonComanyStories: nonComanyStoriesRes.splice(0,3),
       partners: partnersRes,
