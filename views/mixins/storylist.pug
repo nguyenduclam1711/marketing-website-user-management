@@ -36,7 +36,7 @@ mixin storylist(isPublic)
     .row
       .offset-sm-4.col-sm-8
         #employercarousel.py-5.carousel.leftCut.slide(data-ride='')
-          if companyStories[0].isCompanyStory
+          if companyStories && companyStories[0].isCompanyStory
             h3.text-right Companies
           .carousel-inner
             each story, index in companyStories
