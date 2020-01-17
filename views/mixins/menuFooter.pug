@@ -11,7 +11,7 @@ mixin menuFooter
       if user && user.superAdmin === "true"
         li.nav-item
           a.nav-link(href='/admin/users') Users
-      if user && user.admin === "true"
+      if user && user.admin === "true" || user.superAdmin === "true"
         li.nav-item
           a.nav-link(href='/admin/contacts') Contacts
         li.nav-item
@@ -21,7 +21,7 @@ mixin menuFooter
 
       li.nav-item
         a.nav-link(href='/admin/stories') Stories
-      if user && user.admin === "true"
+      if user && user.admin === "true" || user.superAdmin === "true"
         li.nav-item
           a.nav-link(href='/admin/pages') Pages
         li.nav-item

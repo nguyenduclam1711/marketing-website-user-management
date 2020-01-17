@@ -1,12 +1,12 @@
 extends ../layout.pug
 block content
-  .container
-    h1 Admin Events
+  .container-fluid
+    h1 Events
     .btn-group.mt-3(role="group" aria-label="Basic example" )
       a.btn.btn-outline-primary(href="/admin/events/fetchevents")="Fetch events from Eventbride"
       a.btn.btn-outline-danger(href="/admin/events/deleteevents")="Delete all"
 
-  .container.py-3.bg-white
+  .container-fluid.py-3.bg-white
     .row
       each location in eventsByLocation
         .col-md-6.table-responsive

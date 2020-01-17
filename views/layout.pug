@@ -82,11 +82,11 @@ html.h-100(lang='en')
               button.close.ml-3(type='button', data-dismiss='alert', aria-label='Close')
                 span(aria-hidden='true') ×
 
-    .h-100.d-flex.flex-column
+    .h-100.d-flex.flex-column(class=currentPath.includes('admin') ? ' bg-light pb-5' : "" )
       if currentPath !== "/"
         div
           +navigation
-      .flex-grow-1(class=currentPath.includes('admin') ? ' bg-light' : "" )
+      .flex-grow-1(class=currentPath.includes('admin') ? ' pb-5 pt-3' : "" )
         block content
       if !currentPath.includes('admin')
         footer.site-footer.bg-light(role='contentinfo' class=user ? "pb-5" : "")
@@ -176,7 +176,7 @@ html.h-100(lang='en')
         .modal-content.bg-light.border-radius-0
           .p-4
             .mb-2
-              h2.display-4.text-center.text-uppercase Contact us!
+              h2.display-4.text-center.text-uppercase=__('Contact us')
               p.mb-3.text-center.text-muted=__("Let’s connect! Our admissions team will call you soon to chat about our courses and your goals")
             +contactform
     .modal#dataPrivacy

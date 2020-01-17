@@ -1,6 +1,5 @@
 mixin partnerForm
   - var editPath = currentPath.includes('admin/partners/edit')
-  = editPath
   form.mb-5(method='POST', action=editPath ? '/admin/partners/update/'+partner._id+'?_method=PUT' : '/admin/partners?alert=create', enctype="multipart/form-data")
 
     h2
@@ -9,15 +8,15 @@ mixin partnerForm
         if editPath
           a.btn.btn-outline-primary(href="/admin/partners")="Back"
           a.btn.btn-outline-primary(target="_blank" href="/partners/"+partner._id)="Show"
-        button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Partner" 
+        button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Partner"
     .form-group
       label(for='title') Title
       input#inputName.form-control(name='title', type='text', placeholder='Title', required='', autofocus='', value=editPath ? partner.title : "")
-    
+
     .form-group
       label(for='link') Link
       input#link.form-control(name='link', type='text', placeholder='Link', value=editPath ? partner.link : "")
-    
+
     .form-group
       label.d-block(for='partnerlogo') Partner Logo
       if partner && partner.partnerlogo
@@ -25,7 +24,7 @@ mixin partnerForm
       input#partnerlogo.form-control-file(type='file' name='partnerlogo')
 
     .mb-3
-      label(for='order') 
+      label(for='order')
         | Order
         button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Defines the order the partners are displayed. 0,1,2,3,4')
           | ?

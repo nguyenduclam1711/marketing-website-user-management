@@ -1,7 +1,7 @@
 extends ../layout.pug
 block content
-  .container
-    h1= user.admin === "true" ? "Admin Stories" : "Your stories"
+  .container-fluid
+    h1= user.admin === "true" ? "Stories" : "Your stories"
     .row
       .col-md-8
         .row
@@ -9,7 +9,7 @@ block content
             = "You have no stories yet. Create one on the right ->"
           else
             each story in stories
-              .col-md-4
+              .col-md-3
                 a(href="/stories/"+story.slug)
                   .row.position-relative
                     .col-12.align-items-center
@@ -17,13 +17,18 @@ block content
                     .col-5.position-absolute.align-items-center.bottom.right
                       img.object-fit-cover.img-fluid.rounded-circle.square(alt=story.subtitle src="/media/pixel.gif" style="background-image: url('/images/"+story.companylogo+"')")
                   div
-                    h3.font-weight-bold=story.subtitle          
+                    h2=story.title
+                    h5
+                      ="Is Company: "
+                      label.checkbox.TermsofService.text-muted
+                        input(type='checkbox', name='TermsofService[]', value=!story.isCompanyStory,checked=!story.isCompanyStory, disabled)
+                        span.checkmark
                     code=story.workPosition
                     p.text-left.text-muted=story.excerpt
                 +displayLanguage(story, `stories`)
                 +buttonGroup(story, `stories`)
 
-                
+
 
       .col-md-4
         +storyForm

@@ -1,8 +1,8 @@
 extends ../layout.pug
 block content
   .bg-light
-    .container.text-left
-      h1 Admin Contacts
+    .container-fluid.text-left
+      h1 Contacts
       button.btn.btn-info.mb-3#downloadCSV Download CSV
       .row
         .col-md-8
@@ -15,9 +15,9 @@ block content
                 p.mr-3=contact.body
                 tel.mr-3=contact.phone
                 a.mr-3(href='mailto:'+ contact.email)=contact.email
-                
+
                 if contact.locations.length
-                  span Interested in: 
+                  span Interested in:
                   each location in contact.locations
                     .badge.badge-primary.mr-2=location.name
                 if contact.isEvent

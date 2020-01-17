@@ -13,7 +13,7 @@ exports.groupByKey = (items, key) => {
     return group;
   }, {});
 };
-exports.isAdmin = req => req.user.admin !== "true";
+exports.isAdmin = req => req.user.admin === "true" || req.user.superAdmin === "true";
 
 
 module.exports.ensureAuthenticated = (req, res, next) => {

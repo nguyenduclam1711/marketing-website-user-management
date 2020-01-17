@@ -1,12 +1,15 @@
 extends ../layout.pug
 block content
   .bg-light.py-5
-    .container
-      +employeeForm
-
-  .bg-white.py-5
-    .container
-      h2 All employees
+    .container-fluid
+      h1 Employees
       .row
-        each employee in employees
-          +singleEmployee(employee)
+        .col-md-8
+          .row
+            each employee in employees
+              +singleEmployee(employee)
+
+        .col-md-4
+          +employeeForm
+
+

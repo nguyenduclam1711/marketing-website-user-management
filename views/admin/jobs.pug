@@ -1,8 +1,8 @@
 extends ../layout.pug
 block content
-  
-  .container
-    h1 Admin Jobs
+
+  .container-fluid
+    h1 Jobs
     .btn-group.mt-3(role="group" aria-label="Basic example" )
       a.btn.btn-outline-primary(href="/admin/jobs/fetchjobs")="Fetch jobs from Personio"
       a.btn.btn-outline-danger(href="/admin/jobs/deletejobs")="Delete all"
@@ -16,4 +16,3 @@ block content
                 span.mr-2 Location:
                 each location in job.locations
                   span.badge.badge-primary.mr-2=location.name
-              

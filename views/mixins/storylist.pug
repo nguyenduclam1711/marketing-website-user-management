@@ -13,6 +13,9 @@ mixin storylist(isPublic)
                     .col-8
                       .row
                         .col-8.offset-2
+                          if user.userId === story.userId || user.admin === "true"
+                            a.btn.btn-outline-primary(href=`/admin/stories/edit/${story.slug}`) Edit
+
                           +storyImages(story)
                       .carousel-caption.d-none.d-md-block.text-left.text-dark.text-shadow-light-blue.px-5
                         .shape-outside
@@ -36,7 +39,7 @@ mixin storylist(isPublic)
     .row
       .offset-sm-4.col-sm-8
         #employercarousel.py-5.carousel.leftCut.slide(data-ride='')
-          if companyStories && companyStories[0].isCompanyStory
+          if companyStories[0] && companyStories[0].isCompanyStory
             h3.text-right Companies
           .carousel-inner
             each story, index in companyStories

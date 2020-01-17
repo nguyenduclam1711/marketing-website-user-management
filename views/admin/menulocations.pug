@@ -1,6 +1,6 @@
 extends ../layout.pug
 block content
-  .container
+  .container-fluid
     h1 Page menulocations
     .row
       .col-md-8
@@ -18,10 +18,10 @@ block content
       .col-md-4
         form.form-signin(method='POST', action='/admin/menulocations?alert=create')
           h2 Create a new Menulocation
-          
+
           .mb-3
             label(for='inputName') Name
             input#inputName.form-control(name='name', type='text', placeholder='Name', required='', autofocus='')
-            
-            
+
+
           button.btn.btn-lg.btn-primary.btn-block(type='submit') Create
