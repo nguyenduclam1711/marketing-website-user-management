@@ -1,6 +1,7 @@
 require("dotenv").config({path: __dirname + "/../.env"});
 const Stringtranslation = require("../../models/stringtranslation");
 const Language = require("../../models/language");
+const Setting = require("../../models/setting");
 
 module.exports.getSettings = async (req, res) => {
   try {
@@ -9,10 +10,43 @@ module.exports.getSettings = async (req, res) => {
       .exec();
     let languages = await Language.find({})
       .exec();
+    let settings = await Setting.findOne({})
+    let settingsKeys = Object.entries(Setting.schema.paths).filter((s, k) => s[0] !== "_id" && s[0] !== "__v" && s[0] !== "slug").map(s => s[1])
+
     res.render("admin/adminSettings", {
+      settings,
       stringtranslations,
+      settingsKeys,
       languages
     });
+  } catch (err) {
+    console.log(err);
+  }
+};
+module.exports.createSetting = async (req, res) => {
+  try {
+    let setting = await Setting.findOneAndUpdate({}, req.body).exec({});
+    if (!setting) {
+      setting = new Setting(req.body);
+    }
+    setting.save(async function (err) {
+      if (err) {
+        let settings = await Setting.findOne({})
+          .populate("translations.language")
+          .exec();
+        let languages = await Language.find({})
+          .exec();
+        req.flash("danger", `Error ${err}`);
+        res.render("admin/adminSettings", {
+          settings,
+          setting,
+          languages,
+        });
+        return;
+      }
+      req.flash("success", `Successfully created `);
+      res.redirect("/admin/settings");
+    })
   } catch (err) {
     console.log(err);
   }
@@ -48,6 +82,17 @@ module.exports.createStringtranslation = async (req, res) => {
     console.log(err);
   }
 };
+module.exports.deleteSetting = async (req, res, next) => {
+  try {
+    const setting = await Setting.findById(req.params.id)
+    await setting.remove()
+    req.flash("success", `Successfully deleted `);
+    res.redirect("/admin/settings");
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 module.exports.deleteStringtranslation = async (req, res, next) => {
   try {
     const stringtranslation = await Stringtranslation.findById(req.params.id)
