@@ -1,8 +1,8 @@
 mixin storylist(isPublic)
-  .container
-    .row
-      .col-md-8
-        #studentscarousel.carousel.slide(data-ride='carousel')
+  .container.pb-5
+    .row.pb-5.flex-nowrap.justify-content-center
+      .col-md-6.mb-md-5.px-0
+        #studentscarousel.wrapper.wrapper-left.carousel.slide.mb-md-5(data-ride='carousel')
           h3.text-center.my-5.my-md-0 Students
           .carousel-inner
             each story, index in nonComanyStories
@@ -36,9 +36,8 @@ mixin storylist(isPublic)
           //  span.carousel-control-next-icon(aria-hidden='true')
           //  span.sr-only Next
 
-    .row.mt-5.mt-md-0
-      .offset-md-4.col-md-8
-        #employercarousel.py-5.carousel.leftCut.slide(data-ride='carousel')
+      .col-md-6.mt-md-5.px-0
+        #employercarousel.wrapper.wrapper-right.carousel.leftCut.slide.mt-md-5(data-ride='carousel')
           if companyStories[0] && companyStories[0].isCompanyStory
             h3.text-center.text-md-right.pr-md-5.my-5.my-md-0 Companies
           .carousel-inner

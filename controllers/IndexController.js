@@ -84,14 +84,17 @@ module.exports.landingpage = async (req, res) => {
         }
       }
       indexData.push(events)
-      try {
-        await redisClient.setAsync(`${req.headers.host}_indexData`, JSON.stringify(indexData))
-      } catch (error) {
-        console.error('Redis ERROR: Could not save IndexController data: ' + error)
+      if (process.env.USE_REDIS === 'true') {
+        try {
+          await redisClient.setAsync(`${req.headers.host}_indexData`, JSON.stringify(indexData))
+        } catch (error) {
+          console.error('Redis ERROR: Could not save IndexController data: ' + error)
+        }
       }
     }
-    const [nonComanyStoriesRes, companyStoriesRes, locationsRes, partnersRes, coursesRes, contact_user, events] = indexData
+  const [nonComanyStoriesRes, companyStoriesRes, locationsRes, partnersRes, coursesRes, contact_user, events] = indexData
 
+    console.debug(req.headers.referer )
     res.render('index', {
       events,
       companyStories: companyStoriesRes.length !== 0 ? companyStoriesRes : nonComanyStoriesRes.splice(nonComanyStoriesRes.length, nonComanyStoriesRes.length + 3),

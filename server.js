@@ -1,4 +1,4 @@
-const { mongopath, getAsyncRedis } = require('./helpers/helper')
+const {mongopath, getAsyncRedis} = require('./helpers/helper')
 const express = require('express')
 const app = express()
 const i18n = require('i18n')
@@ -10,19 +10,19 @@ const session = require('express-session')
 const passport = require('passport')
 const MongoStore = require('connect-mongo')(session)
 // const promisify = require('es6-promisify');
-const { promisify } = require('util')
+const {promisify} = require('util')
 const Course = require('./models/course')
 const Page = require('./models/page')
 const Menulocation = require('./models/menulocation')
 const Location = require('./models/location')
 const Language = require('./models/language')
-const { languages } = require('./seeddata')
+const {languages} = require('./seeddata')
 const flash = require('connect-flash')
 const cron = require('node-cron')
 const EventsController = require('./controllers/admin/AdminEventsController') // const JobsController = require("./controllers/admin/AdminJobsController");
 const EmployeesController = require('./controllers/admin/AdminEmployeesController')
 const mongoose = require('mongoose')
-const { getAvailableTranslations } = require('./controllers/AbstractController')
+const {getAvailableTranslations} = require('./controllers/AbstractController')
 const compression = require('compression')
 const {updateLocaleFile} = require('./helpers/helper')
 
@@ -31,8 +31,8 @@ const {updateLocaleFile} = require('./helpers/helper')
 let redisClient = null;
 
 (async () => {
-  const en = Language.findOne({ title: 'en' })
-  const de = Language.findOne({ title: 'de' })
+  const en = Language.findOne({title: 'en'})
+  const de = Language.findOne({title: 'de'})
   const res = await Promise.all([en, de, updateLocaleFile])
   if (!res[0]) {
     console.log('no english language created. Seeding EN lang into mongoose')
@@ -60,7 +60,7 @@ if (process.env.USE_REDIS !== undefined && process.env.USE_REDIS === 'true') {
 
 mongoose.set('useCreateIndex', true)
 try {
-  mongoose.connect(mongopath, { useNewUrlParser: true, useUnifiedTopology: true }).then(res => {
+  mongoose.connect(mongopath, {useNewUrlParser: true, useUnifiedTopology: true}).then(res => {
   })
 } catch (err) {
   console.log(`Please set a mongo path in your .env \n\n${err}`)
@@ -82,11 +82,11 @@ app.use(
     key: process.env.SESSION_KEY || 'notaverysecurekey',
     resave: false,
     saveUninitialized: false,
-    store: new MongoStore({ mongooseConnection: mongoose.connection })
+    store: new MongoStore({mongooseConnection: mongoose.connection})
   })
 )
-app.use(bodyParser.json({ limit: '50mb' }))
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
+app.use(bodyParser.json({limit: '50mb'}))
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}))
 
 app.use(express.static('public'))
 app.use('/assets', express.static(path.join(__dirname, 'node_modules/')))
@@ -105,11 +105,11 @@ app.use(function (req, res, next) {
     warning: req.flash('warning'),
     success: req.flash('success')
   }),
-  (app.locals.pathclass = req.url
-    .replace(/^\//g, '')
-    .replace(/\//g, '-')
-    .replace(/\-$/g, '')
-    .toLowerCase())
+    (app.locals.pathclass = req.url
+      .replace(/^\//g, '')
+      .replace(/\//g, '-')
+      .replace(/\-$/g, '')
+      .toLowerCase())
   let match = req.url.match('[^/]+(?=/$|$)')
   res.locals.title = 'DigitalCareerInstitute'
   app.locals.moment = require('moment')
@@ -143,14 +143,14 @@ app.use(async (req, res, next) => {
     const query = await getAvailableTranslations(req, res)
     const courses = await Course
       .find(query)
-      .sort({ order: 1 })
+      .sort({order: 1})
       .exec()
-    const footerCat = await Menulocation.findOne({ name: 'footer' })
-    const headerCat = await Menulocation.findOne({ name: 'header' })
+    const footerCat = await Menulocation.findOne({name: 'footer'})
+    const headerCat = await Menulocation.findOne({name: 'header'})
     const [locations, footerPages, headerPages] = await Promise.all([
       Location.find({}).exec(),
-      Page.find(Object.assign(query, { menulocations: { $in: [footerCat] } })),
-      Page.find(Object.assign(query, { menulocations: { $in: [headerCat] } }))
+      Page.find(Object.assign(query, {menulocations: {$in: [footerCat]}})),
+      Page.find(Object.assign(query, {menulocations: {$in: [headerCat]}}))
     ])
 
     navData = {
@@ -160,7 +160,9 @@ app.use(async (req, res, next) => {
       footerPages
     }
     try {
-      await redisClient.setAsync(`${req.headers.host}_navData`, JSON.stringify(navData))
+      if (process.env.USE_REDIS === 'true') {
+        await redisClient.setAsync(`${req.headers.host}_navData`, JSON.stringify(navData))
+      }
     } catch (error) {
       console.error('Redis ERROR: Could not save navigation data: ' + error)
     }
@@ -168,7 +170,7 @@ app.use(async (req, res, next) => {
     console.log('using cached data')
   }
 
-  const { courses, locations, headerPages, footerPages } = navData
+  const {courses, locations, headerPages, footerPages} = navData
 
   res.locals.user = req.user || null
   const rawPath = req.path.replace(`${req.session.locale}/`, '')
@@ -250,7 +252,8 @@ app.get('*', function (req, res) {
 
 app.set('views', path.join(__dirname, 'views/'))
 app.set('view engine', 'pug')
-async function worker () {
+
+async function worker() {
   try {
     // const jobsResponse = await JobsController.fetchJobs();
     // console.log(jobsResponse)

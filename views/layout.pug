@@ -21,6 +21,7 @@ include mixins/storyImages
 include mixins/buttonGroup
 include mixins/adminButtonGroup
 include mixins/translate
+include mixins/fullstory
 
 doctype html
 //saved from url=(0051)https://getbootstrap.com/docs/4.0/examples/sign-in/
@@ -103,7 +104,7 @@ html.h-100(lang='en')
                     li.my-2
                       a.font-weight-bold.text-light(href='https://dci-jobs.personio.de/') Jobs
                     li.my-2
-                      a.font-weight-bold.text-light(data-toggle='modal',data-target='#contactFormModal')=__("Contact")
+                      a.font-weight-bold.text-light(href="/contact", data-toggle='modal',data-target='#contactFormModal')=__("Contact")
                     each page in footerPages
                       li.my-2
                         a.font-weight-bold.text-light(href='/pages/' + page.slug)
@@ -160,12 +161,12 @@ html.h-100(lang='en')
                   a.font-weight-bold.navbar-brand.text-white.h-60.mr-md-5(href="/")
                     include ../assets/media/dci.svg
                   span.text-white.mr-md-5
-                    ="© 2019 DCI gGmbH"
+                    ="© 2020 DigitalCareerInstitute gGmbH"
                   span.text-white
                     =__("All Rights Reserved")
-                div
-                  a.font-weight-bold.text-white.mr-md-5(href="/impressum") Impressum
-                  span.font-weight-bold.text-white Copyright
+                //div
+                //  a.font-weight-bold.text-white.mr-md-5(href="/impressum") Impressum
+                //  span.font-weight-bold.text-white Copyright
 
     if user
         +menuFooter
