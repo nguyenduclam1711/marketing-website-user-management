@@ -133,7 +133,7 @@ app.use(async (req, res, next) => {
 
   if (process.env.USE_REDIS === 'true') {
     try {
-      const getNavData = await redisClient.getAsync('navData')
+      const getNavData = await redisClient.getAsync(`${req.headers.host}_navData`)
       navData = JSON.parse(getNavData)
     } catch (error) {
       console.error('Redis ERROR: Could not get navigation data: ' + error)
@@ -159,9 +159,8 @@ app.use(async (req, res, next) => {
       headerPages,
       footerPages
     }
-
     try {
-      await redisClient.setAsync('navData', JSON.stringify(navData))
+      await redisClient.setAsync(`${req.headers.host}_navData`, JSON.stringify(navData))
     } catch (error) {
       console.error('Redis ERROR: Could not save navigation data: ' + error)
     }

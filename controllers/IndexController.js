@@ -11,6 +11,7 @@ const {getAvailableTranslations} = require('./AbstractController')
 let redisClient = null;
 
 module.exports.landingpage = async (req, res) => {
+
   let indexData = null
   try {
     if (process.env.USE_REDIS !== undefined && process.env.USE_REDIS === 'true') {
@@ -24,7 +25,7 @@ module.exports.landingpage = async (req, res) => {
     }
     if (process.env.USE_REDIS === 'true') {
       try {
-        const getNavData = await redisClient.getAsync('indexData')
+        const getNavData = await redisClient.getAsync(`${req.headers.host}_indexData`)
         indexData = JSON.parse(getNavData)
 
       } catch (error) {
@@ -84,7 +85,7 @@ module.exports.landingpage = async (req, res) => {
       }
       indexData.push(events)
       try {
-        await redisClient.setAsync('indexData', JSON.stringify(indexData))
+        await redisClient.setAsync(`${req.headers.host}_indexData`, JSON.stringify(indexData))
       } catch (error) {
         console.error('Redis ERROR: Could not save IndexController data: ' + error)
       }
