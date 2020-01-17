@@ -4,13 +4,13 @@ mixin adminButtonGroup(model, path)
     .btn-group
       if editPath
         a.btn.btn-outline-primary(href="/admin/"+path)="Back"
-        a.btn.btn-outline-primary(target="_blank" href="/"+(model.languageVersion ?model.language.title+"/" : "") +path+"/"+model.slug)="Show"
+        a.btn.btn-outline-primary(target="_blank" href="/" + (!!model.language && model.languageVersion ? model.language.title + "/" : "") + path + "/" + model.slug)="Show"
         if model && !model.languageVersion
           a.btn.btn-outline-primary(href="/admin/"+path+"/"+model.slug+"/l18n")="Create german version"
 
-      button.btn.btn-primary.ml-2(type='submit')=editPath ? "Update" :"New" 
+      button.btn.btn-primary.ml-2(type='submit')=editPath ? "Update" :"New"
 
-    if model && model.languageVersion
+    if model && !!model.language && !!model.languageVersion
       div
         = "Language: "
         strong=model.language.title

@@ -15,10 +15,10 @@ mixin employeeForm
           input#name.form-control(name='name', type='text', placeholder='Name', required='', autofocus='', value=editPath ? employee.name : "")
         .form-group
           label(for='phone') Phone
-          input#phone.form-control(name='phone', type='tel', pattern="[0-9]{4,15}" placeholder='Phone', required='', autofocus='', value=editPath ? employee.phone : "")
+          input#phone.form-control(name='phone', type='tel', placeholder='Phone',autofocus='', value=editPath ? employee.phone : "")
         .form-group
           label(for='email') Email
-          input#email.form-control(name='email', type='email', placeholder='Mail', required='', autofocus='', value=editPath ? employee.email : "")
+          input#email.form-control(name='email', type='email', placeholder='Mail',autofocus='', value=editPath ? employee.email : "")
         .form-group
           label.checkbox.text-muted
             ="Contact person?"
