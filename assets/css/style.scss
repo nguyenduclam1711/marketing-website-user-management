@@ -1194,40 +1194,77 @@ div[class*=" #{$class-slug}"] {
 
 #stories {
   .carousel {
-    &:after {
-      content: '';
-      width: 10px;
-      height: 100%;
-      background-color: black;
-      position: absolute;
-      right: 0;
-      transform-origin: top center;
-      top: 50%;
-      transform: rotate(35.7deg) scale(1.5, 1.5) translateY(-50%);
-      left: 75%;
+    .carousel-inner {
+      overflow: visible;
+
     }
 
-    &.leftCut {
-      .carousel-inner {
-        clip-path: polygon(100% 0, 100% 100%, 0 100%, 50% 0);
-      }
+    .carousel-caption {
+      left: auto;
+      right: auto;
+    }
 
+    @include media-breakpoint-up(md) {
+      .carousel-caption {
+        bottom: auto;
+      }
       &:after {
-        left: 25%;
+        content: '';
+        width: 10px;
+        height: 100%;
+        background-color: black;
+        position: absolute;
+        right: 0;
+        transform-origin: top center;
+        top: 50%;
+        transform: rotate(35.7deg) scale(1.5, 1.5) translateY(-50%);
+        left: 75%;
+      }
+
+      &.leftCut {
+        .carousel-inner {
+          clip-path: polygon(100% 0, 100% 100%, 0 100%, 50% 0);
+        }
+
+        &:after {
+          left: 25%;
+        }
+      }
+      .aspect_ratio-md {
+        box-shadow: 2px 2px 5px #0003;
+        margin: 10px;
+      }
+
+      .carousel-inner {
+        clip-path: polygon(100% 0, 50% 100%, 0 100%, 0 0);
+
+        .carousel-item {
+          box-shadow: 0 0 3px #00000033;
+        }
+      }
+      #studentscarousel {
+        transform: translateY(20%);
+      }
+
+      #employercarousel {
+        transform: translateY(-20%);
+      }
+
+      .carousel-caption {
+        position: absolute;
       }
     }
 
-    .aspect_ratio {
-      box-shadow: 2px 2px 5px #0003;
-      margin: 10px;
+    .carousel-caption {
+      position: relative;
     }
-
 
     .carousel-indicators {
       li {
         width: 10px;
         height: 10px;
         margin: 0 10px;
+        border: 1px solid #0003;
         border-radius: 50%;
 
         &.active {
@@ -1236,19 +1273,7 @@ div[class*=" #{$class-slug}"] {
       }
     }
 
-    .carousel-caption {
-      left: auto;
-      right: auto;
-      bottom: auto;
-    }
 
-    .carousel-inner {
-      clip-path: polygon(100% 0, 50% 100%, 0 100%, 0 0);
-
-      .carousel-item {
-        box-shadow: 0 0 3px #00000033;
-      }
-    }
   }
 }
 
@@ -1257,54 +1282,60 @@ div[class*=" #{$class-slug}"] {
 }
 
 .right-shape {
-  background-color: pink;
   clip-path: polygon(100% 0, 75% 100%, 0 100%, 0 0);
 }
 
 .left-shape {
-  background-color: pink;
   clip-path: polygon(100% 0, 100% 100%, 0 100%, 25% 0);
 }
 
-.shape-outside {
-  shape-outside: polygon(100% 0, 100% 100%, 0 100%);
-  width: 25%;
-  height: 100%;
-  float: right;
-  background: black;
-  clip-path: polygon(100% 0px, 10% 100%, 0px 100%, 90% 0);
-  //opacity: .2;
-  &.shape-left {
-    shape-outside: polygon(100% 0, 0 100%, 0 0);
-    float: left;
+.right-shape-md {
+  @include media-breakpoint-up(md) {
+    clip-path: polygon(100% 0, 75% 100%, 0 100%, 0 0);
   }
 }
 
-.aspect_ratio {
-  height: 0;
-  padding-bottom: 67%;
-  position: relative;
-  align-content: center;
-
-  > * {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+.left-shape-md {
+  @include media-breakpoint-up(md) {
+    clip-path: polygon(100% 0, 100% 100%, 0 100%, 25% 0);
   }
 }
 
-#studentscarousel {
-  transform: translateY(20%);
+.shape-md-outside {
+  @include media-breakpoint-up(md) {
+    shape-outside: polygon(100% 0, 100% 100%, 0 100%);
+    width: 25%;
+    height: 100%;
+    float: right;
+    //background: black;
+    clip-path: polygon(100% 0px, 10% 100%, 0px 100%, 90% 0);
+    //opacity: .2;
+    &.shape-left {
+      shape-outside: polygon(100% 0, 0 100%, 0 0);
+      float: left;
+    }
+  }
 }
 
-#employercarousel {
-  transform: translateY(-20%);
+@include media-breakpoint-up(md) {
+  .aspect_ratio {
+    height: 0;
+    padding-bottom: 67%;
+    position: relative;
+    align-content: center;
+
+    > * {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+  }
 }
 
-.carousel-caption {
-  position: relative;
+.aspect_ratio-md {
+  @extend .aspect_ratio;
 }
 
 .box-shadow {
@@ -1397,3 +1428,8 @@ canvas#polygons {
 }
 
 
+.w-md-50 {
+  @include media-breakpoint-up(md) {
+    width: 50%
+  }
+}

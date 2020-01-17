@@ -115,8 +115,10 @@ module.exports.updateStory = async function (req, res) {
     story.avatar = req.files.avatar ? req.body.avatar : story.avatar;
     story.companylogo = req.files.companylogo ? req.body.companylogo : story.companylogo;
 
-    story.languageVersion.isCompanyStory = story.isCompanyStory;
-    await story.languageVersion.save();
+    if(story.languageVersion){
+      story.languageVersion.isCompanyStory = story.isCompanyStory;
+      await story.languageVersion.save();
+    }
     await story.save();
     req.flash("success", `Successfully updated ${story.title}`);
 

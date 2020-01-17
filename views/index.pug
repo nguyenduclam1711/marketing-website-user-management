@@ -174,13 +174,13 @@ block content
           h2.mb-5: +translate("Join the Tech Disruption at DCI")
           .row.mb-5
             .col-md-6
-              .shape-outside
-              div.right-shape: +translate("Do you want to become one of the digital pioneers and show your creativity to the world, or change careers Then join entrepreneurs and disruptors at DCI")
+              .shape-md-outside
+              div.right-shape-md: +translate("Do you want to become one of the digital pioneers and show your creativity to the world, or change careers Then join entrepreneurs and disruptors at DCI")
             .col-md-6
-              .shape-outside.shape-left
-              div.left-shape: +translate("Are you a company looking to hire Grads? or would you like to become one of our partner companies and host company tours? Then ..")
+              .shape-md-outside.shape-left
+              div.left-shape-md: +translate("Are you a company looking to hire Grads? or would you like to become one of our partner companies and host company tours? Then ..")
           .text-center
-            a.btn.btn-lg.btn-secondary.mx-5(href="/stories"): +translate("Apply now")
+            a.btn.btn-lg.btn-secondary.mx-5(data-toggle='modal', data-target='#contactFormModal'): +translate("Apply now")
         canvas.z-minus#polygons(width="1000", height="400")
 
 

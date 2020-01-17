@@ -19,7 +19,7 @@ $turquoise: #3dbaf7;
 $textOrange: #da9446;
 $transition: .15s;
 $theme-colors: (
-  "secondary": $secondary
+        "secondary": $secondary
 );
 @import "../../node_modules/bootstrap/scss/bootstrap";
 @import "../../node_modules/quill/dist/quill.snow.css";
@@ -28,13 +28,21 @@ $theme-colors: (
 .bg-light-grey {
   background-color: $light-grey !important;
 }
+
 .bg-light-blue {
   background-color: $light-blue;
+}
+
+.bg-md-light-blue {
+  @include media-breakpoint-up(md) {
+    background-color: $light-blue;
+  }
 }
 
 .btn-secondary {
   color: $light-grey;
 }
+
 @mixin btn-color($color-pri, $color-sec, $color-border) {
   background-color: $color-pri;
   color: $color-sec !important;

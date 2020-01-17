@@ -1,5 +1,5 @@
 mixin translate(string)
-  if user
-    form.btn.translation_preview( action=`/admin/settings/#translation_${string.toLowerCase().replace(/ /g, "")}`, id=`translation_${string.toLowerCase().replace(" ", "_")}`)
-      button.btn.btn-link.text-danger.text-shadow-white(type="submit")= __(string)
+  //if user && user.superAdmin === "true"
+  //  form.btn.translation_preview( action=`/admin/settings/#translation_${string.toLowerCase().replace(/ /g, "")}`, id=`translation_${string.toLowerCase().replace(" ", "_")}`)
+  //    button.btn.btn-link.text-danger.text-shadow-white(type="submit")= __(string)
   =__(string)

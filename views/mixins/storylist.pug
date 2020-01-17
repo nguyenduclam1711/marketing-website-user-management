@@ -1,30 +1,30 @@
 mixin storylist(isPublic)
   .container
     .row
-      .col-sm-8
-        #studentscarousel.carousel.slide(data-ride='')
-          h3.text-center Students
+      .col-md-8
+        #studentscarousel.carousel.slide(data-ride='carousel')
+          h3.text-center.my-5.my-md-0 Students
           .carousel-inner
             each story, index in nonComanyStories
               //if index === 0
               .carousel-item(class= index === 0 ? ` active` : ``)
-                .aspect_ratio.bg-light-blue
+                .aspect_ratio-md.bg-md-light-blue
                   .row
-                    .col-8
+                    .col-md-8
                       .row
-                        .col-8.offset-2
+                        .col-md-8.offset-md-2
                           if user && story && user.userId === story.userId || user && user.admin === "true"
-                            a.btn.btn-outline-primary(href=`/admin/stories/edit/${story.slug}`) Edit
+                            a.position-absolute.left.top.btn.btn-outline-primary(href=`/admin/stories/edit/${story.slug}`) Edit
 
                           +storyImages(story)
-                      .carousel-caption.d-none.d-md-block.text-left.text-dark.text-shadow-light-blue.px-5
-                        .shape-outside
+                      .carousel-caption.text-left.text-dark.text-shadow-light-blue.px-md-5
+                        .shape-md-outside
                         h5=story.title
                         p=story.excerpt
                         code=story.workPosition
-                    .col-4
+                    .col-md-4
           .row
-            .col-7
+            .col-md-7
               ol.carousel-indicators
                 each story, index in nonComanyStories
                   li(data-target='#studentscarousel', data-slide-to=index, class= index === 0 ? `active` : ``)
@@ -36,33 +36,33 @@ mixin storylist(isPublic)
           //  span.carousel-control-next-icon(aria-hidden='true')
           //  span.sr-only Next
 
-    .row
-      .offset-sm-4.col-sm-8
-        #employercarousel.py-5.carousel.leftCut.slide(data-ride='')
+    .row.mt-5.mt-md-0
+      .offset-md-4.col-md-8
+        #employercarousel.py-5.carousel.leftCut.slide(data-ride='carousel')
           if companyStories[0] && companyStories[0].isCompanyStory
-            h3.text-right.pr-5 Companies
+            h3.text-center.text-md-right.pr-md-5.my-5.my-md-0 Companies
           .carousel-inner
             each story, index in companyStories
               .carousel-item(class= index === 0 ? ` active` : ``)
-                .aspect_ratio
+                .aspect_ratio-md
                   .row
-                    .col-8.offset-3.d-flex.flex-column.justify-content-center
-                      .carousel-caption.text-left.text-dark.text-shadow-light-blue.pr-5
-                        .shape-outside.shape-left
+                    .col-md-8.offset-md-3.d-flex.flex-column.justify-content-center.order-12.ordser-md-1
+                      .carousel-caption.text-left.text-dark.text-shadow-light-blue.pl-md-5
+                        .shape-md-outside.shape-left
                         p=story.excerpt
-                    .col-10.offset-2
+                    .col-md-10.offset-md-2.order-1.order-md-12
                       .row
-                        .col-12.d-flex.align-items-end
-                          div.text-right
+                        .col-12.d-flex.align-items-md-end.flex-column.flex-md-row
+                          .carousel-captiondiv.text-md-right.order-12.order-md-1
                             h5=story.title
                             code=story.workPosition
-                          .w-50
+                          .w-md-50.order-1.order-md-12
                             +storyImages(story)
-                          if (user && story && user.userId === story.userId) || user && !!user.admin === "true" || user && !!user.superAdmin === "true"
-                            a.btn.btn-outline-primary(href=`/admin/stories/edit/${story.slug}`) Edit
+                      if (user && story && user.userId === story.userId) || user && !!user.admin === "true" || user && !!user.superAdmin === "true"
+                        a.position-absolute.right.top.btn.btn-outline-primary(href=`/admin/stories/edit/${story.slug}`) Edit
 
-    .row
-      .col-7
-        ol.carousel-indicators
-          each story, index in companyStories
-            li(data-target='#employercarousel', data-slide-to=index, class= index === 0 ? `active` : ``)
+          .row
+            .col-md-7
+              ol.carousel-indicators
+                each story, index in companyStories
+                  li(data-target='#employercarousel', data-slide-to=index, class= index === 0 ? `active` : ``)

@@ -5,10 +5,17 @@ block content
     form.mb-5(method='POST', action='/admin/settings')
       each settingsKey in settingsKeys
         .mb-1
-          .input-group.mr-2
-            .input-group-prepend
-              label.input-group-text.text-capitalize.d-block(for=settingsKey)= settingsKey.path
-              input.form-control(name=settingsKey.path, id=settingsKey.path, type=settingsKey.instance === "Number" ? 'number' : `text`, value=settings ? settings[settingsKey.path] : "")
+          if settingsKey.instance === "Boolean"
+            label.checkbox.text-muted(for=settingsKey.path)
+              =settingsKey.path
+              input.path(id=settingsKey.path, type='checkbox', name=settingsKey.path, value="on", checked=!!settings[settingsKey.path] ? true : false )
+              span.checkmark
+
+          else
+            .input-group.mr-2
+              .input-group-prepend
+                label.input-group-text.text-capitalize.d-block(for=settingsKey)= settingsKey.path
+                input.form-control(name=settingsKey.path, id=settingsKey.path, type=settingsKey.instance === "Number" ? 'number' : `text`, value=settings ? settings[settingsKey.path] : "")
       button.btn.btn-primary(type='submit')="Save"
 
     h2 String translations
@@ -46,6 +53,6 @@ block content
                 button.btn.btn-outline-danger(type='submit') Delete
 
   .btn-group
-      if stringtranslation
-          a.btn.btn-outline-primary(href="/admin/settings/stringtranslations")="Back"
+    if stringtranslation
+      a.btn.btn-outline-primary(href="/admin/settings/stringtranslations")="Back"
 

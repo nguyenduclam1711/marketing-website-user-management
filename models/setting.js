@@ -9,6 +9,7 @@ var SettingSchema = new Schema({
   number_events: Number,
   tourmailreceiver: String,
   mailreceiver: String,
+  show_language_markers: Boolean,
 });
 
 module.exports = mongoose.model("Setting", SettingSchema);
