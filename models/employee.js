@@ -1,11 +1,6 @@
 var mongoose = require("mongoose"),
   URLSlugs = require("mongoose-url-slugs"),
   Schema = mongoose.Schema;
-var validateEmail = function (email) {
-  console.debug(email)
-  var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  return re.test(email)
-};
 var EmployeeSchema = new Schema({
   name: String,
   avatar: {
@@ -17,19 +12,17 @@ var EmployeeSchema = new Schema({
   active: String,
   contact_user: {
     type: Boolean,
-    unique: true,
-    default: false
+    index: true,
+    unique: true
   },
   phone: {
-    type: Number,
+    type: String,
     default: undefined
   },
   email: {
     type: String,
     trim: true,
     lowercase: true,
-    unique: true,
-    validate: [validateEmail, 'Please fill a valid email address'],
     match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
   },
   updatedAt: {
@@ -48,7 +41,11 @@ EmployeeSchema.pre("save", function preSave(next) {
   employee.update({updatedAt: Date.now()});
   next();
 });
-
+EmployeeSchema.index({
+  contact_user: 1,
+}, {
+  unique: true,
+});
 EmployeeSchema.plugin(URLSlugs("name"));
 EmployeeSchema.pre("remove", function (next) {
   if (!!this.languageVersion) {

@@ -8,7 +8,7 @@ block content
           if settingsKey.instance === "Boolean"
             label.checkbox.text-muted(for=settingsKey.path)
               =settingsKey.path
-              input.path(id=settingsKey.path, type='checkbox', name=settingsKey.path, value="on", checked=!!settings[settingsKey.path] ? true : false )
+            input.path(id=settingsKey.path, type='checkbox', name=settingsKey.path, value="on", checked=!!settings && !!settings[settingsKey.path] ? true : false )
               span.checkmark
 
           else

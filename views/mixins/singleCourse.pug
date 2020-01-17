@@ -16,17 +16,17 @@ mixin singleCourse
           ul.nav.nav-pills.flex-column.nav-courses-pills.p-4.text-center.bg-light
             h4=model.headline
             li.nav-item
-              a.scrollbutton.nav-link.nav-link-spy.mb-2.active(href='#section1') Overview
+              a.scrollbutton.nav-link.nav-link-spy.mb-2.active(href='#section1')=__("Overview")
             li.nav-item
-              a.scrollbutton.nav-link.nav-link-spy.mb-2(href='#section2') What you will learn
+              a.scrollbutton.nav-link.nav-link-spy.mb-2(href='#section2')=__("What you will learn")
             li.nav-item
-              a.scrollbutton.nav-link.nav-link-spy.mb-2(href='#section3') Day at DCI
+              a.scrollbutton.nav-link.nav-link-spy.mb-2(href='#section3')=__("Day at DCI")
             if model.successStory
               li.nav-item
-                a.scrollbutton.nav-link.nav-link-spy.mb-2(href='#section4') A success story
+                a.scrollbutton.nav-link.nav-link-spy.mb-2(href='#section4')=__("A success story")
             li.nav-item
               a.scrollbutton.nav-link.nav-link-spy.mb-2(href='#section5')=__("How to Apply")
-            button.btn.btn-secondary.btn-spy(type='button' data-toggle='modal', data-target='#contactFormModal' )=__("Apply Now")
+            button.btn.btn-secondary.btn-spy(type='button' data-toggle='modal', data-target='#contactFormModal' )=__("Apply now")
 
 
         .col-12.col-xl-9.py-3
@@ -87,9 +87,6 @@ mixin singleCourse
               h2=__("Company Tours")
               p.lead=__("Take a tour of a local startup and see what the work environment is all about.")
 
-              h2 Company Tours
-              p.lead Take a tour of a local startup and see what the work environment is all about.
-
           #section4.my-5
            if model.successStory
             section.my-5
@@ -108,19 +105,19 @@ mixin singleCourse
                   .courseApply
                     .courseApply-step
                       span.courseApply-stepCount 1
-                      p.courseApply-stepTitle Complete the application form
+                      p.courseApply-stepTitle=__("Complete the application form")
                     .courseApply-step
                       span.courseApply-stepCount 2
-                      p.courseApply-stepTitle Visit DCI and chat with our admissions team
+                      p.courseApply-stepTitle=__("Visit DCI and chat with our admissions team")
                     .courseApply-step
                       span.courseApply-stepCount 3
-                      p.courseApply-stepTitle Reserve your spot
+                      p.courseApply-stepTitle=__("Reserve your spot")
 
                   button.btn.btn-lg.btn-secondary.mt-3.mb-5(type='button' data-toggle='modal', data-target='#contactFormModal') Apply
             section.my-5.pr-md-5
               if model.locations.length > 0
                 .mb-5
-                  h3 This course is available in:
+                  h3=__("This course is available in")
                   each location in model.locations
                     span.badge.badge-primary.mr-2=location.name
                   if model.massnahmeNumber
@@ -129,8 +126,8 @@ mixin singleCourse
                       code.text-dark=model.massnahmeNumber
                   if model.massnahmeDetails
                     p.mt-4.text-dark=model.massnahmeDetails
-              h2 Come see our campus!
-              p.lead Have questions? Want to see the student life for yourself? Book a one-on-one visit with our admissions team and we’ll show you around.
+              h2=__("Come see our campus!")
+              p.lead=__("Have questions? Want to see the student life for yourself? Book a one-on-one visit with our admissions team and we’ll show you around.")
               p Vulkanstraße 1
               p 10367 Berlin
       if user && user.admin === "true"

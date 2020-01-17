@@ -43,7 +43,7 @@ module.exports.landingpage = async (req, res) => {
         .limit(3)
         .exec()
       const contact_userRes = Employee
-        .findOne({contact_user: true})
+        .findOne({...query, contact_user: true})
         .exec()
       const nonCompanyStories = Story
         .find(nonCompanyStoriesQuery)
@@ -90,12 +90,12 @@ module.exports.landingpage = async (req, res) => {
         console.error('Redis ERROR: Could not save IndexController data: ' + error)
       }
     }
-    const [nonComanyStoriesRes, companyStoriesRes, locationsRes, partnersRes, coursesRes, contact_user, events ] = indexData
+    const [nonComanyStoriesRes, companyStoriesRes, locationsRes, partnersRes, coursesRes, contact_user, events] = indexData
 
     res.render('index', {
       events,
       companyStories: companyStoriesRes.length !== 0 ? companyStoriesRes : nonComanyStoriesRes.splice(nonComanyStoriesRes.length, nonComanyStoriesRes.length + 3),
-  nonComanyStories: nonComanyStoriesRes.splice(0, 3),
+      nonComanyStories: nonComanyStoriesRes.splice(0, 3),
       partners: partnersRes,
       locations: locationsRes,
       contact_user,
