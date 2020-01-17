@@ -1,12 +1,12 @@
 mixin singleStory(story, showFullContent)
-  div.story-item.py-4.px-3.mb-3.d-flex.flex-column.justify-content-between.w-100
+  div.py-4.px-3.mb-3.d-flex.flex-column.justify-content-between.w-100
     a(href="/stories/"+story.slug)
       +storyImages(story)
-      div
+      div.content
         h3.font-weight-bold=story.title
         code=story.workPosition
-        p.text-left.text-muted=story.excerpt
-  
+        blockquote.text-left.text-muted=story.excerpt
+
     div.text-right
       a.text-muted.font-weight-bold(href="/stories/"+story.slug) Show More
     if user

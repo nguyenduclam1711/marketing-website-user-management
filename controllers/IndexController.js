@@ -6,8 +6,8 @@ const Location = require('../models/location')
 const Partner = require('../models/partner')
 const Employee = require('../models/employee')
 const request = require('request')
-const { sendMail, getAsyncRedis } = require('../helpers/helper')
-const { getAvailableTranslations } = require('./AbstractController')
+const {sendMail, getAsyncRedis} = require('../helpers/helper')
+const {getAvailableTranslations} = require('./AbstractController')
 let redisClient = null;
 
 module.exports.landingpage = async (req, res) => {
@@ -34,7 +34,7 @@ module.exports.landingpage = async (req, res) => {
     if (indexData === null) {
       let query = await getAvailableTranslations(req, res)
       const companyStoriesQuery = {...query, isCompanyStory: true}
-      const nonCompanyStoriesQuery = {...query, isCompanyStory:  { $ne: true }}
+      const nonCompanyStoriesQuery = {...query, isCompanyStory: {$ne: true}}
 
       const companyStories = Story
         .find(companyStoriesQuery)
@@ -49,35 +49,36 @@ module.exports.landingpage = async (req, res) => {
         .sort('order')
         .limit(6)
         .exec()
-
       const locations = Location.find({})
       const partners = Partner.find({})
         .sort('order')
         .exec({})
-
       const courses = Course
         .find(query)
-        .sort({ order: 1 })
+        .sort({order: 1})
         .exec()
       indexData = await Promise.all([nonCompanyStories, companyStories, locations, partners, courses, contact_userRes])
-
       const events = []
       for await (let loc of indexData[2]) {
         if (!events) {
           events[
-            await Event.findOne({ location: loc._id, start: { $gt: new Date() } })
-              .sort({ start: 1 })
+            await Event.find({location: loc._id, start: {$gt: new Date()}})
+              .limit(2)
+              .sort({start: 1})
               .populate("location")
-          ];
+            ];
         } else {
-          const event = await Event.findOne({
+          const event = await Event.find({
             location: loc._id,
-            start: { $gt: new Date() }
+            start: {$gt: new Date()}
           })
-            .sort({ start: 1 })
+            .sort({start: 1})
+            .limit(2)
             .populate("location")
           if (event) {
-            events.push(event)
+
+
+            events.push(...event)
           }
         }
       }
@@ -110,7 +111,7 @@ module.exports.contactLocations = async (req, res) => {
   })
 };
 module.exports.contact = async (req, res, next) => {
-  const { name, email, body, phone, locations, TermsofService } = req.body
+  const {name, email, body, phone, locations, TermsofService} = req.body
 
   if (req.body.age) {
     console.log('Bot stepped into honeypot!')
@@ -195,13 +196,13 @@ module.exports.contact = async (req, res, next) => {
 }
 module.exports.tour = async (req, res) => {
   try {
-    res.render('tour', { companytour: true })
+    res.render('tour', {companytour: true})
   } catch (err) {
     console.log(err)
   }
 }
 module.exports.newsletter = (req, res) => {
-  const { email } = req.body
+  const {email} = req.body
 
   // Make sure fields are filled
   if (!email) {

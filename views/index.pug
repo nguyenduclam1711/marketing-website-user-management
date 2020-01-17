@@ -9,12 +9,12 @@ block content
           div.m-auto.container.py-5
             .row
               .col-md-6.py-5
-                h1.font-weight-bold.display-1=__('Start your')
-                h2.mb-5.display-1.font-weight-bold=__('Digital career')
-                p.subtitle.subtitle-jumbotron.h2.mb-5=__("Learn digital skills with us to get the most fulfilling jobs")
+                h1.font-weight-bold.display-1: +translate('Start your')
+                h2.mb-5.display-1.font-weight-bold: +translate('Digital career')
+                p.subtitle.subtitle-jumbotron.h2.mb-5: +translate("Learn digital skills with us to get the most fulfilling jobs")
                 .d-flex
-                  a.mb-3.btn.btn-lg.btn-secondary.mr-2.mr-md-4(href='#ourcourses', role='button')=__("Browse Courses")
-                  button.mb-3.btn.btn-lg.btn-secondary(data-toggle='modal', data-target='#contactFormModal')=__("Contact us")
+                  a.mb-3.btn.btn-lg.btn-secondary.mr-2.mr-md-4(href='#ourcourses', role='button'): +translate("Browse Courses")
+                  button.mb-3.btn.btn-lg.btn-secondary(data-toggle='modal', data-target='#contactFormModal'): +translate("Contact us")
               .col-md-6.py-5
                 img.w-100(src="/media/hero.png", alt="")
 
@@ -23,7 +23,7 @@ block content
           .d-inline-block.position-relative
             .bluepolygon.z-minus
             h2.position-relative.d-inline-block.display-1.text-center.text-white
-              =__("Our courses")
+              +translate("Our courses")
         .container.pt-5.text-center
           .row.mx-md-5.justify-content-center
             each course in courses
@@ -38,8 +38,11 @@ block content
                     p.text-muted=course.title
                   div
                     hr
-                    a(href="/courses/" + course.slug)=__("View course details")
-          a.z-1.btn.btn-lg.btn-secondary(href='/courses/', role='button', aria-pressed='true')=__("All") + " " + __("Courses")
+                    a(href="/courses/" + course.slug): +translate("View course details")
+          a.z-1.btn.btn-lg.btn-secondary(href='/courses/', role='button', aria-pressed='true')
+            +translate("All")
+            = " "
+            +translate("Courses")
 
       section#mission.bg-light
         .position-relative.offset_title
@@ -47,7 +50,7 @@ block content
             .d-inline-block.position-relative
               .bluepolygon.z-minus.right
               h2.position-relative.d-inline-block.display-1.text-center.text-white.ml-3
-                =__("Mission")
+                +translate("Mission")
 
 
           .position-relative.container.overflow-hidden.my-5
@@ -116,22 +119,22 @@ block content
                       .counter-item
                         .counter-number.font-weight-bold
                           h2.counter-count.display-1 300
-                        h4.font-weight-bold=__("Students")
+                        h4.font-weight-bold: +translate("Students")
                     .col-sm-6.col-md-3
                       .counter-item
                         .counter-number.font-weight-bold
                           h2.counter-count.display-1 30
-                        h4.font-weight-bold=__("Courses started")
+                        h4.font-weight-bold: +translate("Courses started")
                     .col-sm-6.col-md-3
                       .counter-item
                         .counter-number.font-weight-bold
                           h2.counter-count.display-1 260
-                        h4.font-weight-bold=__("Company tours")
+                        h4.font-weight-bold: +translate("Company tours")
                     .col-sm-6.col-md-3
                       .counter-item
                         .counter-number.font-weight-bold
                           h2.counter-count.display-1 4
-                        h4.font-weight-bold=__("Locations")
+                        h4.font-weight-bold: +translate("Locations")
 
 
       section#stories.my-5.offset_title.position-relative
@@ -139,27 +142,27 @@ block content
           .d-inline-block.position-relative
             .bluepolygon.z-minus.left
             h2.position-relative.d-inline-block.display-1.text-center.text-white.mr-3
-              =__("Stories")
+              +translate("Stories")
         +storylist
         .pt-4.text-center
-          a.btn.btn-lg.btn-secondary.mx-5(href="/stories")=__("Show all Stories")
+          a.btn.btn-lg.btn-secondary.mx-5(href="/stories"): +translate("Show all Stories")
 
       if events
         section#events.bg-light.py-5
           .container
-            h2.display-1.text-center=__("Upcoming events")
-            h3.mb-5.text-center.text-muted=__("Meet us in person in several locations in Germany")
+            h2.display-1.text-center: +translate("Upcoming events")
+            h3.mb-5.text-center.text-muted: +translate("Meet us in person in several locations in Germany")
             .row.mx-md-5
               each event in events
                 .col-sm-6
                   +singleEvent(event)
 
           .text-center
-            a.btn.btn-lg.btn-secondary.mx-5(href='/events/')=__("All Events")
+            a.btn.btn-lg.btn-secondary.mx-5(href='/events/'): +translate("All Events")
       section.py-5.section-services
         .container.py-5.text-center
-          h2.display-1.text-center=__("Our Partners")
-          h3.mb-5.text-center.text-muted=__("Meet our partners")
+          h2.display-1.text-center: +translate("Our Partners")
+          h3.mb-5.text-center.text-muted: +translate("Meet our partners")
           each partner in partners
             if partner.link
               a(href=partner.link target="_blank")
@@ -168,14 +171,16 @@ block content
               img.partners-logo.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo)
       section.call-to-action.bg-dark.overflow-hidden.position-relative.z-0.d-flex.flex-column.justify-content-center
         .z-1.container.text-white
-          h2.mb-5=__("Join the Tech Disruption at DCI")
+          h2.mb-5: +translate("Join the Tech Disruption at DCI")
           .row.mb-5
             .col-md-6
-              p=__("Do you want to become one of the digital pioneers and show your creativity to the world, or change careers Then join entrepreneurs and disruptors at DCI")
+              .shape-outside
+              div.right-shape: +translate("Do you want to become one of the digital pioneers and show your creativity to the world, or change careers Then join entrepreneurs and disruptors at DCI")
             .col-md-6
-              p=__("Are you a company looking to hire Grads? or would you like to become one of our partner companies and host company tours? Then ..")
+              .shape-outside.shape-left
+              div.left-shape: +translate("Are you a company looking to hire Grads? or would you like to become one of our partner companies and host company tours? Then ..")
           .text-center
-            a.btn.btn-lg.btn-secondary.mx-5(href="/stories")=__("Apply now")
+            a.btn.btn-lg.btn-secondary.mx-5(href="/stories"): +translate("Apply now")
         canvas.z-minus#polygons(width="1000", height="400")
 
 
@@ -199,8 +204,8 @@ block content
 
           .px-lg-5
             .px-lg-5
-              h2.text-center=__("Contact us")
-              p.mb-5.text-center.text-muted=__("Let’s connect! Our admissions team will call you soon to chat about our courses and your goals")
+              h2.text-center: +translate("Contact us")
+              p.mb-5.text-center.text-muted: +translate("Let’s connect! Our admissions team will call you soon to chat about our courses and your goals")
               .px-md-5
                 .px-md-5
                   .px-sm-5.mb-5

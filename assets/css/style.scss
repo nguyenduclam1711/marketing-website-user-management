@@ -432,11 +432,76 @@ UPCOMING EVENTS
   }
 }
 
-.story-item .content blockquote {
-  @extend .blockquote;
-  border-left: 5px solid var(--secondary);
-  padding-left: 15px;
-  color: var(--secondary);
+.story-item {
+  .brackets {
+    position: relative;
+    background-color: white;
+
+    &:hover {
+      &:before, &:after {
+        transform: scale(1.4);
+      }
+    }
+
+    &:before, &:after {
+      position: absolute;
+      content: '';
+      font-size: 2em;
+      width: 1em;
+      background-color: $blue;
+      height: 1em;
+      z-index: -1;
+      display: block;
+      transition: transform .3s ease;
+    }
+
+    &:before {
+      transform-origin: top left;
+      top: -0.3em;
+      left: -0.3em;
+    }
+
+    &:after {
+      transform-origin: bottom right;
+      bottom: -0.3em;
+      right: -0.3em;
+    }
+  }
+
+  blockquote {
+    @extend .blockquote;
+
+    &:before {
+      content: '"';
+      position: absolute;
+      font-size: 2em;
+      top: -0.5em;
+      left: -0.5em;
+      z-index: 1;
+    }
+
+    position: relative;
+    padding-left: 15px;
+  }
+}
+
+
+.bg-panel {
+  > * {
+    z-index: 1;
+  }
+
+  &:after {
+    background-color: inherit;
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100%;
+    z-index: 0;
+  }
 }
 
 /******************************************
@@ -656,6 +721,7 @@ body:not(.admin) {
 .icons {
   width: 48px;
   height: 48px;
+
   .btn {
     transition: background-color $transition ease, color $transition ease;
   }
@@ -1323,3 +1389,11 @@ canvas#polygons {
   top: 0;
   background-color: $primary;
 }
+
+.translation_preview {
+  color: pink;
+  font-size: 16px;
+  position: absolute;
+}
+
+

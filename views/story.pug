@@ -1,21 +1,23 @@
 extends layout.pug
 block content
-  .container.my-5
-    div.story-item.py-5
-
-      .row
-        .col-md-8.offset-md-2
-          +storyImages(model)
-          h2=model.title
-          blockquote.blockquote
-            p.text-muted=model.excerpt
-            //-footer.blockquote-footer
-              //-| Someone famous in 
-              //-cite(title='Source Title') Source Title
-          p.text-justify="Current position: "+model.workPosition     
-          .mt-4.content
-            p.text-justify !{model.toHTML} 
-          a(href='/stories') +Back
-          if user && user.admin === "true"
-            div.mt-3
-              a.btn.btn-outline-info(href='/admin/stories/edit/'+model.slug) Edit story
+  div.story-item.py-5
+    .position-relative
+      .container
+        .row
+          .col-md-8
+            .pt-3.mt-5
+              .position-relative.bg-light-blue.p-5.bg-panel
+                blockquote.blockquote
+                  p.text-muted=model.excerpt
+              .mt-4.brackets.bg-white.p-3
+                p.text-justify !{model.toHTML}
+          .col-md-4
+            .sticky-top.my-5.text-center.pt-3
+              .bg-light-blue.p-4
+                +storyImages(model)
+                h2=model.title
+                table.table.p-4.small
+                  tbody
+                    tr
+                      th Position
+                      td= model.workPosition
