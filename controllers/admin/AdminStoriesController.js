@@ -101,8 +101,7 @@ module.exports.deleteStory = async (req, res, next) => {
 
 module.exports.updateStory = async function (req, res) {
   const query = !isAdmin(req) ? {userId: req.user._id, slug: req.params.slug} : {slug: req.params.slug}
-
-  let story = await Story.findOne(query).exec()
+  let story = await Story.findOne(query).populate('languageVersion').exec()
   try {
     story.title = req.body.title;
     story.subtitle = req.body.subtitle;
@@ -116,6 +115,8 @@ module.exports.updateStory = async function (req, res) {
     story.avatar = req.files.avatar ? req.body.avatar : story.avatar;
     story.companylogo = req.files.companylogo ? req.body.companylogo : story.companylogo;
 
+    story.languageVersion.isCompanyStory = story.isCompanyStory;
+    await story.languageVersion.save();
     await story.save();
     req.flash("success", `Successfully updated ${story.title}`);
 
@@ -200,5 +201,5 @@ exports.updateProfile = async (request, response) => {
 }
 
 module.exports.setL18n = async (req, res) => {
-  AbstractController.cloneSite(req, res, Story)
+  AbstractController.cloneSite(req, res, Story, ["isCompanyStory"])
 };

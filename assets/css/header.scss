@@ -41,41 +41,40 @@ nav.fixed-top {
 .navbar-light .navbar-nav .nav-link {
   color: $bluedark;
 }
+
 @include media-breakpoint-up(md) {
   #headernav {
-    > li:not(.admin) {
-      a {
-        &:after {
-          content: "";
-          transition: transform 0.3s ease, color 0.3s ease, opacity 0.3s ease;
-          transform: skew(-45deg) scale(1, 0);
-          background: $blue;
-          height: 100%;
-          width: 101%;
-          top: 0;
-          opacity: 0;
-          left: 0;
-          display: block;
-          position: absolute;
-          z-index: -1;
-        }
+    a {
+      &:after {
+        content: "";
+        transition: transform 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+        transform: skew(-45deg) scale(1, 0);
+        background: $blue;
+        height: 100%;
+        width: 101%;
+        top: 0;
+        opacity: 0;
+        left: 0;
+        display: block;
+        position: absolute;
+        z-index: -1;
+      }
+    }
+
+    &:hover > a,
+    > a.active,
+    > a:hover {
+      // &:before,
+      color: white;
+
+      &:after {
+        opacity: 1;
+        transform: skew(-45deg) scale(1, 1);
       }
 
-      &:hover > a,
-      > a.active,
-      > a:hover {
-        // &:before,
-        color: white;
-
-        &:after {
-          opacity: 1;
-          transform: skew(-45deg) scale(1, 1);
-        }
-
-        // &:before {
-        // }
-        &:after {
-        }
+      // &:before {
+      // }
+      &:after {
       }
     }
   }

@@ -180,10 +180,26 @@ block content
 
 
       section#contact.bg-light.py-5
-        .container.py-5
+        .container.py-5.text-center
+          if contact_user
+            h2.display-2= __("Want to know more?")
+            .row.justify-content-center.w-100.mb-5
+              +singleEmployee(contact_user, 'col-sm-8 col-md-6')
+              .col-12.text-center.d-flex.justify-content-center
+                if contact_user.phone
+                  a.btn-primary.icons.rounded-circle.mr-3.p-2(href=`tel:${contact_user.phone}`)
+                    .text-white.text-center
+                      .p-1
+                        include ../assets/icons/phone.svg
+                if contact_user.email
+                  a.btn-primary.icons.rounded-circle.p-2(href=`mailto:${contact_user.email}?subject=Contact request for educational appointment `)
+                    .text-white.text-center
+                      .p-1
+                        include ../assets/icons/mail.svg
+
           .px-lg-5
             .px-lg-5
-              h2.display-1.text-center=__("Contact us")
+              h2.text-center=__("Contact us")
               p.mb-5.text-center.text-muted=__("Let’s connect! Our admissions team will call you soon to chat about our courses and your goals")
               .px-md-5
                 .px-md-5

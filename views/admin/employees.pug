@@ -7,7 +7,8 @@ block content
         .col-md-8
           .row
             each employee in employees
-              +singleEmployee(employee)
+              if !employee.language || employee.language && employee.language.title == "en"
+                +singleEmployee(employee)
 
         .col-md-4
           +employeeForm

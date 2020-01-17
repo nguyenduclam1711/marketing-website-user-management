@@ -20,7 +20,8 @@ module.exports.ensureAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
   } else {
-    res.redirect("/users/login");
+    req.session.redirectTo = req.originalUrl;
+    res.redirect(`/users/login`);
   }
 };
 module.exports.redirectNonAdmin = (req, res, next) => {

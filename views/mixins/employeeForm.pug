@@ -13,10 +13,20 @@ mixin employeeForm
         .form-group
           label(for='name') Name
           input#name.form-control(name='name', type='text', placeholder='Name', required='', autofocus='', value=editPath ? employee.name : "")
-        
         .form-group
-          textarea#content(name='content', placeholder='Optional - Say something about that person' )=editPath ? employee.content : ""
-
+          label(for='phone') Phone
+          input#phone.form-control(name='phone', type='tel', pattern="[0-9]{4,15}" placeholder='Phone', required='', autofocus='', value=editPath ? employee.phone : "")
+        .form-group
+          label(for='email') Email
+          input#email.form-control(name='email', type='email', placeholder='Mail', required='', autofocus='', value=editPath ? employee.email : "")
+        .form-group
+          label.checkbox.text-muted
+            ="Contact person?"
+            input(type='checkbox', name='contact_user', value="on", checked=employee && !!employee.contact_user ? true : false, )
+            span.checkmark
+        .form-group
+          label(for='content') Content
+          textarea.form-control#content(name='content', placeholder='Optional - Say something about that person' )=editPath ? employee.content : ""
         .form-group
           label(for='position') Position
           input#position.form-control(name='position', type='text', placeholder='Position', required='', autofocus='', value=editPath ? employee.position : "")
@@ -31,9 +41,9 @@ mixin employeeForm
         if editPath
           .btn-group
             a.btn.btn-outline-primary(href="/admin/employees/edit/"+employee.slug) Edit
-            
+
             a.btn.btn-outline-primary(href="/employees" target="_blank") Show
-            button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Employee" 
+            button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Employee"
             button.btn.btn-outline-danger(type='submit' form='deleteform') Delete
       if editPath
         form#deleteform(method='POST', action='/admin/employees/delete/'+employee.slug +'?_method=DELETE')

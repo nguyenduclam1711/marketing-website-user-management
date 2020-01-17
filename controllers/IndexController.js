@@ -4,6 +4,7 @@ const Course = require('../models/course')
 const Event = require('../models/event')
 const Location = require('../models/location')
 const Partner = require('../models/partner')
+const Employee = require('../models/employee')
 const request = require('request')
 const { sendMail, getAsyncRedis } = require('../helpers/helper')
 const { getAvailableTranslations } = require('./AbstractController')
@@ -40,6 +41,9 @@ module.exports.landingpage = async (req, res) => {
         .sort('order')
         .limit(3)
         .exec()
+      const contact_userRes = Employee
+        .findOne({contact_user: true})
+        .exec()
       const nonCompanyStories = Story
         .find(nonCompanyStoriesQuery)
         .sort('order')
@@ -55,7 +59,7 @@ module.exports.landingpage = async (req, res) => {
         .find(query)
         .sort({ order: 1 })
         .exec()
-      indexData = await Promise.all([nonCompanyStories, companyStories, locations, partners, courses])
+      indexData = await Promise.all([nonCompanyStories, companyStories, locations, partners, courses, contact_userRes])
 
       const events = []
       for await (let loc of indexData[2]) {
@@ -84,14 +88,15 @@ module.exports.landingpage = async (req, res) => {
         console.error('Redis ERROR: Could not save IndexController data: ' + error)
       }
     }
-    const [nonComanyStoriesRes, companyStoriesRes, locationsRes, partnersRes, coursesRes, events] = indexData
+    const [nonComanyStoriesRes, companyStoriesRes, locationsRes, partnersRes, coursesRes, contact_user, events ] = indexData
 
     res.render('index', {
       events,
-      companyStories: companyStoriesRes.length !== 0 ? companyStoriesRes : nonComanyStoriesRes.splice(3,6),
-      nonComanyStories: nonComanyStoriesRes.splice(0,3),
+      companyStories: companyStoriesRes.length !== 0 ? companyStoriesRes : nonComanyStoriesRes.splice(nonComanyStoriesRes.length, nonComanyStoriesRes.length + 3),
+  nonComanyStories: nonComanyStoriesRes.splice(0, 3),
       partners: partnersRes,
       locations: locationsRes,
+      contact_user,
       courses: coursesRes
     })
   } catch (err) {

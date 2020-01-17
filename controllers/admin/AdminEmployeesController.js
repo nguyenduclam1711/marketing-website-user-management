@@ -66,8 +66,14 @@ module.exports.updateEmployee = async (req, res) => {
   const employee = await Employee.findOne({ slug: req.params.slug})
   employee.name = req.body.name;
   employee.position = req.body.position;
+  employee.phone = req.body.phone;
+  employee.mail = req.body.mail;
   employee.content = req.body.content;
   employee.locations = req.body.locations;
+  employee.contact_user = !!req.body.contact_user;
+  employee.phone = req.body.phone;
+  employee.email = req.body.email;
+
   employee.avatar = req.body.avatar ? req.body.avatar : employee.avatar;
   employee.avatar = req.files.avatar ? req.body.avatar : employee.avatar;
   await employee.save()
@@ -77,10 +83,14 @@ module.exports.updateEmployee = async (req, res) => {
 
 module.exports.createEmployee = async function(req, res) {
   var employee = await new Employee();
-  
+
   employee.name = req.body.name;
   employee.locations = req.body.locations;
+  employee.contact_user = !!req.body.contact_user;
+
   employee.position = req.body.position;
+  employee.phone = req.body.phone;
+  employee.email = req.body.email;
   employee.avatar = req.body.avatar ? req.body.avatar : employee.avatar;
 
   const result = await employee.save()

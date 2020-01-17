@@ -77,7 +77,8 @@ code {
   color: $dark;
   font-size: 100%;
   font-family: "Gordita-Bold", sans-serif;
-  &:before{
+
+  &:before {
     content: "- "
   }
 }
@@ -655,6 +656,9 @@ body:not(.admin) {
 .icons {
   width: 48px;
   height: 48px;
+  .btn {
+    transition: background-color $transition ease, color $transition ease;
+  }
 }
 
 /*timeline*/
@@ -1146,22 +1150,12 @@ div[class*=" #{$class-slug}"] {
         left: 25%;
       }
     }
+
     .aspect_ratio {
       box-shadow: 2px 2px 5px #0003;
       margin: 10px;
     }
 
-    .shape-outside {
-      shape-outside: polygon(200px 0px, 200px 200px, 60px 200px);
-      width: 200px;
-      height: 200px;
-      float: right;
-      opacity: .2;
-      &.shape-left {
-        shape-outside: polygon(200px 0px, 60px 0px, 60px 200px);
-        float: left;
-      }
-    }
 
     .carousel-indicators {
       li {
@@ -1181,14 +1175,42 @@ div[class*=" #{$class-slug}"] {
       right: auto;
       bottom: auto;
     }
+
     .carousel-inner {
       clip-path: polygon(100% 0, 50% 100%, 0 100%, 0 0);
 
       .carousel-item {
-
         box-shadow: 0 0 3px #00000033;
       }
     }
+  }
+}
+
+.right-shape, .left-shape {
+  //transform: translate(0%, 50%);
+}
+
+.right-shape {
+  background-color: pink;
+  clip-path: polygon(100% 0, 75% 100%, 0 100%, 0 0);
+}
+
+.left-shape {
+  background-color: pink;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%, 25% 0);
+}
+
+.shape-outside {
+  shape-outside: polygon(100% 0, 100% 100%, 0 100%);
+  width: 25%;
+  height: 100%;
+  float: right;
+  background: black;
+  clip-path: polygon(100% 0px, 10% 100%, 0px 100%, 90% 0);
+  //opacity: .2;
+  &.shape-left {
+    shape-outside: polygon(100% 0, 0 100%, 0 0);
+    float: left;
   }
 }
 
@@ -1214,6 +1236,7 @@ div[class*=" #{$class-slug}"] {
 #employercarousel {
   transform: translateY(-20%);
 }
+
 .carousel-caption {
   position: relative;
 }
@@ -1232,7 +1255,8 @@ div[class*=" #{$class-slug}"] {
 
 .blue-overlay {
   position: relative;
-  &:after{
+
+  &:after {
     content: "";
     width: 100%;
     height: 100%;
@@ -1249,13 +1273,16 @@ div[class*=" #{$class-slug}"] {
   background-color: $blue;
   background-blend-mode: multiply;
 }
+
 .rounded {
   border-radius: 0.5rem !important;
 }
-.history-line{
+
+.history-line {
   hr {
     border-top: 5px solid $blue;
   }
+
   hr.arrow {
     &:after {
       content: "";
@@ -1269,9 +1296,11 @@ div[class*=" #{$class-slug}"] {
       transform: translate(100%, calc(-50% - 2.5px));
     }
   }
+
   .line {
     transform: translateX(calc(50% + 12.5px));
   }
+
   .circle {
     width: 25px;
     height: 25px;
@@ -1280,11 +1309,13 @@ div[class*=" #{$class-slug}"] {
     transform: translate(-27px, 31.5px);
   }
 }
-.call-to-action{
+
+.call-to-action {
   width: 100%;
   height: 33vh;
 }
-canvas#polygons{
+
+canvas#polygons {
   width: 100%;
   height: 100%;
   position: absolute;

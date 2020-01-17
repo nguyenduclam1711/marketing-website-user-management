@@ -3,7 +3,7 @@ mixin storylist(isPublic)
     .row
       .col-sm-8
         #studentscarousel.carousel.slide(data-ride='')
-          h3 Students
+          h3.text-center Students
           .carousel-inner
             each story, index in nonComanyStories
               //if index === 0
@@ -13,7 +13,7 @@ mixin storylist(isPublic)
                     .col-8
                       .row
                         .col-8.offset-2
-                          if user.userId === story.userId || user.admin === "true"
+                          if user && story && user.userId === story.userId || user && user.admin === "true"
                             a.btn.btn-outline-primary(href=`/admin/stories/edit/${story.slug}`) Edit
 
                           +storyImages(story)
@@ -40,7 +40,7 @@ mixin storylist(isPublic)
       .offset-sm-4.col-sm-8
         #employercarousel.py-5.carousel.leftCut.slide(data-ride='')
           if companyStories[0] && companyStories[0].isCompanyStory
-            h3.text-right Companies
+            h3.text-right.pr-5 Companies
           .carousel-inner
             each story, index in companyStories
               .carousel-item(class= index === 0 ? ` active` : ``)
@@ -58,9 +58,11 @@ mixin storylist(isPublic)
                             code=story.workPosition
                           .w-50
                             +storyImages(story)
+                          if (user && story && user.userId === story.userId) || user && !!user.admin === "true" || user && !!user.superAdmin === "true"
+                            a.btn.btn-outline-primary(href=`/admin/stories/edit/${story.slug}`) Edit
 
-            .row
-              .col-7
-                ol.carousel-indicators
-                  each story, index in companyStories
-                    li(data-target='#employercarousel', data-slide-to=index, class= index === 0 ? `active` : ``)
+    .row
+      .col-7
+        ol.carousel-indicators
+          each story, index in companyStories
+            li(data-target='#employercarousel', data-slide-to=index, class= index === 0 ? `active` : ``)

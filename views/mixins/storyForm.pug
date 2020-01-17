@@ -6,9 +6,9 @@ mixin storyForm
       span.mr-3=editPath ? "Edit story" :"Create a new Story"
     +adminButtonGroup(story, 'stories')
 
-    label.checkbox.text-muted
+    label.checkbox.text-muted(for='isCompanyStory')
       ="Company story?"
-      input(type='checkbox', name='isCompanyStory', value="on", checked=story ? story.isCompanyStory: false, )
+      input#isCompanyStory(type='checkbox', name='isCompanyStory', value="on", checked=story && !!story.isCompanyStory ? true: false, )
       span.checkmark
     .mb-3
       label(for='title') Title
@@ -20,7 +20,7 @@ mixin storyForm
           | Slug
           button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Changing this has negative effects on SEO if it not fresh created. To regenerate the slug, clear the fields and update the record.')
             | ?
-        input#inputTitle.form-control(name='slug', type='text', placeholder='Slug', value=story.slug)
+        input#slug.form-control(name='slug', type='text', placeholder='Slug', value=story.slug)
     .mb-3
       label(for='subtitle') Subtitle
       input#subtitle.form-control(name='subtitle', type='text', placeholder='Subtitle', value=editPath ? story.subtitle :"" required='', autofocus='')
