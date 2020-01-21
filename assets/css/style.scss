@@ -532,9 +532,10 @@ UPCOMING EVENTS
   }
 
   input[type=number] {
-    -moz-appearance:textfield;
+    -moz-appearance: textfield;
   }
 }
+
 div.contactForm {
   margin: 0;
   padding: 0;
@@ -1212,12 +1213,15 @@ div[class*=" #{$class-slug}"] {
 
 #stories {
   .wrapper {
-    &.wrapper-left {
-      margin-right: -5em;
-    }
+    @include media-breakpoint-up(md) {
 
-    &.wrapper-right {
-      margin-left: -5em;
+      &.wrapper-left {
+        margin-right: -5em;
+      }
+
+      &.wrapper-right {
+        margin-left: -5em;
+      }
     }
   }
 
@@ -1380,7 +1384,7 @@ div[class*=" #{$class-slug}"] {
 
   &:focus,
   &:active {
-    background-color: white!important;
+    background-color: white !important;
   }
 }
 
@@ -1471,9 +1475,20 @@ canvas#polygons {
 .mh-33 {
   min-height: 33vh;
 }
+
 .alert {
   position: fixed;
   bottom: 50px;
   z-index: 999999;
   right: 0;
+}
+
+.bg-md-transparent {
+  @include media-breakpoint-up(md) {
+    background-color: transparent !important;
+  }
+}
+
+.z-foreground {
+  z-index: 99999999 !important;
 }

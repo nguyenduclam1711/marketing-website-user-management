@@ -1,10 +1,10 @@
 mixin storylist(isPublic)
   .container.pb-5
-    .row.pb-5.flex-nowrap.justify-content-center
+    .row.pb-5.justify-content-center
       .col-md-6.mb-md-5.px-0
-        #studentscarousel.wrapper.wrapper-left.carousel.slide.mb-md-5(data-ride='carousel')
+        #studentscarousel.wrapper.wrapper-left.carousel.slide.mb-md-5.w-100(data-ride='')
           h3.text-center.my-5.my-md-0 Students
-          .carousel-inner
+          .carousel-inner.px-5.px-md-0
             each story, index in nonComanyStories
               //if index === 0
               .carousel-item(class= index === 0 ? ` active` : ``)
@@ -23,24 +23,18 @@ mixin storylist(isPublic)
                         p=story.excerpt
                         code=story.workPosition
                     .col-md-4
-          .row
-            .col-md-7
-              ol.carousel-indicators
-                each story, index in nonComanyStories
-                  li(data-target='#studentscarousel', data-slide-to=index, class= index === 0 ? `active` : ``)
-
-          //a.carousel-control-prev(href='#studentscarousel' role='button' data-slide='prev')
-          //  span.carousel-control-prev-icon(aria-hidden='true')
-          //  span.sr-only Previous
-          //a.carousel-control-next(href='#studentscarousel' role='button' data-slide='next')
-          //  span.carousel-control-next-icon(aria-hidden='true')
-          //  span.sr-only Next
+          if nonComanyStories[1]
+            .row
+              .col-md-7
+                ol.carousel-indicators
+                  each story, index in nonComanyStories
+                    li(data-target='#studentscarousel', data-slide-to=index, class= index === 0 ? `active` : ``)
 
       .col-md-6.mt-md-5.px-0
-        #employercarousel.wrapper.wrapper-right.carousel.leftCut.slide.mt-md-5(data-ride='carousel')
+        #employercarousel.wrapper.wrapper-right.carousel.leftCut.slide.mt-md-5.w-100(data-ride='')
           if companyStories[0] && companyStories[0].isCompanyStory
             h3.text-center.text-md-right.pr-md-5.my-5.my-md-0 Companies
-          .carousel-inner
+          .carousel-inner.px-5.px-md-0
             each story, index in companyStories
               .carousel-item(class= index === 0 ? ` active` : ``)
                 .aspect_ratio-md
@@ -51,7 +45,7 @@ mixin storylist(isPublic)
                         p=story.excerpt
                     .col-md-10.offset-md-2.order-1.order-md-12
                       .row
-                        .col-12.d-flex.align-items-md-end.flex-column.flex-md-row
+                        .col-md-12.d-flex.align-items-md-end.flex-column.flex-md-row
                           .carousel-captiondiv.text-md-right.order-12.order-md-1
                             h5=story.title
                             code=story.workPosition
@@ -60,8 +54,9 @@ mixin storylist(isPublic)
                       if (user && story && user.userId === story.userId) || user && !!user.admin === "true" || user && !!user.superAdmin === "true"
                         a.position-absolute.right.top.btn.btn-outline-primary(href=`/admin/stories/edit/${story.slug}`) Edit
 
-          .row
-            .col-md-7
-              ol.carousel-indicators
-                each story, index in companyStories
-                  li(data-target='#employercarousel', data-slide-to=index, class= index === 0 ? `active` : ``)
+          if companyStories[1]
+            .row
+              .col-md-7
+                ol.carousel-indicators
+                  each story, index in companyStories
+                    li(data-target='#employercarousel', data-slide-to=index, class= index === 0 ? `active` : ``)

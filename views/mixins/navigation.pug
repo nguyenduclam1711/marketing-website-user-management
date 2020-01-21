@@ -1,5 +1,5 @@
 mixin navigation
-  nav.navbar.navbar-expand-lg.navbar-light.py-0.bg-tranition.px-0(class=currentPath == "/" ? "fixed-top" : "")
+  nav.navbar.navbar-expand-lg.navbar-light.py-0.bg-tranition.px-3.px-md-3.bg-light-grey.bg-md-transparent(class=currentPath == "/" ? " position-absolute top w-100 z-foreground" : "")
     .align-items-stretch(class=currentPath.includes('admin') ? ' container-fluid' : " container" )
       a.navbar-brand.text-primary.h-60(href="/")
         include ../../assets/media/dci.svg
