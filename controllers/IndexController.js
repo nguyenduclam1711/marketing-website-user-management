@@ -25,7 +25,7 @@ module.exports.landingpage = async (req, res) => {
     }
     if (process.env.USE_REDIS === 'true') {
       try {
-        const getNavData = await redisClient.getAsync(`${req.headers.host}_indexData`)
+        const getNavData = await redisClient.getAsync(`indexData`)
         indexData = JSON.parse(getNavData)
 
       } catch (error) {
@@ -86,7 +86,7 @@ module.exports.landingpage = async (req, res) => {
       indexData.push(events)
       if (process.env.USE_REDIS === 'true') {
         try {
-          await redisClient.setAsync(`${req.headers.host}_indexData`, JSON.stringify(indexData))
+          await redisClient.setAsync(`indexData`, JSON.stringify(indexData))
         } catch (error) {
           console.error('Redis ERROR: Could not save IndexController data: ' + error)
         }
@@ -137,7 +137,7 @@ module.exports.contact = async (req, res, next) => {
   const track = req.body.track || 'https://digitalcareerinstitute.org';
   contact.name = req.body.name
   contact.email = req.body.email
-  contact.phone = req.body.phone
+  contact.phone = req.body.phone.replace(/[a-z]/g, '')
   contact.track = track
   contact.body = req.body.body
   contact.createdAt = new Date()

@@ -524,6 +524,17 @@ UPCOMING EVENTS
   margin-bottom: 3rem;
 }
 
+#contactForm {
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number] {
+    -moz-appearance:textfield;
+  }
+}
 div.contactForm {
   margin: 0;
   padding: 0;
@@ -1459,4 +1470,10 @@ canvas#polygons {
 
 .mh-33 {
   min-height: 33vh;
+}
+.alert {
+  position: fixed;
+  bottom: 50px;
+  z-index: 999999;
+  right: 0;
 }

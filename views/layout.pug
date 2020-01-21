@@ -113,7 +113,7 @@ html.h-100(lang='en')
                           a.font-weight-bold.text-light(href='/admin/pages/edit/' + page.slug)
                             small.text-monospace= " (Edit)"
 
-                .col-xs-12.col-sm-3.footers-three
+                .col-xs-12.col-sm-5.footers-three
                   p.font-weight-bold.mb-4.text-lightgrey=__("Courses")
                   ul.list-unstyled
                     li.my-2
@@ -144,26 +144,16 @@ html.h-100(lang='en')
                     each location in locations
                       li.my-2
                         a.font-weight-bold.text-light(href='/events/' + location.name)=location.name
-                .col-xs-12.col-sm-2.footers-five
-                  p.font-weight-bold.mb-4.text-lightgrey=__("Social media")
-                  ul.list-unstyled
-                    li.my-2
-                      a.font-weight-bold.text-light(href='/events') Facebook
-                    li.my-2
-                      a.font-weight-bold.text-light(href='/events') Insta
-                    li.my-2
-                      a.font-weight-bold.text-light(href='/events') Twitter
-                    li.my-2
-                      a.font-weight-bold.text-light(href='/events') Facebook
 
               nav.d-flex.justify-content-between.align-items-center.pt-5
-                div.pt-md-5
+                div.pt-md-5.d-flex.justify-content-between.w-100
                   a.font-weight-bold.navbar-brand.text-white.h-60.mr-md-5(href="/")
                     include ../assets/media/dci.svg
-                  span.text-white.mr-md-5
-                    ="© 2020 DigitalCareerInstitute gGmbH"
-                  span.text-white
-                    =__("All Rights Reserved")
+                  div
+                    span.text-white.mr-md-5
+                      ="© 2020 DigitalCareerInstitute gGmbH"
+                    span.text-white
+                      =__("All Rights Reserved")
                 //div
                 //  a.font-weight-bold.text-white.mr-md-5(href="/impressum") Impressum
                 //  span.font-weight-bold.text-white Copyright
