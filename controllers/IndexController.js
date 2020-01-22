@@ -25,7 +25,7 @@ module.exports.landingpage = async (req, res) => {
     }
     if (process.env.USE_REDIS === 'true') {
       try {
-        const getNavData = await redisClient.getAsync(`indexData`)
+        const getNavData = await redisClient.getAsync(`indexData${req.session.locale}`)
         indexData = JSON.parse(getNavData)
 
       } catch (error) {
@@ -86,7 +86,7 @@ module.exports.landingpage = async (req, res) => {
       indexData.push(events)
       if (process.env.USE_REDIS === 'true') {
         try {
-          await redisClient.setAsync(`indexData`, JSON.stringify(indexData))
+          await redisClient.setAsync(`indexData${req.session.locale}`, JSON.stringify(indexData))
         } catch (error) {
           console.error('Redis ERROR: Could not save IndexController data: ' + error)
         }

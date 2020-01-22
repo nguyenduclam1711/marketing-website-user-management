@@ -133,7 +133,7 @@ app.use(async (req, res, next) => {
 
   if (process.env.USE_REDIS === 'true') {
     try {
-      const getNavData = await redisClient.getAsync(`navData`)
+      const getNavData = await redisClient.getAsync(`navData${req.session.locale}`)
       navData = JSON.parse(getNavData)
     } catch (error) {
       console.error('Redis ERROR: Could not get navigation data: ' + error)
@@ -161,7 +161,7 @@ app.use(async (req, res, next) => {
     }
     try {
       if (process.env.USE_REDIS === 'true') {
-        await redisClient.setAsync(`navData`, JSON.stringify(navData))
+        await redisClient.setAsync(`navData${req.session.locale}`, JSON.stringify(navData))
       }
     } catch (error) {
       console.error('Redis ERROR: Could not save navigation data: ' + error)
