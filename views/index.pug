@@ -11,10 +11,9 @@ block content
               .col-md-6.py-5
                 h1.font-weight-bold.display-1: +translate('Start your')
                 h2.mb-5.display-1.font-weight-bold: +translate('Digital career')
-                p.subtitle.h2.mb-5: +translate("Learn digital skills with us to get the most fulfilling jobs")
+                p.subtitle.h5.mb-5: +translate("Learn digital skills with us to get the most fulfilling jobs")
                 .d-flex
                   a.mb-3.btn.btn-lg.btn-secondary.mr-2.mr-md-4(href='#ourcourses', role='button'): +translate("Browse Courses")
-                  button.mb-3.btn.btn-lg.btn-secondary(data-toggle='modal', data-target='#contactFormModal'): +translate("Contact us")
               .col-md-6.py-5
                 img.w-100(src="/media/hero.png", alt="")
 
@@ -118,22 +117,22 @@ block content
                     .col-sm-6.col-md-3
                       .counter-item
                         .counter-number.font-weight-bold
-                          h2.counter-count.display-1 300
+                          h2.counter-count.display-1 600
                         h4.font-weight-bold: +translate("Students")
                     .col-sm-6.col-md-3
                       .counter-item
                         .counter-number.font-weight-bold
-                          h2.counter-count.display-1 30
+                          h2.counter-count.display-1 50
                         h4.font-weight-bold: +translate("Courses started")
                     .col-sm-6.col-md-3
                       .counter-item
                         .counter-number.font-weight-bold
-                          h2.counter-count.display-1 260
+                          h2.counter-count.display-1 300
                         h4.font-weight-bold: +translate("Company tours")
                     .col-sm-6.col-md-3
                       .counter-item
                         .counter-number.font-weight-bold
-                          h2.counter-count.display-1 4
+                          h2.counter-count.display-1 5
                         h4.font-weight-bold: +translate("Locations")
 
 
@@ -162,7 +161,6 @@ block content
       section.py-5.section-services
         .container.py-5.text-center
           h2.display-1.text-center: +translate("Our Partners")
-          h3.mb-5.text-center.text-muted: +translate("Meet our partners")
           each partner in partners
             if partner.link
               a(href=partner.link target="_blank")

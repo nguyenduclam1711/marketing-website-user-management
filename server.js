@@ -33,7 +33,8 @@ let redisClient = null;
 (async () => {
   const en = Language.findOne({title: 'en'})
   const de = Language.findOne({title: 'de'})
-  const res = await Promise.all([en, de, updateLocaleFile])
+  let createLocalesFile = updateLocaleFile();
+  const res = await Promise.all([en, de, createLocalesFile])
   if (!res[0]) {
     console.log('no english language created. Seeding EN lang into mongoose')
     await Language.create(languages[0])

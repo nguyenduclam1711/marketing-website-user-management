@@ -7,6 +7,7 @@ import "bootstrap/js/dist/dropdown";
 import "bootstrap/js/dist/collapse";
 import "bootstrap/js/dist/carousel";
 import "bootstrap/js/dist/alert";
+
 require("./polygons");
 
 require("../css/style.scss");
@@ -19,10 +20,10 @@ const toggleNL = (remove = false) => {
     .classList.toggle("half-transparent");
 };
 
-(function() {
+(function () {
   var newsletterForm = document.querySelector("#mc-embedded-subscribe-form");
   if (newsletterForm) {
-    newsletterForm.addEventListener("submit", function(e) {
+    newsletterForm.addEventListener("submit", function (e) {
       e.preventDefault();
       var email = document.querySelector("#newsletter_email").value.trim();
       if (email) {
@@ -32,7 +33,7 @@ const toggleNL = (remove = false) => {
           headers: {
             "content-type": "application/json"
           },
-          body: JSON.stringify({ email }) // data can be `string` or {object}!
+          body: JSON.stringify({email}) // data can be `string` or {object}!
         })
           .then(res => res.json())
           .then(response => {
@@ -60,7 +61,7 @@ const countUp = () => {
 
   if (counter && elementInViewport2(counter) && !counted) {
     counted = true;
-    $(".counter-count").each(function() {
+    $(".counter-count").each(function () {
       $(this)
         .prop("Counter", 0)
         .animate(
@@ -70,7 +71,7 @@ const countUp = () => {
           {
             duration: 5000,
             easing: "swing",
-            step: function(now) {
+            step: function (now) {
               $(this).text(Math.ceil(now));
             }
           }
@@ -80,7 +81,7 @@ const countUp = () => {
 };
 var scrollbuttons = document.getElementsByClassName("scrollbutton");
 for (var i = 0, len = scrollbuttons.length; i < len; i++) {
-  scrollbuttons[i].addEventListener("click", function(event) {
+  scrollbuttons[i].addEventListener("click", function (event) {
     event.preventDefault();
     document.querySelector(event.target.attributes.href.value).scrollIntoView({
       behavior: "smooth",
@@ -92,7 +93,7 @@ for (var i = 0, len = scrollbuttons.length; i < len; i++) {
 const throttle = (func, limit) => {
   let lastFunc;
   let lastRan;
-  return function() {
+  return function () {
     const context = this;
     const args = arguments;
     if (!lastRan) {
@@ -100,7 +101,7 @@ const throttle = (func, limit) => {
       lastRan = Date.now();
     } else {
       clearTimeout(lastFunc);
-      lastFunc = setTimeout(function() {
+      lastFunc = setTimeout(function () {
         if (Date.now() - lastRan >= limit) {
           func.apply(context, args);
           lastRan = Date.now();
@@ -111,6 +112,7 @@ const throttle = (func, limit) => {
 };
 
 var floatings = [...document.querySelectorAll(".floatings")];
+
 function showFloatings() {
   let timeout = 0;
   floatings.forEach(item => {
@@ -122,6 +124,7 @@ function showFloatings() {
     }
   });
 }
+
 function elementInViewport2(el) {
   var top = el.offsetTop;
   var left = el.offsetLeft;
@@ -141,18 +144,22 @@ function elementInViewport2(el) {
     left + width > window.pageXOffset
   );
 }
-window.onscroll = throttle(function() {
+
+window.onscroll = throttle(function () {
   showFloatings();
   countUp();
-  stickyNavigation()
+  const homesection = document.querySelector('section.homeSection');
+  if (homesection) {
+    stickyNavigation()
+  }
 }, 50);
 
-$("#contactFormModal").on("shown.bs.modal", function(e) {
+$("#contactFormModal").on("shown.bs.modal", function (e) {
   window.document.querySelector("#track").value = window.location.href;
   window.history.replaceState(window.location.pathname, "/", `/contact`);
 });
 
-$("#contactFormModal").on("hidden.bs.modal", function(e) {
+$("#contactFormModal").on("hidden.bs.modal", function (e) {
   window.document.querySelector("#track").value = "";
   window.history.replaceState({}, "/", window.history.state);
 });
@@ -175,9 +182,11 @@ getFileElements.forEach(el => {
       newItem.innerHTML = `<div id="invalidFile" class="alert alert-danger"                       role="alert">
                              This field not accept ${Filetype}
                             </div>`;
+
       function insertAfter(el, referenceNode) {
         referenceNode.parentNode.insertBefore(el, referenceNode);
       }
+
       insertAfter(newItem, el);
     }
     alert ? alert.remove() : null;
@@ -201,7 +210,7 @@ function objectToCsv(data) {
 }
 
 function downloadCsv(data) {
-  const blob = new Blob([data], { type: "text/csv" });
+  const blob = new Blob([data], {type: "text/csv"});
   const url = window.URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.setAttribute("id", "csv");
@@ -213,7 +222,7 @@ function downloadCsv(data) {
   a.removeChild(a);
 }
 
-$("#downloadCSV").on("click", function(e) {
+$("#downloadCSV").on("click", function (e) {
   fetch(window.location.href + "/api-json")
     .then(resp => resp.json())
     .then(data => {
@@ -230,10 +239,10 @@ $("#downloadCSV").on("click", function(e) {
     .catch(error => console.log("error ===>", error));
 });
 
-window.onload = function() {
+window.onload = function () {
   showFloatings();
   const errorContainer = document.querySelector(".cont_principal")
-  if(errorContainer){
+  if (errorContainer) {
     errorContainer.className = "cont_principal cont_error_active";
   }
 };
@@ -246,13 +255,13 @@ window.onload = function() {
 // console.log(typedCursor)
 
 const nav = document.querySelector('nav.fixed-top');
-const homesection = document.querySelector('section.homeSection');
 
-function stickyNavigation() {
-  if (window.scrollY >= homesection.offsetHeight / 2) {
+function stickyNavigation(element) {
+  if (window.scrollY >= element.offsetHeight / 2) {
     nav.classList.add('bg-white');
   } else {
     nav.classList.remove('bg-white');
   }
 }
+
 
