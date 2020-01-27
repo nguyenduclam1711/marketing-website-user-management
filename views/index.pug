@@ -117,22 +117,30 @@ block content
                     .col-sm-6.col-md-3
                       .counter-item
                         .counter-number.font-weight-bold
-                          h2.counter-count.display-1 600
+                          h2.display-1
+                            span.counter-count=600
+                            = "+"
                         h4.font-weight-bold: +translate("Students")
                     .col-sm-6.col-md-3
                       .counter-item
                         .counter-number.font-weight-bold
-                          h2.counter-count.display-1 50
-                        h4.font-weight-bold: +translate("Courses started")
+                          h2.display-1
+                            span.counter-count=50
+                            = "+"
+                        h4.font-weight-bold
+                          +translate("Courses started")
                     .col-sm-6.col-md-3
                       .counter-item
                         .counter-number.font-weight-bold
-                          h2.counter-count.display-1 300
+                          h2.display-1
+                            span.counter-count=300
+                            = "+"
                         h4.font-weight-bold: +translate("Company tours")
                     .col-sm-6.col-md-3
                       .counter-item
                         .counter-number.font-weight-bold
-                          h2.counter-count.display-1 5
+                          h2.display-1
+                            span.counter-count=5
                         h4.font-weight-bold: +translate("Locations")
 
 
@@ -178,7 +186,8 @@ block content
               .shape-md-outside.shape-left
               div.left-shape-md: +translate("Are you a company looking to hire Grads? or would you like to become one of our partner companies and host company tours? Then ..")
           .text-center
-            a.btn.btn-lg.btn-secondary.mx-5(data-toggle='modal', data-target='#contactFormModal'): +translate("Apply now")
+            a.btn.btn-lg.btn-secondary.mb-3.mx-5(href='/contact', data-toggle='modal', data-target='#contactFormModal'): +translate("Apply now")
+            a.btn.btn-lg.btn-tertiary.mb-3.mx-5(href='/hire-your-digital-talents-with-dci'): +translate("Hire Grad")
         canvas.z-minus#polygons(width="1000", height="400")
 
 
