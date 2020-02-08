@@ -1,10 +1,8 @@
 mixin singleCourse
   .position-relative.mb-3
     .jumbotron.jumbotron-fluid.text-center.bg-transparent
-      .bg-primary.position-fixed.left.top.z-minus.h-100.w-100
-        img.half-transparent.w-100.h-100.object-fit-cover(alt="our team" src='/media/team.jpg')
-      .jumbotron-courses-container.text-white
-        h1.display-1.mt-5.mb-3.text-white=model.headline
+      .jumbotron-courses-container
+        h1.display-1.mt-5.mb-3=model.headline
         p.lead.mb-5=model.subheading
         button.btn.btn-lg.btn-secondary.mt-3.mb-5(type='button' data-toggle='modal', data-target='#contactFormModal')=__("Apply")
       if model.curriculumPdf
