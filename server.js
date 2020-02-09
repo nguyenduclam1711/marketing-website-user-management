@@ -264,7 +264,6 @@ async function worker() {
     // const jobsResponse = await JobsController.fetchJobs();
     // console.log(jobsResponse)
     const response = await EventsController.fetchevents()
-    console.log(response)
 
     console.log('👍 Done! Successfully Fetching data\n')
   } catch (e) {

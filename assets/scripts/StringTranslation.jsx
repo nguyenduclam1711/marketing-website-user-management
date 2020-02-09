@@ -61,7 +61,6 @@ function StringTranslation(props) {
         de: e.target.elements.de.value
       }
     }
-    console.debug(payload)
     fetch(`/admin/settings/stringtranslations`, {
       method: "POST",
       headers: {
@@ -71,7 +70,6 @@ function StringTranslation(props) {
     }).then(res => res.json())
       .then(res => {
         const {...clone} = data;
-        console.debug(res)
         clone.stringtranslations.unshift(res.stringtranslation);
         setData(clone)
       }).catch(e => console.debug(e))

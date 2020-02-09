@@ -64,7 +64,6 @@ module.exports.editEmployee = async function(req, res) {
 
 module.exports.updateEmployee = async (req, res) => {
   const employee = await Employee.findOne({ slug: req.params.slug})
-  console.debug(req.body)
   employee.name = req.body.name;
   employee.position = req.body.position;
   employee.phone = req.body.phone;
