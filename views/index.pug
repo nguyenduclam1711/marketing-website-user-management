@@ -27,17 +27,16 @@ block content
           .row.mx-md-5.justify-content-center
             each course in courses
               .col-md-6.col-lg-4.mb-5.mb-sm-4.floatings
-                .bg-white.p-4.text-center.hover-shadow.h-100.d-flex.flex-column
+                .bg-white.px-5.py-3.px-md-2.text-center.hover-shadow.h-100.d-flex.flex-column
                   a.card-link.d-block(href="/courses/" + course.slug).flex-grow.justify-content-between.h-100
                     .m-3.row.position-relative
                       .col-10.offset-1.col-md-8.offset-md-2.align-items-center.my-4
                         img.object-fit-cover.img-fluid.square(src="/media/pixel.gif" alt=course.headline style="background-image: url('/images/" + course.icon + "')")
-
-                    h4.service-title= course.headline
-                    p.text-muted=course.title
+                    h3.text-dark= course.headline
+                    p.text-dark=course.title
                   div
                     hr
-                    a(href="/courses/" + course.slug): +translate("View course details")
+                    a.text-dark.font-weight-bold(href="/courses/" + course.slug): +translate("View course details")
           a.z-1.btn.btn-lg.btn-secondary(href='/courses/', role='button', aria-pressed='true')
             +translate("All")
             = " "
