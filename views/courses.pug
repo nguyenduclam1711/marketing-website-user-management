@@ -1,23 +1,24 @@
 extends layout.pug
 block content
-  .jumbotron.jumbotron-fluid.text-center
+  .jumbotron.jumbotron-fluid.bg-light-blue.py-5.mb-0
     .jumbotron-courses-container.container.px-md-5.pb-md-5.pb-5
-      h1.display-1.mt-5.mb-3=__('Courses')
-      h2=__("Get going with practical learning from the start")
-      p.lead.mb-5=__("We put you in the driving seat from the beginning. You can expect hands-on learning with a strong support network. Whether you’re starting fresh or topping up your knowledge, we help you build your skills in a flexible environment. Your dedication is your success.")
+      h1.text-left.display-1.mt-5.mb-5.pb-5=__('Courses')
+      h2.mb-4.text-center=__("Get going with practical learning from the start")
+      p.text-center.lead.mb-5=__("We put you in the driving seat from the beginning. You can expect hands-on learning with a strong support network. Whether you’re starting fresh or topping up your knowledge, we help you build your skills in a flexible environment. Your dedication is your success.")
 
-  section#services.h-100
+  section#services.h-100.bg-section
     .container.h-100
-      .bg-white.h-100
-        .row.p-3
+      .h-100.py-3.py-md-5
+        .row.py-5
           each course in courses
-            .col-md-6.col-lg-4
-              .bg-light.hover-shadow.text-center.p-3
-                a(href="/courses/"+course.slug)
+            .col-md-6.col-lg-4.mb-5.mb-sm-4.floatings
+              .bg-white.px-5.py-3.text-center.hover-shadow.h-100.d-flex.flex-column
+                a.card-link.d-block(href="/courses/" + course.slug).flex-grow.justify-content-between.h-100
                   .m-3.row.position-relative
-                    .col-10.offset-1.col-md-8.offset-md-2.align-items-center
-                      img.object-fit-cover.img-fluid.square(alt=course.headline src="/media/pixel.gif" style="background-image: url('/images/"+course.icon+"')")
-
-                  h4.service-title= course.headline
-                  p=course.title
-
+                    .col-10.offset-1.col-md-8.offset-md-2.align-items-center.my-4
+                      img.object-fit-cover.img-fluid.square(src="/media/pixel.gif" alt=course.headline style="background-image: url('/images/" + course.icon + "')")
+                  h3.text-dark= course.headline
+                  p.text-dark=course.title
+                div
+                  hr
+                  a.text-dark.font-weight-bold(href="/courses/" + course.slug): +translate("View course details")

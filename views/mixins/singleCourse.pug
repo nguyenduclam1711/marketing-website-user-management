@@ -1,6 +1,6 @@
 mixin singleCourse
-  .position-relative.mb-3
-    .jumbotron.jumbotron-fluid.text-center.bg-transparent
+  .position-relative.mb-3.bg-section
+    .jumbotron.jumbotron-fluid.text-center.bg-light-blue.mb-0
       .jumbotron-courses-container
         h1.display-1.mt-5.mb-3=model.headline
         p.lead.mb-5=model.subheading
@@ -8,26 +8,26 @@ mixin singleCourse
       if model.curriculumPdf
         a.btn.btn-lg.btn-secondary.mt-3.mb-5(href='/images/'+ model.curriculumPdf target='_blank' ) Download Curriculum
 
-    .container.container-fluid-courses.bg-white.position-relative
+    .container.container-fluid-courses.position-relative
       .row.row-courses
-        nav#courseScrollspy.courses-scroll.col-sm-3.col-4.my-3
-          ul.nav.nav-pills.flex-column.nav-courses-pills.p-4.text-center.bg-light
+        nav#courseScrollspy.courses-scroll.col-sm-3.col-4.my-3.pt-3
+          ul.nav.nav-pills.flex-column.nav-courses-pills.p-4.text-center.bg-white
             h4=model.headline
             li.nav-item
-              a.scrollbutton.nav-link.nav-link-spy.mb-2.active(href='#section1')=__("Overview")
+              a.scrollbutton.nav-link.connection-line.nav-link-spy.text-dark.mb-2.active.mb-5(href='#section1')=__("Overview")
             li.nav-item
-              a.scrollbutton.nav-link.nav-link-spy.mb-2(href='#section2')=__("What you will learn")
+              a.scrollbutton.nav-link.connection-line.nav-link-spy.text-dark.mb-2.mb-5(href='#section2')=__("What you will learn")
             li.nav-item
-              a.scrollbutton.nav-link.nav-link-spy.mb-2(href='#section3')=__("Day at DCI")
+              a.scrollbutton.nav-link.connection-line.nav-link-spy.text-dark.mb-2.mb-5(href='#section3')=__("Day at DCI")
             if model.successStory
               li.nav-item
-                a.scrollbutton.nav-link.nav-link-spy.mb-2(href='#section4')=__("A success story")
+                a.scrollbutton.nav-link.connection-line.nav-link-spy.text-dark.mb-2.mb-5(href='#section4')=__("A success story")
             li.nav-item
-              a.scrollbutton.nav-link.nav-link-spy.mb-2(href='#section5')=__("How to Apply")
+              a.scrollbutton.nav-link.connection-line.nav-link-spy.text-dark.mb-2.mb-5(href='#section5')=__("How to Apply")
             button.btn.btn-secondary.btn-spy(type='button' data-toggle='modal', data-target='#contactFormModal' )=__("Apply now")
 
 
-        .col-12.col-xl-9.py-3
+        .col-12.col-xl-9.py-3.px-5.bg-white
           #section1.mb-5
             h2.mt-3.mb-3.text-left=model.title
             p.lead.text-left=model.subtitle
