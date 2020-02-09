@@ -4,7 +4,7 @@ function StringTranslation(props) {
   const [data, setData] = useState([]);
   const [changed, setChanged] = useState(new Set());
   useEffect(() => {
-    fetch(`http://localhost:7000/admin/settings`, {
+    fetch(`/admin/settings`, {
       headers: {"content-type": "application/json"}
     }).then(res => res.json()).then(res => {
       const {...stringtranslations} = res;
@@ -13,7 +13,7 @@ function StringTranslation(props) {
   }, []);
   const updateStringtranslation = (e, st) => {
     e.preventDefault()
-    fetch(`http://localhost:7000/admin/settings/stringtranslations/update`, {
+    fetch(`/admin/settings/stringtranslations/update`, {
       method: "POST",
       headers: {
         "content-type": "application/json"
@@ -38,7 +38,7 @@ function StringTranslation(props) {
   function deleteItem(e, st) {
     e.preventDefault();
     e.stopPropagation();
-    fetch(`http://localhost:7000/admin/settings/stringtranslations/delete/${st._id}`, {
+    fetch(`/admin/settings/stringtranslations/delete/${st._id}`, {
       method: "POST",
       headers: {
         "content-type": "application/json"
@@ -62,7 +62,7 @@ function StringTranslation(props) {
       }
     }
     console.debug(payload)
-    fetch(`http://localhost:7000/admin/settings/stringtranslations`, {
+    fetch(`/admin/settings/stringtranslations`, {
       method: "POST",
       headers: {
         "content-type": "application/json"
