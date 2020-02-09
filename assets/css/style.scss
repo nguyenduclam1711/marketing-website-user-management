@@ -506,6 +506,7 @@ UPCOMING EVENTS
     width: 100vw;
     height: 100%;
     z-index: 0;
+
     .order-12 & {
       right: auto;
       left: 0;
@@ -1524,4 +1525,50 @@ canvas#polygons {
 
 .z-foreground {
   z-index: 99999999 !important;
+}
+
+body[class*="admin-pages-edit-"],
+body[class*="pages-"] {
+  .ql-image {
+    max-width: 100%;
+  }
+
+  @include media-breakpoint-up(md) {
+    span.ql-size-small,
+    img.ql-size-small {
+      width: 50%;
+      display: block;
+    }
+  }
+
+  .ql-align-right img {
+    padding: .5em 0 .5em .5em;
+    float: right;
+  }
+
+  .ql-align-left img {
+    padding: .5em .5em .5em 0;
+    float: left;
+  }
+
+  pre {
+    position: relative;
+    color: white;
+    overflow: unset;
+    white-space: pre-wrap;
+    padding: 2em 0;
+
+    &:after {
+      z-index: -1;
+      content: "";
+      position: absolute;
+      background: $primary-light;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 0;
+      width: 100vw;
+      right: 0;
+    }
+  }
 }

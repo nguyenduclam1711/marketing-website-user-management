@@ -25,6 +25,13 @@ mixin navigation
           li.position-relative.nav-item
             a.mx-0.mx-lg-2.nav-link.d-flex.align-items-center.h-100.text-uppercase(href="/contact", class=currentPath == "/contact" ? "active" : "")=__("Campuses")
 
+          each page in headerPages
+            li.position-relative.nav-item
+              a.mx-0.mx-lg-2.nav-link.d-flex.align-items-center.h-100.text-uppercase(href='/pages/' + page.slug)
+                =page.title
+              if user && user.admin === "true"
+                a.font-weight-bold.text-light(href='/admin/pages/edit/' + page.slug)
+                  small.text-monospace= " (Edit)"
 
           li.position-relative.nav-item
             a.mx-0.mx-lg-2.nav-link.d-flex.align-items-center.h-100.text-uppercase(href="/contact", data-toggle='modal', data-target='#contactFormModal')=__("Contact us")

@@ -95,6 +95,7 @@ nav.navbar {
 
 @include media-breakpoint-up(md) {
   #headernav > li {
+    z-index: 0;
     > a {
       &:after {
         content: "";

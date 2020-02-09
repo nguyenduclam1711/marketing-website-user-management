@@ -107,6 +107,8 @@ app.use(function (req, res, next) {
     success: req.flash('success')
   }),
     (app.locals.pathclass = req.url
+      .replace(/^\/de/g, '')
+      .replace(/^\/en/g, '')
       .replace(/^\//g, '')
       .replace(/\//g, '-')
       .replace(/\-$/g, '')
@@ -131,10 +133,7 @@ app.use(passport.session())
 
 app.use(async (req, res, next) => {
   let navData = null
-
   if (req.originalUrl.startsWith('/images') || req.headers['content-type'] === 'application/json') {
-    console.debug("req.originalUrl", req.originalUrl)
-    // console.debug("req.originalUrl", req)
     next()
     return
   }
@@ -253,9 +252,9 @@ app.use('/admin/users', usersAdminRoutes)
 
 app.use('/admin*', contactsAdminRoutes)
 app.use(redirects)
-app.get('*', function (req, res) {
-  res.redirect('/')
-})
+// app.get('*', function (req, res) {
+//   res.redirect('/')
+// })
 
 app.set('views', path.join(__dirname, 'views/'))
 app.set('view engine', 'pug')
