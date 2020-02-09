@@ -1373,7 +1373,9 @@ div[class*=" #{$class-slug}"] {
 }
 
 .mr-minus-15 {
-  margin-right: -15%;
+  @include media-breakpoint-up(md) {
+    margin-right: -15%;
+  }
 }
 
 .shape-md-outside {
@@ -1588,4 +1590,10 @@ body[class*="pages-"] {
 #courseScrollspy {
   background-image: url("~/media/circuit-board.svg");
   background-repeat: repeat;
+}
+
+.fullbleed {
+  @include media-breakpoint-down(md) {
+    max-width: none;
+  }
 }

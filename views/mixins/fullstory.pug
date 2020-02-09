@@ -18,7 +18,7 @@ mixin fullstory(model)
                   =model.title
               else
                 =model.title
-            if user.superAdmin === "true" || user.admin === "true"
+            if user && user.superAdmin === "true" || user && user.admin === "true"
               a.position-absolute.mt-3.right.top.btn.btn-outline-primary.z-foreground(href=`/admin/stories/edit/${model.slug}`) Edit
             table.table.m-0.mt-4.small
               tbody

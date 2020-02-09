@@ -1,10 +1,10 @@
 mixin storylist(isPublic)
-  .container.pb-5
+  .container.pb-5.fullbleed
     .row.pb-5.justify-content-center
-      .col-md-6.mb-md-5.px-0.mr-minus-15
+      .col-md-6.mb-md-5.px-5.px-md-0.mr-minus-15
         #studentscarousel.wrapper.wrapper-left.carousel.slide.mb-md-5.w-100(data-ride='')
-          h3.h4.text-center.my-5.my-md-0 Students
-          .carousel-inner.pl-5.px-md-0
+          h3.h4.text-center.my-5.my-md-0=__("Students")
+          .carousel-inner.px-md-0
             each story, index in nonComanyStories
               //if index === 0
               .carousel-item(class= index === 0 ? ` active` : ``)
@@ -13,13 +13,13 @@ mixin storylist(isPublic)
                 .aspect_ratio-md.bg-md-light-blue
                   .row
                     .col-md-8
-                      .row
-                        .col-md-8.offset-md-2.pl-0.pt-3
+                      .row.px-3
+                        .col-md-8.offset-md-2.pl-0.pt-2
                           +storyImages(story)
-                      .carousel-caption.text-left.text-dark.text-shadow-light-blue.pl-3
+                      .carousel-caption.text-left.text-dark.text-shadow-light-blue.pl-3.py-1
                         .shape-md-outside
                         h4.font-weight-bold=story.title
-                        p=story.excerpt
+                        p.mb-1=story.excerpt
                         code.text-muted.small=story.workPosition
                     .col-md-4
           if nonComanyStories[1]
@@ -32,7 +32,7 @@ mixin storylist(isPublic)
       .col-md-6.mt-md-5.px-0
         #employercarousel.wrapper.wrapper-right.carousel.leftCut.slide.mt-md-5.w-100(data-ride='')
           if companyStories[0] && companyStories[0].isCompanyStory
-            h3.h4.text-center.text-md-right.pr-md-5.my-5.my-md-0 Companies
+            h3.h4.text-center.text-md-right.pr-md-5.my-5.my-md-0=__("Companies")
           .carousel-inner.px-5.px-md-0
             each story, index in companyStories
               .carousel-item(class= index === 0 ? ` active` : ``)
