@@ -2,6 +2,7 @@ require("dotenv").config({path: __dirname + "/../.env"});
 const Stringtranslation = require("../../models/stringtranslation");
 const Language = require("../../models/language");
 const Setting = require("../../models/setting");
+const {getAsyncRedis} = require("../../helpers/helper");
 
 module.exports.getSettings = async (req, res) => {
   try {
@@ -19,7 +20,6 @@ module.exports.getSettings = async (req, res) => {
         stringtranslations,
         settingsKeys,
         languages
-
       })
     } else {
       res.render("admin/adminSettings", {
@@ -141,3 +141,13 @@ module.exports.updateStringtranslation = async (req, res) => {
     console.log(err);
   }
 };
+module.exports.clearCache = async (req, res) => {
+  redisClient = getAsyncRedis()
+  const getIndexData = await redisClient.getAsync(`indexData${req.session.locale}`)
+  const getNavData = await redisClient.getAsync(`navData${req.session.locale}`)
+  redisClient.flushdb(function (err, succeeded) {
+    req.flash("success", `Successfully cleared the cache`);
+    res.redirect(req.headers.referer)
+  });
+}
+

@@ -4,11 +4,13 @@ mixin menuFooter
   button.navbar-toggler(type='button', data-toggle='collapse', data-target='#menuFooter')
     span.navbar-toggler-icon
     span.sr-only="Toggle menu"
+
   #menuFooter.navbar-collapse.collapse.w-100
-    span.navbar-brand.p-0= "Logged in as "+user.username
     ul.nav.navbar-nav.ml-auto.w-100.justify-content-end
       li.nav-item
       if user && user.superAdmin === "true"
+        li.nav-item
+          a.nav-link.text-danger(href='/admin/settings/clearcache') Clear cache
         li.nav-item
           a.nav-link(href='/admin/users') Users
       if user && user.admin === "true" || user.superAdmin === "true"

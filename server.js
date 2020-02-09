@@ -132,6 +132,12 @@ app.use(passport.session())
 app.use(async (req, res, next) => {
   let navData = null
 
+  if (req.originalUrl.startsWith('/images') || req.headers['content-type'] === 'application/json') {
+    console.debug("req.originalUrl", req.originalUrl)
+    // console.debug("req.originalUrl", req)
+    next()
+    return
+  }
   if (process.env.USE_REDIS === 'true') {
     try {
       const getNavData = await redisClient.getAsync(`navData${req.session.locale}`)

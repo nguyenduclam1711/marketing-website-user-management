@@ -40,8 +40,7 @@ module.exports.landingpage = async (req, res) => {
       const companyStories = Story
         .find(companyStoriesQuery)
         .sort('order')
-        .limit(3)
-        .exec()
+        .exec({})
       const contact_userRes = Employee
         .findOne({...query, contact_user: true})
         .exec()
@@ -92,9 +91,9 @@ module.exports.landingpage = async (req, res) => {
         }
       }
     }
-  const [nonComanyStoriesRes, companyStoriesRes, locationsRes, partnersRes, coursesRes, contact_user, events] = indexData
+    const [nonComanyStoriesRes, companyStoriesRes, locationsRes, partnersRes, coursesRes, contact_user, events] = indexData;
 
-    console.debug(req.headers.referer )
+    // console.debug(companyStoriesRes)
     res.render('index', {
       events,
       companyStories: companyStoriesRes.length !== 0 ? companyStoriesRes : nonComanyStoriesRes.splice(nonComanyStoriesRes.length, nonComanyStoriesRes.length + 3),

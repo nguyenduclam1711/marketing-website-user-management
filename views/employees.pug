@@ -1,32 +1,36 @@
 extends layout.pug
 block content
-  .jumbotron.jumbotron-fluid.text-center.bg-transparent
+  .jumbotron.jumbotron-fluid.bg-transparent
     .jumbotron-courses-container.container
       .px-md-5
         h1.display-1.mt-5.mb-3=__("Our Team")
-        h1=__("Our values set us apart")
-        h2=__("Passion")
+        h2.mb-5=__("Our values set us apart")
+        .row
+          .col-md-3
+            h3=__("Passion")
 
-        p=__("We’re driven by a passionate belief in the work we do. This passion can be found in our classrooms, our office and in the work of our students. We’re proud to have created a buzzing environment driven by a sense of purpose and dedication.")
-
-
-        h2=__("Impact")
-
-        p=__("We measure success by impact. As we continue to empower people to begin their new careers and learn new skills we see the positive social impact of our work. On difficult days, we can turn to our students as a reminder of what success means as they go on to impact the industry in new ways.")
+            p=__("We’re driven by a passionate belief in the work we do. This passion can be found in our classrooms, our office and in the work of our students. We’re proud to have created a buzzing environment driven by a sense of purpose and dedication.")
 
 
-        h2=__("Community")
+          .col-md-3
+            h3=__("Impact")
 
-        p=__("Community is at the core of everything we do. Our students come from a wide variety of backgrounds and build a culture of honest communication and open collaboration. We work towards a common goal by bringing people together and work with a positive feedback culture based on trust.")
-
-
-        h2=__("Dedication")
-
-        p=__("We’ve learned that to get the best out of people you have to be dedicated to get to know them. That’s why we focus on building a bond with every student, understanding their specific needs and adapting to their ways of learning. We put our students at the centre of the learning process.")
+            p=__("We measure success by impact. As we continue to empower people to begin their new careers and learn new skills we see the positive social impact of our work. On difficult days, we can turn to our students as a reminder of what success means as they go on to impact the industry in new ways.")
 
 
-  .container.mt-md-5
-    .bg-light.p-3
-      .row.justify-content-center
-        each employee in employees
-          +singleEmployee(employee)
+          .col-md-3
+            h3=__("Community")
+
+            p=__("Community is at the core of everything we do. Our students come from a wide variety of backgrounds and build a culture of honest communication and open collaboration. We work towards a common goal by bringing people together and work with a positive feedback culture based on trust.")
+
+          .col-md-3
+            h3=__("Dedication")
+
+            p=__("We’ve learned that to get the best out of people you have to be dedicated to get to know them. That’s why we focus on building a bond with every student, understanding their specific needs and adapting to their ways of learning. We put our students at the centre of the learning process.")
+
+  .overflow-hidden
+    .container.my-md-5
+      h1.bluepolygon2.z-minus.right
+        .triangle
+      each employee, index in employees
+          +singleEmployee(employee, (index % 2 === 0 ? "col-md-8 text-right" : "col-md-8 order-12"))

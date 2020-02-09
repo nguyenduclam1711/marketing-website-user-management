@@ -1,11 +1,30 @@
 const express = require("express");
 const router = express.Router();
-const { ensureAuthenticated, redirectNonAdmin } = require('../../helpers/helper')
+const {ensureAuthenticated, redirectNonSuperAdmin} = require('../../helpers/helper')
 
 const AdminSettingsController = require("../../controllers/admin/AdminSettingsController")
-router.get("/", ensureAuthenticated, AdminSettingsController.getSettings);
-router.post("/", ensureAuthenticated,  AdminSettingsController.createSetting);
-router.post("/stringtranslations", ensureAuthenticated,  AdminSettingsController.createStringtranslation);
-router.post("/stringtranslations/delete/:id", ensureAuthenticated, AdminSettingsController.deleteStringtranslation);
-router.post("/stringtranslations/update", ensureAuthenticated, AdminSettingsController.updateStringtranslation);
+router.get("/",
+  ensureAuthenticated,
+  redirectNonSuperAdmin,
+  AdminSettingsController.getSettings);
+router.post("/",
+  ensureAuthenticated,
+  redirectNonSuperAdmin,
+  AdminSettingsController.createSetting);
+router.post("/stringtranslations",
+  ensureAuthenticated,
+  redirectNonSuperAdmin,
+  AdminSettingsController.createStringtranslation);
+router.post("/stringtranslations/delete/:id",
+  ensureAuthenticated,
+  redirectNonSuperAdmin,
+  AdminSettingsController.deleteStringtranslation);
+router.post("/stringtranslations/update",
+  ensureAuthenticated,
+  redirectNonSuperAdmin,
+  AdminSettingsController.updateStringtranslation);
+router.get("/clearcache",
+  ensureAuthenticated,
+  redirectNonSuperAdmin,
+  AdminSettingsController.clearCache);
 module.exports = router;

@@ -90,7 +90,7 @@ html.h-100(lang='en')
       .flex-grow-1(class=currentPath.includes('admin') ? ' pb-5 pt-3' : "" )
         block content
       if !currentPath.includes('admin')
-        footer.site-footer.bg-light(role='contentinfo' class=user ? "pb-5" : "")
+        footer.site-footer(role='contentinfo' class=user ? "pb-5" : "")
           section.bg-primary
             if currentPath !== "/users/login" && currentPath !== "/users/register"
               +newsletter

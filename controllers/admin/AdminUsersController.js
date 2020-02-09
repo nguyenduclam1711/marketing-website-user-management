@@ -10,7 +10,6 @@ module.exports.getUsers = async function (req, res) {
 
 module.exports.upgradeUser = async function (req, res) {
   let user = await Users.findById(req.params.id);
-  console.debug(req.user._id)
   if (req.user.superAdmin === "true") {
     if (!user.verifiedAt) {
       user.verifiedAt = new Date();

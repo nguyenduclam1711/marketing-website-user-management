@@ -21,7 +21,7 @@ mixin navigation
             a.mx-0.mx-lg-2.nav-link.d-flex.align-items-center.h-100.z-1.text-uppercase(class=currentPath.includes('/events') && !currentPath.includes('admin') ? "active" : "", href='/events')
               =__("Events")
           li.position-relative.nav-item
-            a.mx-0.mx-lg-2.nav-link.d-flex.align-items-center.h-100.text-uppercase(class=currentPath == "/stories" ? "active" : "", href='/stories')=__("Stories")
+            a.mx-0.mx-lg-2.nav-link.d-flex.align-items-center.h-100.text-uppercase(class=currentPath.includes("/stories") ? "active" : "", href='/stories')=__("Stories")
           li.position-relative.nav-item
             a.mx-0.mx-lg-2.nav-link.d-flex.align-items-center.h-100.text-uppercase(href="/contact", class=currentPath == "/contact" ? "active" : "")=__("Campuses")
 

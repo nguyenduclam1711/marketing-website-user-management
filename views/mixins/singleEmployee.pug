@@ -1,20 +1,27 @@
-mixin singleEmployee(employee, classes="col-md-6 col-sm-12 col-lg-4")
-  .d-flex.mb-4.text-center.mb-3(class=classes)
-    .w-100
-      if employee && employee.avatar !== "false"
-        .mb-3
-          .m-3.row.position-relative
-            .col-10.offset-1.col-md-8.offset-md-2.align-items-center
-              img.object-fit-cover.img-fluid.rounded-circle.square(alt=employee.name src="/media/pixel.gif" style="background-image: url('/images/"+employee.avatar+"')")
-          //- img.rounded-circle.w-100.mw-150.mh-150.object-fit-cover(src="/images/"+employee.avatar)
-      h3.display-1
-        small=employee.name
-      h5=employee.position
+mixin singleEmployee(employee, classes="")
+  - random = Math.floor(Math.random() * 10)
+  div.story-item
 
-      if currentPath !== "/"
-        p=employee.content
-      .mb-3
-        each loc in employee.locations
-          span.badge.badge-primary.mr-3= loc.name
-      if user && (user.admin === "true" || user.superAdmin === "true") && currentPath.includes('admin')
-        +buttonGroup(employee, `employees`, `name`)
+    .row
+      div(class=classes)
+        .pt-3
+          .position-relative.bg-light-blue.p-5.bg-panel
+            .position-relative.z-1
+              h2=employee.name
+            if employee.content
+              blockquote.blockquote
+                p.text-muted=employee.content
+            if employee.position
+              .position-relative.z-1
+                p.text-muted=employee.position
+            if employee.locations.length
+              .position-relative.z-1
+                +translate("Locations")
+                =": "
+                each loc in employee.locations
+                  div.badge.badge-light.mb-2= loc.name
+      div.col-md-4
+        .sticky-top.text-center.py-3
+          .bg-light-blue.p-4
+            .px-3.px-md-5
+              img.blue-shadow.object-fit-cover.img-fluid.rounded-circle.square(alt=employee.name src="/media/pixel.gif" style="background-image: url('/images/"+employee.avatar+"')")
