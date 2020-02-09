@@ -8,12 +8,6 @@ mixin navigation
         span.sr-only="Toggle menu"
       #collapsingNavbar3.navbar-collapse.collapse.w-100.mt-4.mt-md-0.align-items-stretch
         ul.nav.navbar-nav.my-3.my-lg-0.ml-auto.w-100.justify-content-end#headernav
-          if locale === "en"
-            li.position-relative.nav-item
-              a.mx-0.mx-lg-2.nav-link.d-flex.align-items-center.h-100.text-uppercase(href="/i18n/de") Deutsch
-          else
-            li.position-relative.nav-item
-              a.mx-0.mx-lg-2.nav-link.d-flex.align-items-center.h-100.text-uppercase(href="/i18n/en") English
           li.position-relative.nav-item
             a.mx-0.mx-lg-2.nav-link.d-flex.align-items-center.h-100.text-uppercase.z-1(class= currentPath.includes('/courses') && !currentPath.includes('admin') ? "active" : "", href="/courses")
               =__("Courses")
@@ -22,16 +16,25 @@ mixin navigation
               =__("Events")
           li.position-relative.nav-item
             a.mx-0.mx-lg-2.nav-link.d-flex.align-items-center.h-100.text-uppercase(class=currentPath.includes("/stories") ? "active" : "", href='/stories')=__("Stories")
-          li.position-relative.nav-item
-            a.mx-0.mx-lg-2.nav-link.d-flex.align-items-center.h-100.text-uppercase(href="/contact", class=currentPath == "/contact" ? "active" : "")=__("Campuses")
-
           each page in headerPages
-            li.position-relative.nav-item
-              a.mx-0.mx-lg-2.nav-link.d-flex.align-items-center.h-100.text-uppercase(href='/pages/' + page.slug)
-                =page.title
-              if user && user.admin === "true"
-                a.font-weight-bold.text-light(href='/admin/pages/edit/' + page.slug)
-                  small.text-monospace= " (Edit)"
+            if !!page.prominent
+              li.position-relative.nav-item
+                a.mx-0.mx-lg-2.nav-link.d-flex.align-items-center.h-100.text-uppercase(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/' + page.slug)=page.title
 
+          li.position-relative.nav-item.dropdown
+            a#navbarDopdown.dropdown-toggle.mx-0.mx-lg-2.nav-link.d-flex.align-items-center.h-100.text-uppercase(class=currentPath.includes("/pages") ? "active" : "", href="/contact", data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")=__("Get involved")
+            .dropdown-menu.p-0.border-radius-0.shadow-sm.z-0(aria-labelledby='navbarDropdownMenuLink')
+              a.dropdown-item.nav-link.text-uppercase(href='/about-us/' class=currentPath == "/about-us" ? "active" : "")=__("About us")
+              a.dropdown-item.nav-link.text-uppercase(class=currentPath == "/tour" ? "active" : "" href='/tour')=__("Host our students")
+              a.dropdown-item.nav-link.text-uppercase(href='https://dci-jobs.personio.de/' class=currentPath == "/jobs" ? "active" : "")=__("Jobs")
+              each page in headerPages
+                if !page.prominent
+                  a.dropdown-item.nav-link.text-uppercase(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
           li.position-relative.nav-item
             a.mx-0.mx-lg-2.nav-link.d-flex.align-items-center.h-100.text-uppercase(href="/contact", data-toggle='modal', data-target='#contactFormModal')=__("Contact us")
+          if locale === "en"
+            li.position-relative.nav-item
+              a.mx-0.mx-lg-2.nav-link.d-flex.align-items-center.h-100.text-uppercase(href="/i18n/de") DE
+          else
+            li.position-relative.nav-item
+              a.mx-0.mx-lg-2.nav-link.d-flex.align-items-center.h-100.text-uppercase(href="/i18n/en") EN

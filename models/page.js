@@ -8,6 +8,7 @@ const PageSchema = new Schema({
   title: String,
   content: Object,
   order: Number,
+  prominent: Boolean,
   menulocations: [{ type: Schema.ObjectId, ref: "Menulocation" }],
   language: { type: Schema.ObjectId, ref: "Language" },
   languageVersion: { type: Schema.ObjectId, ref: "Page"}
@@ -20,7 +21,7 @@ PageSchema.virtual("toHTML").get(function() {
     const content = this.content.ops;
     if (!content) {
       throw "is no quill data yet"
-    } 
+    }
     const converter = new QuillDeltaToHtmlConverter(content);
     return converter.convert();
   } catch (e) {

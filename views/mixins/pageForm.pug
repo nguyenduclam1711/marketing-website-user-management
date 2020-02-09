@@ -7,20 +7,16 @@ mixin pageForm
     .mb-3
       label(for='title') Title
       input#inputName.form-control(name='title', type='text', placeholder='Title', required='', autofocus='', value=editPath ? page.title : "")
-    
+
     if !editpath && page && page.slug
       .mb-3
-        label(for='slug') 
+        label(for='slug')
           | Slug
           button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Changing this has negative effects on SEO if it not fresh created. To regenerate the slug, clear the fields and update the record.')
             | ?
-        input#inputTitle.form-control(name='slug', type='text', placeholder='Slug', value=page.slug) 
+        input#inputTitle.form-control(name='slug', type='text', placeholder='Slug', value=page.slug)
     .mb-3
-      label(for='content') Content
-      #editor(value=editPath ? page.content : "")
-      textarea#inputContent.d-none(name='content', type='password', placeholder='Content', required='', )=editPath ? JSON.stringify(page.content) : ""
-    .mb-3
-      label(for='order') 
+      label(for='order')
         | Order
         button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Defines the order the pages are displayed. 0,1,2,3,4')
           | ?
@@ -31,7 +27,16 @@ mixin pageForm
       button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Defines the Menulocation where the pages are displayed. Headerpages appear in the Header and on the landingpages "Get Involved" section. Footerpages just in the footer. If no location is defined, the page is "hidden" but accessible per direct url.')
         | ?
 
+      .custom-control.custom-checkbox
+        input.custom-control-input(name="prominent" type='checkbox' id="prominent" value=prominent  checked=(page && page.prominent ? true : false))
+        label.custom-control-label(for='prominent') Prominent
+
+        button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='If checked, the Page will be shown directly in the Main navigation instead hidden in a dropdown menu. Exact location depends on the MenuLocation.')
       each menulocation in menulocations
         .custom-control.custom-checkbox
           input.custom-control-input(name="menulocations" type='checkbox' id=menulocation.name value=menulocation._id  checked=(menulocation.selected))
           label.custom-control-label(for=menulocation.name)=menulocation.name
+    .mb-3
+      label(for='content') Content
+      #editor(value=editPath ? page.content : "")
+      textarea#inputContent.d-none(name='content', type='password', placeholder='Content', required='', )=editPath ? JSON.stringify(page.content) : ""

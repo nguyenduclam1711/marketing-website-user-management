@@ -174,7 +174,7 @@ block content
                 img.partners-logo.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo)
             else
               img.partners-logo.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo)
-      section.call-to-action.py-5.bg-dark.overflow-hidden.position-relative.z-0.d-flex.flex-column.justify-content-center
+      section.call-to-action.pt-5.bg-dark.overflow-hidden.position-relative.z-0.d-flex.flex-column.justify-content-center.pb-200
         .z-1.container.text-white
           h2.mb-5: +translate("Join the Tech Disruption at DCI")
           .row.mb-5
@@ -190,30 +190,4 @@ block content
         canvas.z-minus#polygons(width="1000", height="400")
 
 
-      section#contact.bg-light.pb-200.pt-5
-        .container.py-5.text-center
-          if contact_user
-            h2.display-2= __("Want to know more?")
-            .row.justify-content-center.w-100.mb-5
-              +singleEmployee(contact_user, 'col-sm-8 col-md-6')
-              .col-12.text-center.d-flex.justify-content-center
-                if contact_user.phone
-                  a.btn-primary.icons.rounded-circle.mr-3.p-2(href=`tel:${contact_user.phone}`)
-                    .text-white.text-center
-                      .p-1
-                        include ../assets/icons/phone.svg
-                if contact_user.email
-                  a.btn-primary.icons.rounded-circle.p-2(href=`mailto:${contact_user.email}?subject=Contact request for educational appointment `)
-                    .text-white.text-center
-                      .p-1
-                        include ../assets/icons/mail.svg
-
-          .px-lg-5
-            .px-lg-5
-              h2.text-center: +translate("Contact us")
-              p.mb-5.text-center.text-muted: +translate("Let’s connect! Our admissions team will call you soon to chat about our courses and your goals")
-              .px-md-5
-                .px-md-5
-                  .px-sm-5.mb-5
-                    +contactform
 

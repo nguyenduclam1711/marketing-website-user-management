@@ -8,7 +8,7 @@ mixin adminButtonGroup(model, path)
         if model && !model.languageVersion
           a.btn.btn-outline-primary(href="/admin/"+path+"/"+model.slug+"/l18n")="Create german version"
 
-      button.btn.btn-primary.ml-2(type='submit')=editPath ? "Update" :"New"
+      button.btn.btn-primary(type='submit')=editPath ? "Update" :"New"
 
     if model && !!model.language && !!model.languageVersion
       div

@@ -155,8 +155,8 @@ app.use(async (req, res, next) => {
     const headerCat = await Menulocation.findOne({name: 'header'})
     const [locations, footerPages, headerPages] = await Promise.all([
       Location.find({}).exec(),
-      Page.find(Object.assign(query, {menulocations: {$in: [footerCat]}})),
-      Page.find(Object.assign(query, {menulocations: {$in: [headerCat]}}))
+      Page.find(Object.assign(query, {menulocations: {$in: [footerCat]}})).sort({order: 1}),
+      Page.find(Object.assign(query, {menulocations: {$in: [headerCat]}})).sort({order: 1})
     ])
 
     navData = {

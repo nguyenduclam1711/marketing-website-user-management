@@ -103,10 +103,10 @@ nav.navbar {
         transform: skew(-45deg) scale(1, 0.5);
         background: $blue;
         height: 100%;
-        width: 101%;
+        width: calc(100% + 2px);
         top: 0;
         opacity: 0;
-        left: 0;
+        left: -1px;
         display: block;
         position: absolute;
         z-index: -1;

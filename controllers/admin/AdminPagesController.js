@@ -76,6 +76,7 @@ module.exports.createPage = async (req, res) => {
     page.title = req.body.title;
     page.content = req.body.content;
     page.order = req.body.order;
+    page.prominent = req.body.prominent === "on" ? true : false;
     page.menulocations = req.body.menulocations;
 
     await page.save();
@@ -107,6 +108,7 @@ module.exports.updatePage = async (req, res) => {
     page.title = req.body.title;
     page.content = JSON.parse(req.body.content);
     page.order = req.body.order;
+    page.prominent = req.body.prominent === "on" ? true : false;
     page.slug = req.body.slug;
     page.menulocations = req.body.menulocations;
     await page.save();

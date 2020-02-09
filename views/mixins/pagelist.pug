@@ -1,14 +1,19 @@
 mixin pagelist(public)
-  ul.list-group
+  .row
     each page in pages
-      li.list-group-item.mb-3.hover-shadow
-        h2.mr-3=page.title
-        div.mr-3.mb-3
-          if page.order
-            span.mr-2.mb-2
-              = "Order: "
-              =page.order
-          each menulocation in page.menulocations
-            span.badge.badge-primary.mb-2.mr-2=menulocation.name
-        if user && user.admin === "true"
-          +buttonGroup(page, `pages`)
+      .col-md-3.col-sm-6.mb-3
+        .bg-white.p-3.hover-shadow
+          h2.mr-3=page.title
+          div.mr-3.mb-3
+            if page.order
+              span.mr-2.mb-2
+                = "Order: "
+                =page.order
+            if page.prominent
+              strong.mr-2.mb-2
+                = "Prominent"
+            br
+            each menulocation in page.menulocations
+              span.badge.badge-primary.mb-2.mr-2=menulocation.name
+          if user && user.admin === "true"
+            +buttonGroup(page, `pages`)

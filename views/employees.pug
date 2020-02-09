@@ -30,7 +30,5 @@ block content
 
   .overflow-hidden.pb-200
     .container.my-md-5
-      h1.bluepolygon2.z-minus.right
-        .triangle
       each employee, index in employees
           +singleEmployee(employee, (index % 2 === 0 ? "col-md-8 text-right" : "col-md-8 order-12"))
