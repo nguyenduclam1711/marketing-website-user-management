@@ -1,11 +1,8 @@
 extends layout.pug
 block content
   .jumbotron.jumbotron-fluid.text-center.bg-transparent
-    .bg-primary.position-fixed.left.top.z-minus.h-100.right
-      img.half-transparent.w-100.h-100.object-fit-cover(alt="people programming" src='/media/bg1.jpg')
-    .jumbotron-courses-container.text-white
-      h1.display-1.mt-5.mb-3.text-white=__("Company Tours")
-      p.lead.mb-3=__("Lets us visit your office.")
+    .jumbotron-courses-container
+      h1.display-1.mt-5.mb-3=__("Give Us A Tour Of Your Company")
   .container.bg-light
     .row.py-3
       .col.py-md-5
@@ -13,13 +10,12 @@ block content
           .px-md-5
             .px-md-5
               .px-lg-5.pb-lg-5.text-center
-                h3.mb-5.text-muted=__("We organize tours with our students on a regular basis.")
-                h3.mb-5.text-muted=__("Every Wednesday we perform a trip through the digital-sector and visit some of the tech startups to give our students a feeling what it means to be a developer.")
-                h3.mb-5.text-muted=__("Are you or your company interested in hosting on of this events? Write us a message!")
-                h3.mb-5.text-muted=__("We offer company tours in the following locations: ")
-                h4
-                  .mb-3
-                  each location in locations
-                    span.badge.badge-primary.mr-3.mb-3=location.name
+                h2.lead.mb-3=__("Show us what you’ve built")
+                p.text-muted=__("Building a positive company culture is something to be proud of – to show off even!")
+                p.text-muted=__("In the digital world, the physical space can be so important for employees and every Wednesday we show our students what working in a start-up can be like.")
+                p.text-muted=__("Are you or your company interested in hosting on of this events? Write us a message!")
+                h3.mb-5.text-muted=__("We offer company tours in the following locations:")
+                each location in locations
+                  span.badge.badge-primary.mr-3.mb-3=location.name
               h2.text-center=__("Get in touch!")
               +contactform
