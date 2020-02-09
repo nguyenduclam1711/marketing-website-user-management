@@ -148,10 +148,10 @@ function elementInViewport2(el) {
 window.onscroll = throttle(function () {
   showFloatings();
   countUp();
-  const homesection = document.querySelector('section.homeSection');
-  if (homesection) {
-    stickyNavigation()
-  }
+  // const homesection = document.querySelector('section.homeSection');
+  // if (homesection) {
+  //   stickyNavigation(homesection)
+  // }
 }, 50);
 
 $("#contactFormModal").on("shown.bs.modal", function (e) {
@@ -163,7 +163,9 @@ $("#contactFormModal").on("hidden.bs.modal", function (e) {
   window.document.querySelector("#track").value = "";
   window.history.replaceState({}, "/", window.history.state);
 });
-
+// $('[data-spy="scroll"]').on('activate.bs.scrollspy', function () {
+//   console.debug("yo")
+// })
 const getFileElements = document.querySelectorAll("[type='file']");
 getFileElements.forEach(el => {
   el.addEventListener("change", () => {
@@ -179,7 +181,7 @@ getFileElements.forEach(el => {
       el.value = "";
       alert ? alert.remove() : null;
       let newItem = document.createElement("div");
-      newItem.innerHTML = `<div id="invalidFile" class="alert alert-danger"                       role="alert">
+      newItem.innerHTML = `<div id="invalidFile" class="alert alert-danger" role="alert">
                              This field not accept ${Filetype}
                             </div>`;
 
@@ -254,9 +256,9 @@ window.onload = function () {
 // });
 // console.log(typedCursor)
 
-const nav = document.querySelector('nav.fixed-top');
 
 function stickyNavigation(element) {
+  const nav = document.querySelector('nav.navbar');
   if (window.scrollY >= element.offsetHeight / 2) {
     nav.classList.add('bg-white');
   } else {

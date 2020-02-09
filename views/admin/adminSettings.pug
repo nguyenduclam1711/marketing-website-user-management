@@ -19,40 +19,41 @@ block content
       button.btn.btn-primary(type='submit')="Save"
 
     h2 String translations
-    .row
-      .col-md-12
-        h3 New stringtranslation
-        form.mb-5.form-inline(method='POST', action='/admin/settings/stringtranslations')
-          .input-group.mr-2
-            .input-group-prepend
-              label.input-group-text.text-capitalize.d-block(for=`newtranslations`) Title
-              input.form-control(name=`title`, id=`newtranslations`, type='text', placeholder="title", value=stringtranslation ? stringtranslation.title : "")
-          each language in languages
-            .input-group.mr-2
-              .input-group-prepend
-                label.input-group-text.text-capitalize.d-block(for=`newtranslations${language._doc.title}`)= language._doc.title
-                input.form-control(name=`translations[${language._doc._id}]`, id=`newtranslations${language._doc.title}`, type='text', placeholder=language._doc.title + " version", value=stringtranslation ? stringtranslation.title : "")
-          button.btn.btn-primary(type='submit')="Create"
-        h3 Existing stringtranslation
-        each stringtranslation in stringtranslations
-          .d-flex(id=`translation_${stringtranslation.title.toLowerCase().replace(/ /g, "")}`)
-            form.mb-5.form-inline(method='POST', action= '/admin/settings/stringtranslations/update/' + stringtranslation.id + '?_method=PUT')
-              .input-group.mr-2
-                .input-group-prepend
-                  label.input-group-text.text-capitalize.d-block(for=`translations[${stringtranslation.id}_title]`) Title
-                  input.form-control(name=`title`, id=`translations[${stringtranslation.id}_title`, type='text', placeholder="title", value=stringtranslation ? stringtranslation.title : "" )
-              each language in languages
-                - translation = stringtranslation.translations.find(trans => trans.language && trans.language.title === language._doc.title)
-                .input-group.mr-2
-                  .input-group-prepend
-                    label.input-group-text.text-capitalize.d-block(for=`translations[${stringtranslation.id}_${language._doc.title}]`)= language._doc.title
-                  input.form-control(name=`translations[${language._doc._id}]`, id=`translations[${stringtranslation.id}_${language._doc.title}]`, type='text', placeholder=language._doc.title + " version", value=translation ? translation.title : "")
-              button.btn.btn-primary(type='submit')="Save"
-            if user && user.admin === "true"
-              form(method='POST', action='/admin/settings/stringtranslations/delete/' + stringtranslation.id + '?_method=DELETE')
-                button.btn.btn-outline-danger(type='submit') Delete
-
-  .btn-group
-    if stringtranslation
-      a.btn.btn-outline-primary(href="/admin/settings/stringtranslations")="Back"
-
+    #stringtranslationroot
+  //  .row
+  //    .col-md-12
+  //      h3 New stringtranslation
+  //      form.mb-5.form-inline(method='POST', action='/admin/settings/stringtranslations')
+  //        .input-group.mr-2
+  //          .input-group-prepend
+  //            label.input-group-text.text-capitalize.d-block(for=`newtranslations`) Title
+  //            input.form-control(name=`title`, id=`newtranslations`, type='text', placeholder="title", value=stringtranslation ? stringtranslation.title : "")
+  //        each language in languages
+  //          .input-group.mr-2
+  //            .input-group-prepend
+  //              label.input-group-text.text-capitalize.d-block(for=`newtranslations${language._doc.title}`)= language._doc.title
+  //              input.form-control(name=`stringtranslations[${language._doc._id}]`, id=`newtranslations${language._doc.title}`, type='text', placeholder=language._doc.title + " version", value=stringtranslation ? stringtranslation.title : "")
+  //        button.btn.btn-primary(type='submit')="Create"
+  //      h3 Existing stringtranslation
+  //      each stringtranslation in stringtranslations
+  //        .d-flex
+  //          form.mb-5.form-inline.existing-translations(method='POST', action= '/admin/settings/stringtranslations/update/' + stringtranslation.id + '?_method=PUT', id=`stringtranslation_${stringtranslation.id}`)
+  //            .input-group.mr-2
+  //              .input-group-prepend
+  //                label.input-group-text.text-capitalize.d-block(for=`stringtranslations[${stringtranslation.id}_title]`) Title
+  //                input.form-control(name=`title`, id=`stringtranslations[${stringtranslation.id}_title`, type='text', placeholder="title", value=stringtranslation ? stringtranslation.title : "" )
+  //            each language in languages
+  //              - translation = stringtranslation.translations.find(trans => trans.language && trans.language.title === language._doc.title)
+  //              .input-group.mr-2
+  //                .input-group-prepend
+  //                  label.input-group-text.text-capitalize.d-block(for=`stringtranslations[${stringtranslation.id}_${language._doc.title}]`)= language._doc.title
+  //                input.form-control(name=`stringtranslations[${stringtranslation.id}_${language._doc.title}]`, id=`stringtranslations[${stringtranslation.id}_${language._doc.title}]`, type='text', placeholder=language._doc.title + " version", value=translation ? translation.title : "")
+  //            button.btn.btn-primary(type='submit', data-stringtranslation-referenece='')="Save"
+  //          if user && user.admin === "true"
+  //            form(method='POST', action='/admin/settings/stringtranslations/delete/' + stringtranslation.id + '?_method=DELETE')
+  //              button.btn.btn-outline-danger(type='submit') Delete
+  //
+  //.btn-group
+  //  if stringtranslation
+  //    a.btn.btn-outline-primary(href="/admin/settings/stringtranslations")="Back"
+  //

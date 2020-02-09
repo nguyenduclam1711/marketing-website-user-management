@@ -1464,6 +1464,9 @@ canvas#polygons {
 .translation_preview {
   color: pink;
   font-size: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
   position: absolute;
 }
 
@@ -1486,7 +1489,7 @@ canvas#polygons {
 }
 
 .bg-md-transparent {
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(lg) {
     background-color: transparent !important;
   }
 }

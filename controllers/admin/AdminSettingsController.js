@@ -7,18 +7,28 @@ module.exports.getSettings = async (req, res) => {
   try {
     let stringtranslations = await Stringtranslation.find({})
       .populate("translations.language")
+      .sort("title")
       .exec();
     let languages = await Language.find({})
       .exec();
     let settings = await Setting.findOne({})
     let settingsKeys = Object.entries(Setting.schema.paths).filter((s, k) => s[0] !== "_id" && s[0] !== "__v" && s[0] !== "slug").map(s => s[1])
+    if (req.headers['content-type'] === 'application/json') {
+      return res.json({
+        settings,
+        stringtranslations,
+        settingsKeys,
+        languages
 
-    res.render("admin/adminSettings", {
-      settings,
-      stringtranslations,
-      settingsKeys,
-      languages
-    });
+      })
+    } else {
+      res.render("admin/adminSettings", {
+        settings,
+        stringtranslations,
+        settingsKeys,
+        languages
+      });
+    }
   } catch (err) {
     console.log(err);
   }
@@ -55,32 +65,42 @@ module.exports.createSetting = async (req, res) => {
 module.exports.createStringtranslation = async (req, res) => {
   try {
     var stringtranslation = new Stringtranslation();
+    let languages = await Language.find({})
+      .exec();
     stringtranslation.title = req.body.title;
     stringtranslation.translations = Object.keys(req.body.translations).map(trans => ({
-      language: trans,
+      language: languages.find(l => l.title === trans)._id,
       title: req.body.translations[trans]
     }));
-    stringtranslation.save(async function (err) {
-      if (err) {
-        let stringtranslations = await Stringtranslation.find({})
-          .populate("translations.language")
-          .exec();
-        let languages = await Language.find({})
-          .exec();
-        console.log("error", err);
-        req.flash("danger", `Error ${err}`);
-        res.render("admin/adminSettings", {
-          stringtranslations,
-          stringtranslation,
-          languages,
-        });
-        return;
+    return stringtranslation.save(async function (err) {
+      if (req.headers['content-type'] === 'application/json') {
+        if (err) {
+          return res.json({error: err, stringtranslation})
+        } else {
+          return res.json({stringtranslation})
+        }
+      } else {
+        if (err) {
+          let stringtranslations = await Stringtranslation.find({})
+            .populate("translations.language")
+            .exec();
+          let languages = await Language.find({})
+            .exec();
+          req.flash("danger", `Error ${err}`);
+          res.render("admin/adminSettings", {
+            stringtranslations,
+            stringtranslation,
+            languages,
+          });
+        } else {
+          req.flash("success", `Successfully created ${stringtranslation.title}`);
+          res.redirect("/admin/settings");
+        }
       }
-      req.flash("success", `Successfully created ${stringtranslation.title}`);
-      res.redirect("/admin/settings");
     })
   } catch (err) {
     console.log(err);
+    return res.json({error: err})
   }
 };
 module.exports.deleteSetting = async (req, res, next) => {
@@ -98,23 +118,25 @@ module.exports.deleteStringtranslation = async (req, res, next) => {
   try {
     const stringtranslation = await Stringtranslation.findById(req.params.id)
     await stringtranslation.remove()
-    req.flash("success", `Successfully deleted ${stringtranslation.translations[0].title}`);
-    res.redirect("/admin/settings");
+    if (req.headers['content-type'] === 'application/json') {
+      return res.json({_id: req.params.id})
+    } else {
+      req.flash("success", `Successfully deleted ${stringtranslation.translations[0].title}`);
+      res.redirect("/admin/settings");
+    }
   } catch (err) {
     console.log(err);
   }
 };
 module.exports.updateStringtranslation = async (req, res) => {
   try {
-    await Stringtranslation.findOneAndUpdate({_id: req.params.id}, {
-      title: req.body.title,
-      translations: Object.keys(req.body.translations).map(trans => ({
-        language: trans,
-        title: req.body.translations[trans]
-      }))
-    }).exec({});
-    req.flash("success", `Successfully updated ${Object.values(req.body.translations)[0]}`);
-    res.redirect("/admin/settings");
+    const result = await Stringtranslation.findOneAndUpdate({_id: req.body._id}, req.body).exec({});
+    if (req.headers['content-type'] === 'application/json') {
+      return res.json(result)
+    } else {
+      req.flash("success", `Successfully updated ${Object.values(req.body.translations)[0]}`);
+      res.redirect("/admin/settings");
+    }
   } catch (err) {
     console.log(err);
   }

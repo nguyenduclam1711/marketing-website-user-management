@@ -1,6 +1,7 @@
 import "bootstrap/js/dist/popover";
 import "bootstrap/js/dist/alert";
 import Quill from "quill/dist/quill";
+import "./settings";
 
 setTimeout(() => {
   $(".alert").alert("close");
