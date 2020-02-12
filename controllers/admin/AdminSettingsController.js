@@ -1,6 +1,7 @@
 require("dotenv").config({path: __dirname + "/../.env"});
 const Stringtranslation = require("../../models/stringtranslation");
 const Language = require("../../models/language");
+const Page = require("../../models/page");
 const Setting = require("../../models/setting");
 const {getAsyncRedis} = require("../../helpers/helper");
 
@@ -10,15 +11,19 @@ module.exports.getSettings = async (req, res) => {
       .populate("translations.language")
       .sort("title")
       .exec();
+console.debug(stringtranslations);
     let languages = await Language.find({})
+    let pages = await Page.find({})
       .exec();
     let settings = await Setting.findOne({})
     let settingsKeys = Object.entries(Setting.schema.paths).filter((s, k) => s[0] !== "_id" && s[0] !== "__v" && s[0] !== "slug").map(s => s[1])
+console.debug(settingsKeys);
     if (req.headers['content-type'] === 'application/json') {
       return res.json({
         settings,
         stringtranslations,
         settingsKeys,
+        pages,
         languages
       })
     } else {
@@ -26,6 +31,7 @@ module.exports.getSettings = async (req, res) => {
         settings,
         stringtranslations,
         settingsKeys,
+        pages,
         languages
       });
     }

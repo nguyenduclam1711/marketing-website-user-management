@@ -11,11 +11,21 @@ block content
               input.path(id=settingsKey.path, type='checkbox', name=settingsKey.path, value="on", checked=!!settings && !!settings[settingsKey.path] ? true : false )
               span.checkmark
 
+          else if settingsKey.instance === "ObjectID"
+            button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover', delay=2,  data-trigger="hover",  data-placement='top', data-content='Defines the page which will be linked in the lower blue polgon section on the right')
+              | ?
+            label(for='calltoaction') Landingpage polygon calltoaction button page
+            select#calltoaction.form-control(for='calltoaction' name='calltoaction')
+              option(value="") -- Select --
+              each page in pages
+               option(value=page._id, selected=settings.calltoaction.toString() === page._id.toString() ?  "selected" :  false )=page.title
+
           else
             .input-group.mr-2
               .input-group-prepend
                 label.input-group-text.text-capitalize.d-block(for=settingsKey)= settingsKey.path
                 input.form-control(name=settingsKey.path, id=settingsKey.path, type=settingsKey.instance === "Number" ? 'number' : `text`, value=settings ? settings[settingsKey.path] : "")
+
       button.btn.btn-primary(type='submit')="Save"
 
     h2 String translations

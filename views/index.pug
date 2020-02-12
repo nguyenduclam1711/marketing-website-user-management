@@ -186,7 +186,8 @@ block content
               div.left-shape-md: +translate("Are you a company looking to hire Grads? or would you like to become one of our partner companies and host company tours? Then ..")
           .text-center
             a.btn.btn-lg.btn-secondary.mb-3.mx-5(href='/contact', data-toggle='modal', data-target='#contactFormModal'): +translate("Apply now")
-            a.btn.btn-lg.btn-tertiary.mb-3.mx-5(href='/hire-your-digital-talents-with-dci'): +translate("Hire Grad")
+            if locals.settings.calltoaction
+              a#calltoaction.btn.btn-lg.btn-tertiary.mb-3.mx-5(href=locals.settings.calltoaction.slug)=locals.settings.calltoaction.title
         canvas.z-minus#polygons(width="1000", height="400")
 
 

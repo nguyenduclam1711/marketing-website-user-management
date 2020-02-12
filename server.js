@@ -16,6 +16,7 @@ const Page = require('./models/page')
 const Menulocation = require('./models/menulocation')
 const Location = require('./models/location')
 const Language = require('./models/language')
+const Setting = require('./models/setting')
 const {languages} = require('./seeddata')
 const flash = require('connect-flash')
 const cron = require('node-cron')
@@ -153,18 +154,24 @@ app.use(async (req, res, next) => {
       .exec()
     const footerCat = await Menulocation.findOne({name: 'footer'})
     const headerCat = await Menulocation.findOne({name: 'header'})
-    const [locations, footerPages, headerPages] = await Promise.all([
+
+    const [locations, settings, footerPages, headerPages] = await Promise.all([
       Location.find({}).exec(),
+      Setting.findOne().populate({ path: 'calltoaction', populate: { path: 'languageVersion', model: 'Page' } }).exec({}),
       Page.find(Object.assign(query, {menulocations: {$in: [footerCat]}})).sort({order: 1}),
       Page.find(Object.assign(query, {menulocations: {$in: [headerCat]}})).sort({order: 1})
     ])
-
+    if(req.session.locale){
+      settings.calltoaction = settings.calltoaction.languageVersion
+    }
     navData = {
       courses,
       locations,
+      settings,
       headerPages,
       footerPages
     }
+
     try {
       if (process.env.USE_REDIS === 'true') {
         await redisClient.setAsync(`navData${req.session.locale}`, JSON.stringify(navData))
@@ -176,13 +183,14 @@ app.use(async (req, res, next) => {
     console.log('using cached data')
   }
 
-  const {courses, locations, headerPages, footerPages} = navData
+  const {courses, settings, locations, headerPages, footerPages} = navData
 
   res.locals.user = req.user || null
   const rawPath = req.path.replace(`${req.session.locale}/`, '')
   res.locals.currentPath = rawPath
   res.locals.locations = locations
   res.locals.courses = courses
+  res.locals.settings = settings
   res.locals.headerPages = headerPages
   res.locals.footerPages = footerPages
   next()

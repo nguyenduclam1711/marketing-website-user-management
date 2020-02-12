@@ -10,6 +10,7 @@ var SettingSchema = new Schema({
   tourmailreceiver: String,
   mailreceiver: String,
   show_language_markers: Boolean,
+  calltoaction: {type: Schema.ObjectId, ref: "Page"},
 });
 
 module.exports = mongoose.model("Setting", SettingSchema);
