@@ -8,9 +8,10 @@ block content
   .container.pb-200
     .row.pt-3
       each location in eventsByLocation
-        .col-md-6
-          h2=location.name
-          each event in location.events
-            +singleEvent(event)
+        if location.events.length > 0
+          .col-md-6
+            h2=location.name
+            each event in location.events
+              +singleEvent(event)
 
 

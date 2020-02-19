@@ -1,4 +1,4 @@
-require("dotenv").config({ path: __dirname + "/../.env" });
+require("dotenv").config({path: __dirname + "/../.env"});
 const request = require("request");
 const Event = require("../models/event");
 const Location = require("../models/location");
@@ -13,18 +13,22 @@ module.exports.getEvents = async (req, res) => {
 
 module.exports.getEventsByLocation = async (req, res) => {
   let location = await Location.findOne({
-    name: { $regex: new RegExp(req.params.location, "i") }
+    name: {$regex: new RegExp(req.params.location, "i")}
   });
 
   if (location) {
     let events = await Event.find({
       location: location._id,
-      start: { $gt: new Date() }
+      start: {$gt: new Date()}
     });
-    res.render("eventsByLocation", {
-      events,
-      location
-    });
+    if (events && events.length > 0) {
+      res.render("eventsByLocation", {
+        events,
+        location
+      });
+    } else {
+      res.redirect("/events");
+    }
   } else {
     res.redirect("/events");
   }

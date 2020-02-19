@@ -93,13 +93,12 @@ module.exports.landingpage = async (req, res) => {
     }
     const [nonComanyStoriesRes, companyStoriesRes, locationsRes, partnersRes, coursesRes, contact_user, events] = indexData;
 
-    // console.debug(companyStoriesRes)
     res.render('index', {
       events,
       companyStories: companyStoriesRes.length !== 0 ? companyStoriesRes : nonComanyStoriesRes.splice(nonComanyStoriesRes.length, nonComanyStoriesRes.length + 3),
       nonComanyStories: nonComanyStoriesRes.splice(0, 3),
       partners: partnersRes,
-      locations: locationsRes,
+      locations: locationsRes.filter(l => events.map(e => e.location._id).includes(l._id)),
       contact_user,
       courses: coursesRes
     })
