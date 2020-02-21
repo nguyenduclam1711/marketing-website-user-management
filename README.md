@@ -2,11 +2,11 @@
 
 [![Build Status](https://travis-ci.org/DigitalCareerInstitute/marketing-website.svg?branch=master)](https://travis-ci.org/DigitalCareerInstitute/marketing-website)
 
-![Screenshot](screenshot.jpg)
+![Screenshot](screenshot.png)
 
 ## Architecture:
 
-NodeJs/Express/Passport/Pug
+NodeJs/Express/Passport/Pug/Redis, React in the backend
 
 [Live version](https://digitalcareerinstitute.org)  
 
