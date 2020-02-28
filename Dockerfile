@@ -4,6 +4,6 @@ WORKDIR /home/node
 COPY . .
 RUN npm install
 USER node
-EXPOSE 7000
+EXPOSE 3000
 COPY --chown=node:node . .
 CMD [ "npm", "run", "dev" ]

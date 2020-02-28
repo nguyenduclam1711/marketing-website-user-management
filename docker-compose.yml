@@ -1,6 +1,6 @@
 version: '3'
 services:
-  
+
   mongo:
     container_name: mongo
     image: mongo
@@ -16,7 +16,7 @@ services:
     depends_on:
       - mongo
     ports:
-      - 7000:7000
+      -3000:3000
     links:
       - mongo
     environment:
