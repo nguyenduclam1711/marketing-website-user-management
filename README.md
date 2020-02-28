@@ -14,30 +14,33 @@ NodeJs/Express/Passport/Pug/Redis, React in the backend
 
 1. Install `NodeJS/npm`
 1. Install `MongoDB`
-1. copy the `.env.example` to `.env` and fill in the neccessary secret keys (you get them from an admin).
+1. Install caching `Redis`. [Install info](https://redis.io/download#installation)
+1. copy the `.env.example` to `.env` and fill in the neccessary secret keys (you get them from an admin): ``
+1. It can happend that it complains about a missing global `webpack` and `webpack-cli`. Just install them global: `npm i webpack webpack-cli -g`
 
 
 #### Example .env:
 ```
-PORT=4000
+PORT=3000
 MONGOURL=mongodb://localhost:27017/marketing-website
 DOMAIN=localhost
-
-EVENTBRIDE_API_KEY=
-
-MAILHOST=
-MAILUSER=
-MAILPW=
+EVENTBRIDE_API_KEY=XXXXXXXXXXXXXXXXXXXX
+MAILHOST=XXXXXX.XXXXXXXXXX.com
+MAILUSER=XXXXXXXXXXXX
+MAILPW=XXXXXXXXXXXXXX
 MAILPORT=587
-MAILRECEIVER=you@development.org
-IMAGE_UPLOAD_DIR=uploads/images
-
+MAILRECEIVER=developer@digitalcareerinstitute.org
+TOURMAILRECEIVER=developer@digitalcareerinstitute.org
+IMAGE_UPLOAD_DIR=uploads/images/
 USE_REDIS=true
-URL=
-AUTHORIZATION=
+AUTHORIZATION='auth xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us14'
+URL='https://us14.api.mailchimp.com/3.0/lists/xxxxxxxxxx'
+CRONINTERVAL="0 0 * * *"
+CLIENT_ID="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+CLIENT_SECRET="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+SESSION_KEY=digitalcareerinstitute
+SESSION_SECRET=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
-CLIENT_ID=
-CLIENT_SECRET=
 ```
 
 ## Run the app
