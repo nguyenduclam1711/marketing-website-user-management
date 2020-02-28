@@ -55,7 +55,6 @@
     "redis": "^2.8.0",
     "sass-loader": "^7.1.0",
     "url-loader": "^3.0.0",
-    "webpack": "^4.41.5",
     "webpack-cli": "^3.2.3",
     "xml2json": "^0.11.2"
   },
@@ -66,7 +65,8 @@
     "mocha": "^5.2.0",
     "nodemon": "^1.17.5",
     "request": "^2.88.0",
-    "supertest": "^3.3.0"
+    "supertest": "^3.3.0",
+    "webpack": "^4.41.6"
   },
   "scripts": {
     "start": "node ./index.js",
