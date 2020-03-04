@@ -137,13 +137,17 @@ exports.updateLocaleFile = async () => {
       .exec();
     let locales = [];
     stringtranslations.map(strTrans => {
+
       strTrans.translations.map(string => {
+        if (!!string.language){
         locales[string.language.title] = locales[string.language.title] ? {
           ...locales[string.language.title],
           [strTrans.title]: string.title
         } : {[strTrans.title]: string.title}
+        }
       })
     });
+
     let localesFolder = path.resolve(__dirname, "../locales");
     const promises = Object.entries(locales).map(([loc, value]) => {
       fs.writeFileSync(`${localesFolder}/${loc}.json`, JSON.stringify(value));

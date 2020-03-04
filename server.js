@@ -77,7 +77,14 @@ i18n.configure({
   autoReload: true,
   directory: __dirname + '/locales'
 })
+
 app.use(i18n.init)
+app.use((req, res, next) => {
+ // console.log('i18n lan ==> ',i18n.locale)
+  res.setLocale(req.params.locale || '');
+  next();
+});
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET || 'notaverysecuresecret',
@@ -161,7 +168,7 @@ app.use(async (req, res, next) => {
       Page.find(Object.assign(query, {menulocations: {$in: [footerCat]}})).sort({order: 1}),
       Page.find(Object.assign(query, {menulocations: {$in: [headerCat]}})).sort({order: 1})
     ])
-    if(req.session.locale){
+    if (!!req.session.locale && !!settings.calltoaction) {
       settings.calltoaction = settings.calltoaction.languageVersion
     }
     navData = {
