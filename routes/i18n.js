@@ -3,6 +3,7 @@ const router = express.Router();
 const i18n = require("i18n");
 
 router.all(/^\/(\w{2}\/)+(.*)/, handleLangUrl);
+//TODO clear console.logs after i18n works as expected
 
 function handleLangUrl(req, res, next) {
   var lang = req.params[0].slice(0, 2);
