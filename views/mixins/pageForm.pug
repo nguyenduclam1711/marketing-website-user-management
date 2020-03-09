@@ -40,3 +40,8 @@ mixin pageForm
       label(for='content') Content
       #editor(value=editPath ? page.content : "")
       textarea#inputContent.d-none(name='content', type='password', placeholder='Content', required='', )=editPath ? JSON.stringify(page.content) : ""
+    .btn-group
+      if editPath
+        a.btn.btn-outline-primary(href="/admin/pages")="Back"
+        a.btn.btn-outline-primary( href="/pages/"+page.slug)="Show"
+      button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Page"
