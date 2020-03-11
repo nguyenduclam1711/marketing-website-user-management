@@ -7,7 +7,6 @@ dump.rdb
 *.map
 public/*
 backup.sh
-restore.sh
 backup
 *.log
 .idea
