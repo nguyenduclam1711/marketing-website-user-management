@@ -40,13 +40,13 @@ module.exports.fetchevents = async (req, res) => {
         if (body.error) {
           console.log("error:", body);
         }
-          
+
         for await (let event of body.events) {
           try {
             const existingEvent = await Event.findOne({
               eventbride_id: event.id
             });
-            if (!existingEvent) {
+            if (!existingEvent && event.venue) {
               let location = await Location.findOne({
                 name: { $regex: new RegExp(event.venue.address.city, "i") }
               });
