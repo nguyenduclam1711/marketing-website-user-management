@@ -113,40 +113,41 @@ module.exports.contactLocations = async (req, res) => {
   })
 };
 module.exports.contact = async (req, res, next) => {
-  const {name, email, body, phone, locations, TermsofService} = req.body
+  try {
+    const {name, email, body, phone, locations, TermsofService} = req.body
 
-  if (req.body.age) {
-    console.log('Bot stepped into honeypot!')
-    req.flash(
-      'success',
-      'Thanks for your message. We will reply to you as soon as possible.'
-    )
-    res.redirect(req.headers.referer)
-    next()
-    return;
-  }
-  if (!email || !name || !body || !phone || !locations || !TermsofService) {
-    req.flash('danger', 'Please fill out all form fields')
-    res.redirect(req.headers.referer)
-    next()
-    return;
-  }
-  const contact = new Contact()
-  const track = req.body.track || 'https://digitalcareerinstitute.org';
-  contact.name = req.body.name
-  contact.email = req.body.email
-  contact.phone = req.body.phone.replace(/[a-z]/g, '')
-  contact.track = track
-  contact.body = req.body.body
-  contact.createdAt = new Date()
-  contact.isCompany = !!req.body.companytour
-  contact.locations = req.body.locations
-  if (!contact.email) {
-    res.redirect(req.headers.referer)
-  }
-  const location = await Location.findById(req.body.locations)
+    if (req.body.age) {
+      console.log('Bot stepped into honeypot!')
+      req.flash(
+        'success',
+        'Thanks for your message. We will reply to you as soon as possible.'
+      )
+      res.redirect(req.headers.referer)
+      next()
+      return;
+    }
+    if (!email || !name || !body || !phone || !locations || !TermsofService) {
+      req.flash('danger', 'Please fill out all form fields')
+      res.redirect(req.headers.referer)
+      next()
+      return;
+    }
+    const contact = new Contact()
+    const track = req.body.track || 'https://digitalcareerinstitute.org';
+    contact.name = req.body.name
+    contact.email = req.body.email
+    contact.phone = req.body.phone.replace(/[a-z]/g, '')
+    contact.track = track
+    contact.body = req.body.body
+    contact.createdAt = new Date()
+    contact.isCompany = !!req.body.companytour
+    contact.locations = req.body.locations
+    if (!contact.email) {
+      res.redirect(req.headers.referer)
+    }
+    const location = await Location.findById(req.body.locations)
 
-  const mailTemplate = `Contact from: <table>
+    const mailTemplate = `Contact from: <table>
     <tr>
       <td>Message send from: </td>
       <a href=${track}>${track}</a>
@@ -173,8 +174,7 @@ module.exports.contact = async (req, res, next) => {
     </tr>
     </table>
   `
-  contact.save(async function (err) {
-    if (err) res.send(err)
+    await contact.save()
     const mailOptions = {
       from: 'contact@digitalcareerinstitute.org',
       to: req.body.companytour
@@ -186,15 +186,53 @@ module.exports.contact = async (req, res, next) => {
       text: mailTemplate,
       html: mailTemplate
     }
-    const info = await sendMail(res, req, mailOptions)
+    let hubspotPromise = new Promise(()=>{})
+    if (!!process.env.HUBSPOT_API_KEY) {
+      var options = {
+        method: 'POST',
+        url: 'https://api.hubapi.com/contacts/v1/contact/',
+        qs: {hapikey: process.env.HUBSPOT_API_KEY},
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: {
+          properties:
+            [
+              {property: 'firstname', value: req.body.name.split(' ')[0]},
+              {property: 'lastname', value: req.body.name.split(' ').slice(1).join(' ')},
+              {property: 'email', value: req.body.email},
+              {property: 'phone', value: req.body.phone},
+              {
+                property: 'form_payload',
+                value: JSON.stringify({
+                  'track': req.body.track,
+                  'locations': req.body.locations,
+                  'is_company': req.body.isCompany
+                })
+              }
+            ],
+        },
+        json: true
+      };
+      hubspotPromise = await request(options)
+    }
+
+    const info = sendMail(res, req, mailOptions)
+    const resolved = await Promise.all([info, hubspotPromise])
     req.flash(
       'success',
       'Thanks for your message. We will reply to you as soon as possible.'
-    )
+    );
     console.log('Message sent: %s', info.messageId)
     res.redirect(req.headers.referer.replace('/contact', ''))
     next()
-  })
+  } catch (e) {
+    console.error(`Error in /controllers/IndexController.js`)
+    console.error(e)
+
+    req.flash('danger', JSON.stringify(e));
+    next()
+  }
 }
 module.exports.tour = async (req, res) => {
   try {
