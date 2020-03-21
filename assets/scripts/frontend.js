@@ -311,3 +311,48 @@ if (notFoundTimer) {
     }
   }, 1000);
 }
+const matomodomainname = window.location.hostname;
+var matomocookiename =
+  "matomooptout" + matomodomainname.replace(/\./g, "");
+var showncookiename = "sfprivacy" + matomodomainname.replace(/\./g, "");
+if (
+  document.cookie.indexOf(matomocookiename) < 0 &&
+  document.cookie.indexOf(showncookiename) !== -1
+) {
+  //TODO add GA code here
+}
+const cookieButton = document.getElementById("cookiehint");
+const cookieRejectButton = document.getElementById("cookieRejectButton");
+if (cookieRejectButton) {
+  cookieRejectButton.addEventListener("click", e => {
+    e.preventDefault();
+    var matomocookienamevalue =
+      matomocookiename +
+      "=" +
+      "optedout;expires=Wed, 1 Jan 2100 00:00:00 UTC;path=/";
+    document.cookie = matomocookienamevalue;
+    hideCookieHint();
+  });
+}
+if (cookieButton) {
+  if (document.cookie.indexOf(showncookiename) < 0) {
+    setTimeout(function() {
+      cookieButton.classList.add("shown");
+    }, 500);
+  }
+  document
+    .getElementById("cookieCloseButton")
+    .addEventListener("click", e => {
+      e.preventDefault();
+      hideCookieHint();
+    });
+}
+const hideCookieHint = () => {
+  var showncookienamevalue =
+    showncookiename +
+    "=" +
+    "shown;expires=Wed, 1 Jan 2100 00:00:00 UTC;path=/";
+  document.cookie = showncookienamevalue;
+  cookieButton.classList.remove("shown");
+};
+

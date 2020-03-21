@@ -1402,7 +1402,7 @@ canvas#polygons {
   min-height: 33vh;
 }
 
-.alert {
+.alert.flash {
   position: fixed;
   bottom: 50px;
   z-index: 999999;
@@ -1540,4 +1540,31 @@ body[class*="pages-"] {
 .transform-absolute-center{
   top: 50%;
   transform: translateY(-50%);
+}
+
+
+#cookiehint {
+  transition: opacity .3s ease, transform .3s ease;
+  transform: translateY(100%);
+
+  &.shown {
+    transform: translateY(0);
+  }
+
+  .alert {
+    border-radius: 0;
+
+    svg {
+      min-width: 30px;
+      width: 1em;
+      fill: white;
+      vertical-align: text-top;
+    }
+  }
+}
+
+.text-underline {
+  &, &:link {
+    text-decoration: underline !important;
+  }
 }
