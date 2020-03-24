@@ -15,7 +15,7 @@ module.exports.renderRegister = (req, res) => {
   if (req.user) {
     res.redirect("/admin");
   }
-  res.render("register");
+   res.render("register");
 };
 sendVerificationMail = async (res, req, userToken) => {
   const verificationLink = `${getRequestUrl(req)}/users/verify/${userToken}`;
@@ -32,17 +32,8 @@ module.exports.register = async (req, res) => {
   const email = req.body.email;
   const username = req.body.username;
   const password = req.body.password;
-
-  // Validation
-  //TODO validate user registration input
-   check("email", "Email is required").notEmpty();
-  check("email", "Email is not valid").isEmail();
-   check("username", "Username is required").notEmpty();
-   check("password", "Password is required").notEmpty();
-   check("password2", "Passwords do not match").equals(req.body.password);
-
   const errors = validationResult(req);
-  console.log("errors", errors);
+
   if (!errors.isEmpty()) {
     req.flash(
       "danger",
@@ -51,13 +42,12 @@ module.exports.register = async (req, res) => {
         .map(i => i.msg)
         .join(", ")
     );
-    res.render("register");
+    res.render("register", {
+      error: errors.array().map(i => i.msg)
+        .join(", ")
+    });
   } else {
-    const user = await User.findOne({ email: req.body.email });
-    if (user) {
-      req.flash("danger", `Email already taken`);
-      res.redirect("/users/register");
-    } else {
+    console.log('register ==> OK')
       const userToken = uuid(4);
       const newUser = new User({
         email: email,
@@ -65,22 +55,20 @@ module.exports.register = async (req, res) => {
         password: password,
         token: userToken
       });
-
       User.createUser(newUser, async (err, user) => {
         if (err) throw err;
         try {
-          const response = await sendVerificationMail(res, req, userToken);
+          await sendVerificationMail(res, req, userToken);
           req.flash(
             "success",
             `Email ${email} registered. Please check your mails for verification.`
           );
-          res.redirect("/users/login");
+         return res.redirect("/users/login");
         } catch (e) {
           req.flash("danger", `A error occured, please try it later again!`);
           res.redirect(req.headers.referer);
         }
       });
-    }
   }
 };
 module.exports.login = function(req, res, next) {
