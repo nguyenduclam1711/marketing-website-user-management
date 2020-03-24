@@ -1,5 +1,5 @@
 mixin navigation
-  nav.navbar.navbar-expand-lg.navbar-light.py-0.bg-tranition.px-3.px-md-3.bg-light-grey.bg-md-transparent(class=currentPath == "/" ? " position-absolute top w-100 z-foreground" : "")
+  nav.navbar.navbar-expand-lg.navbar-light.py-0.bg-tranition.px-3.px-md-3.bg-light-grey.bg-md-transparent.flex-column(class=currentPath == "/" ? " position-absolute top w-100 z-foreground" : "")
     .align-items-stretch(class=currentPath.includes('admin') ? ' container-fluid' : " container" )
       a.navbar-brand.text-primary.h-60(href="/")
         include ../../assets/media/dci.svg
@@ -40,3 +40,6 @@ mixin navigation
           else
             li.position-relative.nav-item
               a.mx-0.mx-lg-2.nav-link.d-flex.align-items-center.h-100.text-uppercase(href="/i18n/en") EN
+    .container
+      .navbar-collapse.collapse.w-100.justify-content-end
+        =__("Some campuses are running their courses remotely in response to COVID-19")
