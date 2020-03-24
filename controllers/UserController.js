@@ -35,11 +35,11 @@ module.exports.register = async (req, res) => {
 
   // Validation
   //TODO validate user registration input
-  // check("email", "Email is required").notEmpty();
+   check("email", "Email is required").notEmpty();
   check("email", "Email is not valid").isEmail();
-  // check("username", "Username is required").notEmpty();
-  // check("password", "Password is required").notEmpty();
-  // check("password2", "Passwords do not match").equals(req.body.password);
+   check("username", "Username is required").notEmpty();
+   check("password", "Password is required").notEmpty();
+   check("password2", "Passwords do not match").equals(req.body.password);
 
   const errors = validationResult(req);
   console.log("errors", errors);
