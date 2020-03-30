@@ -84,7 +84,7 @@
   position: absolute;
 }
 
-nav.navbar {
+.top {
   font-family: "Gordita", sans-serif;
   font-weight: 500;
 margin-top: 4rem;
@@ -96,7 +96,7 @@ margin-top: 4rem;
 
 @include media-breakpoint-up(md) {
 
-nav.navbar {
+.top {
   font-family: "Gordita", sans-serif;
   font-weight: 500;
 margin-top: 2.5rem;
