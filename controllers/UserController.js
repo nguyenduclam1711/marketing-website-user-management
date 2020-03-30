@@ -47,7 +47,7 @@ module.exports.register = async (req, res) => {
         .join(", ")
     });
   } else {
-    console.log('register ==> OK')
+ 
       const userToken = uuid(4);
       const newUser = new User({
         email: email,

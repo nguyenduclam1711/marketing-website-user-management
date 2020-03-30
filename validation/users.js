@@ -31,7 +31,7 @@ exports.register = [
             email: value
         }).then(user => {
             if (user) {
-                return Promise.reject("the user alrady exist");
+                return Promise.reject("the user already exist");
             }
         });
     })
