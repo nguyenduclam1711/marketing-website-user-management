@@ -3,7 +3,7 @@ mixin contactform
     .row
       .col-md-6.mb-3
         label.sr-only(for='name')=__("Name")
-        input#name.form-control(name="name" type='text', placeholder='Name', value='', required)
+        input#name.form-control(name="name" type='text', placeholder='Name', value=contact ? contact.name : '', required)
         input#track.form-control(name="track" type="hidden" )
       .col-md-6.mb-3
         label.sr-only(for='email')=__("Email")
@@ -12,16 +12,17 @@ mixin contactform
       .col-md-12
         .form-group
           label.sr-only(for='body')=__("Message")
-          textarea.mb-3#body.form-control(name="body" placeholder=__("Please, write your message here..."), value='', required)
+          textarea.mb-3#body.form-control(name="body" placeholder=__("Please, write your message here..."), value=contact ? contact.body : '', required)
         .form-group
           label.sr-only(for='phone')=__("Phone")
           input#phone.form-control(name="phone" type='number', pattern="[0-9]", placeholder='0123456789' required)
           input#age.agefield.form-control(name="age" type='text', placeholder='25')
-        label.sr-only(for='location') Location
-        select.mb-3.custom-select.text-muted.form-control(required='', name="locations")
-          option( selected disabled value="")=__("Select your location here...")
-          each location in locations
-            option(value=(location._id))=location.name
+        if locations.length > 0
+          label.sr-only(for='location') Location
+          select.mb-3.custom-select.text-muted.form-control(required='', name="locations")
+            option( contact && selected disabled value="")=__("Select your location here...")
+            each location in locations
+              option(value=(location._id))=location.name
         p.dataPrivacyLink
           label.checkbox.TermsofService.text-muted
             =__("I have read and agree to the")

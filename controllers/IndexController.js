@@ -76,8 +76,6 @@ module.exports.landingpage = async (req, res) => {
             .limit(2)
             .populate("location")
           if (event) {
-
-
             events.push(...event)
           }
         }
@@ -98,7 +96,7 @@ module.exports.landingpage = async (req, res) => {
       companyStories: companyStoriesRes.length !== 0 ? companyStoriesRes : nonComanyStoriesRes.splice(nonComanyStoriesRes.length, nonComanyStoriesRes.length + 3),
       nonComanyStories: nonComanyStoriesRes.splice(0, 3),
       partners: partnersRes,
-      locations: locationsRes.filter(l => events.map(e => e.location._id).includes(l._id)),
+      locations: locationsRes,
       contact_user,
       courses: coursesRes
     })
@@ -108,8 +106,10 @@ module.exports.landingpage = async (req, res) => {
 }
 module.exports.contactLocations = async (req, res) => {
   const locations = await Location.find({})
+  const contact = req.body
   res.render('contactLocations', {
-    locations
+    locations,
+    contact
   })
 };
 module.exports.contact = async (req, res, next) => {
@@ -126,7 +126,7 @@ module.exports.contact = async (req, res, next) => {
       next()
       return;
     }
-    if (!email || !name || !body || !phone || !locations || !TermsofService) {
+    if (!email || !name || !body || !phone || !TermsofService) {
       req.flash('danger', 'Please fill out all form fields')
       res.redirect(req.headers.referer)
       next()
@@ -168,10 +168,7 @@ module.exports.contact = async (req, res, next) => {
       <td>Content: </td>
       <td>${req.body.body}</td>
     </tr>
-    <tr>
-      <td>Locations: </td>
-      <td>${location.name}</td>
-    </tr>
+    ${req.body.locations && `<tr> <td>Locations: </td> <td>${location.name}</td> </tr>`}
     </table>
   `
     await contact.save()
