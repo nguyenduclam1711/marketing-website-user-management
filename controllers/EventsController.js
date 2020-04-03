@@ -5,7 +5,7 @@ const Location = require("../models/location");
 const fetchEventsByLocation = require("../helpers/fetch_events_by_location");
 
 module.exports.getEvents = async (req, res) => {
-  const eventsByLocation = await fetchEventsByLocation(true);
+  const eventsByLocation = await fetchEventsByLocation(true, 0);
   res.render("events", {
     eventsByLocation
   });
