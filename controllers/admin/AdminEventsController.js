@@ -30,7 +30,7 @@ module.exports.getEventsByLocation = async (req, res) => {
 };
 
 module.exports.fetchevents = async (req, res) => {
-  const url = `https://www.eventbriteapi.com/v3/organizers/19992198582/events/?order_by=start_desc&expand=venue&token=${
+  const url = `https://www.eventbriteapi.com/v3/organizers/16608751086/events/?order_by=start_desc&expand=venue&token=${
     process.env.EVENTBRIDE_API_KEY
     }`;
   try {
