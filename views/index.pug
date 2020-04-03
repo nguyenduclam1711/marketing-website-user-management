@@ -161,8 +161,7 @@ block content
             h3.mb-5.text-center.text-muted: +translate("Meet us in person in several locations in Germany")
             .row.mx-md-5
               each event in events
-                .col-sm-6
-                  +singleEvent(event)
+                +singleEvent(event)
 
           .text-center
             a.btn.btn-lg.btn-secondary.mx-5(href='/events/'): +translate("All Events")
