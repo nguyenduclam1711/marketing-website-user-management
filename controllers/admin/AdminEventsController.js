@@ -30,9 +30,7 @@ module.exports.getEventsByLocation = async (req, res) => {
 };
 
 module.exports.fetchevents = async (req, res) => {
-  const url = `https://www.eventbriteapi.com/v3/organizers/16608751086/events/?order_by=start_desc&expand=venue&token=${
-    process.env.EVENTBRIDE_API_KEY
-    }`;
+  const url = `https://www.eventbriteapi.com/v3/organizers/16608751086/events/?order_by=start_asc&expand=venue&start_date.range_start=${new Date().toISOString().substr(0, 19)}&token=${process.env.EVENTBRIDE_API_KEY}`;
   try {
     return new Promise(function (resolve, reject) {
       request(url, async (error, response, body) => {
@@ -46,8 +44,9 @@ module.exports.fetchevents = async (req, res) => {
             const existingEvent = await Event.findOne({
               eventbride_id: event.id
             });
-            if (!existingEvent && event.venue) {
-              let location = await Location.findOne({
+            let location = undefined
+            if (event.venue) {
+              location = await Location.findOne({
                 name: { $regex: new RegExp(event.venue.address.city, "i") }
               });
               if (!location) {
@@ -60,11 +59,12 @@ module.exports.fetchevents = async (req, res) => {
                 });
                 location = await location.save();
               }
-              let locationId = location._id ? location : null;
-
+            }
+            let locationId = location ? location._id : null
+            if (!existingEvent) {
               const newevent = new Event({
                 eventbride_id: event.id,
-                location: location._id,
+                location: locationId,
                 name: event.name.text,
                 text: event.description.text,
                 start: event.start.local,

@@ -8,6 +8,7 @@ const Employee = require('../models/employee')
 const request = require('request')
 const {sendMail, getAsyncRedis} = require('../helpers/helper')
 const {getAvailableTranslations} = require('./AbstractController')
+const fetchEventsByLocation = require("../helpers/fetch_events_by_location");
 let redisClient = null;
 
 module.exports.landingpage = async (req, res) => {
@@ -58,28 +59,30 @@ module.exports.landingpage = async (req, res) => {
         .sort({order: 1})
         .exec()
       indexData = await Promise.all([nonCompanyStories, companyStories, locations, partners, courses, contact_userRes])
-      const events = []
-      for await (let loc of indexData[2]) {
-        if (!events) {
-          events[
-            await Event.find({location: loc._id, start: {$gt: new Date()}})
-              .limit(2)
-              .sort({start: 1})
-              .populate("location")
-            ];
-        } else {
-          const event = await Event.find({
-            location: loc._id,
-            start: {$gt: new Date()}
-          })
-            .sort({start: 1})
-            .limit(2)
-            .populate("location")
-          if (event) {
-            events.push(...event)
-          }
-        }
-      }
+      const events = await fetchEventsByLocation(true);
+      console.debug('XXX')
+      console.debug(events)
+      // for await (let loc of indexData[2]) {
+      //   if (!events) {
+      //     events[
+      //       // await Event.find({location: loc._id, start: {$gt: new Date()}})
+      //       await Event.find({start: {$gt: new Date()}})
+      //         .limit(9)
+      //         .sort({start: 1})
+      //         .populate("location")
+      //       ];
+      //   } else {
+      //     // const event = await Event.find({ location: loc._id, start: {$gt: new Date()}
+      //     const event = await Event.find({ start: {$gt: new Date()}
+      //     })
+      //       .sort({start: 1})
+      //       .limit(9)
+      //       .populate("location")
+      //     if (event) {
+      //       events.push(...event)
+      //     }
+      //   }
+      // }
       indexData.push(events)
       if (process.env.USE_REDIS === 'true') {
         try {

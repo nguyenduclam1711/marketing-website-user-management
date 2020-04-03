@@ -8,12 +8,12 @@ block content
 
   .container-fluid.py-3.bg-white
     .row
-      each location in eventsByLocation
-        .col-md-6.table-responsive
-          h2=location.name
-          table.table.table-striped
-            each event in location.events
-              tr.white-space-nowrap(class=event.start < new Date() ? "text-lightgrey" : "")
-                td.py-0
-                  span=event.start.toISOString().replace(/-/g, "").replace("T", " ").slice(0,14)
-                td.py-0=event.name
+      // each location in eventsByLocation
+        //  h2=location.name
+      .col-md-6.table-responsive
+        table.table.table-striped
+          each event in eventsByLocation
+            tr.white-space-nowrap(class=event.start < new Date() ? "text-lightgrey" : "")
+              td.py-0
+                span=event.start.toISOString().replace(/-/g, "").replace("T", " ").slice(0,14)
+              td.py-0=event.name
