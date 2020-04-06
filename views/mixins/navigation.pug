@@ -4,7 +4,7 @@ mixin navigation
       =__("Our campuses are running their courses 100% remotely in response to COVID-19.")
     div
       =__("All our events take place virtually as webinars.")
-  nav.navbar.navbar-expand-lg.navbar-light.py-0.bg-tranition.px-3.px-md-3.bg-light-grey.bg-md-transparent.flex-column(class=currentPath == "/" ? " position-absolute top w-100 z-foreground mt-5 pt-4" : "")
+  nav.navbar.navbar-expand-lg.navbar-light.py-0.bg-tranition.px-3.px-md-3.bg-light-grey.bg-md-transparent.flex-column(class=currentPath == "/" ? " position-absolute top w-100 z-foreground pt-4" : "")
     .align-items-stretch(class=currentPath.includes('admin') ? ' container-fluid' : " container" )
       a.navbar-brand.pt-3.pl-3.text-primary.h-60(href="/")
         include ../../assets/media/dci.svg
