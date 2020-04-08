@@ -50,6 +50,10 @@ let redisClient = null;
   }
 })()
 
+if (process.env.HUBSPOT_API_KEY !== undefined) {
+  console.error('HUBSPOT_API_KEY is not defined in .env')
+  process.exit()
+}
 if (process.env.USE_REDIS !== undefined && process.env.USE_REDIS === 'true') {
   console.log('Redis enabled')
   redisClient = getAsyncRedis()
