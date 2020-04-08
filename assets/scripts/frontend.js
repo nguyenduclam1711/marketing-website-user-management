@@ -241,6 +241,9 @@ $("#downloadCSV").on("click", function (e) {
     .catch(error => console.log("error ===>", error));
 });
 
+document.getElementById("contactForm").addEventListener('submit', (e) => {
+  e.target.querySelector('button').disabled = true;
+})
 window.onload = function () {
   showFloatings();
   const errorContainer = document.querySelector(".cont_principal")
