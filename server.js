@@ -50,7 +50,7 @@ let redisClient = null;
   }
 })()
 
-if (process.env.HUBSPOT_API_KEY !== undefined) {
+if (process.env.HUBSPOT_API_KEY === undefined) {
   console.error('HUBSPOT_API_KEY is not defined in .env')
   process.exit()
 }
