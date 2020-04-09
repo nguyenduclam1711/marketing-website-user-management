@@ -42,8 +42,9 @@ function changeLang(req, res, next) {
 
       const pathWithLocale = req.headers.referer.replace(/\/\w{2}\//, "/")
       // console.log('pathWithLocale ', pathWithLocale)
-      if (req.cookies)
-        delete req.cookies.locale
+      
+      if (!!req.session && req.session.locale)
+        delete req.session.locale
       //   i18n.setLocale(res,'en',true)
 
       res.redirect(pathWithLocale);
