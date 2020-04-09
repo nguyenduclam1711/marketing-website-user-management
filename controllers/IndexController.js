@@ -60,8 +60,6 @@ module.exports.landingpage = async (req, res) => {
         .exec()
       indexData = await Promise.all([nonCompanyStories, companyStories, locations, partners, courses, contact_userRes])
       const events = await fetchEventsByLocation(true);
-      console.debug('XXX')
-      console.debug(events)
       // for await (let loc of indexData[2]) {
       //   if (!events) {
       //     events[
