@@ -11,8 +11,8 @@ function handleLangUrl(req, res, next) {
 
   if (lang === i18n.getLocales()[0] || req.path.indexOf('users') !== -1 || req.path.indexOf('admin') !== -1) {
     //console.log('handleLangUrl => locals ==> if', req.locals)
-    if (req.cookies)
-      delete req.cookies.locale
+    if (!!req.session && req.session.locale)
+      delete req.session.locale
 
     res.redirect(`/${req.params[1]}`);
 
@@ -42,7 +42,7 @@ function changeLang(req, res, next) {
 
       const pathWithLocale = req.headers.referer.replace(/\/\w{2}\//, "/")
       // console.log('pathWithLocale ', pathWithLocale)
-      
+
       if (!!req.session && req.session.locale)
         delete req.session.locale
       //   i18n.setLocale(res,'en',true)
