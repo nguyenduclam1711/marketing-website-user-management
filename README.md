@@ -4,14 +4,13 @@
 
 ![Screenshot](screenshot.png)
 
-## Architecture:
+### Architecture:
 
 NodeJs/Express/Passport/Pug/Redis, React in the backend
 
 [Live version](https://digitalcareerinstitute.org)  
 
 ## Installation:
-
 1. Install `NodeJS/npm`
 1. Install `MongoDB`
 1. Install caching `Redis`. [Install info](https://redis.io/download#installation)
@@ -40,15 +39,16 @@ CLIENT_ID="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 CLIENT_SECRET="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 SESSION_KEY=digitalcareerinstitute
 SESSION_SECRET=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+HUBSPOT_API_KEY=XXXXXXXX-00XX-0000-0000-XXXXXXXXXXXX
 
 ```
 
-## Run the app
+### Run the app
 
 Start normal: `npm start`  
 Start development: `npm run dev`
 
-## Insert example data in database
+### Insert example data in database
 
 ##### Create a few Stories and Menulocations in the selected DB.
 
@@ -58,13 +58,23 @@ Insert example data:
 Remove all seeds from database:  
 `npm run seed:delete`
 
-## Contribution
+### Contribution
 Check out the [Issues](https://github.com/DigitalCareerInstitute/marketing-website/issues) for a `good first issue`.
 And read  the [Contribution Guidelines](https://github.com/digitalcareerinstitute/marketing-website/CONTRIBUTION.md)
 
 
-## Run in docker dev environment  
+### Run in docker dev environment  
 `docker-compose up`
 
-## Deployment
+### Deployment
 In the private [infrastructure repo](https://github.com/DigitalCareerInstitute/infrastructure) we manage the deployment and the server provision per [Ansible](https://www.ansible.com/). If you need to deploy, require ssh access to the live environment from an admin.
+
+
+## Features
+
+For some actions you need a superadmin account, for some a normal admin role is enought. Contact [@spielhoelle](https://github.com/spielhoelle) or [@LeandroDCI](https://github.com/LeandroDCI) for extended access rights.
+
+### Events from eventbrite
+
+Events will be automatically fetched once a night per a automated task. It is possible to  manually delete all of them and refetch in case of urgent update. Go on [/admin/events](https://digitalcareerinstitute.org/admin/events) and use the appropriate interface action for just refetch, or first purge all.
+![Events screenshot](/docs/events.png)
