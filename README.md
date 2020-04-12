@@ -59,8 +59,9 @@ Remove all seeds from database:
 `npm run seed:delete`
 
 ### Contribution
-Check out the [Issues](https://github.com/DigitalCareerInstitute/marketing-website/issues) for a `good first issue`.
-And read  the [Contribution Guidelines](https://github.com/digitalcareerinstitute/marketing-website/CONTRIBUTION.md)
+- Check out the [Issues](https://github.com/DigitalCareerInstitute/marketing-website/issues) for a `good first issue` and let yourself invite to Trello by [@spielhoelle](mailto:thomas.kuhnert@digitalcareerinstitute.org)
+- And read  the [Contribution Guidelines](https://github.com/digitalcareerinstitute/marketing-website/CONTRIBUTION.md)
+- Be nice to each other and follow the [Code of Conduct](https://github.com/digitalcareerinstitute/marketing-website/CODE_OF_CONDUCT.md)
 
 
 ### Run in docker dev environment  
@@ -72,9 +73,46 @@ In the private [infrastructure repo](https://github.com/DigitalCareerInstitute/i
 
 ## Features
 
-For some actions you need a superadmin account, for some a normal admin role is enought. Contact [@spielhoelle](https://github.com/spielhoelle) or [@LeandroDCI](https://github.com/LeandroDCI) for extended access rights.
+For some actions you need a superadmin account, for some a normal admin role is enought. Contact [@spielhoelle](mailto:thomas.kuhnert@digitalcareerinstitute.org) or [@LeandroDCI](https://github.com/LeandroDCI) for extended access rights.
 
 ### Events from eventbrite
 
 Events will be automatically fetched once a night per a automated task. It is possible to  manually delete all of them and refetch in case of urgent update. Go on [/admin/events](https://digitalcareerinstitute.org/admin/events) and use the appropriate interface action for just refetch, or first purge all.
 ![Events screenshot](/docs/events.png)
+
+### Multilang
+Todo
+
+### Usermanagement
+Todo
+
+### Partners
+Todo
+
+### Employees
+Todo
+
+### Pages
+Todo
+
+### Stories
+Todo
+
+### Locations/Campuses
+Todo
+
+### Menu + menulocations
+Todo
+
+### Pages
+Todo
+
+### Contacts
+Todo
+
+### Courses
+Todo
+
+### Add an item
+Todo
+
