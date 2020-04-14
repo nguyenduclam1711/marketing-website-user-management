@@ -140,6 +140,13 @@ module.exports.contact = async (req, res, next) => {
     contact.phone = req.body.phone.replace(/[a-z]/g, '')
     contact.track = track
     contact.body = req.body.body
+    if (req.session.utmParams) {
+      contact.utm_source = req.session.utmParams.utm_source
+      contact.utm_medium = req.session.utmParams.utm_medium
+      contact.utm_campaign = req.session.utmParams.utm_campaign
+      contact.utm_content = req.session.utmParams.utm_content
+      contact.utm_term = req.session.utmParams.utm_term
+    }
     contact.createdAt = new Date()
     contact.isCompany = !!req.body.companytour
     contact.locations = req.body.locations
@@ -173,6 +180,7 @@ module.exports.contact = async (req, res, next) => {
     </table>
   `
     await contact.save()
+    delete req.session.utmParams
     const mailOptions = {
       from: 'contact@digitalcareerinstitute.org',
       to: req.body.companytour
@@ -205,14 +213,20 @@ module.exports.contact = async (req, res, next) => {
                 value: JSON.stringify({
                   'track': req.body.track,
                   'locations': req.body.locations,
-                  'is_company': req.body.isCompany
+                  'body': req.body.body,
+                  'is_company': req.body.isCompany,
+                  'utm_source': req.session.utmParams ? req.session.utmParams.utm_source : "",
+                  'utm_medium': req.session.utmParams ? req.session.utmParams.utm_medium : "",
+                  'utm_campaign': req.session.utmParams ? req.session.utmParams.utm_campaign : "",
+                  'utm_content': req.session.utmParams ? req.session.utmParams.utm_content : "",
+                  'utm_term': req.session.utmParams ? req.session.utmParams.utm_term : "",
                 })
               }
             ],
         },
         json: true
       };
-      hubspotPromise = await request(options)
+      hubspotPromise = request(options)
     }
 
     const info = sendMail(res, req, mailOptions)
