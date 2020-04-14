@@ -91,7 +91,9 @@ html.h-100(lang='en')
         block content
       if !currentPath.includes('admin')
         footer.site-footer(role='contentinfo' class=user ? "pb-5" : "")
-          section.bg-primary
+          section.bg-primary.position-relative
+            a.triangle.hint.top-right(target="_blank" href="https://github.com/DigitalCareerInstitute/marketing-website" title=__("Wanna contribute and help making this site better? Fork me on GitHub"))
+              include ../assets/icons/github-brands.svg
             if currentPath !== "/users/login" && currentPath !== "/users/register"
               +newsletter
             .container.pb-5
@@ -154,6 +156,7 @@ html.h-100(lang='en')
                       ="© 2020 DigitalCareerInstitute gGmbH"
                     span.text-white
                       =__("All Rights Reserved")
+
                 //div
                 //  a.font-weight-bold.text-white.mr-md-5(href="/impressum") Impressum
                 //  span.font-weight-bold.text-white Copyright
