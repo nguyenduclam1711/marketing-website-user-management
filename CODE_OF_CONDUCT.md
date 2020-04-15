@@ -15,10 +15,14 @@ Examples of behavior that contributes to creating a positive environment
 include:
 
 * Using welcoming and inclusive language
-* Being respectful of differing viewpoints and experiences
+* Different levels of experience and skill-sets are an advantage for the whole group, not a place for self-profiling and showing off
+* Don't waffle around and come to the point. Nobody likes reading books with empty phrases
+* Being respectful of differing viewpoints
+* Give feedback in a progressive and non-violent way so other don't feel offended (feedback-burger)
 * Gracefully accepting constructive criticism
 * Focusing on what is best for the community
 * Showing empathy towards other community members
+* Reproduciong stereotypes should be avoided professional environment
 
 Examples of unacceptable behavior by participants include:
 

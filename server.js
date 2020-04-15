@@ -109,9 +109,16 @@ app.use('/fonts', express.static(path.join(__dirname, 'assets/fonts/')))
 app.use('/media', express.static(path.join(__dirname, 'assets/media/')))
 app.use('/images', express.static(path.join(__dirname, 'uploads/images')))
 
-
 app.use(flash())
 
+app.use(function (req, res, next) {
+  var query = req.query
+  Object.keys(query).map(q =>  !q.startsWith('utm_') && delete query[q] )
+  if (Object.keys(query).length > 0) {
+    req.session.utmParams = query
+  }
+  next()
+})
 app.use(function (req, res, next) {
   (res.locals.messages = {
     danger: req.flash('danger'),

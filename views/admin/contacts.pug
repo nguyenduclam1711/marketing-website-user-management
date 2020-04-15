@@ -4,23 +4,38 @@ block content
     .container-fluid.text-left
       h1 Contacts
       button.btn.btn-info.mb-3#downloadCSV Download CSV
-      .row
-        .col-md-8
-          ul.list-group
-            each contact in contacts
-              li.list-group-item.mb-3.hover-shadow.bg-white
-                h2.mr-3=contact.name
-                a.d-block(href=contact.track)=contact.track
-                small.text-muted=contact.createdAt
-                p.mr-3=contact.body
-                tel.mr-3=contact.phone
-                a.mr-3(href='mailto:'+ contact.email)=contact.email
+    table.table.table-striped.table-responsive
+      thead
+        tr
+          th.sticky-top.bg-white CreatedAt
+          th.sticky-top.bg-white Email
+          th.sticky-top.bg-white Phone
+          th.sticky-top.bg-white Name
+          th.sticky-top.bg-white Location/Type
+          th.sticky-top.bg-white Message
+          th.sticky-top.bg-white Form submit origin
+      each contact in contacts
+        tr
+          td=contact.createdAt.toString()
+          td
+            a(href=`mailto:${contact.email}`)=contact.email
+          td
+           a(href=`tel:${contact.phone}`)=contact.phone
+          td=contact.name
+          td
+            if contact.locations.length
+              each location in contact.locations
+                .badge.badge-primary.mr-2=location.name
+            if contact.isEvent
+              span.badge.badge-danger= "Event"
+            if contact.isCompany === 'true'
+              span.badge.badge-warning= "Companytour"
+          td=contact.body
+          td
+            if contact.track
+              a.d-block(href=contact.track target=`_blank`)=contact.track == 'https://digitalcareerinstitute.org' ? 'landingpage' : contact.track.replace('https://digitalcareerinstitute.org', '').replace('http://digitalcareerinstitute.org', '')
+            form.d-flex.justify-content-between(method='POST', action='/admin/contacts/delete/'+contact._id +'?_method=DELETE')
+              if user && user.admin === "true" && user.superAdmin === "true"
+                .d-flex.align-items-center
+                  button.btn.btn-outline-danger(type='submit') Delete
 
-                if contact.locations.length
-                  span Interested in:
-                  each location in contact.locations
-                    .badge.badge-primary.mr-2=location.name
-                if contact.isEvent
-                  span.badge.badge-danger= "Event participation request"
-                if contact.isCompany === 'true'
-                  span.badge.badge-warning= "Is Companytour request"
