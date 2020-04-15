@@ -60,7 +60,7 @@ Remove all seeds from database:
 
 ### Contribution
 - Check out the [Issues](https://github.com/DigitalCareerInstitute/marketing-website/issues) for a `good first issue` and let yourself invite to Trello by [@spielhoelle](mailto:thomas.kuhnert@digitalcareerinstitute.org)
-- And read  the [Contribution Guidelines](https://github.com/digitalcareerinstitute/marketing-website/CONTRIBUTION.md)
+- And read  the [Contribution Guidelines](CONTRIBUTING.md)
 - Be nice to each other and follow the [Code of Conduct](https://github.com/digitalcareerinstitute/marketing-website/CODE_OF_CONDUCT.md)
 
 
