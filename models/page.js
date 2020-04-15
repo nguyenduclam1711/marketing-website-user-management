@@ -9,6 +9,9 @@ const PageSchema = new Schema({
   content: Object,
   order: Number,
   prominent: Boolean,
+  cta_button_url: String,
+  cta_button_text: String,
+  cta_text: String,
   menulocations: [{ type: Schema.ObjectId, ref: "Menulocation" }],
   language: { type: Schema.ObjectId, ref: "Language" },
   languageVersion: { type: Schema.ObjectId, ref: "Page"}

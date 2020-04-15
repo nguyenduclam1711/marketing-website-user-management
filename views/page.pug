@@ -5,8 +5,13 @@ block content
     h1.display-1.d-block=model.title
     p.lead.pSize !{model.toHTML}
 
-
+    if model.cta_text || model.cta_button_url
+      .bg-section.box-shadow.p-5.text-center.d-inline-block
+        if model.cta_text
+          p.mb-5=model.cta_text
+        if model.cta_button_url
+          a.btn.btn-outline-secondary(href=model.cta_url title=model.cta_button_text target=)=model.cta_button_text 
 
     if user && user.admin === "true"
       div.mt-3
-      a.btn.btn-outline-primary(href='/admin/pages/edit/'+model.slug) Edit page
+      a.btn.btn-outline-primary.mb-4(href='/admin/pages/edit/'+model.slug) Edit page
