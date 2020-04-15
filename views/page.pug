@@ -6,7 +6,7 @@ block content
     p.lead.pSize !{model.toHTML}
 
     if model.cta_text || model.cta_button_url
-      .bg-section.box-shadow.p-5.text-center.d-inline-block
+      .bg-section.box-shadow.p-5.text-center.d-inline-block.mb-5
         if model.cta_text
           p.mb-5=model.cta_text
         if model.cta_button_url
