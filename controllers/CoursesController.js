@@ -17,6 +17,7 @@ module.exports.getSingleCourse = async (req, res) => {
   const course = await Course.findOne({ slug: req.params.slug })
     .populate('language')
     .populate('languageVersion')
+    .populate('locations')
     .populate('successStory')
     .exec()
   renderLanguageVersion(req, res, course, 'course', 'courses')
