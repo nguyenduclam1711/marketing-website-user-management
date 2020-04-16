@@ -11,13 +11,11 @@ module.exports.getSettings = async (req, res) => {
       .populate("translations.language")
       .sort("title")
       .exec();
-console.debug(stringtranslations);
     let languages = await Language.find({})
     let pages = await Page.find({})
       .exec();
     let settings = await Setting.findOne({})
     let settingsKeys = Object.entries(Setting.schema.paths).filter((s, k) => s[0] !== "_id" && s[0] !== "__v" && s[0] !== "slug").map(s => s[1])
-console.debug(settingsKeys);
     if (req.headers['content-type'] === 'application/json') {
       return res.json({
         settings,
