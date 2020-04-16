@@ -8,6 +8,8 @@ mixin storyForm
 
     label.checkbox.text-muted(for='isCompanyStory')
       ="Company story?"
+      button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='If checked, the story will appear on the landingpage stories slider on the right side as a story, written in the perspective of a company, not a alumni')
+        | ?
       input#isCompanyStory(type='checkbox', name='isCompanyStory', value="on", checked=story && !!story.isCompanyStory ? true: false, )
       span.checkmark
     .mb-3
@@ -18,7 +20,7 @@ mixin storyForm
       .mb-3
         label(for='slug')
           | Slug
-          button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Changing this has negative effects on SEO if it not fresh created. To regenerate the slug, clear the fields and update the record.')
+          button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='When creating a page, the slug (url/permalink) derives from the title. Eg. a page with the title `Our students` generates a slug like `our-studets`. The slug is important for SEO, should kept consistent and would confuse google crawler if changed later on after creation. To regenerate/reset the slug, clear the fields and update the record.')
             | ?
         input#slug.form-control(name='slug', type='text', placeholder='Slug', value=story.slug)
     .mb-3
@@ -31,6 +33,8 @@ mixin storyForm
 
     .mb-3
       label(for='excerpt') Excerpt
+      button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Preview of the content. Shows up storyslider on the landingpage to prevent overlapping text. Use it for granular summary of the story in case the story content itself has a lyrical, very long or unconnected beginning content')
+        | ?
       input#inputExcerpt.form-control(name='excerpt', type='text', placeholder='excerpt (teaser text)', value=editPath ? story.excerpt :"" required='', autofocus='')
 
     .mb-3

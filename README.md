@@ -93,18 +93,36 @@ Todo
 Todo
 
 ### Pages
-Todo
+> Static-sites are main content deliverers and can serve as landingpages, general information
+
+`Slug`
+When creating a page, the slug (url/permalink) derives from the title. Eg. a page with the title *Our students* generates a slug like *our-studets*. The slug is important for SEO, should kept consistent and would confuse google crawler if changed later on.
+
+`Order and page location`
+Pagelocation defines where and whether the page should be visible in a menu. Prominent shows the page in the main header-navigation - otherwise its in the *GET INVOLVED* submenu sorted by order. If page location is not set, the page will be created, but not in a menu - so kind of invisible, but reachable per direct link.
+*Order* Defines the position of the pages amongst their location (header-page => 1, 2, 3 ... | footer-pages => 1, 2, 3)
+
+`Call to action`
+Offers posiibility to show a prominent box on the page frontend. If not set, bos is not visible.
+
+`Translations`
+By default all entries are created in a english namespace and are also just visible on the english version in the frontend. If you translate a entry, it creates a clone and links the original with the translated pendant. All fields are individual editable. If you switch in the frontend the language, the adequate version will be displayed.
+
+`Rich-text-editor`
+[This page](https://digitalcareerinstitute.org/pages/test) offers a lot of the build in mechanics to make pages more visually attractive. We use [Quill rich text editor](https://quilljs.com/) with some basic features to not overkill the content.
 
 ### Stories
 Todo
+`Slug` see [Pages -> Slug](https://github.com/DigitalCareerInstitute/marketing-website/#pages)
+
+`Translation` see [Pages -> Translation](https://github.com/DigitalCareerInstitute/marketing-website/#pages)
+
+`Excerpt` Preview of the content. Shows up storyslider on the landingpage to prevent overlapping text. Use it for granular summary of the story in case the story content itself has a lyrical, very long or unconnected beginning content
 
 ### Locations/Campuses
 Todo
 
 ### Menu + menulocations
-Todo
-
-### Pages
 Todo
 
 ### Contacts

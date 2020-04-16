@@ -7,7 +7,6 @@ mixin adminButtonGroup(model, path)
         a.btn.btn-outline-primary(target="_blank" href="/" + (!!model.language && model.languageVersion ? model.language.title + "/" : "") + path + "/" + model.slug)="Show"
         if model && !model.languageVersion
           a.btn.btn-outline-primary(href="/admin/"+path+"/"+model.slug+"/l18n")="Create german version"
-
       button.btn.btn-primary(type='submit')=editPath ? "Update" :"New"
 
     if model && !!model.language && !!model.languageVersion
@@ -16,3 +15,6 @@ mixin adminButtonGroup(model, path)
         strong=model.language.title
         = " - "
         a(href="/admin/"+path+"/edit/"+model.languageVersion.slug)="Go to translation"
+
+        button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='By default all entries are created in a english namespace and are also just visible on the english version in the frontend. If you translate a entry, it creates a clone and links the original with the translated pendant. All fields are individual editable. If you switch in the frontend the language, the adequate version will be displayed.')
+          | ?
