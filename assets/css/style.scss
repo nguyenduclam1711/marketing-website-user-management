@@ -688,6 +688,9 @@ body:not(.admin) {
       background-color: white;
     }
   }
+  select {
+    padding: 0 12px;
+  }
 }
 
 ::placeholder {
