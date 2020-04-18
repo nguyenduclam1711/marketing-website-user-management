@@ -15,8 +15,8 @@ mixin contactform
           textarea.mb-3#body.form-control(name="body" placeholder=__("Please, write your message here..."), required)=contact ? contact.body : ''
         .form-group
           label.sr-only(for='phone')=__("Phone")
-          input#phone.form-control(name="phone" type='number', pattern="[0-9]", placeholder='0123456789' , value=contact ? contact.phone : '', required)
-          input#age.agefield.form-control(name="age" type='text', placeholder='25')
+          input#phone.form-control(name="phone" type='number', pattern="[0-9]", placeholder='+4915117367384' , value=contact ? contact.phone : '', required)
+          input#age.agefield.form-control(name="age" tabindex="-1" type='text', placeholder='25')
         if locations.length > 0
           label.sr-only(for='location') Location
           select.mb-3.custom-select.text-muted.form-control(required='', name="locations")
