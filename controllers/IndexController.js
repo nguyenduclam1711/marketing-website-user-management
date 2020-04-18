@@ -121,7 +121,7 @@ module.exports.contact = async (req, res, next) => {
       console.log('Bot stepped into honeypot!')
       req.flash(
         'success',
-        'Thanks for your message. We will reply to you as soon as possible.'
+        res.__(`Thanks for your message`)
       )
       res.redirect(req.headers.referer)
       next()
@@ -153,45 +153,9 @@ module.exports.contact = async (req, res, next) => {
     if (!contact.email) {
       res.redirect(req.headers.referer)
     }
-    const location = await Location.findById(req.body.locations)
 
-    const mailTemplate = `Contact from: <table>
-    <tr>
-      <td>Message send from: </td>
-      <a href=${track}>${track}</a>
-   </tr>
-    <tr>
-      <td>Name: </td>
-      <td>${req.body.name}</td>
-    </tr>
-    <tr>
-      <td>Phone: </td>
-      <td>${req.body.phone}</td>
-    </tr>
-    <tr>
-      <td>Email: </td>
-      <td>${req.body.email}</td>
-    </tr>
-    <tr>
-      <td>Content: </td>
-      <td>${req.body.body}</td>
-    </tr>
-    ${req.body.locations && `<tr> <td>Locations: </td> <td>${location.name}</td> </tr>`}
-    </table>
-  `
     await contact.save()
-    delete req.session.utmParams
-    const mailOptions = {
-      from: 'contact@digitalcareerinstitute.org',
-      to: req.body.companytour
-        ? process.env.TOURMAILRECEIVER
-        : process.env.MAILRECEIVER,
-      subject: req.body.companytour
-        ? 'Company Tour request from website'
-        : 'Message on website',
-      text: mailTemplate,
-      html: mailTemplate
-    }
+
     let hubspotPromise = new Promise(()=>{})
     if (!!process.env.HUBSPOT_API_KEY) {
       var options = {
@@ -229,14 +193,23 @@ module.exports.contact = async (req, res, next) => {
       hubspotPromise = request(options)
     }
 
-    const info = sendMail(res, req, mailOptions)
-    const resolved = await Promise.all([info, hubspotPromise])
-    req.flash(
-      'success',
-      'Thanks for your message. We will reply to you as soon as possible.'
-    );
-    console.log('Message sent: %s', info.messageId)
-    res.redirect(req.headers.referer.replace('/contact', ''))
+    const resolved = await Promise.all([ hubspotPromise])
+    
+    if (req.headers['content-type'] === 'application/json') {
+      const response = {
+        message: res.__(`Thanks for your message`)
+      }
+      return res.json({
+        response
+      })
+    } else {
+      req.flash(
+        'success',
+        res.__(`Thanks for your message`)
+      );
+      res.redirect(req.headers.referer.replace('/contact', ''))
+    }
+    delete req.session.utmParams
     next()
   } catch (e) {
     console.error(`Error in /controllers/IndexController.js`)

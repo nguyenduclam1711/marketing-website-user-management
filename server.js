@@ -139,7 +139,7 @@ app.use(function (req, res, next) {
   if (match) {
     match = match[0].replace(/\//g, ' ')
     res.locals.title =
-      match.charAt(0).toUpperCase() + match.slice(1) + ' | ' + res.locals.title
+      match.charAt(0).toUpperCase() + match.slice(1).replace(/(.*)\?.*/,"$1") + ' | ' + res.locals.title
   }
   console.log(req.method, req.headers.host + req.url)
   next()

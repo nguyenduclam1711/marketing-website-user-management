@@ -2,10 +2,13 @@ import "bootstrap/js/dist/popover";
 import "bootstrap/js/dist/alert";
 import Quill from "quill/dist/quill";
 import "./settings";
+const flashAlertTimeout = 5000
 
 setTimeout(() => {
   $(".alert").alert("close");
-}, 5000);
+}, flashAlertTimeout);
+
+export var alertTimeout= flashAlertTimeout
 
 $(function () {
   $('[data-toggle="popover"]').popover();

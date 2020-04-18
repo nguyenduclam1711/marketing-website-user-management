@@ -1055,7 +1055,9 @@ div[class*=" #{$class-slug}"] {
   .mh-#{ 30 * $i } {
     max-height: 30px * $i;
   }
-
+  .h-#{ $i } {
+    height: 1em * $i;
+  }
   .#{$class-slug}-#{$i} {
     max-width: 100px * $i;
     max-height: 100px * $i;
@@ -1686,4 +1688,22 @@ body[class*="pages-"] {
     border: none;
     margin: 0;
   }
+}
+.vertical-align-revert{
+  &, > svg {
+    vertical-align: revert;
+  }
+}
+
+@keyframes spinning {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotating {
+  animation: spinning 3s linear infinite;
 }
