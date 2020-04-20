@@ -24,6 +24,11 @@ router.get('/en/:path', function(req, res) {
 });
 router.get('*', function (req, res) {
 const page=  req.path.replace('/',' ')
-  res.render('404',{page:page})
+  let backURL = req.baseUrl
+
+  res.render('404', {
+    page: page,
+    backURL: backURL
+  })
 });
 module.exports = router

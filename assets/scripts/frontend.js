@@ -267,3 +267,17 @@ function stickyNavigation(element) {
 }
 
 
+// 404 page
+let counter = 0
+  document.querySelector('.timerRedirect').innerHTML =  + '0 '
+  setInterval(function () {
+    if (counter <= 4){
+ counter += 1
+ document.querySelector('.timerRedirect').innerHTML = counter + ' '
+    }else{
+  window.location.replace('/')
+    }
+  }, 1000);
+
+
+
