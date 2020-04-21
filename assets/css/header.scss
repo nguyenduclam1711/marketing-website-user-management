@@ -84,10 +84,10 @@
   position: absolute;
 }
 
-.top {
+#nav-primary {
   font-family: "Gordita", sans-serif;
   font-weight: 500;
-margin-top: 8rem!important;
+  margin-top: 5rem!important;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -95,12 +95,9 @@ margin-top: 8rem!important;
 }
 
 @include media-breakpoint-up(lg) {
-
-.top {
-  font-family: "Gordita", sans-serif;
-  font-weight: 500;
-margin-top: 2.5rem!important;
-}
+  #nav-primary {
+    margin-top: 2.5rem!important;
+  }
 
 
   #headernav > li {
@@ -138,6 +135,9 @@ margin-top: 2.5rem!important;
   }
 }
 
+body:not(.index) #nav-primary {
+  margin-top: 0 !important;
+}
 .navbar-toggler {
   border: 0 none;
 }
