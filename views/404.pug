@@ -1,0 +1,13 @@
+extends layout.pug
+block content
+  .container.noFoundPage
+    div.cont_principal
+      div
+        h1 404 #{page} Not Found
+        a(href=backURL) Click to go back
+        p You will redirect to the landing page after 
+          span.timerRedirect 
+          span secondes
+      div.cont_aura_1
+      div.cont_aura_2
+

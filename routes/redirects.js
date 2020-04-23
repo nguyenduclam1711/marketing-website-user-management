@@ -22,5 +22,13 @@ router.get('/jobs', function(req, res) {
 router.get('/en/:path', function(req, res) {
   res.redirect(301, '/'+req.param('path'))
 });
+router.get('*', function (req, res) {
+const page=  req.path.replace('/',' ')
+  let backURL = req.baseUrl
 
+  res.render('404', {
+    page: page,
+    backURL: backURL
+  })
+});
 module.exports = router
