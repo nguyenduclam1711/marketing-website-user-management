@@ -152,7 +152,42 @@ module.exports.contact = async (req, res, next) => {
     if (!contact.email) {
       res.redirect(req.headers.referer)
     }
-
+    const location = await Location.findById(req.body.locations)
+    const mailTemplate = `Contact from: <table>
+    <tr>
+      <td>Message send from: </td>
+      <a href=${track}>${track}</a>
+   </tr>
+    <tr>
+      <td>Name: </td>
+      <td>${req.body.name}</td>
+    </tr>
+    <tr>
+      <td>Phone: </td>
+      <td>${req.body.phone}</td>
+    </tr>
+    <tr>
+      <td>Email: </td>
+      <td>${req.body.email}</td>
+    </tr>
+    <tr>
+      <td>Content: </td>
+      <td>${req.body.body}</td>
+    </tr>
+    ${req.body.locations && `<tr> <td>Locations: </td> <td>${location.name}</td> </tr>`}
+    </table>
+  ` 
+    const mailOptions = {
+      from: 'contact@digitalcareerinstitute.org',
+      to: req.body.companytour
+        ? process.env.TOURMAILRECEIVER
+        : process.env.MAILRECEIVER,
+      subject: req.body.companytour
+        ? 'Company Tour request from website'
+        : 'Message on website',
+      text: mailTemplate,
+      html: mailTemplate
+    }
     await contact.save()
     let hubspotPromise = new Promise(() => { })
     if (!!process.env.HUBSPOT_API_KEY) {
@@ -190,9 +225,8 @@ module.exports.contact = async (req, res, next) => {
       };
       hubspotPromise = request(options)
     }
-
-    const resolved = await Promise.all([ hubspotPromise])
-    
+    const info = sendMail(res, req, mailOptions)
+    const resolved = await Promise.all([info, hubspotPromise])
 
     if (req.headers['content-type'] === 'application/json') {
       const response = {
