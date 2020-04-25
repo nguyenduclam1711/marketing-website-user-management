@@ -86,7 +86,9 @@ module.exports.createCourse = async function(req, res) {
   course.massnahmeNumber = req.body.massnahmenummer;
   course.massnahmeDetails = req.body.massnahmedetails;
 
-  course.successStory = req.body.successStory;
+  if(!!req.body.successStory) {
+    course.successStory = req.body.successStory;
+  }
 
   course.archivements = [1, 2, 3, 4, 5].map(item => {
     return {
