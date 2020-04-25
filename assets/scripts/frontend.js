@@ -269,18 +269,16 @@ function stickyNavigation(element) {
   }
 }
 
-
-// 404 page
-let counter = 5
-  document.querySelector('.timerRedirect').innerHTML =  + '0 '
+const notFoundTimer = document.querySelector('.timerRedirect')
+if (notFoundTimer) {
+  let counter = 5
+  notFoundTimer.innerHTML = + '0 '
   setInterval(function () {
-    if (counter > 0){
- counter -= 1
- document.querySelector('.timerRedirect').innerHTML = counter + ' '
-    }else{
-  window.location.replace('/')
+    if (counter > 0) {
+      counter -= 1
+      notFoundTimer.innerHTML = counter + ' '
+    } else {
+      window.location.replace('/')
     }
   }, 1000);
-
-
-
+}

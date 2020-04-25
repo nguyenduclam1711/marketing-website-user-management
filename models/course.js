@@ -60,7 +60,7 @@ var CourseSchema = new Schema({
   language: { type: Schema.ObjectId, ref: "Language" },
   languageVersion: { type: Schema.ObjectId, ref: "Course" }
 });
-CourseSchema.plugin(URLSlugs("title"));
+CourseSchema.plugin(URLSlugs("headline"));
 CourseSchema.pre("remove", function (next) {
   if (!!this.languageVersion) {
     this.languageVersion.update({ $unset: { language: 1, languageVersion: 1 } }, next)
