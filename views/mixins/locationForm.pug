@@ -1,4 +1,4 @@
-mixin formLocation
+mixin locationForm
   - var editPath = currentPath.includes('admin/locations/edit')
   form.mb-5.form-signin(method='POST', action=location ?
     '/admin/locations/update/'+location.id+'?_method=PUT' :
@@ -11,6 +11,13 @@ mixin formLocation
           a.btn.btn-outline-primary(href="/admin/locations")="Back"
         button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Location" 
     
+
+    label.checkbox.text-muted(for='isCompanylocation')
+      ="Company location?"
+      button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='If is campus, the location will be featured under /contact. If not - it will be still selectable on the contact form as a location')
+        | ?
+      input#isCompanylocation(type='checkbox', name='isCampus', value="on", checked=location && !!location.isCampus ? true: false, )
+      span.checkmark
     .mb-3
       label(for='inputName') Name
       input#inputName.form-control(name='name', type='text', placeholder='Name', required='', autofocus='' value=editPath ? location.name : "")

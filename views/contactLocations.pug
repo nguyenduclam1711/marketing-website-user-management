@@ -7,7 +7,7 @@ block content
           .mt-5
             h1=__("Our campuses")
             .row.mt-5
-              each location in locations
+              each location in locations.filter(l => l.isCampus)
                 .col-sm-6.mb-5
                   h3=location.name
                   if location.email

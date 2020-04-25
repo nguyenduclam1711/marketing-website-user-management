@@ -36,6 +36,7 @@ module.exports.createLocation = (req, res) => {
   location.longitude = req.body.longitude; 
   location.latitude = req.body.latitude; 
   location.phone = req.body.phone; 
+  location.isCampus = req.body.isCampus === "on"; 
   location.save((err) => {
     if (err) res.send(err);
     req.flash("success", `Successfully created ${location.name}`);
@@ -69,6 +70,7 @@ module.exports.updateLocation = (req, res) => {
     location.longitude = req.body.longitude; 
     location.latitude = req.body.latitude; 
     location.phone = req.body.phone; 
+    location.isCampus = req.body.isCampus === "on"; 
     location.save((err) => {
       if (err) { 
         console.log(err);

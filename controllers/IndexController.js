@@ -1,7 +1,7 @@
 const Story = require('../models/story')
 const Contact = require('../models/contact')
 const Course = require('../models/course')
-const Event = require('../models/event')
+// const Event = require('../models/event')
 const Location = require('../models/location')
 const Partner = require('../models/partner')
 const Employee = require('../models/employee')
@@ -50,7 +50,7 @@ module.exports.landingpage = async (req, res) => {
         .sort('order')
         .limit(6)
         .exec()
-      const locations = Location.find({})
+      const locations = Location.find({}).sort({name: 1})
       const partners = Partner.find({})
         .sort('order')
         .exec({})
@@ -106,7 +106,7 @@ module.exports.landingpage = async (req, res) => {
   }
 }
 module.exports.contactLocations = async (req, res) => {
-  const locations = await Location.find({})
+  const locations = await Location.find({}).sort({name: 1})
   const contact = req.body
   res.render('contactLocations', {
     locations,
@@ -115,8 +115,7 @@ module.exports.contactLocations = async (req, res) => {
 };
 module.exports.contact = async (req, res, next) => {
   try {
-    const {name, email, body, phone, locations, TermsofService} = req.body
-
+    const { name, email, body, phone, locations, companytour, TermsofService } = req.body
     if (req.body.age) {
       console.log('Bot stepped into honeypot!')
       req.flash(
@@ -135,11 +134,11 @@ module.exports.contact = async (req, res, next) => {
     }
     const contact = new Contact()
     const track = req.body.track || 'https://digitalcareerinstitute.org';
-    contact.name = req.body.name
-    contact.email = req.body.email
-    contact.phone = req.body.phone.replace(/[a-z]/g, '')
+    contact.name = name
+    contact.email = email
+    contact.phone = phone.replace(/[a-z]/g, '')
     contact.track = track
-    contact.body = req.body.body
+    contact.body = body
     if (req.session.utmParams) {
       contact.utm_source = req.session.utmParams.utm_source
       contact.utm_medium = req.session.utmParams.utm_medium
@@ -148,30 +147,29 @@ module.exports.contact = async (req, res, next) => {
       contact.utm_term = req.session.utmParams.utm_term
     }
     contact.createdAt = new Date()
-    contact.isCompany = !!req.body.companytour
-    contact.locations = req.body.locations
+    contact.isCompany = !!companytour
+    contact.locations = locations
     if (!contact.email) {
       res.redirect(req.headers.referer)
     }
 
     await contact.save()
-
-    let hubspotPromise = new Promise(()=>{})
+    let hubspotPromise = new Promise(() => { })
     if (!!process.env.HUBSPOT_API_KEY) {
       var options = {
         method: 'POST',
         url: 'https://api.hubapi.com/contacts/v1/contact/',
-        qs: {hapikey: process.env.HUBSPOT_API_KEY},
+        qs: { hapikey: process.env.HUBSPOT_API_KEY },
         headers: {
           'Content-Type': 'application/json'
         },
         body: {
           properties:
             [
-              {property: 'firstname', value: req.body.name.split(' ')[0]},
-              {property: 'lastname', value: req.body.name.split(' ').slice(1).join(' ')},
-              {property: 'email', value: req.body.email},
-              {property: 'phone', value: req.body.phone},
+              { property: 'firstname', value: req.body.name.split(' ')[0] },
+              { property: 'lastname', value: req.body.name.split(' ').slice(1).join(' ') },
+              { property: 'email', value: req.body.email },
+              { property: 'phone', value: req.body.phone },
               {
                 property: 'form_payload',
                 value: JSON.stringify({
@@ -195,6 +193,7 @@ module.exports.contact = async (req, res, next) => {
 
     const resolved = await Promise.all([ hubspotPromise])
     
+
     if (req.headers['content-type'] === 'application/json') {
       const response = {
         message: res.__(`Thanks for your message`)
