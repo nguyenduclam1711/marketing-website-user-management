@@ -8,7 +8,7 @@ mixin courselist(isPublic)
               .col-md-3
                 a(href="/admin/courses/edit/"+course.slug)
                   if course.icon
-                    img.object-fit-cover.img-fluid.square(src="/media/pixel.gif" alt=course.headline style="background-image: url('/images/"+course.icon+"')")
+                    img.object-fit-cover.img-fluid.square(src="/media/pixel.gif" alt=course.headline style=`background-image: url('${course.icon ? `/images/` + course.icon : `/media/circuit-board.svg`}')`)
                   else
                     span No image uploaded
               .col-md-9

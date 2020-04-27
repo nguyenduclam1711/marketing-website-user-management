@@ -11,6 +11,7 @@ import "bootstrap/js/dist/alert";
 require("./polygons");
 
 require("../css/style.scss");
+import {alertTimeout} from "./backend.js"
 
 const toggleNL = (remove = false) => {
   document.getElementById("nlbtn").disabled = remove ? "" : "disabled";
@@ -242,7 +243,39 @@ $("#downloadCSV").on("click", function (e) {
 });
 
 document.getElementById("contactForm").addEventListener('submit', (e) => {
+  e.preventDefault()
   e.target.querySelector('button').disabled = true;
+  e.target.querySelector('#contactform_text').classList.add("d-none")
+  e.target.querySelector('#contactform_spinner').classList.remove("d-none")
+  const payload = Array.from(e.target.elements)
+    .filter(i => i.type !== "submit")
+    .reduce((acc, el) => ({ ...acc, [el.name]: el.value }), {})
+
+  fetch("/contact", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  })
+    .then(resp => resp.json())
+    .then(data => {
+      e.target.querySelector('#contactform_spinner').classList.add("d-none")
+      e.target.querySelector('#contactform_check').classList.remove("d-none")
+      Array.from(e.target.elements).map(i => i.value = "")
+      var flashMessage = document.createElement('div')
+      flashMessage.classList.add("flash", "m-0", "mr-3", "alert", "fade", "show", "alert-success")
+
+      flashMessage.innerHTML = `${data.response.message}<button class="close ml-3" type="button" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>`
+      document.body.appendChild(flashMessage)
+      setTimeout(() => {
+        $(".alert").alert("close");
+      }, alertTimeout);
+    })
+    .catch(error => {
+      e.target.querySelector('button').disabled = false;
+      console.error(error)
+    });
 })
 window.onload = function () {
   showFloatings();

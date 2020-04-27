@@ -1,11 +1,9 @@
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-var LocationSchema = new Schema({
+const LocationSchema = new Schema({
   name: {
     type: String,
-    //TODO fetching events and jobs just rely on this fixed locations. If DCI creates another location, this must be allowed here
-    enum: ["Berlin", "Hamburg", "Leipzig", "Düsseldorf", "Dortmund"],
     required: true,
     unique: true
   },
@@ -26,6 +24,9 @@ var LocationSchema = new Schema({
   },
   phone: {
     type: String
+  },
+  isCampus: {
+    type: Boolean
   },
   updatedAt: {
     type: Date,

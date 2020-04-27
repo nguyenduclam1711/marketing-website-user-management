@@ -8,28 +8,33 @@ mixin contactform
       .col-md-6.mb-3
         label.sr-only(for='email')=__("Email")
         span.text-muted
-        input#email.form-control(name="email" type='email', placeholder='email@example.com' required)
+        input#email.form-control(name="email" type='email', placeholder='email@example.com', value=contact ? contact.email : '', required)
       .col-md-12
         .form-group
           label.sr-only(for='body')=__("Message")
-          textarea.mb-3#body.form-control(name="body" placeholder=__("Please, write your message here..."), value=contact ? contact.body : '', required)
+          textarea.mb-3#body.form-control(name="body" placeholder=__("Please, write your message here..."), required)=contact ? contact.body : ''
         .form-group
           label.sr-only(for='phone')=__("Phone")
-          input#phone.form-control(name="phone" type='number', pattern="[0-9]", placeholder='0123456789' required)
-          input#age.agefield.form-control(name="age" type='text', placeholder='25')
+          input#phone.form-control(name="phone" type='number', pattern="[0-9]", placeholder='+4915117367384' , value=contact ? contact.phone : '', required)
+          input#age.agefield.form-control(name="age" tabindex="-1" type='text', placeholder='25')
         if locations.length > 0
           label.sr-only(for='location') Location
           select.mb-3.custom-select.text-muted.form-control(required='', name="locations")
             option( contact && selected disabled value="")=__("Select your location here...")
             each location in locations
-              option(value=(location._id))=location.name
+              option(value=(location._id) selected=contact && contact.locations && contact.locations[0].toString() === location._id.toString() ?  "selected" :  false )=location.name
         p.dataPrivacyLink
           label.checkbox.TermsofService.text-muted
             =__("I have read and agree to the")
-            input(type='checkbox', name='TermsofService[]', value=__("I have read and agree to the"), required)
+            input(type='checkbox', name='TermsofService', value=true, required)
             span.checkmark
           a.ml-1(data-toggle='modal', data-target='#dataPrivacy')=__("Data Privacy")
         if companytour
           input(type="hidden" name='companytour' value=true)
         .text-center
-          button.btn.btn-lg.btn-secondary.m-auto(type="submit")=__("SEND")
+          button.btn.btn-lg.btn-secondary.m-auto(type="submit")
+            div#contactform_text=__("SEND")
+            div#contactform_spinner.h-1.vertical-align-revert.rotating.text-white.d-none
+              include ../../assets/media/spinner.svg
+            div#contactform_check.h-1.vertical-align-revert.text-white.d-none
+              include ../../assets/media/check.svg

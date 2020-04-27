@@ -1,4 +1,4 @@
-mixin formLocation
+mixin locationForm
   - var editPath = currentPath.includes('admin/locations/edit')
   form.mb-5.form-signin(method='POST', action=location ?
     '/admin/locations/update/'+location.id+'?_method=PUT' :
@@ -6,24 +6,26 @@ mixin formLocation
 
     h2
       =editPath ? "Edit Location " :"Create a new Location"
-      .btn-group
-        if editPath
-          a.btn.btn-outline-primary(href="/admin/locations")="Back"
-        button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Location" 
     
+    label.checkbox.text-muted(for='iscampus')
+      ="Is physical campus?"
+      button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='If is campus, the location will be featured under /contact. If not - it will be still selectable on the contact form as a location')
+        | ?
+      input#iscampus(type='checkbox', name='isCampus', value="on", checked=location && !!location.isCampus ? true: false, )
+      span.checkmark
     .mb-3
       label(for='inputName') Name
       input#inputName.form-control(name='name', type='text', placeholder='Name', required='', autofocus='' value=editPath ? location.name : "")
       
     .mb-3
       label(for='phone') Phone
-      input#street.form-control(name='phone', type='number',
+      input#phone.form-control(name='phone', type='number',
       placeholder='Phone',  autofocus='' value=editPath ?
       location.phone : "")
       
     .mb-3
       label(for='email') Email
-      input#street.form-control(name='email', type='email',
+      input#email.form-control(name='email', type='email',
       placeholder='Email', autofocus='' value=editPath ?
       location.email : "")
     .mb-3
@@ -39,6 +41,11 @@ mixin formLocation
       input#longitude.form-control(name='longitude', type='number', placeholder='Longitude', autofocus='' value=editPath ? location.longitude : "")
       
     .mb-3
-      label(for='longitude') Latitude
-      input#longitude.form-control(name='latitude', type='number', placeholder='Latitude', autofocus='' value=editPath ?  location.latitude : "")
+      label(for='latitude') Latitude
+      input#latitude.form-control(name='latitude', type='number', placeholder='Latitude', autofocus='' value=editPath ?  location.latitude : "")
       
+
+    .btn-group
+      if editPath
+        a.btn.btn-outline-primary(href="/admin/locations")="Back"
+      button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Location" 
