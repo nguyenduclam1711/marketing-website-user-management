@@ -33,9 +33,9 @@ mixin employeeForm
 
         .my-3
           label Person available in locations:
-          .d-flex
+          .d-flex.flex-wrap
             each location in locations
-              .custom-control.custom-checkbox.mr-3
+              .custom-control.custom-checkbox.mr-3.mb-3
                 input.custom-control-input(name="locations" type='checkbox' id=location.name value=location._id  checked=(location.selected))
                 label.custom-control-label(for=location.name)=location.name
         if editPath
