@@ -8,7 +8,7 @@ mixin singleStory(story, showFullContent)
         blockquote.text-left.text-muted=story.excerpt
 
     div.text-right
-      a.text-muted.font-weight-bold(href="/stories/"+story.slug) Show More
+      a.text-muted.font-weight-bold(href="/stories/"+story.slug)=__("Show More")
     if user
       form.d-flex.justify-content-between(method='POST', action='/admin/stories/delete/'+story.slug +'?_method=DELETE')
         a.btn.btn-outline-primary.mr-2(target="_blank" href="/stories/"+story.slug) Show
