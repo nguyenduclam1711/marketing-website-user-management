@@ -15,7 +15,7 @@ block content
                 p.text-muted=__("In the digital world, the physical space can be so important for employees and every Wednesday we show our students what working in a start-up can be like.")
                 p.text-muted=__("Are you or your company interested in hosting on of this events? Write us a message!")
                 h3.mb-5.text-muted=__("We offer company tours in the following locations:")
-                each location in locations
+                each location in locations.filter(l => l.isCampus)
                   span.badge.badge-primary.mr-3.mb-3=location.name
               h2.text-center=__("Get in touch!")
               +contactform
