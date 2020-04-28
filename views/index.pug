@@ -1,11 +1,11 @@
 extends layout.pug
 block content
   .section
-    if currentPath == "/"
-      +navigation
 
     .content.overflow-hidden
-      section.homeSection.d-flex.position-relative.py-5.bg-light-grey
+      section.homeSection.d-flex.flex-column.position-relative.bg-light-grey
+        if currentPath == "/"
+          +navigation
         div.mainHome.d-flex.w-100.z-1.py-5
           div.m-auto.container.py-5
             .row
