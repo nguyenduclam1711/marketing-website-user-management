@@ -41,8 +41,10 @@ module.exports.createSetting = async (req, res) => {
   req.body.show_language_markers = req.body.show_language_markers === "on" ? true : false
   try {
     let setting = await Setting.findOneAndUpdate({}, req.body).exec({});
+    let responseMsg = `Successfully updated`
     if (!setting) {
       setting = new Setting(req.body);
+      responseMsg = `Successfully created`
     }
     setting.save(async function (err) {
       if (err) {
@@ -59,7 +61,7 @@ module.exports.createSetting = async (req, res) => {
         });
         return;
       }
-      req.flash("success", `Successfully created `);
+      req.flash("success", responseMsg);
       res.redirect("/admin/settings");
     })
   } catch (err) {
