@@ -11,6 +11,8 @@ var SettingSchema = new Schema({
   mailreceiver: String,
   show_language_markers: Boolean,
   calltoaction: {type: Schema.ObjectId, ref: "Page"},
+  announcement_banner_string: String,
+  announcement_banner_cta: String
 });
 
 module.exports = mongoose.model("Setting", SettingSchema);
