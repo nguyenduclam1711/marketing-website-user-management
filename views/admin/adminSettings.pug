@@ -1,7 +1,10 @@
 extends ../layout.pug
 block content
   .container-fluid.mt-5.text-left
-    h2 Settings
+    h2 
+      = "Settings"
+      button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover', delay=2,  data-trigger="hover",  data-placement='top', data-content='Archivements define the counting up numbers on the landing page. Number of events are limiting the events shown on the landing page and the /events page. Mail-, Tour-receiver define the email where the contact form email info should be send to. Langauage markers help you in the frontend finding the correct translation title (translation on the left side)')
+        | ?
     form.mb-5(method='POST', action='/admin/settings')
       each settingsKey in settingsKeys
         .mb-1
@@ -21,7 +24,7 @@ block content
                 select#calltoaction.form-control(for='calltoaction' name='calltoaction')
                   option(value="") -- Select --
                   each page in pages
-                    option(value=page._id, selected=settings.calltoaction.toString() === page._id.toString() ?  "selected" :  false )=page.title
+                    option(value=page._id, selected=settings.calltoaction && settings.calltoaction.toString() === page._id.toString() ?  "selected" :  false )=page.title
 
           else
             .input-group.mr-2

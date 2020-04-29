@@ -5,6 +5,7 @@ const Course = require('../models/course')
 const Location = require('../models/location')
 const Partner = require('../models/partner')
 const Employee = require('../models/employee')
+const Setting = require('../models/setting')
 const request = require('request')
 const {sendMail, getAsyncRedis} = require('../helpers/helper')
 const {getAvailableTranslations} = require('./AbstractController')
@@ -227,6 +228,7 @@ module.exports.contact = async (req, res, next) => {
       };
       hubspotPromise = request(options)
     }
+    // to save time, mail get send out without waiting for the response
     const info = sendMail(res, req, mailOptions)
     const resolved = await Promise.all([hubspotPromise])
 
