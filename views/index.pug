@@ -121,14 +121,14 @@ block content
                       .counter-item
                         .counter-number.font-weight-bold
                           h2.display-1
-                            span.counter-count=600
+                            span.counter-count=locals.settings.archivements_students || 600
                             = "+"
                         h4.font-weight-bold: +translate("Students")
                     .col-sm-6.col-md-3
                       .counter-item
                         .counter-number.font-weight-bold
                           h2.display-1
-                            span.counter-count=50
+                            span.counter-count=locals.settings.archivements_courses || 50
                             = "+"
                         h4.font-weight-bold
                           +translate("Courses started")
@@ -136,14 +136,14 @@ block content
                       .counter-item
                         .counter-number.font-weight-bold
                           h2.display-1
-                            span.counter-count=300
+                            span.counter-count=locals.settings.archivements_tours || 300
                             = "+"
                         h4.font-weight-bold: +translate("Company tours")
                     .col-sm-6.col-md-3
                       .counter-item
                         .counter-number.font-weight-bold
                           h2.display-1
-                            span.counter-count=5
+                            span.counter-count=locals.settings.archivements_locations || 5
                         h4.font-weight-bold: +translate("Locations")
 
 

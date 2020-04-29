@@ -59,7 +59,7 @@ module.exports.landingpage = async (req, res) => {
         .sort({order: 1})
         .exec()
       indexData = await Promise.all([nonCompanyStories, companyStories, locations, partners, courses, contact_userRes])
-      const events = await fetchEventsByLocation(true);
+      const events = await fetchEventsByLocation(true, res.locals.settings.number_events);
       // for await (let loc of indexData[2]) {
       //   if (!events) {
       //     events[
@@ -177,11 +177,13 @@ module.exports.contact = async (req, res, next) => {
     ${req.body.locations && `<tr> <td>Locations: </td> <td>${location.name}</td> </tr>`}
     </table>
   ` 
+  const settings = await Setting.findOne()
+  
     const mailOptions = {
       from: 'contact@digitalcareerinstitute.org',
       to: req.body.companytour
-        ? process.env.TOURMAILRECEIVER
-        : process.env.MAILRECEIVER,
+        ? settings.tourmailreceiver
+        : settings.mailreceiver,
       subject: req.body.companytour
         ? 'Company Tour request from website'
         : 'Message on website',
@@ -226,7 +228,7 @@ module.exports.contact = async (req, res, next) => {
       hubspotPromise = request(options)
     }
     const info = sendMail(res, req, mailOptions)
-    const resolved = await Promise.all([info, hubspotPromise])
+    const resolved = await Promise.all([hubspotPromise])
 
     if (req.headers['content-type'] === 'application/json') {
       const response = {
