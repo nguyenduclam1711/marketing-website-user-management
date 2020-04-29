@@ -2,15 +2,17 @@ var mongoose = require("mongoose"),
   Schema = mongoose.Schema;
 
 var SettingSchema = new Schema({
-  archivements_students: Number,
-  archivements_courses: Number,
-  archivements_tours: Number,
-  archivements_locations: Number,
-  number_events: Number,
+  landingpage_archivements_students: Number,
+  landingpage_archivements_courses: Number,
+  landingpage_archivements_tours: Number,
+  landingpage_archivements_locations: Number,
+  landingpage_number_events: Number,
+  landingpage_calltoaction: {type: Schema.ObjectId, ref: "Page"},
+  announcement_banner_string: String,
+  announcement_banner_cta: String,
   tourmailreceiver: String,
   mailreceiver: String,
   show_language_markers: Boolean,
-  calltoaction: {type: Schema.ObjectId, ref: "Page"},
 });
 
 module.exports = mongoose.model("Setting", SettingSchema);

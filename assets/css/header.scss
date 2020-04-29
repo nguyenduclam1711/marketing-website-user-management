@@ -87,7 +87,6 @@
 #nav-primary {
   font-family: "Gordita", sans-serif;
   font-weight: 500;
-  margin-top: 5rem!important;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -95,11 +94,6 @@
 }
 
 @include media-breakpoint-up(lg) {
-  #nav-primary {
-    margin-top: 2.5rem!important;
-  }
-
-
   #headernav > li {
     z-index: 0;
     > a {

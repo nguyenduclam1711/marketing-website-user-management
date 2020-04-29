@@ -1,11 +1,11 @@
 extends layout.pug
 block content
   .section
-    if currentPath == "/"
-      +navigation
 
     .content.overflow-hidden
-      section.homeSection.d-flex.position-relative.py-5.bg-light-grey
+      section.homeSection.d-flex.flex-column.position-relative.bg-light-grey
+        if currentPath == "/"
+          +navigation
         div.mainHome.d-flex.w-100.z-1.py-5
           div.m-auto.container.py-5
             .row
@@ -57,17 +57,17 @@ block content
               .offset-md-1
               .col-md-2.d-flex.flex-column.justify-content-end
                 div.font-weight-bold.h3-md 2016
-                div=__("1st Campus in Berlin")
+                div: +translate("1st Campus in Berlin")
               .col-md-2
                 div.d-md-none.font-weight-bold.h3-md 2017
-                div.d-md-none=__("New Campuses in Düsseldorf & Hamburg")
+                div.d-md-none: +translate("New Campuses in Düsseldorf & Hamburg")
               .col-md-2.flex-column.justify-content-end
                 div.d-none.d-md-block.font-weight-bold.h3-md 2018
-                div.d-none.d-md-block=__("Partnership with Facebook")
+                div.d-none.d-md-block: +translate("Partnership with Facebook")
               .col-md-2
               .col-md-2
                 div.d-none.d-md-block.font-weight-bold.h3-md 2020
-                div.d-none.d-md-block=__("Courses run 100% remotely")
+                div.d-none.d-md-block: +translate("Courses run 100% remotely")
 
             .history-line.row.text-center.text-shadow-white.pb-3.d-none.d-md-flex
               .offset-md-1
@@ -93,13 +93,13 @@ block content
               .col-md-2
               .col-md-2
                 div.d-md-block.d-none.font-weight-bold.h3-md 2017
-                div.d-md-block.d-none=__("New Campuses in Düsseldorf & Hamburg")
+                div.d-md-block.d-none: +translate("New Campuses in Düsseldorf & Hamburg")
               .col-md-2.flex-column.justify-content-end
                 div.d-md-none.font-weight-bold.h3-md 2018
-                div.d-md-none=__("Partnership with Facebook")
+                div.d-md-none: +translate("Partnership with Facebook")
               .col-md-2
                 div.font-weight-bold.h3-md 2019
-                div=__("Launched Online Marketing course and Leipzig Campus")
+                div: +translate("Launched Online Marketing course and Leipzig Campus")
 
 
 
@@ -121,14 +121,14 @@ block content
                       .counter-item
                         .counter-number.font-weight-bold
                           h2.display-1
-                            span.counter-count=600
+                            span.counter-count=locals.settings.landingpage_archivements_students || 600
                             = "+"
                         h4.font-weight-bold: +translate("Students")
                     .col-sm-6.col-md-3
                       .counter-item
                         .counter-number.font-weight-bold
                           h2.display-1
-                            span.counter-count=50
+                            span.counter-count=locals.settings.landingpage_archivements_courses || 50
                             = "+"
                         h4.font-weight-bold
                           +translate("Courses started")
@@ -136,14 +136,14 @@ block content
                       .counter-item
                         .counter-number.font-weight-bold
                           h2.display-1
-                            span.counter-count=300
+                            span.counter-count=locals.settings.landingpage_archivements_tours || 300
                             = "+"
                         h4.font-weight-bold: +translate("Company tours")
                     .col-sm-6.col-md-3
                       .counter-item
                         .counter-number.font-weight-bold
                           h2.display-1
-                            span.counter-count=5
+                            span.counter-count=locals.settings.landingpage_archivements_locations || 5
                         h4.font-weight-bold: +translate("Locations")
 
 

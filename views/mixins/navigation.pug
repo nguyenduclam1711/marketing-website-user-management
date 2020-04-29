@@ -1,11 +1,12 @@
 mixin navigation
-  if !currentPath.includes('admin')
-    .w-100.bg-primary.text-white.p-2.text-center
+  if !currentPath.includes('admin') && locals.settings && locals.settings.announcement_banner_string
+    .w-100.bg-primary.text-white.p-2.text-center.z-foreground
       div
-        =__("Our campuses are running their courses 100% remotely in response to COVID-19.")
-      div
-        =__("All our events take place virtually as webinars.")
-  nav#nav-primary.navbar.navbar-expand-lg.navbar-light.py-0.bg-tranition.px-3.px-md-3.bg-light-grey.bg-md-transparent.flex-column(class=currentPath == "/" ? " position-absolute top w-100 z-foreground pt-lg-4" : "")
+        =__(locals.settings.announcement_banner_string)
+        if locals.settings && locals.settings.announcement_banner_cta && locals.settings.announcement_banner_cta !== currentPath
+          a.btn.btn-link.ml-3.btn-secondary.py-0(href=locals.settings.announcement_banner_cta)=__("Show More")
+
+  nav#nav-primary.navbar.navbar-expand-lg.navbar-light.py-0.bg-tranition.px-3.px-md-3.bg-light-grey.bg-md-transparent.flex-column(class=currentPath == "/" ? " z-foreground " : "")
     .align-items-stretch(class=currentPath.includes('admin') ? ' container-fluid' : " container" )
       a.navbar-brand.pt-3.pl-3.text-primary.h-60(href="/")
         include ../../assets/media/dci.svg

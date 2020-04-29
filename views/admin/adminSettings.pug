@@ -1,69 +1,45 @@
 extends ../layout.pug
 block content
   .container-fluid.mt-5.text-left
-    h2 Settings
+    h2 
+      = "Settings"
+      button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover', delay=2,  data-trigger="hover",  data-placement='top', data-content='Archivements define the counting up numbers on the landing page. Number of events are limiting the events shown on the landing page and the /events page. Mail-, Tour-receiver define the email where the contact form email info should be send to. Langauage markers help you in the frontend finding the correct translation title (translation on the left side)')
+        | ?
     form.mb-5(method='POST', action='/admin/settings')
       each settingsKey in settingsKeys
         .mb-1
           if settingsKey.instance === "Boolean"
             label.checkbox.text-muted(for=settingsKey.path)
-              =settingsKey.path
+              = settingsKey.path
               input.path(id=settingsKey.path, type='checkbox', name=settingsKey.path, value="on", checked=!!settings && !!settings[settingsKey.path] ? true : false )
               span.checkmark
 
+          
           else if settingsKey.instance === "ObjectID"
-            button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover', delay=2,  data-trigger="hover",  data-placement='top', data-content='Defines the page which will be linked in the lower blue polgon section on the right')
-              | ?
-            label(for='calltoaction') Landingpage polygon calltoaction button page
-            select#calltoaction.form-control(for='calltoaction' name='calltoaction')
-              option(value="") -- Select --
-              each page in pages
-               option(value=page._id, selected=settings.calltoaction.toString() === page._id.toString() ?  "selected" :  false )=page.title
+            .input-group.mr-2
+              .input-group-prepend.w-100
+                label.input-group-text.text-capitalize.d-block(for='calltoaction') Landingpage polygon calltoaction button page
+                  button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover', delay=2,  data-trigger="hover",  data-placement='top', data-content='Defines the page which will be linked in the lower blue polgon section on the right')
+                    | ?
+                select#calltoaction.form-control(for='calltoaction' name='calltoaction')
+                  option(value="") -- Select --
+                  each page in pages
+                    option(value=page._id, selected=settings.calltoaction && settings.calltoaction.toString() === page._id.toString() ?  "selected" :  false )=page.title
 
           else
             .input-group.mr-2
-              .input-group-prepend
-                label.input-group-text.text-capitalize.d-block(for=settingsKey)= settingsKey.path
-                input.form-control(name=settingsKey.path, id=settingsKey.path, type=settingsKey.instance === "Number" ? 'number' : `text`, value=settings ? settings[settingsKey.path] : "")
+              .input-group-prepend.w-100
+                label.input-group-text.text-capitalize.d-block(for=settingsKey.path)
+                  = settingsKey.path
+                  if settingsKey.path === "announcement_banner_string"
+                    button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover', delay=2,  data-trigger="hover",  data-placement='top', data-content='Defines the text shown in the top announcement bar. This should be the english version and can be translated with exactly this string per translation key below. If empty the announcement box + cta is hidden. They translation key should not contain a period(.).')
+                      | ?
+                if settingsKey.path === "announcement_banner_string"
+                  textarea.form-control(name=settingsKey.path, id=settingsKey.path, type=settingsKey.instance === "Number" ? 'number' : `text`)=settings ? settings[settingsKey.path] : ""
+                else
+                  input.form-control(name=settingsKey.path, id=settingsKey.path, type=settingsKey.instance === "Number" ? 'number' : `text`, value=settings ? settings[settingsKey.path] : "")
 
       button.btn.btn-primary(type='submit')="Save"
 
     h2 String translations
     #stringtranslationroot
-  //  .row
-  //    .col-md-12
-  //      h3 New stringtranslation
-  //      form.mb-5.form-inline(method='POST', action='/admin/settings/stringtranslations')
-  //        .input-group.mr-2
-  //          .input-group-prepend
-  //            label.input-group-text.text-capitalize.d-block(for=`newtranslations`) Title
-  //            input.form-control(name=`title`, id=`newtranslations`, type='text', placeholder="title", value=stringtranslation ? stringtranslation.title : "")
-  //        each language in languages
-  //          .input-group.mr-2
-  //            .input-group-prepend
-  //              label.input-group-text.text-capitalize.d-block(for=`newtranslations${language._doc.title}`)= language._doc.title
-  //              input.form-control(name=`stringtranslations[${language._doc._id}]`, id=`newtranslations${language._doc.title}`, type='text', placeholder=language._doc.title + " version", value=stringtranslation ? stringtranslation.title : "")
-  //        button.btn.btn-primary(type='submit')="Create"
-  //      h3 Existing stringtranslation
-  //      each stringtranslation in stringtranslations
-  //        .d-flex
-  //          form.mb-5.form-inline.existing-translations(method='POST', action= '/admin/settings/stringtranslations/update/' + stringtranslation.id + '?_method=PUT', id=`stringtranslation_${stringtranslation.id}`)
-  //            .input-group.mr-2
-  //              .input-group-prepend
-  //                label.input-group-text.text-capitalize.d-block(for=`stringtranslations[${stringtranslation.id}_title]`) Title
-  //                input.form-control(name=`title`, id=`stringtranslations[${stringtranslation.id}_title`, type='text', placeholder="title", value=stringtranslation ? stringtranslation.title : "" )
-  //            each language in languages
-  //              - translation = stringtranslation.translations.find(trans => trans.language && trans.language.title === language._doc.title)
-  //              .input-group.mr-2
-  //                .input-group-prepend
-  //                  label.input-group-text.text-capitalize.d-block(for=`stringtranslations[${stringtranslation.id}_${language._doc.title}]`)= language._doc.title
-  //                input.form-control(name=`stringtranslations[${stringtranslation.id}_${language._doc.title}]`, id=`stringtranslations[${stringtranslation.id}_${language._doc.title}]`, type='text', placeholder=language._doc.title + " version", value=translation ? translation.title : "")
-  //            button.btn.btn-primary(type='submit', data-stringtranslation-referenece='')="Save"
-  //          if user && user.admin === "true"
-  //            form(method='POST', action='/admin/settings/stringtranslations/delete/' + stringtranslation.id + '?_method=DELETE')
-  //              button.btn.btn-outline-danger(type='submit') Delete
-  //
-  //.btn-group
-  //  if stringtranslation
-  //    a.btn.btn-outline-primary(href="/admin/settings/stringtranslations")="Back"
-  //
