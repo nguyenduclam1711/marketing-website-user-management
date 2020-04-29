@@ -21,9 +21,24 @@ mixin pageForm
         button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Pagelocation defines where and whether the page should be visible in a menu. Prominent shows the page in the main header-navigation - otherwise its in the *GET INVOLVED* submenu sorted by order. If page location is not set, the page will be created, but not in a menu - so kind of invisible, but reachable per direct link. *Order* Defines the position of the pages amongst their location (header-page => 1, 2, 3 ... | footer-pages => 1, 2, 3)')
           | ?
       input#inputOrder.form-control(name='order', type='number', placeholder='Order', autofocus='', value=editPath ? page.order : "")
+    h4.d-inline-block Call to action
+    button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='If cta_button_url or cta_text is defined, a box is shown on the page for special information. If cta_button_text is not set, it will display "GoGo gadget!"')
+      | ?
+    .mb-3
+      label(for='cta_button_url')
+        | cta_button_url
+      input#inputcta_button_url.form-control(name='cta_button_url', type='url', placeholder='cta_button_url', autofocus='', value=editPath ? page.cta_button_url : "")
+    .mb-3
+      label(for='cta_button_text')
+        | cta_button_text
+      input#inputcta_button_text.form-control(name='cta_button_text', type='text', placeholder='cta_button_text', autofocus='', value=editPath ? page.cta_button_text : "")
+    .mb-3
+      label(for='cta_text')
+        | cta_text
+      input#inputcta_text.form-control(name='cta_text', type='text', placeholder='cta_text', autofocus='', value=editPath ? page.cta_text : "")
 
     .my-3
-      label(for="menulocations") Page Location
+      label.h4(for="menulocations") Page Location
       button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Defines the Menulocation where the pages are displayed. Headerpages appear in the Header and on the landingpages "Get Involved" section. Footerpages just in the footer. If no location is defined, the page is "hidden" but accessible per direct url.')
         | ?
 
