@@ -1,40 +1,38 @@
 @font-face {
   font-family: 'Gordita-Regular';
   src: url('~/fonts/Gordita-Regular.eot');
-  /* IE9 Compat Modes */
-  src: url('~/fonts/Gordita-Regular.eot?#iefix') format('embedded-opentype'),
-    /* IE6-IE8 */
+   src: url('~/fonts/Gordita-Regular.eot?#iefix') format('embedded-opentype'),
     url('~/fonts/Gordita-Regular.woff2') format('woff2'),
-    /* Super Modern Browsers */
     url('~/fonts/Gordita-Regular.woff') format('woff'),
-    /* Pretty Modern Browsers */
     url('~/fonts/Gordita-Regular.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Gordita-Light';
-  src: url('~/foGordita-Bold nts/Gordita-Light.eot');
-  /* IE9 Compat Modes */
-  src: url('~/fonts/Gordita-Light.eot?#iefix') format('embedded-opentype'),
-    /* IE6-IE8 */
+  src: url('~/fonts/Gordita-Light.eot');
+   src: url('~/fonts/Gordita-Light.eot?#iefix') format('embedded-opentype'),
     url('~/fonts/Gordita-Light.woff2') format('woff2'),
-    /* Super Modern Browsers */
     url('~/fonts/Gordita-Light.woff') format('woff'),
-    /* Pretty Modern Browsers */
     url('~/fonts/Gordita-Light.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Gordita-Bold';
-  src: url('~/foGordita-Bold nts/Gordita-Bold.eot');
-  /* IE9 Compat Modes */
-  src: url('~/fonts/Gordita-Bold.eot?#iefix') format('embedded-opentype'),
-    /* IE6-IE8 */
+  src: url('~/fonts/Gordita-Bold.eot');
+   src: url('~/fonts/Gordita-Bold.eot?#iefix') format('embedded-opentype'),
     url('~/fonts/Gordita-Bold.woff2') format('woff2'),
-    /* Super Modern Browsers */
     url('~/fonts/Gordita-Bold.woff') format('woff'),
-    /* Pretty Modern Browsers */
     url('~/fonts/Gordita-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Gordita-Medium';
+  src: url('~/fonts/GorditaMedium.eot');
+  src: url('~/fonts/GorditaMedium.svg') format('svg');
+  src: url('~/fonts/GorditaMedium.eot?#iefix') format('embedded-opentype'),
+    url('~/fonts/GorditaMedium.woff2') format('woff2'),
+    url('~/fonts/GorditaMedium.woff') format('woff'),
+    url('~/fonts/GorditaMedium.ttf') format('truetype');
 }
 
 @import "global";
