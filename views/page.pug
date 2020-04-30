@@ -10,7 +10,7 @@ block content
         if model.cta_text
           p.mb-5=model.cta_text
         if model.cta_button_url
-          a.btn.btn-outline-secondary(href=model.cta_url title=model.cta_button_text target=)=model.cta_button_text 
+          a.btn.btn-outline-secondary(href=model.cta_url title=model.cta_button_text)=model.cta_button_text 
 
     if user && user.admin === "true"
       div.mt-3
