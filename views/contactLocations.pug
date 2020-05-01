@@ -1,42 +1,63 @@
 extends layout.pug
 block content
+  .jumbotron.jumbotron-fluid.text-center.mb-0.bg-section
+    .container
+      .row
+        .col-md-6
+          h1.display-1.mt-md-5.mb-3.pt-md-5=__("Our campuses")
+        .col-md-6
+          img.w-100(src="/media/header_contact.jpg" alt="Campus image" )
 
-    .bg-light
-      .bg-white
-        .container
-          .mt-5
-            h1=__("Our campuses")
-            .row.mt-5
-              each location in locations.filter(l => l.isCampus)
-                .col-sm-6.mb-5
-                  h3=location.name
-                  if location.email
-                    div
-                      strong
-                        ="Email: "
-                      a(href= "mailto:"+location.email)=location.email
-                  if location.phone
-                    div
-                      strong
-                        =__("Phone")+": "
-                      tel= location.phone
-                  if location.street
-                    div
-                      strong
-                        =__("Street")+": "
-                      tel= location.street
-                  if location.zip
-                    div
-                      strong
-                        =__("Zip")+": "
-                      = location.zip
+  .bg-primary
+    .container.text-center.text-white.py-5
+      .py-md-5
+        h2 Remote Learning
+        p Learn from the comfort of your home in a virtual and professional learning enviroment. Our educational Counselors will bring you up to speed and help you secure your spot.
+        .row
+          .col-md-6
+            Learn from anywhere in Germany
+          .col-md-6
+            We will equip you with the right devices
 
-    .bg-light.pb-200
-      .container.py-5
-        div.story-item.py-5
+  .bg-light
+    .bg-white
+      .container
+        .mt-5
+          .row.mt-5
+            each location, index in locations.filter(l => l.isCampus)
+              .col-sm-6.mb-5.hover-shadow(class=index % 2 === 0 ? "offset-md-6" : "")
+                .row
+                  .col-md-6.px-0
+                    .bg-primary
+                      img.object-fit-cover.img-fluid.portrait.half-transparent(src="/media/pixel.gif" alt=location.name style=`background-image: url('${location.avatar ? `/images/` + location.avatar : `/media/circuit-board.svg`}')`)
+                    h3.text-white.position-absolute.transform-absolute-center.w-100.text-center=location.name
+                  .col-md-6.d-flex.flex-column.justify-content-center
+                    if location.email
+                      div
+                        strong
+                        a(href= "mailto:"+location.email)=location.email
+                    if location.phone
+                      div
+                        strong
+                          =__("Phone")+": "
+                        tel= location.phone
+                    if location.street
+                      div
+                        strong
+                          =__("Street")+": "
+                        tel= location.street
+                    if location.zip
+                      div
+                        strong
+                          =__("Zip")+": "
+                        = location.zip
 
-          .row
-            .col-md-8.offset-md-2
-              h2.display-1.text-center.text-uppercase=__('Contact us')
-              p.mb-5.text-center.text-muted=__('Let’s connect! Our admissions team will call you soon to chat about our courses and your goals')
-              +contactform
+  .bg-light.pb-200
+    .container.py-5
+      div.story-item.py-5
+
+        .row
+          .col-md-8.offset-md-2
+            h2.display-1.text-center.text-uppercase=__('Contact us')
+            p.mb-5.text-center.text-muted=__('Let’s connect! Our admissions team will call you soon to chat about our courses and your goals')
+            +contactform

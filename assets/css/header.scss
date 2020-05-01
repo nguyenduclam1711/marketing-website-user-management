@@ -96,6 +96,10 @@
 @include media-breakpoint-up(lg) {
   #headernav > li {
     z-index: 0;
+    a {
+      font-weight: 600;
+      font-family: "Gordita-Medium", sans-serif;
+    }
     > a {
       &:after {
         content: "";
