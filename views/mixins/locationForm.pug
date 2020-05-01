@@ -2,7 +2,7 @@ mixin locationForm
   - var editPath = currentPath.includes('admin/locations/edit')
   form.mb-5.form-signin(method='POST', action=location ?
     '/admin/locations/update/'+location.id+'?_method=PUT' :
-    '/admin/locations')
+    '/admin/locations', enctype="multipart/form-data")
 
     h2
       =editPath ? "Edit Location " :"Create a new Location"
@@ -13,10 +13,17 @@ mixin locationForm
         | ?
       input#iscampus(type='checkbox', name='isCampus', value="on", checked=location && !!location.isCampus ? true: false, )
       span.checkmark
+
     .mb-3
       label(for='inputName') Name
       input#inputName.form-control(name='name', type='text', placeholder='Name', required='', autofocus='' value=editPath ? location.name : "")
       
+    .form-group
+      label.d-block(for='avatar') Location Icon
+      if location && location.avatar !== "false"
+        img.w-100.mw-150.mh-150.object-fit-cover(src="/images/"+location.avatar)
+      input#avatar.form-control-file(type='file' name='avatar')
+
     .mb-3
       label(for='phone') Phone
       input#phone.form-control(name='phone', type='number',
@@ -28,6 +35,7 @@ mixin locationForm
       input#email.form-control(name='email', type='email',
       placeholder='Email', autofocus='' value=editPath ?
       location.email : "")
+
     .mb-3
       label(for='street') Street
       input#street.form-control(name='street', type='text', placeholder='Street',  autofocus='' value=editPath ?  location.street : "")

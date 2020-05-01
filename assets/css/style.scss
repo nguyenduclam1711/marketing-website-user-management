@@ -444,6 +444,14 @@ UPCOMING EVENTS
   background-position: center;
 }
 
+.portrait {
+  width: 100%;
+  height: 0;
+  padding-top: 132%;
+  background-size: cover;
+  background-position: center;
+}
+
 .partners-logo {
   display: inline-block;
   margin: 0 1rem;
@@ -1704,4 +1712,8 @@ body[class*="pages-"] {
 
 .rotating {
   animation: spinning 3s linear infinite;
+}
+.transform-absolute-center{
+  top: 50%;
+  transform: translateY(-50%);
 }
