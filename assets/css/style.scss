@@ -491,6 +491,9 @@ UPCOMING EVENTS
     position: relative;
     background-color: white;
 
+    p {
+     word-break: break-all; 
+    }
     &:hover {
 
       &:before,

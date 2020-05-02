@@ -97,14 +97,14 @@
   #headernav > li {
     z-index: 0;
     a {
-      font-weight: 600;
+      font-weight: 500;
       font-family: "Gordita-Medium", sans-serif;
     }
     > a {
       &:after {
         content: "";
         transition: transform 0.3s ease, color 0.3s ease, opacity 0.3s ease;
-        transform: skew(-45deg) scale(1, 0.5);
+        transform: skew(-45deg) scale(1, 0.85);
         background: $primary;
         height: 100%;
         width: calc(100% + 2px);

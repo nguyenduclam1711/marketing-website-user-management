@@ -46,11 +46,11 @@ mixin locationForm
       
     .mb-3
       label(for='longitude') Longitude
-      input#longitude.form-control(name='longitude', type='number', placeholder='Longitude', autofocus='' value=editPath ? location.longitude : "")
+      input#longitude.form-control(name='longitude', type='number', placeholder='Longitude', autofocus='' value=editPath ? location.longitude : "", step="any")
       
     .mb-3
       label(for='latitude') Latitude
-      input#latitude.form-control(name='latitude', type='number', placeholder='Latitude', autofocus='' value=editPath ?  location.latitude : "")
+      input#latitude.form-control(name='latitude', type='number', placeholder='Latitude', autofocus='' value=editPath ?  location.latitude : "", step="any")
       
 
     .btn-group
