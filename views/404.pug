@@ -1,13 +1,11 @@
 extends layout.pug
 block content
   .container.noFoundPage
-    div.cont_principal
-      div
-        h1 404 #{page} Not Found
-        a(href=backURL) Click to go back
-        p You will redirect to the landing page after 
-          span.timerRedirect 
+    div
+      div.pb-5
+        h1.my-5 This page could not be found
+        a(href="/") Click to go back
+        p You will automatically get redirected after 
+          span.timerRedirect 5 
           span secondes
-      div.cont_aura_1
-      div.cont_aura_2
 

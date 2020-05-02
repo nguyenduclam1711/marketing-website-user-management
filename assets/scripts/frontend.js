@@ -305,13 +305,13 @@ function stickyNavigation(element) {
 const notFoundTimer = document.querySelector('.timerRedirect')
 if (notFoundTimer) {
   let counter = 5
-  notFoundTimer.innerHTML = + '0 '
   setInterval(function () {
-    if (counter > 0) {
+    if (counter > -1) {
       counter -= 1
       notFoundTimer.innerHTML = counter + ' '
-    } else {
-      window.location.replace('/')
+      if (counter === 0) {
+        window.location.replace('/')
+      }
     }
   }, 1000);
 }

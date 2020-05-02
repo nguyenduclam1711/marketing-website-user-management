@@ -35,7 +35,7 @@ module.exports.getSingleCourse = function(req, res) {
         courseFormConfig
       });
     }
-    res.render("admin/notFoundPage");
+    res.redirect("/admin/courses");
   });
 };
 module.exports.editCourse = async function(req, res) {
@@ -68,7 +68,7 @@ module.exports.editCourse = async function(req, res) {
   } catch (error) {
     console.debug("error", error);
     req.flash("danger", JSON.stringify(error));
-    res.render("admin/notFoundPage");
+    res.redirect("/admin/courses");
   }
 };
 module.exports.createCourse = async function(req, res) {
