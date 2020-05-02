@@ -212,7 +212,7 @@ module.exports.contact = async (req, res, next) => {
                 property: 'form_payload',
                 value: JSON.stringify({
                   'track': req.body.track,
-                  'locations': req.body.locations,
+                  'locations': location,
                   'body': req.body.body,
                   'is_company': req.body.isCompany,
                   'utm_source': req.session.utmParams ? req.session.utmParams.utm_source : "",
