@@ -1,5 +1,3 @@
-// import $ from "jquery";
-// import Popper from "popper.js";
 import "bootstrap/js/dist/util";
 import "bootstrap/js/dist/modal";
 import "bootstrap/js/dist/scrollspy";
@@ -7,11 +5,9 @@ import "bootstrap/js/dist/dropdown";
 import "bootstrap/js/dist/collapse";
 import "bootstrap/js/dist/carousel";
 import "bootstrap/js/dist/alert";
-
+import {alertTimeout} from "./helper.js"
 require("./polygons");
-
 require("../css/style.scss");
-import {alertTimeout} from "./backend.js"
 
 const toggleNL = (remove = false) => {
   document.getElementById("nlbtn").disabled = remove ? "" : "disabled";
@@ -270,7 +266,7 @@ document.getElementById("contactForm").addEventListener('submit', (e) => {
       document.body.appendChild(flashMessage)
       setTimeout(() => {
         $(".alert").alert("close");
-      }, alertTimeout);
+      }, alertTimeout || 5000);
     })
     .catch(error => {
       e.target.querySelector('button').disabled = false;
