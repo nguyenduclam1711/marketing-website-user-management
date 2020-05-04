@@ -49,7 +49,7 @@ mixin courseForm
     .mb-3
       label(for='order')
         | Order
-      button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Defines the order the courses are displayed. 0,1,2,3,4')
+      button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Defines the order the item is displayed. 0, 1, 2, 3, 4. Try to avoid two items with the same order.')
         | ?
       input#order.form-control(name='order', type='number', placeholder='Order', autofocus='', value=course ? course.order : "")
     .mb-3
