@@ -18,6 +18,12 @@ mixin locationForm
       label(for='inputName') Name
       input#inputName.form-control(name='name', type='text', placeholder='Name', required='', autofocus='' value=editPath ? location.name : "")
       
+    .mb-3
+      label(for='order')
+        | Order
+      button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Defines the order the item is displayed. 0, 1, 2, 3, 4. Try to avoid two items with the same order.')
+        | ?
+      input#order.form-control(name='order', type='number', placeholder='Order', autofocus='', value=location ? location.order : "")
     .form-group
       label.d-block(for='avatar') Location Icon
       if location && location.avatar !== "false"

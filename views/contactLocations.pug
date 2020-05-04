@@ -13,10 +13,14 @@ block content
       .py-md-5
         h2 Remote Learning
         p Learn from the comfort of your home in a virtual and professional learning enviroment. Our educational Counselors will bring you up to speed and help you secure your spot.
-        .row
+        .row.mt-5
           .col-md-6
+            div.mb-3.h-2
+              include ../assets/media/pin.svg
             Learn from anywhere in Germany
           .col-md-6
+            div.mb-3.h-2
+              include ../assets/media/computer-thin.svg
             We will equip you with the right devices
 
   .bg-light
@@ -25,13 +29,13 @@ block content
         .mt-5
           .row.mt-5
             each location, index in locations.filter(l => l.isCampus)
-              .col-sm-6.mb-5.hover-shadow(class=index % 2 === 0 ? "offset-md-6" : "")
+              .col-sm-8.mb-5.hover-shadow.rounded.overflow-hidden(class=index % 2 === 0 ? "offset-md-4" : "")
                 .row
                   .col-md-6.px-0
                     .bg-primary
                       img.object-fit-cover.img-fluid.portrait.half-transparent(src="/media/pixel.gif" alt=location.name style=`background-image: url('${location.avatar ? `/images/` + location.avatar : `/media/circuit-board.svg`}')`)
                     h3.text-white.position-absolute.transform-absolute-center.w-100.text-center=location.name
-                  .col-md-6.d-flex.flex-column.justify-content-center
+                  .col-md-6.d-flex.flex-column.justify-content-center.text-center
                     if location.email
                       div
                         strong
@@ -39,17 +43,14 @@ block content
                     if location.phone
                       div
                         strong
-                          =__("Phone")+": "
                         tel= location.phone
                     if location.street
                       div
                         strong
-                          =__("Street")+": "
                         tel= location.street
                     if location.zip
                       div
                         strong
-                          =__("Zip")+": "
                         = location.zip
 
   .bg-light.pb-200

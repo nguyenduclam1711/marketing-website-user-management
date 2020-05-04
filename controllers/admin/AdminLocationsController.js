@@ -5,6 +5,7 @@ const jimp = require("jimp");
 const uuid = require("uuid");
 module.exports.getLocations = async (req, res) => {
   let locations = await Location.find({})
+    .sort({ order: 1 })
     .exec();
   res.render("admin/locations", {
     locations: locations,
@@ -33,6 +34,7 @@ module.exports.createLocation = (req, res) => {
   location.name = req.body.name; 
   location.street = req.body.street; 
   location.email = req.body.email; 
+  location.order = req.body.order; 
   location.zip = req.body.zip; 
   location.avatar = req.body.avatar ? req.body.avatar : location.avatar;
   location.longitude = req.body.longitude; 
@@ -70,6 +72,7 @@ module.exports.updateLocation = (req, res) => {
     location.name = req.body.name; 
     location.street = req.body.street; 
     location.email = req.body.email; 
+    location.order = req.body.order; 
     location.zip = req.body.zip; 
     location.longitude = req.body.longitude; 
     location.latitude = req.body.latitude; 

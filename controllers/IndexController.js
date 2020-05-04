@@ -51,7 +51,9 @@ module.exports.landingpage = async (req, res) => {
         .sort('order')
         .limit(6)
         .exec()
-      const locations = Location.find({}).sort({name: 1})
+        const locations = Location.find({})
+        .sort({ order: 1 })
+        .exec()
       const partners = Partner.find({})
         .sort('order')
         .exec({})
@@ -107,7 +109,7 @@ module.exports.landingpage = async (req, res) => {
   }
 }
 module.exports.contactLocations = async (req, res) => {
-  const locations = await Location.find({}).sort({name: 1})
+  const locations = await Location.find({}).sort({ order: 1 })
   const contact = req.body
   res.render('contactLocations', {
     locations,

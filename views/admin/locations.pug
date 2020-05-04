@@ -9,6 +9,8 @@ block content
           each location in locations
             li.list-group-item.mb-3
               h2.mr-3=location.name
+              span.mr-3="Order: " + location.order
+
               form.d-flex.justify-content-between(method='POST', action='/admin/locations/delete/'+location._id +'?_method=DELETE')
                 if user && user.admin === "true"
                   .d-flex.align-items-center

@@ -39,6 +39,11 @@ const LocationSchema = new Schema({
   avatar: {
     type: String
   },
+  order: {
+    type: Number,
+    default: 99
+
+  },
 });
 
 module.exports = mongoose.model("Location", LocationSchema);
