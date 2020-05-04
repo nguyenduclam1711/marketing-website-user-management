@@ -128,8 +128,7 @@ mixin singleCourse
                     p.mt-4.text-dark=model.massnahmeDetails
               h2=__("Come see our campus!")
               p.lead=__("Have questions? Want to see the student life for yourself? Book a one-on-one visit with our admissions team and we’ll show you around.")
-              p Vulkanstraße 1
-              p 10367 Berlin
+
       if user && user.admin === "true"
         div.py-3
           a.btn.btn-outline-primary(target="_blank" href='/admin/courses/edit/'+model.slug) Edit course
