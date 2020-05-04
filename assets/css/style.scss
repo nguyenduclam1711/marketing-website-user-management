@@ -1433,7 +1433,9 @@ body[class*="pages-"] {
       display: block;
     }
   }
-
+  .ql-align-center {
+    text-align: center;
+  }
   .ql-align-right img {
     padding: .5em 0 .5em .5em;
     float: right;
