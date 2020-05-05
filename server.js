@@ -175,12 +175,12 @@ app.use(async (req, res, next) => {
 
     const [locations, settings, footerPages, headerPages] = await Promise.all([
       Location.find({}).sort({ order: 1 }).exec(),
-      Setting.findOne().populate({ path: 'calltoaction', populate: { path: 'languageVersion', model: 'Page' } }).exec({}),
+      Setting.findOne().populate({ path: 'landingpage_calltoaction', populate: { path: 'languageVersion', model: 'Page' } }).exec({}),
       Page.find(Object.assign(query, { menulocations: { $in: [footerCat] } })).sort({ order: 1 }),
       Page.find(Object.assign(query, { menulocations: { $in: [headerCat] } })).sort({ order: 1 })
     ])
-    if (!!req.session.locale && !!settings.calltoaction) {
-      settings.calltoaction = settings.calltoaction.languageVersion
+    if (!!req.session.locale && !!settings.landingpage_calltoaction) {
+      settings.landingpage_calltoaction = settings.landingpage_calltoaction.languageVersion
     }
     navData = {
       courses,
