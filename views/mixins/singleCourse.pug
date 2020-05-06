@@ -4,8 +4,6 @@ mixin singleCourse
       h1.display-1.mt-5.mb-3=model.headline
       p.lead.mb-5=model.subheading
       button.btn.btn-lg.btn-secondary.mt-3.mb-5(type='button' data-toggle='modal', data-target='#contactFormModal')=__("Apply")
-    if model.curriculumPdf
-      a.btn.btn-lg.btn-secondary.mt-3.mb-5(href='/images/'+ model.curriculumPdf target='_blank' ) Download Curriculum
 
     .container.container-fluid-courses.position-relative
       .row.row-courses
@@ -129,6 +127,8 @@ mixin singleCourse
               h2=__("Come see our campus!")
               p.lead=__("Have questions? Want to see the student life for yourself? Book a one-on-one visit with our admissions team and we’ll show you around.")
 
+              if model.curriculumPdf
+                a.btn.btn-lg.btn-secondary.mt-3.mb-5(href='/images/'+ model.curriculumPdf target='_blank' ) Download Curriculum
       if user && user.admin === "true"
         div.py-3
           a.btn.btn-outline-primary(target="_blank" href='/admin/courses/edit/'+model.slug) Edit course
