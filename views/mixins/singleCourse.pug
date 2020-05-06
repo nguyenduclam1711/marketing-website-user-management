@@ -85,6 +85,10 @@ mixin singleCourse
               h2=__("Company Tours")
               p.lead=__("Take a tour of a local startup and see what the work environment is all about.")
 
+          if model.curriculumPdf
+            .text-center
+              a.btn.btn-lg.btn-secondary.mt-3.mb-3(href='/images/'+ model.curriculumPdf target='_blank' ) Download Course Overview
+
           #section4.my-5
            if model.successStory
             section.my-5
@@ -127,8 +131,6 @@ mixin singleCourse
               h2=__("Come see our campus!")
               p.lead=__("Have questions? Want to see the student life for yourself? Book a one-on-one visit with our admissions team and we’ll show you around.")
 
-              if model.curriculumPdf
-                a.btn.btn-lg.btn-secondary.mt-3.mb-5(href='/images/'+ model.curriculumPdf target='_blank' ) Download Curriculum
       if user && user.admin === "true"
         div.py-3
           a.btn.btn-outline-primary(target="_blank" href='/admin/courses/edit/'+model.slug) Edit course
