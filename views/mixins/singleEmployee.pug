@@ -1,27 +1,16 @@
 mixin singleEmployee(employee, classes="")
   - random = Math.floor(Math.random() * 10)
-  div.story-item
-
-    .row
-      div(class=classes)
-        .pt-3
-          .position-relative.bg-light-blue.p-5.bg-panel
+  .col-md-6.mb-4.mx-5.mx-md-0(class=classes)
+    .text-center
+      .border.bg-white.p-2.rounded
+        .px-3
+          .px-3.pt-3
+            img.blue-shadow.object-fit-cover.img-fluid.rounded-circle.square(alt=employee.name src="/media/pixel.gif" style="background-image: url('/images/"+employee.avatar+"')")
+          h6.font-weight-bold.mt-3=employee.name
+          if employee.position
             .position-relative.z-1
-              h2=employee.name
-            if employee.content
-              blockquote.blockquote
-                p.text-muted=employee.content
-            if employee.position
-              .position-relative.z-1
-                p.text-muted=employee.position
-            if employee.locations.length
-              .position-relative.z-1
-                +translate("Locations")
-                =": "
-                each loc in employee.locations
-                  div.badge.badge-light.mb-2= loc.name
-      div.col-md-4
-        .sticky-top.text-center.py-3
-          .bg-light-blue.p-4
-            .px-3.px-md-5
-              img.blue-shadow.object-fit-cover.img-fluid.rounded-circle.square(alt=employee.name src="/media/pixel.gif" style="background-image: url('/images/"+employee.avatar+"')")
+              p.text-muted.mb-1=employee.position
+          if employee.locations.length
+            .position-relative.z-1.text-right
+              each loc in employee.locations
+                a.ml-2.font-weight-bold.text-uppercase.text-primary(title=loc.name href="/contact")= loc.name.substr(0, 3)

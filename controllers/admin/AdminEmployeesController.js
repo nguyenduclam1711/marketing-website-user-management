@@ -67,6 +67,7 @@ module.exports.updateEmployee = async (req, res) => {
   employee.name = req.body.name;
   employee.position = req.body.position;
   employee.phone = req.body.phone;
+  employee.order = req.body.order;
   employee.mail = req.body.mail;
   employee.content = req.body.content;
   employee.locations = req.body.locations;
@@ -90,6 +91,7 @@ module.exports.createEmployee = async function(req, res) {
 
   employee.position = req.body.position;
   employee.phone = req.body.phone;
+  employee.order = req.body.order;
   employee.email = req.body.email;
   employee.avatar = req.body.avatar ? req.body.avatar : employee.avatar;
 
