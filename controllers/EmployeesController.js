@@ -6,7 +6,6 @@ module.exports.getEmployees = async function (req, res) {
     const query = await getAvailableTranslations(req, res)
     const employees = await Employee.find(query)
       .populate('locations')
-      .sort('-createdAt')
       .sort({order: 1})
       .exec()
 

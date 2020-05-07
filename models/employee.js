@@ -34,7 +34,11 @@ var EmployeeSchema = new Schema({
     default: Date.now
   },
   language: {type: Schema.ObjectId, ref: "Language"},
-  languageVersion: {type: Schema.ObjectId, ref: "Employee"}
+  languageVersion: {type: Schema.ObjectId, ref: "Employee"},
+  order: {
+    type: Number,
+    default: 99
+  },
 });
 EmployeeSchema.pre("save", function preSave(next) {
   const employee = this;
