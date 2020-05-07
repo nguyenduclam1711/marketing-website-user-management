@@ -12,6 +12,7 @@ block content
                   h2.text-center=employee.name
                   .px-5.pb-3
                     img.blue-shadow.object-fit-cover.img-fluid.rounded-circle.square(alt=employee.name src="/media/pixel.gif" style="background-image: url('/images/" + employee.avatar + "')")
+                  div=`Order: ${employee.order}`
                   if employee.locations.length
                     .position-relative.z-1.mb-2
                       +translate("Locations")

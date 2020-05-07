@@ -13,7 +13,7 @@ module.exports.getEmployees = async function(req, res) {
       .populate('language')
       .populate('languageVersion')
       .populate("locations")
-      .sort("-createdAt")
+      .sort("order")
       .exec();
 
     res.render("admin/employees", {
