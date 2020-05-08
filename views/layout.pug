@@ -56,16 +56,13 @@ html.h-100(lang='en')
     meta(name='twitter:creator', content='@DevugeesOrg')
     meta(name="msapplication-TileColor", content="#ffffff")
     meta(name="theme-color", content="#ffffff")
-
     title=title
-
     link(rel="stylesheet", href="/frontend.css")
     link(rel="apple-touch-icon", sizes="180x180", href="/assets/apple-touch-icon.png")
     link(rel="icon", type="image/png", sizes="32x32", href="/assets/favicon-32x32.png")
     link(rel="icon", type="image/png", sizes="16x16", href="/assets/favicon-16x16.png")
     link(rel="manifest", href="/assets/site.webmanifest")
     link(rel="mask-icon", href="/assets/safari-pinned-tab.svg", color="#5bbad5")
-
 
   body.h-100(data-spy='scroll', data-target='#courseScrollspy', data-offset='1', class=`${pathclass+(currentPath && currentPath.includes('admin') ? ' admin mb-5' : currentPath == "/" ? "index" : "" )}`)
 
@@ -157,13 +154,8 @@ html.h-100(lang='en')
                     span.text-white
                       =__("All Rights Reserved")
 
-                //div
-                //  a.font-weight-bold.text-white.mr-md-5(href="/impressum") Impressum
-                //  span.font-weight-bold.text-white Copyright
-
     if user
-        +menuFooter
-
+      +menuFooter
 
     #contactFormModal.modal(tabindex='-1', role='dialog', aria-labelledby='contactFormModal', aria-hidden='true')
       .modal-dialog.modal-dialog-centered
@@ -177,7 +169,7 @@ html.h-100(lang='en')
       +dataPrivacy
 
     script(src="/frontend.bundle.js")
-    icurrentPath && f currentPath.includes('admin')
+    if currentPath && currentPath.includes('admin')
       script(src="/backend.bundle.js")
 
     if live
