@@ -24,7 +24,6 @@ include mixins/translate
 include mixins/fullstory
 
 doctype html
-//saved from url=(0051)https://getbootstrap.com/docs/4.0/examples/sign-in/
 html.h-100(lang='en')
   head
     if live
@@ -36,7 +35,6 @@ html.h-100(lang='en')
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','GTM-KS4DGK3');
       // End Google Tag Manager
-      // Google Tag Manager (noscript)
 
     meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
     meta(name='viewport', content='width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86')
@@ -84,6 +82,7 @@ html.h-100(lang='en')
       if currentPath !== "/"
         div
           +navigation
+          
       .flex-grow-1(class=currentPath && currentPath.includes('admin') ? ' pb-5 pt-3' : "" )
         block content
       if currentPath && !currentPath.includes('admin')
@@ -123,6 +122,7 @@ html.h-100(lang='en')
                         if user && user.admin === "true"
                           a.font-weight-bold.text-light(href='/admin/courses/edit/' + course.slug)
                             small.text-monospace= " (Edit)"
+
                 .col-xs-12.col-sm-3.footers-four
                   p.font-weight-bold.mb-4.text-lightgrey=__("Community")
                   ul.list-unstyled
@@ -165,6 +165,7 @@ html.h-100(lang='en')
               h2.display-4.text-center.text-uppercase=__('Contact us')
               p.mb-3.text-center.text-muted=__("Let’s connect! Our admissions team will call you soon to chat about our courses and your goals")
             +contactform
+
     .modal#dataPrivacy
       +dataPrivacy
 
@@ -206,4 +207,3 @@ html.h-100(lang='en')
         fbq('track', 'PageView');
       noscript
         img(height='1', width='1', style='display:none', src='https://www.facebook.com/tr?id=1296683973774299&ev=PageView&noscript=1')
-      // End Facebook Pixel Code
