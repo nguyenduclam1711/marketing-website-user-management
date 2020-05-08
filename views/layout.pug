@@ -67,7 +67,7 @@ html.h-100(lang='en')
     link(rel="mask-icon", href="/assets/safari-pinned-tab.svg", color="#5bbad5")
 
 
-  body.h-100(data-spy='scroll', data-target='#courseScrollspy', data-offset='1', class=`${pathclass+(currentPath.includes('admin') ? ' admin mb-5' : currentPath == "/" ? "index" : "" )}`)
+  body.h-100(data-spy='scroll', data-target='#courseScrollspy', data-offset='1', class=`${pathclass+(currentPath && currentPath.includes('admin') ? ' admin mb-5' : currentPath == "/" ? "index" : "" )}`)
 
     if live
       noscript
@@ -83,13 +83,13 @@ html.h-100(lang='en')
               button.close.ml-3(type='button', data-dismiss='alert', aria-label='Close')
                 span(aria-hidden='true') ×
 
-    .h-100.d-flex.flex-column(class=currentPath.includes('admin') ? ' bg-light pb-5' : "" )
+    .h-100.d-flex.flex-column(class=currentPath && currentPath.includes('admin') ? ' bg-light pb-5' : "" )
       if currentPath !== "/"
         div
           +navigation
-      .flex-grow-1(class=currentPath.includes('admin') ? ' pb-5 pt-3' : "" )
+      .flex-grow-1(class=currentPath && currentPath.includes('admin') ? ' pb-5 pt-3' : "" )
         block content
-      if !currentPath.includes('admin')
+      if currentPath && !currentPath.includes('admin')
         footer.site-footer(role='contentinfo' class=user ? "pb-5" : "")
           section.bg-primary.position-relative
             a.triangle.hint.top-right(target="_blank" href="https://github.com/DigitalCareerInstitute/marketing-website" title=__("Wanna contribute and help making this site better? Fork me on GitHub"))
@@ -177,7 +177,7 @@ html.h-100(lang='en')
       +dataPrivacy
 
     script(src="/frontend.bundle.js")
-    if currentPath.includes('admin')
+    icurrentPath && f currentPath.includes('admin')
       script(src="/backend.bundle.js")
 
     if live

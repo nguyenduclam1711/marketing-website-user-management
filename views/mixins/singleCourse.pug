@@ -7,8 +7,8 @@ mixin singleCourse
 
     .container.container-fluid-courses.position-relative
       .row.row-courses
-        nav#courseScrollspy.courses-scroll.col-sm-3.col-4.my-3.pt-3
-          ul.nav.nav-pills.flex-column.nav-courses-pills.p-4.text-center.bg-white
+        nav#courseScrollspy.courses-scroll.col-sm-3.col-4.pt-3
+          ul.nav.nav-pills.flex-column.nav-courses-pills.p-4.text-center.bg-white.mb-3
             h4=model.headline
             li.nav-item
               a.scrollbutton.nav-link.connection-line.nav-link-spy.text-dark.mb-2.active.mb-5(href='#section1')=__("Overview")
@@ -130,6 +130,8 @@ mixin singleCourse
                     p.mt-4.text-dark=model.massnahmeDetails
               h2=__("Come see our campus!")
               p.lead=__("Have questions? Want to see the student life for yourself? Book a one-on-one visit with our admissions team and we’ll show you around.")
+              a.btn.btn-lg.btn-secondary.mt-3.mb-3(href='/contact' )=__("Campuses")
+
 
       if user && user.admin === "true"
         div.py-3
