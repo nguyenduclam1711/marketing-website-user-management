@@ -109,9 +109,9 @@ app.use(flash())
 
 app.use(function (req, res, next) {
   var query = req.query
-  Object.keys(query).map(q =>  !q.startsWith('utm_') && delete query[q] )
-  if (Object.keys(query).length > 0) {
-    req.session.utmParams = query
+  if (!!query && Object.keys(query).length > 0 && (req.session.utmParams === undefined || req.session.utmParams.length === 0)) {
+    req.session.utmParams = []
+    req.session.utmParams = Object.assign(...Object.keys(query).map(paramKey => Array.isArray(query[paramKey]) ? ({ [paramKey]: [...new Set(query[paramKey])] }) : ({ [paramKey]: query[paramKey] })))
   }
   next()
 })

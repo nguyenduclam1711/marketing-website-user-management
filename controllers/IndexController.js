@@ -143,11 +143,7 @@ module.exports.contact = async (req, res, next) => {
     contact.track = track
     contact.body = body
     if (req.session.utmParams) {
-      contact.utm_source = req.session.utmParams.utm_source
-      contact.utm_medium = req.session.utmParams.utm_medium
-      contact.utm_campaign = req.session.utmParams.utm_campaign
-      contact.utm_content = req.session.utmParams.utm_content
-      contact.utm_term = req.session.utmParams.utm_term
+      contact.utm_params = req.session.utmParams
     }
     contact.createdAt = new Date()
     contact.isCompany = !!companytour
@@ -195,6 +191,10 @@ module.exports.contact = async (req, res, next) => {
     }
     await contact.save()
     let hubspotPromise = new Promise(() => { })
+
+    let remainingUtmParams = req.session.utmParams ? { ...req.session.utmParams } : []
+    Object.keys(remainingUtmParams).map(q => q.startsWith('utm_') && delete remainingUtmParams[q])
+
     if (!!process.env.HUBSPOT_API_KEY) {
       var options = {
         method: 'POST',
@@ -210,6 +210,11 @@ module.exports.contact = async (req, res, next) => {
               { property: 'lastname', value: req.body.name.split(' ').slice(1).join(' ') },
               { property: 'email', value: req.body.email },
               { property: 'phone', value: req.body.phone },
+              { property: 'utm_source', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_source) : "" },
+              { property: 'utm_medium', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_medium) : "" },
+              { property: 'utm_campaign', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_campaign) : "" },
+              { property: 'utm_content', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_content) : "" },
+              { property: 'utm_term', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_term) : "" },
               {
                 property: 'form_payload',
                 value: JSON.stringify({
@@ -217,11 +222,7 @@ module.exports.contact = async (req, res, next) => {
                   'locations': location,
                   'body': req.body.body,
                   'is_company': req.body.isCompany,
-                  'utm_source': req.session.utmParams ? req.session.utmParams.utm_source : "",
-                  'utm_medium': req.session.utmParams ? req.session.utmParams.utm_medium : "",
-                  'utm_campaign': req.session.utmParams ? req.session.utmParams.utm_campaign : "",
-                  'utm_content': req.session.utmParams ? req.session.utmParams.utm_content : "",
-                  'utm_term': req.session.utmParams ? req.session.utmParams.utm_term : "",
+                  'utm_params': remainingUtmParams 
                 })
               }
             ],

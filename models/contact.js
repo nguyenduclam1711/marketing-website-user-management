@@ -8,11 +8,7 @@ var ContactSchema = new Schema({
   phone: String,
   track: String,
   body: String,
-  utm_source: [String],
-  utm_medium: [String],
-  utm_campaign: [String],
-  utm_content: String,
-  utm_term: [String],
+  utm_params: Object,
   updatedAt: {
     type: Date,
     default: Date.now
