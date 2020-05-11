@@ -311,48 +311,41 @@ if (notFoundTimer) {
     }
   }, 1000);
 }
-const matomodomainname = window.location.hostname;
-var matomocookiename =
-  "matomooptout" + matomodomainname.replace(/\./g, "");
-var showncookiename = "sfprivacy" + matomodomainname.replace(/\./g, "");
-if (
-  document.cookie.indexOf(matomocookiename) < 0 &&
-  document.cookie.indexOf(showncookiename) !== -1
-) {
-  //TODO add GA code here
-}
+
+const googleAnalyticsdomainname = window.location.hostname;
+var googleAnalyticsRejectCookie = "dcigoogleAnalyticsoptout" + googleAnalyticsdomainname.replace(/\./g, "");
+var googleAnalyticsShowncookiename = "dciprivacy" + googleAnalyticsdomainname.replace(/\./g, "");
+
+//actual GA tracking
+window.dataLayer = window.dataLayer || [];
+function gtag() { dataLayer.push(arguments); }
+gtag('js', new Date());
+document.cookie.indexOf(googleAnalyticsRejectCookie) !== -1 ? gtag('config', 'UA-140962410-1', { 'anonymize_ip': true }) : gtag('config', 'UA-140962410-1');
+//actual GA tracking end
+
 const cookieButton = document.getElementById("cookiehint");
 const cookieRejectButton = document.getElementById("cookieRejectButton");
 if (cookieRejectButton) {
   cookieRejectButton.addEventListener("click", e => {
     e.preventDefault();
-    var matomocookienamevalue =
-      matomocookiename +
-      "=" +
-      "optedout;expires=Wed, 1 Jan 2100 00:00:00 UTC;path=/";
-    document.cookie = matomocookienamevalue;
+    var googleAnalyticsRejectCookievalue = googleAnalyticsRejectCookie + "=" + "optedout;expires=Wed, 1 Jan 2100 00:00:00 UTC;path=/";
+    document.cookie = googleAnalyticsRejectCookievalue;
     hideCookieHint();
   });
 }
 if (cookieButton) {
-  if (document.cookie.indexOf(showncookiename) < 0) {
-    setTimeout(function() {
+  if (document.cookie.indexOf(googleAnalyticsShowncookiename) < 0) {
+    setTimeout(function () {
       cookieButton.classList.add("shown");
     }, 500);
   }
-  document
-    .getElementById("cookieCloseButton")
-    .addEventListener("click", e => {
+  document.getElementById("cookieCloseButton").addEventListener("click", e => {
       e.preventDefault();
       hideCookieHint();
     });
 }
 const hideCookieHint = () => {
-  var showncookienamevalue =
-    showncookiename +
-    "=" +
-    "shown;expires=Wed, 1 Jan 2100 00:00:00 UTC;path=/";
-  document.cookie = showncookienamevalue;
+  var googleAnalyticsShowncookienamevalue = googleAnalyticsShowncookiename + "=" + "shown;expires=Wed, 1 Jan 2100 00:00:00 UTC;path=/";
+  document.cookie = googleAnalyticsShowncookienamevalue;
   cookieButton.classList.remove("shown");
 };
-

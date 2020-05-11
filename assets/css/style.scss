@@ -1548,6 +1548,9 @@ body[class*="pages-"] {
   transform: translateY(100%);
 
   &.shown {
+    svg {
+      transform: rotate(-360deg);
+    }
     transform: translateY(0);
   }
 
@@ -1556,6 +1559,7 @@ body[class*="pages-"] {
 
     svg {
       min-width: 30px;
+      transition: transform 1s ease;
       width: 1em;
       fill: white;
       vertical-align: text-top;
