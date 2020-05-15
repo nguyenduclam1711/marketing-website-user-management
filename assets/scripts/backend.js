@@ -32,7 +32,7 @@ if (editorContainer) {
         [{indent: "-1"}, {indent: "+1"}],
         // [{ direction: "rtl" }],
         [{size: ["small", "large"]}],
-        [{ color: ["#1f3fc7", "#f2793c", "#000", "#fff"] }, { background: [] }],
+        [{ color: ["#1f3fc7", "#f2793c", "#000", "#fff", false] }],
         // [{ font: [] }],
         [{align: []}],
         ["clean"]
@@ -45,6 +45,8 @@ if (editorContainer) {
   const about = document.querySelector("textarea[name=content]");
 
   editor.on("editor-change", function (eventName, ...args) {
+    console.debug('eventName', about.value.substr(0, 50));
+    
     about.value = JSON.stringify(editor.getContents());
   });
   if (about && about.value) {
