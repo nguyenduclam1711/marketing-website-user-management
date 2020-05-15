@@ -32,7 +32,7 @@ if (editorContainer) {
         [{indent: "-1"}, {indent: "+1"}],
         // [{ direction: "rtl" }],
         [{size: ["small", "large"]}],
-        // [{ color: [] }, { background: [] }],
+        [{ color: ["#1f3fc7", "#f2793c", "#000", "#fff"] }, { background: [] }],
         // [{ font: [] }],
         [{align: []}],
         ["clean"]
