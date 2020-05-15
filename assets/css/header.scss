@@ -95,12 +95,7 @@
 
 @include media-breakpoint-up(lg) {
   #headernav > li {
-    z-index: 0;
-    a {
-      font-weight: 500;
-      font-family: "Gordita-Medium", sans-serif;
-    }
-    > a {
+    > a.contactlink {
       &:after {
         content: "";
         transition: transform 0.3s ease, color 0.3s ease, opacity 0.3s ease;
@@ -109,30 +104,90 @@
         height: 100%;
         width: calc(100% + 2px);
         top: 0;
-        opacity: 0;
         left: -1px;
         display: block;
         position: absolute;
         z-index: -1;
-      }
-    }
-
-    &:hover > a,
-    > a.active,
-    > a:active,
-    > a:focus,
-    > a:focus-within,
-    > a:hover {
-      color: white;
-
-      &:after {
         opacity: 1;
         transform: skew(-45deg) scale(1, 1);
       }
+      color: white;
+    }
+  }
+}
+#headernav > li {
+
+  z-index: 0;
+  a {
+    font-weight: 500;
+    font-family: "Gordita-Medium", sans-serif;
+  }
+  &:hover > a,
+  > a.active,
+  > a:active,
+  > a:focus,
+  > a:focus-within,
+  > a:hover {
+    color: $primary !important;
+  }
+}
+.dropdown {
+  .dropdown-menu {
+    background-color: transparent;
+    @include media-breakpoint-up(lg) {
+      background-color: white;
+    }
+    .dropdown-item {
+      background-color: transparent !important;
+      &:hover {
+        color: $primary !important;
+      }
+    }
+    @include media-breakpoint-down(md) {
+      margin: 1em 0 1em 1em !important;
+      box-shadow: none !important;
+    }
+  }
+}
+.dropdown,
+.dropdown-toggle {
+  .dropdown-menu.show,
+  &:hover~.dropdown-menu,
+  &:hover .dropdown-menu {
+    right: 0;
+    left: auto;
+    display: block;
+    border: 0;
+    top: calc(100% - 1px);
+    //top: 100%;
+    margin: 0 30px 0 0;
+
+    &:after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: -10px;
+      left: 0;
+    }
+
+    .dropdown-item:hover,
+    .dropdown-item:focus-within,
+    .dropdown-item:active,
+    .dropdown-item:focus,
+    .dropdown-item.active {
+      background: $primary;
+      color: white;
     }
   }
 }
 
+
+.dropdown-toggle {
+  &:after {
+    border: none;
+    margin: 0;
+  }
+}
 body:not(.index) #nav-primary {
   margin-top: 0 !important;
 }

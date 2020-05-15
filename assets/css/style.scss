@@ -1478,47 +1478,6 @@ body[class*="pages-"] {
     max-width: none;
   }
 }
-
-.dropdown,
-.dropdown-toggle {
-
-  .dropdown-menu.show,
-  &:hover~.dropdown-menu,
-  &:hover .dropdown-menu {
-    right: 0;
-    left: auto;
-    display: block;
-    border: 0;
-    top: calc(100% - 1px);
-    //top: 100%;
-    margin: 0 30px 0 0;
-
-    &:after {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      top: -10px;
-      left: 0;
-    }
-
-    .dropdown-item:hover,
-    .dropdown-item:focus-within,
-    .dropdown-item:active,
-    .dropdown-item:focus,
-    .dropdown-item.active {
-      background: $primary;
-      color: white;
-    }
-  }
-}
-
-
-.dropdown-toggle {
-  &:after {
-    border: none;
-    margin: 0;
-  }
-}
 .vertical-align-revert{
   &, > svg {
     vertical-align: revert;
