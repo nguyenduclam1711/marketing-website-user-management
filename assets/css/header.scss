@@ -116,7 +116,6 @@
   }
 }
 #headernav > li {
-
   z-index: 0;
   a {
     font-weight: 500;
@@ -128,7 +127,9 @@
   > a:focus,
   > a:focus-within,
   > a:hover {
-    color: $primary !important;
+    &:not(.contactlink){
+      color: $primary !important;
+    }
   }
 }
 .dropdown {
@@ -139,6 +140,7 @@
     }
     .dropdown-item {
       background-color: transparent !important;
+      color: $bluedark !important;
       &:hover {
         color: $primary !important;
       }
