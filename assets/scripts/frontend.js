@@ -78,7 +78,7 @@ const countUp = () => {
   }
 };
 const scrollbuttons = document.getElementsByClassName("scrollbutton");
-for (const i = 0, len = scrollbuttons.length; i < len; i++) {
+for (let i = 0, len = scrollbuttons.length; i < len; i++) {
   scrollbuttons[i].addEventListener("click", function (event) {
     event.preventDefault();
     document.querySelector(event.target.attributes.href.value).scrollIntoView({
