@@ -19,11 +19,11 @@ const toggleNL = (remove = false) => {
 };
 
 (function () {
-  var newsletterForm = document.querySelector("#mc-embedded-subscribe-form");
+  const newsletterForm = document.querySelector("#mc-embedded-subscribe-form");
   if (newsletterForm) {
     newsletterForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      var email = document.querySelector("#newsletter_email").value.trim();
+      const email = document.querySelector("#newsletter_email").value.trim();
       if (email) {
         toggleNL();
         fetch("/newsletter-signup", {
@@ -57,7 +57,7 @@ let counted = false;
 const countUp = () => {
   const counter = document.querySelector(".section-counter");
 
-  if (counter && elementInViewport2(counter) && !counted) {
+  if (counter && elementInViewport(counter) && !counted) {
     counted = true;
     $(".counter-count").each(function () {
       $(this)
@@ -77,8 +77,8 @@ const countUp = () => {
     });
   }
 };
-var scrollbuttons = document.getElementsByClassName("scrollbutton");
-for (var i = 0, len = scrollbuttons.length; i < len; i++) {
+const scrollbuttons = document.getElementsByClassName("scrollbutton");
+for (const i = 0, len = scrollbuttons.length; i < len; i++) {
   scrollbuttons[i].addEventListener("click", function (event) {
     event.preventDefault();
     document.querySelector(event.target.attributes.href.value).scrollIntoView({
@@ -109,12 +109,12 @@ const throttle = (func, limit) => {
   };
 };
 
-var floatings = [...document.querySelectorAll(".floatings")];
+const floatings = [...document.querySelectorAll(".floatings")];
 
 function showFloatings() {
   let timeout = 0;
   floatings.forEach(item => {
-    if (elementInViewport2(item) && window.innerWidth > 576) {
+    if (elementInViewport(item) && window.innerWidth > 576) {
       setTimeout(() => {
         item.classList.add("floated");
       }, timeout);
@@ -123,11 +123,11 @@ function showFloatings() {
   });
 }
 
-function elementInViewport2(el) {
-  var top = el.offsetTop;
-  var left = el.offsetLeft;
-  var width = el.offsetWidth;
-  var height = el.offsetHeight;
+function elementInViewport(el) {
+  let top = el.offsetTop;
+  let left = el.offsetLeft;
+  let width = el.offsetWidth;
+  let height = el.offsetHeight;
 
   while (el.offsetParent) {
     el = el.offsetParent;
@@ -146,10 +146,6 @@ function elementInViewport2(el) {
 window.onscroll = throttle(function () {
   showFloatings();
   countUp();
-  // const homesection = document.querySelector('section.homeSection');
-  // if (homesection) {
-  //   stickyNavigation(homesection)
-  // }
 }, 50);
 
 $("#contactFormModal").on("shown.bs.modal", function (e) {
@@ -260,7 +256,7 @@ document.getElementById("contactForm").addEventListener('submit', (e) => {
       e.target.querySelector('#contactform_spinner').classList.add("d-none")
       e.target.querySelector('#contactform_check').classList.remove("d-none")
       Array.from(e.target.elements).map(i => i.value = "")
-      var flashMessage = document.createElement('div')
+      const flashMessage = document.createElement('div')
       flashMessage.classList.add("flash", "m-0", "mr-3", "alert", "fade", "show", "alert-success")
 
       flashMessage.innerHTML = `${data.response.message}<button class="close ml-3" type="button" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>`

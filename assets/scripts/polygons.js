@@ -69,7 +69,7 @@ if (canvas) {
     return Math.random() * (max - min) + min;
   }
 
-  console.log(randomNumFrom(0, 10));
+  // console.log(randomNumFrom(0, 10));
 
 // Random Ball
   function getRandomBall() {
@@ -240,7 +240,7 @@ if (canvas) {
   }
 
   window.addEventListener('resize', function (e) {
-    console.log('Window Resize...');
+    // console.log('Window Resize...');
     initCanvas();
   });
 
