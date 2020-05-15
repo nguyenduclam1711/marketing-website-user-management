@@ -54,7 +54,7 @@ mixin pageForm
     .mb-3
       label(for='content') Content
       #editor(value=editPath ? page.content : "")
-      textarea#inputContent.d-none(name='content', type='password', placeholder='Content', required='', )=editPath ? JSON.stringify(page.content) : ""
+      textarea#inputContent.d-none(name='content', placeholder='Content', required='', )=editPath ? JSON.stringify(page.content) : ""
     .btn-group
       if editPath
         a.btn.btn-outline-primary(href="/admin/pages")="Back"
