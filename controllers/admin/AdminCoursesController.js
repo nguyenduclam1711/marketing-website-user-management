@@ -198,7 +198,7 @@ exports.resizeImages = async (request, response, next) => {
     const extension = singleFile[0].mimetype.split("/")[1];
     request.body[
       singleFile[0].fieldname
-    ] = `${singleFile[0].filename}.${extension}`;
+    ] = `${singleFile[0].filename}`;
     try {
       if (singleFile[0].mimetype === "application/pdf") {
         const pdfFile = fs.readFileSync(singleFile[0].path);
