@@ -58,7 +58,10 @@ var CourseSchema = new Schema({
     }
   ],
   language: { type: Schema.ObjectId, ref: "Language" },
-  languageVersion: { type: Schema.ObjectId, ref: "Course" }
+  languageVersion: { type: Schema.ObjectId, ref: "Course" },
+  coloraccent: {
+    type: String
+  },
 });
 CourseSchema.plugin(URLSlugs("headline"));
 CourseSchema.pre("remove", function (next) {
