@@ -62,28 +62,7 @@ module.exports.landingpage = async (req, res) => {
         .sort({order: 1})
         .exec()
       indexData = await Promise.all([nonCompanyStories, companyStories, locations, partners, courses, contact_userRes])
-      const events = await fetchEventsByLocation(true, res.locals.settings.number_events);
-      // for await (let loc of indexData[2]) {
-      //   if (!events) {
-      //     events[
-      //       // await Event.find({location: loc._id, start: {$gt: new Date()}})
-      //       await Event.find({start: {$gt: new Date()}})
-      //         .limit(9)
-      //         .sort({start: 1})
-      //         .populate("location")
-      //       ];
-      //   } else {
-      //     // const event = await Event.find({ location: loc._id, start: {$gt: new Date()}
-      //     const event = await Event.find({ start: {$gt: new Date()}
-      //     })
-      //       .sort({start: 1})
-      //       .limit(9)
-      //       .populate("location")
-      //     if (event) {
-      //       events.push(...event)
-      //     }
-      //   }
-      // }
+      const events = await fetchEventsByLocation(true, res.locals.settings.landingpage_number_events);
       indexData.push(events)
       if (process.env.USE_REDIS === 'true') {
         try {
