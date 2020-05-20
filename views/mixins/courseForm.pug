@@ -8,8 +8,8 @@ mixin courseForm
         label(for='coloraccent') Color accent
         .input-group.mr-2
           .input-group-prepend.w-100
-            label.px-4.input-group-text.text-capitalize.d-block#demo(for='coloraccent' style=`background-color: ${course && course.coloraccent ? course.coloraccent : `rgb(255, 128, 0)`}` ) 
-            input#coloraccent.form-control(name='coloraccent', type='text', placeholder='Color accent', value=course ? course.coloraccent : "rgb(255, 128, 0)", autofocus='')
+            label.px-4.input-group-text.text-capitalize.d-block#demo(for='coloraccent' style=`background-color: ${course && course.coloraccent ? course.coloraccent : ``}` ) 
+            input#coloraccent.form-control(name='coloraccent', type='text', placeholder='Color accent', value=course ? course.coloraccent : "", autofocus='')
 
       label.d-block.d-block(for='icon') Course Curriculum PDF
       if course && course.curriculumPdf
