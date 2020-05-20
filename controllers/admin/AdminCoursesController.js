@@ -83,6 +83,7 @@ module.exports.createCourse = async function(req, res) {
   course.order = req.body.order;
   course.locations = req.body.locations;
   course.icon = req.body.icon;
+  course.coloraccent = req.body.coloraccent;
   course.massnahmeNumber = req.body.massnahmenummer;
   course.massnahmeDetails = req.body.massnahmedetails;
 
@@ -228,9 +229,10 @@ exports.resizeImages = async (request, response, next) => {
 
 module.exports.updateCourse = async function(req, res) {
   let course = await Course.findOne({ slug: req.params.slug });
-  const {slug, massnahmedetails, massnahmenummer, subtitle, order, successStory, subheading, locations, headline, title, icon, curriculumPdf} = req.body;
+  const { slug, massnahmedetails, massnahmenummer, subtitle, order, successStory, subheading, locations, headline, title, icon, curriculumPdf, coloraccent} = req.body;
   course.slug = slug;
   course.icon = icon ? icon : course.icon;
+  course.coloraccent = coloraccent ? coloraccent : course.coloraccent;
   course.headline = headline;
   course.subheading = subheading;
   course.title = title;

@@ -2,6 +2,7 @@ import {alertTimeout} from "./helper.js"
 import "bootstrap/js/dist/popover";
 import "bootstrap/js/dist/alert";
 import "./settings";
+import "bootstrap-colorpicker";
 import Quill from "quill/dist/quill";
 
 setTimeout(() => {
@@ -61,3 +62,11 @@ if (editorContainer) {
 
 const deleteButtons = document.querySelectorAll("button.btn-danger, button.btn-outline-danger");
 Array.from(deleteButtons).map(button => button.addEventListener("click", (e) => !confirm("are you sure?") && e.preventDefault()))
+$(function () {
+  $('#coloraccent').colorpicker({
+    autoInputFallback: false
+  });
+  $('#coloraccent').on('colorpickerChange', function (event) {
+    $('#demo').css('background-color', event.color.toString());
+  });
+});
