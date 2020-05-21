@@ -30,8 +30,10 @@ let redisClient = null;
 (async () => {
   const en = Language.findOne({ title: 'en' })
   const de = Language.findOne({ title: 'de' })
+  const setting = Setting.findOne().populate({ path: 'landingpage_calltoaction', populate: { path: 'languageVersion', model: 'Page' } }).exec({})
   let createLocalesFile = updateLocaleFile();
-  const res = await Promise.all([en, de, createLocalesFile])
+  const res = await Promise.all([en, de, createLocalesFile, setting])
+
   if (!res[0]) {
     console.log('no english language created. Seeding EN lang into mongoose')
     await Language.create(languages[0])
@@ -43,6 +45,10 @@ let redisClient = null;
 
   if (Object.keys(await Course.collection.getIndexes()).includes('order_1')) {
     await Course.collection.dropIndex('order_1')
+  }
+  if (!res[3]) {
+    console.log('No Setting created yet, inserting empty Setting model')
+    await Setting.create({})
   }
 })()
 
