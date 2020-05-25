@@ -6,7 +6,7 @@ mixin navigation
         if locals.settings && locals.settings.announcement_banner_cta && locals.settings.announcement_banner_cta !== currentPath
           a.btn.btn-link.ml-3.btn-secondary.py-0(href=locals.settings.announcement_banner_cta)=__("Show More")
 
-  nav#nav-primary.navbar.navbar-expand-lg.navbar-light.py-0.bg-tranition.px-3.px-md-3.bg-light-grey.bg-md-transparent.flex-column(class=currentPath == "/" ? " z-foreground " : "")
+  nav#nav-primary.z-1.navbar.navbar-expand-lg.navbar-light.py-0.bg-tranition.px-3.px-md-3.bg-light-grey.bg-md-transparent.flex-column(class=currentPath == "/" ? " z-foreground " : "")
     .align-items-stretch(class=currentPath && currentPath.includes('admin') ? ' container-fluid' : " container" )
       a.navbar-brand.pt-3.pl-3.text-primary.h-60(href="/")
         include ../../assets/media/dci.svg
