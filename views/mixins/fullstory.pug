@@ -1,27 +1,27 @@
-mixin fullstory(model)
+mixin fullstory(story)
   div.story-item
     .row.mh-33
       .col-md-8
         .pt-3
           .position-relative.bg-light-blue.p-5.bg-panel
             blockquote.blockquote
-              p.text-muted=model.excerpt
+              p.text-muted=story.excerpt
           .my-5.brackets.bg-white.p-3
-            p.text-justify !{model.toHTML}
+            p.text-justify !{story.toHTML}
       .col-md-4
         .sticky-top.text-center.pt-3
           .bg-light-blue.p-4
-            +storyImages(model)
+            +storyImages(story)
             h2.mt-3
               if locals.pathclass === "stories"
-                a.text-dark.stretched-link(href=`/stories/${model.slug}`)
-                  =model.title
+                a.text-dark.stretched-link(href=`/stories/${story.slug}`)
+                  =story.title
               else
-                =model.title
+                =story.title
             if user && user.superAdmin === "true" || user && user.admin === "true"
-              a.position-absolute.mt-3.right.top.btn.btn-outline-primary.z-foreground(href=`/admin/stories/edit/${model.slug}`) Edit
+              a.position-absolute.mt-3.right.top.btn.btn-outline-primary.z-foreground(href=`/admin/stories/edit/${story.slug}`) Edit
             table.table.m-0.mt-4.small
               tbody
                 tr.text-left
                   th.py-0.pr-3.pl-0 Position
-                  td.p-0= model.workPosition
+                  td.p-0= story.workPosition

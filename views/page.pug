@@ -2,16 +2,16 @@ extends layout.pug
 block content
 
   .container.pt-5.pb-200
-    h1.display-1.d-block=model.title
-    p.lead.pSize !{model.toHTML}
+    h1.display-1.d-block=page.title
+    p.lead.pSize !{page.toHTML}
 
-    if model.cta_text || model.cta_button_url
+    if page.cta_text || page.cta_button_url
       .bg-section.box-shadow.p-5.text-center.d-inline-block.mb-5
-        if model.cta_text
-          p.mb-5=model.cta_text
-        if model.cta_button_url
-          a.btn.btn-outline-secondary(href=model.cta_button_url title=model.cta_button_text)=model.cta_button_text 
+        if page.cta_text
+          p.mb-5=page.cta_text
+        if page.cta_button_url
+          a.btn.btn-outline-secondary(href=page.cta_button_url title=page.cta_button_text)=page.cta_button_text 
 
     if user && user.admin === "true"
       div.mt-3
-      a.btn.btn-outline-primary.mb-4(href='/admin/pages/edit/'+model.slug) Edit page
+      a.btn.btn-outline-primary.mb-4(href='/admin/pages/edit/'+page.slug) Edit page

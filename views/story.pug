@@ -1,23 +1,23 @@
 extends layout.pug
 block content
   div.story-item.py-5
-    .position-relative
+    .position-relative.pb-200
       .container
         .row
           .col-md-8
             .pt-3.mt-5
               .position-relative.bg-light-blue.p-5.bg-panel
                 blockquote.blockquote
-                  p.text-muted=model.excerpt
+                  p.text-muted=story.excerpt
               .mt-4.brackets.bg-white.p-3
-                p.text-justify !{model.toHTML}
+                p.text-justify !{story.toHTML}
           .col-md-4
             .sticky-top.my-5.text-center.pt-3
               .bg-light-blue.p-4
-                +storyImages(model)
-                h2.mt-3=model.title
+                +storyImages(story)
+                h2.mt-3=story.title
                 table.table.p-4.small
                   tbody
                     tr
                       th Position
-                      td= model.workPosition
+                      td= story.workPosition

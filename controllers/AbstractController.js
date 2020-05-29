@@ -7,7 +7,7 @@ module.exports.renderLanguageVersion = async (req, res, model, singlePath, path,
     res.redirect(`/${path}/${model.languageVersion[identifier]}`)
   } else if (model) {
     return res.render(`${singlePath}`, {
-      model
+      [singlePath]: model
     });
 
   } else {
