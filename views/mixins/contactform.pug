@@ -2,35 +2,41 @@ mixin contactform
   form#contactForm.mt-3(method="POST" action="/contact")
     .row
       .col-md-6.mb-3
-        label.sr-only(for='name')=__("Name")
+        label(for='name')=__("Name")
         input#name.form-control(name="name" type='text', placeholder='Name', value=contact ? contact.name : '', required)
         input#track.form-control(name="track" type="hidden" )
       .col-md-6.mb-3
-        label.sr-only(for='email')=__("Email")
+        label(for='email')=__("Email")
         span.text-muted
         input#email.form-control(name="email" type='email', placeholder='email@example.com', value=contact ? contact.email : '', required)
       .col-md-12
         .form-group
-          label.sr-only(for='body')=__("Message")
+          label(for='body')=__("Message")
           textarea.mb-3#body.form-control(name="body" placeholder=__("Please, write your message here..."), required)=contact ? contact.body : ''
         .form-group
-          label.sr-only(for='phone')=__("Phone")
-          input#phone.form-control(name="phone" type='number', pattern="[0-9]", placeholder='+4915117367384' , value=contact ? contact.phone : '', required)
+          label(for='phone')=__("Phone")
+          input#phone.form-control(name="phone" type='number', pattern="[\+]\d*", placeholder='0170123456789' , value=contact ? contact.phone : '', required)
           input#age.agefield.form-control(name="age" tabindex="-1" type='text', placeholder='25')
         if locations && locations.length > 0
-          label.sr-only(for='location') Location
-          select.mb-3.custom-select.text-muted.form-control(required='', name="locations")
+          label(for='location') Location
+          select.mb-3.custom-select.text-muted.form-control(required='', name="locations" id="location")
             option( contact && selected disabled value="")=__("Select your location here...")
             each location in locations
               option(value=(location._id) selected=contact && contact.locations && contact.locations[0].toString() === location._id.toString() ?  "selected" :  false )=location.name
+        if !companytour
+          p
+            label.checkbox.text-muted(for="jobcenter")
+              =__("Are you registered with the Jobcenter or Agentur für Arbeit")
+              input(type='checkbox', id='jobcenter', name='jobcenter', checked, value="true")
+              span.checkmark
         p.dataPrivacyLink
           label.checkbox.TermsofService.text-muted
             =__("I have read and agree to the")
-            input(type='checkbox', name='TermsofService', value=true, required)
+            input(type='checkbox', name='TermsofService', value="true", required)
             span.checkmark
           a.ml-1(data-toggle='modal', data-target='#dataPrivacy')=__("Data Privacy")
         if companytour
-          input(type="hidden" name='companytour' value=true)
+          input(type="hidden" name='companytour' checked value="true")
         .text-center
           button.btn.btn-lg.btn-secondary.m-auto(type="submit")
             div#contactform_text=__("SEND")
