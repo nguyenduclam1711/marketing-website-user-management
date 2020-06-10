@@ -8,6 +8,7 @@ var ContactSchema = new Schema({
   phone: String,
   track: String,
   body: String,
+  jobcenter: Boolean,
   utm_params: Object,
   updatedAt: {
     type: Date,

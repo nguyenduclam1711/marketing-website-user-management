@@ -97,8 +97,8 @@ module.exports.contactLocations = async (req, res) => {
 };
 module.exports.contact = async (req, res, next) => {
   try {
-    const { name, email, body, phone, locations, companytour, TermsofService } = req.body
-    if (req.body.age) {
+    const { name, age, email, body, phone, locations, companytour, TermsofService, jobcenter } = req.body
+    if (age) {
       console.log('Bot stepped into honeypot!')
       req.flash(
         'success',
@@ -115,54 +115,58 @@ module.exports.contact = async (req, res, next) => {
       return;
     }
     const contact = new Contact()
-    const track = req.body.track || 'https://digitalcareerinstitute.org';
     contact.name = name
     contact.email = email
     contact.phone = phone.replace(/[a-z]/g, '')
-    contact.track = track
+    contact.track = req.headers.referer
     contact.body = body
+    contact.jobcenter = !!jobcenter
     if (req.session.utmParams) {
       contact.utm_params = req.session.utmParams
     }
     contact.createdAt = new Date()
-    contact.isCompany = !!companytour
+    contact.isCompany = companytour
     contact.locations = locations
     if (!contact.email) {
       res.redirect(req.headers.referer)
     }
-    const location = await Location.findById(req.body.locations)
+    const location = await Location.findById(locations)
     const mailTemplate = `Contact from: <table>
     <tr>
       <td>Message send from: </td>
-      <a href=${track}>${track}</a>
+      <a href=${req.headers.referer}>${req.headers.referer}</a>
    </tr>
     <tr>
       <td>Name: </td>
-      <td>${req.body.name}</td>
+      <td>${name}</td>
     </tr>
     <tr>
       <td>Phone: </td>
-      <td>${req.body.phone}</td>
+      <td>${phone}</td>
     </tr>
     <tr>
       <td>Email: </td>
-      <td>${req.body.email}</td>
+      <td>${email}</td>
     </tr>
+    ${!companytour && `<tr>
+      <td>Is registered at Jobcenter:</td>
+      <td>${!!jobcenter}</td>
+    </tr>`}
     <tr>
       <td>Content: </td>
-      <td>${req.body.body}</td>
+      <td>${body}</td>
     </tr>
-    ${req.body.locations && `<tr> <td>Locations: </td> <td>${location.name}</td> </tr>`}
+    ${locations && `<tr> <td>Locations: </td> <td>${location.name}</td> </tr>`}
     </table>
   ` 
   const settings = await Setting.findOne()
   
     const mailOptions = {
       from: 'contact@digitalcareerinstitute.org',
-      to: req.body.companytour
+      to: companytour
         ? settings.tourmailreceiver
         : settings.mailreceiver,
-      subject: req.body.companytour
+      subject: companytour
         ? 'Company Tour request from website'
         : 'Message on website',
       text: mailTemplate,
@@ -185,10 +189,10 @@ module.exports.contact = async (req, res, next) => {
         body: {
           properties:
             [
-              { property: 'firstname', value: req.body.name.split(' ')[0] },
-              { property: 'lastname', value: req.body.name.split(' ').slice(1).join(' ') },
-              { property: 'email', value: req.body.email },
-              { property: 'phone', value: req.body.phone },
+              { property: 'firstname', value: name.split(' ')[0] },
+              { property: 'lastname', value: name.split(' ').slice(1).join(' ') },
+              { property: 'email', value: email },
+              { property: 'phone', value: phone },
               { property: 'utm_source', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_source) : "" },
               { property: 'utm_medium', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_medium) : "" },
               { property: 'utm_campaign', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_campaign) : "" },
@@ -197,10 +201,10 @@ module.exports.contact = async (req, res, next) => {
               {
                 property: 'form_payload',
                 value: JSON.stringify({
-                  'track': req.body.track,
+                  'track': req.headers.referer,
                   'locations': location,
-                  'body': req.body.body,
-                  'is_company': req.body.isCompany,
+                  'body': body,
+                  'is_company': companytour,
                   'utm_params': remainingUtmParams 
                 })
               }
@@ -208,6 +212,9 @@ module.exports.contact = async (req, res, next) => {
         },
         json: true
       };
+      if (!!jobcenter) {
+        options.body.properties.push({ property: 'are_you_registered_with_the_jobcenter_or_agentur_fr_arbeit', value: !!jobcenter })
+      }
       hubspotPromise = request(options)
     }
     // to save time, mail get send out without waiting for the response
@@ -226,7 +233,7 @@ module.exports.contact = async (req, res, next) => {
         'success',
         res.__(`Thanks for your message`)
       );
-      res.redirect(req.headers.referer.replace('/contact', ''))
+      res.redirect(req.headers.referer)
     }
     delete req.session.utmParams
     next()
@@ -234,8 +241,8 @@ module.exports.contact = async (req, res, next) => {
     console.error(`Error in /controllers/IndexController.js`)
     console.error(e)
 
-    req.flash('danger', JSON.stringify(e));
-    next()
+    req.flash('danger', e.message);
+    res.redirect(req.headers.referer)
   }
 }
 module.exports.tour = async (req, res) => {

@@ -242,7 +242,7 @@ document.getElementById("contactForm").addEventListener('submit', (e) => {
   e.target.querySelector('#contactform_spinner').classList.remove("d-none")
   const payload = Array.from(e.target.elements)
     .filter(i => i.type !== "submit")
-    .reduce((acc, el) => ({ ...acc, [el.name]: el.value }), {})
+    .reduce((acc, el) => ({ ...acc, [el.name]: el.type === "checkbox" ? el.checked : el.value }), {})
 
   fetch("/contact", {
     method: "POST",
@@ -255,7 +255,7 @@ document.getElementById("contactForm").addEventListener('submit', (e) => {
     .then(data => {
       e.target.querySelector('#contactform_spinner').classList.add("d-none")
       e.target.querySelector('#contactform_check').classList.remove("d-none")
-      Array.from(e.target.elements).map(i => i.value = "")
+      Array.from(e.target.elements).map(i => (i.value = "", i.style.boxShadow = "none"))
       const flashMessage = document.createElement('div')
       flashMessage.classList.add("flash", "m-0", "mr-3", "alert", "fade", "show", "alert-success")
 

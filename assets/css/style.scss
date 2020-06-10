@@ -713,7 +713,6 @@ body:not(.admin) {
   input[type="week"] {
     background-color: transparent;
     color: #222;
-    box-shadow: none;
     padding: 12px;
     font-size: 16px;
     font-weight: normal;
@@ -788,6 +787,10 @@ body:not(.admin) {
 /* On mouse-over, add a grey background color */
 .checkbox:hover input~.checkmark {
   background-color: #ccc;
+}
+.checkbox input:active~.checkmark, 
+.checkbox input:focus~.checkmark {
+  box-shadow: 0px 0px 4px $blue;
 }
 
 /* When the checkbox is checked, add a blue background */
