@@ -25,10 +25,13 @@ mixin contactform
               option(value=(location._id) selected=contact && contact.locations && contact.locations[0].toString() === location._id.toString() ?  "selected" :  false )=location.name
         if !companytour
           p
-            label.checkbox.text-muted(for="jobcenter")
-              =__("Are you registered with the Jobcenter or Agentur für Arbeit")
-              input(type='checkbox', id='jobcenter', name='jobcenter', checked, value="true")
-              span.checkmark
+            label(for="jobcenter")
+              =__("Are you registered with the Jobcenter or Agentur für Arbeit?")
+
+            select.mb-3.custom-select.text-muted.form-control(name="jobcenter" id="jobcenter")
+              option(contact && selected disabled)=__("Please choose...")
+              option(value=1 )=__("yes")
+              option(value=0)=__("no")
         p.dataPrivacyLink
           label.checkbox.TermsofService.text-muted
             =__("I have read and agree to the")

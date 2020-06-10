@@ -242,7 +242,7 @@ document.getElementById("contactForm").addEventListener('submit', (e) => {
   e.target.querySelector('#contactform_spinner').classList.remove("d-none")
   const payload = Array.from(e.target.elements)
     .filter(i => i.type !== "submit")
-    .reduce((acc, el) => ({ ...acc, [el.name]: el.type === "checkbox" ? el.checked : el.value }), {})
+    .reduce((acc, el) => ({ ...acc, [el.name]: el.type === "checkbox" ? el.checked : el.name === "jobcenter" ? !!Number(el.value) : el.value }), {})
 
   fetch("/contact", {
     method: "POST",
