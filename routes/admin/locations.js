@@ -4,8 +4,8 @@ const AdminLocationsController = require('../../controllers/admin/AdminLocations
 const { ensureAuthenticated, redirectNonAdmin } = require("../../helpers/helper");
 
 router.get("/",
-    ensureAuthenticated,
-    redirectNonAdmin,
+/*     ensureAuthenticated,
+    redirectNonAdmin, */
     AdminLocationsController.getLocations);
 
 router.get("/:id",
