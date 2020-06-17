@@ -36,7 +36,7 @@ block content
                     .bg-primary
                       img.object-fit-cover.img-fluid.portrait.half-transparent(src="/media/pixel.gif" alt=location.name style=`background-image: url('${location.avatar ? `/images/` + location.avatar : `/media/circuit-board.svg`}')`)
                     h3.text-white.position-absolute.transform-absolute-center.w-100.text-center=location.name
-                  .col-md-6.d-flex.flex-column.justify-content-center.text-center.py-5 
+                  .col-md-6.d-flex.flex-column.justify-content-center.text-center
                     if location.street
                       .h-3.text-primary.mb-1
                         include ../assets/media/pin.svg
@@ -56,6 +56,21 @@ block content
                           include ../assets/icons/phone.svg
                         div                   
                           =location.phone
+                    if location.contactEmployee
+                      .row.d-flex.justify-content-center.align-items-center
+                        p.w-100.text-center.mt-3=(`Contact Person for ${location.name}:`)
+                        .col-5
+                          img.img-fluid.rounded-circle.square.object-fit-cover(src="/media/pixel.gif" alt= location.contactEmployee ? location.contactEmployee.name : " " style=`background-image: url('${location.contactEmployee && location.contactEmployee.avatar ? `/images/` + location.contactEmployee.avatar : `/media/circuit-board.svg`}')`)
+                          p.my-3=location.contactEmployee.name
+                        .col-5
+                          if location.contactEmployee
+                            a.d-block(href=`tel:${location.contactEmployee.phone}`)
+                              .h-2.text-primary.mt-3.mb-1
+                                include ../assets/icons/phone.svg
+                              div                   
+                                =location.contactEmployee.phone
+                          
+                          
 
   .bg-light.pb-200
     .container.py-5

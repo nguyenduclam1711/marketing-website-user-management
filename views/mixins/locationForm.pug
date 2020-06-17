@@ -38,11 +38,10 @@ mixin locationForm
             option(value=employee._id)=employee.name
       
     .mb-3
-      label(for='phone') Phone (automatically added from contact user)
-      input#phone.form-control(disabled name='phone', type='number', 
-            placeholder = location && location.contactEmployee && location.contactEmployee.phone ? location.contactEmployee.phone : "Phone number missing for selected contact user",  
-            autofocus='', 
-            value = location && location.contactEmployee && location.contactEmployee.phone ? location.contactEmployee.phone : " ")
+      label(for='phone') Phone
+      input#phone.form-control(name='phone', type='number',
+      placeholder='Phone',  autofocus='' value=editPath ?
+      location.phone : "")
 
     .mb-3
       label(for='email') Email
