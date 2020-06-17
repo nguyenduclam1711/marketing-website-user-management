@@ -10,11 +10,7 @@ var EmployeeSchema = new Schema({
   position: String,
   content: String,
   active: String,
-  contact_user: {
-    type: Boolean,
-    index: true,
-    unique: true
-  },
+
   phone: {
     type: String,
     default: undefined
@@ -45,11 +41,7 @@ EmployeeSchema.pre("save", function preSave(next) {
   employee.update({updatedAt: Date.now()});
   next();
 });
-EmployeeSchema.index({
-  contact_user: 1,
-}, {
-  unique: true,
-});
+
 EmployeeSchema.plugin(URLSlugs("name"));
 EmployeeSchema.pre("remove", function (next) {
   if (!!this.languageVersion) {

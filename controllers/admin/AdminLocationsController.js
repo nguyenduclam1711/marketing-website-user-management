@@ -1,14 +1,18 @@
 const Location = require("../../models/location");
+const Employee = require("../../models/employee");
 const multer = require("multer");
 const fs = require("fs");
 const jimp = require("jimp");
 const uuid = require("uuid");
 module.exports.getLocations = async (req, res) => {
+  const employees = await Employee.find({})
   let locations = await Location.find({})
+    .populate('contactUser')
     .sort({ order: 1 })
     .exec();
   res.render("admin/locations", {
     locations: locations,
+    employees: employees
   });
 }
 
@@ -20,13 +24,15 @@ module.exports.getSingleLocation = (req, res) => {
   });
 }
 
-module.exports.editLocation = (req, res) => {
-  Location.findById(req.params.id, async (err, location) => {
-    let locations = await Location.find({}).exec();
+module.exports.editLocation = async (req, res) => {
+    let location = await Location.findById(req.params.id)
+      .populate('contactUser')
+      .exec();
+    const employees = await Employee.find({})
     res.render("admin/editLocation", {
-      location: location
+      location: location,
+      employees: employees
     });
-  });
 }
 
 module.exports.createLocation = (req, res) => {
@@ -40,6 +46,7 @@ module.exports.createLocation = (req, res) => {
   location.longitude = req.body.longitude; 
   location.latitude = req.body.latitude; 
   location.phone = req.body.phone; 
+  location.contactUser = req.body.contactUser; 
   location.isCampus = req.body.isCampus === "on"; 
   location.save((err) => {
     if (err) res.send(err);
@@ -77,6 +84,7 @@ module.exports.updateLocation = (req, res) => {
     location.longitude = req.body.longitude; 
     location.latitude = req.body.latitude; 
     location.phone = req.body.phone; 
+    location.contactUser = req.body.contactUser; 
     location.avatar = req.body.avatar ? req.body.avatar : location.avatar;
     location.avatar = req.files.avatar ? req.body.avatar : location.avatar;
     location.isCampus = req.body.isCampus === "on"; 
