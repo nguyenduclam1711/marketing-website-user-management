@@ -44,7 +44,7 @@ const LocationSchema = new Schema({
     default: 99
 
   },
-  contactUser: {
+  contactEmployee: {
     type: Schema.ObjectId,
     ref: "Employee"
   }
