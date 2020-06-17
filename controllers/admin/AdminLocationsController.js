@@ -1,18 +1,20 @@
 const Location = require("../../models/location");
 const Employee = require("../../models/employee");
+const Language = require("../../models/language");
 const multer = require("multer");
 const fs = require("fs");
 const jimp = require("jimp");
 const uuid = require("uuid");
 module.exports.getLocations = async (req, res) => {
-  const employees = await Employee.find({language: '5dc5a87fba4c6e051ad49ea5'})
+  const enReq = await Language.findOne({ title: 'en' })
+  const employeesReq = await Employee.find({language: enReq._id})
   let locations = await Location.find({})
     .populate('contactEmployee')
     .sort({ order: 1 })
     .exec();
   res.render("admin/locations", {
     locations: locations,
-    employees: employees
+    employees: employeesReq
   });
 }
 
@@ -28,10 +30,12 @@ module.exports.editLocation = async (req, res) => {
     let location = await Location.findById(req.params.id)
       .populate('contactEmployee')
       .exec();
-    const employees = await Employee.find({language: '5dc5a87fba4c6e051ad49ea5'})
+      const enReq = await Language.findOne({ title: 'en' })
+      const employeesReq = await Employee.find({language: enReq._id})
+    
     res.render("admin/editLocation", {
       location: location,
-      employees: employees
+      employees: employeesReq
     });
 }
 
