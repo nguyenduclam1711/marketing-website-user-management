@@ -5,7 +5,7 @@ const fs = require("fs");
 const jimp = require("jimp");
 const uuid = require("uuid");
 module.exports.getLocations = async (req, res) => {
-  const employees = await Employee.find({})
+  const employees = await Employee.find({language: '5dc5a87fba4c6e051ad49ea5'})
   let locations = await Location.find({})
     .populate('contactUser')
     .sort({ order: 1 })
@@ -28,7 +28,7 @@ module.exports.editLocation = async (req, res) => {
     let location = await Location.findById(req.params.id)
       .populate('contactUser')
       .exec();
-    const employees = await Employee.find({})
+    const employees = await Employee.find({language: '5dc5a87fba4c6e051ad49ea5'})
     res.render("admin/editLocation", {
       location: location,
       employees: employees
