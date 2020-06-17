@@ -7,7 +7,7 @@ const uuid = require("uuid");
 module.exports.getLocations = async (req, res) => {
   const employees = await Employee.find({language: '5dc5a87fba4c6e051ad49ea5'})
   let locations = await Location.find({})
-    .populate('contactUser')
+    .populate('contactEmployee')
     .sort({ order: 1 })
     .exec();
   res.render("admin/locations", {
@@ -26,7 +26,7 @@ module.exports.getSingleLocation = (req, res) => {
 
 module.exports.editLocation = async (req, res) => {
     let location = await Location.findById(req.params.id)
-      .populate('contactUser')
+      .populate('contactEmployee')
       .exec();
     const employees = await Employee.find({language: '5dc5a87fba4c6e051ad49ea5'})
     res.render("admin/editLocation", {
@@ -46,7 +46,7 @@ module.exports.createLocation = (req, res) => {
   location.longitude = req.body.longitude; 
   location.latitude = req.body.latitude; 
   location.phone = req.body.phone; 
-  location.contactUser = req.body.contactUser; 
+  location.contactEmployee = req.body.contactEmployee; 
   location.isCampus = req.body.isCampus === "on"; 
   location.save((err) => {
     if (err) res.send(err);
@@ -84,7 +84,7 @@ module.exports.updateLocation = (req, res) => {
     location.longitude = req.body.longitude; 
     location.latitude = req.body.latitude; 
     location.phone = req.body.phone; 
-    location.contactUser = req.body.contactUser; 
+    location.contactEmployee = req.body.contactEmployee; 
     location.avatar = req.body.avatar ? req.body.avatar : location.avatar;
     location.avatar = req.files.avatar ? req.body.avatar : location.avatar;
     location.isCampus = req.body.isCampus === "on"; 
