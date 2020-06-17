@@ -40,9 +40,9 @@ mixin locationForm
     .mb-3
       label(for='phone') Phone (automatically added from contact user)
       input#phone.form-control(disabled name='phone', type='number', 
-            placeholder = location && location.contactUser.phone ? location.contactUser.phone : "Phone number missing for selected contact user",  
+            placeholder = location.contactUser && location.contactUser.phone ? location.contactUser.phone : "Phone number missing for selected contact user",  
             autofocus='', 
-            value = location && location.contactUser ? location.contactUser.phone : " ")
+            value = location.contactUser && location.contactUser.phone ? location.contactUser.phone : " ")
 
     .mb-3
       label(for='email') Email
