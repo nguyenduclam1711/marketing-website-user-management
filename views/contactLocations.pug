@@ -61,10 +61,10 @@ block content
                       .row.d-flex.justify-content-center.align-items-center
                         p.w-100.text-center.mt-3=(`Contact Person for ${location.name}:`)
                         .col-5
-                          img.img-fluid.rounded-circle.square.object-fit-cover(src="/media/pixel.gif" alt= location.contactEmployee ? location.contactEmployee.name : " " style=`background-image: url('${location.contactEmployee && location.contactEmployee.avatar ? `/images/` + location.contactEmployee.avatar : `/media/circuit-board.svg`}')`)
-                          p.my-3=location.contactEmployee.name
-                        .col-5
-                          if location.contactEmployee
+                          img.img-fluid.square.object-fit-cover(src="/media/pixel.gif" alt= location.contactEmployee ? location.contactEmployee.name : " " style=`background-image: url('${location.contactEmployee && location.contactEmployee.avatar ? `/images/` + location.contactEmployee.avatar : `/media/circuit-board.svg`}')`)
+                          p.my-3=location.contactEmployee.name  
+                        if location.contactEmployee.phone
+                          .col-5
                             a.d-block(href=`tel:${location.contactEmployee.phone}`)
                               .h-2.text-primary.mt-3.mb-1
                                 include ../assets/icons/phone.svg
