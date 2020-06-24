@@ -1,14 +1,22 @@
 const Location = require("../../models/location");
+const Employee = require("../../models/employee");
+const Language = require("../../models/language");
 const multer = require("multer");
 const fs = require("fs");
 const jimp = require("jimp");
 const uuid = require("uuid");
+const employee = require("../../models/employee");
 module.exports.getLocations = async (req, res) => {
-  let locations = await Location.find({})
+  const enReq = await Language.findOne({ title: 'en' })
+  const employeesReq = Employee.find({language: enReq._id})
+  const locationsReq = Location.find({})
+    .populate('contactEmployee')
     .sort({ order: 1 })
     .exec();
+  const [employees, locations] = await Promise.all([employeesReq, locationsReq])
   res.render("admin/locations", {
-    locations: locations,
+    locations,
+    employees
   });
 }
 
@@ -20,13 +28,18 @@ module.exports.getSingleLocation = (req, res) => {
   });
 }
 
-module.exports.editLocation = (req, res) => {
-  Location.findById(req.params.id, async (err, location) => {
-    let locations = await Location.find({}).exec();
+module.exports.editLocation = async (req, res) => {
+  const enReq = await Language.findOne({ title: 'en' })
+  const employeesReq = Employee.find({language: enReq._id})
+  const locationReq = Location.findById(req.params.id)
+    .populate('contactEmployee')
+    .exec();
+  const [employees, location] = await Promise.all([employeesReq, locationReq])
+    
     res.render("admin/editLocation", {
-      location: location
+      location,
+      employees
     });
-  });
 }
 
 module.exports.createLocation = (req, res) => {
@@ -40,6 +53,7 @@ module.exports.createLocation = (req, res) => {
   location.longitude = req.body.longitude; 
   location.latitude = req.body.latitude; 
   location.phone = req.body.phone; 
+  location.contactEmployee = req.body.contactEmployee; 
   location.isCampus = req.body.isCampus === "on"; 
   location.save((err) => {
     if (err) res.send(err);
@@ -77,6 +91,7 @@ module.exports.updateLocation = (req, res) => {
     location.longitude = req.body.longitude; 
     location.latitude = req.body.latitude; 
     location.phone = req.body.phone; 
+    location.contactEmployee = req.body.contactEmployee; 
     location.avatar = req.body.avatar ? req.body.avatar : location.avatar;
     location.avatar = req.files.avatar ? req.body.avatar : location.avatar;
     location.isCampus = req.body.isCampus === "on"; 
