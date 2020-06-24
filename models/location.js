@@ -10,9 +10,6 @@ const LocationSchema = new Schema({
   street: {
     type: String
   },
-  email: {
-    type: String
-  },
   zip: {
     type: String
   },
@@ -21,9 +18,6 @@ const LocationSchema = new Schema({
   },
   longitude: {
     type: Number
-  },
-  phone: {
-    type: String
   },
   isCampus: {
     type: Boolean
