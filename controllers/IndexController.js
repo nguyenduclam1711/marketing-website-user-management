@@ -88,7 +88,7 @@ module.exports.landingpage = async (req, res) => {
   }
 }
 module.exports.contactLocations = async (req, res) => {
-  const locations = await Location.find({}).populate('contactEmployee').sort({ order: 1 }).exec();
+  const locations = await Location.find({}).sort({ order: 1 })
   const contact = req.body
   res.render('contactLocations', {
     locations,
