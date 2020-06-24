@@ -5,16 +5,18 @@ const multer = require("multer");
 const fs = require("fs");
 const jimp = require("jimp");
 const uuid = require("uuid");
+const employee = require("../../models/employee");
 module.exports.getLocations = async (req, res) => {
   const enReq = await Language.findOne({ title: 'en' })
-  const employeesReq = await Employee.find({language: enReq._id})
-  let locations = await Location.find({})
+  const employeesReq = Employee.find({language: enReq._id})
+  const locationsReq = Location.find({})
     .populate('contactEmployee')
     .sort({ order: 1 })
     .exec();
+  const [employees, locations] = await Promise.all([employeesReq, locationsReq])
   res.render("admin/locations", {
-    locations: locations,
-    employees: employeesReq
+    locations,
+    employees
   });
 }
 
@@ -27,15 +29,16 @@ module.exports.getSingleLocation = (req, res) => {
 }
 
 module.exports.editLocation = async (req, res) => {
-    let location = await Location.findById(req.params.id)
-      .populate('contactEmployee')
-      .exec();
-      const enReq = await Language.findOne({ title: 'en' })
-      const employeesReq = await Employee.find({language: enReq._id})
+  const enReq = await Language.findOne({ title: 'en' })
+  const employeesReq = Employee.find({language: enReq._id})
+  const locationReq = Location.findById(req.params.id)
+    .populate('contactEmployee')
+    .exec();
+  const [employees, location] = await Promise.all([employeesReq, locationReq])
     
     res.render("admin/editLocation", {
-      location: location,
-      employees: employeesReq
+      location,
+      employees
     });
 }
 
