@@ -1,7 +1,7 @@
 const Users = require("../../models/user");
 
 module.exports.getUsers = async function (req, res) {
-  let users = await Users.find({})
+  let users = await Users.find({'_id': {$ne : req.user._id}}) 
     .sort("-createdAt")
     .exec();
 
