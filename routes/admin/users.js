@@ -28,4 +28,11 @@ router.get(
   AdminUsersController.verifyUser
 );
 
+router.post(
+  "/delete/:id",
+  ensureAuthenticated,
+  redirectNonSuperAdmin,
+  AdminUsersController.deleteUser
+);
+  
 module.exports = router;

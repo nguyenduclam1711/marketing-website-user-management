@@ -53,3 +53,20 @@ module.exports.verifyUser = async function (req, res) {
     res.redirect("/admin/users");
   }
 };
+module.exports.deleteUser = async function (req, res) {
+  if (req.user.superAdmin === "true") {
+    try {
+      await Users.deleteOne({
+        _id: req.params.id
+      });
+      req.flash("success", `User successfully deleted`);
+      res.redirect("/admin/users");
+    } catch (error) {
+      req.flash("danger", `Error: ${JSON.stringify(error)}`);
+      res.redirect("/admin/users");
+    }
+  } else {
+    req.flash("danger", `Sorry, just superadmins can do that.`);
+    res.redirect("/admin/users");
+  }
+};

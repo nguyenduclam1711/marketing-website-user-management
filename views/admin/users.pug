@@ -25,12 +25,12 @@ block content
           else
             td User
             
-          td.d-flex
+          td.d-flex.justify-content-between.px-0
             form(method='GET', action='/admin/users/verify_user/' + user._id)
               if !user.verifiedAt || !user.activatedAt 
-                button.btn.btn-success.btn-sm(type="submit") Activate
+                button.btn.btn-success.btn-sm.mr-1(type="submit") Activate
               else
-                button.btn.btn-warning.btn-sm(type='submit') Deactivate
+                button.btn.btn-warning.btn-sm.mr-1(type='submit') Deactivate
 
 
             if user.verifiedAt && user.activatedAt
@@ -43,3 +43,5 @@ block content
               else 
                 form(method='POST', action='/admin/users/upgrade_user/' + user._id)
                   button.btn.btn-warning.btn-sm(type='submit') Make user
+            form(method='POST', action='/admin/users/delete/' + user._id)
+              button.btn.btn-danger.btn-sm.mx-1(type='submit') Delete
