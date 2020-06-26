@@ -1,18 +1,17 @@
 extends layout.pug
 block content
   .bg-light.h-100
-    .container.py-5
+    .container.py-5.d-flex.justify-content-center.flex-column.h-100
       .row.py-5
         .col-md-6.offset-md-3.p-3.card.border-0
           h1 Register
-
           form.mb-3(method='post' action='/users/register')
             .form-group
               label Email
-              input.form-control.bg-light(type='email' placeholder='Email' name='email')
+              input.form-control.bg-light(type='email' placeholder='Email' name='email' autofocus=true value=user ? user.email : "")
             .form-group
               label Username
-              input.form-control.bg-light(type='text' placeholder='Username' name='username')
+              input.form-control.bg-light(type='text' placeholder='Username' name='username' value=user ? user.username : "")
             .form-group
               label Password
               input.form-control.bg-light(type='password' placeholder='Password' name='password')

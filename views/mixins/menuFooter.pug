@@ -1,16 +1,14 @@
 mixin menuFooter
 
  nav.fixed-bottom.navbar.navbar-expand-md.navbar-dark.bg-primary
-  button.navbar-toggler(type='button', data-toggle='collapse', data-target='#menuFooter')
+  button.navbar-toggler.row(type='button', data-toggle='collapse', data-target='#menuFooter')
     span.navbar-toggler-icon
     span.sr-only="Toggle menu"
 
   #menuFooter.navbar-collapse.collapse.w-100
-    ul.nav.navbar-nav.ml-auto.w-100.justify-content-end
+    ul.pt-3.pt-md-0.nav.navbar-nav.ml-auto.w-100.justify-content-end
       li.nav-item
       if user && user.superAdmin === "true"
-        li.nav-item
-          a.nav-link.text-danger(href='/admin/settings/clearcache') Clear cache
         li.nav-item
           a.nav-link(href='/admin/users') Users
       if user && user.admin === "true" || user.superAdmin === "true"
@@ -39,5 +37,8 @@ mixin menuFooter
         li.nav-item
           a.nav-link(href='/admin/settings') Settings
       li.position-relative.nav-item
-        a.d-none.d-md-block.nav-link.mx-2.border-left.pl-3.border-secondary(href='/users/logout') Logout
+        a.d-none.d-md-block.nav-link.ml-2.border-left.pl-3.border-grey(href='/users/logout') Logout
         a.d-md-none.nav-link.mx-md-2.pl-md-3(href='/users/logout') Logout
+      if user && user.admin === "true" || user.superAdmin === "true"
+        li.position-relative.nav-item
+          a.nav-link.text-danger(href='/admin/settings/clearcache') Clear cache
