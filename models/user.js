@@ -26,6 +26,9 @@ var UserSchema = mongoose.Schema({
   },
   verifiedAt: {
     type: Date
+  },
+  activatedAt: {
+    type: Date
   }
 });
 

@@ -23,8 +23,8 @@ sendVerificationMail = async (res, req, userToken) => {
     from: "verification@digitalcareerinstitute.org",
     to: req.body.email,
     subject: "Verify your account on digitalcareerinstitute.org",
-    text: `By clicking on the following link, you verify your account <a href="${verificationLink}">${verificationLink}</a>`,
-    html: `By clicking on the following link, you verify your account <a href="${verificationLink}">${verificationLink}</a>`
+  text: `By opening the following link in your browser, you verify your account: ${verificationLink}. Please consider that your account is not activated yet. Contact one of the staff members to request the activation of your account. `,
+    html: `By clicking on the following link, you verify your account <a href="${verificationLink}">${verificationLink}</a>. <br/><br/><strong>Please consider that your account is not activated yet. <br/> Contact one of the staff members to request the activation of your account.</strong> `
   };
   return await sendMail(res, req, mailOptions);
 };
@@ -42,12 +42,16 @@ module.exports.register = async (req, res) => {
         .map(i => i.msg)
         .join(", ")
     );
+    req.flash(
+      "error",
+      `There are some errors: ${JSON.stringify(errors)}`
+    );
     res.render("register", {
+      user: { email, username },
       error: errors.array().map(i => i.msg)
         .join(", ")
     });
   } else {
- 
       const userToken = uuid(4);
       const newUser = new User({
         email: email,
@@ -63,7 +67,7 @@ module.exports.register = async (req, res) => {
             "success",
             `Email ${email} registered. Please check your mails for verification.`
           );
-         return res.redirect("/users/login");
+          renderLogin(req, res, next, user)
         } catch (e) {
           req.flash("danger", `A error occured, please try it later again!`);
           res.redirect(req.headers.referer);
@@ -71,6 +75,7 @@ module.exports.register = async (req, res) => {
       });
   }
 };
+
 module.exports.login = function(req, res, next) {
   passport.authenticate("local", function(err, user, info) {
     if (err) {
@@ -78,10 +83,13 @@ module.exports.login = function(req, res, next) {
     }
     if (!user) {
       req.flash("danger", `${info.message}`);
-      return res.redirect("/users/login");
+      renderLogin(req, res, next, user)
     } else if (!user.verifiedAt) {
       req.flash("danger", `Account not verified`);
-      return res.redirect("/users/login");
+      renderLogin(req, res, next, user)
+    } else if (!user.activatedAt) {
+      req.flash("danger", `Account not activated yet. Please contact thomas.kuhnert@digitalcareerinstitute.org`);
+      renderLogin(req, res, next, user)
     } else {
       req.logIn(user, function(err) {
         if (err) {
@@ -94,6 +102,10 @@ module.exports.login = function(req, res, next) {
   })(req, res, next);
 };
 
+const renderLogin = function (req, res, next, user) {
+  res.render("login", { user });
+}
+
 module.exports.verify = async function(req, res, next) {
   const user = await User.findOne({ token: req.params.token });
   if (!user) {
@@ -103,10 +115,10 @@ module.exports.verify = async function(req, res, next) {
     user.verifiedAt = new Date();
     req.flash("success", `Email ${user.email} verified!`);
     await user.save();
-    return res.redirect("/users/login");
+    return renderLogin(req, res, next, user)
   }
 };
 module.exports.logout = (req, res) => {
   req.logout();
-  res.redirect("/users/login");
+  renderLogin(req, res, next, user)
 };

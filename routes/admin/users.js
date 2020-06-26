@@ -14,11 +14,18 @@ router.get(
   AdminUsersController.getUsers
 );
 
-router.get(
+router.post(
   "/upgrade_user/:id",
   ensureAuthenticated,
   redirectNonSuperAdmin,
   AdminUsersController.upgradeUser
+);
+
+router.get(
+  "/verify_user/:id",
+  ensureAuthenticated,
+  redirectNonSuperAdmin,
+  AdminUsersController.verifyUser
 );
 
 module.exports = router;
