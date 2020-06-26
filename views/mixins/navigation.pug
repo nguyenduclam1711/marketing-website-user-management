@@ -1,5 +1,5 @@
 mixin navigation
-  if currentPath && !currentPath.includes('admin') && locals.settings && locals.settings.announcement_banner_string
+  if currentPath && !currentPath.includes('admin') && !currentPath.includes('users') && locals.settings && locals.settings.announcement_banner_string
     .w-100.bg-primary.text-white.p-2.text-center.z-foreground
       div
         =__(locals.settings.announcement_banner_string)

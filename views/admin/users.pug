@@ -1,31 +1,45 @@
 extends ../layout.pug
 block content
 
-  ul.list-group.usersListContainer
-    li.list-group-item.d-flex.align-items-center.usersList
-      span.mr-5.userInfoHalfWidth Name
-      span.mr-5.userInfoHalfWidth Email
-      span.mr-5.userInfoFullWidth Verification
-      span.mr-5 Role
-      span.mr-4 Status
+  table.table
+    thead
+      tr
+        th Name
+        th Email
+        th Verified
+        th Activated
+        th Role
+        th.mr-4 Status
 
-    each user in users
-      form(method='GET', action='/admin/users/upgrade_user/' + user._id)
-        li.list-group-item.d-flex.align-items-center.usersList
-          span.mr-5.userInfoHalfWidth= user.username
-          span.mr-5.userInfoHalfWidth= user.email
-          span.mr-5.userInfoFullWidth= `${user.verifiedAt ? user.verifiedAt : ' Not verified yet'}`
+    tbody
+      each user in users
+        tr
+          td= user.username
+          td= user.email
+          td= `${user.verifiedAt ? user.verifiedAt : ' Not verified yet'}`
+          td= `${user.activatedAt ? user.activatedAt : ' Not activated yet'}`
           if user.superAdmin == 'true'
-            span.mr-5 Super Admin
+            td Super Admin
           else if user.admin == 'true' && user.superAdmin != 'true'
-            span.mr-5 Admin
+            td Admin
           else
-            span.mr-5 User
-          div
-            if user.verifiedAt
-              if user.admin != 'true' && user.superAdmin != 'true'
-                button.btn.btn-warning.btn-sm(type="submit") Upgrade
+            td User
+            
+          td.d-flex
+            form(method='GET', action='/admin/users/verify_user/' + user._id)
+              if !user.verifiedAt || !user.activatedAt 
+                button.btn.btn-success.btn-sm(type="submit") Activate
               else
-                button.btn.btn-success(type='submit') Downgrade
-            else
-              button.btn.btn-success(type='submit') Activate
+                button.btn.btn-warning.btn-sm(type='submit') Deactivate
+
+
+            if user.verifiedAt && user.activatedAt
+              if user.admin != 'true' && user.superAdmin != 'true'
+                form(method='POST', action=`/admin/users/upgrade_user/${user._id}?role=admin`)
+                  button.btn.btn-success.btn-sm(type="submit") Make admin
+              else if user.admin == 'true' && user.superAdmin != 'true'
+                form(method='POST', action=`/admin/users/upgrade_user/${user._id}?role=superadmin`)
+                  button.btn.btn-success.btn-sm(type='submit') Make superadmin
+              else 
+                form(method='POST', action='/admin/users/upgrade_user/' + user._id)
+                  button.btn.btn-warning.btn-sm(type='submit') Make user
