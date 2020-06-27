@@ -14,7 +14,7 @@ mixin courseForm
       label.d-block.d-block(for='textColor') Text color
       .d-flex
         .custom-control.custom-radio.mr-2
-          input#textColor1.custom-control-input(type="radio" name="textColor" value="black" checked=course && course.textColor == "black")
+          input#textColor1.custom-control-input(type="radio" name="textColor" value="black" checked=course && (course.textColor == "black" || (course && !course.textColor)))
           label.custom-control-label(for="textColor1") Black
         .custom-control.custom-radio.mr-2
           input#textColor2.custom-control-input(type="radio" name="textColor" value="white" checked=course && course.textColor == "white")

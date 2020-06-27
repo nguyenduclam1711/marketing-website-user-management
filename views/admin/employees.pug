@@ -19,7 +19,7 @@ block content
                       =": "
                       each loc in employee.locations
                         span.badge.badge-primary.mr-1= loc.name
-                  if user && (user.admin === "true" || user.superAdmin === "true") && currentPath.includes('admin')
+                  if user && (user.admin === "true" || user.superAdmin === "true") && currentPath.includes('/admin')
                     +buttonGroup(employee, `employees`, `name`)
 
         .col-md-4

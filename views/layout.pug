@@ -62,7 +62,7 @@ html.h-100(lang='en')
     link(rel="manifest", href="/assets/site.webmanifest")
     link(rel="mask-icon", href="/assets/safari-pinned-tab.svg", color="#5bbad5")
 
-  body.h-100(data-spy='scroll', data-target='#courseScrollspy', data-offset='1', class=`${pathclass+(currentPath && currentPath.includes('admin') ? ' admin mb-5' : currentPath == "/" ? "index" : "" )}`)
+  body.h-100(data-spy='scroll', data-target='#courseScrollspy', data-offset='1', class=`${pathclass+(currentPath && currentPath.includes('/admin') ? ' admin mb-5' : currentPath == "/" ? "index" : "" )}`)
 
     if live
       noscript
@@ -78,16 +78,16 @@ html.h-100(lang='en')
               button.close.ml-3(type='button', data-dismiss='alert', aria-label='Close')
                 span(aria-hidden='true') ×
 
-    .d-flex.flex-column(class=currentPath && currentPath.includes('admin') ? ' bg-light pb-5' : "" )
+    .d-flex.flex-column(class=currentPath && currentPath.includes('/admin') ? ' bg-light pb-5' : "" )
       if currentPath !== "/"
         div
           +navigation
           
-      .flex-grow-1.z-0(class=currentPath && currentPath.includes('admin') ? '' : "" )
+      .flex-grow-1.z-0(class=currentPath && currentPath.includes('/admin') ? '' : "" )
         block content
       if currentPath && !currentPath.includes('admin') && !currentPath.includes('users')
-        footer.site-footer(role='contentinfo' class=user ? "pb-5" : "")
-          section.bg-primary.position-relative
+        footer.site-footer.text-center.text-sm-left(role='contentinfo' class=user ? "pb-5" : "" style=course && `color: ${course.textColor}`)
+          section.position-relative(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
             a.triangle.hint.top-right(target="_blank" href="https://github.com/DigitalCareerInstitute/marketing-website" title=__("Wanna contribute and help making this site better? Fork me on GitHub"))
               include ../assets/icons/github-brands.svg
             if currentPath !== "/users/login" && currentPath !== "/users/register"
@@ -219,5 +219,5 @@ html.h-100(lang='en')
         img(height='1', width='1', style='display:none', src='https://www.facebook.com/tr?id=1296683973774299&ev=PageView&noscript=1')
 
     script(src="/frontend.bundle.js")
-    if currentPath && currentPath.includes('admin')
+    if currentPath && currentPath.includes('/admin')
       script(src="/backend.bundle.js")
