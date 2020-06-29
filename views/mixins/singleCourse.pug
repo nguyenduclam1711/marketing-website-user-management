@@ -141,7 +141,7 @@ mixin singleCourse
               strong.mr-2=__("Language")+":"
               span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )=__("English - minimum B2 Level")
             .my-3
-              strong.mr-2=__("ComputerKnowledge")+":"
+              strong.mr-2=__("Computer Knowledge")+":"
               span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )=__("Beginner")
       hr.d-md-none
 
@@ -188,7 +188,7 @@ mixin singleCourse
                 .mb-3
                   h3=__("Have questions?")
                   =__("Our education counselors are always there to advice you.")
-                a.btn.btn-lg.px-4.mb-5.text-white( data-toggle='modal', data-target='#contactFormModal' class=course && course.coloraccent ? `hover-transparent` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}!important` : `` )=__("Contact Us")
+                a.btn.btn-lg.px-4.mb-5.text-white( data-toggle='modal', data-target='#contactFormModal' class=course && course.coloraccent ? `hover-transparent` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}!important` : `` )=__("Contact us")
                 .mb-3
                   h3=__("Download Course Overview")
                 a.btn.btn-lg.px-4.btn-secondary.border-0.text-white(href='/images/'+ course.curriculumPdf target='_blank' class=course && course.coloraccent ? `hover-transparent` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` ) 
