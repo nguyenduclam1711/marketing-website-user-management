@@ -8,8 +8,8 @@ mixin navigation
   nav#nav-primary.pb-3.z-1.navbar.navbar-expand-lg.navbar-light.py-0.bg-tranition.px-3.px-md-3.flex-column(class=currentPath == "/" ? " z-foreground " : "")
     if course && course.coloraccent
       div.position-absolute.left.w-50.h-100.z-minus.d-none.d-lg-block(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}!important` : ``)
-    .align-items-stretch.ml-0.ml-md-auto.pl-md-0(class=currentPath && currentPath.includes('/admin') ? ' container-fluid' : " container" )
-      a.navbar-brand.py-3.pl-4.pl-lg-0.h-60(href="/" class=currentPath && currentPath.includes('/courses') && currentPath.lastIndexOf('/') > 0 ? 'text-white-responsive' : 'text-primary' )
+    .align-items-stretch.pl-md-0(class=currentPath && currentPath.includes('/admin') ? ' container-fluid' : " container-md" )
+      a.navbar-brand.py-3.pl-sm-3.h-60(href="/" class=currentPath && currentPath.includes('/courses') && currentPath.lastIndexOf('/') > 0 ? 'text-white-responsive' : 'text-primary' )
         include ../../assets/media/dci.svg
       button.navbar-toggler(type='button', data-toggle='collapse', data-target='#collapsingNavbar3')
         span.navbar-toggler-icon

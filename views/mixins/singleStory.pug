@@ -12,7 +12,7 @@ mixin singleStory(story, showFullContent)
             h5.font-weight-bold.text-right.text-dark=story.title
             .text-muted.text-right.d-block.mb-3.mb-md-0=story.workPosition
         .col-md-3.d-flex.flex-column.justify-content-end
-          +storyImages(story, " p-0 col-md-8 offset-md-2 col-6 offset-3")
+          +storyImages(story, " p-0 col-md-9 offset-md-1 col-6 offset-3")
 
     if user
       form.d-flex.justify-content-between.mt-3(method='POST', action='/admin/stories/delete/'+story.slug +'?_method=DELETE')

@@ -64,9 +64,10 @@ const deleteButtons = document.querySelectorAll("button.btn-danger, button.btn-o
 Array.from(deleteButtons).map(button => button.addEventListener("click", (e) => !confirm("are you sure?") && e.preventDefault()))
 $(function () {
   $('#coloraccent').colorpicker({
-    autoInputFallback: false
+    autoInputFallback: false,
+    format: "rgb"
   });
   $('#coloraccent').on('colorpickerChange', function (event) {
-    $('#demo').css('background-color', event.color.toString());
+    $('#colorpicker').css('background-color', event.color.toRgbString());
   });
 });

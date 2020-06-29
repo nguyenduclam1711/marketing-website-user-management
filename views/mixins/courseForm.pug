@@ -8,7 +8,7 @@ mixin courseForm
         label(for='coloraccent') Color accent
         .input-group.mr-2
           .input-group-prepend.w-100
-            label.px-4.input-group-text.text-capitalize.d-block#demo(for='coloraccent' style=`background-color: ${course && course.coloraccent ? course.coloraccent : ``}` ) 
+            label.px-4.input-group-text.text-capitalize.d-block#colorpicker(for='coloraccent' style=`background-color: ${course && course.coloraccent ? course.coloraccent : ``}` ) 
             input#coloraccent.form-control(name='coloraccent', type='text', placeholder='Color accent', value=course ? course.coloraccent : "", autofocus='')
 
       label.d-block.d-block(for='textColor') Text color

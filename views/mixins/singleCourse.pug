@@ -8,9 +8,16 @@ mixin singleCourse
           .d-flex.align-items-center.flex-wrap.line-height-2-5
             .bg-white.circle.mr-2.p-2
               include ../../assets/icons/location.svg
-            each location in course.locations
-              span.font-weight-bold.mr-3.text-uppercase.afterdot(style=`color: ${course.textColor}`)=location.name
-            span.font-weight-bold.mr-3.text-uppercase.afterdot(style=`color: ${course.textColor}`)="Online"
+            each location, index in course.locations
+              span.font-weight-bold.text-uppercase.d-flex.align-items-center(style=`color: ${course.textColor}`)
+                =location.name
+                if index != course.locations.length - 1
+                  span.afterdot.mx-2(style=`background-color: ${course.textColor}`)
+                
+            span.font-weight-bold.text-uppercase.d-flex.align-items-center(style=`color: ${course.textColor}`)
+              ="Online"
+              if index != course.locations.length - 1
+                span.afterdot.mx-2(style=`background-color: ${course.textColor}`)
           div.my-4
             a.btn.btn-white.px-4(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}!important` : `` )=__("Apply Now")
         .col-md-6.py-5.py-md-0
@@ -53,14 +60,14 @@ mixin singleCourse
               each object, index in course.archivements
                 if object.icon
                   .col-lg-6.text-center.d-flex.p-4.floatings
-                    .d-flex.bg-white.p-3.rounded.shadow-sm.w-100
-                      figure.mw-150.row.position-relative.col.mb-0
-                        .col.d-flex.flex-column.justify-content-center
+                    .d-flex.bg-white.p-3.py-md-5.rounded.shadow-sm.w-100.flex-wrap
+                      figure.mw-md-150.p-0.position-relative.col-12.mb-0.col-md
+                        .col.d-flex.flex-column.justify-content-center.h-100
                           img.object-fit-cover.img-fluid.square(alt=object.description src="/media/pixel.gif" style="background-image: url('/images/"+object.icon+"')")
-                      .col.text-left
+                      .col.text-left.order-3.order-sm-2
                         h5.font-weight-bold=object.title
                         p.lead.mb-0=object.description
-                      .d-flex.flex-column.justify-content-center
+                      .d-flex.flex-column.justify-content-center.order-2.order-sm-3
                         h2.font-weight-bold=`0${index+1}`
         if course.curriculumPdf
           h3.mt-5=__("Want to know more?")
@@ -84,7 +91,7 @@ mixin singleCourse
             each object in course.features
               if object.icon
                 .row.container
-                  .col-lg-6.text-center.p-5
+                  .col-lg-6.text-center.pl-5.pr-5.pt-5
                     .px-lg-5
                       img.img-fluid.h-100(src="/images/"+object.icon, alt=object.title)
                   .col-lg-6.position-relative
@@ -99,7 +106,8 @@ mixin singleCourse
         section#section4.w-100.py-5.container
           .row.my-md-5
             .col-md-8.offset-md-2.border.pt-4.p-5.rounded
-              +singleStory(course.successStory)
+              .pt-md-4
+                +singleStory(course.successStory)
       section#section3.my-5.container
         .row
           .col-md-6.p-5
@@ -110,45 +118,35 @@ mixin singleCourse
 
             h5.font-weight-bold.text-muted.text-uppercase.text-center.mb-4=__("FURTHER DETAILS")
             h3=__("About this Course.")
-            .d-flex.mb-2.flex-wrap
+            .my-3
               strong.mr-2=__("Teaching Mode")+":"
-              span.position-relative.overflow-hidden.d-inline-block.px-sm-1
-                .position-absolute.top.left.right.bottom.third-transparent.z-minus(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
-                ="On Campus"
-            .d-flex.mb-2.flex-wrap
+              span
+                span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )=__( "On Campus & Online" )
+            .my-3
               strong.mr-2=__("Language")+":"
-              span.position-relative.overflow-hidden.d-inline-block.px-sm-1
-                .position-absolute.top.left.right.bottom.third-transparent.z-minus(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
-                =__("English or German")
+              span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )=__("English or German")
             if course.courselength
-              .d-flex.mb-2.flex-wrap
+              .my-3
                 strong.mr-2=__("Duration")+":"
-                span.position-relative.overflow-hidden.d-inline-block.px-sm-1
-                  .position-absolute.top.left.right.bottom.third-transparent.z-minus(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
-                  = course.courselength
-            .d-flex.mb-2.flex-wrap
+                span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )= course.courselength
+            .my-3
               strong.mr-2=__("Availability")+":"
-              span.position-relative.overflow-hidden.d-inline-block.px-sm-1
-                .position-absolute.top.left.right.bottom.third-transparent.z-minus(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
-                ="Berlin, Düsseldorf, Hamburg & Leipzig"
+              span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )
                 each location, index in course.locations
                   =location.name
-                  if index != course.locations.length
+                  if index != course.locations.length - 1
                     =", "
+                =" & Online"
           .col-md-6.position-relative.p-5
             h5.font-weight-bold.text-muted.text-uppercase.mb-4=__("REQUIREMENTS")
 
-            h3 What do we require of you?
-            .d-flex.mb-2.flex-wrap
+            h3=__("What do we require of you?")
+            .my-3
               strong.mr-2=__("Language")+":"
-              span.position-relative.overflow-hidden.d-inline-block.px-sm-1
-                .position-absolute.top.left.right.bottom.third-transparent.z-minus(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
-                =__("English - minimum B2 Level")
-            .d-flex.mb-2.flex-wrap
+              span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )=__("English - minimum B2 Level")
+            .my-3
               strong.mr-2=__("ComputerKnowledge")+":"
-              span.position-relative.overflow-hidden.d-inline-block.px-sm-1
-                .position-absolute.top.left.right.bottom.third-transparent.z-minus(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
-                =__("Beginner")
+              span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )=__("Beginner")
       hr.d-md-none
 
       section.my-5.py-5
@@ -160,7 +158,7 @@ mixin singleCourse
               h2.font-weight-bold=`01`
               div(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
                 include ../../assets/icons/course_personal_data.svg
-            =__("Individual Appointment with DCI")
+            strong.text-muted=__("Individual Appointment with DCI")
             .d-none.d-md-block.position-absolute.right.h-3.shift-vertical.top-50 
               .rotate-180(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
                 include ../../assets/icons/back-button-arrow-left.svg
@@ -170,7 +168,7 @@ mixin singleCourse
               h2.font-weight-bold=`02`
               div(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
                 include ../../assets/icons/course_job_interview.svg
-            =__("Appointment with AfA/ JobCenter")
+            strong.text-muted=__("Appointment with AfA/ JobCenter")
             .d-none.d-md-block.position-absolute.right.h-3.shift-vertical.top-50 
               .rotate-180(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
                 include ../../assets/icons/back-button-arrow-left.svg
@@ -179,29 +177,30 @@ mixin singleCourse
               h2.font-weight-bold=`03`
               div(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
                 include ../../assets/icons/course_checklist.svg
-            =__("Start your Class")
+            strong.text-muted=__("Start your Class")
 
       section.pb-200.mt-5.w-100
-        .p-5.position-relative.border.shadow-sm.overflow-hidden
-          div.position-absolute.top.left.w-100.h-100.third-transparent(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
-          .row
-            .col-md-6.order-12.order-md-0.text-left
-              .mb-3
-                h3=__("What are you waiting for?")
-                =__("Join the tech disruption at DCI and launch your career in tech")
-              a.btn.px-4.mb-5.text-white( data-toggle='modal', data-target='#contactFormModal' class=course && course.coloraccent ? `hover-transparent` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}!important` : `` )=__("Apply Now")
-              .mb-3
-                h3=__("Have questions?")
-                =__("Our education counselors are always there to advice you.")
-              a.btn.px-4.mb-5.text-white( data-toggle='modal', data-target='#contactFormModal' class=course && course.coloraccent ? `hover-transparent` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}!important` : `` )=__("Contact Us")
-              .mb-3
-                h3=__("Download Course Overview")
-              a.btn.px-4.btn-secondary.border-0.text-white(href='/images/'+ course.curriculumPdf target='_blank' class=course && course.coloraccent ? `hover-transparent` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` ) 
-                div.h-2.d-inline-block.mr-2
-                  include ../../assets/icons/download.svg
-                ="Download"
-            .col-md-6.order-0.order-md-12.pb-5.pb-md-0(style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
-              include ../../assets/icons/rocket_launch.svg
+        .p-5.position-relative.shadow-sm.overflow-hidden.mb-5
+          .p-md-5.mb-5
+            div.position-absolute.top.left.w-100.h-100.third-transparent(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
+            .row
+              .col-md-7.order-12.order-md-0.text-left
+                .mb-3
+                  h3=__("What are you waiting for?")
+                  =__("Join the tech disruption at DCI and launch your career in tech")
+                a.btn.btn-lg.px-4.mb-5.text-white( data-toggle='modal', data-target='#contactFormModal' class=course && course.coloraccent ? `hover-transparent` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}!important` : `` )=__("Apply Now")
+                .mb-3
+                  h3=__("Have questions?")
+                  =__("Our education counselors are always there to advice you.")
+                a.btn.btn-lg.px-4.mb-5.text-white( data-toggle='modal', data-target='#contactFormModal' class=course && course.coloraccent ? `hover-transparent` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}!important` : `` )=__("Contact Us")
+                .mb-3
+                  h3=__("Download Course Overview")
+                a.btn.btn-lg.px-4.btn-secondary.border-0.text-white(href='/images/'+ course.curriculumPdf target='_blank' class=course && course.coloraccent ? `hover-transparent` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` ) 
+                  div.h-2.d-inline-block.mr-2
+                    include ../../assets/icons/download.svg
+                  ="Download"
+              .col-md-5.order-0.order-md-12.pb-5.pb-md-0(style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
+                include ../../assets/icons/rocket_launch.svg
 
         if user && user.admin === "true"
           div.py-3
