@@ -11,13 +11,9 @@ mixin singleCourse
             each location, index in course.locations
               span.font-weight-bold.text-uppercase.d-flex.align-items-center(style=`color: ${course.textColor}`)
                 =location.name
-                if index != course.locations.length - 1
-                  span.afterdot.mx-2(style=`background-color: ${course.textColor}`)
-                
+                span.afterdot.mx-2(style=`background-color: ${course.textColor}`)
             span.font-weight-bold.text-uppercase.d-flex.align-items-center(style=`color: ${course.textColor}`)
               ="Online"
-              if index != course.locations.length - 1
-                span.afterdot.mx-2(style=`background-color: ${course.textColor}`)
           div.my-4
             a.btn.btn-white.px-4(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}!important` : `` )=__("Apply Now")
         .col-md-6.py-5.py-md-0
