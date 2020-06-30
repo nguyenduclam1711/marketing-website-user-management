@@ -2,11 +2,11 @@ mixin singleCourse
   .jumbotron.jumbotron-fluid.mb-0.bg-white.p-0.z-1.position-relative
     .container-md
       .row
-        .col-md-6.bg-panel.right.py-3.py-md-5.px-5.px-md-0(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
-          h1.display-1.mt-5.mb-3(style=`color: ${course.textColor}`)=course.headline
-          p.lead.mb-5(style=`color: ${course.textColor}`)=course.subheading
-          .d-flex.align-items-center.flex-wrap.line-height-2-5
-            .bg-white.circle.mr-2.p-2
+        .col-md-6.bg-panel.right.py-3.py-md-5.px-5.pl-md-0(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
+          h1.display-1.my-5(style=`color: ${course.textColor}`)=course.headline
+          p.lead.mb-5.pt-3(style=`color: ${course.textColor}`)=course.subheading
+          .d-flex.align-items-center.flex-wrap.line-height-2-5.pt-3
+            .bg-white.circle.mr-2.p-2(style=`color: ${course.coloraccent}`)
               include ../../assets/icons/location.svg
             each location, index in course.locations
               span.font-weight-bold.text-uppercase.d-flex.align-items-center(style=`color: ${course.textColor}`)
@@ -14,12 +14,12 @@ mixin singleCourse
                 span.afterdot.mx-2(style=`background-color: ${course.textColor}`)
             span.font-weight-bold.text-uppercase.d-flex.align-items-center(style=`color: ${course.textColor}`)
               ="Online"
-          div.my-4
-            a.btn.btn-white.px-4(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}!important` : `` )=__("Apply Now")
+          div.my-5
+            a.btn.btn-white.px-4.mt-5(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}!important` : `` )=__("Apply Now")
         .col-md-6.py-5.py-md-0
           .floatings.h-100
             .w-100.px-lg-5.align-items-end.h-100.justify-content-end.d-flex.flex-column
-              .flex-grow-1.w-100.py-5.px-5.px-md-0
+              .d-flex.flex-column.justify-content-center.flex-grow-1.w-100.pb-5.px-5.px-md-0
                 if course.icon
                   img.object-fit-cover.img-fluid(alt=course.description src="/images/"+course.icon)
                 else
@@ -32,10 +32,10 @@ mixin singleCourse
       section#section1
         .row.row-courses
           .col-md-7.px-5.bg-white.pt-5
-            .py-3.py-md-5
+            .pt-3.pt-md-5
               h5.font-weight-bold.text-muted.text-uppercase.py-3=__("Overview")
               h2.mt-3.mb-3.text-left=course.title
-              p.lead.text-left=course.subtitle
+              p.mb-0.lead.text-left=course.subtitle
           .col-md-5.d-none.d-md-flex.px-5.bg-white.d-flex.flex-column.justify-content-end
           .col-md-7.d-none.d-md-flex.py-3.px-5.bg-white.py-5.mb-5
           .col-md-5.px-5.bg-white.d-flex.flex-column.justify-content-end
@@ -75,27 +75,26 @@ mixin singleCourse
             div.h-2.d-inline-block.mr-2
               include ../../assets/icons/download.svg
             ="Download"
-            
-      section.my-5.pt-5
-        h5.font-weight-bold.text-muted.text-uppercase.py-3=__("COURSE DETAILS")
-        h2=__("What more do we offer?")
-        p.lead=__("We offer much more than just teaching and hacking, such as")+":"
+      if course.features.filter(t => !!t.title).length > 0   
+        section.my-5.pt-5
+          h5.font-weight-bold.text-muted.text-uppercase.py-3=__("COURSE DETAILS")
+          h2=__("What more do we offer?")
+          p.lead=__("We offer much more than just teaching and hacking, such as")+":"
 
-      section.mb-5
-        if course.features.filter(t => !!t.title).length > 0 
-          section#section2.my-5
-            each object in course.features
-              if object.icon
-                .row.container
-                  .col-lg-6.text-center.pl-5.pr-5.pt-5
-                    .px-lg-5
-                      img.img-fluid.h-100(src="/images/"+object.icon, alt=object.title)
-                  .col-lg-6.position-relative
-                    .row.bg-panel.left.third-transparent.z-minus(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
-                    .p-3.px-md-5.py-5.pb-md-3
-                      .p-md-4.position-relative
-                        h3.text-left=object.title
-                        p.text-left.lead=object.subtitle
+          .mb-5
+            .my-5
+              each object in course.features
+                if object.icon
+                  .row.container
+                    .col-lg-6.text-center.pl-5.pr-5.pt-5
+                      .px-lg-5
+                        img.img-fluid.h-100(src="/images/"+object.icon, alt=object.title)
+                    .col-lg-6.position-relative
+                      .row.bg-panel.left.third-transparent.z-minus(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
+                      .p-3.px-md-5.py-5.pb-md-3
+                        .p-md-4.position-relative
+                          h3.text-left=object.title
+                          p.text-left.lead=object.subtitle
 
 
       if course.successStory
@@ -104,7 +103,7 @@ mixin singleCourse
             .col-md-8.offset-md-2.border.pt-4.p-5.rounded
               .pt-md-4
                 +singleStory(course.successStory)
-      section#section3.my-5.container
+      section#section3.my-5.container.text-left
         .row
           .col-md-6.p-5
             .position-absolute.top.left.right.bottom.third-transparent.z-minus(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )     
@@ -112,15 +111,17 @@ mixin singleCourse
             //- each location in course.locations
             //-   span.badge.badge-primary.mr-2=location.name
 
-            h5.font-weight-bold.text-muted.text-uppercase.text-center.mb-4=__("FURTHER DETAILS")
-            h3=__("About this Course.")
+            h5.font-weight-bold.text-muted.text-uppercase.mb-4=__("FURTHER DETAILS")
+            h3=__("About this Course")
             .my-3
               strong.mr-2=__("Teaching Mode")+":"
               span
                 span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )=__( "On Campus & Online" )
             .my-3
               strong.mr-2=__("Language")+":"
-              span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )=__("English or German")
+              span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )
+                = course.courseLanguages
+                =" & Online"
             if course.courselength
               .my-3
                 strong.mr-2=__("Duration")+":"
@@ -139,7 +140,7 @@ mixin singleCourse
             h3=__("What do we require of you?")
             .my-3
               strong.mr-2=__("Language")+":"
-              span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )=__("English - minimum B2 Level")
+              span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )=__("English or German - minimum B2 Level")
             .my-3
               strong.mr-2=__("Computer Knowledge")+":"
               span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )=__("Beginner")
@@ -183,11 +184,11 @@ mixin singleCourse
               .col-md-7.order-12.order-md-0.text-left
                 .mb-3
                   h3=__("What are you waiting for?")
-                  =__("Join the tech disruption at DCI and launch your career in tech")
+                  =__("Join the tech disruption at DCI and launch your career in tech.")
                 a.btn.btn-lg.px-4.mb-5.text-white( data-toggle='modal', data-target='#contactFormModal' class=course && course.coloraccent ? `hover-transparent` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}!important` : `` )=__("Apply Now")
                 .mb-3
                   h3=__("Have questions?")
-                  =__("Our education counselors are always there to advice you.")
+                  =__("Our education counselors are always there to advise you.")
                 a.btn.btn-lg.px-4.mb-5.text-white( data-toggle='modal', data-target='#contactFormModal' class=course && course.coloraccent ? `hover-transparent` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}!important` : `` )=__("Contact us")
                 .mb-3
                   h3=__("Download Course Overview")
