@@ -77,6 +77,7 @@ var CourseSchema = new Schema({
     enum : ['black','white'],
     default: 'black'
   },
+  courseLanguages: String,
 });
 CourseSchema.plugin(URLSlugs("headline"));
 CourseSchema.pre("remove", function (next) {

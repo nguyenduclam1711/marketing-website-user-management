@@ -47,6 +47,7 @@ module.exports.editCourse = async function(req, res) {
       .exec();
     const storys = await Story.find()
       .select("title slug")
+      .populate("language")
       .exec();
     let alllocations = await Location.find({}).exec();
     const all = alllocations.map(loc => {
@@ -90,6 +91,7 @@ module.exports.createCourse = async function(req, res) {
   course.courselength = req.body.courselength;
   course.curriculumSectionSubheading = req.body.curriculumSectionSubheading;
   course.textColor = req.body.textColor;
+  course.courseLanguages = req.body.courseLanguages;
 
   if(!!req.body.successStory) {
     course.successStory = req.body.successStory;
@@ -256,6 +258,7 @@ module.exports.updateCourse = async function(req, res) {
   course.subicon = req.files.subicon ? subicon : course.subicon;
   course.curriculumSectionSubheading = req.body.curriculumSectionSubheading;
   course.textColor = textColor;
+  course.courseLanguages = req.body.courseLanguages;
 
   function verbose(inputs) {
     let items = [];

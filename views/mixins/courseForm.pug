@@ -66,7 +66,7 @@ mixin courseForm
       select#successStory.form-control(for='successStory' name='successStory')
         option(value="") -- Select --
         each story in storys
-          option(value=story._id, selected=!!course && !!course.successStory && course.successStory._id.toString() === story._id.toString() ?  "selected" :  false )=story.title
+          option(value=story._id, selected=!!course && !!course.successStory && course.successStory._id.toString() === story._id.toString() ?  "selected" :  false )=`${story.title} ${story.language ? `- ${story.language.title}` : ``}`
 
     .mb-3
       label(for='order')
@@ -86,6 +86,9 @@ mixin courseForm
     .mb-3
       label(for='curriculumSectionSubheading') Curriculum subheading
       input#curriculumSectionSubheading.form-control(name='curriculumSectionSubheading', type='text', placeholder='curriculumSectionSubheading', value=course && course.curriculumSectionSubheading ? course.curriculumSectionSubheading :"")
+    .mb-3
+      label(for='courseLanguages') Course languages
+      input#courseLanguages.form-control(name='courseLanguages', type='text', placeholder='courseLanguages', value=course && course.courseLanguages ? course.courseLanguages :"")
 
     h3.mt-3 Archivements
     each archivementGroup, i in courseFormConfig.archivementConfig
