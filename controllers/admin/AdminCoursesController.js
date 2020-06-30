@@ -47,6 +47,7 @@ module.exports.editCourse = async function(req, res) {
       .exec();
     const storys = await Story.find()
       .select("title slug")
+      .populate("language")
       .exec();
     let alllocations = await Location.find({}).exec();
     const all = alllocations.map(loc => {
@@ -83,22 +84,28 @@ module.exports.createCourse = async function(req, res) {
   course.order = req.body.order;
   course.locations = req.body.locations;
   course.icon = req.body.icon;
+  course.subicon = req.body.subicon;
   course.coloraccent = req.body.coloraccent;
   course.massnahmeNumber = req.body.massnahmenummer;
   course.massnahmeDetails = req.body.massnahmedetails;
+  course.courselength = req.body.courselength;
+  course.curriculumSectionSubheading = req.body.curriculumSectionSubheading;
+  course.textColor = req.body.textColor;
+  course.courseLanguages = req.body.courseLanguages;
 
   if(!!req.body.successStory) {
     course.successStory = req.body.successStory;
   }
 
-  course.archivements = [1, 2, 3, 4, 5].map(item => {
+  course.archivements = [1, 2, 3, 4, 5, 6].map(item => {
     return {
+      title: req.body[`archivement_title_${item}`],
       icon: req.body[`archivement_icon_${item}`],
       description: req.body[`archivement_description_${item}`]
     };
   });
 
-  course.timeline = [1, 2, 3, 4, 5].map(item => {
+  course.timeline = [1, 2, 3, 4, 5, 6].map(item => {
     return {
       title: req.body[`timeline_title_${item}`],
       subtitle: req.body[`timeline_subtitle_${item}`],
@@ -106,7 +113,7 @@ module.exports.createCourse = async function(req, res) {
     };
   });
 
-  course.features = [1, 2, 3, 4, 5].map(item => {
+  course.features = [1, 2, 3, 4, 5, 6].map(item => {
     return {
       icon: req.body[`features_icon_${item}`],
       subtitle: req.body[`features_subtitle_${item}`],
@@ -176,16 +183,19 @@ module.exports.uploadImages = multer({
 }).fields([
   { name: "curriculumPdf", maxCount: 1 },
   { name: "icon", maxCount: 1 },
+  { name: "subicon", maxCount: 1 },
   { name: "archivement_icon_1", maxCount: 1 },
   { name: "archivement_icon_2", maxCount: 1 },
   { name: "archivement_icon_3", maxCount: 1 },
   { name: "archivement_icon_4", maxCount: 1 },
   { name: "archivement_icon_5", maxCount: 1 },
+  { name: "archivement_icon_6", maxCount: 1 },
   { name: "features_icon_1", maxCount: 1 },
   { name: "features_icon_2", maxCount: 1 },
   { name: "features_icon_3", maxCount: 1 },
   { name: "features_icon_4", maxCount: 1 },
-  { name: "features_icon_5", maxCount: 1 }
+  { name: "features_icon_5", maxCount: 1 },
+  { name: "features_icon_6", maxCount: 1 }
 ]);
 
 // Resize the images with different thumbnail sizes
@@ -196,18 +206,17 @@ exports.resizeImages = async (request, response, next) => {
     return;
   }
   for await (const singleFile of Object.values(request.files)) {
-    const extension = singleFile[0].mimetype.split("/")[1];
     request.body[
       singleFile[0].fieldname
     ] = `${singleFile[0].filename}`;
     try {
-      if (singleFile[0].mimetype === "application/pdf") {
-        const pdfFile = fs.readFileSync(singleFile[0].path);
+      if (singleFile[0].mimetype === "image/svg+xml" || singleFile[0].mimetype === "application/pdf") {
+        const fileObject = fs.readFileSync(singleFile[0].path);
         fs.writeFileSync(
           `${process.env.IMAGE_UPLOAD_DIR}/${
             request.body[singleFile[0].fieldname]
           }`,
-          pdfFile
+          fileObject
         );
       }
       if (singleFile[0].mimetype.startsWith("image/")) {
@@ -229,7 +238,7 @@ exports.resizeImages = async (request, response, next) => {
 
 module.exports.updateCourse = async function(req, res) {
   let course = await Course.findOne({ slug: req.params.slug });
-  const { slug, massnahmedetails, massnahmenummer, subtitle, order, successStory, subheading, locations, headline, title, icon, curriculumPdf, coloraccent} = req.body;
+  const { slug, massnahmedetails, massnahmenummer, subtitle, order, successStory, subheading, locations, headline, title, icon, subicon, curriculumPdf, coloraccent, curriculumSectionSubheading, textColor} = req.body;
   course.slug = slug;
   course.icon = icon ? icon : course.icon;
   course.coloraccent = coloraccent ? coloraccent : "";
@@ -241,10 +250,15 @@ module.exports.updateCourse = async function(req, res) {
   course.order = order;
   course.massnahmeNumber = massnahmenummer;
   course.massnahmeDetails = massnahmedetails;
+  course.courselength = req.body.courselength;
   course.curriculumPdf = curriculumPdf;
   course.locations = locations;
   course.curriculumPdf = curriculumPdf;
   course.icon = req.files.icon ? icon : course.icon;
+  course.subicon = req.files.subicon ? subicon : course.subicon;
+  course.curriculumSectionSubheading = req.body.curriculumSectionSubheading;
+  course.textColor = textColor;
+  course.courseLanguages = req.body.courseLanguages;
 
   function verbose(inputs) {
     let items = [];
@@ -262,21 +276,32 @@ module.exports.updateCourse = async function(req, res) {
               description: ""
             };
           }
-          course[model][i][title.dbChild] = req[
-            model == "archivements" && title.dbChild == "icon"
+          if (req.body[`${title.reqChild}${i + 1}`] === ""){
+            course[model][i][`title`] = ""
+            course[model][i][`icon`] = ""
+            course[model][i][`subtitle`] = ""
+            course[model][i][`description`] = ""
+          } else {
+            course[model][i][title.dbChild] = req[
+              model == "archivements" && title.dbChild == "icon"
               ? "files"
               : "body"
-          ][`${title.reqChild}${i + 1}`]
+            ][`${title.reqChild}${i + 1}`]
             ? req.body[`${title.reqChild}${i + 1}`]
             : course[model][i][title.dbChild];
+          }
         });
       });
     }
   }
   const archivements = {
-    itemsAmount: 5,
+    itemsAmount: 6,
     model: "archivements",
     titles: [
+      {
+        dbChild: "title",
+        reqChild: "archivement_title_"
+      },
       {
         dbChild: "icon",
         reqChild: "archivement_icon_"
@@ -289,7 +314,7 @@ module.exports.updateCourse = async function(req, res) {
   };
 
   const timeline = {
-    itemsAmount: 5,
+    itemsAmount: 6,
     model: "timeline",
     titles: [
       {
@@ -308,7 +333,7 @@ module.exports.updateCourse = async function(req, res) {
   };
 
   const features = {
-    itemsAmount: 5,
+    itemsAmount: 6,
     model: "features",
     titles: [
       {

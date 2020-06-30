@@ -62,7 +62,7 @@ html.h-100(lang='en')
     link(rel="manifest", href="/assets/site.webmanifest")
     link(rel="mask-icon", href="/assets/safari-pinned-tab.svg", color="#5bbad5")
 
-  body.h-100(data-spy='scroll', data-target='#courseScrollspy', data-offset='1', class=`${pathclass+(currentPath && currentPath.includes('admin') ? ' admin mb-5' : currentPath == "/" ? "index" : "" )}`)
+  body.h-100(data-spy='scroll', data-target='#courseScrollspy', data-offset='1', class=`${pathclass+(currentPath && currentPath.includes('/admin') ? ' admin mb-5' : currentPath == "/" ? "index" : "" )}`)
 
     if live
       noscript
@@ -78,16 +78,16 @@ html.h-100(lang='en')
               button.close.ml-3(type='button', data-dismiss='alert', aria-label='Close')
                 span(aria-hidden='true') ×
 
-    .h-100.d-flex.flex-column(class=currentPath && currentPath.includes('admin') ? ' bg-light pb-5' : "" )
+    .d-flex.flex-column(class=currentPath && currentPath.includes('/admin') ? ' bg-light pb-5' : "" )
       if currentPath !== "/"
         div
           +navigation
           
-      .flex-grow-1(class=currentPath && currentPath.includes('admin') ? ' pb-5 pt-3' : "" )
+      .flex-grow-1.z-0(class=currentPath && currentPath.includes('/admin') ? '' : "" )
         block content
       if currentPath && !currentPath.includes('admin') && !currentPath.includes('users')
-        footer.site-footer(role='contentinfo' class=user ? "pb-5" : "")
-          section.bg-primary.position-relative
+        footer.site-footer.text-center.text-sm-left(role='contentinfo' class=user ? "pb-5" : "" style=course && `color: ${course.textColor}`)
+          section.position-relative(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
             a.triangle.hint.top-right(target="_blank" href="https://github.com/DigitalCareerInstitute/marketing-website" title=__("Wanna contribute and help making this site better? Fork me on GitHub"))
               include ../assets/icons/github-brands.svg
             if currentPath !== "/users/login" && currentPath !== "/users/register"
@@ -95,7 +95,7 @@ html.h-100(lang='en')
             .container.pb-5
               .row
                 .col-xs-12.col-sm-2.footers-two
-                  p.font-weight-bold.mb-4.text-lightgrey=__("Company")
+                  p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-lightgrey`)=__("Company")
                   ul.list-unstyled
                     li.my-2
                       a.font-weight-bold.text-light(href='/about-us/')=__("About us")
@@ -112,7 +112,7 @@ html.h-100(lang='en')
                             small.text-monospace= " (Edit)"
 
                 .col-xs-12.col-sm-5.footers-three
-                  p.font-weight-bold.mb-4.text-lightgrey=__("Courses")
+                  p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-lightgrey`)=__("Courses")
                   ul.list-unstyled
                     li.my-2
                       a.font-weight-bold.text-light(href='/courses')=__("All courses")
@@ -124,7 +124,7 @@ html.h-100(lang='en')
                             small.text-monospace= " (Edit)"
 
                 .col-xs-12.col-sm-3.footers-four
-                  p.font-weight-bold.mb-4.text-lightgrey=__("Community")
+                  p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-lightgrey`)=__("Community")
                   ul.list-unstyled
                     li.my-2
                       a.font-weight-bold.text-light(target="_blank" href="https://www.facebook.com/digitalcareerinstitute") Facebook
@@ -136,7 +136,7 @@ html.h-100(lang='en')
                       a.font-weight-bold.text-light(target="_blank" href="https://www.youtube.com/channel/UCSM_3ldxjcclGTcXaJRBYTw") YouTube
 
                 .col-xs-12.col-sm-2.footers-five
-                  p.font-weight-bold.mb-4.text-lightgrey=__("Events")
+                  p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-lightgrey`)=__("Events")
                   ul.list-unstyled
                     li.my-2
                       a.font-weight-bold.text-light(href='/events')=__("All Events")
@@ -219,5 +219,5 @@ html.h-100(lang='en')
         img(height='1', width='1', style='display:none', src='https://www.facebook.com/tr?id=1296683973774299&ev=PageView&noscript=1')
 
     script(src="/frontend.bundle.js")
-    if currentPath && currentPath.includes('admin')
+    if currentPath && currentPath.includes('/admin')
       script(src="/backend.bundle.js")

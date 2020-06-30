@@ -41,7 +41,7 @@
 
   .triangle:before,
   .triangle:after {
-    content: '';
+    content: "";
     position: absolute;
     background-color: inherit;
   }
@@ -59,11 +59,12 @@
   }
 
   .triangle:before {
-    transform: rotate(-135deg) skewX(-45deg) scale(1.414, .707) translate(0, -50%);
+    transform: rotate(-135deg) skewX(-45deg) scale(1.414, 0.707)
+      translate(0, -50%);
   }
 
   .triangle:after {
-    transform: rotate(135deg) skewY(-45deg) scale(.707, 1.414) translate(50%);
+    transform: rotate(135deg) skewY(-45deg) scale(0.707, 1.414) translate(50%);
   }
 }
 
@@ -95,22 +96,20 @@
 
 @include media-breakpoint-up(lg) {
   #headernav > li {
-    > a.contactlink {
-      &:after {
-        content: "";
-        transition: transform 0.3s ease, color 0.3s ease, opacity 0.3s ease;
-        transform: skew(-45deg) scale(1, 0.85);
-        background: $primary;
-        height: 100%;
-        width: calc(100% + 2px);
-        top: 0;
-        left: -1px;
-        display: block;
-        position: absolute;
-        z-index: -1;
-        opacity: 1;
-        transform: skew(-45deg) scale(1, 1);
-      }
+    > .contactlink {
+      content: "";
+      transition: transform 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+      transform: skew(-45deg) scale(1, 0.85);
+      background: inherit;
+      height: 100%;
+      width: calc(100% + 2px);
+      top: 0;
+      left: -1px;
+      display: block;
+      position: absolute;
+      z-index: -1;
+      opacity: 1;
+      transform: skew(-45deg) scale(1, 1);
       color: white;
     }
   }
@@ -127,11 +126,27 @@
   > a:focus,
   > a:focus-within,
   > a:hover {
-    &:not(.contactlink){
+    &:not(.contactlink) {
       color: $primary !important;
     }
   }
 }
+
+@include media-breakpoint-up(lg) {
+  #headernav.not-set-active > li {
+    &:hover > a,
+    > a.active,
+    > a:active,
+    > a:focus,
+    > a:focus-within,
+    > a:hover {
+      &:not(.contactlink) {
+        color: #040a3b !important;
+      }
+    }
+  }
+}
+
 .dropdown {
   .dropdown-menu {
     background-color: transparent;
@@ -154,7 +169,7 @@
 .dropdown,
 .dropdown-toggle {
   .dropdown-menu.show,
-  &:hover~.dropdown-menu,
+  &:hover ~ .dropdown-menu,
   &:hover .dropdown-menu {
     right: 0;
     left: auto;
@@ -183,7 +198,6 @@
   }
 }
 
-
 .dropdown-toggle {
   &:after {
     border: none;
@@ -196,3 +210,22 @@ body:not(.index) #nav-primary {
 .navbar-toggler {
   border: 0 none;
 }
+
+.text-white-responsive {
+  color: $primary !important;
+
+  @include media-breakpoint-up(lg) {
+    color: $white !important;
+  }
+}
+
+/* @include media-breakpoint-up(md) {
+  .not-set-active > li { a,
+  > a.active,
+  > a:active,
+  > a:focus,
+  > a:focus-within,
+  > a:hover &:not(.contactlink) {
+    color: #040a3b !important;
+  }
+} */

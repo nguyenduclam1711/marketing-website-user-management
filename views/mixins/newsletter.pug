@@ -1,16 +1,17 @@
 mixin newsletter
-  #newsletter.container
-    .bg-section.box-shadow.p-5
-      .p-2
-        .row
-          .col-md-5.pr-0
-            h3#nlheadline.font-weight-bold.text-dark=__("Stay up to date on the latest")
-            p.mb-5=__("Get the latest news on events, project presentations and more")
-          .col-md-7
-            .w-100.pl-sm-4
-              form#mc-embedded-subscribe-form(name='mc-embedded-subscribe-form', method='post', action='/newsletter-signup')
-                div.mb-3
-                  label(for='newsletter_email')=__("Email")
-                  input#newsletter_email.subs_input(type='email', required, name='email')
-                button.float-right#nlbtn.btn.btn-outline-primary(type="submit")
-                  span=__("Subscribe")
+  #newsletter.container.px-5
+    .px-5
+      .bg-section.box-shadow.p-5
+        .p-2
+          .row
+            .col-md-5.pr-0
+              h3#nlheadline.font-weight-bold.text-dark=__("Stay up to date on the latest")
+              p.text-dark.mb-5=__("Get the latest news on events, project presentations and more")
+            .col-md-7
+              .w-100.pl-sm-4
+                form#mc-embedded-subscribe-form(name='mc-embedded-subscribe-form', method='post', action='/newsletter-signup')
+                  div.mb-3
+                    label(for='newsletter_email')=__("Email")
+                    input#newsletter_email.subs_input(type='email', required, name='email')
+                  button.float-right#nlbtn.btn.btn-outline-primary(type="submit")
+                    span=__("Subscribe")

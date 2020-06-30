@@ -5,6 +5,9 @@ var CourseSchema = new Schema({
   icon: {
     type: String
   },
+  subicon: {
+    type: String
+  },
   headline: {
     type: String,
     trim: true,
@@ -16,6 +19,12 @@ var CourseSchema = new Schema({
     required: "Please enter a subheading !"
   },
   title: {
+    type: String
+  },
+  subtitle: {
+    type: String
+  },
+  courselength: {
     type: String
   },
   massnahmeDetails: {
@@ -33,12 +42,10 @@ var CourseSchema = new Schema({
   order: {
     type: Number
   },
-  subtitle: {
-    type: String
-  },
   locations: [{ type: Schema.ObjectId, ref: "Location" }],
   archivements: [
     {
+      title: String,
       icon: String,
       description: String
     }
@@ -62,6 +69,15 @@ var CourseSchema = new Schema({
   coloraccent: {
     type: String
   },
+  curriculumSectionSubheading: {
+    type: String
+  },
+  textColor: {
+    type: String,
+    enum : ['black','white'],
+    default: 'black'
+  },
+  courseLanguages: String,
 });
 CourseSchema.plugin(URLSlugs("headline"));
 CourseSchema.pre("remove", function (next) {
