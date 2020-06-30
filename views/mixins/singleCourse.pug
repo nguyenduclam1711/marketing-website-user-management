@@ -140,7 +140,10 @@ mixin singleCourse
             h3=__("What do we require of you?")
             .my-3
               strong.mr-2=__("Language")+":"
-              span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )=__("English or German - minimum B2 Level")
+              span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )
+              = course.courseLanguages 
+              = " - "
+              =__("minimum B2 Level")
             .my-3
               strong.mr-2=__("Computer Knowledge")+":"
               span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )=__("Beginner")
