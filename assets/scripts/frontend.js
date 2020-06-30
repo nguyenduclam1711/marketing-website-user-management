@@ -42,7 +42,7 @@ const toggleNL = (remove = false) => {
             } else if (response.code === 422) {
               toggleNL(true);
               nlHeadline.innerHTML =
-                "User alread in list, check your mails for a existing verification mail";
+                "User already in list, check your mails for a existing verification mail";
             }
           })
           .catch(error => {
