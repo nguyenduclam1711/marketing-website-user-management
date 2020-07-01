@@ -119,15 +119,15 @@ mixin courseForm
 
             input.form-control(type=featuresGroup.textFieldSubtitle.type, name=featuresGroup.textFieldSubtitle.name,  value=course && course.features[i] ? course.features[i].subtitle : '', placeholder=featuresGroup.textFieldSubtitle.placeholder )
 
-    h3.mt-3 Timeline
-    each timelineGroup, i in courseFormConfig.timelineConfig
-      .form-group
-        label(for=timelineGroup.title.name)=timelineGroup.title.label
-        input.form-control(type="text", id=timelineGroup.title.name name=timelineGroup.title.name, placeholder=timelineGroup.title.label, value= course && course.timeline[i]? course.timeline[i].title : "")
+    //- h3.mt-3 Timeline
+    //- each timelineGroup, i in courseFormConfig.timelineConfig
+    //-   .form-group
+    //-     label(for=timelineGroup.title.name)=timelineGroup.title.label
+    //-     input.form-control(type="text", id=timelineGroup.title.name name=timelineGroup.title.name, placeholder=timelineGroup.title.label, value= course && course.timeline[i]? course.timeline[i].title : "")
 
-        input.form-control(type="text", id=timelineGroup.subtitle.name name=timelineGroup.subtitle.name, placeholder=timelineGroup.subtitle.label, value= course && course.timeline[i]? course.timeline[i].subtitle : "")
+    //-     input.form-control(type="text", id=timelineGroup.subtitle.name name=timelineGroup.subtitle.name, placeholder=timelineGroup.subtitle.label, value= course && course.timeline[i]? course.timeline[i].subtitle : "")
 
-        input.form-control(type="text", id=timelineGroup.time.name name=timelineGroup.time.name, placeholder=timelineGroup.time.label, value= course && course.timeline[i]? course.timeline[i].time : "")
+    //-     input.form-control(type="text", id=timelineGroup.time.name name=timelineGroup.time.name, placeholder=timelineGroup.time.label, value= course && course.timeline[i]? course.timeline[i].time : "")
 
     h3.mt-3 Course available in locations:
     each location in locations
