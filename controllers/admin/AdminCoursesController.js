@@ -49,7 +49,7 @@ module.exports.editCourse = async function(req, res) {
       .select("title slug")
       .populate("language")
       .exec();
-    let alllocations = await Location.find({}).exec();
+    let alllocations = await Location.find({isCampus: true}).exec();
     const all = alllocations.map(loc => {
       let match = course.locations
         .map(pcat => pcat.toString())
