@@ -15,7 +15,7 @@ mixin singleCourse
             span.font-weight-bold.text-uppercase.d-flex.align-items-center(style=`color: ${course.textColor}`)
               ="Online"
           div.my-5
-            a.btn.btn-white.px-4.mt-5(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}!important` : `` )=__("Apply Now")
+            a.btn.btn-white.px-4.mt-5(data-toggle='modal', data-target='#contactFormModal' class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}!important` : `` )=__("Apply Now")
         .col-md-6.py-5.py-md-0
           .floatings.h-100
             .w-100.px-lg-5.align-items-end.h-100.justify-content-end.d-flex.flex-column
@@ -117,33 +117,36 @@ mixin singleCourse
               strong.mr-2=__("Teaching Mode")+":"
               span
                 span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )=__( "On Campus & Online" )
-            .my-3
-              strong.mr-2=__("Language")+":"
-              span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )
-                = course.courseLanguages
-                =" & Online"
+            if course.courseLanguages
+              .my-3
+                strong.mr-2=__("Language")+":"
+                span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )
+                  = course.courseLanguages
+                  =" & Online"
             if course.courselength
               .my-3
                 strong.mr-2=__("Duration")+":"
                 span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )= course.courselength
-            .my-3
-              strong.mr-2=__("Availability")+":"
-              span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )
-                each location, index in course.locations
-                  =location.name
-                  if index != course.locations.length - 1
-                    =", "
-                =" & Online"
+            if course.locations
+              .my-3
+                strong.mr-2=__("Availability")+":"
+                span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )
+                  each location, index in course.locations
+                    =location.name
+                    if index != course.locations.length - 1
+                      =", "
+                  =" & Online"
           .col-md-6.position-relative.p-5
             h5.font-weight-bold.text-muted.text-uppercase.mb-4=__("REQUIREMENTS")
 
             h3=__("What do we require of you?")
-            .my-3
-              strong.mr-2=__("Language")+":"
-              span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )
-              = course.courseLanguages 
-              = " - "
-              =__("minimum B2 Level")
+            if course.courseLanguages
+              .my-3
+                strong.mr-2=__("Language")+":"
+                span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )
+                  = course.courseLanguages 
+                  = " - "
+                  =__("minimum B2 Level")
             .my-3
               strong.mr-2=__("Computer Knowledge")+":"
               span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )=__("Beginner")
@@ -193,12 +196,13 @@ mixin singleCourse
                   h3=__("Have questions?")
                   =__("Our education counselors are always there to advise you.")
                 a.btn.btn-lg.px-4.mb-5.text-white( data-toggle='modal', data-target='#contactFormModal' class=course && course.coloraccent ? `hover-transparent` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}!important` : `` )=__("Contact us")
-                .mb-3
-                  h3=__("Download Course Overview")
-                a.btn.btn-lg.px-4.btn-secondary.border-0.text-white(href='/images/'+ course.curriculumPdf target='_blank' class=course && course.coloraccent ? `hover-transparent` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` ) 
-                  div.h-2.d-inline-block.mr-2
-                    include ../../assets/icons/download.svg
-                  ="Download"
+                if course.curriculumPdf
+                  .mb-3
+                    h3=__("Download Course Overview")
+                  a.btn.btn-lg.px-4.btn-secondary.border-0.text-white(href='/images/'+ course.curriculumPdf target='_blank' class=course && course.coloraccent ? `hover-transparent` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` ) 
+                    div.h-2.d-inline-block.mr-2
+                      include ../../assets/icons/download.svg
+                    ="Download"
               .col-md-5.order-0.order-md-12.pb-5.pb-md-0(style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
                 include ../../assets/icons/rocket_launch.svg
 
