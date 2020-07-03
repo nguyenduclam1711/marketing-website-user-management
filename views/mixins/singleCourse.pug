@@ -122,7 +122,6 @@ mixin singleCourse
                 strong.mr-2=__("Language")+":"
                 span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )
                   = course.courseLanguages
-                  =" & Online"
             if course.courselength
               .my-3
                 strong.mr-2=__("Duration")+":"
