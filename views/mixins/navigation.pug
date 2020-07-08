@@ -16,9 +16,14 @@ mixin navigation
         span.sr-only="Toggle menu"
       #collapsingNavbar3.navbar-collapse.collapse.w-100.mt-4.mt-md-0.align-items-stretch
         ul.nav.navbar-nav.my-3.my-lg-0.ml-auto.w-100.justify-content-end#headernav(class=currentPath && currentPath.includes('/courses') && currentPath.lastIndexOf('/') > 0 ? 'not-set-active' : ' ' )
-          li.position-relative.nav-item
+          li.position-relative.nav-item.dropdown
             a.mx-0.mx-xl-3.mx-lg-2.nav-link.d-flex.align-items-center.h-100.z-1(class= currentPath && currentPath.includes('/courses') && !currentPath.includes('/admin') ? "active" : "", href="/courses")
               =__("Courses")
+
+            .dropdown-menu.border-radius-0.shadow-sm.z-0.p-0(aria-labelledby='navbarDropdownMenuLink')
+              a.dropdown-item.nav-link.px-2(class= currentPath === ("/courses") ? "active" : "" href='/courses')=__("All courses")
+              each course in courses
+                a.dropdown-item.nav-link.px-2(class= currentPath === ("/courses/" + course.slug) ? "active" : "" href='/courses/'+ course.slug)=course.headline
           li.position-relative.nav-item
             a.mx-0.mx-xl-3.mx-lg-2.nav-link.d-flex.align-items-center.h-100.z-1(class=currentPath && currentPath.includes('/events') && !currentPath.includes('/admin') ? "active" : "", href='/events')
               =__("Events")
