@@ -25,9 +25,9 @@ mixin singleCourse
                   img.object-fit-cover.img-fluid(alt=course.description src="/images/"+course.icon)
                 else
                   img.w-100(src="/media/pixel.gif" alt=course.headline style=`background-image: url('${course.icon ? `/images/` + course.icon : `/media/circuit-board.svg`}')`)
-              if course.courselength
-                .row
-                  .p-4.font-weight-bold.align-self-end(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}; color: ${course.textColor}` : `` )=course.courselength
+        if course.courselength
+          .position-absolute.right.bottom
+            .p-4.font-weight-bold.align-self-end(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}; color: ${course.textColor}` : `` )=course.courselength
   .position-relative.mb-3.overflow-hidden
     .container-fluid.position-relative
       section#section1
