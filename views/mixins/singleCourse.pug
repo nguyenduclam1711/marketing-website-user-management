@@ -3,23 +3,24 @@ mixin singleCourse
     .container-md
       .row
         .col-md-6.bg-panel.right.py-3.py-md-5.px-5.pl-md-0(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
-          h1.display-1.my-5(style=`color: ${course.textColor}`)=course.headline
-          p.lead.mb-5.pt-3(style=`color: ${course.textColor}`)=course.subheading
-          .d-flex.align-items-center.flex-wrap.line-height-2-5.pt-3
+          h1.display-1.my-3.my-xl-5(style=`color: ${course.textColor}`)=course.headline
+          p.lead.mb-3.mb-xl-5.pt-3(style=`color: ${course.textColor}`)=course.subheading
+          .d-flex.align-items-center.line-height-2-5.pt-3
             .bg-white.circle.mr-2.p-2(style=`color: ${course.coloraccent}`)
               include ../../assets/icons/location.svg
-            each location, index in course.locations
+            .d-flex.flex-wrap
+              each location, index in course.locations
+                span.font-weight-bold.text-uppercase.d-flex.align-items-center(style=`color: ${course.textColor}`)
+                  =location.name
+                  span.afterdot.mx-2(style=`background-color: ${course.textColor}`)
               span.font-weight-bold.text-uppercase.d-flex.align-items-center(style=`color: ${course.textColor}`)
-                =location.name
-                span.afterdot.mx-2(style=`background-color: ${course.textColor}`)
-            span.font-weight-bold.text-uppercase.d-flex.align-items-center(style=`color: ${course.textColor}`)
-              ="Online"
-          div.my-5
-            a.btn.btn-white.px-4.mt-5(data-toggle='modal', data-target='#contactFormModal' class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}!important` : `` )=__("Apply Now")
+                ="Online"
+          div.my-3.my-xl-5
+            a.btn.btn-white.px-4.mt-3.mt-xl-5(data-toggle='modal', data-target='#contactFormModal' class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}!important` : `` )=__("Apply Now")
         .col-md-6.py-5.py-md-0
           .floatings.h-100
             .w-100.px-lg-5.align-items-end.h-100.justify-content-end.d-flex.flex-column
-              .d-flex.flex-column.justify-content-center.flex-grow-1.w-100.pb-5.px-5.px-md-0
+              .d-flex.flex-column.justify-content-center.flex-grow-1.w-100.pb-3.pb-xl-5.px-5.px-md-5
                 if course.icon
                   img.object-fit-cover.img-fluid(alt=course.description src="/images/"+course.icon)
                 else
@@ -32,12 +33,12 @@ mixin singleCourse
       section#section1
         .row.row-courses
           .col-md-7.px-5.bg-white.pt-5
-            .pt-3.pt-md-5
-              h5.font-weight-bold.text-muted.text-uppercase.py-3=__("Overview")
+            .pt-xl-5
+              h5.text-left.font-weight-bold.text-muted.text-uppercase.py-3=__("Overview")
               h2.mt-3.mb-3.text-left=course.title
               p.mb-0.lead.text-left=course.subtitle
           .col-md-5.d-none.d-md-flex.px-5.bg-white.d-flex.flex-column.justify-content-end
-          .col-md-7.d-none.d-md-flex.py-3.px-5.bg-white.py-5.mb-5
+          .col-md-7.d-none.d-md-flex.py-3.px-5.bg-white.py-5.mb-xl-5
           .col-md-5.px-5.bg-white.d-flex.flex-column.justify-content-end
             span(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
             img.img-fluid(alt=course.description src="/images/"+course.subicon)
