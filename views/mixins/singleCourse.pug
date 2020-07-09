@@ -43,7 +43,7 @@ mixin singleCourse
             span(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
             img.img-fluid(alt=course.description src="/images/"+course.subicon)
 
-    section.mb-5.position-relative.py-5
+    section.position-relative.py-5
       .position-absolute.top.left.right.bottom.third-transparent(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
 
 
@@ -66,16 +66,13 @@ mixin singleCourse
                         p.lead.mb-0=object.description
                       .d-flex.flex-column.justify-content-center.order-2.order-sm-3
                         h2.font-weight-bold=`0${index+1}`
-        if course.curriculumPdf
-          h3.mt-5=__("Want to know more?")
-          =__("Download %s Overview.", course.headline)
+
+    .bg-light
+      .text-center.py-5
+        h3.pt-lg-5=__("Want to know more?")
+        h5.mb-3=__("Join the tech disruption at DCI and launch your career in tech.")
+        a.btn.btn-lg.px-4.mb-5.text-white( data-toggle='modal', data-target='#contactFormModal' class=course && course.coloraccent ? `hover-transparent` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}!important` : `` )=__("Apply Now")
     .container.container-fluid-courses.position-relative
-      if course.curriculumPdf
-        .text-center.mb-5 
-          a.btn.btn-lg.px-5.btn-secondary.border-0.text-white(href='/images/'+ course.curriculumPdf target='_blank' class=course && course.coloraccent ? `hover-transparent` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent};` : `` ) 
-            div.h-2.d-inline-block.mr-2
-              include ../../assets/icons/download.svg
-            ="Download"
       if course.features.filter(t => !!t.title).length > 0   
         section.my-5.pt-5
           h5.font-weight-bold.text-muted.text-uppercase.py-3=__("COURSE DETAILS")
