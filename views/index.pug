@@ -168,9 +168,9 @@ block content
 
           .text-center
             a.btn.btn-lg.btn-secondary.mx-5(href='/events/'): +translate("All Events")
-      section.py-5.section-services
+      section.py-5.section-services#partners
         .container.py-5.text-center
-          h2.display-1.text-center: +translate("Our Partners")
+          h2.display-1.text-center.mb-5: +translate("Our Partners")
           each partner in partners
             if partner.link
               a(href=partner.link target="_blank")
