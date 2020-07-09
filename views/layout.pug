@@ -110,6 +110,9 @@ html.h-100(lang='en')
                         if user && user.admin === "true"
                           a.font-weight-bold.text-light(href='/admin/pages/edit/' + page.slug)
                             small.text-monospace= " (Edit)"
+                      li.my-2
+                        a.font-weight-bold.text-light(href='/#partners')
+                          =__("Partners")
 
                 .col-xs-12.col-sm-5.footers-three
                   p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-lightgrey`)=__("Courses")
@@ -127,13 +130,9 @@ html.h-100(lang='en')
                   p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-lightgrey`)=__("Community")
                   ul.list-unstyled
                     li.my-2
-                      a.font-weight-bold.text-light(target="_blank" href="https://www.facebook.com/digitalcareerinstitute") Facebook
+                      a.font-weight-bold.text-light(target="_blank" alt="DCI on Facebook" href="https://www.facebook.com/digitalcareerinstitute") Facebook
                     li.my-2
-                      a.font-weight-bold.text-light(target="_blank" href="https://twitter.com/DevugeesOrg") Twitter
-                    li.my-2
-                      a.font-weight-bold.text-light(target="_blank" href="https://medium.com/devugees") Medium
-                    li.my-2
-                      a.font-weight-bold.text-light(target="_blank" href="https://www.youtube.com/channel/UCSM_3ldxjcclGTcXaJRBYTw") YouTube
+                      a.font-weight-bold.text-light(target="_blank" alt="DCI on Instagram" href="https://www.instagram.com/digitalcareerinstitute/") Instagram
 
                 .col-xs-12.col-sm-2.footers-five
                   p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-lightgrey`)=__("Events")
