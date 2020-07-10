@@ -9,7 +9,7 @@ mixin navigation
     if course && course.coloraccent
       div.position-absolute.left.w-50.h-100.z-minus.d-none.d-lg-block(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}!important` : ``)
     .align-items-stretch.pl-md-0(class=currentPath && currentPath.includes('/admin') ? ' container-fluid' : " container-md" )
-      a.navbar-brand.py-3.pl-sm-3.h-60(href="/" class=currentPath && currentPath.includes('/courses') && currentPath.lastIndexOf('/') > 0 ? 'text-white-responsive' : 'text-primary' )
+      a.navbar-brand.py-3.pl-sm-3.h-60(href="/" class=course && course.coloraccent ? 'text-white-responsive' : 'text-primary' )
         include ../../assets/media/dci.svg
       button.navbar-toggler(type='button', data-toggle='collapse', data-target='#collapsingNavbar3')
         span.navbar-toggler-icon
