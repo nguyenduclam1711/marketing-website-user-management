@@ -6,6 +6,7 @@ module.exports.getCourses = async (req, res) => {
     const query = await getAvailableTranslations(req, res)
     const courses = await Course
       .find(query)
+      .sort({order: 1})
       .exec()
     res.render('courses', { courses })
   } catch (err) {
