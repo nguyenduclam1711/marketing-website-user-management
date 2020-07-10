@@ -118,7 +118,7 @@ module.exports.verify = async function(req, res, next) {
     return renderLogin(req, res, next, user)
   }
 };
-module.exports.logout = (req, res) => {
+module.exports.logout = (req, res, next) => {
   req.logout();
-  renderLogin(req, res, next, user)
+  renderLogin(req, res, next)
 };
