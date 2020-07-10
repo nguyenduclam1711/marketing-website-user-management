@@ -181,7 +181,7 @@ module.exports.contact = async (req, res, next) => {
     if (!!process.env.HUBSPOT_API_KEY) {
       var options = {
         method: 'POST',
-        url: 'https://api.hubapi.com/contacts/v1/contact/',
+        url: `https://api.hubapi.com/contacts/v1/contact/createOrUpdate/email/${email}`,
         qs: { hapikey: process.env.HUBSPOT_API_KEY },
         headers: {
           'Content-Type': 'application/json'

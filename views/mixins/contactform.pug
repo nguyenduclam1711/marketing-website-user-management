@@ -29,9 +29,9 @@ mixin contactform
               =__("Are you registered with the Jobcenter or Agentur für Arbeit?")
 
             select.mb-3.custom-select.text-muted.form-control(name="jobcenter" id="jobcenter")
-              option(contact && selected disabled)=__("Please choose...")
-              option(value=1 )=__("yes")
-              option(value=0)=__("no")
+              option(selected=!contact ? "selected" : false disabled)=__("Please choose...")
+              option(value=1 selected=contact && contact.jobcenter ? "selected" :  false)=__("yes")
+              option(value=0 selected=contact && contact.jobcenter ? false : "selected" )=__("no")
         p.dataPrivacyLink
           label.checkbox.TermsofService.text-muted
             =__("I have read and agree to the")
