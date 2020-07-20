@@ -89,6 +89,10 @@ mixin courseForm
     .mb-3
       label(for='courseLanguages') Course languages
       input#courseLanguages.form-control(name='courseLanguages', type='text', placeholder='courseLanguages', value=course && course.courseLanguages ? course.courseLanguages :"")
+    //- TODO remove startInterval when fetch-course-dates-from-api is gonna implemented
+    .mb-3
+      label(for='startInterval') Course start interval
+      input#startInterval.form-control(name='startInterval', type='text', placeholder='startInterval', value=course && course.startInterval ? course.startInterval :"")
 
     h3.mt-3 Archivements
     each archivementGroup, i in courseFormConfig.archivementConfig

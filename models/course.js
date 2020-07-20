@@ -78,6 +78,7 @@ var CourseSchema = new Schema({
     default: 'black'
   },
   courseLanguages: String,
+  startInterval: String,
 });
 CourseSchema.plugin(URLSlugs("headline"));
 CourseSchema.pre("remove", function (next) {

@@ -92,6 +92,7 @@ module.exports.createCourse = async function(req, res) {
   course.curriculumSectionSubheading = req.body.curriculumSectionSubheading;
   course.textColor = req.body.textColor;
   course.courseLanguages = req.body.courseLanguages;
+  course.startInterval = req.body.startInterval;
 
   if(!!req.body.successStory) {
     course.successStory = req.body.successStory;
@@ -259,6 +260,7 @@ module.exports.updateCourse = async function(req, res) {
   course.curriculumSectionSubheading = req.body.curriculumSectionSubheading;
   course.textColor = textColor;
   course.courseLanguages = req.body.courseLanguages;
+  course.startInterval = req.body.startInterval;
 
   function verbose(inputs) {
     let items = [];
