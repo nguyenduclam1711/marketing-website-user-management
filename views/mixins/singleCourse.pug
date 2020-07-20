@@ -111,6 +111,11 @@ mixin singleCourse
 
             h5.font-weight-bold.text-muted.text-uppercase.mb-4=__("FURTHER DETAILS")
             h3=__("About this Course")
+            if course.startInterval
+              .my-3
+                strong.mr-2=__("Starts every")+":"
+                span
+                  span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )=course.startInterval
             .my-3
               strong.mr-2=__("Teaching Mode")+":"
               span

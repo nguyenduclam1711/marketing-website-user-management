@@ -6,7 +6,7 @@ block content
       .col-md-8
         ul.list-group
           each menulocation in menulocations
-            li.list-group-item.mb-3
+            li.list-group-item.mb-3.hover-shadow
               h2.mr-3=menulocation.name
               = menulocation.pages
               form.d-flex.justify-content-between(method='POST', action='/admin/menulocations/delete/'+menulocation._id +'?_method=DELETE')
