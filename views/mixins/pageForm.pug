@@ -53,7 +53,7 @@ mixin pageForm
           label.custom-control-label(for=menulocation.name)=menulocation.name
     .mb-3
       label(for='content') Content
-      #editor(value=editPath ? page.content : "")
+      #editor.bg-white(value=editPath ? page.content : "")
       textarea#inputContent.d-none(name='content', placeholder='Content', required='', )=editPath ? JSON.stringify(page.content) : ""
     .btn-group
       if editPath

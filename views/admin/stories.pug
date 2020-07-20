@@ -11,7 +11,7 @@ block content
             each story in stories
               if !story.language || story.language && story.language.title == "en"
                 .col-md-3
-                  a(href="/stories/"+story.slug)
+                  .p-3.bg-white.hover-shadow(href="/stories/"+story.slug)
                     .row.position-relative
                       .col-12.align-items-center
                         img.object-fit-cover.img-fluid.rounded-circle.square(alt=story.subtitle src="/media/pixel.gif" style="background-image: url('/images/"+story.avatar+"')")
@@ -26,10 +26,9 @@ block content
                           span.checkmark
                       code=story.workPosition
                       p.text-left.text-muted=story.excerpt
-                  +buttonGroup(story, `stories`)
-
-              //if story.languageVersion
+                    +buttonGroup(story, `stories`)
 
 
-  .col-md-4
+
+      .col-md-4
         +storyForm

@@ -3,7 +3,7 @@ mixin partnerForm
   form.mb-5(method='POST', action=editPath ? '/admin/partners/update/'+partner._id+'?_method=PUT' : '/admin/partners?alert=create', enctype="multipart/form-data")
 
     h2
-      =editPath ? "Edit Partner " :"Create a new Partner"
+      span.mr-3=editPath ? "Edit Partner " :"Create a new Partner"
       .btn-group
         if editPath
           a.btn.btn-outline-primary(href="/admin/partners")="Back"
