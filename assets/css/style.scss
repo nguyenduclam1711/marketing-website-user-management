@@ -1143,6 +1143,9 @@ div[class*=" #{$class-slug}"] {
   .h-#{ $i } {
     height: 1em * $i;
   }
+  .w-#{ $i } {
+    width: 1em * $i;
+  }
   .#{$class-slug}-#{$i} {
     max-width: 100px * $i;
     max-height: 100px * $i;
