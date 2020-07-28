@@ -1141,10 +1141,10 @@ div[class*=" #{$class-slug}"] {
     max-height: 30px * $i;
   }
   .h-#{ $i } {
-    height: 1em * $i;
+    height: 1em * $i!important;
   }
   .w-#{ $i } {
-    width: 1em * $i;
+    width: 1em * $i!important;
   }
   .#{$class-slug}-#{$i} {
     max-width: 100px * $i;
@@ -1625,4 +1625,9 @@ body[class*="pages-"] {
   padding-block: 5px;
   padding-inline: 5px;
   box-decoration-break: clone;
+}
+.mt-y-xl-5 {
+  @media (min-height: 800px)  { 
+    margin-top: 3rem !important;  
+  }
 }
