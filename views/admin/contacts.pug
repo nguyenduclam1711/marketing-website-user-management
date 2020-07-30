@@ -33,7 +33,7 @@ block content
           td=contact.body
           td
             if contact.track
-              a.d-block(href=contact.track target=`_blank`)=contact.track == 'https://digitalcareerinstitute.org' ? 'landingpage' : contact.track.replace('https://digitalcareerinstitute.org', '').replace('http://digitalcareerinstitute.org', '')
+              a.d-block(href=contact.track target=`_blank` rel="noopener")=contact.track == 'https://digitalcareerinstitute.org' ? 'landingpage' : contact.track.replace('https://digitalcareerinstitute.org', '').replace('http://digitalcareerinstitute.org', '')
             form.d-flex.justify-content-between(method='POST', action='/admin/contacts/delete/'+contact._id +'?_method=DELETE')
               if user && user.admin === "true" && user.superAdmin === "true"
                 .d-flex.align-items-center

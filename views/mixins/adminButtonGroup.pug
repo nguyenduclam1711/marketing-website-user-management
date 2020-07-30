@@ -4,7 +4,7 @@ mixin adminButtonGroup(model, path)
     .btn-group
       if editPath
         a.btn.btn-outline-primary(href="/admin/"+path)="Back"
-        a.btn.btn-outline-primary(target="_blank" href="/" + (!!model.language && model.languageVersion ? model.language.title + "/" : "") + path + "/" + model.slug)="Show"
+        a.btn.btn-outline-primary(target="_blank" rel="noopener" href="/" + (!!model.language && model.languageVersion ? model.language.title + "/" : "") + path + "/" + model.slug)="Show"
         if model && !model.languageVersion
           a.btn.btn-outline-primary(href="/admin/"+path+"/"+model.slug+"/l18n")="Create german version"
       button.btn.btn-primary(type='submit')=editPath ? "Update" :"New"

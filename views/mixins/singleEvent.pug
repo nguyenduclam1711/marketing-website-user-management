@@ -1,6 +1,6 @@
 mixin singleEvent(event)
   .col-md-4
-    a.card.single-event-card.border-0.mb-4.hover-shadow(href=event.url, target="_blank")
+    a.card.single-event-card.border-0.mb-4.hover-shadow(href=event.url, target="_blank" rel="noopener")
       img.card-img-top(alt=event.name src=event.imageurl)
       .card-body.p-3
         .card-date.mr-2

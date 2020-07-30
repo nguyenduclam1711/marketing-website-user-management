@@ -173,7 +173,7 @@ block content
           h2.display-1.text-center.mb-5: +translate("Our Partners")
           each partner in partners
             if partner.link
-              a(href=partner.link target="_blank")
+              a(href=partner.link target="_blank" rel="noopener")
                 img.partners-logo.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo)
             else
               img.partners-logo.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo)
