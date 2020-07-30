@@ -201,7 +201,7 @@ mixin singleCourse
                 if course.curriculumPdf
                   .mb-3
                     h3=__("Download Course Overview")
-                  a.btn.btn-lg.px-4.btn-secondary.border-0.text-white(href='/images/'+ course.curriculumPdf target='_blank' class=course && course.coloraccent ? `hover-transparent` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` ) 
+                  a.btn.btn-lg.px-4.btn-secondary.border-0.text-white(href='/images/'+ course.curriculumPdf target='_blank' rel="noopener" class=course && course.coloraccent ? `hover-transparent` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` ) 
                     div.h-2.w-2.d-inline-block.mr-2
                       include ../../assets/icons/download.svg
                     ="Download"
@@ -210,4 +210,4 @@ mixin singleCourse
 
         if user && user.admin === "true"
           div.py-3
-            a.btn.btn-outline-primary(target="_blank" href='/admin/courses/edit/'+course.slug) Edit course
+            a.btn.btn-outline-primary(target="_blank" rel="noopener" href='/admin/courses/edit/'+course.slug) Edit course

@@ -88,7 +88,7 @@ html.h-100(lang='en')
       if currentPath && !currentPath.includes('admin') && !currentPath.includes('users')
         footer.site-footer.text-center.text-sm-left(role='contentinfo' class=user ? "pb-5" : "" style=course && `color: ${course.textColor}`)
           section.position-relative(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
-            a.triangle.hint.top-right(target="_blank" href="https://github.com/DigitalCareerInstitute/marketing-website" title=__("Wanna contribute and help making this site better? Fork me on GitHub"))
+            a.triangle.hint.top-right(target="_blank" rel="noopener" href="https://github.com/DigitalCareerInstitute/marketing-website" title=__("Wanna contribute and help making this site better? Fork me on GitHub"))
               include ../assets/icons/github-brands.svg
             if currentPath !== "/users/login" && currentPath !== "/users/register"
               +newsletter
@@ -130,9 +130,9 @@ html.h-100(lang='en')
                   p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-lightgrey`)=__("Community")
                   ul.list-unstyled
                     li.my-2
-                      a.font-weight-bold.text-light(target="_blank" alt="DCI on Facebook" href="https://www.facebook.com/digitalcareerinstitute") Facebook
+                      a.font-weight-bold.text-light(target="_blank" rel="noopener" alt="DCI on Facebook" href="https://www.facebook.com/digitalcareerinstitute") Facebook
                     li.my-2
-                      a.font-weight-bold.text-light(target="_blank" alt="DCI on Instagram" href="https://www.instagram.com/digitalcareerinstitute/") Instagram
+                      a.font-weight-bold.text-light(target="_blank" rel="noopener" alt="DCI on Instagram" href="https://www.instagram.com/digitalcareerinstitute/") Instagram
 
                 .col-xs-12.col-sm-2.footers-five
                   p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-lightgrey`)=__("Events")
