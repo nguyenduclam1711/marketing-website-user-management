@@ -4,7 +4,7 @@ mixin navigation
       div
         =__(locals.settings.announcement_banner_string)
         if locals.settings && locals.settings.announcement_banner_cta && locals.settings.announcement_banner_cta !== currentPath
-          a.btn.btn-link.ml-3.btn-secondary.py-0(class=course && course.coloraccent ? `btn-white` : `btn-secondary` style=course && course.coloraccent ? `color: ${course.textColor} !important` : `` href=locals.settings.announcement_banner_cta)=__("Show More")
+          a.btn.btn-link.ml-3.btn-secondary.py-0(class=course && course.coloraccent ? `btn-white` : `btn-secondary` style=course && course.coloraccent ? `color: ${course.coloraccent} !important` : `` href=locals.settings.announcement_banner_cta)=__("Show More")
   nav#nav-primary.pb-3.z-1.navbar.navbar-expand-lg.navbar-light.py-0.bg-tranition.px-3.px-md-3.flex-column(class=currentPath == "/" ? " z-foreground " : "")
     if course && course.coloraccent
       div.position-absolute.left.w-50.h-100.z-minus.d-none.d-lg-block(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}!important` : ``)
