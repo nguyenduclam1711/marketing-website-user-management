@@ -6,7 +6,6 @@ import "bootstrap/js/dist/collapse";
 import "bootstrap/js/dist/carousel";
 import "bootstrap/js/dist/alert";
 import {alertTimeout} from "./helper.js"
-import { response } from "express";
 require("./polygons");
 require("./google-analytics");
 require("../css/style.scss");

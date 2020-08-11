@@ -131,7 +131,6 @@
     }
   }
 }
-
 @include media-breakpoint-up(lg) {
   #headernav.not-set-active > li {
     &:hover > a,
@@ -146,7 +145,13 @@
     }
   }
 }
-
+#headernav > li {
+  &:hover {
+    a.contactlinktext {
+      color: white !important;
+    }
+  }
+}
 .dropdown {
   .dropdown-menu {
     background-color: transparent;
