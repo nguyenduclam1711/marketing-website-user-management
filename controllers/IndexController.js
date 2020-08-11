@@ -311,3 +311,100 @@ module.exports.newsletter = (req, res) => {
     )
   }
 }
+module.exports.downloadCourseCurriculum = async (req, res, next) => {
+  try {
+    const { email, age, TermsofService } = req.body
+    if (age) {
+      console.log('Bot stepped into honeypot!')
+      req.flash(
+        'success',
+        res.__(`Thanks for your message`)
+      )
+      res.redirect(req.headers.referer)
+      next()
+      return;
+    }
+    if (!email) {
+      req.flash('danger', 'Please fill in your email')
+      res.redirect(req.headers.referer)
+      next()
+      return;
+    }
+    if (!TermsofService) {
+      req.flash('danger', 'Please accept the terms of service')
+      res.redirect(req.headers.referer)
+      next()
+      return;
+    }
+    const course = await Course
+      .findOne({ slug: req.headers.referer.match(/\/([^/]*)$/)[1] })
+      .exec()
+    const contact = new Contact()
+    contact.email = email
+    contact.track = req.headers.referer
+    if (req.session.utmParams) {
+      contact.utm_params = req.session.utmParams
+    }
+    contact.createdAt = new Date()
+    const settings = await Setting.findOne()
+    await contact.save()
+    let hubspotPromise = new Promise(() => { })
+
+    let remainingUtmParams = req.session.utmParams ? { ...req.session.utmParams } : []
+    Object.keys(remainingUtmParams).map(q => q.startsWith('utm_') && delete remainingUtmParams[q])
+    if (!!process.env.HUBSPOT_API_KEY) {
+      var options = {
+        method: 'POST',
+        url: `https://api.hubapi.com/contacts/v1/contact/createOrUpdate/email/${email}`,
+        qs: { hapikey: process.env.HUBSPOT_API_KEY },
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: {
+          properties:
+            [
+              { property: 'email', value: email },
+              { property: 'utm_source', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_source) : "" },
+              { property: 'utm_medium', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_medium) : "" },
+              { property: 'utm_campaign', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_campaign) : "" },
+              { property: 'utm_content', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_content) : "" },
+              { property: 'utm_term', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_term) : "" },
+              {
+                property: 'form_payload',
+                value: JSON.stringify({
+                  'track': req.headers.referer,
+                  'utm_params': remainingUtmParams
+                })
+              }
+            ],
+        },
+        json: true
+      };
+      hubspotPromise = request(options)
+    }
+    const resolved = await Promise.all([hubspotPromise])
+
+    if (req.headers['content-type'] === 'application/json') {
+      const response = {
+        message: res.__(`Thanks for your message`),
+        filepath: course.curriculumPdf
+      }
+      return res.json({
+        response
+      })
+    } else {
+      req.flash(
+        'success',
+        res.__(`Thanks for your message`)
+      );
+      res.redirect(req.headers.referer)
+    }
+    delete req.session.utmParams
+    next()
+  } catch (e) {
+    console.error(`Error in /controllers/IndexController.js`)
+    console.error(e)
+    req.flash('danger', e.message);
+    res.redirect(req.headers.referer)
+  }
+}

@@ -235,41 +235,46 @@ $("#downloadCSV").on("click", function (e) {
     .catch(error => console.log("error ===>", error));
 });
 
-document.getElementById("contactForm").addEventListener('submit', (e) => {
-  e.preventDefault()
-  e.target.querySelector('button').disabled = true;
-  e.target.querySelector('#contactform_text').classList.add("d-none")
-  e.target.querySelector('#contactform_spinner').classList.remove("d-none")
-  const payload = Array.from(e.target.elements)
-    .filter(i => i.type !== "submit")
-    .reduce((acc, el) => ({ ...acc, [el.name]: el.type === "checkbox" ? el.checked : el.name === "jobcenter" ? !!Number(el.value) : el.value }), {})
+Array.from(document.querySelectorAll(".ajaxform")).map(form => {
+  form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    e.target.querySelector('button').disabled = true;
+    e.target.querySelector('#contactform_text').classList.add("d-none")
+    e.target.querySelector('#contactform_spinner').classList.remove("d-none")
+    const payload = Array.from(e.target.elements)
+      .filter(i => i.type !== "submit")
+      .reduce((acc, el) => ({ ...acc, [el.name]: el.type === "checkbox" ? el.checked : el.name === "jobcenter" ? !!Number(el.value) : el.value }), {})
 
-  fetch("/contact", {
-    method: "POST",
-    headers: {
-      "content-type": "application/json"
-    },
-    body: JSON.stringify(payload)
-  })
-    .then(resp => resp.json())
-    .then(data => {
-      e.target.querySelector('#contactform_spinner').classList.add("d-none")
-      e.target.querySelector('#contactform_check').classList.remove("d-none")
-      Array.from(e.target.elements).map(i => (i.value = "", i.style.boxShadow = "none"))
-      const flashMessage = document.createElement('div')
-      flashMessage.classList.add("flash", "m-0", "mr-3", "alert", "fade", "show", "alert-success")
-
-      flashMessage.innerHTML = `${data.response.message}<button class="close ml-3" type="button" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>`
-      document.body.appendChild(flashMessage)
-      setTimeout(() => {
-        $(".alert").alert("close");
-      }, alertTimeout || 5000);
+    fetch(e.target.action, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify(payload)
     })
-    .catch(error => {
-      e.target.querySelector('button').disabled = false;
-      console.error(error)
-    });
+      .then(data => data.json()).then(data => {
+        e.target.querySelector('#contactform_spinner').classList.add("d-none")
+        e.target.querySelector('#contactform_check').classList.remove("d-none")
+        Array.from(e.target.elements).map(i => (i.value = "", i.style.boxShadow = "none"))
+        const flashMessage = document.createElement('div')
+        flashMessage.classList.add("flash", "m-0", "mr-3", "alert", "fade", "show", "alert-success")
+
+        flashMessage.innerHTML = `${data.response.message}<button class="close ml-3" type="button" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>`
+        document.body.appendChild(flashMessage)
+        setTimeout(() => {
+          $(".alert").alert("close");
+        }, alertTimeout || 5000);
+        if(data.response.filepath){
+          window.open(`${window.location.origin}/images/${data.response.filepath}`, '_blank')
+        }
+      })
+      .catch(error => {
+        e.target.querySelector('button').disabled = false;
+        console.error(error)
+      });
+  })
 })
+
 window.onload = function () {
   showFloatings();
   const errorContainer = document.querySelector(".cont_principal")

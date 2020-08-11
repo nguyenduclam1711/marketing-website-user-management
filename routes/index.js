@@ -17,6 +17,8 @@ router.get("/contact", IndexController.contactLocations);
 
 router.post("/contact", IndexController.contact);
 
+router.post("/downloadcurriculum", IndexController.downloadCourseCurriculum);
+
 router.get("/tour", IndexController.tour);
 
 router.post("/newsletter-signup", IndexController.newsletter);

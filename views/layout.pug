@@ -22,6 +22,7 @@ include mixins/buttonGroup
 include mixins/adminButtonGroup
 include mixins/translate
 include mixins/fullstory
+include mixins/curriculumForm
 
 doctype html
 html.h-100(lang='en')
@@ -168,6 +169,10 @@ html.h-100(lang='en')
     if currentPath && !currentPath.includes('admin') && !currentPath.includes('users')
       .modal#dataPrivacy
         +dataPrivacy
+    
+    if course && course.curriculumPdf
+      +curriculumForm
+
     if currentPath && !currentPath.includes('admin') && !currentPath.includes('users')
       #cookiehint.fixed-bottom.faded(role='alert')
         .alert.alert-light.mb-0.d-flex.justify-content-between.flex-nowrap.px-2.px-md-3.no-radius.p-3.bg-primary.text-white.font-weight-light.border-0.w-100.align-items-center
