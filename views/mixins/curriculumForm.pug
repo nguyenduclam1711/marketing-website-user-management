@@ -1,0 +1,32 @@
+mixin curriculumForm
+  #curriculumpopup.modal(tabindex='-1', role='dialog', aria-labelledby='curriculumpopup', aria-hidden='true')
+    .modal-dialog.modal-dialog-centered
+      .modal-content.bg-light.border-radius-0
+        .p-4
+          .mb-2
+            h2.display-4.text-center.text-uppercase=__('How can we reach you?')
+            p.mb-3.text-center.text-muted=__("We will send you the course curriculum per email")
+            form#curriculumpopupform.mt-3.ajaxform(method="POST" action="/downloadcurriculum")
+
+              .form-group
+                input#age.agefield.form-control(name="age" tabindex="-1" type='text', placeholder='25')
+              .form-group
+                label(for='email')=__("Email")
+                span.text-muted
+                input#email.form-control(name="email" type='email', placeholder='name@example.com', value=contact ? contact.email : '', required)
+
+              p.dataPrivacyLink
+                label.checkbox.TermsofService.text-muted
+                  =__("I have read and agree to the")
+                  input(type='checkbox', name='TermsofService', value="true", required)
+                  span.checkmark
+                a.ml-1(data-toggle='modal', data-target='#dataPrivacy')=__("Data Privacy")
+              if companytour
+              input(type="hidden" name='companytour' checked value="true")
+              .text-center
+                button.btn.btn-lg.btn-secondary.m-auto(type="submit")
+                  div#contactform_text=__("SEND")
+                  div#contactform_spinner.h-1.vertical-align-revert.rotating.text-white.d-none
+                    include ../../assets/media/spinner.svg
+                  div#contactform_check.h-1.vertical-align-revert.text-white.d-none
+                    include ../../assets/media/check.svg
