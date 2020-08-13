@@ -1,32 +1,31 @@
 extends layout.pug
 block content
-  .jumbotron.jumbotron-fluid.text-center.mb-0.px-3.bg-white
-    h1.display-1.mt-5.mb-3=__("All events in our locations")
-    p.lead.mb-5=__("Hackthons, Infoevents and Jobfairs")
+  .jumbotron.container.mb-0.px-3.bg-white
+    .row
+      .col-md-6
+        h1=__("Events")
+        h2.text-muted.mt-5.mb-3=__("All events in our locations")
+        p.lead.mb-5=__("Hackthons, Infoevents and Jobfairs")
+      .col-md-6
+        .px-md-5
+          .px-5
+            img.w-100(src="/media/events_webinar.svg", alt="women on blackboard")
 
   .bg-light.py-5
-    .container
-      h2.mb-5=__("How to register for an event:")
+    .container.position-relative
       .row
         .col-md-6.mb-5
-          .bg-white.p-4.h-100.d-flex
-            h2.mr-3.d-inline 1.
-            =__("Pick the event that is right for you. You will be redirected to the Eventbrite website.")
-        .col-md-6.mb-5
-          .bg-white.p-4.h-100.d-flex
-            h2.mr-3.d-inline 2.
-            =__("Click the register button and fill out your contact information.")
-        .col-md-6.mb-5.mb-md-0
-          .bg-white.p-4.h-100.d-flex
-            h2.mr-3.d-inline 3.
-            =__("You will receive a reminder email two days before the event. In that email, click on the orange ‘Go to online event page’ button. You will be redirected to the Eventbrite website.")
-        .col-md-6.mb-0.mb-md-0
-          .bg-white.p-4.h-100.d-flex
-            h2.mr-3.d-inline 4.
-            =__("Click on the video template that is shown and fill out your details on the Zoom registration page.")
+          .mt-n5
+            h2.mb-5=__("How to register for an event:")
+            ol.pl-4
+              li.mb-3=__("Pick the event that is right for you. You will be redirected to the Eventbrite website.")
+              li.mb-3=__("Click the register button and fill out your contact information.")
+              li.mb-3=__("You will receive a reminder email two days before the event. In that email, click on the orange ‘Go to online event page’ button. You will be redirected to the Eventbrite website.")
+              li.mb-3=__("Click on the video template that is shown and fill out your details on the Zoom registration page.")
 
-  .container.pb-200
-    .row.pt-5
-      each event in eventsByLocation
-        +singleEvent(event)
+
+      .row.position-relative.pb-200
+        .bg-primary.position-absolute.top.right.mt-n5.w-50.bottom.shift-top-10.d-none.d-md-block
+        each event in eventsByLocation
+          +singleEvent(event)
 
