@@ -111,9 +111,9 @@ html.h-100(lang='en')
                         if user && user.admin === "true"
                           a.font-weight-bold.text-light(href='/admin/pages/edit/' + page.slug)
                             small.text-monospace= " (Edit)"
-                      li.my-2
-                        a.font-weight-bold.text-light(href='/#partners')
-                          =__("Partners")
+                    li.my-2
+                      a.font-weight-bold.text-light(href='/#partners')
+                        =__("Partners")
 
                 .col-xs-12.col-sm-5.footers-three
                   p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-lightgrey`)=__("Courses")
