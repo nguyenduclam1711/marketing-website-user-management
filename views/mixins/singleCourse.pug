@@ -184,6 +184,23 @@ mixin singleCourse
                 include ../../assets/icons/course_checklist.svg
             strong.text-muted=__("Start your Class")
 
+      section
+        .position-relative
+          hr.position-absolute.top.left.right.z-minus.m-2
+          p.text-muted.d-inline.p-3.bg-white=__("or")
+        .row
+          .col-md-6
+            div(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
+              include ../../assets/icons/credit_card.svg
+            strong.text-muted=__("Financing with Chancen eG")
+          .col-md-6
+            div(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
+              include ../../assets/icons/credit_card.svg
+            strong.text-muted=__("Self-payer")
+        .my-5
+          p.mb-3=__("Want to learn more about our financing options?")
+          a.btn.btn-lg.px-4.btn-secondary.border-0.text-white(href='/financingoptions' class=course && course.coloraccent ? `hover-transparent` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )=__("Learn more")
+          
       section.pb-200.mt-5.w-100
         .p-5.position-relative.shadow-sm.overflow-hidden.mb-5
           .p-md-5.mb-5
