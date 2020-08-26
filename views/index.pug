@@ -6,16 +6,16 @@ block content
       section.homeSection.d-flex.flex-column.position-relative.bg-light-grey
         if currentPath == "/"
           +navigation
-        div.mainHome.d-flex.w-100.z-1.py-5
-          div.m-auto.container.py-5
+        div.mainHome.d-flex.w-100.z-1.py-md-5
+          div.m-auto.container.py-md-5
             .row
-              .col-md-6.py-5
+              .col-md-6.py-5.order-12.order-md-1
                 h1.font-weight-bold.display-1: +translate('Start your')
                 h2.mb-5.display-1.font-weight-bold: +translate('Digital career')
                 p.subtitle.h5.mb-5: +translate("Learn digital skills with us to get the most fulfilling jobs")
                 .d-flex
                   a.mb-3.btn.btn-lg.btn-secondary.mr-2.mr-md-4(href='#ourcourses', role='button'): +translate("Browse Courses")
-              .col-md-6.py-5
+              .col-md-6.py-5.order-1.order-md-12
                 img.w-100(src="/media/hero.png", alt="")
 
       section#ourcourses.position-relative.offset_title.pb-5
