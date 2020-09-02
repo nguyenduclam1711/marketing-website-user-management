@@ -1,0 +1,50 @@
+extends layout.pug
+block content
+  .bg-light
+    .jumbotron.container.mb-0.px-3.bg-light.pb-0.bg-transparent.z-1.position-relative
+      .row
+        .jumbotron-polygon.h-100.bg-primary
+        .col-md-6.order-12.order-md-1.py-5
+          h1.pt-5.text-white=__("Financing options")
+          p.text-muted.mt-5.mb-5=__("We offer the following financing options at DCI")
+
+          a.btn.btn-lg.btn-secondary.mb-3(href='/contact', data-toggle='modal', data-target='#contactFormModal')=__("Contact us")
+        .col-md-6.order-1.order-md-12
+          .px-lg-5.px-5.px-md-0
+            img.w-100.px-5.px-md-0.pb-5.pb-md-0(src="/media/events_webinar.svg", alt="women on blackboard")
+
+    .py-5
+      .container.position-relative
+        .row.position-relative.py-5
+          .col-md-6.px-5.py-5
+            include ../assets/icons/chancen-eg-logo.svg
+          .col-md-6.py-5
+            h1 Agentur für Arbeit / Jobcenter
+            p Die Bundesagentur für Arbeit mit Sitz in Nürnberg erbringt als Bundesagentur Leistungen für den Arbeitsmarkt, insbesondere die Arbeitsvermittlung sowie die Arbeitsförderung und regelt als Verwaltungsträgerin der deutschen Arbeitslosenversicherung die finanziellen Entgeltersatzleistungen, z. B. das Arbeitslosengeld.
+
+            a.btn.btn-lg.btn-primary.mt-3(href='/contact', data-toggle='modal', data-target='#contactFormModal')=__("Book an Appointment")
+
+        .row.position-relative
+          .col-md-9
+            hr
+        .row.position-relative.py-5
+          .col-md-6.py-5
+            h1 Chancen eG
+            p Mit dem Umgekehrten Generationenvertrag kannst du dich voll und ganz auf den Kurs bei DCI – Digital Career Institute konzentrieren, während die CHANCEN eG deine Gebühren übernimmt. Im Gegenzug verpflichtest du dich, auch späteren Teilnehmergenerationen diese Möglichkeit zu geben: Wenn du in einem Unternehmen oder selbständig tätig bist und über einem jährlichen Mindesteinkommen verdienst, zahlst du einen Anteil des Einkommens zur Finanzierung weiterer Kursteilnehmer*innen zurück.
+            a.btn.btn-lg.btn-primary.mt-3(href='/contact', data-toggle='modal', data-target='#contactFormModal')=__("Contact us")
+
+          .col-md-6.px-5.py-5
+            include ../assets/icons/chancen-eg-logo.svg
+
+        .row.position-relative
+          .col-md-3
+          .col-md-9
+            hr
+        .row.position-relative.py-5.mb-200
+          .col-md-6.px-5.py-5
+            include ../assets/icons/chancen-eg-logo.svg
+          .col-md-6.py-5
+            h1 Self-Payment
+            p Mit dem Umgekehrten Generationenvertrag kannst du dich voll und ganz auf den Kurs bei DCI – Digital Career Institute konzentrieren, während die CHANCEN eG deine Gebühren übernimmt. Im Gegenzug verpflichtest du dich, auch späteren Teilnehmergenerationen diese Möglichkeit zu geben: Wenn du in einem Unternehmen oder selbständig tätig bist und über einem jährlichen Mindesteinkommen verdienst, zahlst du einen Anteil des Einkommens zur Finanzierung weiterer Kursteilnehmer*innen zurück.
+            a.btn.btn-lg.btn-primary.mt-3(href='/contact', data-toggle='modal', data-target='#contactFormModal')=__("Contact us")
+  

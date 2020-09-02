@@ -1641,3 +1641,10 @@ body[class*="pages-"] {
     margin-top: 3rem !important;  
   }
 }
+.jumbotron-polygon {
+  position: absolute;
+  right: 50%;
+  top: 0;
+  width: 100vw;
+  clip-path: polygon(0px 0px, 91.18% 10.86%, 100% 100%, 0% 100%);
+}
