@@ -1,31 +1,26 @@
 extends layout.pug
 block content
-  .jumbotron.container.mb-0.px-3.bg-white
-    .row
-      .col-md-6
-        h1=__("Events")
-        h2.text-muted.mt-5.mb-3=__("All events in our locations")
-        p.lead.mb-5=__("Hackthons, Infoevents and Jobfairs")
-      .col-md-6
-        .px-md-5
-          .px-5
-            img.w-100(src="/media/events_webinar.svg", alt="women on blackboard")
+  .bg-light
+    .jumbotron.container.mb-0.px-3.bg-light.pb-0.bg-transparent.z-1.position-relative
+      .row.pt-md-5
+        .col-md-6.order-12.order-md-1
+          h1=__("Events")
+          h3.text-muted.mt-5.mb-5=__("All events in our locations")
 
-  .bg-light.py-5
-    .container.position-relative
-      .row
-        .col-md-6.mb-5
-          .mt-n5
-            h2.mb-5=__("How to register for an event:")
-            ol.pl-4
-              li.mb-3=__("Pick the event that is right for you. You will be redirected to the Eventbrite website.")
-              li.mb-3=__("Click the register button and fill out your contact information.")
-              li.mb-3=__("You will receive a reminder email two days before the event. In that email, click on the orange ‘Go to online event page’ button. You will be redirected to the Eventbrite website.")
-              li.mb-3=__("Click on the video template that is shown and fill out your details on the Zoom registration page.")
+          p.font-weight-bold.pt-0.pt-4=__("How to register for an event:")
+          ol.pl-4
+            li.mb-3.text-muted=__("Pick the event that is right for you. You will be redirected to the Eventbrite website.")
+            li.mb-3.text-muted=__("Click the register button and fill out your contact information.")
+            li.mb-3.text-muted=__("You will receive a reminder email two days before the event. In that email, click on the orange ‘Go to online event page’ button. You will be redirected to the Eventbrite website.")
+            li.mb-3.text-muted=__("Click on the video template that is shown and fill out your details on the Zoom registration page.")
+        .col-md-6.order-1.order-md-12
+          .px-lg-5.px-5.px-md-0
+            img.w-100.px-5.px-md-0.pb-5.pb-md-0(src="/media/events_webinar.svg", alt="women on blackboard")
 
-
-      .row.position-relative.pb-200
-        .bg-primary.position-absolute.top.right.mt-n5.w-50.bottom.shift-top-10.d-none.d-md-block
-        each event in eventsByLocation
-          +singleEvent(event)
+    .py-5
+      .container.position-relative
+        .row.position-relative.mb-200
+          .bg-primary.position-absolute.top.right.mt-md-n5.mt-lg-n1.w-50.bottom.shift-top-10.d-none.d-md-block
+          each event in eventsByLocation
+            +singleEvent(event)
 
