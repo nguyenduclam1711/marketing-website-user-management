@@ -10,7 +10,9 @@ if (document.cookie.indexOf(googleAnalyticsShowncookiename) !== -1) {
   window.dataLayer = window.dataLayer || [];
   function gtag() { dataLayer.push(arguments); }
   gtag('js', new Date());
-  findCookie(googleAnalyticsShowncookiename) === "optedout" ? gtag('config', 'UA-140962410-1', { 'anonymize_ip': true }) : gtag('config', 'UA-140962410-1');
+  // findCookie(googleAnalyticsShowncookiename) === "optedout" ? 
+  //   gtag('config', 'UA-140962410-1', { 'anonymize_ip': true }) : 
+    gtag('config', 'UA-140962410-1');
 }
 //actual GA tracking end
 
