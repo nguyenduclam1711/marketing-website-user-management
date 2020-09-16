@@ -36,14 +36,7 @@ describe("Stories", function() {
     });
   });
 });
-describe("Database Tests", function() {
-  before(function(done) {
-    mongoose.connection.on("error", console.error.bind(console, "connection error"));
-    mongoose.connection.once("open", function() {
-      console.log("We are connected to test database!");
-      done();
-    });
-  });
+describe("Database Tests", function () {
   describe("Test Database", function() {
     //Save object with 'name' value of 'Mike"
     it("New name saved to test database", function(done) {
