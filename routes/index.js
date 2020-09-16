@@ -4,7 +4,7 @@ const express = require("express");
 const router = express.Router();
 const IndexController = require("../controllers/IndexController");
 
-if (!process.env.AUTHORIZATION || !process.env.URL) {
+if (process.env.NODE_ENV !== "test" && (!process.env.AUTHORIZATION || !process.env.URL)) {
   console.error(
     "Please set a Mailchimp URL or AUTHORIZATION ApiKey in .env file"
   );
@@ -23,7 +23,7 @@ router.get("/tour", IndexController.tour);
 
 router.post("/newsletter-signup", IndexController.newsletter);
 
-router.get("/robots.txt", function(req, res) {
+router.get("/robots.txt", function (req, res) {
   res.type("text/plain");
   res.send("User-agent: *");
 });
