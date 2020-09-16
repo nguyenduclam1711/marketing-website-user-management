@@ -1,19 +1,21 @@
-var request = require("request");
 require("dotenv").config({ path: __dirname + "/../.env" });
+const request = require("request");
 const puppeteer = require('puppeteer');
 const email = "testuser@digitalcareerinstitute.org";
 const assert = require('assert');
+const supertest = require("supertest");
 
+var server = require("../server");
 (async () => {
     let hubspotContactID
     describe('Contactform and hubspot contact existence', function () {
         it('Fills the contact form and submits it', async function () {
             const browser = await puppeteer.launch({
-                // headless: false,
                 defaultViewport: null,
             });
+            const serverInstance = supertest(server).get("/")
             const page = await browser.newPage();
-            await page.goto('http://localhost:3000', { waitUntil: 'networkidle2' });
+            await page.goto(serverInstance.url, { waitUntil: 'networkidle2' });
             const name = await page.$eval('.mainHome h1.display-1', el => el.innerText)
             await page.$eval('.contactlinktext', e => e.click());
             await page.type('#name', 'Testuser');
@@ -36,7 +38,6 @@ const assert = require('assert');
         })
         it('Checks if Hubspot contains the new contact and the jobcenter field', async function () {
             //TODO replace this
-            // setTimeout(async () => {
             var options = {
                 method: 'GET',
                 url: `https://api.hubapi.com/contacts/v1/contact/email/${email}/profile`,
@@ -50,7 +51,6 @@ const assert = require('assert');
                 hubspotContactID = JSON.parse(body).vid
                 var options = {
                     method: 'DELETE',
-                    // https://api.hubapi.com/contacts/v1/contact/vid/61571?hapikey=demo
                     url: `https://api.hubapi.com/contacts/v1/contact/vid/${hubspotContactID}`,
                     qs: { hapikey: process.env.HUBSPOT_API_KEY }
                 }
@@ -59,7 +59,6 @@ const assert = require('assert');
                     assert.equal(JSON.parse(bodyDelete).vid, hubspotContactID)
                 });
             });
-            // }, 2000);
         });
     });
 })();
