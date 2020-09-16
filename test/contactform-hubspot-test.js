@@ -31,13 +31,10 @@ var server = require("../server");
             await page.$eval('#contactFormModal button[type="submit"]', e => e.click());
             await page.waitForSelector('.flash')
             const responseMsg = await page.$eval('.flash', el => el.innerText)
-            assert.equal(responseMsg, 'Thanks for your message. We will reply to you as soon as possible\n×')
-
+            assert.equal(responseMsg.includes('Thanks for your message'), true)
             await browser.close()
-            // });
         })
         it('Checks if Hubspot contains the new contact and the jobcenter field', async function () {
-            //TODO replace this
             var options = {
                 method: 'GET',
                 url: `https://api.hubapi.com/contacts/v1/contact/email/${email}/profile`,
