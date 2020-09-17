@@ -384,7 +384,6 @@ UPCOMING EVENTS
 
 .card-img-top {
   width: 100%;
-  height: 8vw;
   object-fit: contain;
 }
 
@@ -1617,6 +1616,9 @@ body[class*="pages-"] {
 }
 .line-height-2-5 {
   line-height: 2.5;
+}
+.line-height-0 {
+  line-height: 0;
 }
 .hover-transparent {
   transition: opacity $transition ease;
