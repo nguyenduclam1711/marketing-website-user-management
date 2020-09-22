@@ -30,7 +30,7 @@ router.get('/en/:path', function(req, res) {
 });
 router.get('*', function (req, res) {
   const page = req.path.replace('/', ' ')
-  const shouldRedirect = redirects.find(red => red.from === req.path)
+  const shouldRedirect = redirects.find(red => red.from === req.originalUrl)
   if (shouldRedirect) {
     return res.redirect(shouldRedirect.to)
   }
