@@ -198,7 +198,7 @@ module.exports.contact = async (req, res, next) => {
               { property: 'utm_campaign', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_campaign) : "" },
               { property: 'utm_content', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_content) : "" },
               { property: 'utm_term', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_term) : "" },
-              { property: 'are_you_registered_with_the_jobcenter_or_agentur_fr_arbeit', value: !!jobcenter },
+              { property: 'afa_jc_registered_', value: !!jobcenter },
               {
                 property: 'form_payload',
                 value: JSON.stringify({
