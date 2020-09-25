@@ -224,13 +224,9 @@ $("#downloadCSV").on("click", function (e) {
     .then(data => {
       let leads = data
       .map(lead => ({
-        // name: lead.name,
-        // email: lead.email,
-        // phone: lead.phone,
-        // body: lead.body,
         ...lead,
-        locations:
-        lead.locations && lead.locations[0] ? lead.locations[0].name : ""
+        utm_params: lead.utm_params ? JSON.stringify(lead.utm_params) : "",
+        locations: lead.locations && lead.locations[0] ? lead.locations[0].name : ""
       }));
       console.log('leads', leads);
       let csvRow = objectToCsv(leads);
