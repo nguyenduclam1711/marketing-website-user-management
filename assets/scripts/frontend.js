@@ -196,7 +196,7 @@ function objectToCsv(data) {
   for (const row of data) {
     const values = headers.map(header => {
       const escaped = !!row[header]
-        ? "" + row[header].replace(/"/g, '\\"')
+        ? "" + row[header].toString().replace(/"/g, '\\"')
         : "";
       return `"${escaped}"`;
     });
@@ -222,14 +222,17 @@ $("#downloadCSV").on("click", function (e) {
   fetch("/admin/contacts/api-json")
     .then(resp => resp.json())
     .then(data => {
-      let leads = data.map(lead => ({
-        name: lead.name,
-        email: lead.email,
-        phone: lead.phone,
-        body: lead.body,
+      let leads = data
+      .map(lead => ({
+        // name: lead.name,
+        // email: lead.email,
+        // phone: lead.phone,
+        // body: lead.body,
+        ...lead,
         locations:
-          lead.locations && lead.locations[0] ? lead.locations[0].name : ""
+        lead.locations && lead.locations[0] ? lead.locations[0].name : ""
       }));
+      console.log('leads', leads);
       let csvRow = objectToCsv(leads);
       downloadCsv(csvRow);
     })
