@@ -219,13 +219,14 @@ function downloadCsv(data) {
 }
 
 $("#downloadCSV").on("click", function (e) {
-  fetch(window.location.href + "/api-json")
+  fetch("/admin/contacts/api-json")
     .then(resp => resp.json())
     .then(data => {
       let leads = data.map(lead => ({
         name: lead.name,
         email: lead.email,
         phone: lead.phone,
+        body: lead.body,
         locations:
           lead.locations && lead.locations[0] ? lead.locations[0].name : ""
       }));
