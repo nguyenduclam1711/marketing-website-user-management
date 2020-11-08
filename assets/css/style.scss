@@ -1641,3 +1641,25 @@ body[class*="pages-"] {
     margin-top: 3rem !important;  
   }
 }
+.jumbotron-polygon {
+  position: absolute;
+  left: 50%;
+  width: 100vw;
+  height: 50% !important;
+  transform: translate(-50%);
+  bottom: 0;
+  top: auto;
+  @include media-breakpoint-up(md) {
+    left: auto;
+    bottom: auto;
+    height: 100% !important;
+    top: 0;
+    right: 50%;
+    clip-path: polygon(0px 0px, 91.18% 10.86%, 100% 100%, 0% 100%);
+    transform: unset;
+  }
+}
+
+.border-top-2 {
+  border-top-width: 2px;
+}
