@@ -1,20 +1,115 @@
 extends layout.pug
 block content
-  .jumbotron.jumbotron-fluid.text-center.bg-transparent
-    h1.display-1.mt-5.mb-3=__("Give Us A Tour Of Your Company")
-  .container.bg-light.pb-200
-    .row.py-3
-      .col.py-md-5
-        .px-md-5.py-md-5
-          .px-md-5
-            .px-md-5
-              .px-lg-5.pb-lg-5.text-center
-                h2.lead.mb-3=__("Show us what you’ve built")
-                p.text-muted=__("Building a positive company culture is something to be proud of – to show off even!")
-                p.text-muted=__("In the digital world, the physical space can be so important for employees and every Wednesday we show our students what working in a start-up can be like.")
-                p.text-muted=__("Are you or your company interested in hosting on of this events? Write us a message!")
-                h3.mb-5.text-muted=__("We offer company tours in the following locations:")
-                each location in locations.filter(l => l.isCampus)
-                  span.badge.badge-primary.mr-3.mb-3=location.name
-              h2.text-center=__("Get in touch!")
-              +contactform
+  .jumbotron.jumbotron-fluid.text-center.bg-transparent.pb-200
+    h1.display-1.mt-5.mb-3=__("Become our Hiring Partner")
+    h2.mb-3=__("We connect companies to the most talented Web Developers and Online Marketers.")
+  div.careerwave.pb-5
+    .container.container-counter.mt-4.pb-5
+      .offset-md-3.col-md-9.offset-lg-7.col-lg-5.py-5
+        img.w-100.shift-top-200(src="/media/hero.png", alt="")
+      .col-12.py-5
+        .row
+          .col-sm-6.col-md-3
+            .counter-item
+              .counter-number.font-weight-bold
+                h2.display-1
+                  span.counter-count=locals.settings.landingpage_archivements_students || 600
+                  = "+"
+              h4.font-weight-bold: +translate("Students")
+          .col-sm-6.col-md-3
+            .counter-item
+              .counter-number.font-weight-bold
+                h2.display-1
+                  span.counter-count=locals.settings.landingpage_archivements_courses || 50
+                  = "+"
+              h4.font-weight-bold
+                +translate("Courses started")
+          .col-sm-6.col-md-3
+            .counter-item
+              .counter-number.font-weight-bold
+                h2.display-1
+                  span.counter-count=locals.settings.landingpage_archivements_tours || 300
+                  = "+"
+              h4.font-weight-bold: +translate("Company tours")
+          .col-sm-6.col-md-3
+            .counter-item
+              .counter-number.font-weight-bold
+                h2.display-1
+                  span.counter-count=locals.settings.landingpage_archivements_locations || 5
+              h4.font-weight-bold: +translate("Locations")
+        .mt-5.text-center
+          .btn.btn-lg.btn-outline-primary
+            =__("Become a Hiring Partner")
+  .container.pt-5
+    .px-lg-5.pb-lg-5
+      h2.mb-3
+        =__("What makes our graduates?")
+        =" "
+        span.badge-primary.p-1=__("stand out")
+      p.text-muted=__("Our 1-year program develops higly-motivated individuals into great tech and digital professionals with a broad skill set.")
+      .row
+        .col-md-6.d-flex.flex-column
+          h5.font-weight-normal=__("WebDev Tech Stack 🚀")
+          .bg-primary-light.rounded-lg.p-3.flex-grow-1.mr-md-3
+            ul.mb-3
+              li.float-right.list-style-none
+                img.rounded-circle.w-8.h-8.bg-white.shift-vertical-md-margin.border.border-primary(src="/media/code.svg", alt="")
+              li.pt-5.mb-2=__("Basic Digital Literacy")              
+              li.mb-2=__("User Interface Basics: HTML, CSS")
+              li.mb-2=__("Programming Basics: JavaScript")
+              li.mb-2=__("SPA - Single Page Applications")
+              li.mb-2=__("Backend Development")
+        .col-md-6.d-flex.flex-column
+          h5.font-weight-normal.ml-md-3=__("Online Marketing Stack 🎯")
+          .bg-red-light.rounded-lg.p-3.flex-grow-1.ml-md-3
+            ul.mb-3mt-5
+              li.float-right.list-style-none
+                img.rounded-circle.w-8.h-8.bg-white.shift-vertical-md-margin.border.border-red(src="/media/om.svg", alt="")
+              li.pt-5.mb-2=__("Introduction to Marketing")              
+              li.mb-2=__("SEO and Analytics: Google Analytics & Ahrefs")
+              li.mb-2=__("SEA & Display Marketing: Google Ads")
+              li.mb-2=__("Social Media Marketing")
+              li.mb-2=__("Email Marketing")
+              li.mb-2=__("Press Relations")
+
+
+    .container.mt-5
+      .mb-3
+        =__( "Additional training" )
+      .d-flex.d-column.d-md-row.justify-content-between.mb-4.text-center
+        .bg-light-yellow.rounded-lg.d-flex.flex-column.align-items-center.py-2.px-4.w-11
+          .mb-2.w-3.d-flex 
+            include ../assets/media/careersuccess_training.svg
+          =__("Soft Skill Training")
+        .bg-light-yellow.rounded-lg.d-flex.flex-column.align-items-center.py-2.px-4.w-11
+          .mb-2.w-3.d-flex 
+            include ../assets/media/careersuccess_time.svg
+          =__("Time management")
+        .bg-light-yellow.rounded-lg.d-flex.flex-column.align-items-center.py-2.px-4.w-11
+          .mb-2.w-3.d-flex 
+            include ../assets/media/careersuccess_management.svg
+          =__("Agile project management")
+      .d-flex.d-column.d-md-row.justify-content-between.text-center
+        .bg-light-yellow.rounded-lg.d-flex.flex-column.align-items-center.py-2.px-4.w-11
+          .mb-2.w-3.d-flex 
+            include ../assets/media/careersuccess_language.svg
+          =__("Language courses")
+        .bg-light-yellow.rounded-lg.d-flex.flex-column.align-items-center.py-2.px-4.w-11
+          .mb-2.w-3.d-flex 
+            include ../assets/media/careersuccess_job.svg
+          =__("Job coaching")
+        .bg-light-yellow.rounded-lg.d-flex.flex-column.align-items-center.py-2.px-4.w-11
+          .mb-2.w-3.d-flex 
+            include ../assets/media/careersuccess_service.svg
+          =__("Mentoring")
+
+    .container.pb-200
+      h4
+        =__("What companies")
+        span.badge.badge-primary-trans.text-primary.font-weight-normal.my-5.mx-1=__("love")
+        =("about our graduates?")
+
+      each location in locations.filter(l => l.isCampus)
+        span.badge.badge-primary.mr-3.mb-3=location.name
+    h2.text-center=__("Get in touch!")
+    +contactform
