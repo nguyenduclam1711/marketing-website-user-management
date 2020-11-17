@@ -41,7 +41,14 @@ module.exports.updatePartner = async (req, res) => {
   partner.link = req.body.link;
   partner.partnerlogo = req.files.partnerlogo
     ? req.body.partnerlogo
-    : partner.partnerlogo;
+    : partner.partnerlogo
+  partner.testimonial_name = req.body.testimonial_name !== "" ? req.body.testimonial_name : ""
+  partner.testimonial_content = req.body.testimonial_content !== "" ? req.body.testimonial_content : ""
+  partner.testimonial_job = req.body.testimonial_job !== "" ? req.body.testimonial_job : ""
+  if (partner.partnerlogo && fs.existsSync(`${partner.partnerlogo}.jpg`)) {
+    await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${partner.partnerlogo}`)
+  }
+    console.log('partner', partner);
   await partner.save();
   req.flash("success", `Successfully updated ${partner.title}`);
   res.redirect("/admin/partners/edit/" + partner._id);
@@ -53,6 +60,9 @@ module.exports.createPartner = async function(req, res) {
   partner.title = req.body.title;
   partner.order = req.body.order;
   partner.link = req.body.link;
+  partner.testimonial_name = req.body.testimonial_name
+  partner.testimonial_content = req.body.testimonial_content
+  partner.testimonial_job = req.body.testimonial_job
 
   partner.partnerlogo = req.files.partnerlogo
     ? req.body.partnerlogo
@@ -101,7 +111,7 @@ module.exports.resizeImages = async (request, response, next) => {
     }.${extension}`;
     try {
       const image = await jimp.read(singleFile[0].path);
-      // await image.cover(600, 600);
+      await image.scaleToFit(150, 150);
       await image.write(
         `${process.env.IMAGE_UPLOAD_DIR}/${
           request.body[singleFile[0].fieldname]

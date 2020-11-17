@@ -29,3 +29,13 @@ mixin partnerForm
         button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Defines the order the partners are displayed. 0,1,2,3,4')
           | ?
       input#inputOrder.form-control(name='order', type='number', placeholder='Order', required='', autofocus='', value=editPath ? partner.order : "")
+
+    .form-group
+      label.d-block(for='testimonial_name') Testimonial name
+      input.form-control#testimonial_name(type='text' name='testimonial_name' value=partner && partner.testimonial_name ? partner.testimonial_name : "")
+    .form-group
+      label.d-block(for='testimonial_content') Testimonial content
+      textarea.form-control#testimonial_content(type='text' name='testimonial_content')=partner && partner.testimonial_content ? partner.testimonial_content : ""
+    .form-group
+      label.d-block(for='testimonial_job') Testimonial job
+      input.form-control(type='text' name='testimonial_job' value=partner && partner.testimonial_job ? partner.testimonial_job : "")

@@ -87,8 +87,10 @@ body:not(.admin).btn {
 .btn-group-lg > .btn {
   padding: 0.5em 1.5em;
 }
-
-.nav-pills .nav-link:hover,
+.btn-outline-white{
+  @include button-variant(white, $blue, $blue);
+}
+  .nav-pills .nav-link:hover,
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link:hover {
   background-color: $blue !important;
@@ -470,6 +472,7 @@ UPCOMING EVENTS
 }
 
 .story-item,
+body.tour,
 body[class*="pages-"] {
   blockquote {
     @extend .blockquote;
@@ -1419,6 +1422,9 @@ body:not(.admin) {
 .rounded {
   border-radius: 0.15rem !important;
 }
+.rounded-md {
+  border-radius: 1rem !important;
+}
 .rounded-lg {
   border-radius: 30px !important;
 }
@@ -1697,4 +1703,28 @@ body[class*="pages-"] {
 }
 .badge-primary-trans {
   background-color: $primary-trans;
+}
+.bar-bottom {
+  position: relative;
+  &:after {
+    border-radius: 5px;
+    content: "";
+    display: block;
+    width: 50px;
+    height: 5px;
+    background: $primary;
+    position: absolute;
+    bottom: 0;
+  }
+  &.shadowed{
+    &:after {
+      box-shadow: 0 2px 3px #0000004e;
+    }
+  }
+  &.center{
+    &:after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
 }
