@@ -45,10 +45,10 @@ module.exports.updatePartner = async (req, res) => {
   partner.testimonial_name = req.body.testimonial_name !== "" ? req.body.testimonial_name : ""
   partner.testimonial_content = req.body.testimonial_content !== "" ? req.body.testimonial_content : ""
   partner.testimonial_job = req.body.testimonial_job !== "" ? req.body.testimonial_job : ""
+  partner.testimonial_show = req.body.testimonial_show === "on" ? true: false
   if (partner.partnerlogo && fs.existsSync(`${partner.partnerlogo}.jpg`)) {
     await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${partner.partnerlogo}`)
   }
-    console.log('partner', partner);
   await partner.save();
   req.flash("success", `Successfully updated ${partner.title}`);
   res.redirect("/admin/partners/edit/" + partner._id);
@@ -63,6 +63,7 @@ module.exports.createPartner = async function(req, res) {
   partner.testimonial_name = req.body.testimonial_name
   partner.testimonial_content = req.body.testimonial_content
   partner.testimonial_job = req.body.testimonial_job
+  partner.testimonial_show = req.body.testimonial_show === "on" ? true: false
 
   partner.partnerlogo = req.files.partnerlogo
     ? req.body.partnerlogo

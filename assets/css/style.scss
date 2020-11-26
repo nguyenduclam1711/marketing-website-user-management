@@ -1131,8 +1131,11 @@ body:not(.admin) {
   transform: translate(50%, -50%);
 }
 .shift-vertical-md-margin {
+  margin-right: -1em;
+  margin-top: -1em;
   @include media-breakpoint-up(md) {
-    margin: -5em;
+    margin-right: -3em;
+    margin-top: -3em;
   }
 }
 .shift-top-200 {
@@ -1716,6 +1719,7 @@ body[class*="pages-"] {
     background: $primary;
     position: absolute;
     bottom: 0;
+    left: 0.25em;
   }
   &.shadowed{
     &:after {

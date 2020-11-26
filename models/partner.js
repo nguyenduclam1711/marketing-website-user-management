@@ -11,6 +11,7 @@ const PartnerSchema = new Schema({
   testimonial_name: String,
   testimonial_content: String,
   testimonial_job: String,
+  testimonial_show: Boolean,
   updatedAt: {
     type: Date,
     default: Date.now

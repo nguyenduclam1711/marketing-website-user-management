@@ -40,19 +40,22 @@ block content
               h4.font-weight-bold.bar-bottom.shadowed.center.pb-4.w-min-width.m-0-auto: +translate("Employment rate within 6 months")
         .mt-5.text-center
           .my-5.btn.btn-lg.btn-outline-white.rounded-md.py-3.px-5.display-2.font-weight-light
+          a.btn.btn-lg.btn-secondary.mb-3.mx-5(href='/contact', data-toggle='modal', data-target='#contactFormModal'): +translate("Apply now")
+
             =__("Become a Hiring Partner")
   .container.pt-5
     .mx-lg-5.px-lg-5.pb-lg-5
-      h2.mb-3.bar-bottom.pb-3.mb-4
-        =__("What makes our graduates")
-        =" "
-        span.badge.badge-primary-trans.text-primary.font-weight-normal=__("stand out")
-        = "?"
-      p.text-muted.mb-5=__("Our 1-year program develops higly-motivated individuals into great tech and digital professionals with a broad skill set.")
-      .row.mx-lg-5
+      .mx-xl-5.px-xl-5
+        h2.mb-3.bar-bottom.pb-3.mb-4
+          =__("What makes our graduates")
+          =" "
+          span.badge.badge-primary-trans.text-primary.font-weight-normal=__("stand out")
+          = "?"
+        p.text-muted.mb-5=__("Our 1-year program develops higly-motivated individuals into great tech and digital professionals with a broad skill set.")
+      .row.mx-xl-5
         .col-md-6.d-flex.flex-column
-          h5.font-weight-normal=__("WebDev Tech Stack 🚀")
-          .bg-primary-light.rounded-lg.p-3.flex-grow-1.mr-md-3
+          h5.font-weight-normal.mr-5=__("WebDev Tech Stack 🚀")
+          .bg-primary-light.rounded-lg.flex-grow-1.mr-md-3
             ul.mb-3
               li.float-right.list-style-none
                 img.rounded-circle.w-8.h-8.bg-white.shift-vertical-md-margin.border.border-primary(src="/media/code.svg", alt="")
@@ -62,9 +65,9 @@ block content
               li.mb-2=__("SPA - Single Page Applications")
               li.mb-2=__("Backend Development")
         .col-md-6.d-flex.flex-column
-          h5.font-weight-normal.ml-md-3=__("Online Marketing Stack 🎯")
-          .bg-red-light.rounded-lg.p-3.flex-grow-1.ml-md-3
-            ul.mb-3mt-5
+          h5.mt-5.mt-md-0.font-weight-normal.ml-md-3.mr-5=__("Online Marketing Stack 🎯")
+          .bg-red-light.rounded-lg.flex-grow-1.ml-md-3
+            ul.mb-3
               li.float-right.list-style-none
                 img.rounded-circle.w-8.h-8.bg-white.shift-vertical-md-margin.border.border-red(src="/media/om.svg", alt="")
               li.pt-5.mb-2=__("Introduction to Marketing")              
@@ -81,8 +84,8 @@ block content
         .mx-lg-5
           .mx-lg-5
             .ml-3
-              =__( "Additional training" )
-            .row.mb-4.text-center
+             h5.mt-5.mt-md-0.font-weight-normal.ml-md-3.mr-5=__( "Additional training" )
+            .row.text-center
               .col-md-4.col-6.py-2.px-4.mb-4
                 .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center
                   .w-3.d-flex.mb-3
@@ -114,15 +117,15 @@ block content
                     include ../assets/media/careersucces_icon_mentoring.svg
                   =__("Mentoring")
 
-  - partnersWithTestimonial = partners.filter(p => p.testimonial_name && p.testimonial_job && p.testimonial_content )
+  - partnersWithTestimonial = partners.filter(p => p.testimonial_name && p.testimonial_job && p.testimonial_content && p.testimonial_show )
   if partnersWithTestimonial
     .container
-      .my-5
+      .my-5.py-5
         h2.pb-3.bar-bottom
           =__("What companies")
           span.badge.badge-primary-trans.text-primary.font-weight-normal.mx-1=__("love")
           =("about our graduates?")
-    #careersuccesscarousel.carousel.slide(data-ride="carousel")
+    #careersuccesscarousel.carousel.slide.mb-5.pb-5(data-ride="carousel")
       .carousel-inner
         each partner, index in partnersWithTestimonial
           .carousel-item(class= index === 0 ? ` active` : ``)
@@ -145,19 +148,21 @@ block content
         a.carousel-control-next(href="#careersuccesscarousel" role="button" data-slide="next")
           span.carousel-control-next-icon(aria-hidden="true")
           span.sr-only Next
-
+  else if user
+    ="No partners have either defined a testimonial_job, testimonial_name, testimonial_content or "
 
   div.mt-5
     .careerwave.py-5
       .py-5
         .container.py-5
-          h2.pb-3.bar-bottom.my-4=__("Our Hiring Network")
+          h2.pb-3.bar-bottom.my-5=__("Our Hiring Network")
           h3.mb=__("More than ")
             =locals.settings.careersuccesspage_companypartners
             = "+ "
             =__("company partners ")
           
-          - randompartners = [...partners]
+          - partnersWithTestimonialsShown = partners.filter(p => p.testimonial_show)
+          - randompartners = [...partnersWithTestimonialsShown]
           - for (let i = randompartners.length - 1; i > 0; i--) {
               - const j = Math.floor(Math.random() * (i + 1));
               - [randompartners[i], randompartners[j]] = [randompartners[j], randompartners[i]];
@@ -168,7 +173,7 @@ block content
                 img.mw-150.object-fit-contain(alt=partner.title, src="/images/" + partner.partnerlogo)
 
   .container.my-5
-    h2.pb-3.bar-bottom.mb-5
+    h2.pb-3.pt-5.bar-bottom.mb-5
       =__("How our hiring partners")
       = " "
       span.badge.badge-primary-trans.text-primary.font-weight-normal.mx-1=__("benefit")
@@ -176,46 +181,46 @@ block content
     .row.text-center
       .col-6.mb-4
         .p-md-4.h-100
-          .p-md-4.h-100
-            .h-100.border.border-primary.rounded-lg.d-flex.flex-column.align-items-center.py-5.px-3.justify-content-center
+          .p-lg-4.h-100
+            .h-100.border.border-primary.rounded-lg.d-flex.flex-column.align-items-center.py-md-5.py-3.px-3.justify-content-center
               .mb-4.w-5.d-flex.text-primary
                 include ../assets/media/careersuccess_cv.svg
-              h3=__("Access our student profiles even before graduation")
+              h3.font-weight-light=__("Access our student profiles even before graduation")
       .col-6.mb-4
         .p-md-4.h-100
-          .p-md-4.h-100
-            .h-100.border.border-primary.rounded-lg.d-flex.flex-column.align-items-center.py-5.px-3.justify-content-center
+          .p-lg-4.h-100
+            .h-100.border.border-primary.rounded-lg.d-flex.flex-column.align-items-center.py-md-5.py-3.px-3.justify-content-center
               .mb-4.w-5.d-flex.text-primary
                 include ../assets/media/careersuccess_event.svg
-              h3=__("Participate at our events for free")
+              h3.font-weight-light=__("Participate at our events for free")
       .col-6.mb-4
         .p-md-4.h-100
-          .p-md-4.h-100
-            .h-100.border.border-primary.rounded-lg.d-flex.flex-column.align-items-center.py-5.px-3.justify-content-center
+          .p-lg-4.h-100
+            .h-100.border.border-primary.rounded-lg.d-flex.flex-column.align-items-center.py-md-5.py-3.px-3.justify-content-center
               .mb-4.w-5.d-flex.text-primary
-                include ../assets/media/careersuccess_home_office.svg
-              h3=__("Host a company tour for our students")
+                include ../assets/media/careersuccess_company_tour.svg
+              h3.font-weight-light=__("Host a company tour for our students")
       .col-6.mb-4
         .p-md-4.h-100
-          .p-md-4.h-100
-            .h-100.border.border-primary.rounded-lg.d-flex.flex-column.align-items-center.py-5.px-3.justify-content-center
+          .p-lg-4.h-100
+            .h-100.border.border-primary.rounded-lg.d-flex.flex-column.align-items-center.py-md-5.py-3.px-3.justify-content-center
               .mb-4.w-5.d-flex.text-primary
-                include ../assets/media/careersuccess_tips.svg
-              h3=__("Receive financial support when hiring DCI graduates")
+                include ../assets/media/careersuccess_financial_support.svg
+              h3.font-weight-light=__("Receive financial support when hiring DCI graduates")
       .col-6.mb-4
         .p-md-4.h-100
-          .p-md-4.h-100
-            .h-100.border.border-primary.rounded-lg.d-flex.flex-column.align-items-center.py-5.px-3.justify-content-center
+          .p-lg-4.h-100
+            .h-100.border.border-primary.rounded-lg.d-flex.flex-column.align-items-center.py-md-5.py-3.px-3.justify-content-center
               .mb-4.w-5.d-flex.text-primary
                 include ../assets/media/careersuccess_permanent_job.svg
-              h3=__("Hire our graduates")
+              h3.font-weight-light=__("Hire our graduates")
       .col-6.mb-4
         .p-md-4.h-100
-          .p-md-4.h-100
-            .h-100.border.border-primary.rounded-lg.d-flex.flex-column.align-items-center.py-5.px-3.justify-content-center
+          .p-lg-4.h-100
+            .h-100.border.border-primary.rounded-lg.d-flex.flex-column.align-items-center.py-md-5.py-3.px-3.justify-content-center
               .mb-4.w-5.d-flex.text-primary
                 include ../assets/media/careersuccess_lecturer.svg
-              h3=__("Give an Industry Lecture")
+              h3.font-weight-light=__("Give an Industry Lecture")
 
   .container.text-center.mb-5
     h2.display-1.font-weight-light.mb-5.text-primary=__("Fill Your Open Vacancies")
