@@ -79,7 +79,8 @@ module.exports.createPage = async (req, res) => {
     page.cta_button_url = req.body.cta_button_url;
     page.cta_button_text = req.body.cta_button_text;
     page.cta_text = req.body.cta_text;
-    page.prominent = req.body.prominent === "on" ? true : false;
+    page.companypage = req.body.companypage === "on" ? true : false;
+    page.metapage = req.body.metapage === "on" ? true : false;
     page.menulocations = req.body.menulocations;
 
     await page.save();
@@ -111,7 +112,8 @@ module.exports.updatePage = async (req, res) => {
     page.title = req.body.title;
     page.content = JSON.parse(req.body.content);
     page.order = req.body.order;
-    page.prominent = req.body.prominent === "on" ? true : false;
+    page.companypage = req.body.companypage === "on" ? true : false;
+    page.metapage = req.body.metapage === "on" ? true : false;
     page.slug = req.body.slug;
     page.cta_button_url = req.body.cta_button_url;
     page.cta_button_text = req.body.cta_button_text ? req.body.cta_button_text : "GoGo gadget!";
