@@ -39,9 +39,7 @@ block content
                   = "%"
               h4.font-weight-bold.bar-bottom.shadowed.center.pb-4.w-min-width.m-0-auto: +translate("Employment rate within 6 months")
         .mt-5.text-center
-          .my-5.btn.btn-lg.btn-outline-white.rounded-md.py-3.px-5.display-2.font-weight-light
-          a.btn.btn-lg.btn-secondary.mb-3.mx-5(href='/contact', data-toggle='modal', data-target='#contactFormModal'): +translate("Apply now")
-
+          a.my-5.btn.btn-lg.btn-outline-white.rounded-md.py-3.px-5.display-2.font-weight-light(href='/contact', data-toggle='modal', data-target='#contactFormModal')
             =__("Become a Hiring Partner")
   .container.pt-5
     .mx-lg-5.px-lg-5.pb-lg-5
@@ -82,95 +80,105 @@ block content
     .mb-3
       .mx-lg-5
         .mx-lg-5
-          .mx-lg-5
-            .ml-3
-             h5.mt-5.mt-md-0.font-weight-normal.ml-md-3.mr-5=__( "Additional training" )
-            .row.text-center
-              .col-md-4.col-6.py-2.px-4.mb-4
-                .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center
-                  .w-3.d-flex.mb-3
-                    include ../assets/media/careersuccess_training.svg
-                  =__("Soft Skill Training")
-              .col-md-4.col-6.py-2.px-4.mb-4
-                .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center
-                  .w-3.d-flex.mb-3
-                    include ../assets/media/careersuccess_time.svg
-                  =__("Time management")
-              .col-md-4.col-6.py-2.px-4.mb-4
-                .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center
-                  .w-3.d-flex.mb-3
-                    include ../assets/media/careersuccess_management.svg
-                  =__("Agile project management")
-              .col-md-4.col-6.py-2.px-4.mb-4
-                .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center
-                  .w-3.d-flex.mb-3
-                    include ../assets/media/careersuccess_language.svg
-                  =__("Language courses")
-              .col-md-4.col-6.py-2.px-4.mb-4
-                .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center
-                  .w-3.d-flex.mb-3
-                    include ../assets/media/careersuccess_job.svg
-                  =__("Job coaching")
-              .col-md-4.col-6.py-2.px-4.mb-4
-                .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center
-                  .w-3.d-flex.mb-3
-                    include ../assets/media/careersucces_icon_mentoring.svg
-                  =__("Mentoring")
+          .ml-3
+            h5.mt-5.mt-md-0.font-weight-normal.ml-md-3.mr-5=__( "Additional training" )
+          .row.text-center
+            .col-md-4.col-6.py-2.px-4.mb-4
+              .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center
+                .w-3.d-flex.mb-3
+                  include ../assets/media/careersuccess_training.svg
+                =__("Soft Skill Training")
+            .col-md-4.col-6.py-2.px-4.mb-4
+              .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center
+                .w-3.d-flex.mb-3
+                  include ../assets/media/careersuccess_time.svg
+                =__("Time management")
+            .col-md-4.col-6.py-2.px-4.mb-4
+              .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center
+                .w-3.d-flex.mb-3
+                  include ../assets/media/careersuccess_management.svg
+                =__("Agile project management")
+            .col-md-4.col-6.py-2.px-4.mb-4
+              .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center
+                .w-3.d-flex.mb-3
+                  include ../assets/media/careersuccess_language.svg
+                =__("Language courses")
+            .col-md-4.col-6.py-2.px-4.mb-4
+              .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center
+                .w-3.d-flex.mb-3
+                  include ../assets/media/careersuccess_job.svg
+                =__("Job coaching")
+            .col-md-4.col-6.py-2.px-4.mb-4
+              .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center
+                .w-3.d-flex.mb-3
+                  include ../assets/media/careersucces_icon_mentoring.svg
+                =__("Mentoring")
 
   - partnersWithTestimonial = partners.filter(p => p.testimonial_name && p.testimonial_job && p.testimonial_content && p.testimonial_show )
-  if partnersWithTestimonial
+  if partnersWithTestimonial.length > 0
     .container
-      .my-5.py-5
-        h2.pb-3.bar-bottom
-          =__("What companies")
-          span.badge.badge-primary-trans.text-primary.font-weight-normal.mx-1=__("love")
-          =("about our graduates?")
-    #careersuccesscarousel.carousel.slide.mb-5.pb-5(data-ride="carousel")
+      .mx-lg-5
+        .mx-lg-5.px-lg-2
+          .py-5
+            h2.pb-3.bar-bottom.mb-5
+              =__("What companies")
+              span.badge.badge-primary-trans.text-primary.font-weight-normal.mx-1=__("love")
+              =("about our graduates?")
+    #careersuccesscarousel.carousel.slide.mb-5.pt-3.pb-5(data-ride="carousel")
       .carousel-inner
         each partner, index in partnersWithTestimonial
           .carousel-item(class= index === 0 ? ` active` : ``)
-            .container.bg-primary-light.p-4.rounded-lg
-              if user && partner && user.userId === partner.userId || user && user.admin === "true"
-                a.position-absolute.right.bottom.btn.btn-outline-primary.z-foreground(href=`/admin/stories/edit/${partner.slug}`) Edit
-                  
-              .d-flex.justify-content-between.align-items-start
-                img.mw-150.object-fit-contain(alt=partner.title, src="/images/" + partner.partnerlogo)
-                
-                div.text-right
-                  h3=partner.testimonial_name
-                  h4.font-italic=partner.testimonial_job
-              .p-5
-                blockquote.blockquote.my-1=partner.testimonial_content
+            .container
+              .mx-lg-5
+                .mx-lg-5.px-lg-2
+                  .bg-primary-light.p-4.rounded-lg
+                    if user && partner && user.userId === partner.userId || user && user.admin === "true"
+                      a.position-absolute.right.bottom.btn.btn-outline-primary.z-foreground(href=`/admin/stories/edit/${partner.slug}`) Edit
+                        
+                    .d-flex.justify-content-between.align-items-start
+                      img.mw-150.object-fit-contain(alt=partner.title, src="/images/" + partner.partnerlogo)
+                      
+                      div.text-right
+                        h3=partner.testimonial_name
+                        h4.font-italic=partner.testimonial_job
+                    .p-5
+                      blockquote.blockquote.my-1=partner.testimonial_content
 
-        a.carousel-control-prev(href="#careersuccesscarousel" role="button" data-slide="prev")
-          span.carousel-control-prev-icon(aria-hidden="true")
-          span.sr-only Previous
-        a.carousel-control-next(href="#careersuccesscarousel" role="button" data-slide="next")
-          span.carousel-control-next-icon(aria-hidden="true")
-          span.sr-only Next
+        if partnersWithTestimonial.length > 1
+          a.carousel-control-prev(href="#careersuccesscarousel" role="button" data-slide="prev")
+            span.carousel-control-prev-icon(aria-hidden="true")
+            span.sr-only Previous
+          a.carousel-control-next(href="#careersuccesscarousel" role="button" data-slide="next")
+            span.carousel-control-next-icon(aria-hidden="true")
+            span.sr-only Next
   else if user
-    ="No partners have either defined a testimonial_job, testimonial_name, testimonial_content or "
+    .text-center
+      ="No partners have either defined a testimonial_job, testimonial_name, testimonial_content or are not marked as testimonial_show."
 
-  div.mt-5
-    .careerwave.py-5
-      .py-5
-        .container.py-5
-          h2.pb-3.bar-bottom.my-5=__("Our Hiring Network")
-          h3.mb=__("More than ")
-            =locals.settings.careersuccesspage_companypartners
-            = "+ "
-            =__("company partners ")
-          
-          - partnersWithTestimonialsShown = partners.filter(p => p.testimonial_show)
-          - randompartners = [...partnersWithTestimonialsShown]
-          - for (let i = randompartners.length - 1; i > 0; i--) {
-              - const j = Math.floor(Math.random() * (i + 1));
-              - [randompartners[i], randompartners[j]] = [randompartners[j], randompartners[i]];
-          - }  
-          .row.my-5
-            each partner, index in randompartners.splice(0,6)
-              .col-md-4.col-6.text-center.my-4.d-flex.flex-column.justify-content-center.align-items-center
+  - partnersWithTestimonialsShown = partners.filter(p => p.testimonial_show)
+  if partnersWithTestimonialsShown.length > 0
+    div.mt-5
+      .careerwave.py-5
+        .py-5
+          .container.py-5
+            h2.pb-3.bar-bottom.my-5=__("Our Hiring Network")
+            h3.mb=__("More than ")
+              =locals.settings.careersuccesspage_companypartners
+              = "+ "
+              =__("company partners ")
+            
+            - randompartners = [...partnersWithTestimonialsShown]
+            - for (let i = randompartners.length - 1; i > 0; i--) {
+                - const j = Math.floor(Math.random() * (i + 1));
+                - [randompartners[i], randompartners[j]] = [randompartners[j], randompartners[i]];
+            - }  
+            .row.my-5
+              each partner, index in randompartners.splice(0,6)
+                .col-md-4.col-6.text-center.my-4.d-flex.flex-column.justify-content-center.align-items-center
                 img.mw-150.object-fit-contain(alt=partner.title, src="/images/" + partner.partnerlogo)
+  else if user
+    .text-center.my-5
+      ="No partners are marked as testimonial_show."
 
   .container.my-5
     h2.pb-3.pt-5.bar-bottom.mb-5
@@ -225,7 +233,7 @@ block content
   .container.text-center.mb-5
     h2.display-1.font-weight-light.mb-5.text-primary=__("Fill Your Open Vacancies")
     h3.display-2.font-weight-light.mb-5=__("For web developers and online marketers")
-    a.btn.btn-primary.btn-lg(href="") 
+    a.btn.btn-primary.btn-lg(href='/contact', data-toggle='modal', data-target='#contactFormModal')
       =__("Become a Hiring Partner")
   .w-100
     include ../assets/media/careersuccess_waveline.svg
