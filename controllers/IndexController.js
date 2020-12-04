@@ -245,16 +245,12 @@ module.exports.contact = async (req, res, next) => {
 }
 module.exports.tour = async (req, res) => {
   try {
-    const partners = await Partner.find({
-      // $and:
-      //   [
-      //     { testimonial_name: { $nin: ["", null]  } },
-      //     { testimonial_job: { $nin: ["", null]  } },
-      //     { testimonial_content: { $nin: ["", null]  } }
-      //   ]
-    })
-      .sort("-createdAt")
-      .exec();
+    const query = await getAvailableTranslations(req, res)
+    const partners = await Partner.find(query)
+    .sort("-createdAt")
+    .exec();
+    console.log('partners', partners);
+      
     res.render('tour', { companytour: true, partners })
   } catch (err) {
     console.log(err)

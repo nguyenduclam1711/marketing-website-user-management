@@ -4,6 +4,7 @@ const fs = require("fs");
 const jimp = require("jimp");
 const Partner = require("../../models/partner");
 const uuid = require("uuid");
+const AbstractController = require("./AbstractController");
 
 module.exports.getPartners = async function(req, res) {
   try {
@@ -21,7 +22,7 @@ module.exports.getPartners = async function(req, res) {
 
 module.exports.deletePartner = async function(req, res) {
   await Partner.deleteOne({
-    _id: req.params.id
+    slug: req.params.slug
   });
 
   req.flash("success", `Successfully deleted Partner`);
@@ -29,14 +30,17 @@ module.exports.deletePartner = async function(req, res) {
 };
 
 module.exports.editPartner = async function(req, res) {
-  const partner = await Partner.findById(req.params.id);
+  const partner = await Partner
+    .findOne({ slug: req.params.slug })
+    .populate("language")
+    .populate("languageVersion")
   res.render("admin/editPartner", {
     partner: partner
   });
 };
 
 module.exports.updatePartner = async (req, res) => {
-  const partner = await Partner.findById(req.params.id);
+  const partner = await Partner.findOne({ slug: req.params.slug })
   partner.title = req.body.title;
   partner.link = req.body.link;
   partner.partnerlogo = req.files.partnerlogo
@@ -51,7 +55,7 @@ module.exports.updatePartner = async (req, res) => {
   }
   await partner.save();
   req.flash("success", `Successfully updated ${partner.title}`);
-  res.redirect("/admin/partners/edit/" + partner._id);
+  res.redirect("/admin/partners/edit/" + partner.slug);
 };
 
 module.exports.createPartner = async function(req, res) {
@@ -124,4 +128,8 @@ module.exports.resizeImages = async (request, response, next) => {
     }
   }
   next();
+};
+
+module.exports.setL18n = async (req, res) => {
+  AbstractController.cloneSite(req, res, Partner)
 };

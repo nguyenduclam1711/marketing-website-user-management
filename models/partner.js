@@ -1,5 +1,6 @@
 const mongoose = require("mongoose"),
-  Schema = mongoose.Schema;
+  Schema = mongoose.Schema,
+  URLSlugs = require("mongoose-url-slugs");
 
 const PartnerSchema = new Schema({
   title: String,
@@ -19,6 +20,9 @@ const PartnerSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now
-  }
+  },
+  language: { type: Schema.ObjectId, ref: "Language" },
+  languageVersion: { type: Schema.ObjectId, ref: "Partner" }
 });
+PartnerSchema.plugin(URLSlugs("title"));
 module.exports = mongoose.model("Partner", PartnerSchema);
