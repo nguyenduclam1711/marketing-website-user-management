@@ -171,7 +171,7 @@ block content
       section.py-5.section-services#partners
         .container.py-5.text-center
           h2.display-1.text-center.mb-5: +translate("Our Partners")
-          each partner in partners.filter(p => !p.testimonial_show)
+          each partner in partners
             if partner.link
               a(href=partner.link target="_blank" rel="noopener")
                 img.partners-logo.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo)
