@@ -249,8 +249,6 @@ module.exports.tour = async (req, res) => {
     const partners = await Partner.find(query)
     .sort("-createdAt")
     .exec();
-    console.log('partners', partners);
-      
     res.render('tour', { companytour: true, partners })
   } catch (err) {
     console.log(err)
