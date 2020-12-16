@@ -10,6 +10,8 @@ module.exports.getPartners = async function(req, res) {
   try {
     let partners = await Partner.find({})
       .sort("-createdAt")
+      .populate("language")
+      .populate("languageVersion")
       .exec();
 
     res.render("admin/partners", {

@@ -36,14 +36,14 @@ mixin navigation
                 li.position-relative.nav-item
                   a.mx-0.mx-xl-3.mx-lg-2.nav-link.d-flex.align-items-center.h-100(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/' + page.slug)=page.title
             
-          li.position-relative.nav-item.dropdown
-            a.dropdown-toggle.mx-0.mx-xl-3.mx-lg-2.nav-link.d-flex.align-items-center.h-100(class=page && page.companypage !== "true" && currentPath && currentPath.includes("/pages") || currentPath && currentPath.includes("/about-us") : "", href="#", data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")=__("Companies")
-            .dropdown-menu.p-0.border-radius-0.shadow-sm(aria-labelledby='navbarDropdownMenuLink')
-              if headerPages
-                each page in headerPages
-                  if page.companypage
-                    a.dropdown-item.nav-link(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/' + page.slug)=page.title
-              a.dropdown-item.nav-link(class=currentPath && currentPath.includes("/tour") ? "active" : "" href='/tour')=__("Host our students")
+          li.position-relative.nav-item
+            //- a.dropdown-toggle.mx-0.mx-xl-3.mx-lg-2.nav-link.d-flex.align-items-center.h-100(class=page && page.companypage !== "true" && currentPath && currentPath.includes("/pages") || currentPath && currentPath.includes("/about-us") : "", href="#", data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")=__("Companies")
+            //- .dropdown-menu.p-0.border-radius-0.shadow-sm(aria-labelledby='navbarDropdownMenuLink')
+            //-   if headerPages
+            //-     each page in headerPages
+            //-       if page.companypage
+            //-         a.dropdown-item.nav-link(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/' + page.slug)=page.title
+            a.mx-0.mx-xl-3.mx-lg-2.nav-link.d-flex.align-items-center.h-100.z-1(class=currentPath && currentPath.includes("/tour") ? "active" : "" href='/tour')=__("Companies")
 
           li.position-relative.nav-item.dropdown
             a.dropdown-toggle.mx-0.mx-xl-3.mx-lg-2.nav-link.d-flex.align-items-center.h-100(class=page && page.metapage !== "true" && currentPath && currentPath.includes("/pages") || currentPath && currentPath.includes("/about-us") : "", href="#", data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")=__("Get involved")

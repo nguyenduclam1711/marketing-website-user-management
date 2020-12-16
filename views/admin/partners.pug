@@ -22,12 +22,7 @@ block content
                       input#testimonial_show(disabled type='checkbox', name='testimonial_show', value="on", checked=partner && partner.testimonial_show && !!partner.testimonial_show ? true: false )
                       span.checkmark
                 if user && user.admin === "true"
-                  form.d-flex.justify-content-between(method='POST', action='/admin/partners/delete/'+partner.slug +'?_method=DELETE')
-                    a.btn.btn-outline-primary.mr-2(href="/partners/"+partner.slug) Show
-
-                    .d-flex.align-items-center
-                      a.btn.btn-outline-primary.mr-2(href="/admin/partners/edit/"+partner.slug) Edit
-                      button.btn.btn-outline-danger(type='submit') Delete
+                  +buttonGroup(partner, `partners`)
       .col-md-4
         +partnerForm
 
