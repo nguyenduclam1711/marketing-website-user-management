@@ -83,35 +83,42 @@ block content
           .ml-3
             h5.mt-5.mt-md-0.font-weight-normal.ml-md-3.mr-5=__( "Additional training" )
           .row.text-center
-            .col-md-4.col-6.py-2.px-4.mb-4
-              .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center
+            .col-md-4.col-6.py-2.px-4.mb-4.d-flex.justify-content-center
+              .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center.w-11
                 .w-3.d-flex.mb-3
                   include ../assets/media/careersuccess_training.svg
-                =__("Soft Skill Training")
-            .col-md-4.col-6.py-2.px-4.mb-4
-              .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center
+                .h-3.d-flex.flex-column.justify-content-center
+                  =__("Soft Skill Training")
+            .col-md-4.col-6.py-2.px-4.mb-4.d-flex.justify-content-center
+              .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center.w-11
                 .w-3.d-flex.mb-3
                   include ../assets/media/careersuccess_time.svg
-                =__("Time management")
-            .col-md-4.col-6.py-2.px-4.mb-4
-              .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center
+                .h-3.d-flex.flex-column.justify-content-center
+                  =__("Time management")
+            .col-md-4.col-6.py-2.px-4.mb-4.d-flex.justify-content-center
+              .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center.w-11
                 .w-3.d-flex.mb-3
                   include ../assets/media/careersuccess_management.svg
-                =__("Agile project management")
-            .col-md-4.col-6.py-2.px-4.mb-4
-              .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center
+                .h-3.d-flex.flex-column.justify-content-center
+                  =__("Agile project management")
+            .col-md-4.col-6.py-2.px-4.mb-4.d-flex.justify-content-center
+              .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center.w-11
                 .w-3.d-flex.mb-3
                   include ../assets/media/careersuccess_language.svg
-                =__("Language courses")
-              .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center
+                .h-3.d-flex.flex-column.justify-content-center
+                  =__("Language courses")
+            .col-md-4.col-6.py-2.px-4.mb-4.d-flex.justify-content-center
+              .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center.w-11
                 .w-3.d-flex.mb-3
                   include ../assets/media/careersuccess_job.svg
-                =__("Job coaching")
-            .col-md-4.col-6.py-2.px-4.mb-4
-              .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center
+                .h-3.d-flex.flex-column.justify-content-center
+                  =__("Job coaching")
+            .col-md-4.col-6.py-2.px-4.mb-4.d-flex.justify-content-center
+              .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center.w-11
                 .w-3.d-flex.mb-3
                   include ../assets/media/careersucces_icon_mentoring.svg
-                =__("Mentoring")
+                .h-3.d-flex.flex-column.justify-content-center
+                  =__("Mentoring")
 
   if partners
     - partnersWithTestimonial = partners.filter(p => p.testimonial_name && p.testimonial_job && p.testimonial_content && p.testimonial_show )
@@ -199,7 +206,7 @@ block content
                       include ../assets/media/careersuccess_cv.svg
                     h3.font-weight-light=__("Access our student profiles even before graduation")
                 .flip-card-back.rounded-lg.p-5.border.border-light
-                  =__("Every 4-8 weeks we have a new graduation class in each of our locations")
+                  h3.font-weight-light=__("Every 4-8 weeks we have a new graduation class in each of our locations")
       .col-6.mb-4
         .p-md-4.h-100
           .p-lg-4.h-100
@@ -211,7 +218,7 @@ block content
                       include ../assets/media/careersuccess_event.svg
                     h3.font-weight-light=__("Participate at our events for free")
                 .flip-card-back.rounded-lg.p-5.border.border-light
-                  =__("Receive regular invitations to our Final Events and meet our graduates")
+                  h3.font-weight-light=__("Receive regular invitations to our Final Events and meet our graduates")
       .col-6.mb-4
         .p-md-4.h-100
           .p-lg-4.h-100
@@ -223,7 +230,7 @@ block content
                       include ../assets/media/careersuccess_company_tour.svg
                     h3.font-weight-light=__("Host a company tour for our students")
                 .flip-card-back.rounded-lg.p-5.border.border-light
-                  =__("Show our students what it is like to work in tech by inviting them to your (virtual) offices")
+                  h3.font-weight-light=__("Show our students what it is like to work in tech by inviting them to your (virtual) offices")
       .col-6.mb-4
         .p-md-4.h-100
           .p-lg-4.h-100
@@ -235,7 +242,7 @@ block content
                       include ../assets/media/careersuccess_financial_support.svg
                     h3.font-weight-light=__("Receive financial support when hiring DCI graduates")
                 .flip-card-back.rounded-lg.p-5.border.border-light
-                  =__("Employer can be reimbursed 50% of the salary paid for half of the time the student is hired")
+                  h3.font-weight-light=__("Employer can be reimbursed 50% of the salary paid for half of the time the student is hired")
       .col-6.mb-4
         .p-md-4.h-100
           .p-lg-4.h-100
@@ -247,7 +254,7 @@ block content
                       include ../assets/media/careersuccess_permanent_job.svg
                     h3.font-weight-light=__("Hire our graduates")
                 .flip-card-back.rounded-lg.p-5.border.border-light
-                  =__("Hire our students for Intern positions, and our graduates for Junior/Trainee positions ")
+                  h3.font-weight-light=__("Hire our students for Intern positions, and our graduates for Junior/Trainee positions ")
       .col-6.mb-4
         .p-md-4.h-100
           .p-lg-4.h-100
@@ -259,7 +266,7 @@ block content
                       include ../assets/media/careersuccess_lecturer.svg
                     h3.font-weight-light=__("Give an Industry Lecture")
                 .flip-card-back.rounded-lg.p-5.border.border-light
-                  =__("Share your industry knowledge by holding a lecture on a topic from our curriculum")
+                  h3.font-weight-light=__("Share your industry knowledge by holding a lecture on a topic from our curriculum")
 
   .container.text-center.mb-5
     h2.display-1.font-weight-light.mb-5.text-primary=__("Fill Your Open Vacancies")
