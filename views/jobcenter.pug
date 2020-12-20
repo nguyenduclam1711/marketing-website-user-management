@@ -1,0 +1,92 @@
+extends layout.pug
+block content
+    .container
+        h1.my-5 Jobcenter
+        .row
+            .col-md-6.text-center.order-md-12
+                .px-5.mb-4
+                    .px-lg-5
+                        .px-lg-5.text-left
+                            img.w-150(src="/media/azav.png", alt="")
+            .col-md-6
+                div.mb-5
+                    h3=__("ORIENTATION COURSE")
+                    h4=__("Course ID: 962/90/20")
+                    h5=__("Duration: 4 weeks full time (160 units)")
+
+                #accordionExample.accordion.mb-5
+                    .card
+                        #headingOne.card-header
+                            h5.mb-0
+                                button.btn.btn-link(type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne")
+                                    | Notice
+                        #collapseOne.collapse(aria-labelledby="headingOne" data-parent="#accordionExample")
+                            .card-body
+                                p=("This activation and placement measure in accordance with §45 (1) sentence 1 no. 2 SGB III is intended to provide an insight into the field of digital occupations. Here, the individual support and promotion of the participants as well as direct contact and dialogue with companies is decisive. In order to convey a transparent impression of the digital working world, the focus is on various unusual excursions to regional IT companies, among other things. This is intended to increase the personal commitment and performance aspirations of the participants. The practical and theoretical mediation units are realised by various teachers and lecturers from regional IT companies. If necessary, they receive support from an interpreter (Arabic and Farsi) to break down language barriers. Our analysis of the participants works out their potential so that an individual self-marketing and application strategy can be designed based on their personality profile.")
+
+
+                div.mb-5
+                    h3=__("FURTHER TRAINING AS A WEB DEVELOPER")
+                    h4=__("Course ID: 962/445/2020")
+                    h5=__("12 months training + 2 months internship")
+                #accordionExample.accordion.mb-5
+                    .card
+                        #headingTwo.card-header
+                            h5.mb-0
+                                button.btn.btn-link.collapsed(type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo")
+                                    | Notice
+                        #collapseTwo.collapse(aria-labelledby="headingTwo" data-parent="#accordionExample")
+                            .card-body
+                                p=("The web development course is aimed at all successful graduates of the orientation course as well as people with basic knowledge of digital technologies. Our founders themselves come from the startup and digital scene and have developed a course with our lecturers that provides practical programming skills that are in high demand on the job market. The course provides you with comprehensive know-how about software development (programs/apps) with web technologies.")
+
+                div.mb-5
+                    h3=__("FURTHER TRAINING AS ONLINE MARKETER")
+
+                    h4=__("Course ID: 962/403/2020")
+
+                    h5=__("14 months training + 2 months internship")
+                #accordionExample.accordion.mb-5
+                    .card
+                        #headingThree.card-header
+                            h5.mb-0
+                                button.btn.btn-link.collapsed(type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree")
+                                    | Notice
+                        #collapseThree.collapse(aria-labelledby="headingThree" data-parent="#accordionExample")
+                            .card-body
+                                p=("All participants who have successfully completed the orientation course and people who are confident in using digital technologies also qualify for the online marketing course. With our course we train you to become a creative online marketer, who can develop and implement versatile marketing campaigns. Our course contaings SEM, SEO, Email Marketing, Display Marketing, Affiliate Marketing, PR, Social Media Marketing and Google Analytics.")
+                h3=__("Legal")
+                .font-weight-bold.my-4=__("DCI - Digital Career Institute gGmbH")
+                div
+                    ="Address: "
+                    strong.font-weight-bold=__("Grünberger Str. 54, 10245 Berlin Phone: +4930 - 364286190")
+                div
+                    ="Email: "
+                    strong.font-weight-bold=__("info@digitalcareerinstitute.org")
+                div
+                    ="Managing Director: "
+                    strong.font-weight-bold=__("Marius Hein")
+                div
+                    ="Registration: "
+                    strong.font-weight-bold=__("Local Court Berlin Charlottenburg HRB 177854 Banking Institute: Deutsche Bank")
+                div
+                    ="IBAN: "
+                    strong.font-weight-bold=__("EN88 8607 0024 0314 9507 00")
+                div
+                    ="SWIFT-BIC: "
+                    strong.font-weight-bold=__("DEUTDEDBLEG")
+
+                h3="DCI - Digital Career Institute gGmbH"
+                p.text-center=__("Approved Institution for the promotion of further vocational training according to the law on employment promotion.")
+
+
+
+
+
+
+
+
+
+
+
+    .pb-200
+    .pb-200

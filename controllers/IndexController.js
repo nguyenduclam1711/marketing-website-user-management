@@ -405,3 +405,12 @@ module.exports.downloadCourseCurriculum = async (req, res, next) => {
     res.redirect(req.headers.referer)
   }
 }
+module.exports.jobcenter = async (req, res) => {
+  try {
+    res.render('jobcenter', {
+
+    })
+  } catch (err) {
+    console.log(err)
+  }
+}
