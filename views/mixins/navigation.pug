@@ -30,6 +30,9 @@ mixin navigation
           li.position-relative.nav-item
             a.mx-0.mx-xl-3.mx-lg-2.nav-link.d-flex.align-items-center.h-100.z-1(class=currentPath && currentPath.includes("/stories") ? "active" : "", href='/stories')=__("Stories")
 
+          li.position-relative.nav-item
+            a.mx-0.mx-xl-3.mx-lg-2.nav-link.d-flex.align-items-center.h-100.z-1(class=currentPath && currentPath.includes("/jobcenter") ? "active" : "", href='/jobcenter')=__("Jobcenter")
+
           if headerPages
             each page in headerPages
               if !page.companypage && !page.metapage

@@ -410,7 +410,22 @@ UPCOMING EVENTS
 .card-text {
   color: #6f7287;
 }
-
+.card-header {
+  background-color: transparent;
+  border-bottom: none;
+}
+button[data-toggle="collapse"]{
+  svg {
+    transition: transform .3s ease;
+    transform: rotate(90deg);
+  }
+  &[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+  }
+}
+.accordion > .card {
+    overflow: visible;
+}
 .event-name {
   font-size: 1.2rem;
   text-transform: capitalize;

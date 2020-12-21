@@ -81,6 +81,8 @@ i18n.configure({
   locales: ['en', 'de'],
   queryParameter: 'lang',
   autoReload: true,
+  keySeparator: "$",
+  nsSeparator: "%",
   directory: __dirname + '/locales'
 })
 
