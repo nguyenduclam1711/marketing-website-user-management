@@ -16,7 +16,7 @@ block content
                 .d-flex
                   a.mb-3.btn.btn-lg.btn-secondary.mr-2.mr-md-4(href='#ourcourses', role='button'): +translate("Browse Courses")
               .col-md-6.py-5.order-1.order-md-12
-                img.w-100(src="/media/hero.png", alt="")
+                img.w-100(src="/media/hero.svg", alt="")
 
       section#ourcourses.position-relative.offset_title.pb-5
         header.offset_header.text-center
@@ -38,7 +38,7 @@ block content
                   div
                     hr
                     a.text-dark.font-weight-bold(href="/courses/" + course.slug): +translate("View course details")
-          a.z-1.btn.btn-lg.btn-secondary(href='/courses/', role='button', aria-pressed='true')
+          a.z-1.btn.btn-lg.btn-secondary.my-5(href='/courses/', role='button', aria-pressed='true')
             +translate("All")
             = " "
             +translate("Courses")

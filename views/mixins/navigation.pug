@@ -59,10 +59,9 @@ mixin navigation
             .contactlink(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
             .dropdown-menu.p-0.border-radius-0.shadow-sm(aria-labelledby='navbarDropdownMenuLink')
               a.dropdown-item.nav-link(href="/contact", class=currentPath == "/contact" ? "active" : "")=__("Campuses")
-          if locale === "en"
-            li.position-relative.nav-item
-              a.mx-0.mx-xl-3.mx-lg-2.nav-link.d-flex.align-items-center.h-100(href="/i18n/de") DE
-          else
-            li.position-relative.nav-item
-              a.mx-0.mx-xl-3.mx-lg-2.nav-link.d-flex.align-items-center.h-100(href="/i18n/en") EN
+
+          li.position-relative.nav-item.d-flex.align-items-center
+            a.ml-0.ml-xl-3.ml-lg-2.nav-link.d-flex.align-items-center.h-100(href="/i18n/de" class=locale === "de" ? "active" : "") DE
+            = "|"
+            a.mr-0.mr-xl-3.mr-lg-2.nav-link.d-flex.align-items-center.h-100(href="/i18n/en" class=locale === "en" ? "active" : "") EN
 
