@@ -34,8 +34,12 @@ router.get('*', function (req, res) {
   if (shouldRedirect) {
     return res.redirect(shouldRedirect.to)
   }
+  if (req.originalUrl.startsWith('/images') || req.headers['content-type'] === 'application/json') {
+    res.status(404).send('Not found');
+  } else {
   return res.render('404', {
     page: page
   })
+  }
 });
 module.exports = router

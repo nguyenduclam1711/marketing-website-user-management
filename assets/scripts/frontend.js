@@ -7,7 +7,6 @@ import "bootstrap/js/dist/carousel";
 import "bootstrap/js/dist/alert";
 import {alertTimeout} from "./helper.js"
 require("./polygons");
-require("./google-analytics");
 require("../css/style.scss");
 
 const toggleNL = (remove = false) => {
