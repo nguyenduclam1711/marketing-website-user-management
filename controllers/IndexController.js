@@ -407,10 +407,38 @@ module.exports.downloadCourseCurriculum = async (req, res, next) => {
 }
 module.exports.jobcenter = async (req, res) => {
   try {
-    res.render('jobcenter', {
+    let query = await getAvailableTranslations(req, res)
+    const storiesQuery = Story
+      .find({ ...query })
+      .sort('order')
+      .exec({})
+    const employeeQuery = Employee
+      .find({
+        ...query,
+      }).populate('locations')
+      .exec()
+    const locationsQuery = Location.find({})
+      .sort({ order: 1 })
+      .exec()
+    const partnersQuery = Partner.find({})
+      .sort('order')
+      .exec({})
+    const coursesQuery = Course
+      .find(query)
+      .sort({ order: 1 })
+      .exec()
+    indexData = await Promise.all([storiesQuery, locationsQuery, partnersQuery, coursesQuery, employeeQuery])
 
+    const [stories, locations, partners, courses, employees] = indexData;
+    res.render('jobcenter', {
+      stories,
+      locations,
+      partners,
+      courses,
+      employees
     })
   } catch (err) {
     console.log(err)
+    res.redirect(req.headers.referer)
   }
 }

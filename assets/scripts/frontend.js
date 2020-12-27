@@ -312,3 +312,17 @@ if (notFoundTimer) {
     }
   }, 1000);
 }
+
+const jobcenterSelect = document.querySelector('.jobcenter-location-select')
+if (jobcenterSelect) {
+  jobcenterSelect.addEventListener('change', (e) => {
+    document.getElementById('jobcenter_address').innerText = e.target.selectedOptions[0].dataset.address
+    Array.from(document.querySelectorAll('.jobcenter-location-employee')).map(j => {
+      if (!JSON.parse(j.dataset.location).includes(e.target.selectedOptions[0].innerText)) {
+        j.classList.add('hidden')
+      } else {
+        j.classList.remove('hidden')
+      }
+    })
+  })
+}

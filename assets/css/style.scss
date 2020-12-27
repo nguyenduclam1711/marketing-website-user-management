@@ -101,11 +101,14 @@ body:not(.admin).btn {
 .bg-secondary {
   background-color: $secondary !important;
 }
-.bg-primary-light {
+.bg-primary-trans {
   background-color: $primary-trans !important;
 }
 .text-primary-light {
   color: $primary-light !important;
+}
+.bg-primary-light {
+  background-color: $primary-light !important;
 }
 .bg-red-light {
   background-color: $red-light !important;
@@ -1099,6 +1102,9 @@ body:not(.admin) {
   transform: translateY(-10em);
 }
 .shift-bottom {
+  transform: translateY(50px);
+}
+.shift-bottom-percent {
   transform: translateY(50%);
 }
 .shift-vertical {
@@ -1724,4 +1730,43 @@ body[class*="pages-"] {
   @include media-breakpoint-up(md) {
     justify-content: start !important;
   }
+}
+
+.customselect {
+  position: relative;
+  overflow: hidden;
+  select {
+    width: calc(100% + 1em) !important;
+    display: grid !important;
+    grid-template-areas: "select" !important;
+    align-items: center !important;
+    position: relative !important;
+    max-width: calc(100% + 1em) !important;
+    border: 1px solid var(--select-border) !important;
+    border-radius: 0.25em !important;
+    padding: 0.25em 0.5em !important;
+    font-size: 1.25rem !important;
+    cursor: pointer !important;
+    line-height: 1.1 !important;
+    background-color: $primary-light !important;
+    border: 0 none !important;
+    color: white !important;
+    border-radius: 4px !important;
+  }
+  &:after {
+    content: "";
+    justify-self: end;
+    width: 0.8em;
+    height: 0.5em;
+    background-color: white;
+    -webkit-clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+.hidden {
+  display: none;
 }

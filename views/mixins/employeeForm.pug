@@ -31,6 +31,11 @@ mixin employeeForm
             input(type='checkbox', name='contact_user', value="on", checked=employee && !!employee.contact_user ? true : false, )
             span.checkmark
         .form-group
+          label.checkbox.text-muted
+            ="Show on Jobcenterpage?"
+            input(type='checkbox', name='feature_on_jobcenter', value="on", checked=employee && !!employee.feature_on_jobcenter ? true : false, )
+            span.checkmark
+        .form-group
           label(for='content') Content
           textarea.form-control#content(name='content', placeholder='Optional - Say something about that person' )=editPath ? employee.content : ""
         .form-group

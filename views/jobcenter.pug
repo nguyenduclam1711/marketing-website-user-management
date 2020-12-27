@@ -1,114 +1,159 @@
 extends layout.pug
 block content
-    .container
-        h1.my-5 Jobcenter
+  .container
+    .jumbotron.container.mb-0.px-3.bg-light.pb-0.bg-transparent.z-1.position-relative
+      .row
+        .col-md-6.order-12.order-md-1.py-5.pr-0.pr-sm-5
+          h1.pt-5=__("Financing")
+          p.mt-5.mb-5=__("You have found an exciting course, but don't know how to pay for it yet? No problem! We help you to find the right financing for you.")
+
+          a.btn.btn-lg.btn-secondary.mb-3(href='/contact', data-toggle='modal', data-target='#contactFormModal')=__("Contact us")
+        .col-md-6.order-1.order-md-12
+          .bg-primary.bg-panel.h-50.position-absolute.bottom
+          .px-lg-5.px-5.px-md-0.pb-5
+            img.w-100.px-5.px-md-0.pb-5.pb-md-0.shift-bottom(src="/media/jobcenter_header1.jpg", alt="People working at computer")
+            img.w-100.px-5.px-md-0.pb-5.pb-md-0.shift-right.mt-n5.ml-n5(src="/media/jobcenter_header2.jpg", alt="People working at computer")
+
+  .bg-light
+    if partners
+      - partnersWithTestimonialsShown = partners.filter(p => p.testimonial_show)
+      if partnersWithTestimonialsShown.length > 0
         .row
-            .col-md-5.text-center.order-md-12.mb-5.mb-5.mb-md-0
-                .px-5.mb-4.text-left
-                    .px-sm-5.px-md-0.px-lg-5.text-left.text-md-center
-                        .px-5.px-md-0
-                            img.w-100.w-150(src="/media/azav.png", alt="")
-                div.px-3
-                    h3="DCI - Digital Career Institute gGmbH"
-                div.px-5
-                    p.text-center=__("Approved Institution for the promotion of further vocational training according to the law on employment promotion.")
+          each partner, index in partnersWithTestimonialsShown.splice(0,6)
+            .col-md-4.col-6.text-center.my-4.d-flex.flex-column.justify-content-center.align-items-center
+              img.mw-150.object-fit-contain(alt=partner.title, src="/images/" + partner.partnerlogo)
 
-            .col-md-7
-                h5.mb-3.font-weight-bold=__("Courses")
-                div.mb-5
-                    div.mb-4.font-weight-bold=__("Orientation Course")
-                    div
-                        =__("Course ID")
-                        strong.font-weight-bold=`: 962/90/20`
+  .container
+    .row
+      .col-md-7
+        =__("Who we are")
+        p=__("The Ditial career purus sapien nec a felis malesuada eget rutrum volutpat torquent nisi mattis, conubia convallis porttitor ex metus adipiscing netus nibh sed. Eleifend porttitor duis class penatibus maximus eget natoque taciti, montes lectus mattis augue nec eros sapien blandit rhoncus, mauris egestas facilisis velit cursus pretium erat.")
+      .col-md-5.text-center.order-md-12.mb-5.mb-5.mb-md-0
+        .px-5.mb-4.text-left
+          .px-sm-5.px-md-0.px-lg-5.text-left.text-md-center
+            .px-5.px-md-0
+              img.w-100.w-150(src="/media/azav.png", alt="")
+  - ceo = employees.find(e => e.feature_on_jobcenter)
+  if ceo
+    .container.position-relative.mb-3.my-5
+      .row
+        .offset-md-4.col-md-8.pb-4.pt-5.d-flex.flex-column.justify-content-between.w-100.bg-light-blue.bg-panel.pl-md-0.order-12.order-md-1
+          .row
+            .col-md-10
+              .position-relative.px-5
+                blockquote.blockquote.mb-0
+                  p.text-muted=ceo.content
 
-                    div
-                        =__("Duration")
-                        = ": "
-                        =__("4 weeks full time (160 units)")
+                .text-right
+                  div.font-weight-bold=ceo.name
+                  span.font-weight-bold.text-muted= ceo.position
 
-                #accordionExample.accordion.mb-5
-                    .card.border-0
-                        #headingOne.card-header.shadow
-                            h5.mb-0
-                                button.btn.text-left.h-100.w-100.d-flex.justify-content-between.align-items-center(type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne")
-                                    | Notice
-                                    svg.p-1.w-1.h-1.d-flex.justify-content-center.align-items-center.mt-1
-                                        g
-                                            path(d="M2.75 0l-1.5 1.5L3.75 4l-2.5 2.5L2.75 8l4-4-4-4z")
-                        #collapseOne.collapse(aria-labelledby="headingOne" data-parent="#accordionExample")
-                            .card-body
-                                p=("This activation and placement measure in accordance with §45 (1) sentence 1 no. 2 SGB III is intended to provide an insight into the field of digital occupations. Here, the individual support and promotion of the participants as well as direct contact and dialogue with companies is decisive. In order to convey a transparent impression of the digital working world, the focus is on various unusual excursions to regional IT companies, among other things. This is intended to increase the personal commitment and performance aspirations of the participants. The practical and theoretical mediation units are realised by various teachers and lecturers from regional IT companies. If necessary, they receive support from an interpreter (Arabic and Farsi) to break down language barriers. Our analysis of the participants works out their potential so that an individual self-marketing and application strategy can be designed based on their personality profile.")
+            .col-md-2.d-flex.flex-column.justify-content-end
+              a.text-dark.stretched-link(href=`/stories/${ceo.slug}`)
+                .mw-150.ml-auto
+                  +storyImages(ceo, 'col')
+
+  if courses
+    .container
+      h2=__('Our courses')
+      p=__("We offer Purus sapien nec a felis malesuada eget rutrum volutpat torquent nisi mattis, conubia convallis porttitor ex metus adipiscing netus nibh sed. Eleifend porttitor duis")
+      .row
+        each course in courses
+          .col-md-4
+            .p-5(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )
+              h5=course.headline
+              .my-3
+                strong.font-weight-bold.mr-2=__("Duration")+":"
+                span.padded-text()= course.courselength
+              .my-3
+                strong.font-weight-bold.mr-2=__("Number")+":"
+                span.padded-text()= course.massnahmeNumber
+              .my-3
+                strong.font-weight-bold.mr-2=__("Starts every")+":"
+                span.padded-text()= course.startInterval
+              .my-3
+                strong.font-weight-bold.mr-2=__("Language")+":"
+                span.padded-text()= course.courseLanguages
+
+  .container
+    =__("Find your contact person") 
+    =__("Select location")
+    .row
+      .col-md-3
+        .customselect
+
+          select(class="jobcenter-location-select")
+            each location in locations.filter(l => l.isCampus)
+              option(data-address=`${location.street}, ${location.zip} ${location.name}`)=location.name
+          
+        
+        .p-5.d-flex.justify-content-center.flex-column.align-items-center.text-center
+          .w-5.h-5.text-muted.mb-4
+            include ../assets/icons/jobcenter_location.svg
+          - firstLocation = locations.filter(l => l.isCampus)[0]
+          #jobcenter_address=`${firstLocation.street}, ${firstLocation.zip} ${firstLocation.name}`
+      .col-md-7
+        each employee in employees.filter(e => !e.feature_on_jobcenter)
+          .row.jobcenter-location-employee(class=!employee.locations.map(l => l.name.toLowerCase()).includes(locations.filter(l => l.isCampus)[0].name.toLowerCase()) ? "hidden": "", data-location=employee.locations.map(l => l.name))
+            .col-md-4
+              .px-3.pt-3
+                img.blue-shadow.object-fit-cover.img-fluid.rounded-circle.square(alt=employee.name src="/media/pixel.gif" style="background-image: url('/images/"+employee.avatar+"')")
+            .col-md-8
+              h6.font-weight-bold.mt-3=employee.name
+              if employee.position
+                .position-relative.z-1
+                  p.text-muted.mb-1=employee.position
+
+  .container
+    =__("Our all inclusive service") 
+    =__("In 4 steps to socialinsuranced employment")
+    .row.px-md-5.my-5
+      .col-md-6.mb-3.px-2
+        .border.h-100.d-flex.flex-column.justify-content-between
+          .px-5.pt-5
+            .d-flex.justify-content-center.align-items-center.flex-column.mb-4
+              .w-5.h-5
+                include ../assets/icons/jobcenter_location.svg
+            h5.font-weight-bold=__("MAT")
+            p.mb-4=__("Testing center digital professions in online live distance learning (remote learning).")
+          .d-flex.justify-content-end
+            .bg-primary-light.text-white.w-5.h-5.d-flex.justify-content-center.align-items-center
+              h3.mb-0="01"
+      .col-md-6.mb-3.px-2
+        .border.h-100.d-flex.flex-column.justify-content-between
+          .px-5.pt-5
+            .d-flex.justify-content-center.align-items-center.flex-column.mb-4
+              .w-5.h-5
+                include ../assets/icons/jobcenter_location.svg
+            h5.font-weight-bold=__("FbW")
+            p.mb-4=__("Further education to become an online marketing specialist or web and software developer incl. language courses.")
+          .d-flex.justify-content-start
+            .bg-primary-light.text-white.w-5.h-5.d-flex.justify-content-center.align-items-center
+              h3.mb-0="02"
+      .col-md-6.mb-3.px-2
+        .border.h-100.d-flex.flex-column.justify-content-between
+          .d-flex.justify-content-end
+            .bg-primary-light.text-white.w-5.h-5.d-flex.justify-content-center.align-items-center
+              h3.mb-0="03"
+          .px-5.pt-5
+            .d-flex.justify-content-center.align-items-center.flex-column.mb-4
+              .w-5.h-5
+                include ../assets/icons/jobcenter_location.svg
+            h5.font-weight-bold=__("Applicationphase")
+            p.mb-4=__("Career training and consulting in the DCI. Access to the wide network of companies and partners.")
+      .col-md-6.mb-3.px-2
+        .border.h-100.d-flex.flex-column.justify-content-between
+          .d-flex.justify-content-start
+            .bg-primary-light.text-white.w-5.h-5.d-flex.justify-content-center.align-items-center
+              h3.mb-0="04"
+          .px-5.pt-5
+            .d-flex.justify-content-center.align-items-center.flex-column.mb-4
+              .w-5.h-5
+                include ../assets/icons/jobcenter_location.svg
+            h5.font-weight-bold=__("Inclusion")
+            p.mb-4=__("Placement in an employment employment subject to social insurance.")
 
 
-                div.mb-5
-                    div.mb-4.font-weight-bold=__("Further training as a web developer")
-                    div
-                        =__("Course ID") + ": "
-                        strong.font-weight-bold= "962/445/2020"
-
-                    div
-                        =__("Duration")
-                        = ": "
-                        =__("12 months training + 2 months internship")
-                #accordionExample.accordion.mb-5
-                    .card.border-0
-                        #headingTwo.card-header.shadow
-                            h5.mb-0
-                                button.btn.text-left.h-100.w-100.d-flex.justify-content-between.align-items-center(type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseOne")
-                                    | Notice
-                                    svg.p-1.w-1.h-1.d-flex.justify-content-center.align-items-center.mt-1
-                                        g
-                                            path(d="M2.75 0l-1.5 1.5L3.75 4l-2.5 2.5L2.75 8l4-4-4-4z")
-                        #collapseTwo.collapse(aria-labelledby="headingTwo" data-parent="#accordionExample")
-                            .card-body
-                                p=("The web development course is aimed at all successful graduates of the orientation course as well as people with basic knowledge of digital technologies. Our founders themselves come from the startup and digital scene and have developed a course with our lecturers that provides practical programming skills that are in high demand on the job market. The course provides you with comprehensive know-how about software development (programs/apps) with web technologies.")
-
-                div.mb-5
-                    div.mb-4.font-weight-bold=__("Further training as online marketer")
-
-                    div
-                        =__("Course ID") + ": "
-                        strong.font-weight-bold= "962/403/2020"
-
-
-                    div
-                        =__("Duration")
-                        = ": "
-                        =__("14 months training + 2 months internship")
-                #accordionExample.accordion.mb-5
-                    .card.border-0
-                        #headingThree.card-header.shadow
-                            h5.mb-0
-                                button.btn.text-left.h-100.w-100.d-flex.justify-content-between.align-items-center(type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseOne")
-                                    | Notice
-                                    svg.p-1.w-1.h-1.d-flex.justify-content-center.align-items-center.mt-1
-                                        g
-                                            path(d="M2.75 0l-1.5 1.5L3.75 4l-2.5 2.5L2.75 8l4-4-4-4z")
-                        #collapseThree.collapse(aria-labelledby="headingThree" data-parent="#accordionExample")
-                            .card-body
-                                p=("All participants who have successfully completed the orientation course and people who are confident in using digital technologies also qualify for the online marketing course. With our course we train you to become a creative online marketer, who can develop and implement versatile marketing campaigns. Our course contaings SEM, SEO, Email Marketing, Display Marketing, Affiliate Marketing, PR, Social Media Marketing and Google Analytics.")
-                .pt-md-5
-                .pt-5
-                    h3=__("Legal")
-                    .font-weight-bold.my-4=__("DCI - Digital Career Institute gGmbH")
-                    div
-                        ="Address: "
-                        strong.font-weight-bold=__("Grünberger Str. 54, 10245 Berlin Phone: +4930 - 364286190")
-                    div.mb-3
-                        ="Email: "
-                        strong.font-weight-bold=__("info@digitalcareerinstitute.org")
-                    div
-                        ="Managing Director: "
-                        strong.font-weight-bold=__("Marius Hein")
-                    div
-                        ="Registration: "
-                        strong.font-weight-bold=__("Local Court Berlin Charlottenburg HRB 177854 Banking Institute Deutsche Bank")
-                    div
-                        ="IBAN: "
-                        strong.font-weight-bold=__("EN88 8607 0024 0314 9507 00")
-                    div
-                        ="SWIFT-BIC: "
-                        strong.font-weight-bold=__("DEUTDEDBLEG")
 
 
 
@@ -121,5 +166,127 @@ block content
 
 
 
-    .pb-200
-    .pb-200
+
+  h1.my-5 Jobcenter
+  .container
+    .row
+      .col-md-5.text-center.order-md-12.mb-5.mb-5.mb-md-0
+        .px-5.mb-4.text-left
+          .px-sm-5.px-md-0.px-lg-5.text-left.text-md-center
+            .px-5.px-md-0
+              img.w-100.w-150(src="/media/azav.png", alt="")
+        div.px-3
+          h3="DCI - Digital Career Institute gGmbH"
+        div.px-5
+          p.text-center=__("Approved Institution for the promotion of further vocational training according to the law on employment promotion.")
+
+      .col-md-7
+        h5.mb-3.font-weight-bold=__("Courses")
+        div.mb-5
+          div.mb-4.font-weight-bold=__("Orientation Course")
+          div
+            =__("Course ID")
+            strong.font-weight-bold=`: 962/90/20`
+
+          div
+            =__("Duration")
+            = ": "
+            =__("4 weeks full time (160 units)")
+
+        #accordionExample.accordion.mb-5
+          .card.border-0
+            #headingOne.card-header.shadow
+              h5.mb-0
+                button.btn.text-left.h-100.w-100.d-flex.justify-content-between.align-items-center(type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne")
+                  | Notice
+                  svg.p-1.w-1.h-1.d-flex.justify-content-center.align-items-center.mt-1
+                    g
+                      path(d="M2.75 0l-1.5 1.5L3.75 4l-2.5 2.5L2.75 8l4-4-4-4z")
+            #collapseOne.collapse(aria-labelledby="headingOne" data-parent="#accordionExample")
+              .card-body
+                p=("This activation and placement measure in accordance with §45 (1) sentence 1 no. 2 SGB III is intended to provide an insight into the field of digital occupations. Here, the individual support and promotion of the participants as well as direct contact and dialogue with companies is decisive. In order to convey a transparent impression of the digital working world, the focus is on various unusual excursions to regional IT companies, among other things. This is intended to increase the personal commitment and performance aspirations of the participants. The practical and theoretical mediation units are realised by various teachers and lecturers from regional IT companies. If necessary, they receive support from an interpreter (Arabic and Farsi) to break down language barriers. Our analysis of the participants works out their potential so that an individual self-marketing and application strategy can be designed based on their personality profile.")
+
+
+        div.mb-5
+          div.mb-4.font-weight-bold=__("Further training as a web developer")
+          div
+            =__("Course ID") + ": "
+            strong.font-weight-bold= "962/445/2020"
+
+          div
+            =__("Duration")
+            = ": "
+            =__("12 months training + 2 months internship")
+        #accordionExample.accordion.mb-5
+          .card.border-0
+            #headingTwo.card-header.shadow
+              h5.mb-0
+                button.btn.text-left.h-100.w-100.d-flex.justify-content-between.align-items-center(type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseOne")
+                  | Notice
+                  svg.p-1.w-1.h-1.d-flex.justify-content-center.align-items-center.mt-1
+                    g
+                      path(d="M2.75 0l-1.5 1.5L3.75 4l-2.5 2.5L2.75 8l4-4-4-4z")
+            #collapseTwo.collapse(aria-labelledby="headingTwo" data-parent="#accordionExample")
+              .card-body
+                p=("The web development course is aimed at all successful graduates of the orientation course as well as people with basic knowledge of digital technologies. Our founders themselves come from the startup and digital scene and have developed a course with our lecturers that provides practical programming skills that are in high demand on the job market. The course provides you with comprehensive know-how about software development (programs/apps) with web technologies.")
+
+        div.mb-5
+          div.mb-4.font-weight-bold=__("Further training as online marketer")
+
+          div
+            =__("Course ID") + ": "
+            strong.font-weight-bold= "962/403/2020"
+
+
+          div
+            =__("Duration")
+            = ": "
+            =__("14 months training + 2 months internship")
+        #accordionExample.accordion.mb-5
+          .card.border-0
+            #headingThree.card-header.shadow
+              h5.mb-0
+                button.btn.text-left.h-100.w-100.d-flex.justify-content-between.align-items-center(type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseOne")
+                  | Notice
+                  svg.p-1.w-1.h-1.d-flex.justify-content-center.align-items-center.mt-1
+                    g
+                      path(d="M2.75 0l-1.5 1.5L3.75 4l-2.5 2.5L2.75 8l4-4-4-4z")
+            #collapseThree.collapse(aria-labelledby="headingThree" data-parent="#accordionExample")
+              .card-body
+                p=("All participants who have successfully completed the orientation course and people who are confident in using digital technologies also qualify for the online marketing course. With our course we train you to become a creative online marketer, who can develop and implement versatile marketing campaigns. Our course contaings SEM, SEO, Email Marketing, Display Marketing, Affiliate Marketing, PR, Social Media Marketing and Google Analytics.")
+        .pt-md-5
+        .pt-5
+          h3=__("Legal")
+          .font-weight-bold.my-4=__("DCI - Digital Career Institute gGmbH")
+          div
+            ="Address: "
+            strong.font-weight-bold=__("Grünberger Str. 54, 10245 Berlin Phone: +4930 - 364286190")
+          div.mb-3
+            ="Email: "
+            strong.font-weight-bold=__("info@digitalcareerinstitute.org")
+          div
+            ="Managing Director: "
+            strong.font-weight-bold=__("Marius Hein")
+          div
+            ="Registration: "
+            strong.font-weight-bold=__("Local Court Berlin Charlottenburg HRB 177854 Banking Institute Deutsche Bank")
+          div
+            ="IBAN: "
+            strong.font-weight-bold=__("EN88 8607 0024 0314 9507 00")
+          div
+            ="SWIFT-BIC: "
+            strong.font-weight-bold=__("DEUTDEDBLEG")
+
+
+
+
+
+
+
+
+
+
+
+
+  .pb-200
+  .pb-200

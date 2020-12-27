@@ -39,6 +39,11 @@ var EmployeeSchema = new Schema({
     type: Number,
     default: 99
   },
+  feature_on_jobcenter: {
+    type: Boolean,
+    index: true,
+    unique: true
+  },
 });
 EmployeeSchema.pre("save", function preSave(next) {
   const employee = this;
