@@ -1,5 +1,6 @@
 mixin newsletter
-  #newsletter.container.px-md-5
+  #newsletter.container.px-md-5.overflow-hidden
+    .position-absolute.bg-panel.bg-primary.left.bottom.top.shift-left-percent-skew.w-100.d-none.d-lg-block
     .px-md-5
       .bg-section.box-shadow.p-5
         .p-2
@@ -7,11 +8,11 @@ mixin newsletter
             .col-lg-5.pr-0
               h3#nlheadline.font-weight-bold.text-dark=__("Stay up to date on the latest")
               p.text-dark.mb-5=__("Get the latest news on events, project presentations and more")
-            .col-lg-7
-              .w-100.pl-sm-4
+            .col-lg-7.d-flex.flex-column.justify-content-end
+              .ml-lg-5.w-100.pl-lg-5
                 form#mc-embedded-subscribe-form(name='mc-embedded-subscribe-form', method='post', action='/newsletter-signup')
                   div.mb-3
-                    label(for='newsletter_email')=__("Email")
-                    input#newsletter_email.subs_input(type='email', required, name='email')
+                    label.text-lg-white(for='newsletter_email')=__("Email")
+                    input#newsletter_email.subs_input.text-lg-white.border-bottom.border-white(type='email', required, name='email')
                   button.float-right#nlbtn.btn.btn-outline-primary(type="submit")
                     span=__("Subscribe")

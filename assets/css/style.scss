@@ -724,8 +724,8 @@ body:not(.admin) {
     box-sizing: border-box;
     height: 42px;
     border-radius: 0 !important;
-    border: none !important;
-    border-bottom: 1px solid lighten($dark, 10) !important;
+    border: none;
+    border-bottom: 1px solid lighten($dark, 10);
 
     &:focus,
     &:focus-within,
@@ -1098,6 +1098,9 @@ body:not(.admin) {
 
 .shift-left-percent {
   transform: translateX(50%);
+}
+.shift-left-percent-skew {
+  transform: translateX(50%) skewX(-30deg);
 }
 .shift-left {
   transform: translateX(50px);
@@ -1673,7 +1676,12 @@ body[class*="pages-"] {
 }
 .text-md-white {
   @include media-breakpoint-up(md) {
-    color: white;
+    color: white !important;
+  }
+}
+.text-lg-white {
+  @include media-breakpoint-up(lg) {
+    color: white !important;
   }
 }
 .bg-md-white {

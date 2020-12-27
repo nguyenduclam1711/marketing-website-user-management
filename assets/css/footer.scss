@@ -41,6 +41,18 @@ footer.site-footer {
   #newsletter{
     margin-bottom: -100px;
     transform: translateY(-200px);
+    @include media-breakpoint-up(lg) {
+      input#newsletter_email {
+        &:hover,
+        &:active,
+        &:focus {
+          background-color: $primary-light;
+        }
+      }
+      button[type="submit"] {
+        @include btn-color($primary, white, white);
+      }
+    }
   }
   .triangle {
     width: 0;
