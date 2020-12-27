@@ -549,6 +549,16 @@ body[class*="pages-"] {
   &.right:after {
     right: 0;
   }
+  &.left {
+    @include media-breakpoint-down(sm) {
+      left: -50%;
+     }
+  }
+  &.top {
+    @include media-breakpoint-down(sm) {
+      top: 50%;
+     }
+  }
   &:after {
     background-color: inherit;
     content: "";
