@@ -233,17 +233,19 @@ $("#downloadCSV").on("click", function (e) {
     })
     .catch(error => console.log("error ===>", error));
 });
-
+$("#curriculumpopup").on('show.bs.modal', function (e) {
+  e.target.querySelector('form').dataset.course = e.relatedTarget.dataset.course
+});
 Array.from(document.querySelectorAll(".ajaxform")).map(form => {
   form.addEventListener('submit', (e) => {
     e.preventDefault()
     e.target.querySelector('button').disabled = true;
     e.target.querySelector('#contactform_text').classList.add("d-none")
     e.target.querySelector('#contactform_spinner').classList.remove("d-none")
-    const payload = Array.from(e.target.elements)
+    let payload = Array.from(e.target.elements)
       .filter(i => i.type !== "submit")
       .reduce((acc, el) => ({ ...acc, [el.name]: el.type === "checkbox" ? el.checked : el.name === "jobcenter" ? !!Number(el.value) : el.value }), {})
-
+    payload = { ...payload, course: e.target.dataset.course }
     fetch(e.target.action, {
       method: "POST",
       headers: {

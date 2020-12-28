@@ -310,7 +310,7 @@ module.exports.newsletter = (req, res) => {
 }
 module.exports.downloadCourseCurriculum = async (req, res, next) => {
   try {
-    const { email, age, TermsofService } = req.body
+    const { email, age, TermsofService, course: requestedCourse } = req.body
     if (age) {
       console.log('Bot stepped into honeypot!')
       req.flash(
@@ -334,7 +334,7 @@ module.exports.downloadCourseCurriculum = async (req, res, next) => {
       return;
     }
     const course = await Course
-      .findOne({ slug: req.headers.referer.match(/\/([^/]*)$/)[1] })
+      .findOne({ slug: requestedCourse })
       .exec()
     const contact = new Contact()
     contact.email = email

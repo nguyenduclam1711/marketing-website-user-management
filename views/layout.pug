@@ -175,7 +175,7 @@ html.h-100(lang='en')
       .modal#dataPrivacy
         +dataPrivacy
     
-    if course && course.curriculumPdf
+    if (course && course.curriculumPdf) || currentPath === '/jobcenter'
       +curriculumForm
 
     if currentPath && !currentPath.includes('admin') && !currentPath.includes('users')

@@ -78,7 +78,7 @@ block content
                 span.padded-text()= course.startInterval
               .my-3
                 strong.font-weight-bold.mr-2=__("Language")+":"
-                span.padded-text()= course.courseLanguages
+                a.text-dark(href='#' data-toggle='modal', data-target=`#curriculumpopup` data-course=`${course.slug}`) 
   .d-flex.justify-content-end
     .w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
       .rotate-135
