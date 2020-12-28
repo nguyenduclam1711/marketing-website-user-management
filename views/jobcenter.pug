@@ -4,8 +4,8 @@ block content
     .jumbotron.container.mb-0.px-3.bg-light.pb-0.bg-transparent.z-1.position-relative.overflow-hidden
       .row
         .col-md-6.order-12.order-md-1.py-5.pr-0.pr-sm-5
-          h1.pt-5=__("Financing")
-          p.mt-5.mb-5=__("You have found an exciting course, but don't know how to pay for it yet? No problem! We help you to find the right financing for you.")
+          h1.pt-5=__("Digital Careers Begin at the DCI.")
+          p.mt-5.mb-5=__("Certified and practical training. Language courses. Career service.  Our all-round service for your customer.")
 
           a.btn.btn-lg.btn-secondary.mb-3(href='/contact', data-toggle='modal', data-target='#contactFormModal')=__("Contact us")
         .col-md-6.order-1.order-md-12
@@ -26,7 +26,7 @@ block content
               .col-md-3.col-4.text-center.my-4.d-flex.flex-column.justify-content-center.align-items-center
                 img.mw-150.object-fit-contain.partners-logo(alt=partner.title, src="/images/" + partner.partnerlogo)
 
-  .w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
+  .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
     include ../assets/icons/cross.svg
   .container
     .row
@@ -57,10 +57,10 @@ block content
               a.text-dark.stretched-link(href=`/stories/${ceo.slug}`)
                 .mw-150.ml-auto
                   +storyImages(ceo, 'col')
-  .w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
+  .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
     include ../assets/icons/arrow.svg
   if courses
-    .container
+    .container.mb-5
       .row
         .col-md-6.mb-5
           h2.mb-3=__('Our courses')
@@ -91,18 +91,17 @@ block content
                     =__("Download complete course curriculum")
                     .w-4.h-4
                       include ../assets/icons/download.svg
-
+  .pb-5
   .d-flex.justify-content-end
-    .w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
+    .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
       .rotate-135
         include ../assets/icons/arrow.svg
   .container
     h2.mb-3=__("Find your contact person") 
-    =__("Select location")
+    .mb-3=__("Select location")
     .row
-      .col-md-3
-        .customselect
-
+      .col-md-5
+        .customselect.mr-5
           select(class="jobcenter-location-select")
             each location in locations.filter(l => l.isCampus)
               option(data-address=`${location.street}, ${location.zip} ${location.name}`)=location.name
@@ -124,56 +123,60 @@ block content
               if employee.position
                 .position-relative.z-1
                   p.text-muted.mb-1=employee.position
-  .w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
+              if employee.position
+                .position-relative.z-1
+                  p.text-muted.mb-1=employee.position
+  .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
     include ../assets/icons/rectangle.svg
   .container
     h2.mb-3=__("Our all inclusive service") 
     =__("In 4 steps to socialinsuranced employment")
-    .row.px-md-5.my-5
-      .col-md-6.mb-3.px-2
-        .border.h-100.d-flex.flex-column.justify-content-between
-          .px-5.pt-5
-            .d-flex.justify-content-center.align-items-center.flex-column.mb-4
-              .w-5.h-5
-                include ../assets/icons/jobcenter_location.svg
-            h5.font-weight-bold=__("MAT")
-            p.mb-4=__("Testing center digital professions in online live distance learning (remote learning).")
-          .d-flex.justify-content-end
-            .bg-primary-light.text-white.w-5.h-5.d-flex.justify-content-center.align-items-center
-              h3.mb-0="01"
-      .col-md-6.mb-3.px-2
-        .border.h-100.d-flex.flex-column.justify-content-between
-          .px-5.pt-5
-            .d-flex.justify-content-center.align-items-center.flex-column.mb-4
-              .w-5.h-5
-                include ../assets/icons/jobcenter_location.svg
-            h5.font-weight-bold=__("FbW")
-            p.mb-4=__("Further education to become an online marketing specialist or web and software developer incl. language courses.")
-          .d-flex.justify-content-start
-            .bg-primary-light.text-white.w-5.h-5.d-flex.justify-content-center.align-items-center
-              h3.mb-0="02"
-      .col-md-6.mb-3.px-2
-        .border.h-100.d-flex.flex-column.justify-content-between
-          .d-flex.justify-content-end
-            .bg-primary-light.text-white.w-5.h-5.d-flex.justify-content-center.align-items-center
-              h3.mb-0="03"
-          .px-5.pt-5
-            .d-flex.justify-content-center.align-items-center.flex-column.mb-4
-              .w-5.h-5
-                include ../assets/icons/jobcenter_location.svg
-            h5.font-weight-bold=__("Applicationphase")
-            p.mb-4=__("Career training and consulting in the DCI. Access to the wide network of companies and partners.")
-      .col-md-6.mb-3.px-2
-        .border.h-100.d-flex.flex-column.justify-content-between
-          .d-flex.justify-content-start
-            .bg-primary-light.text-white.w-5.h-5.d-flex.justify-content-center.align-items-center
-              h3.mb-0="04"
-          .px-5.pt-5
-            .d-flex.justify-content-center.align-items-center.flex-column.mb-4
-              .w-5.h-5
-                include ../assets/icons/jobcenter_location.svg
-            h5.font-weight-bold=__("Inclusion")
-            p.mb-4=__("Placement in an employment employment subject to social insurance.")
+    .mx-5
+      .row.px-md-5.my-5
+        .col-md-6.mb-3.px-2
+          .border.h-100.d-flex.flex-column.justify-content-between
+            .px-5.pt-5
+              .d-flex.justify-content-center.align-items-center.flex-column.mb-4
+                .w-13.h-9
+                  include ../assets/icons/jobcenter_online_lesson.svg
+              h5.font-weight-bold=__("MAT")
+              p.mb-4=__("Testing center digital professions in online live distance learning (remote learning).")
+            .d-flex.justify-content-end
+              .bg-primary-light.text-white.w-5.h-5.d-flex.justify-content-center.align-items-center
+                h3.mb-0="01"
+        .col-md-6.mb-3.px-2
+          .border.h-100.d-flex.flex-column.justify-content-between
+            .px-5.pt-5
+              .d-flex.justify-content-center.align-items-center.flex-column.mb-4
+                .w-13.h-9
+                  include ../assets/icons/jobcenter_web_developer.svg
+              h5.font-weight-bold=__("FbW")
+              p.mb-4=__("Further education to become an online marketing specialist or web and software developer incl. language courses.")
+            .d-flex.justify-content-start
+              .bg-primary-light.text-white.w-5.h-5.d-flex.justify-content-center.align-items-center
+                h3.mb-0="02"
+        .col-md-6.mb-3.px-2
+          .border.h-100.d-flex.flex-column.justify-content-between
+            .d-flex.justify-content-end
+              .bg-primary-light.text-white.w-5.h-5.d-flex.justify-content-center.align-items-center
+                h3.mb-0="03"
+            .px-5.pt-5
+              .d-flex.justify-content-center.align-items-center.flex-column.mb-4
+                .w-13.h-9
+                  include ../assets/icons/jobcenter_job_interview.svg
+              h5.font-weight-bold=__("Applicationphase")
+              p.mb-4=__("Career training and consulting in the DCI. Access to the wide network of companies and partners.")
+        .col-md-6.mb-3.px-2
+          .border.h-100.d-flex.flex-column.justify-content-between
+            .d-flex.justify-content-start
+              .bg-primary-light.text-white.w-5.h-5.d-flex.justify-content-center.align-items-center
+                h3.mb-0="04"
+            .px-5.pt-5
+              .d-flex.justify-content-center.align-items-center.flex-column.mb-4
+                .w-13.h-9
+                  include ../assets/icons/jobcenter_handshake.svg
+              h5.font-weight-bold=__("Inclusion")
+              p.mb-4=__("Placement in an employment employment subject to social insurance.")
 
 
 
@@ -197,7 +200,7 @@ block content
                   =__("Sustainable")
             p.mb-5=__("Job profiles of our graduates include: Programmer, IT Consultant, Web Designer, Online Marketing Manager, Social Media Manager and many more.")
 
-  .w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
+  .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
     include ../assets/icons/circle.svg
   if stories
     - storysWithTestimonial = stories

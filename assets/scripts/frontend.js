@@ -76,6 +76,18 @@ const countUp = () => {
     });
   }
 };
+const animateMarker = () => {
+  console.log("yay");
+  const markers = document.querySelectorAll(".marker");
+  markers.forEach(marker => {
+    if (elementInViewport(marker)) {
+      console.log('marker', marker);
+      marker.classList.add('animated')
+    } else {
+      marker.classList.remove('animated')
+    }
+  })
+}
 const scrollbuttons = document.getElementsByClassName("scrollbutton");
 for (let i = 0, len = scrollbuttons.length; i < len; i++) {
   scrollbuttons[i].addEventListener("click", function (event) {
@@ -145,6 +157,7 @@ function elementInViewport(el) {
 window.onscroll = throttle(function () {
   showFloatings();
   countUp();
+  animateMarker()
 }, 50);
 
 $("#contactFormModal").on("shown.bs.modal", function (e) {

@@ -1765,7 +1765,7 @@ body[class*="pages-"] {
     max-width: calc(100% + 1em) !important;
     border: 1px solid var(--select-border) !important;
     border-radius: 0.25em !important;
-    padding: 0.25em 0.5em !important;
+    padding: 0.85em 1.5em !important;
     font-size: 1.25rem !important;
     cursor: pointer !important;
     line-height: 1.1 !important;
@@ -1773,6 +1773,7 @@ body[class*="pages-"] {
     border: 0 none !important;
     color: white !important;
     border-radius: 4px !important;
+    height: auto !important;
   }
   &:after {
     content: "";
@@ -1783,7 +1784,7 @@ body[class*="pages-"] {
     -webkit-clip-path: polygon(100% 0%, 0 0%, 50% 100%);
     clip-path: polygon(100% 0%, 0 0%, 50% 100%);
     position: absolute;
-    right: 0;
+    right: 10px;
     top: 50%;
     transform: translate(-50%, -50%);
   }
