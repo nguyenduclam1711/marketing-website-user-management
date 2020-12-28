@@ -1,7 +1,7 @@
 extends layout.pug
 block content
   .container
-    .jumbotron.container.mb-0.px-3.bg-light.pb-0.bg-transparent.z-1.position-relative
+    .jumbotron.container.mb-0.px-3.bg-light.pb-0.bg-transparent.z-1.position-relative.overflow-hidden
       .row
         .col-md-6.order-12.order-md-1.py-5.pr-0.pr-sm-5
           h1.pt-5=__("Financing")
@@ -14,15 +14,19 @@ block content
             img.w-100.px-5.px-md-0.pb-5.pb-md-0.shift-bottom(src="/media/jobcenter_header1.jpg", alt="People working at computer")
             img.w-100.px-5.px-md-0.pb-5.pb-md-0.shift-right.mt-n5.ml-n5(src="/media/jobcenter_header2.jpg", alt="People working at computer")
 
-  .bg-light
+  .bg-light.container-fluid.text-center
     if partners
-      - partnersWithTestimonialsShown = partners.filter(p => p.testimonial_show)
+      - partnersWithTestimonialsShown = partners
       if partnersWithTestimonialsShown.length > 0
+        p.py-3.font-weight-bold=__("Our Partners")
         .row
-          each partner, index in partnersWithTestimonialsShown.splice(0,6)
+          each partner, index in partnersWithTestimonialsShown
+            //- .splice(0,6)
             .col-md-4.col-6.text-center.my-4.d-flex.flex-column.justify-content-center.align-items-center
-              img.mw-150.object-fit-contain(alt=partner.title, src="/images/" + partner.partnerlogo)
+              img.mw-150.object-fit-contain.partners-logo(alt=partner.title, src="/images/" + partner.partnerlogo)
 
+  .w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
+    include ../assets/icons/cross.svg
   .container
     .row
       .col-md-7
@@ -36,7 +40,7 @@ block content
   - ceo = employees.find(e => e.feature_on_jobcenter)
   if ceo
     .container.position-relative.mb-3.my-5
-      .row
+      .row.overflow-hidden
         .offset-md-4.col-md-8.pb-4.pt-5.d-flex.flex-column.justify-content-between.w-100.bg-light-blue.bg-panel.pl-md-0.order-12.order-md-1
           .row
             .col-md-10
@@ -52,7 +56,8 @@ block content
               a.text-dark.stretched-link(href=`/stories/${ceo.slug}`)
                 .mw-150.ml-auto
                   +storyImages(ceo, 'col')
-
+  .w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
+    include ../assets/icons/arrow.svg
   if courses
     .container
       h2=__('Our courses')
@@ -74,7 +79,10 @@ block content
               .my-3
                 strong.font-weight-bold.mr-2=__("Language")+":"
                 span.padded-text()= course.courseLanguages
-
+  .d-flex.justify-content-end
+    .w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
+      .rotate-135
+        include ../assets/icons/arrow.svg
   .container
     =__("Find your contact person") 
     =__("Select location")
@@ -103,7 +111,8 @@ block content
               if employee.position
                 .position-relative.z-1
                   p.text-muted.mb-1=employee.position
-
+  .w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
+    include ../assets/icons/rectangle.svg
   .container
     =__("Our all inclusive service") 
     =__("In 4 steps to socialinsuranced employment")
@@ -156,7 +165,7 @@ block content
 
 
 
-  .bg-light.position-relative
+  .bg-light.position-relative.overflow-hidden
     .container
       .position-absolute.bg-panel.bg-primary.left.bottom.top.shift-left-percent.w-100
       .row
@@ -175,7 +184,8 @@ block content
                   =__("Sustainable")
             p.mb-5=__("Job profiles of our graduates include: Programmer, IT Consultant, Web Designer, Online Marketing Manager, Social Media Manager and many more.")
 
-
+  .w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
+    include ../assets/icons/circle.svg
   if stories
     - storysWithTestimonial = stories
     if storysWithTestimonial.length > 0

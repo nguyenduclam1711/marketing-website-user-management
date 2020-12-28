@@ -1142,6 +1142,9 @@ body:not(.admin) {
 .rotate-180 {
   transform: rotate(180deg);
 }
+.rotate-135 {
+  transform: rotate(135deg);
+}
 
 .shift-up-container {
   height: -50%;
