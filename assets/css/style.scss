@@ -1108,6 +1108,14 @@ body:not(.admin) {
 .shift-right {
   transform: translateX(-50px);
 }
+.shift-right-percent {
+  transform: translateX(-50%);
+}
+.shift-md-right-percent {
+  @include media-breakpoint-up(md) {
+    transform: translateX(-50%);
+  }
+}
 .shift-top {
   transform: translateY(-50%);
 }
@@ -1119,6 +1127,11 @@ body:not(.admin) {
 }
 .shift-bottom-percent {
   transform: translateY(50%);
+}
+.shift-md-reset {
+  @include media-breakpoint-up(md) {
+    transform: translate(0, 0) !important;
+  }
 }
 .shift-vertical {
   transform: translate(50%, -50%);
@@ -1187,6 +1200,9 @@ div[class*=" #{$class-slug}"] {
   .w-#{ $i } {
     width: 1em * $i!important;
   }
+}
+.w-300 {
+  width: 300%;
 }
 
 @include media-breakpoint-up(sm) {

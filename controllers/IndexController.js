@@ -423,13 +423,19 @@ module.exports.jobcenter = async (req, res) => {
     const partnersQuery = Partner.find({ ...query })
       .sort('order')
       .exec({})
+
     const coursesQuery = Course
       .find(query)
       .sort({ order: 1 })
       .exec()
     indexData = await Promise.all([storiesQuery, locationsQuery, partnersQuery, coursesQuery, employeeQuery])
 
-    const [stories, locations, partners, courses, employees] = indexData;
+    let [stories, locations, partners, courses, employees] = indexData;
+    partners.map(b => {
+      var random = Math.floor(Math.random() * partners.length)
+      partners.splice(random, 1)
+    })
+    console.log('partners', partners);
     res.render('jobcenter', {
       stories,
       locations,
