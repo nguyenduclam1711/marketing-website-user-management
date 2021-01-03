@@ -32,7 +32,7 @@ block content
                 .col-md-3.col-6.text-center.my-4.d-flex.flex-column.justify-content-center.align-items-center
                   img.mw-150.object-fit-contain.partners-logo(alt=partner.title, src="/images/" + partner.partnerlogo)
 
-    .w-100.d-flex.justify-content-center.mb-5.mb-md-0
+    .w-100.d-flex.justify-content-center.justify-content-md-left.mb-5.mb-md-0
       .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
         include ../assets/icons/cross.svg
     .container.mt-5.mt-xl-0.text-center.text-md-left
@@ -238,11 +238,12 @@ block content
                             
                         div
                           .p-5.story-item
-                            .position-relative.ml-n4
-                              .position-absolute.left.top
-                                include ../assets/icons/om_quote.svg
 
-                            blockquote.blockquote.my-1=story.excerpt
+                            blockquote.blockquote.my-1
+                              
+                              .quotesign.third-transparent.z-minus(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
+                                include ../assets/icons/om_quote.svg
+                              =story.excerpt
                           .d-flex.justify-content-end.align-items-center.align-items-md-end.flex-column.flex-md-row
                             
                             .text-center.text-md-right.px-3.mb-4.mb-md-0.order-12.order-md-1

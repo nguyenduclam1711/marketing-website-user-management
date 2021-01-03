@@ -179,7 +179,11 @@ block content
                                 
                             div.position-relative
                               .p-5.story-item
-                                blockquote.blockquote.my-1=story.excerpt
+                                blockquote.blockquote.my-1
+
+                                  .quotesign.text-primary.third-transparent.ml-n3.mt-n3
+                                    include ../assets/icons/om_quote.svg
+                                  =story.excerpt
                               .d-flex.justify-content-end.align-items-end
                                 
                                 div.text-right.px-3
