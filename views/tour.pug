@@ -1,22 +1,23 @@
 extends layout.pug
 block content
-  .jumbotron.container.text-center.bg-transparent.pb-200
-    h1.text-primary.mt-5.mb-3=__("Become our Hiring Partner")
-    h2.font-weight-light.mb-3=__("We connect companies to the most talented Web Developers and Online Marketers.")
+  .jumbotron.container.text-center.bg-transparent.mb-0.mb-md-5
+    .pb-0.pb-md-5
+      h1.text-primary.mt-5.mb-3=__("Become our Hiring Partner")
+      h2.font-weight-light.mb-3=__("We connect companies to the most talented Web Developers and Online Marketers.")
   div.careerwave.pb-5
     .container.container-counter.mt-4.pb-5.section-counter
       .offset-md-3.col-md-9.offset-lg-7.col-lg-5.py-5
-        img.w-100.shift-top-200(src="/media/hero.svg", alt="")
+        img.w-100.shift-top-md-200(src="/media/hero.svg", alt="")
       .col-12.py-5
         .row
-          .col-sm-6.col-md-3.mb-5
+          .col-6.col-md-3.mb-5
             .counter-item
               .counter-number.font-weight-bold
                 h2.display-1
                   span.counter-count=locals.settings.careersuccesspage_alumni ? locals.settings.careersuccesspage_alumni : user ? "setting not defined" : ""
                   = "+"
               h4.font-weight-bold.bar-bottom.shadowed.center.pb-4.w-min-width.m-0-auto: +translate("DCI Alumni")
-          .col-sm-6.col-md-3.mb-5
+          .col-6.col-md-3.mb-5
             .counter-item
               .counter-number.font-weight-bol
                 h2.display-1
@@ -24,14 +25,14 @@ block content
                   = "+"
               h4.font-weight-bold.bar-bottom.shadowed.center.pb-4.w-min-width.m-0-auto
                 +translate("DCI Students")
-          .col-sm-6.col-md-3.mb-5
+          .col-6.col-md-3.mb-5
             .counter-item
               .counter-number.font-weight-bold
                 h2.display-1
                   span.counter-count=locals.settings.careersuccesspage_companypartners ? locals.settings.careersuccesspage_companypartners : user ? "setting not defined" : ""
                   = "+"
               h4.font-weight-bold.bar-bottom.shadowed.center.pb-4.w-min-width.m-0-auto: +translate("Company Partners")
-          .col-sm-6.col-md-3.mb-5
+          .col-6.col-md-3.mb-5
             .counter-item
               .counter-number.font-weight-bold
                 h2.display-1
@@ -51,7 +52,7 @@ block content
           = "?"
         p.text-muted.mb-5=__("Our 1-year program develops higly-motivated individuals into great tech and digital professionals with a broad skill set.")
       .row.mx-xl-5
-        .col-md-6.d-flex.flex-column
+        .col-md-6.d-flex.flex-column.my-5.my-md-0
           h5.font-weight-normal.mr-5=__("WebDev Tech Stack 🚀")
           .bg-primary-light.rounded-lg.flex-grow-1.mr-md-3
             ul.mb-3
@@ -62,7 +63,7 @@ block content
               li.mb-2=__("Programming Basics: JavaScript")
               li.mb-2=__("SPA - Single Page Applications")
               li.mb-2=__("Backend Development")
-        .col-md-6.d-flex.flex-column
+        .col-md-6.d-flex.flex-column.my-5.my-md-0
           h5.mt-5.mt-md-0.font-weight-normal.ml-md-3.mr-5=__("Online Marketing Stack 🎯")
           .bg-red-light.rounded-lg.flex-grow-1.ml-md-3
             ul.mb-3
@@ -180,10 +181,10 @@ block content
                   - const j = Math.floor(Math.random() * (i + 1));
                   - [randompartners[i], randompartners[j]] = [randompartners[j], randompartners[i]];
               - }  
-              .row.my-5
+              .row.my-5.justify-content-center
                 each partner, index in randompartners.splice(0,6)
                   .col-md-4.col-6.text-center.my-4.d-flex.flex-column.justify-content-center.align-items-center
-                  img.mw-150.object-fit-contain(alt=partner.title, src="/images/" + partner.partnerlogo)
+                    img.mw-150.object-fit-contain(alt=partner.title, src="/images/" + partner.partnerlogo)
   else if user
     .text-center.my-5
       ="No partners are marked as testimonial_show."
@@ -204,9 +205,9 @@ block content
                   .h-100.border.border-primary.rounded-lg.d-flex.flex-column.align-items-center.py-md-5.py-3.px-3.justify-content-center
                     .mb-4.w-5.d-flex.text-primary
                       include ../assets/media/careersuccess_cv.svg
-                    h3.font-weight-light=__("Access our student profiles even before graduation")
+                    h3.font-weight-light.font-size-normal-below-md=__("Access our student profiles even before graduation")
                 .flip-card-back.rounded-lg.p-5.border.border-light
-                  h3.font-weight-light=__("Every 4-8 weeks we have a new graduation class in each of our locations")
+                  h3.font-weight-light.font-size-normal-below-md=__("Every 4-8 weeks we have a new graduation class in each of our locations")
       .col-6.mb-4
         .p-md-4.h-100
           .p-lg-4.h-100
@@ -216,9 +217,9 @@ block content
                   .h-100.border.border-primary.rounded-lg.d-flex.flex-column.align-items-center.py-md-5.py-3.px-3.justify-content-center
                     .mb-4.w-5.d-flex.text-primary
                       include ../assets/media/careersuccess_event.svg
-                    h3.font-weight-light=__("Participate at our events for free")
+                    h3.font-weight-light.font-size-normal-below-md=__("Participate at our events for free")
                 .flip-card-back.rounded-lg.p-5.border.border-light
-                  h3.font-weight-light=__("Receive regular invitations to our Final Events and meet our graduates")
+                  h3.font-weight-light.font-size-normal-below-md=__("Receive regular invitations to our Final Events and meet our graduates")
       .col-6.mb-4
         .p-md-4.h-100
           .p-lg-4.h-100
@@ -228,9 +229,9 @@ block content
                   .h-100.border.border-primary.rounded-lg.d-flex.flex-column.align-items-center.py-md-5.py-3.px-3.justify-content-center
                     .mb-4.w-5.d-flex.text-primary
                       include ../assets/media/careersuccess_company_tour.svg
-                    h3.font-weight-light=__("Host a company tour for our students")
+                    h3.font-weight-light.font-size-normal-below-md=__("Host a company tour for our students")
                 .flip-card-back.rounded-lg.p-5.border.border-light
-                  h3.font-weight-light=__("Show our students what it is like to work in tech by inviting them to your (virtual) offices")
+                  h3.font-weight-light.font-size-normal-below-md=__("Show our students what it is like to work in tech by inviting them to your (virtual) offices")
       .col-6.mb-4
         .p-md-4.h-100
           .p-lg-4.h-100
@@ -240,9 +241,9 @@ block content
                   .h-100.border.border-primary.rounded-lg.d-flex.flex-column.align-items-center.py-md-5.py-3.px-3.justify-content-center
                     .mb-4.w-5.d-flex.text-primary
                       include ../assets/media/careersuccess_financial_support.svg
-                    h3.font-weight-light=__("Receive financial support when hiring DCI graduates")
+                    h3.font-weight-light.font-size-normal-below-md=__("Receive financial support when hiring DCI graduates")
                 .flip-card-back.rounded-lg.p-5.border.border-light
-                  h3.font-weight-light=__("Employer can be reimbursed 50% of the salary paid for half of the time the student is hired")
+                  h3.font-weight-light.font-size-normal-below-md=__("Employer can be reimbursed 50% of the salary paid for half of the time the student is hired")
       .col-6.mb-4
         .p-md-4.h-100
           .p-lg-4.h-100
@@ -252,9 +253,9 @@ block content
                   .h-100.border.border-primary.rounded-lg.d-flex.flex-column.align-items-center.py-md-5.py-3.px-3.justify-content-center
                     .mb-4.w-5.d-flex.text-primary
                       include ../assets/media/careersuccess_permanent_job.svg
-                    h3.font-weight-light=__("Hire our graduates")
+                    h3.font-weight-light.font-size-normal-below-md=__("Hire our graduates")
                 .flip-card-back.rounded-lg.p-5.border.border-light
-                  h3.font-weight-light=__("Hire our students for Intern positions, and our graduates for Junior/Trainee positions ")
+                  h3.font-weight-light.font-size-normal-below-md=__("Hire our students for Intern positions, and our graduates for Junior/Trainee positions ")
       .col-6.mb-4
         .p-md-4.h-100
           .p-lg-4.h-100
@@ -264,9 +265,9 @@ block content
                   .h-100.border.border-primary.rounded-lg.d-flex.flex-column.align-items-center.py-md-5.py-3.px-3.justify-content-center
                     .mb-4.w-5.d-flex.text-primary
                       include ../assets/media/careersuccess_lecturer.svg
-                    h3.font-weight-light=__("Give an Industry Lecture")
+                    h3.font-weight-light.font-size-normal-below-md=__("Give an Industry Lecture")
                 .flip-card-back.rounded-lg.p-5.border.border-light
-                  h3.font-weight-light=__("Share your industry knowledge by holding a lecture on a topic from our curriculum")
+                  h3.font-weight-light.font-size-normal-below-md=__("Share your industry knowledge by holding a lecture on a topic from our curriculum")
 
   .container.text-center.mb-5
     h2.display-1.font-weight-light.mb-5.text-primary=__("Fill Your Open Vacancies")

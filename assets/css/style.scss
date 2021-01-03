@@ -1104,6 +1104,11 @@ body:not(.admin) {
 .shift-top-200 {
   margin-top: -200px;
 }
+.shift-top-md-200 {
+  @include media-breakpoint-up(md) {
+    margin-top: -200px;
+  }
+}
 .rotate-180 {
   transform: rotate(180deg);
 }
@@ -1651,6 +1656,11 @@ body[class*="pages-"] {
 }
 .font-size-normal {
   font-size: 1em;
+}
+.font-size-normal-below-md {
+  @include media-breakpoint-down(md) {
+    font-size: 1em;
+  }
 }
 .flip-card {
   background-color: transparent;
