@@ -435,7 +435,6 @@ module.exports.jobcenter = async (req, res) => {
       var random = Math.floor(Math.random() * partners.length)
       partners.splice(random, 1)
     })
-    console.log('partners', partners);
     res.render('jobcenter', {
       stories,
       locations,

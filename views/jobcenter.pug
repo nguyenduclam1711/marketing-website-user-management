@@ -12,42 +12,49 @@ block content
           .col-md-6
             .bg-primary.bg-panel.h-50.position-absolute.bottom.shift-right-percent.w-300.z-minus.shift-md-reset
             .pb-5
-              .px-lg-5.px-sm-5.px-md-0.position-relative.z-foreground
-                img.w-100.px-5.px-md-0.pb-5.pb-md-0.shift-bottom(src="/media/jobcenter_header1.jpg", alt="People working at computer")
-              img.w-100.pb-5.pb-md-0.shift-md-right-percent.mt-n5(src="/media/jobcenter_header2.jpg", alt="People working at computer")
+              .px-5.px-md-0.px-lg-5.px-sm-5
+                .px-5.px-md-0.px-lg-5.px-sm-5.position-relative.z-foreground
+                  .bg-primary.floatings.shift-bottom
+                    img.w-100.pb-md-0.quarter-transparent(src="/media/jobcenter_header1.jpg", alt="People working at computer")
+                .floatings
+                  .bg-primary.shift-md-right-percent.pb-5.pb-md-0.mt-n5
+                    img.w-100.quarter-transparent(src="/media/jobcenter_header2.jpg", alt="People working at computer")
 
     if partners
       .bg-light.text-center
         .container
           - partnersWithTestimonialsShown = partners
           if partnersWithTestimonialsShown.length > 0
-            p.m-0.py-3.font-weight-bold=__("Our Partners")
+            p.m-0.pt-4.pb-3.font-weight-bold=__("Our Partners")
             .row
               each partner, index in partnersWithTestimonialsShown
                 //- .splice(0,6)
-                .col-md-3.col-4.text-center.my-4.d-flex.flex-column.justify-content-center.align-items-center
+                .col-md-3.col-6.text-center.my-4.d-flex.flex-column.justify-content-center.align-items-center
                   img.mw-150.object-fit-contain.partners-logo(alt=partner.title, src="/images/" + partner.partnerlogo)
 
-    .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
-      include ../assets/icons/cross.svg
-    .container
+    .w-100.d-flex.justify-content-center.mb-5.mb-md-0
+      .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
+        include ../assets/icons/cross.svg
+    .container.mt-5.mt-xl-0.text-center.text-md-left
       .row
-        .col-md-7
+        .col-md-6.d-flex.flex-column.justify-content-center
           h2.mb-3=__("Who we are")
           p=__("The Ditial career purus sapien nec a felis malesuada eget rutrum volutpat torquent nisi mattis, conubia convallis porttitor ex metus adipiscing netus nibh sed. Eleifend porttitor duis class penatibus maximus eget natoque taciti, montes lectus mattis augue nec eros sapien blandit rhoncus, mauris egestas facilisis velit cursus pretium erat.")
-        .col-md-5.text-center.order-md-12.mb-5.mb-5.mb-md-0
+        .col-md-6.text-center.order-md-12.mb-5.mb-5.mb-md-0.mt-5.mt-md-0
           .px-5.mb-4.text-left
             .px-sm-5.px-md-0.px-lg-5.text-left.text-md-center
               .px-5.px-md-0
-                img.w-100.w-150(src="/media/azav.png", alt="")
+                .px-5.px-md-0
+                  img.w-100.w-150(src="/media/azav.png", alt="")
+
     - ceo = employees.find(e => e.feature_on_jobcenter)
     if ceo
       .container.position-relative.mb-3.my-5
         .row.overflow-hidden
-          .offset-md-4.col-md-8.pb-4.pt-5.d-flex.flex-column.justify-content-between.w-100.bg-light-blue.bg-panel.pl-md-0.order-12.order-md-1
+          .offset-lg-2.col-lg-10.pb-4.pt-5.d-flex.flex-column.justify-content-between.w-100.bg-light-blue.bg-panel.pl-md-0.order-12.order-md-1
             .row
               .col-md-10
-                .position-relative.px-5
+                .position-relative.px-3.px-md-5
                   blockquote.blockquote.mb-0
                     p.text-muted=ceo.content
 
@@ -59,17 +66,18 @@ block content
                 a.text-dark.stretched-link(href=`/stories/${ceo.slug}`)
                   .mw-150.ml-auto
                     +storyImages(ceo, 'col')
+
     .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
       include ../assets/icons/arrow.svg
     if courses
-      .container.mb-5
+      .container.mt-5.mt-xl-0
         .row
           .col-md-6.mb-5
             h2.mb-3=__('Our courses')
             p=__("We offer Purus sapien nec a felis malesuada eget rutrum volutpat torquent nisi mattis, conubia convallis porttitor ex metus adipiscing netus nibh sed. Eleifend porttitor duis")
         .row
           each course in courses
-            .col-md-4
+            .col-md-4.floatings.mb-5.mb-md-0
               .p-5.h-100(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )
                 h5.font-weight-bold=course.headline
                 .my-3
@@ -98,12 +106,13 @@ block content
       .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
         .rotate-135
           include ../assets/icons/arrow.svg
-    .container
+
+    .container.my-5.mt-xl-0
       h2.mb-3=__("Find your contact person") 
       .mb-3=__("Select location")
-      .row
+      .row.pb-5.pb-md-0
         .col-md-5
-          .customselect.mr-5
+          .customselect.mr-0.mr-md-5
             select(class="jobcenter-location-select")
               each location in locations.filter(l => l.isCampus)
                 option(data-address=`${location.street}, ${location.zip} ${location.name}`)=location.name
@@ -117,20 +126,25 @@ block content
         .col-md-7
           each employee in employees.filter(e => !e.feature_on_jobcenter)
             .row.jobcenter-location-employee(class=!employee.locations.map(l => l.name.toLowerCase()).includes(locations.filter(l => l.isCampus)[0].name.toLowerCase()) ? "hidden": "", data-location=employee.locations.map(l => l.name))
-              .col-md-4
-                .px-3.pt-3
-                  img.blue-shadow.object-fit-cover.img-fluid.rounded-circle.square(alt=employee.name src="/media/pixel.gif" style="background-image: url('/images/"+employee.avatar+"')")
-              .col-md-8
-                h6.font-weight-bold.mt-3=employee.name
-                if employee.position
+              .col-3
+                .px-0.px-lg-3.pt-3
+                  +storyImages(employee, 'col')
+              .col-9.d-flex.flex-column.justify-content-end
+                h6.font-weight-bold=employee.name
+                if employee.phone
                   .position-relative.z-1
-                    p.text-muted.mb-1=employee.position
-                if employee.position
+                    p.text-muted.mb-1
+                      span.font-weight-bold Tel: 
+                      =employee.phone
+                if employee.email
                   .position-relative.z-1
-                    p.text-muted.mb-1=employee.position
+                    p.text-muted.mb-1
+                      span.font-weight-bold Email: 
+                      =employee.email
+
     .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
       include ../assets/icons/rectangle.svg
-    .container
+    .container.mt-5.mt-xl-0
       h2.mb-3=__("Our all inclusive service") 
       =__("In 4 steps to socialinsuranced employment")
       .mx-5
@@ -180,10 +194,7 @@ block content
                 h5.font-weight-bold=__("Inclusion")
                 p.mb-4=__("Placement in an employment employment subject to social insurance.")
 
-
-
-
-    .bg-light.position-relative.overflow-hidden
+    .bg-light.position-relative.overflow-hidden.mb-3
       .container
         .position-absolute.bg-panel.bg-primary.left.bottom.top.shift-left-percent.w-100
         .row
@@ -191,15 +202,15 @@ block content
             .p-5
               div.mb-3
                 .p-3.mt-4.bg-primary.d-inline-block.text-white
-                  .font-weight-bold
+                  .font-weight-bold.font-size-120
                     =__("Sustainable")
               p.mb-5=__("The digital sector is one of the fastest growing industries in Germany and is proving itself to be a sustainable and crisis-proof industry, especially now.")
           .col-md-6.text-white
             .p-5
               div.mb-3
                 .p-3.mt-4.bg-white.d-inline-block
-                  .font-weight-bold.text-primary
-                    =__("Sustainable")
+                  .font-weight-bold.text-primary.font-size-120
+                    =__("Digital")
               p.mb-5=__("Job profiles of our graduates include: Programmer, IT Consultant, Web Designer, Online Marketing Manager, Social Media Manager and many more.")
 
     .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
@@ -207,14 +218,14 @@ block content
     if stories
       - storysWithTestimonial = stories
       if storysWithTestimonial.length > 0
-        .container
+        .container.mt-5.mt-xl-0
           .mx-lg-5
             .mx-lg-5.px-lg-2
-              .py-5
-                h2.pb-3
-                  =__("Successstories")
-                p=__("See what our participants say")
-        #careersuccesscarousel.carousel.slide.mb-5.pt-3.pb-5(data-ride="carousel")
+              h2.pb-3
+                =__("Successstories")
+              p=__("See what our participants say")
+
+        #careersuccesscarousel.carousel.slide.mb-5.pt-3.pb-5(data-ride="carousel" data-interval="40000")
           .carousel-inner
             each story, index in storysWithTestimonial
               .carousel-item(class= index === 0 ? ` active` : ``)
@@ -225,15 +236,19 @@ block content
                         if user && story && user.userId === story.userId || user && user.admin === "true"
                           a.position-absolute.right.bottom.btn.btn-outline-primary.z-foreground(href=`/admin/stories/edit/${story.slug}`) Edit
                             
-                        div.position-relative
+                        div
                           .p-5.story-item
+                            .position-relative.ml-n4
+                              .position-absolute.left.top
+                                include ../assets/icons/om_quote.svg
+
                             blockquote.blockquote.my-1=story.excerpt
-                          .d-flex.justify-content-end.align-items-end
+                          .d-flex.justify-content-end.align-items-center.align-items-md-end.flex-column.flex-md-row
                             
-                            div.text-right.px-3
+                            .text-center.text-md-right.px-3.mb-4.mb-md-0.order-12.order-md-1
                               h3=story.subtitle
                               h4.font-italic=story.workPosition
-                            a.stretched-link.text-right.rounded-circle.overflow-hidden(href=`/stories/${story.slug}` style=`box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1f3fc7 !important`};`)
+                            a.stretched-link.text-right.rounded-circle.overflow-hidden.mb-5.mb-md-0.order-1.order-md-12(href=`/stories/${story.slug}` style=`box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1f3fc7 !important`};`)
                               img.mw-150.object-fit-contain.w-8.square(src="/media/pixel.gif" style=`background-image: url('/images/${story.avatar}'); box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1f3fc7 !important`}`)
 
             if storysWithTestimonial.length > 1
@@ -241,14 +256,12 @@ block content
                 each story, index in storysWithTestimonial
                   li(data-target="#careersuccesscarousel" data-slide-to=index class=index==0 ? " active": "")
 
-            if storysWithTestimonial.length > 1
-              a.carousel-control-prev(href="#careersuccesscarousel" role="button" data-slide="prev")
-                span.carousel-control-prev-icon(aria-hidden="true")
-                span.sr-only Previous
-              a.carousel-control-next(href="#careersuccesscarousel" role="button" data-slide="next")
-                span.carousel-control-next-icon(aria-hidden="true")
-                span.sr-only Next
+            //- if storysWithTestimonial.length > 1
+            //-   a.carousel-control-prev(href="#careersuccesscarousel" role="button" data-slide="prev")
+            //-     span.carousel-control-prev-icon(aria-hidden="true")
+            //-     span.sr-only Previous
+            //-   a.carousel-control-next(href="#careersuccesscarousel" role="button" data-slide="next")
+            //-     span.carousel-control-next-icon(aria-hidden="true")
+            //-     span.sr-only Next
 
-
-    .pb-200
     .pb-200

@@ -7,8 +7,11 @@ block content
         .row
           .col-md-8.order-12.order-md-1
             .pt-3.mt-5
+              .position-relative.ml-n4.z-0
               .position-relative.bg-light-blue.p-5.bg-panel.right
                 blockquote.blockquote
+                  .position-absolute.left.top.w-4.text-primary.third-transparent.ml-n3.mt-n3
+                    include ../assets/icons/om_quote.svg
                   p.text-muted=story.excerpt
               .mt-4.bg-white.p-3
                 p.text-justify !{story.toHTML}

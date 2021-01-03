@@ -100,7 +100,29 @@ mixin singleCourse
           .row.my-md-5
             .col-md-8.offset-md-2.border.pt-4.p-5.rounded
               .pt-md-4
-                +singleStory(course.successStory)
+                div.py-4.px-3.d-flex.flex-column.justify-content-between.w-100
+                  a(href="/stories/"+course.successStory.slug)
+                    
+                    .row
+                      .col-md-9
+                        div.content
+                          blockquote.text-left.text-muted
+                            .quotesign.third-transparent.z-minus(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
+                              include ../../assets/icons/om_quote.svg
+                            =course.successStory.excerpt.replace(/"/g, "")
+                          h5.font-weight-bold.text-right.text-dark=course.successStory.title
+                          .text-muted.text-right.d-block.mb-3.mb-md-0=course.successStory.workPosition
+                      .col-md-3.d-flex.flex-column.justify-content-end
+                        +storyImages(course.successStory, " p-0 col-md-9 offset-md-1 col-6 offset-3")
+
+                  if user
+                    form.d-flex.justify-content-between.mt-3(method='POST', action='/admin/stories/delete/'+course.successStory.slug +'?_method=DELETE')
+                      a.btn.btn-outline-primary.mr-2(target="_blank" rel="noopener" href="/stories/"+course.successStory.slug) Show
+                      if user.id === course.successStory.userId || user.admin === "true"
+                        .d-flex.align-items-center
+                          a.btn.btn-outline-primary.mr-2(href="/admin/stories/edit/"+course.successStory.slug) Edit
+                          button.btn.btn-outline-danger(type='submit') Delete
+
       section#section3.my-5.container.text-left
         .row
           .col-md-6.p-5

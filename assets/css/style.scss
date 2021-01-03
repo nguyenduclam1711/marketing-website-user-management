@@ -132,6 +132,9 @@ nav.container:after {
   display: none !important;
 }
 
+.quarter-transparent {
+  opacity: 0.75;
+}
 .half-transparent {
   opacity: 0.5;
 }
@@ -492,15 +495,6 @@ body[class*="pages-"] {
     @extend .blockquote;
     color: var(--gray);
 
-    &:before {
-      content: '"';
-      position: absolute;
-      font-size: 2em;
-      top: -0.5em;
-      left: -0.3em;
-      z-index: 1;
-    }
-
     position: relative;
     padding: 1em 0 1em 1em;
     margin: 3em 0 2em 0;
@@ -519,16 +513,6 @@ body[class*="pages-"] {
 .story-item {
   blockquote {
     @extend .blockquote;
-
-    &:before {
-      content: '"';
-      position: absolute;
-      font-size: 2em;
-      top: -0.5em;
-      left: -0.5em;
-      z-index: 1;
-    }
-
     position: relative;
     padding-left: 15px;
   }
@@ -1100,7 +1084,10 @@ body:not(.admin) {
   transform: translateX(50%);
 }
 .shift-left-percent-skew {
-  transform: translateX(50%) skewX(-30deg);
+  transform: translateY(50%) skewY(-3deg);
+  @include media-breakpoint-up(lg) {
+    transform: translateX(50%) skewX(-30deg);
+  }
 }
 .shift-left {
   transform: translateX(50px);
@@ -1235,11 +1222,12 @@ div[class*=" #{$class-slug}"] {
     width: 10px;
     height: 10px;
     margin: 0 10px;
-    border: 1px solid #0003;
+    border: 1px solid #0008;
     border-radius: 50%;
-
+    
     &.active {
-      background-color: $blue;
+      border: 1px solid $primary-light;
+      background-color: $primary-light;
     }
   }
 }
@@ -1715,6 +1703,9 @@ body[class*="pages-"] {
   @include media-breakpoint-down(md) {
     font-size: 1em;
   }
+}
+.font-size-120 {
+  font-size: 120%;
 }
 .flip-card {
   background-color: transparent;
