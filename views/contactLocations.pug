@@ -1,4 +1,7 @@
+
 extends layout.pug
+mixin employeeimage(location)
+  img.blue-shadow.object-fit-cover.img-fluid.rounded-circle.square(src="/media/pixel.gif" alt= location.contactEmployee ? location.contactEmployee.name : " " style=`background-image: url('${location.contactEmployee && location.contactEmployee.avatar ? `/images/` + location.contactEmployee.avatar : `/media/circuit-board.svg`}')`)
 block content
   .jumbotron.jumbotron-fluid.mb-0.bg-section
     .container
@@ -31,9 +34,9 @@ block content
         .mt-5
           .row.mt-5
             each location, index in locations.filter(l => l.isCampus)
-              .col-sm-8.mb-5.hover-shadow.rounded.overflow-hidden(class=index % 2 === 0 ? "offset-md-4" : "")
+              .col-md-10.col-lg-8.mb-5.hover-shadow.rounded.overflow-hidden(class=index % 2 === 0 ? "offset-md-2 offset-lg-4" : "")
                 .row
-                  .col-md-6.px-0.mx-5.mx-md-0
+                  .col-6.px-0
                     .bg-primary
                       img.object-fit-cover.img-fluid.portrait.half-transparent(src="/media/pixel.gif" alt=location.name style=`background-image: url('${location.avatar ? `/images/` + location.avatar : `/media/circuit-board.svg`}')`)
                     h3.text-white.position-absolute.transform-absolute-center.w-100.text-center=location.name
@@ -58,6 +61,14 @@ block content
                         div                   
                           =location.phone
 
+                    div.mt-3
+                      if location.street
+                        .h-2.text-primary.mb-1
+                          include ../assets/media/pin.svg
+                        div= location.street
+                      if location.zip
+                        div
+                          = location.zip
   .bg-light.pb-200
     .container.py-5
       div.py-5
