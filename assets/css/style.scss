@@ -1306,6 +1306,11 @@ div[class*=" #{$class-slug}"] {
 .shadow-sm {
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.4) !important;
 }
+.shadow-sm-md-none {
+  @include media-breakpoint-up(md) {
+    box-shadow: none !important;
+  }
+}
 .bg-tranition {
   transition: background-color $transition ease;
 }
