@@ -101,7 +101,7 @@ $theme-colors: (
 }
 
 .z-minus {
-  z-index: -1;
+  z-index: -1 !important;
 }
 
 .z-1 {

@@ -39,7 +39,7 @@ block content
       .row
         .col-md-6.d-flex.flex-column.justify-content-center
           h2.mb-3=__("Who we are")
-          p=__("The Ditial career purus sapien nec a felis malesuada eget rutrum volutpat torquent nisi mattis, conubia convallis porttitor ex metus adipiscing netus nibh sed. Eleifend porttitor duis class penatibus maximus eget natoque taciti, montes lectus mattis augue nec eros sapien blandit rhoncus, mauris egestas facilisis velit cursus pretium erat.")
+          p=__("The Digital Career Institute gGmbH is a non-profit, AZAV-certified educational institution that specializes in offering continuing education courses in the digital field or for professions in the field of information and communication technology (ICT). What began as a small initiative to integrate refugees into the German labor market is now an established educational institute with over 100 employees throughout Germany. We benefit from the professional expertise and many years of experience of our founders, colleagues and lecturers, who are also strongly networked in the industry.")
         .col-md-6.text-center.order-md-12.mb-5.mb-5.mb-md-0.mt-5.mt-md-0
           .px-5.mb-4.text-left
             .px-sm-5.px-md-0.px-lg-5.text-left.text-md-center
@@ -74,7 +74,7 @@ block content
         .row
           .col-md-6.mb-5
             h2.mb-3=__('Our courses')
-            p=__("We offer Purus sapien nec a felis malesuada eget rutrum volutpat torquent nisi mattis, conubia convallis porttitor ex metus adipiscing netus nibh sed. Eleifend porttitor duis")
+            p=__("We offer a range of courses that help our students enter the job market and future-proof their careers.")
         .row
           each course in courses
             .col-md-4.floatings.mb-5.mb-md-0
@@ -109,13 +109,15 @@ block content
 
     .container.my-5.mt-xl-0
       h2.mb-3=__("Find your contact person") 
+      .mb-3=__("We are always there for you!")
       .mb-3=__("Select location")
       .row.pb-5.pb-md-0
-        .col-md-5
-          .customselect.mr-0.mr-md-5
-            select(class="jobcenter-location-select")
-              each location in locations.filter(l => l.isCampus)
-                option(data-address=`${location.street}, ${location.zip} ${location.name}`)=location.name
+        .col-md-5.pr-3.pr-sm-5
+          .pr-0.pr-sm-5
+            .customselect.mr-0.mr-md-5
+              select.text-center.pr-5(style="padding-right: 80px !important" class="jobcenter-location-select")
+                each location in locations.filter(l => l.isCampus)
+                  option(data-address=`${location.street}, ${location.zip} ${location.name}`)=location.name
             
           
           .p-5.d-flex.justify-content-center.flex-column.align-items-center.text-center
@@ -142,6 +144,7 @@ block content
                       span.font-weight-bold Email: 
                       =employee.email
 
+    .pb-5
     .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
       include ../assets/icons/rectangle.svg
     .container.mt-5.mt-xl-0
@@ -149,7 +152,7 @@ block content
       =__("In 4 steps to socialinsuranced employment")
       .mx-5
         .row.px-md-5.my-5
-          .col-md-6.mb-3.px-2
+          .col-md-6.mb-5.px-2.mb-md-3
             .border.h-100.d-flex.flex-column.justify-content-between
               .px-5.pt-5
                 .d-flex.justify-content-center.align-items-center.flex-column.mb-4
@@ -160,7 +163,7 @@ block content
               .d-flex.justify-content-end
                 .bg-primary-light.text-white.w-5.h-5.d-flex.justify-content-center.align-items-center
                   h3.mb-0="01"
-          .col-md-6.mb-3.px-2
+          .col-md-6.mb-5.px-2.mb-md-3
             .border.h-100.d-flex.flex-column.justify-content-between
               .px-5.pt-5
                 .d-flex.justify-content-center.align-items-center.flex-column.mb-4
@@ -171,23 +174,23 @@ block content
               .d-flex.justify-content-start
                 .bg-primary-light.text-white.w-5.h-5.d-flex.justify-content-center.align-items-center
                   h3.mb-0="02"
-          .col-md-6.mb-3.px-2
+          .col-md-6.mb-5.px-2.mb-md-3
             .border.h-100.d-flex.flex-column.justify-content-between
               .d-flex.justify-content-end
                 .bg-primary-light.text-white.w-5.h-5.d-flex.justify-content-center.align-items-center
                   h3.mb-0="03"
-              .px-5.pt-5
+              .px-5.pt-5.pt-md-3
                 .d-flex.justify-content-center.align-items-center.flex-column.mb-4
                   .w-13.h-9
                     include ../assets/icons/jobcenter_job_interview.svg
                 h5.font-weight-bold=__("Applicationphase")
                 p.mb-4=__("Career training and consulting in the DCI. Access to the wide network of companies and partners.")
-          .col-md-6.mb-3.px-2
+          .col-md-6.mb-5.px-2.mb-md-3
             .border.h-100.d-flex.flex-column.justify-content-between
               .d-flex.justify-content-start
                 .bg-primary-light.text-white.w-5.h-5.d-flex.justify-content-center.align-items-center
                   h3.mb-0="04"
-              .px-5.pt-5
+              .px-5.pt-5.pt-md-3
                 .d-flex.justify-content-center.align-items-center.flex-column.mb-4
                   .w-13.h-9
                     include ../assets/icons/jobcenter_handshake.svg
@@ -199,17 +202,17 @@ block content
         .position-absolute.bg-panel.bg-primary.left.bottom.top.shift-left-percent.w-100
         .row
           .col-md-6
-            .p-5
+            .p-5.pl-md-0
               div.mb-3
                 .p-3.mt-4.bg-primary.d-inline-block.text-white
-                  .font-weight-bold.font-size-120
+                  .font-weight-bold.font-size-120.px-4
                     =__("Sustainable")
               p.mb-5=__("The digital sector is one of the fastest growing industries in Germany and is proving itself to be a sustainable and crisis-proof industry, especially now.")
           .col-md-6.text-white
             .p-5
               div.mb-3
                 .p-3.mt-4.bg-white.d-inline-block
-                  .font-weight-bold.text-primary.font-size-120
+                  .font-weight-bold.text-primary.font-size-120.px-4
                     =__("Digital")
               p.mb-5=__("Job profiles of our graduates include: Programmer, IT Consultant, Web Designer, Online Marketing Manager, Social Media Manager and many more.")
 
@@ -219,11 +222,9 @@ block content
       - storysWithTestimonial = stories
       if storysWithTestimonial.length > 0
         .container.mt-5.mt-xl-0
-          .mx-lg-5
-            .mx-lg-5.px-lg-2
-              h2.pb-3
-                =__("Successstories")
-              p=__("See what our participants say")
+          h2.pb-3
+            =__("Successstories")
+          p=__("See what our participants say")
 
         #careersuccesscarousel.carousel.slide.mb-5.pt-3.pb-5(data-ride="carousel" data-interval="40000")
           .carousel-inner
@@ -236,12 +237,10 @@ block content
                         if user && story && user.userId === story.userId || user && user.admin === "true"
                           a.position-absolute.right.bottom.btn.btn-outline-primary.z-foreground(href=`/admin/stories/edit/${story.slug}`) Edit
                             
-                        div
+                        div.position-relative
                           .p-5.story-item
-
-                            blockquote.blockquote.my-1
-                              
-                              .quotesign.third-transparent.z-minus(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
+                            blockquote.blockquote.z-0
+                              .quotesign.z-minus(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
                                 include ../assets/icons/om_quote.svg
                               =story.excerpt
                           .d-flex.justify-content-end.align-items-center.align-items-md-end.flex-column.flex-md-row
