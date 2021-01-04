@@ -6,7 +6,7 @@ block content
       h2.font-weight-light.mb-3=__("We connect companies to the most talented Web Developers and Online Marketers.")
   div.careerwave.pb-5
     .container.container-counter.mt-4.pb-5.section-counter
-      .offset-md-3.col-md-9.offset-lg-7.col-lg-5.py-5
+      .offset-md-3.col-md-9.offset-lg-7.col-lg-5.py-5.floatings
         img.w-100.shift-top-md-200(src="/media/hero.svg", alt="")
       .col-12.py-5
         .row
@@ -44,11 +44,11 @@ block content
             =__("Become a Hiring Partner")
   .container.pt-5
     .mx-lg-5.px-lg-5.pb-lg-5
-      .mx-xl-5.px-xl-5
+      .mx-xl-5.px-xl-4
         h2.mb-3.bar-bottom.pb-3.mb-4
           =__("What makes our graduates")
           =" "
-          span.badge.badge-primary-trans.text-primary.font-weight-normal.font-size-normal=__("stand out")
+          span.badge.badge-primary-trans.text-primary-light.font-weight-normal.font-size-normal=__("stand out")
           = "?"
         p.text-muted.mb-5=__("Our 1-year program develops higly-motivated individuals into great tech and digital professionals with a broad skill set.")
       .row.mx-xl-5
@@ -82,39 +82,39 @@ block content
       .mx-lg-5
         .mx-lg-5
           .ml-3
-            h5.mt-5.mt-md-0.font-weight-normal.ml-md-3.mr-5=__( "Additional training" )
+            h5.mt-5.mt-md-0.font-weight-normal.ml-sm-4.ml-md-1.ml-lg-3.mr-5.mb-4=__( "Additional training" )
           .row.text-center
-            .col-md-4.col-6.py-2.px-4.mb-4.d-flex.justify-content-center
+            .col-md-4.col-6.py-2.px-4.mb-4.d-flex.justify-content-center.floatings
               .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center.w-11
                 .w-3.d-flex.mb-3
                   include ../assets/media/careersuccess_training.svg
                 .h-3.d-flex.flex-column.justify-content-center
                   =__("Soft Skill Training")
-            .col-md-4.col-6.py-2.px-4.mb-4.d-flex.justify-content-center
+            .col-md-4.col-6.py-2.px-4.mb-4.d-flex.justify-content-center.floatings
               .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center.w-11
                 .w-3.d-flex.mb-3
                   include ../assets/media/careersuccess_time.svg
                 .h-3.d-flex.flex-column.justify-content-center
                   =__("Time management")
-            .col-md-4.col-6.py-2.px-4.mb-4.d-flex.justify-content-center
+            .col-md-4.col-6.py-2.px-4.mb-4.d-flex.justify-content-center.floatings
               .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center.w-11
                 .w-3.d-flex.mb-3
                   include ../assets/media/careersuccess_management.svg
                 .h-3.d-flex.flex-column.justify-content-center
                   =__("Agile project management")
-            .col-md-4.col-6.py-2.px-4.mb-4.d-flex.justify-content-center
+            .col-md-4.col-6.py-2.px-4.mb-4.d-flex.justify-content-center.floatings
               .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center.w-11
                 .w-3.d-flex.mb-3
                   include ../assets/media/careersuccess_language.svg
                 .h-3.d-flex.flex-column.justify-content-center
                   =__("Language courses")
-            .col-md-4.col-6.py-2.px-4.mb-4.d-flex.justify-content-center
+            .col-md-4.col-6.py-2.px-4.mb-4.d-flex.justify-content-center.floatings
               .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center.w-11
                 .w-3.d-flex.mb-3
                   include ../assets/media/careersuccess_job.svg
                 .h-3.d-flex.flex-column.justify-content-center
                   =__("Job coaching")
-            .col-md-4.col-6.py-2.px-4.mb-4.d-flex.justify-content-center
+            .col-md-4.col-6.py-2.px-4.mb-4.d-flex.justify-content-center.floatings
               .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center.w-11
                 .w-3.d-flex.mb-3
                   include ../assets/media/careersucces_icon_mentoring.svg
@@ -130,7 +130,7 @@ block content
             .py-5
               h2.pb-3.bar-bottom.mb-5
                 =__("What companies")
-                span.badge.badge-primary-trans.text-primary.font-weight-normal.mx-1.font-size-normal=__("love")
+                span.badge.badge-primary-trans.text-primary-light.font-weight-normal.mx-1.font-size-normal=__("love")
                 =__("about our graduates")
       #careersuccesscarousel.carousel.slide.mb-5.pt-3.pb-5(data-ride="carousel")
         .carousel-inner
@@ -147,8 +147,8 @@ block content
                         img.mw-150.object-fit-contain(alt=partner.title, src="/images/" + partner.partnerlogo)
                         
                         div.text-right
-                          h3=partner.testimonial_name
-                          h4.font-italic=partner.testimonial_job
+                          h4.font-weight-bold=partner.testimonial_name
+                          h5.font-italic=partner.testimonial_job
                       .p-5
                         blockquote.blockquote.my-1=partner.testimonial_content
 
@@ -190,13 +190,14 @@ block content
       ="No partners are marked as testimonial_show."
 
   .container.my-5
-    h2.pb-3.pt-5.bar-bottom.mb-5
-      =__("How our hiring partners")
-      = " "
-      span.badge.badge-primary-trans.text-primary.font-weight-normal.mx-1.font-size-normal=__("benefit")
-      ="?"
+    .mx-0.mx-md-4.mx-lg-5
+      h2.pb-3.pt-5.bar-bottom.mb-5
+        =__("How our hiring partners")
+        = " "
+        span.badge.badge-primary-trans.text-primary-light.font-weight-normal.mx-1.font-size-normal=__("benefit")
+        ="?"
     .row.text-center
-      .col-6.mb-4
+      .col-6.mb-4.floatings
         .p-md-4.h-100
           .p-lg-4.h-100
             .flip-card
@@ -208,7 +209,7 @@ block content
                     h3.font-weight-light.font-size-normal-below-md=__("Access our student profiles even before graduation")
                 .flip-card-back.rounded-lg.p-5.border.border-light
                   h3.font-weight-light.font-size-normal-below-md=__("Every 4-8 weeks we have a new graduation class in each of our locations")
-      .col-6.mb-4
+      .col-6.mb-4.floatings
         .p-md-4.h-100
           .p-lg-4.h-100
             .flip-card
@@ -220,7 +221,7 @@ block content
                     h3.font-weight-light.font-size-normal-below-md=__("Participate at our events for free")
                 .flip-card-back.rounded-lg.p-5.border.border-light
                   h3.font-weight-light.font-size-normal-below-md=__("Receive regular invitations to our Final Events and meet our graduates")
-      .col-6.mb-4
+      .col-6.mb-4.floatings
         .p-md-4.h-100
           .p-lg-4.h-100
             .flip-card
@@ -232,7 +233,7 @@ block content
                     h3.font-weight-light.font-size-normal-below-md=__("Host a company tour for our students")
                 .flip-card-back.rounded-lg.p-5.border.border-light
                   h3.font-weight-light.font-size-normal-below-md=__("Show our students what it is like to work in tech by inviting them to your (virtual) offices")
-      .col-6.mb-4
+      .col-6.mb-4.floatings
         .p-md-4.h-100
           .p-lg-4.h-100
             .flip-card
@@ -244,7 +245,7 @@ block content
                     h3.font-weight-light.font-size-normal-below-md=__("Receive financial support when hiring DCI graduates")
                 .flip-card-back.rounded-lg.p-5.border.border-light
                   h3.font-weight-light.font-size-normal-below-md=__("Employer can be reimbursed 50% of the salary paid for half of the time the student is hired")
-      .col-6.mb-4
+      .col-6.mb-4.floatings
         .p-md-4.h-100
           .p-lg-4.h-100
             .flip-card
@@ -256,7 +257,7 @@ block content
                     h3.font-weight-light.font-size-normal-below-md=__("Hire our graduates")
                 .flip-card-back.rounded-lg.p-5.border.border-light
                   h3.font-weight-light.font-size-normal-below-md=__("Hire our students for Intern positions, and our graduates for Junior/Trainee positions ")
-      .col-6.mb-4
+      .col-6.mb-4.floatings
         .p-md-4.h-100
           .p-lg-4.h-100
             .flip-card
