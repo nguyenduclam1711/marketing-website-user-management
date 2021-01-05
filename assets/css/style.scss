@@ -1707,3 +1707,13 @@ body[class*="pages-"] {
   justify-content: center;
   flex-flow: column;
 } 
+.justify-content-md-end {
+  @include media-breakpoint-up(md) {
+    justify-content: end !important;
+  }
+}
+.justify-content-md-start {
+  @include media-breakpoint-up(md) {
+    justify-content: start !important;
+  }
+}
