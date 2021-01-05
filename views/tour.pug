@@ -80,41 +80,42 @@ block content
   .container.mt-5
     .mb-3
       .mx-lg-5
-        .mx-lg-5
-          .ml-3
-            h5.mt-5.mt-md-0.font-weight-normal.ml-sm-4.ml-md-1.ml-lg-3.mr-5.mb-4=__( "Additional training" )
+        .mx-xl-5
+          .ml-md-3.mx-lg-5
+            .ml-0
+              h5.mt-5.mt-md-0.font-weight-normal.mb-4=__( "Additional training" )
           .row.text-center
-            .col-md-4.col-6.py-2.px-4.mb-4.d-flex.justify-content-center.floatings
+            .col-md-4.col-6.py-2.justify-content-md-center.mb-4.d-flex.floatings
               .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center.w-11
                 .w-3.d-flex.mb-3
                   include ../assets/media/careersuccess_training.svg
                 .h-3.d-flex.flex-column.justify-content-center
                   =__("Soft Skill Training")
-            .col-md-4.col-6.py-2.px-4.mb-4.d-flex.justify-content-center.floatings
+            .col-md-4.col-6.py-2.justify-content-md-center.mb-4.d-flex.floatings.justify-content-end
               .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center.w-11
                 .w-3.d-flex.mb-3
                   include ../assets/media/careersuccess_time.svg
                 .h-3.d-flex.flex-column.justify-content-center
                   =__("Time management")
-            .col-md-4.col-6.py-2.px-4.mb-4.d-flex.justify-content-center.floatings
+            .col-md-4.col-6.py-2.justify-content-md-center.mb-4.d-flex.floatings
               .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center.w-11
                 .w-3.d-flex.mb-3
                   include ../assets/media/careersuccess_management.svg
                 .h-3.d-flex.flex-column.justify-content-center
                   =__("Agile project management")
-            .col-md-4.col-6.py-2.px-4.mb-4.d-flex.justify-content-center.floatings
+            .col-md-4.col-6.py-2.justify-content-md-center.mb-4.d-flex.floatings.justify-content-end
               .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center.w-11
                 .w-3.d-flex.mb-3
                   include ../assets/media/careersuccess_language.svg
                 .h-3.d-flex.flex-column.justify-content-center
                   =__("Language courses")
-            .col-md-4.col-6.py-2.px-4.mb-4.d-flex.justify-content-center.floatings
+            .col-md-4.col-6.py-2.justify-content-md-center.mb-4.d-flex.floatings
               .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center.w-11
                 .w-3.d-flex.mb-3
                   include ../assets/media/careersuccess_job.svg
                 .h-3.d-flex.flex-column.justify-content-center
                   =__("Job coaching")
-            .col-md-4.col-6.py-2.px-4.mb-4.d-flex.justify-content-center.floatings
+            .col-md-4.col-6.py-2.justify-content-md-center.mb-4.d-flex.floatings.justify-content-end
               .p-3.bg-light-yellow.d-flex.d-flex.flex-column.align-items-center.rounded-lg.d-flex.flex-column.h-100.justify-content-center.w-11
                 .w-3.d-flex.mb-3
                   include ../assets/media/careersucces_icon_mentoring.svg
@@ -126,7 +127,8 @@ block content
     if partnersWithTestimonial.length > 0
       .container
         .mx-lg-5
-          .mx-lg-5.px-lg-2
+          .mx-xl-5
+            .mx-lg-5
             .py-5
               h2.pb-3.bar-bottom.mb-5
                 =__("What companies")
@@ -138,6 +140,7 @@ block content
             .carousel-item(class= index === 0 ? ` active` : ``)
               .container
                 .mx-lg-5
+                  .mx-xl-5
                   .mx-lg-5.px-lg-2
                     .bg-primary-light.p-4.rounded-lg
                       if user && partner && user.userId === partner.userId || user && user.admin === "true"
@@ -170,6 +173,9 @@ block content
         .careerwave.py-5
           .py-5
             .container.py-5
+              .mx-lg-5
+                .mx-lg-5
+                  .mx-xl-5
               h2.pb-3.bar-bottom.my-5=__("Our Hiring Network")
               h3.mb=__("More than ")
                 =locals.settings.careersuccesspage_companypartners
@@ -191,6 +197,8 @@ block content
 
   .container.my-5
     .mx-0.mx-md-4.mx-lg-5
+      .mx-lg-5
+        .mx-xl-5
       h2.pb-3.pt-5.bar-bottom.mb-5
         =__("How our hiring partners")
         = " "
@@ -198,8 +206,8 @@ block content
         ="?"
     .row.text-center
       .col-6.mb-4.floatings
-        .p-md-4.h-100
-          .p-lg-4.h-100
+              .py-md-3.h-100.pr-3
+                .h-100
             .flip-card
               .flip-card-inner
                 .flip-card-front
@@ -210,8 +218,8 @@ block content
                 .flip-card-back.rounded-lg.p-5.border.border-light
                   h3.font-weight-light.font-size-normal-below-md=__("Every 4-8 weeks we have a new graduation class in each of our locations")
       .col-6.mb-4.floatings
-        .p-md-4.h-100
-          .p-lg-4.h-100
+              .py-md-3.h-100.pl-3
+                .h-100
             .flip-card
               .flip-card-inner
                 .flip-card-front
@@ -222,8 +230,8 @@ block content
                 .flip-card-back.rounded-lg.p-5.border.border-light
                   h3.font-weight-light.font-size-normal-below-md=__("Receive regular invitations to our Final Events and meet our graduates")
       .col-6.mb-4.floatings
-        .p-md-4.h-100
-          .p-lg-4.h-100
+              .py-md-3.h-100.pr-3
+                .h-100
             .flip-card
               .flip-card-inner
                 .flip-card-front
@@ -234,8 +242,8 @@ block content
                 .flip-card-back.rounded-lg.p-5.border.border-light
                   h3.font-weight-light.font-size-normal-below-md=__("Show our students what it is like to work in tech by inviting them to your (virtual) offices")
       .col-6.mb-4.floatings
-        .p-md-4.h-100
-          .p-lg-4.h-100
+              .py-md-3.h-100.pl-3
+                .h-100
             .flip-card
               .flip-card-inner
                 .flip-card-front
@@ -246,8 +254,8 @@ block content
                 .flip-card-back.rounded-lg.p-5.border.border-light
                   h3.font-weight-light.font-size-normal-below-md=__("Employer can be reimbursed 50% of the salary paid for half of the time the student is hired")
       .col-6.mb-4.floatings
-        .p-md-4.h-100
-          .p-lg-4.h-100
+              .py-md-3.h-100.pr-3
+                .h-100
             .flip-card
               .flip-card-inner
                 .flip-card-front
@@ -258,8 +266,8 @@ block content
                 .flip-card-back.rounded-lg.p-5.border.border-light
                   h3.font-weight-light.font-size-normal-below-md=__("Hire our students for Intern positions, and our graduates for Junior/Trainee positions ")
       .col-6.mb-4.floatings
-        .p-md-4.h-100
-          .p-lg-4.h-100
+              .py-md-3.h-100.pl-3
+                .h-100
             .flip-card
               .flip-card-inner
                 .flip-card-front

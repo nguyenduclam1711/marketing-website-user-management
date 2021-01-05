@@ -144,6 +144,10 @@
   }
 }
 #headernav > li {
+  &.active,
+  &:active,
+  &:focus,
+  &:focus-within,
   &:hover {
     a.contactlinktext {
       color: white !important;
