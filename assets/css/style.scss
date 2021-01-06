@@ -101,11 +101,14 @@ body:not(.admin).btn {
 .bg-secondary {
   background-color: $secondary !important;
 }
-.bg-primary-light {
+.bg-primary-trans {
   background-color: $primary-trans !important;
 }
 .text-primary-light {
   color: $primary-light !important;
+}
+.bg-primary-light {
+  background-color: $primary-light !important;
 }
 .bg-red-light {
   background-color: $red-light !important;
@@ -129,6 +132,9 @@ nav.container:after {
   display: none !important;
 }
 
+.quarter-transparent {
+  opacity: 0.75;
+}
 .half-transparent {
   opacity: 0.5;
 }
@@ -398,13 +404,6 @@ UPCOMING EVENTS
   object-fit: contain;
 }
 
-.card-body {
-  display: flex;
-  flex-direction: row;
-  font-size: 1.2rem;
-  padding: 24px 0;
-}
-
 .card-date {
   text-transform: uppercase;
 }
@@ -417,7 +416,22 @@ UPCOMING EVENTS
 .card-text {
   color: #6f7287;
 }
-
+.card-header {
+  background-color: transparent;
+  border-bottom: none;
+}
+button[data-toggle="collapse"]{
+  svg {
+    transition: transform .3s ease;
+    transform: rotate(90deg);
+  }
+  &[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+  }
+}
+.accordion > .card {
+    overflow: visible;
+}
 .event-name {
   font-size: 1.2rem;
   text-transform: capitalize;
@@ -481,24 +495,14 @@ body[class*="pages-"] {
     @extend .blockquote;
     color: var(--gray);
 
-    &:before {
-      content: '"';
-      position: absolute;
-      font-size: 2em;
-      top: -0.5em;
-      left: -0.3em;
-      z-index: 1;
-    }
-
     position: relative;
     padding: 1em 0 1em 1em;
-    margin: 3em 0 2em 0;
   }
 }
 .quotesign {
   position: absolute;
   font-size: 4em;
-  top: -0.75em;
+  top: -0.45em;
   left: 0;
   z-index: 1;
   width: 0.7em;
@@ -508,16 +512,6 @@ body[class*="pages-"] {
 .story-item {
   blockquote {
     @extend .blockquote;
-
-    &:before {
-      content: '"';
-      position: absolute;
-      font-size: 2em;
-      top: -0.5em;
-      left: -0.5em;
-      z-index: 1;
-    }
-
     position: relative;
     padding-left: 15px;
   }
@@ -537,6 +531,16 @@ body[class*="pages-"] {
   }
   &.right:after {
     right: 0;
+  }
+  &.left {
+    @include media-breakpoint-down(sm) {
+      left: -50%;
+     }
+  }
+  &.top {
+    @include media-breakpoint-down(sm) {
+      top: 50%;
+     }
   }
   &:after {
     background-color: inherit;
@@ -703,8 +707,8 @@ body:not(.admin) {
     box-sizing: border-box;
     height: 42px;
     border-radius: 0 !important;
-    border: none !important;
-    border-bottom: 1px solid lighten($dark, 10) !important;
+    border: none;
+    border-bottom: 1px solid lighten($dark, 10);
 
     &:focus,
     &:focus-within,
@@ -1078,11 +1082,25 @@ body:not(.admin) {
 .shift-left-percent {
   transform: translateX(50%);
 }
+.shift-left-percent-skew {
+  transform: translateY(50%) skewY(-3deg);
+  @include media-breakpoint-up(lg) {
+    transform: translateX(50%) skewX(-30deg);
+  }
+}
 .shift-left {
   transform: translateX(50px);
 }
 .shift-right {
   transform: translateX(-50px);
+}
+.shift-right-percent {
+  transform: translateX(-50%);
+}
+.shift-md-right-percent {
+  @include media-breakpoint-up(md) {
+    transform: translateX(-50%);
+  }
 }
 .shift-top {
   transform: translateY(-50%);
@@ -1091,7 +1109,15 @@ body:not(.admin) {
   transform: translateY(-10em);
 }
 .shift-bottom {
+  transform: translateY(50px);
+}
+.shift-bottom-percent {
   transform: translateY(50%);
+}
+.shift-md-reset {
+  @include media-breakpoint-up(md) {
+    transform: translate(0, 0) !important;
+  }
 }
 .shift-vertical {
   transform: translate(50%, -50%);
@@ -1114,6 +1140,9 @@ body:not(.admin) {
 }
 .rotate-180 {
   transform: rotate(180deg);
+}
+.rotate-135 {
+  transform: rotate(135deg);
 }
 
 .shift-up-container {
@@ -1158,6 +1187,9 @@ div[class*=" #{$class-slug}"] {
     width: 1em * $i!important;
   }
 }
+.w-300 {
+  width: 300%;
+}
 
 @include media-breakpoint-up(sm) {
   .floatings {
@@ -1189,11 +1221,12 @@ div[class*=" #{$class-slug}"] {
     width: 10px;
     height: 10px;
     margin: 0 10px;
-    border: 1px solid #0003;
+    border: 1px solid #0008;
     border-radius: 50%;
-
+    
     &.active {
-      background-color: $blue;
+      border: 1px solid $primary-light;
+      background-color: $primary-light;
     }
   }
 }
@@ -1272,6 +1305,11 @@ div[class*=" #{$class-slug}"] {
 }
 .shadow-sm {
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.4) !important;
+}
+.shadow-sm-md-none {
+  @include media-breakpoint-up(md) {
+    box-shadow: none !important;
+  }
 }
 .bg-tranition {
   transition: background-color $transition ease;
@@ -1649,7 +1687,12 @@ body[class*="pages-"] {
 }
 .text-md-white {
   @include media-breakpoint-up(md) {
-    color: white;
+    color: white !important;
+  }
+}
+.text-lg-white {
+  @include media-breakpoint-up(lg) {
+    color: white !important;
   }
 }
 .bg-md-white {
@@ -1664,6 +1707,9 @@ body[class*="pages-"] {
   @include media-breakpoint-down(md) {
     font-size: 1em;
   }
+}
+.font-size-120 {
+  font-size: 120%;
 }
 .flip-card {
   background-color: transparent;
@@ -1716,4 +1762,44 @@ body[class*="pages-"] {
   @include media-breakpoint-up(md) {
     justify-content: start !important;
   }
+}
+
+.customselect {
+  position: relative;
+  overflow: hidden;
+  select {
+    width: calc(100% + 1em) !important;
+    display: grid !important;
+    grid-template-areas: "select" !important;
+    align-items: center !important;
+    position: relative !important;
+    max-width: calc(100% + 1em) !important;
+    border: 1px solid var(--select-border) !important;
+    border-radius: 0.25em !important;
+    padding: 0.85em 1.5em !important;
+    font-size: 1.25rem !important;
+    cursor: pointer !important;
+    line-height: 1.1 !important;
+    background-color: $primary-light !important;
+    border: 0 none !important;
+    color: white !important;
+    border-radius: 4px !important;
+    height: auto !important;
+  }
+  &:after {
+    content: "";
+    justify-self: end;
+    width: 0.8em;
+    height: 0.5em;
+    background-color: white;
+    -webkit-clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+.hidden {
+  display: none;
 }

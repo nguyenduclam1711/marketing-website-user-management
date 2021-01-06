@@ -72,6 +72,7 @@ module.exports.updateEmployee = async (req, res) => {
   employee.content = req.body.content;
   employee.locations = req.body.locations;
   employee.contact_user = !!req.body.contact_user ? true : false;
+  employee.feature_on_jobcenter = !!req.body.feature_on_jobcenter ? true : false;
   employee.phone = req.body.phone;
   employee.email = req.body.email;
 
@@ -88,6 +89,7 @@ module.exports.createEmployee = async function(req, res) {
   employee.name = req.body.name;
   employee.locations = req.body.locations;
   employee.contact_user = !!req.body.contact_user ? true : false;
+  employee.feature_on_jobcenter = !!req.body.feature_on_jobcenter ? true : false;
 
   employee.position = req.body.position;
   employee.phone = req.body.phone;

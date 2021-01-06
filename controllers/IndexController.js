@@ -7,8 +7,8 @@ const Partner = require('../models/partner')
 const Employee = require('../models/employee')
 const Setting = require('../models/setting')
 const request = require('request')
-const {sendMail, getAsyncRedis} = require('../helpers/helper')
-const {getAvailableTranslations} = require('./AbstractController')
+const { sendMail, getAsyncRedis } = require('../helpers/helper')
+const { getAvailableTranslations } = require('./AbstractController')
 const fetchEventsByLocation = require("../helpers/fetch_events_by_location");
 let redisClient = null;
 
@@ -38,21 +38,21 @@ module.exports.landingpage = async (req, res) => {
       let query = await getAvailableTranslations(req, res)
 
       const stories = Story
-        .find({...query})
+        .find({ ...query })
         .sort('order')
         .exec({})
       const contact_userRes = Employee
-        .findOne({...query, contact_user: true})
+        .findOne({ ...query, contact_user: true })
         .exec()
       const locations = Location.find({})
         .sort({ order: 1 })
-        .exec() 
-      const partners = Partner.find(query)
+        .exec()
+      const partners = Partner.find({ ...query })
         .sort('order')
         .exec({})
       const courses = Course
         .find(query)
-        .sort({order: 1})
+        .sort({ order: 1 })
         .exec()
       indexData = await Promise.all([stories, locations, partners, courses, contact_userRes])
       const events = await fetchEventsByLocation(true, res.locals.settings.landingpage_number_events);
@@ -150,9 +150,9 @@ module.exports.contact = async (req, res, next) => {
     </tr>
     ${locations && `<tr> <td>Locations: </td> <td>${location.name}</td> </tr>`}
     </table>
-  ` 
-  const settings = await Setting.findOne()
-  
+  `
+    const settings = await Setting.findOne()
+
     const mailOptions = {
       from: 'contact@digitalcareerinstitute.org',
       to: companytour
@@ -198,7 +198,7 @@ module.exports.contact = async (req, res, next) => {
                   'locations': location,
                   'body': body,
                   'is_company': companytour,
-                  'utm_params': remainingUtmParams 
+                  'utm_params': remainingUtmParams
                 })
               }
             ],
@@ -239,8 +239,8 @@ module.exports.tour = async (req, res) => {
   try {
     const query = await getAvailableTranslations(req, res)
     const partners = await Partner.find(query)
-    .sort("-createdAt")
-    .exec();
+      .sort("-createdAt")
+      .exec();
     res.locals.title = 'Become our Hiring Partner | DigitalCareerInstitute'
     res.render('tour', { companytour: true, partners })
   } catch (err) {
@@ -248,7 +248,7 @@ module.exports.tour = async (req, res) => {
   }
 }
 module.exports.newsletter = (req, res) => {
-  const {email} = req.body
+  const { email } = req.body
 
   // Make sure fields are filled
   if (!email) {
@@ -310,7 +310,7 @@ module.exports.newsletter = (req, res) => {
 }
 module.exports.downloadCourseCurriculum = async (req, res, next) => {
   try {
-    const { email, age, TermsofService } = req.body
+    const { email, age, TermsofService, course: requestedCourse } = req.body
     if (age) {
       console.log('Bot stepped into honeypot!')
       req.flash(
@@ -334,7 +334,7 @@ module.exports.downloadCourseCurriculum = async (req, res, next) => {
       return;
     }
     const course = await Course
-      .findOne({ slug: req.headers.referer.match(/\/([^/]*)$/)[1] })
+      .findOne({ slug: requestedCourse })
       .exec()
     const contact = new Contact()
     contact.email = email
@@ -402,6 +402,48 @@ module.exports.downloadCourseCurriculum = async (req, res, next) => {
     console.error(`Error in /controllers/IndexController.js`)
     console.error(e)
     req.flash('danger', e.message);
+    res.redirect(req.headers.referer)
+  }
+}
+module.exports.jobcenter = async (req, res) => {
+  try {
+    let query = await getAvailableTranslations(req, res)
+    const storiesQuery = Story
+      .find({ ...query })
+      .sort('order')
+      .exec({})
+    const employeeQuery = Employee
+      .find({
+        ...query,
+      }).populate('locations')
+      .exec()
+    const locationsQuery = Location.find({})
+      .sort({ order: 1 })
+      .exec()
+    const partnersQuery = Partner.find({ ...query })
+      .sort('order')
+      .exec({})
+
+    const coursesQuery = Course
+      .find(query)
+      .sort({ order: 1 })
+      .exec()
+    indexData = await Promise.all([storiesQuery, locationsQuery, partnersQuery, coursesQuery, employeeQuery])
+
+    let [stories, locations, partners, courses, employees] = indexData;
+    partners.map(b => {
+      var random = Math.floor(Math.random() * partners.length)
+      partners.splice(random, 1)
+    })
+    res.render('jobcenter', {
+      stories,
+      locations,
+      partners,
+      courses,
+      employees
+    })
+  } catch (err) {
+    console.log(err)
     res.redirect(req.headers.referer)
   }
 }

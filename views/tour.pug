@@ -54,7 +54,7 @@ block content
       .row.mx-xl-5
         .col-md-6.d-flex.flex-column.my-5.my-md-0
           h5.font-weight-normal.mr-5=__("WebDev Tech Stack 🚀")
-          .bg-primary-light.rounded-lg.flex-grow-1.mr-md-3
+          .bg-primary-trans.rounded-lg.flex-grow-1.mr-md-3
             ul.mb-3
               li.float-right.list-style-none
                 img.rounded-circle.w-8.h-8.bg-white.shift-vertical-md-margin.border.border-primary(src="/media/code.svg", alt="")
@@ -142,7 +142,7 @@ block content
                 .mx-lg-5
                   .mx-xl-5
                     .mx-lg-5.px-lg-2
-                      .bg-primary-light.p-4.rounded-lg
+                      .bg-primary-trans.p-4.rounded-lg
                         if user && partner && user.userId === partner.userId || user && user.admin === "true"
                           a.position-absolute.right.bottom.btn.btn-outline-primary.z-foreground(href=`/admin/stories/edit/${partner.slug}`) Edit
                             
@@ -190,10 +190,10 @@ block content
               .mx-lg-5
                 .mx-lg-5
                   .mx-xl-5
-              .row.my-5.justify-content-center
-                each partner, index in randompartners.splice(0,6)
+                    .row.my-5.justify-content-center
+                      each partner, index in randompartners.splice(0,6)
                         .col-md-4.col-6.text-center.my-4.d-flex.align-items-center.justify-content-center(class=index === 2 || index === 5 ? `justify-content-md-end` : index === 0 || index === 3 ? `justify-content-md-start`: ``)
-                    img.mw-150.object-fit-contain(alt=partner.title, src="/images/" + partner.partnerlogo)
+                          img.mw-150.object-fit-contain(alt=partner.title, src="/images/" + partner.partnerlogo)
   else if user
     .text-center.my-5
       ="No partners are marked as testimonial_show."

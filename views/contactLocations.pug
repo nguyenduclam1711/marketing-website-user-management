@@ -39,7 +39,7 @@ block content
                     h3.text-white.position-absolute.transform-absolute-center.w-100.text-center=location.name
                   .col-md-6.d-flex.flex-column.justify-content-center.text-center.py-5 
                     if location.street
-                      .h-3.text-primary.mb-1
+                      .h-3.w-3.mt-3.mb-1.bg-primary-light.circle.mx-auto.text-white.p-2
                         include ../assets/media/pin.svg
                       div= location.street
                     if location.zip
@@ -47,13 +47,13 @@ block content
                         = location.zip
                     if location.email
                       a.d-block(href= "mailto:"+location.email)
-                        .h-2.text-primary.mt-3.mb-1
+                        .h-3.w-3.mt-3.mb-1.bg-primary-light.circle.mx-auto
                           include ../assets/icons/mail.svg
                         div                   
                           =location.email
                     if location.phone
                       a.d-block(href=`tel:${location.phone}`)
-                        .h-2.text-primary.mt-3.mb-1
+                        .h-3.w-3.mt-3.mb-1.bg-primary-light.circle.mx-auto
                           include ../assets/icons/phone.svg
                         div                   
                           =location.phone

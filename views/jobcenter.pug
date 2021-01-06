@@ -1,0 +1,279 @@
+extends layout.pug
+block content
+  .overflow-hidden
+    .container
+      .jumbotron.container.mb-0.px-3.bg-light.pb-0.bg-transparent.z-1.position-relative
+        .row
+          .col-md-6.py-5.pr-0.pr-sm-5
+            h1.pt-5=__("Digital Careers Begin at the DCI.")
+            p.mt-5.mb-5=__("Certified and practical training. Language courses. Career service.  Our all-round service for your customer.")
+            a.btn.btn-lg.btn-secondary.mb-3.z-foreground(href='/contact', data-toggle='modal', data-target='#contactFormModal')=__("Contact us")
+
+          .col-md-6.d-none.d-md-block
+            .bg-primary.bg-panel.h-50.position-absolute.bottom.shift-right-percent.w-300.z-minus.shift-md-reset
+            .pb-5
+              .px-5.px-lg-0.px-lg-5.px-sm-5
+                .px-5.px-md-0.px-lg-5.px-sm-5.position-relative.z-foreground.pt-5.pt-lg-0
+                  .bg-primary.floatings.shift-bottom
+                    picture.w-100.pb-md-0.quarter-transparent
+                      source(media="(max-width: 767px)" sizes="1px" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 1w")
+                      source(media="(min-width: 768px)" sizes="300px" srcset="/media/jobcenter_header1-600.jpg 600w, /media/jobcenter_header1-300.jpg 300w")
+                      img.w-100(src="/media/jobcenter_header1-600.jpg" alt="People working at computer")
+
+                .floatings.d-none.d-lg-block
+                  .bg-primary.shift-md-right-percent.pb-5.pb-md-0.mt-n5
+                    picture.w-100.pb-md-0.quarter-transparent
+                      source(media="(max-width: 991px)" sizes="1px" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 1w")
+                      source(media="(min-width: 992px)" sizes="600px" srcset="/media/jobcenter_header2-600.jpg 600w")
+                      img.w-100(src="/media/jobcenter_header2-600.jpg" alt="People working at computer")
+    if partners
+      .bg-light.text-center
+        .container
+          - partnersWithTestimonialsShown = partners
+          if partnersWithTestimonialsShown.length > 0
+            p.m-0.pt-4.pb-3.font-weight-bold=__("Our Partners")
+            .row
+              each partner, index in partnersWithTestimonialsShown
+                //- .splice(0,6)
+                .col-md-3.col-6.text-center.my-4.d-flex.flex-column.justify-content-center.align-items-center
+                  img.mw-150.object-fit-contain.partners-logo(alt=partner.title, src="/images/" + partner.partnerlogo)
+
+    .w-100.d-flex.justify-content-center.justify-content-md-left.mb-5.mb-md-0
+      .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
+        include ../assets/icons/cross.svg
+    .container.mt-5.mt-xl-0.text-center.text-md-left
+      .row
+        .col-md-6.d-flex.flex-column.justify-content-center
+          h2.mb-3=__("Who we are")
+          p=__("The Digital Career Institute gGmbH is a non-profit, AZAV-certified educational institution that specializes in offering continuing education courses in the digital field or for professions in the field of information and communication technology (ICT). What began as a small initiative to integrate refugees into the German labor market is now an established educational institute with over 100 employees throughout Germany. We benefit from the professional expertise and many years of experience of our founders, colleagues and lecturers, who are also strongly networked in the industry.")
+        .col-md-6.text-center.order-md-12.mb-5.mb-5.mb-md-0.mt-5.mt-md-0
+          .px-5.mb-4.text-left
+            .px-sm-5.px-md-0.px-lg-5.text-left.text-md-center
+              .px-5.px-md-0
+                .px-5.px-md-0
+                  img.w-100.w-150(src="/media/azav.png", alt="")
+
+    - ceo = employees.find(e => e.feature_on_jobcenter)
+    if ceo
+      .container.position-relative.mb-3.my-5
+        .row.overflow-hidden
+          .offset-lg-2.col-lg-10.pb-4.pt-5.d-flex.flex-column.justify-content-between.w-100.bg-light-blue.bg-panel.pl-md-0.order-12.order-md-1
+            .row
+              .col-md-10
+                .position-relative.px-3.px-md-5
+                  blockquote.blockquote.mb-0
+                    p.text-muted=ceo.content
+
+                  .text-right
+                    div.font-weight-bold=ceo.name
+                    span.font-weight-bold.text-muted= ceo.position
+
+              .col-md-2.d-flex.flex-column.justify-content-end
+                a.text-dark.stretched-link(href=`/stories/${ceo.slug}`)
+                  .mw-150.ml-auto
+                    +storyImages(ceo, 'col')
+
+    .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
+      include ../assets/icons/arrow.svg
+    if courses
+      .container.mt-5.mt-xl-0
+        .row
+          .col-md-6.mb-5
+            h2.mb-3=__('Our courses')
+            p=__("We offer a range of courses that help our students enter the job market and future-proof their careers.")
+        .row
+          each course in courses
+            .col-md-4.floatings.mb-5.mb-md-0
+              .p-5.h-100(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )
+                h5.font-weight-bold=course.headline
+                .my-3
+                  strong.font-weight-bold.mr-2=__("Duration")+":"
+                  span.padded-text()=course.courselength
+                if course.massnahmeNumber
+                  .my-3
+                    strong.font-weight-bold.mr-2=__("Number")+":"
+                    span.padded-text()=course.massnahmeNumber
+                if course.startInterval
+                  .my-3
+                    strong.font-weight-bold.mr-2=__("Starts every")+":"
+                    span.padded-text()=course.startInterval
+                if course.courseLanguages
+                  .my-3
+                    strong.font-weight-bold.mr-2=__("Language")+":"
+                    span.padded-text()=course.courseLanguages
+                if course.curriculumPdf
+                  a.text-dark(href='#' data-toggle='modal', data-target=`#curriculumpopup` data-course=`${course.slug}`) 
+                    .d-flex.justify-content-between.align-items-center.mt-4
+                      =__("Download complete course curriculum")
+                      .w-4.h-4
+                        include ../assets/icons/download.svg
+    .pb-5
+    .d-flex.justify-content-end
+      .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
+        .rotate-135
+          include ../assets/icons/arrow.svg
+
+    .container.my-5.mt-xl-0
+      h2.mb-3=__("Find your contact person") 
+      .mb-3=__("We are always there for you!")
+      .mb-3=__("Select location")
+      .row.pb-5.pb-md-0
+        .col-md-5.pr-3.pr-sm-5
+          .pr-0.pr-sm-5
+            .customselect.mr-0.mr-md-5
+              select.text-center.pr-5(style="padding-right: 80px !important" class="jobcenter-location-select")
+                each location in locations.filter(l => l.isCampus)
+                  option(data-address=`${location.street}, ${location.zip} ${location.name}`)=location.name
+            
+          
+          .p-5.d-flex.justify-content-center.flex-column.align-items-center.text-center
+            .w-5.h-5.text-muted.mb-4
+              include ../assets/icons/jobcenter_location.svg
+            - firstLocation = locations.filter(l => l.isCampus)[0]
+            #jobcenter_address=`${firstLocation.street}, ${firstLocation.zip} ${firstLocation.name}`
+        .col-md-7.px-5.px-md-0
+          each employee in employees.filter(e => !e.feature_on_jobcenter)
+            .shadow-sm.shadow-sm-md-none.mb-5.mb-md-4
+              .row.jobcenter-location-employee(class=!employee.locations.map(l => l.name.toLowerCase()).includes(locations.filter(l => l.isCampus)[0].name.toLowerCase()) ? "hidden": "", data-location=employee.locations.map(l => l.name))
+                .col-md-3.mb-4.mb-md-0
+                  .px-0.px-lg-3.pt-4.mw-150.mx-auto
+                    +storyImages(employee, 'col')
+                .col-md-9.d-flex.flex-column.justify-content-end.text-center.text-md-left
+                  h6.font-weight-bold=employee.name
+                  .d-flex.flex-md-column.justify-content-center.mb-4.mb-md-0
+                    if employee.phone
+                      a.h-3.w-3.mt-3.mb-1.bg-primary-light.circle.d-md-none(href=`tel:${employee.phone}`)
+                        include ../assets/icons/phone.svg
+                      .position-relative.z-1
+                        p.text-muted.mb-1.d-none.d-md-block
+                          span.font-weight-bold Tel: 
+                          a.text-dark(href=`tel:${employee.phone}`)=employee.phone
+                    if employee.email
+                      .position-relative.z-1.ml-5.ml-md-0
+                        a.h-3.w-3.mt-3.mb-1.bg-primary-light.circle.d-md-none(href=`mailto:${employee.email}`)
+                          include ../assets/icons/mail.svg
+                        p.text-muted.d-none.d-md-block.mb-0
+                          span.font-weight-bold Email: 
+                          a.text-dark(href=`mailto:${employee.email}`)=employee.email
+
+    .pb-5
+    .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
+      include ../assets/icons/rectangle.svg
+    .container.mt-5.mt-xl-0
+      h2.mb-3=__("Our all inclusive service") 
+      =__("In 4 steps to socialinsuranced employment")
+      .mx-5
+        .row.px-md-5.my-5
+          .col-md-6.mb-5.px-2.mb-md-3
+            .border.h-100.d-flex.flex-column.justify-content-between
+              .px-5.pt-5
+                .d-flex.justify-content-center.align-items-center.flex-column.mb-4
+                  .w-13.h-9
+                    include ../assets/icons/jobcenter_online_lesson.svg
+                h5.font-weight-bold=__("MAT")
+                p.mb-4=__("Testing center digital professions in online live distance learning (remote learning).")
+              .d-flex.justify-content-end
+                .bg-primary-light.text-white.w-5.h-5.d-flex.justify-content-center.align-items-center
+                  h3.mb-0="01"
+          .col-md-6.mb-5.px-2.mb-md-3
+            .border.h-100.d-flex.flex-column.justify-content-between
+              .px-5.pt-5
+                .d-flex.justify-content-center.align-items-center.flex-column.mb-4
+                  .w-13.h-9
+                    include ../assets/icons/jobcenter_web_developer.svg
+                h5.font-weight-bold=__("FbW")
+                p.mb-4=__("Further education to become an online marketing specialist or web and software developer incl. language courses.")
+              .d-flex.justify-content-start
+                .bg-primary-light.text-white.w-5.h-5.d-flex.justify-content-center.align-items-center
+                  h3.mb-0="02"
+          .col-md-6.mb-5.px-2.mb-md-3
+            .border.h-100.d-flex.flex-column.justify-content-between
+              .d-flex.justify-content-end
+                .bg-primary-light.text-white.w-5.h-5.d-flex.justify-content-center.align-items-center
+                  h3.mb-0="03"
+              .px-5.pt-5.pt-md-3
+                .d-flex.justify-content-center.align-items-center.flex-column.mb-4
+                  .w-13.h-9
+                    include ../assets/icons/jobcenter_job_interview.svg
+                h5.font-weight-bold=__("Applicationphase")
+                p.mb-4=__("Career training and consulting in the DCI. Access to the wide network of companies and partners.")
+          .col-md-6.mb-5.px-2.mb-md-3
+            .border.h-100.d-flex.flex-column.justify-content-between
+              .d-flex.justify-content-start
+                .bg-primary-light.text-white.w-5.h-5.d-flex.justify-content-center.align-items-center
+                  h3.mb-0="04"
+              .px-5.pt-5.pt-md-3
+                .d-flex.justify-content-center.align-items-center.flex-column.mb-4
+                  .w-13.h-9
+                    include ../assets/icons/jobcenter_handshake.svg
+                h5.font-weight-bold=__("Inclusion")
+                p.mb-4=__("Placement in an employment employment subject to social insurance.")
+
+    .bg-light.position-relative.overflow-hidden.mb-3
+      .container
+        .position-absolute.bg-panel.bg-primary.left.bottom.top.shift-left-percent.w-100
+        .row
+          .col-md-6
+            .p-5.pl-md-0
+              div.mb-3
+                .p-3.mt-4.bg-primary.d-inline-block.text-white
+                  .font-weight-bold.font-size-120.px-4
+                    =__("Sustainable")
+              p.mb-5=__("The digital sector is one of the fastest growing industries in Germany and is proving itself to be a sustainable and crisis-proof industry, especially now.")
+          .col-md-6.text-white
+            .p-5
+              div.mb-3
+                .p-3.mt-4.bg-white.d-inline-block
+                  .font-weight-bold.text-primary.font-size-120.px-4
+                    =__("Digital")
+              p.mb-5=__("Job profiles of our graduates include: Programmer, IT Consultant, Web Designer, Online Marketing Manager, Social Media Manager and many more.")
+
+    .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
+      include ../assets/icons/circle.svg
+    if stories
+      - storysWithTestimonial = stories
+      if storysWithTestimonial.length > 0
+        .container.mt-5.mt-xl-0
+          h2.pb-3
+            =__("Successstories")
+          p=__("See what our participants say")
+
+        #careersuccesscarousel.carousel.slide.mb-5.pt-3.pb-5(data-ride="carousel" data-interval="40000")
+          .carousel-inner
+            each story, index in storysWithTestimonial
+              .carousel-item(class= index === 0 ? ` active` : ``)
+                .container
+                  .mx-lg-5
+                    .mx-lg-5.px-lg-2
+                      .bg-white.p-4.rounded-md.border.pb-5
+                        if user && story && user.userId === story.userId || user && user.admin === "true"
+                          a.position-absolute.right.bottom.btn.btn-outline-primary.z-foreground(href=`/admin/stories/edit/${story.slug}`) Edit
+                            
+                        div.position-relative
+                          .p-5.story-item
+                            blockquote.blockquote.z-0
+                              .quotesign.z-minus(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
+                                include ../assets/icons/om_quote.svg
+                              =story.excerpt
+                          .d-flex.justify-content-end.align-items-center.align-items-md-end.flex-column.flex-md-row
+                            
+                            .text-center.text-md-right.px-3.mb-4.mb-md-0.order-12.order-md-1
+                              h3=story.subtitle
+                              h4.font-italic=story.workPosition
+                            a.stretched-link.text-right.rounded-circle.overflow-hidden.mb-5.mb-md-0.order-1.order-md-12(href=`/stories/${story.slug}` style=`box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1f3fc7 !important`};`)
+                              img.mw-150.object-fit-contain.w-8.square(src="/media/pixel.gif" style=`background-image: url('/images/${story.avatar}'); box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1f3fc7 !important`}`)
+
+            if storysWithTestimonial.length > 1
+              ol.carousel-indicators
+                each story, index in storysWithTestimonial
+                  li(data-target="#careersuccesscarousel" data-slide-to=index class=index==0 ? " active": "")
+
+            //- if storysWithTestimonial.length > 1
+            //-   a.carousel-control-prev(href="#careersuccesscarousel" role="button" data-slide="prev")
+            //-     span.carousel-control-prev-icon(aria-hidden="true")
+            //-     span.sr-only Previous
+            //-   a.carousel-control-next(href="#careersuccesscarousel" role="button" data-slide="next")
+            //-     span.carousel-control-next-icon(aria-hidden="true")
+            //-     span.sr-only Next
+
+    .pb-200

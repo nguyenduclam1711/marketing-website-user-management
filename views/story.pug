@@ -9,6 +9,8 @@ block content
             .pt-3.mt-5
               .position-relative.bg-light-blue.p-5.bg-panel.right
                 blockquote.blockquote
+                  .quotesign.text-primary.third-transparent
+                    include ../assets/icons/om_quote.svg
                   p.text-muted=story.excerpt
               .mt-4.bg-white.p-3
                 p.text-justify !{story.toHTML}

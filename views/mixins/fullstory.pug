@@ -4,7 +4,9 @@ mixin fullstory(story, index = undefined)
     .row
       .col-md-10.pr-md-0
         .position-relative.pt-5.pb-3.pl-md-3
-          blockquote.blockquote
+          blockquote.blockquote.z-1.position-relative.z-1
+            .quotesign.text-primary.z-minus.mt-n4
+              include ../../assets/icons/om_quote.svg
             p.text-muted.small=story.excerpt
 
           div(class=index !== undefined && index % 2 === 0 ? `text-left text-md-right` : `text-right`)

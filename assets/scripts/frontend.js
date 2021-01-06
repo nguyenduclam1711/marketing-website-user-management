@@ -76,6 +76,7 @@ const countUp = () => {
     });
   }
 };
+
 const scrollbuttons = document.getElementsByClassName("scrollbutton");
 for (let i = 0, len = scrollbuttons.length; i < len; i++) {
   scrollbuttons[i].addEventListener("click", function (event) {
@@ -233,17 +234,19 @@ $("#downloadCSV").on("click", function (e) {
     })
     .catch(error => console.log("error ===>", error));
 });
-
+$("#curriculumpopup").on('show.bs.modal', function (e) {
+  e.target.querySelector('form').dataset.course = e.relatedTarget.dataset.course
+});
 Array.from(document.querySelectorAll(".ajaxform")).map(form => {
   form.addEventListener('submit', (e) => {
     e.preventDefault()
     e.target.querySelector('button').disabled = true;
     e.target.querySelector('#contactform_text').classList.add("d-none")
     e.target.querySelector('#contactform_spinner').classList.remove("d-none")
-    const payload = Array.from(e.target.elements)
+    let payload = Array.from(e.target.elements)
       .filter(i => i.type !== "submit")
       .reduce((acc, el) => ({ ...acc, [el.name]: el.type === "checkbox" ? el.checked : el.name === "jobcenter" ? !!Number(el.value) : el.value }), {})
-
+    payload = { ...payload, course: e.target.dataset.course }
     fetch(e.target.action, {
       method: "POST",
       headers: {
@@ -311,4 +314,18 @@ if (notFoundTimer) {
       }
     }
   }, 1000);
+}
+
+const jobcenterSelect = document.querySelector('.jobcenter-location-select')
+if (jobcenterSelect) {
+  jobcenterSelect.addEventListener('change', (e) => {
+    document.getElementById('jobcenter_address').innerText = e.target.selectedOptions[0].dataset.address
+    Array.from(document.querySelectorAll('.jobcenter-location-employee')).map(j => {
+      if (!JSON.parse(j.dataset.location).includes(e.target.selectedOptions[0].innerText)) {
+        j.classList.add('hidden')
+      } else {
+        j.classList.remove('hidden')
+      }
+    })
+  })
 }
