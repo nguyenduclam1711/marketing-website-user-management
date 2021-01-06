@@ -7,7 +7,7 @@ block content
           .col-md-6.py-5.pr-0.pr-sm-5
             h1.pt-5=__("Digital Careers Begin at the DCI.")
             p.mt-5.mb-5=__("Certified and practical training. Language courses. Career service.  Our all-round service for your customer.")
-            a.btn.btn-lg.btn-secondary.mb-3.z-foreground(href='/contact', data-toggle='modal', data-target='#contactFormModal')=__("Contact us")
+            a.btn.btn-lg.btn-secondary.mb-3.z-foreground(href='#courses')=__("Contact us")
 
           .col-md-6.d-none.d-md-block
             .bg-primary.bg-panel.h-50.position-absolute.bottom.shift-right-percent.w-300.z-minus.shift-md-reset
@@ -73,7 +73,7 @@ block content
                   .mw-150.ml-auto
                     +storyImages(ceo, 'col')
 
-    .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
+    .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center#courses
       include ../assets/icons/arrow.svg
     if courses
       .container.mt-5.mt-xl-0
