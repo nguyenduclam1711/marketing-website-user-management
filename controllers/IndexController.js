@@ -47,7 +47,7 @@ module.exports.landingpage = async (req, res) => {
       const locations = Location.find({})
         .sort({ order: 1 })
         .exec() 
-      const partners = Partner.find({})
+      const partners = Partner.find(query)
         .sort('order')
         .exec({})
       const courses = Course
