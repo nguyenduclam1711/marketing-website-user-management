@@ -2,10 +2,13 @@ mixin contactform
   form#contactForm.mt-3.ajaxform(method="POST" action="/contact")
     .row
       .col-md-6.mb-3
-        label(for='name')=__("Name")
-        input#name.form-control(name="name" type='text', placeholder='Name', value=contact ? contact.name : '', required)
+        label(for='firstname')=__("firstname")
+        input#firstname.form-control(name="firstname" type='text', placeholder='Firstname', value=contact ? contact.firstname : '', required)
         input#track.form-control(name="track" type="hidden" )
       .col-md-6.mb-3
+        label(for='lastname')=__("lastname")
+        input#lastname.form-control(name="lastname" type='text', placeholder='Lastname', value=contact ? contact.lastname : '', required)
+      .col.mb-3
         label(for='email')=__("Email")
         span.text-muted
         input#email.form-control(name="email" type='email', placeholder='email@example.com', value=contact ? contact.email : '', required)

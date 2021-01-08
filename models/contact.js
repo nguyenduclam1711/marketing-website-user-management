@@ -2,7 +2,8 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var ContactSchema = new Schema({
-  name: String,
+  firstname: String,
+  lastname: String,
   locations: [{ type: Schema.ObjectId, ref: "Location" }],
   email: String,
   phone: String,

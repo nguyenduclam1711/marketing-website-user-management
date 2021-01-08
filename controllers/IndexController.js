@@ -89,7 +89,7 @@ module.exports.contactLocations = async (req, res) => {
 };
 module.exports.contact = async (req, res, next) => {
   try {
-    const { name, age, email, body, phone, locations, companytour, TermsofService, jobcenter } = req.body
+    const { firstname, lastname, age, email, body, phone, locations, companytour, TermsofService, jobcenter } = req.body
     if (age) {
       console.log('Bot stepped into honeypot!')
       req.flash(
@@ -100,14 +100,15 @@ module.exports.contact = async (req, res, next) => {
       next()
       return;
     }
-    if (!email || !name || !body || !phone || !TermsofService) {
+    if (!email || !firstname || !body || !phone || !TermsofService) {
       req.flash('danger', 'Please fill out all form fields')
       res.redirect(req.headers.referer)
       next()
       return;
     }
     const contact = new Contact()
-    contact.name = name
+    contact.firstname = firstname
+    contact.lastname = lastname
     contact.email = email
     contact.phone = phone.replace(/[a-z]/g, '')
     contact.track = req.headers.referer
@@ -130,7 +131,7 @@ module.exports.contact = async (req, res, next) => {
    </tr>
     <tr>
       <td>Name: </td>
-      <td>${name}</td>
+      <td>${firstname} ${lastname}</td>
     </tr>
     <tr>
       <td>Phone: </td>
@@ -181,8 +182,8 @@ module.exports.contact = async (req, res, next) => {
         body: {
           properties:
             [
-              { property: 'firstname', value: name.split(' ')[0] },
-              { property: 'lastname', value: name.split(' ').slice(1).join(' ') },
+              { property: 'firstname', value: firstname },
+              { property: 'lastname', value: lastname },
               { property: 'email', value: email },
               { property: 'phone', value: phone },
               { property: 'utm_source', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_source) : "" },
@@ -207,6 +208,9 @@ module.exports.contact = async (req, res, next) => {
       };
       hubspotPromise = request(options)
     }
+    // TODO remove logging statement
+    console.log(req.session);
+    console.log(options.body.properties);
     // to save time, mail get send out without waiting for the response
     const info = sendMail(res, req, mailOptions)
     const resolved = await Promise.all([hubspotPromise])

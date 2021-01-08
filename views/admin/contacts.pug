@@ -21,7 +21,8 @@ block content
             a(href=`mailto:${contact.email}`)=contact.email
           td
            a(href=`tel:${contact.phone}`)=contact.phone
-          td=contact.name
+          td=contact.firstname
+          td=contact.lastname
           td
             if contact.locations.length
               each location in contact.locations
