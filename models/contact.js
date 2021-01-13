@@ -10,6 +10,7 @@ var ContactSchema = new Schema({
   track: String,
   body: String,
   jobcenter: Boolean,
+  unemployed: String,
   utm_params: Object,
   updatedAt: {
     type: Date,

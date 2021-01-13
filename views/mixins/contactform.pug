@@ -28,6 +28,15 @@ mixin contactform
               option(value=(location._id) selected=contact && contact.locations && contact.locations[0].toString() === location._id.toString() ?  "selected" :  false )=location.name
         if !companytour
           p
+            label(for="unemployed")
+              =__("Are you currently unemployed?")
+
+            select.mb-3.custom-select.text-muted.form-control(name="unemployed" id="unemployed")
+              option(selected=!contact ? "selected" : false disabled)=__("Please choose...")
+              option(value="Yes" selected=contact && contact.unemployed == "yes" ? "selected" :  false)=__("yes")
+              option(value="No" selected=contact && contact.unemployed == "no" ? false : "selected" )=__("no")
+              option(value="No, but soon" selected=contact && contact.unemployed == "no but soon" ? false : "selected" )=__("no but soon")
+          p
             label(for="jobcenter")
               =__("Are you registered with the Jobcenter or Agentur für Arbeit?")
 
@@ -35,6 +44,7 @@ mixin contactform
               option(selected=!contact ? "selected" : false disabled)=__("Please choose...")
               option(value=1 selected=contact && contact.jobcenter ? "selected" :  false)=__("yes")
               option(value=0 selected=contact && contact.jobcenter ? false : "selected" )=__("no")
+              
         p.dataPrivacyLink
           label.checkbox.TermsofService.text-muted
             =__("I have read and agree to the")

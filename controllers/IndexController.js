@@ -89,7 +89,7 @@ module.exports.contactLocations = async (req, res) => {
 };
 module.exports.contact = async (req, res, next) => {
   try {
-    const { firstname, lastname, age, email, body, phone, locations, companytour, TermsofService, jobcenter } = req.body
+    const { firstname, lastname, age, email, body, phone, locations, companytour, TermsofService, jobcenter, unemployed } = req.body
     if (age) {
       console.log('Bot stepped into honeypot!')
       req.flash(
@@ -114,6 +114,7 @@ module.exports.contact = async (req, res, next) => {
     contact.track = req.headers.referer
     contact.body = body
     contact.jobcenter = !!jobcenter
+    contact.unemployed = unemployed
     if (req.session.utmParams) {
       contact.utm_params = req.session.utmParams
     }
@@ -144,6 +145,9 @@ module.exports.contact = async (req, res, next) => {
     ${!companytour && `<tr>
       <td>Is registered at Jobcenter:</td>
       <td>${!!jobcenter}</td>
+    </tr><tr>
+      <td>Is unemployed:</td>
+      <td>${unemployed}</td>
     </tr>`}
     <tr>
       <td>Content: </td>
@@ -192,6 +196,7 @@ module.exports.contact = async (req, res, next) => {
               { property: 'utm_content', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_content) : "" },
               { property: 'utm_term', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_term) : "" },
               { property: 'afa_jc_registered_', value: !jobcenter ? "No" : "Yes" },
+              { property: 'form_are_you_currently_unemployed', value: unemployed },
               {
                 property: 'form_payload',
                 value: JSON.stringify({
