@@ -31,7 +31,7 @@ mixin contactform
             label(for="unemployed")
               =__("Are you currently unemployed?")
 
-            select.mb-3.custom-select.text-muted.form-control(name="unemployed" id="unemployed")
+            select.mb-3.custom-select.text-muted.form-control(name="unemployed" id="unemployed" required)
               option(selected disabled value="")=__("Please select an answer here...")
               option(value="Yes" selected=contact && contact.unemployed == "yes" ? "selected" : false)=__("yes")
               option(value="No" selected=contact && contact.unemployed == "no" ? "selected" : false)=__("no")
@@ -40,10 +40,10 @@ mixin contactform
             label(for="jobcenter")
               =__("Are you registered with the Jobcenter or Agentur für Arbeit?")
 
-            select.mb-3.custom-select.text-muted.form-control(name="jobcenter" id="jobcenter")
-              option(selected=!contact ? "selected" : false disabled)=__("Please choose...")
-              option(value=1 selected=contact && contact.jobcenter ? "selected" :  false)=__("yes")
-              option(value=0 selected=contact && contact.jobcenter ? false : "selected" )=__("no")
+            select.mb-3.custom-select.text-muted.form-control(name="jobcenter" id="jobcenter" required)
+              option(selected=contact && !contact.jobcenter ? "selected" : false, disabled value="")=__("Please select an answer here...")
+              option(value=1 selected=contact && contact.jobcenter == true ? "selected" : false)=__("yes")
+              option(value=0 selected=contact && contact.jobcenter == false ? "selected" : false )=__("no")
               
         p.dataPrivacyLink
           label.checkbox.TermsofService.text-muted
