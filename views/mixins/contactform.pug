@@ -32,10 +32,10 @@ mixin contactform
               =__("Are you currently unemployed?")
 
             select.mb-3.custom-select.text-muted.form-control(name="unemployed" id="unemployed")
-              option(selected=!contact ? "selected" : false disabled)=__("Please choose...")
-              option(value="Yes" selected=contact && contact.unemployed == "yes" ? "selected" :  false)=__("yes")
-              option(value="No" selected=contact && contact.unemployed == "no" ? false : "selected" )=__("no")
-              option(value="No, but soon" selected=contact && contact.unemployed == "no but soon" ? false : "selected" )=__("no but soon")
+              option(selected disabled value="")=__("Please select an answer here...")
+              option(value="Yes" selected=contact && contact.unemployed == "yes" ? "selected" : false)=__("yes")
+              option(value="No" selected=contact && contact.unemployed == "no" ? "selected" : false)=__("no")
+              option(value="No, but soon" selected=contact && contact.unemployed == "no but soon" ?  "selected" : false )=__("no but soon")
           p
             label(for="jobcenter")
               =__("Are you registered with the Jobcenter or Agentur für Arbeit?")
