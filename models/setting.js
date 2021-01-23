@@ -7,7 +7,6 @@ var SettingSchema = new Schema({
   landingpage_archivements_tours: Number,
   landingpage_archivements_locations: Number,
   landingpage_number_events: Number,
-  landingpage_calltoaction: {type: Schema.ObjectId, ref: "Page"},
   announcement_banner_string: String,
   announcement_banner_cta: String,
   tourmailreceiver: String,
