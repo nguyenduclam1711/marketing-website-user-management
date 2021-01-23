@@ -17,7 +17,7 @@ const Setting = require('./models/setting')
 const { languages } = require('./seeddata')
 const flash = require('connect-flash')
 const cron = require('node-cron')
-const EventsController = require('./controllers/admin/AdminEventsController') 
+const EventsController = require('./controllers/admin/AdminEventsController')
 const mongoose = require('mongoose')
 const { getAvailableTranslations } = require('./controllers/AbstractController')
 const compression = require('compression')
@@ -112,6 +112,14 @@ app.use('/assets', express.static(path.join(__dirname, 'assets/icons/')))
 app.use('/fonts', express.static(path.join(__dirname, 'assets/fonts/')))
 app.use('/media', express.static(path.join(__dirname, 'assets/media/')))
 app.use('/images', express.static(path.join(__dirname, 'uploads/images')))
+// if asset it not found, dont pass missing image request to next and finish with 404 for missing image
+app.use(function (req, res, next) {
+  if (req.url.includes("/images/")) {
+    res.sendStatus(404)
+  } else {
+    next()
+  }
+})
 
 app.use(flash())
 
@@ -143,7 +151,7 @@ app.use(function (req, res, next) {
   if (match) {
     match = match[0].replace(/\//g, ' ')
     res.locals.title =
-      match.charAt(0).toUpperCase() + match.slice(1).replace(/(.*)\?.*/,"$1") + ' | ' + res.locals.title
+      match.charAt(0).toUpperCase() + match.slice(1).replace(/(.*)\?.*/, "$1") + ' | ' + res.locals.title
   }
   console.log(req.method, req.headers.host + req.url)
   next()
@@ -229,7 +237,6 @@ app.use((req, res, next) => {
     var duration = new Date() - start
     res.setHeader('X-Response-Time', duration + 'ms')
   })
-  req.login = promisify(req.login, req)
   next()
 })
 
