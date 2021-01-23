@@ -62,7 +62,7 @@ html.h-100(lang='en')
     link(rel="manifest", href="/assets/site.webmanifest")
     link(rel="mask-icon", href="/assets/safari-pinned-tab.svg", color="#5bbad5")
 
-  body.h-100(data-spy='scroll', data-target='#courseScrollspy', data-offset='1', class=`${pathclass+(currentPath && currentPath.includes('/admin') ? ' admin' : currentPath == "/" ? "index" : "" )}`)
+  body.h-100.d-flex.flex-column(data-spy='scroll', data-target='#courseScrollspy', data-offset='1', class=`${pathclass+(currentPath && currentPath.includes('/admin') ? ' admin' : currentPath == "/" ? "index" : "" )}`)
 
     if live
       noscript
@@ -78,7 +78,7 @@ html.h-100(lang='en')
               button.close.ml-3(type='button', data-dismiss='alert', aria-label='Close')
                 span(aria-hidden='true') ×
 
-    .d-flex.flex-column(class=currentPath && /users|admin/.test(currentPath) ? ' h-100' : "" )
+    .d-flex.flex-column.flex-grow-1(class=currentPath && /users|admin/.test(currentPath) ? ' h-100' : "" )
       if currentPath !== "/"
         div
           +navigation
