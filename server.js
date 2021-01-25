@@ -114,7 +114,7 @@ app.use('/media', express.static(path.join(__dirname, 'assets/media/')))
 app.use('/images', express.static(path.join(__dirname, 'uploads/images')))
 // if asset it not found, dont pass missing image request to next and finish with 404 for missing image
 app.use(function (req, res, next) {
-  if (req.url.includes("/images/")) {
+  if (req.url.includes("/media/") || req.url.includes("/images/")) {
     res.sendStatus(404)
   } else {
     next()
