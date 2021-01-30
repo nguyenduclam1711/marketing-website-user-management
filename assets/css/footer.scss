@@ -41,17 +41,15 @@ footer.site-footer {
   #newsletter{
     margin-bottom: -100px;
     transform: translateY(-200px);
-    @include media-breakpoint-up(lg) {
-      input#newsletter_email {
-        &:hover,
-        &:active,
-        &:focus {
-          background-color: rgba(0,0,0,0.4);
-        }
+    input#newsletter_email {
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: rgba(0,0,0,0.4);
       }
-      button[type="submit"] {
-        @include btn-color($primary, white, white);
-      }
+    }
+    button[type="submit"] {
+      @include btn-color($primary, white, white);
     }
   }
   .triangle {

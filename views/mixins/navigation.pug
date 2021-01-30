@@ -57,14 +57,14 @@ mixin navigation
                 each page in headerPages
                   if page.metapage
                     a.dropdown-item.nav-link(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
-          li.position-relative.nav-item.dropdown
+          li.position-relative.nav-item.dropdown.z-foreground
             a.contactlinktext.dropdown-toggle.mx-0.mx-xl-3.mx-lg-2.nav-link.d-flex.align-items-center.h-100( href="#", data-toggle='modal', data-target='#contactFormModal' aria-haspopup="true" aria-expanded="false" class=course && course.coloraccent ? `` : `text-white` )=__("Contact")
             .contactlink(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
             .dropdown-menu.p-0.border-radius-0.shadow-sm(aria-labelledby='navbarDropdownMenuLink')
               a.dropdown-item.nav-link(href="/contact", class=currentPath == "/contact" ? "active" : "")=__("Campuses")
 
           li.position-relative.nav-item.d-flex.align-items-center
-            a.ml-0.ml-xl-3.ml-lg-2.nav-link.d-flex.align-items-center.h-100(href="/i18n/de" class=locale === "de" ? "active" : "") DE
+            a.mr-2.ml-xl-3.ml-lg-2.nav-link.d-flex.align-items-center.h-100(href="/i18n/de" class=locale === "de" ? "active" : "") DE
             = "|"
-            a.mr-0.mr-xl-3.mr-lg-2.nav-link.d-flex.align-items-center.h-100(href="/i18n/en" class=locale === "en" ? "active" : "") EN
+            a.ml-2.mr-xl-3.mr-lg-2.nav-link.d-flex.align-items-center.h-100(href="/i18n/en" class=locale === "en" ? "active" : "") EN
 

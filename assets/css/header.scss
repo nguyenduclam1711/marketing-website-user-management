@@ -92,23 +92,26 @@
   color: $bluedark;
 }
 
-@include media-breakpoint-up(lg) {
-  #headernav > li {
-    > .contactlink {
-      content: "";
-      transition: transform 0.3s ease, color 0.3s ease, opacity 0.3s ease;
-      transform: skew(-45deg) scale(1, 0.85);
-      background: inherit;
+#headernav > li {
+  > .contactlink {
+    content: "";
+    transition: transform 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+    background: inherit;
+    top: 0;
+    display: block;
+    position: absolute;
+    z-index: -1;
+    opacity: 1;
+    color: white;
+    height: 2em;
+    transform: skew(-15deg) scale(1, 1);
+    left: -10px;
+    width: calc(100% + 20px);
+    @include media-breakpoint-up(lg) {
       height: 100%;
-      width: calc(100% + 2px);
-      top: 0;
-      left: -1px;
-      display: block;
-      position: absolute;
-      z-index: -1;
-      opacity: 1;
       transform: skew(-45deg) scale(1, 1);
-      color: white;
+      left: -1px;
+      width: calc(100% + 2px);
     }
   }
 }

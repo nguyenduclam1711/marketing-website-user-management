@@ -1687,12 +1687,22 @@ body[class*="pages-"] {
 }
 .text-md-white {
   @include media-breakpoint-up(md) {
-    color: white !important;
+    &,
+    &:focus,
+    &:hover,
+    &:active {
+      color: white !important;
+    }
   }
 }
 .text-lg-white {
   @include media-breakpoint-up(lg) {
-    color: white !important;
+    &,
+    &:focus,
+    &:hover,
+    &:active {
+      color: white !important;
+    }
   }
 }
 .bg-md-white {
