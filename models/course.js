@@ -81,6 +81,7 @@ var CourseSchema = new Schema({
   startInterval: String,
   computerKnowledge: String,
   education: String,
+  requiredLanguages: String,
   other: String,
   financingoption: {
     type: Boolean, 

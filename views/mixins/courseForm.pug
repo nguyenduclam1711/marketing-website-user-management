@@ -105,6 +105,9 @@ mixin courseForm
       label(for='computerKnowledge') computerKnowledge
       input#computerKnowledge.form-control(name='computerKnowledge', type='text', placeholder='computerKnowledge', value=course && course.computerKnowledge ? course.computerKnowledge :"")
     .mb-3
+      label(for='requiredLanguages') Required languages
+      input#requiredLanguages.form-control(name='requiredLanguages', type='text', placeholder='requiredLanguages', value=course && course.requiredLanguages ? course.requiredLanguages :"")
+    .mb-3
       label(for='education') Education
       input#education.form-control(name='education', type='text', placeholder='education', value=course && course.education ? course.education :"")
     .mb-3
