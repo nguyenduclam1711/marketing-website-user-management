@@ -15,7 +15,7 @@ mixin courseForm
         label(for="financingoption")="Chancen EG"
         .mb-3
           .custom-control.custom-checkbox
-            input.custom-control-input(name="financingoption" type='checkbox' id="financingoption" value=course.financingoption  checked=(course.financingoption))
+            input.custom-control-input(name="financingoption" type='checkbox' id="financingoption" value=course && course.financingoption  checked=(course && course.financingoption))
             label.custom-control-label(for="financingoption")="Show financingoption section"
       .col
         label.d-block.d-block(for='textColor') Text color
