@@ -113,6 +113,19 @@ mixin courseForm
     .mb-3
       label(for='other') other
       input#other.form-control(name='other', type='text', placeholder='other', value=course && course.other ? course.other :"")
+    h3 Text translations overwrites
+    .mb-3
+      label(for='joinTheTechDisruption') 
+        | joinTheTechDisruption
+        button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Overwrites the text for a specific course. If this field is empty, the normal translations will be used: "Join the tech disruption at DCI and launch your career in tech."')
+          | ?
+      input#joinTheTechDisruption.form-control(name='joinTheTechDisruption', type='text', placeholder='joinTheTechDisruption', value=course && course.joinTheTechDisruption ? course.joinTheTechDisruption :"")
+    .mb-3
+      label(for='startYourClass') 
+        | startYourClass
+        button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Overwrites the text for a specific course. If this field is empty, the normal translations will be used: "Start your Class"')
+          | ?
+      input#startYourClass.form-control(name='startYourClass', type='text', placeholder='startYourClass', value=course && course.startYourClass ? course.startYourClass :"")
 
     h3.mt-3 Archivements
     each archivementGroup, i in courseFormConfig.archivementConfig
