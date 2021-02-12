@@ -98,6 +98,8 @@ module.exports.createCourse = async function(req, res) {
   course.other = req.body.other;
   course.financingoption = !!req.body.financingoption ? true : false;
   course.requiredLanguages = req.body.requiredLanguages;
+  course.joinTheTechDisruption = req.body.joinTheTechDisruption;
+  course.startYourClass = req.body.startYourClass;
 
   if(!!req.body.successStory) {
     course.successStory = req.body.successStory;
@@ -270,6 +272,8 @@ module.exports.updateCourse = async function(req, res) {
   course.other = req.body.other;
   course.financingoption = !!req.body.financingoption ? true : false;
   course.requiredLanguages = req.body.requiredLanguages;
+  course.joinTheTechDisruption = req.body.joinTheTechDisruption;
+  course.startYourClass = req.body.startYourClass;
 
   function verbose(inputs) {
     let items = [];
