@@ -186,8 +186,6 @@ mixin singleCourse
                   =":"
                 span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )
                   = course.courseLanguages 
-                  = " - "
-                  +translate("minimum B2 Level")
             if course.computerKnowledge
               .my-3
                 strong.mr-2
