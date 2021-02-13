@@ -179,13 +179,13 @@ mixin singleCourse
             h5.font-weight-bold.text-muted.text-uppercase.mb-4: +translate("REQUIREMENTS")
 
             h3: +translate("What do we require of you?")
-            if course.courseLanguages
+            if course.requiredLanguages
               .my-3
                 strong.mr-2
                   +translate("Language")
                   =":"
                 span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )
-                  = course.courseLanguages 
+                  = course.requiredLanguages 
             if course.computerKnowledge
               .my-3
                 strong.mr-2
