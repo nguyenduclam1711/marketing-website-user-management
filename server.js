@@ -93,15 +93,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET || 'notaverysecuresecret',
-    key: process.env.SESSION_KEY || 'notaverysecurekey',
-    resave: false,
-    saveUninitialized: false,
-    store: new MongoStore({ mongooseConnection: mongoose.connection })
-  })
-)
 app.use(bodyParser.json({ limit: '50mb' }))
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 
@@ -123,6 +114,15 @@ app.use(function (req, res, next) {
 
 app.use(flash())
 
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || 'notaverysecuresecret',
+    key: process.env.SESSION_KEY || 'notaverysecurekey',
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+  })
+)
 app.use(function (req, res, next) {
   var query = req.query
   if (!!query && Object.keys(query).length > 0 && (req.session.utmParams === undefined || req.session.utmParams.length === 0)) {
