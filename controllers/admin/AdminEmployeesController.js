@@ -64,6 +64,9 @@ module.exports.editEmployee = async function(req, res) {
 
 module.exports.updateEmployee = async (req, res) => {
   const employee = await Employee.findOne({ slug: req.params.slug})
+  if(req.body.avatar && await fs.existsSync(`${process.env.IMAGE_UPLOAD_DIR}${employee.avatar}`)) {
+    await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${employee.avatar}`);
+  }
   employee.name = req.body.name;
   employee.position = req.body.position;
   employee.phone = req.body.phone;
@@ -75,9 +78,7 @@ module.exports.updateEmployee = async (req, res) => {
   employee.feature_on_jobcenter = !!req.body.feature_on_jobcenter ? true : false;
   employee.phone = req.body.phone;
   employee.email = req.body.email;
-
   employee.avatar = req.body.avatar ? req.body.avatar : employee.avatar;
-  employee.avatar = req.files.avatar ? req.body.avatar : employee.avatar;
   await employee.save()
   req.flash("success", `Successfully updated ${employee.name}`);
   res.redirect("/admin/employees/edit/" + employee.slug);

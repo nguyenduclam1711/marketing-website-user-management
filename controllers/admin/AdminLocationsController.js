@@ -63,7 +63,10 @@ module.exports.deleteLocation = (req, res) => {
 }
 
 module.exports.updateLocation = (req, res) => {
-  Location.findById(req.params.id, (err, location) => {
+  Location.findById(req.params.id, async (err, location) => {
+    if (req.body.avatar && await fs.existsSync(`${process.env.IMAGE_UPLOAD_DIR}${location.avatar}`)) {
+      await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${location.avatar}`);
+    }
     if (err) { 
       console.log(err);
       res.send(err) 
@@ -78,7 +81,6 @@ module.exports.updateLocation = (req, res) => {
     location.latitude = req.body.latitude; 
     location.phone = req.body.phone; 
     location.avatar = req.body.avatar ? req.body.avatar : location.avatar;
-    location.avatar = req.files.avatar ? req.body.avatar : location.avatar;
     location.isCampus = req.body.isCampus === "on"; 
     location.save((err) => {
       if (err) { 
