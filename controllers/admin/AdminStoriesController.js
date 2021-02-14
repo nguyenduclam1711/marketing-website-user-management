@@ -103,6 +103,12 @@ module.exports.updateStory = async function (req, res) {
   const query = !isAdmin(req) ? {userId: req.user._id, slug: req.params.slug} : {slug: req.params.slug}
   let story = await Story.findOne(query).populate('languageVersion').exec()
   try {
+    if (req.body.avatar && await fs.existsSync(`${process.env.IMAGE_UPLOAD_DIR}${story.avatar}`)) {
+      await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${story.avatar}`);
+    }
+    if (req.body.companylogo && await fs.existsSync(`${process.env.IMAGE_UPLOAD_DIR}${story.companylogo}`)) {
+      await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${story.companylogo}`);
+    }
     story.title = req.body.title;
     story.subtitle = req.body.subtitle;
     story.slug = req.body.slug;
