@@ -43,6 +43,9 @@ module.exports.editPartner = async function(req, res) {
 
 module.exports.updatePartner = async (req, res) => {
   const partner = await Partner.findOne({ slug: req.params.slug })
+  if (req.body.partnerlogo && await fs.existsSync(`${process.env.IMAGE_UPLOAD_DIR}${partner.partnerlogo}`)) {
+    await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${partner.partnerlogo}`);
+  }
   partner.title = req.body.title;
   partner.link = req.body.link;
   partner.partnerlogo = req.files.partnerlogo
@@ -51,10 +54,7 @@ module.exports.updatePartner = async (req, res) => {
   partner.testimonial_name = req.body.testimonial_name !== "" ? req.body.testimonial_name : ""
   partner.testimonial_content = req.body.testimonial_content !== "" ? req.body.testimonial_content : ""
   partner.testimonial_job = req.body.testimonial_job !== "" ? req.body.testimonial_job : ""
-  partner.testimonial_show = req.body.testimonial_show === "on" ? true: false
-  if (partner.partnerlogo && fs.existsSync(`${partner.partnerlogo}.jpg`)) {
-    await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${partner.partnerlogo}`)
-  }
+  partner.testimonial_show = req.body.testimonial_show === "on" ? true : false
   await partner.save();
   req.flash("success", `Successfully updated ${partner.title}`);
   res.redirect("/admin/partners/edit/" + partner.slug);
