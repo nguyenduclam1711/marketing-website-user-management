@@ -81,11 +81,12 @@ block content
           .col-md-6.mb-5
             h2.mb-3=__('Our courses')
             p=__("We offer a range of courses that help our students enter the job market and future-proof their careers.")
-        .row
+        .row.justify-content-center
           each course in courses
-            .col-md-4.floatings.mb-5.mb-md-0
+            .col-md-4.floatings.mb-5.mb-md-4
               .p-5.h-100(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )
-                h5.font-weight-bold=course.headline
+                a.text-dark(href=`/courses/${course.slug}`)
+                  h5.font-weight-bold=course.headline
                 .my-3
                   strong.font-weight-bold.mr-2=__("Duration")+":"
                   span.padded-text()=course.courselength
