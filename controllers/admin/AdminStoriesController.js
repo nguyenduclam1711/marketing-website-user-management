@@ -4,6 +4,7 @@ mongoose.Promise = global.Promise
 const Story = require("../../models/story");
 const {isAdmin} = require("../../helpers/helper");
 const multer = require('multer');
+const path = require("path");
 const jimp = require('jimp');
 const uuid = require('uuid');
 const fs = require('fs');
@@ -103,11 +104,11 @@ module.exports.updateStory = async function (req, res) {
   const query = !isAdmin(req) ? {userId: req.user._id, slug: req.params.slug} : {slug: req.params.slug}
   let story = await Story.findOne(query).populate('languageVersion').exec()
   try {
-    if (req.body.avatar && await fs.existsSync(`${process.env.IMAGE_UPLOAD_DIR}${story.avatar}`)) {
-      await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${story.avatar}`);
+    if (req.body.avatar && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, story.avatar))) {
+      await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, story.avatar));
     }
-    if (req.body.companylogo && await fs.existsSync(`${process.env.IMAGE_UPLOAD_DIR}${story.companylogo}`)) {
-      await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${story.companylogo}`);
+    if (req.body.companylogo && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, story.companylogo))) {
+      await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, story.companylogo));
     }
     story.title = req.body.title;
     story.subtitle = req.body.subtitle;
@@ -184,7 +185,7 @@ exports.resizeImages = async (request, response, next) => {
       const image = await jimp.read(singleFile[0].path);
       // await image.cover(350, 180);
       await image.write(
-        `${process.env.IMAGE_UPLOAD_DIR}/${request.body[singleFile[0].fieldname]}`
+        path.resolve(process.env.IMAGE_UPLOAD_DIR, request.body[singleFile[0].fieldname])
       );
       fs.unlinkSync(singleFile[0].path);
     } catch (error) {

@@ -2,6 +2,7 @@ require("dotenv").config({ path: __dirname + "/../.env" });
 const multer = require("multer");
 const fs = require("fs");
 const jimp = require("jimp");
+const path = require("path");
 const Employee = require("../../models/employee");
 const Location = require("../../models/location");
 const uuid = require("uuid");
@@ -64,8 +65,8 @@ module.exports.editEmployee = async function(req, res) {
 
 module.exports.updateEmployee = async (req, res) => {
   const employee = await Employee.findOne({ slug: req.params.slug})
-  if(req.body.avatar && await fs.existsSync(`${process.env.IMAGE_UPLOAD_DIR}${employee.avatar}`)) {
-    await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${employee.avatar}`);
+  if(req.body.avatar && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, employee.avatar))) {
+    await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, employee.avatar));
   }
   employee.name = req.body.name;
   employee.position = req.body.position;
@@ -141,9 +142,9 @@ exports.resizeImages = async (request, response, next) => {
       const image = await jimp.read(singleFile[0].path);
       await image.cover(600, 600);
       await image.write(
-        `${process.env.IMAGE_UPLOAD_DIR}/${
+        path.resolve(process.env.IMAGE_UPLOAD_DIR,
           request.body[singleFile[0].fieldname]
-        }`
+        )
       );
       fs.unlinkSync(singleFile[0].path);
     } catch (error) {

@@ -1,4 +1,5 @@
 require("dotenv").config({ path: __dirname + "/../.env" });
+const path = require("path");
 const multer = require("multer");
 const fs = require("fs");
 const jimp = require("jimp");
@@ -43,8 +44,8 @@ module.exports.editPartner = async function(req, res) {
 
 module.exports.updatePartner = async (req, res) => {
   const partner = await Partner.findOne({ slug: req.params.slug })
-  if (req.body.partnerlogo && await fs.existsSync(`${process.env.IMAGE_UPLOAD_DIR}${partner.partnerlogo}`)) {
-    await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${partner.partnerlogo}`);
+  if (req.body.partnerlogo && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, partner.partnerlogo))) {
+    await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, partner.partnerlogo));
   }
   partner.title = req.body.title;
   partner.link = req.body.link;

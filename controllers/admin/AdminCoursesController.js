@@ -1,4 +1,5 @@
 require("dotenv").config({ path: __dirname + "/../.env" });
+const path = require("path");
 const multer = require("multer");
 const uuid = require("uuid");
 const fs = require("fs");
@@ -220,21 +221,26 @@ exports.resizeImages = async (request, response, next) => {
     ] = `${singleFile[0].filename}`;
     try {
       if (singleFile[0].mimetype === "image/svg+xml" || singleFile[0].mimetype === "application/pdf") {
-        const fileObject = fs.readFileSync(singleFile[0].path);
         const filename = `${request.body[singleFile[0].fieldname].split('.')[0]}_${uuid(4)}.${request.body[singleFile[0].fieldname].split('.').reverse()[0]}`
+        const fileObject = fs.readFileSync(singleFile[0].path);
         request.body[singleFile[0].fieldname] = filename
         fs.writeFileSync(
-          `${process.env.IMAGE_UPLOAD_DIR}${ filename }`,
-          fileObject
-        );
+          path.resolve(
+            process.env.IMAGE_UPLOAD_DIR, filename
+          ),
+          fileObject)
       }
       if (singleFile[0].mimetype.startsWith("image/")) {
         const image = await jimp.read(singleFile[0].path);
         await image.cover(500, 500);
         await image.write(
-          `${process.env.IMAGE_UPLOAD_DIR}/${
-            request.body[singleFile[0].fieldname]
-          }`
+            path.resolve(
+              process.env.IMAGE_UPLOAD_DIR,
+              request.body[singleFile[0].fieldname]
+            )
+        );
+        await image.write(
+          path.resolve(process.env.IMAGE_UPLOAD_DIR, request.body[singleFile[0].fieldname])
         );
         if(fs.existsSync(singleFile[0].path)){
           fs.unlinkSync(singleFile[0].path);
@@ -250,50 +256,50 @@ exports.resizeImages = async (request, response, next) => {
 module.exports.updateCourse = async function(req, res) {
   let course = await Course.findOne({ slug: req.params.slug });
 
-  if(req.body.curriculumPdf && await fs.existsSync(`${process.env.IMAGE_UPLOAD_DIR}${course.curriculumPdf}`)) {
-    await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${course.curriculumPdf}`);
+  if(req.body.curriculumPdf && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.curriculumPdf))) {
+    await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.curriculumPdf));
   }
-  if(req.body.icon && await fs.existsSync(`${process.env.IMAGE_UPLOAD_DIR}${course.icon}`)) {
-    await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${course.icon}`);
+  if(req.body.icon && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.icon))) {
+    await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.icon));
   }
-  if(req.body.subicon && await fs.existsSync(`${process.env.IMAGE_UPLOAD_DIR}${course.subicon}`)) {
-    await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${course.subicon}`);
+  if(req.body.subicon && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.subicon))) {
+    await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.subicon));
   }
-  if(req.body.archivement_icon_1 && await fs.existsSync(`${process.env.IMAGE_UPLOAD_DIR}${course.archivement_icon_1}`)) {
-    await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${course.archivement_icon_1}`);
+  if(req.body.archivement_icon_1 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_1))) {
+    await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_1));
   }
-  if(req.body.archivement_icon_2 && await fs.existsSync(`${process.env.IMAGE_UPLOAD_DIR}${course.archivement_icon_2}`)) {
-    await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${course.archivement_icon_2}`);
+  if(req.body.archivement_icon_2 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_2))) {
+    await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_2));
   }
-  if(req.body.archivement_icon_3 && await fs.existsSync(`${process.env.IMAGE_UPLOAD_DIR}${course.archivement_icon_3}`)) {
-    await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${course.archivement_icon_3}`);
+  if(req.body.archivement_icon_3 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_3))) {
+    await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_3));
   }
-  if(req.body.archivement_icon_4 && await fs.existsSync(`${process.env.IMAGE_UPLOAD_DIR}${course.archivement_icon_4}`)) {
-    await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${course.archivement_icon_4}`);
+  if(req.body.archivement_icon_4 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_4))) {
+    await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_4));
   }
-  if(req.body.archivement_icon_5 && await fs.existsSync(`${process.env.IMAGE_UPLOAD_DIR}${course.archivement_icon_5}`)) {
-    await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${course.archivement_icon_5}`);
+  if(req.body.archivement_icon_5 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_5))) {
+    await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_5));
   }
-  if(req.body.archivement_icon_6 && await fs.existsSync(`${process.env.IMAGE_UPLOAD_DIR}${course.archivement_icon_6}`)) {
-    await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${course.archivement_icon_6}`);
+  if(req.body.archivement_icon_6 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_6))) {
+    await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_6));
   }
-  if(req.body.features_icon_1 && await fs.existsSync(`${process.env.IMAGE_UPLOAD_DIR}${course.features_icon_1}`)) {
-    await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${course.features_icon_1}`);
+  if(req.body.features_icon_1 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_1))) {
+    await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_1));
   }
-  if(req.body.features_icon_2 && await fs.existsSync(`${process.env.IMAGE_UPLOAD_DIR}${course.features_icon_2}`)) {
-    await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${course.features_icon_2}`);
+  if(req.body.features_icon_2 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_2))) {
+    await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_2));
   }
-  if(req.body.features_icon_3 && await fs.existsSync(`${process.env.IMAGE_UPLOAD_DIR}${course.features_icon_3}`)) {
-    await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${course.features_icon_3}`);
+  if(req.body.features_icon_3 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_3))) {
+    await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_3));
   }
-  if(req.body.features_icon_4 && await fs.existsSync(`${process.env.IMAGE_UPLOAD_DIR}${course.features_icon_4}`)) {
-    await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${course.features_icon_4}`);
+  if(req.body.features_icon_4 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_4))) {
+    await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_4));
   }
-  if(req.body.features_icon_5 && await fs.existsSync(`${process.env.IMAGE_UPLOAD_DIR}${course.features_icon_5}`)) {
-    await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${course.features_icon_5}`);
+  if(req.body.features_icon_5 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_5))) {
+    await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_5));
   }
-  if(req.body.features_icon_6 && await fs.existsSync(`${process.env.IMAGE_UPLOAD_DIR}${course.features_icon_6}`)) {
-    await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${course.features_icon_6}`);
+  if(req.body.features_icon_6 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_6))) {
+    await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_6));
   }
   
   course.slug = req.body.slug;

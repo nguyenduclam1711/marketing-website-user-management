@@ -1,4 +1,5 @@
 const Location = require("../../models/location");
+const path = require("path");
 const multer = require("multer");
 const fs = require("fs");
 const jimp = require("jimp");
@@ -64,8 +65,8 @@ module.exports.deleteLocation = (req, res) => {
 
 module.exports.updateLocation = (req, res) => {
   Location.findById(req.params.id, async (err, location) => {
-    if (req.body.avatar && await fs.existsSync(`${process.env.IMAGE_UPLOAD_DIR}${location.avatar}`)) {
-      await fs.unlinkSync(`${process.env.IMAGE_UPLOAD_DIR}${location.avatar}`);
+    if (req.body.avatar && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, location.avatar))) {
+      await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, location.avatar));
     }
     if (err) { 
       console.log(err);
