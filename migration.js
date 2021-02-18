@@ -17,9 +17,13 @@ mongoose.connect(process.env.MONGOURL, {
 mongoose.Promise = global.Promise;
 (async () => {
   try {
-    const res = await Partner.find({})
-    await Promise.all(res.map(async res => await res.save()))
-    console.log("Migration successful");
+    const res = await Employee.find({ contact_user: { $exists: 1 } })
+    await Promise.all(res.map(async res => {
+      res.set('contact_user', undefined, { strict: false })
+      await res.save()
+    }))
+    console.log(`Migration successful. Processed ${res.length} documents`);
+    process.exit()
   } catch (error) {
     console.log('error', error);
   }
