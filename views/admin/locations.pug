@@ -9,6 +9,10 @@ block content
           each location in locations
             li.list-group-item.mb-3.hover-shadow
               h2.mr-3=location.name
+              if location.contactEmployee
+                div
+                  = "contactEmployee: "
+                  =location.contactEmployee.name
               span.mr-3="Order: " + location.order
 
               form.d-flex.justify-content-between(method='POST', action='/admin/locations/delete/'+location._id +'?_method=DELETE')
