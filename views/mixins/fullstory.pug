@@ -12,7 +12,6 @@ mixin fullstory(story, index = undefined)
           div(class=index !== undefined && index % 2 === 0 ? `text-left text-md-right` : `text-right`)
             a.text-dark.stretched-link(href=`/stories/${story.slug}`)
               div.font-weight-bold=story.title
-              = index
               = story.workPosition
 
       .col-md-2.d-flex.flex-column.justify-content-end.py-3
