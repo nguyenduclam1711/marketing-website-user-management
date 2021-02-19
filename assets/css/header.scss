@@ -202,8 +202,8 @@
     .dropdown-item:active,
     .dropdown-item:focus,
     .dropdown-item.active {
-      background: $primary;
-      color: white;
+      background: $primary !important;
+      color: white !important;
     }
   }
 }

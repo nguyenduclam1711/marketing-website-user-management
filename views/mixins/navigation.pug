@@ -21,9 +21,9 @@ mixin navigation
               =__("Courses")
 
             .dropdown-menu.border-radius-0.shadow-sm.z-0.p-0(aria-labelledby='navbarDropdownMenuLink')
-              a.dropdown-item.nav-link.px-2(class= currentPath === ("/courses") ? "active" : "" href='/courses')=__("All courses")
+              a.dropdown-item.nav-link.px-2(class= currentPath.includes("/courses") ? "active" : "" href='/courses')=__("All courses")
               each course in courses
-                a.dropdown-item.nav-link.px-2(class= currentPath === ("/courses/" + course.slug) ? "active" : "" href='/courses/'+ course.slug)=course.headline
+                a.dropdown-item.nav-link.px-2(class= currentPath.includes("/courses/" + course.slug) ? "active" : "" href='/courses/'+ course.slug)=course.headline
           li.position-relative.nav-item
             a.mx-0.mx-xl-3.mx-lg-2.nav-link.d-flex.align-items-center.h-100.z-1(class=currentPath && currentPath.includes('/events') && !currentPath.includes('/admin') ? "active" : "", href='/events')
               =__("Events")
@@ -49,10 +49,10 @@ mixin navigation
             a.mx-0.mx-xl-3.mx-lg-2.nav-link.d-flex.align-items-center.h-100.z-1(class=currentPath && currentPath.includes("/tour") ? "active" : "" href='/tour')=__("Companies")
 
           li.position-relative.nav-item.dropdown
-            a.dropdown-toggle.mx-0.mx-xl-3.mx-lg-2.nav-link.d-flex.align-items-center.h-100(class=page && page.metapage !== "true" && currentPath && currentPath.includes("/pages") || currentPath && currentPath.includes("/about-us") : "", href="#", data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")=__("Get involved")
+            a.dropdown-toggle.mx-0.mx-xl-3.mx-lg-2.nav-link.d-flex.align-items-center.h-100(class=( page && (page.metapage != "true") && currentPath && currentPath.includes("/pages") ) || ( currentPath && currentPath.includes("/about-us") ) ? "active" : "", href="#", data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")=__("Get involved")
             .dropdown-menu.p-0.border-radius-0.shadow-sm(aria-labelledby='navbarDropdownMenuLink')
-              a.dropdown-item.nav-link(href='/about-us/' class=currentPath && currentPath.includes("/about-us") ? "active" : "")=__("About us")
-              a.dropdown-item.nav-link(href='https://dci.jobs.personio.de/' class=currentPath == "/jobs" ? "active" : "")=__("Jobs")
+              a.dropdown-item.nav-link(href='/about-us/', class=currentPath && currentPath.includes("/about-us") ? "active" : "")=__("About us")
+              a.dropdown-item.nav-link(href='https://dci.jobs.personio.de/', class=currentPath == "/jobs" ? "active" : "")=__("Jobs")
               if headerPages
                 each page in headerPages
                   if page.metapage
