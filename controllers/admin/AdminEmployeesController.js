@@ -8,7 +8,7 @@ const Location = require("../../models/location");
 const uuid = require("uuid");
 const AbstractController = require("./AbstractController");
 
-module.exports.getEmployees = async function(req, res) {
+module.exports.getEmployees = async function (req, res) {
   try {
     let employees = await Employee.find({})
       .populate('language')
@@ -26,7 +26,7 @@ module.exports.getEmployees = async function(req, res) {
 };
 
 module.exports.deleteEmployee = async function (req, res, next) {
-  Employee.findOne({ slug: req.params.slug})
+  Employee.findOne({ slug: req.params.slug })
     .populate('language')
     .populate('languageVersion')
     .exec((err, doc) => {
@@ -37,12 +37,12 @@ module.exports.deleteEmployee = async function (req, res, next) {
     })
 };
 
-module.exports.editEmployee = async function(req, res) {
+module.exports.editEmployee = async function (req, res) {
   const employee = await Employee
-  .findOne({ slug: req.params.slug})
-  .populate('language')
-  .populate('languageVersion')
-  .exec()
+    .findOne({ slug: req.params.slug })
+    .populate('language')
+    .populate('languageVersion')
+    .exec()
 
   let alllocations = await Location.find({}).exec();
   all = alllocations.map(loc => {
@@ -75,7 +75,6 @@ module.exports.updateEmployee = async (req, res) => {
   employee.mail = req.body.mail;
   employee.content = req.body.content;
   employee.locations = req.body.locations;
-  employee.contact_user = !!req.body.contact_user ? true : false;
   employee.feature_on_jobcenter = !!req.body.feature_on_jobcenter ? true : false;
   employee.phone = req.body.phone;
   employee.email = req.body.email;
@@ -85,12 +84,11 @@ module.exports.updateEmployee = async (req, res) => {
   res.redirect("/admin/employees/edit/" + employee.slug);
 };
 
-module.exports.createEmployee = async function(req, res) {
+module.exports.createEmployee = async function (req, res) {
   var employee = await new Employee();
 
   employee.name = req.body.name;
   employee.locations = req.body.locations;
-  employee.contact_user = !!req.body.contact_user ? true : false;
   employee.feature_on_jobcenter = !!req.body.feature_on_jobcenter ? true : false;
 
   employee.position = req.body.position;
@@ -104,10 +102,10 @@ module.exports.createEmployee = async function(req, res) {
   res.redirect("/admin/employees");
 }
 const storage = multer.diskStorage({
-  destination: function(request, file, next) {
+  destination: function (request, file, next) {
     next(null, "./temp");
   },
-  filename: function(request, file, next) {
+  filename: function (request, file, next) {
     next(null, uuid(4));
   }
 });
@@ -135,9 +133,8 @@ exports.resizeImages = async (request, response, next) => {
   }
   for await (const singleFile of Object.values(request.files)) {
     const extension = singleFile[0].mimetype.split("/")[1];
-    request.body[singleFile[0].fieldname] = `${
-      singleFile[0].filename
-    }.${extension}`;
+    request.body[singleFile[0].fieldname] = `${singleFile[0].filename
+      }.${extension}`;
     try {
       const image = await jimp.read(singleFile[0].path);
       await image.cover(600, 600);

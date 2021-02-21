@@ -124,8 +124,12 @@ a:link {
 .white-space-nowrap {
   white-space: nowrap;
 }
-
-
+.word-break-break-all {
+  word-break: break-all;
+}
+.line-height-1 {
+  line-height: 1;
+}
 .h3-md {
   @include media-breakpoint-up(md) {
     font-size: 1.75rem;

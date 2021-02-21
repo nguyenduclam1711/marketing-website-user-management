@@ -25,11 +25,7 @@ mixin employeeForm
         .form-group
           label(for='email') Email
           input#email.form-control(name='email', type='email', placeholder='Mail',autofocus='', value=editPath ? employee.email : "")
-        .form-group
-          label.checkbox.text-muted
-            ="Contact person?"
-            input(type='checkbox', name='contact_user', value="on", checked=employee && !!employee.contact_user ? true : false, )
-            span.checkmark
+        
         .form-group
           label.checkbox.text-muted
             ="Show on Jobcenterpage?"

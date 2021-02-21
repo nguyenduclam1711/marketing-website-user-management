@@ -41,9 +41,6 @@ module.exports.landingpage = async (req, res) => {
         .find({ ...query })
         .sort('order')
         .exec({})
-      const contact_userRes = Employee
-        .findOne({ ...query, contact_user: true })
-        .exec()
       const locations = Location.find({})
         .sort({ order: 1 })
         .exec()
@@ -54,7 +51,7 @@ module.exports.landingpage = async (req, res) => {
         .find(query)
         .sort({ order: 1 })
         .exec()
-      indexData = await Promise.all([stories, locations, partners, courses, contact_userRes])
+      indexData = await Promise.all([stories, locations, partners, courses])
       const events = await fetchEventsByLocation(true, res.locals.settings.landingpage_number_events);
       indexData.push(events)
       if (process.env.USE_REDIS === 'true') {
@@ -65,14 +62,13 @@ module.exports.landingpage = async (req, res) => {
         }
       }
     }
-    const [storiesRes, locationsRes, partnersRes, coursesRes, contact_user, events] = indexData;
+    const [storiesRes, locationsRes, partnersRes, coursesRes, events] = indexData;
 
     res.render('index', {
       events,
       stories: storiesRes,
       partners: partnersRes,
       locations: locationsRes,
-      contact_user,
       courses: coursesRes
     })
   } catch (err) {
@@ -80,7 +76,7 @@ module.exports.landingpage = async (req, res) => {
   }
 }
 module.exports.contactLocations = async (req, res) => {
-  const locations = await Location.find({}).sort({ order: 1 })
+  const locations = await Location.find({}).populate('contactEmployee').sort({ order: 1 }).exec();
   const contact = req.body
   res.render('contactLocations', {
     locations,
@@ -426,7 +422,8 @@ module.exports.jobcenter = async (req, res) => {
         ...query,
       }).populate('locations')
       .exec()
-    const locationsQuery = Location.find({})
+    const locationsQuery = Location.find({ contactEmployee: { $exists: 1 } })
+      .populate('contactEmployee')
       .sort({ order: 1 })
       .exec()
     const partnersQuery = Partner.find({ ...query })

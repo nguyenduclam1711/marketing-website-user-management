@@ -29,19 +29,14 @@ mixin locationForm
       if location && location.avatar !== "false"
         img.w-100.mw-150.mh-150.object-fit-cover(src="/images/"+location.avatar)
       input#avatar.form-control-file(type='file' name='avatar')
-
-    .mb-3
-      label(for='phone') Phone
-      input#phone.form-control(name='phone', type='number',
-      placeholder='Phone',  autofocus='' value=editPath ?
-      location.phone : "")
       
-    .mb-3
-      label(for='email') Email
-      input#email.form-control(name='email', type='email',
-      placeholder='Email', autofocus='' value=editPath ?
-      location.email : "")
-
+    .form-group.mb-3
+        label(for='selectContact') Contact Person for this Location
+        select#selectContact.form-control(name="contactEmployee")
+          option(value = location && location.contactEmployee ? location.contactEmployee._id : " ")=location && location.contactEmployee ? location.contactEmployee.name : "-- Select --"
+          each employee in employees
+            option(value=employee._id)=employee.name
+      
     .mb-3
       label(for='street') Street
       input#street.form-control(name='street', type='text', placeholder='Street',  autofocus='' value=editPath ?  location.street : "")
