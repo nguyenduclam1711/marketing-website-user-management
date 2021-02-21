@@ -86,6 +86,7 @@ for (let i = 0, len = scrollbuttons.length; i < len; i++) {
       block: "start",
       inline: "nearest"
     });
+    window.history.pushState({}, {}, event.target.attributes.href.value)
   });
 }
 const throttle = (func, limit) => {

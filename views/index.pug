@@ -1,8 +1,7 @@
 extends layout.pug
 block content
-  .section
-
-    .content.overflow-hidden
+  .section.overflow-hidden
+    .content
       section.homeSection.d-flex.flex-column.position-relative.bg-light-grey
         if currentPath == "/"
           +navigation
@@ -14,7 +13,7 @@ block content
                 h2.mb-5.display-1.font-weight-bold: +translate('Digital career')
                 p.subtitle.h5.mb-5.text-shadow-light-blue: +translate("Learn digital skills with us to get the most fulfilling jobs")
                 .d-flex
-                  a.mb-3.btn.btn-lg.btn-secondary.mr-2.mr-md-4(href='#ourcourses', role='button'): +translate("Browse Courses")
+                  a.mb-3.btn.btn-lg.btn-secondary.mr-2.mr-md-4.scrollbutton(href='#ourcourses', role='button'): +translate("Browse Courses")
               .col-md-6.py-5.order-1.order-md-12
                 img.w-100(src="/media/hero.svg", alt="")
 
