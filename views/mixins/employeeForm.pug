@@ -39,7 +39,11 @@ mixin employeeForm
           input#position.form-control(name='position', type='text', placeholder='Position', required='', autofocus='', value=editPath ? employee.position : "")
 
         .my-3
-          label Person available in locations:
+          label 
+            | Person available in locations:
+            button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Displays on the about-us the location for the employee as "BER" "HAM" etc.')
+              | ?
+
           .d-flex.flex-wrap
             each location in locations
               .custom-control.custom-checkbox.mr-3.mb-3

@@ -31,6 +31,10 @@ mixin locationForm
       input#avatar.form-control-file(type='file' name='avatar')
       
     .form-group.mb-3
+      label(for='street') 
+        | Contact employees
+      button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Displays on the Jobcenter page the contactpersons next to the location dropdown')
+        | ?
       each employee in employees
         .custom-control.custom-checkbox
           input.custom-control-input(name="contactEmployee" type='checkbox' id=employee.name value=employee._id  checked=(location && location.contactEmployee.includes(employee._id)) ? true : false)
