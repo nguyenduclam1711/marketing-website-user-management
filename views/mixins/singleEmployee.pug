@@ -11,6 +11,6 @@ mixin singleEmployee(employee, classes="")
             .position-relative.z-1
               p.text-muted.mb-1=employee.position
           if employee.locations.length
-            .position-relative.z-1.text-right
+            .position-relative.z-1.text-right.d-flex.flex-wrap
               each loc in employee.locations
                 a.ml-2.font-weight-bold.text-uppercase.text-primary(title=loc.name href="/contact")= loc.name.substr(0, 3)

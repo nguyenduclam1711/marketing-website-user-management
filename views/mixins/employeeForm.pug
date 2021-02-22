@@ -36,7 +36,7 @@ mixin employeeForm
           textarea.form-control#content(name='content', placeholder='Optional - Say something about that person' )=editPath ? employee.content : ""
         .form-group
           label(for='position') Position
-          input#position.form-control(name='position', type='text', placeholder='Position', required='', autofocus='', value=editPath ? employee.position : "")
+          input#position.form-control(name='position', type='text', placeholder='Position', autofocus='', value=editPath ? employee.position : "")
 
         .my-3
           label 

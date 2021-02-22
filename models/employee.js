@@ -2,7 +2,10 @@ var mongoose = require("mongoose"),
   URLSlugs = require("mongoose-url-slugs"),
   Schema = mongoose.Schema;
 var EmployeeSchema = new Schema({
-  name: String,
+  name: {
+    type: String,
+    required: "Please enter a name !"
+  },
   avatar: {
     type: String
   },

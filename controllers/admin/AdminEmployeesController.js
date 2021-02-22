@@ -65,7 +65,7 @@ module.exports.editEmployee = async function (req, res) {
 
 module.exports.updateEmployee = async (req, res) => {
   const employee = await Employee.findOne({ slug: req.params.slug})
-  if(req.body.avatar && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, employee.avatar))) {
+  if (req.body.avatar && employee.avatar && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, employee.avatar))) {
     await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, employee.avatar));
   }
   employee.name = req.body.name;

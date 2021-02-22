@@ -44,7 +44,7 @@ module.exports.editPartner = async function(req, res) {
 
 module.exports.updatePartner = async (req, res) => {
   const partner = await Partner.findOne({ slug: req.params.slug })
-  if (req.body.partnerlogo && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, partner.partnerlogo))) {
+  if (req.body.partnerlogo && partner.partnerlogo && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, partner.partnerlogo))) {
     await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, partner.partnerlogo));
   }
   partner.title = req.body.title;

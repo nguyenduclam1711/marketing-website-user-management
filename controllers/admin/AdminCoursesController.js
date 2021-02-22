@@ -256,49 +256,49 @@ exports.resizeImages = async (request, response, next) => {
 module.exports.updateCourse = async function(req, res) {
   let course = await Course.findOne({ slug: req.params.slug });
 
-  if(req.body.curriculumPdf && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.curriculumPdf))) {
+  if(req.body.curriculumPdf && course.curriculumPdf && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.curriculumPdf))) {
     await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.curriculumPdf));
   }
-  if(req.body.icon && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.icon))) {
+  if(req.body.icon && course.icon && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.icon))) {
     await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.icon));
   }
-  if(req.body.subicon && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.subicon))) {
+  if(req.body.subicon && course.subicon && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.subicon))) {
     await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.subicon));
   }
-  if(req.body.archivement_icon_1 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_1))) {
+  if(req.body.archivement_icon_1 && course.archivement_icon_1 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_1))) {
     await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_1));
   }
-  if(req.body.archivement_icon_2 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_2))) {
+  if(req.body.archivement_icon_2 && course.archivement_icon_2 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_2))) {
     await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_2));
   }
-  if(req.body.archivement_icon_3 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_3))) {
+  if(req.body.archivement_icon_3 && course.archivement_icon_3 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_3))) {
     await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_3));
   }
-  if(req.body.archivement_icon_4 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_4))) {
+  if(req.body.archivement_icon_4 && course.archivement_icon_4 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_4))) {
     await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_4));
   }
-  if(req.body.archivement_icon_5 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_5))) {
+  if(req.body.archivement_icon_5 && course.archivement_icon_5 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_5))) {
     await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_5));
   }
-  if(req.body.archivement_icon_6 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_6))) {
+  if(req.body.archivement_icon_6 && course.archivement_icon_6 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_6))) {
     await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.archivement_icon_6));
   }
-  if(req.body.features_icon_1 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_1))) {
+  if(req.body.features_icon_1 && course.features_icon_1 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_1))) {
     await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_1));
   }
-  if(req.body.features_icon_2 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_2))) {
+  if(req.body.features_icon_2 && course.features_icon_2 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_2))) {
     await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_2));
   }
-  if(req.body.features_icon_3 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_3))) {
+  if(req.body.features_icon_3 && course.features_icon_3 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_3))) {
     await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_3));
   }
-  if(req.body.features_icon_4 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_4))) {
+  if(req.body.features_icon_4 && course.features_icon_4 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_4))) {
     await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_4));
   }
-  if(req.body.features_icon_5 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_5))) {
+  if(req.body.features_icon_5 && course.features_icon_5 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_5))) {
     await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_5));
   }
-  if(req.body.features_icon_6 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_6))) {
+  if(req.body.features_icon_6 && course.features_icon_6 && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_6))) {
     await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.features_icon_6));
   }
   
