@@ -38,10 +38,10 @@ const LocationSchema = new Schema({
     default: 99
 
   },
-  contactEmployee: {
+  contactEmployee: [{
     type: Schema.ObjectId,
     ref: "Employee"
-  }
+  }]
 });
 
 module.exports = mongoose.model("Location", LocationSchema);

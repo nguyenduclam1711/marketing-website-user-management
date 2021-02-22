@@ -31,11 +31,10 @@ mixin locationForm
       input#avatar.form-control-file(type='file' name='avatar')
       
     .form-group.mb-3
-        label(for='selectContact') Contact Person for this Location
-        select#selectContact.form-control(name="contactEmployee")
-          option(value = location && location.contactEmployee ? location.contactEmployee._id : " ")=location && location.contactEmployee ? location.contactEmployee.name : "-- Select --"
-          each employee in employees
-            option(value=employee._id)=employee.name
+      each employee in employees
+        .custom-control.custom-checkbox
+          input.custom-control-input(name="contactEmployee" type='checkbox' id=employee.name value=employee._id  checked=(location && location.contactEmployee.includes(employee._id)) ? true : false)
+          label.custom-control-label(for=employee.name)=employee.name
       
     .mb-3
       label(for='street') Street

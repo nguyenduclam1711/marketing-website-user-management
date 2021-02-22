@@ -33,7 +33,6 @@ module.exports.editLocation = async (req, res) => {
   const enReq = await Language.findOne({ title: 'en' })
   const employeesReq = Employee.find({language: enReq._id})
   const locationReq = Location.findById(req.params.id)
-    .populate('contactEmployee')
     .exec();
   const [employees, location] = await Promise.all([employeesReq, locationReq])
     

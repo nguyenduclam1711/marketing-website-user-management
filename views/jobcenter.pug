@@ -134,28 +134,29 @@ block content
             #jobcenter_address=`${firstLocation.street}, ${firstLocation.zip} ${firstLocation.name}`
         .col-md-7.px-5.px-md-0
           each location, index in locations
-            .shadow-sm.shadow-sm-md-none.mb-5.mb-md-4
-              .row.jobcenter-location-employee(class=index != 0 ? "hidden": "",  data-location=location.name)
-                .col-md-3.mb-4.mb-md-0
-                  .px-0.px-lg-3.pt-4.mw-150.mx-auto
-                    +storyImages(location.contactEmployee, 'col')
-                .col-md-9.d-flex.flex-column.justify-content-end.text-center.text-md-left
-                  h6.font-weight-bold=location.contactEmployee.name
-                  .d-flex.flex-md-column.justify-content-center.mb-4.mb-md-0
-                    if location.contactEmployee.phone
-                      a.h-3.w-3.mt-3.mb-1.bg-primary-light.circle.d-md-none(href=`tel:${location.contactEmployee.phone}`)
-                        include ../assets/icons/phone.svg
-                      .position-relative.z-1
-                        p.text-muted.mb-1.d-none.d-md-block
-                          span.font-weight-bold Tel: 
-                          a.text-dark(href=`tel:${location.contactEmployee.phone}`)=location.contactEmployee.phone
-                    if location.contactEmployee.email
-                      .position-relative.z-1.ml-5.ml-md-0
-                        a.h-3.w-3.mt-3.mb-1.bg-primary-light.circle.d-md-none(href=`mailto:${location.contactEmployee.email}`)
-                          include ../assets/icons/mail.svg
-                        p.text-muted.d-none.d-md-block.mb-0
-                          span.font-weight-bold Email: 
-                          a.text-dark(href=`mailto:${location.contactEmployee.email}`)=location.contactEmployee.email
+            .shadow-sm.shadow-sm-md-none
+              .row.jobcenter-location-employee.mb-5.mb-md-4(class=index != 0 ? "hidden": "",  data-location=location.name)
+                each employee, index2 in location.contactEmployee
+                  .col-md-3.mb-4.mb-md-0
+                    .px-0.px-lg-3.pt-4.mw-150.mx-auto
+                      +storyImages(employee, 'col')
+                  .col-md-9.d-flex.flex-column.justify-content-end.text-center.text-md-left
+                    h6.font-weight-bold=employee.name
+                    .d-flex.flex-md-column.justify-content-center.mb-4.mb-md-0
+                      if employee.phone
+                        a.h-3.w-3.mt-3.mb-1.bg-primary-light.circle.d-md-none(href=`tel:${employee.phone}`)
+                          include ../assets/icons/phone.svg
+                        .position-relative.z-1
+                          p.text-muted.mb-1.d-none.d-md-block
+                            span.font-weight-bold Tel: 
+                            a.text-dark(href=`tel:${employee.phone}`)=employee.phone
+                      if employee.email
+                        .position-relative.z-1.ml-5.ml-md-0
+                          a.h-3.w-3.mt-3.mb-1.bg-primary-light.circle.d-md-none(href=`mailto:${employee.email}`)
+                            include ../assets/icons/mail.svg
+                          p.text-muted.d-none.d-md-block.mb-0
+                            span.font-weight-bold Email: 
+                            a.text-dark(href=`mailto:${employee.email}`)=employee.email
 
     .pb-5
     .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
