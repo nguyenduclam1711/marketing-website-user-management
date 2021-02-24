@@ -95,7 +95,7 @@ html.h-100(lang='en')
             .container.pb-5
               .row
                 .col-6.col-sm-2.footers-two
-                  p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-lightgrey`)=__("Company")
+                  p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-muted`)=__("Company")
                   ul.list-unstyled
                     li.my-2
                       a(class=!course ? "text-muted" : "text-white", href='/about-us/')=__("About us")
@@ -111,7 +111,7 @@ html.h-100(lang='en')
                         =__("Partners")
 
                 .col-6.col-sm-5.footers-three
-                  p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-lightgrey`)=__("Courses")
+                  p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-muted`)=__("Courses")
                   ul.list-unstyled
                     li.my-2
                       a(class=!course ? "text-muted" : "text-white", href='/courses')=__("All courses")
@@ -123,7 +123,7 @@ html.h-100(lang='en')
                             small.text-monospace= " (Edit)"
 
                 .col-6.col-sm-3.footers-four
-                  p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-lightgrey`)=__("Community")
+                  p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-muted`)=__("Community")
                   ul.list-unstyled
                     li.my-2
                       a(class=!course ? "text-muted" : "text-white", target="_blank" rel="noopener" alt="DCI on Facebook" href="https://www.facebook.com/digitalcareerinstitute") Facebook
@@ -133,10 +133,8 @@ html.h-100(lang='en')
                       a(class=!course ? "text-muted" : "text-white", target="_blank" rel="noopener" alt="DCI on LinkedIn" href="https://www.linkedin.com/school/dci-digital-career-institute/") LinkedIn
 
                 .col-6.col-sm-2.footers-five
-                  p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-lightgrey`)=__("Events")
+                  p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-muted`)=__("Campus")
                   ul.list-unstyled
-                    li.my-2
-                      a(class=!course ? "text-muted" : "text-white", href='/events')=__("All Events")
                     each location in locations.filter(l => l.isCampus) 
                       li.my-2
                         a(class=!course ? "text-muted" : "text-white", href='/contact')=location.name
