@@ -10,13 +10,27 @@ const AbstractController = require("./AbstractController");
 
 module.exports.getEmployees = async function (req, res) {
   try {
+
+    let locations = await Location.find({})
     let employees = await Employee.find({})
       .populate('language')
       .populate('languageVersion')
       .populate("locations")
       .sort("order")
       .exec();
-
+    employees.map(e => {
+      locations.map(l => {
+        if (l.contactEmployee.includes(e._id)) {
+          if (!!e.contactLocation && e.contactLocation.length > 0) {
+            e.contactLocation.push(l)
+          } else {
+            e.contactLocation = [l]
+          }
+        }
+      })
+      return e
+    })
+    console.log('employees', employees);
     res.render("admin/employees", {
       employees
     });
@@ -64,7 +78,7 @@ module.exports.editEmployee = async function (req, res) {
 };
 
 module.exports.updateEmployee = async (req, res) => {
-  const employee = await Employee.findOne({ slug: req.params.slug})
+  const employee = await Employee.findOne({ slug: req.params.slug })
   if (req.body.avatar && employee.avatar && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, employee.avatar))) {
     await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, employee.avatar));
   }
