@@ -5,7 +5,7 @@ const uuid = require("uuid");
 const User = require("../models/user");
 const { sendMail, getRequestUrl } = require("../helpers/helper");
 
-module.exports.renderLogin = (req, res) => {
+module.exports.conditionalRenderLogin = (req, res) => {
   if (req.user) {
     res.redirect("/admin");
   }
@@ -28,7 +28,7 @@ sendVerificationMail = async (res, req, userToken) => {
   };
   return await sendMail(res, req, mailOptions);
 };
-module.exports.register = async (req, res) => {
+module.exports.register = async (req, res, next) => {
   const email = req.body.email;
   const username = req.body.username;
   const password = req.body.password;
@@ -52,6 +52,7 @@ module.exports.register = async (req, res) => {
         .join(", ")
     });
   } else {
+    try {
       const userToken = uuid(4);
       const newUser = new User({
         email: email,
@@ -74,6 +75,9 @@ module.exports.register = async (req, res) => {
           res.redirect(req.headers.referer);
         }
       });
+    } catch (error) {
+      res.redirect(req.headers.referer);
+    }
   }
 };
 

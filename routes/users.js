@@ -5,7 +5,7 @@ var UserController = require("../controllers/UserController");
 
 router.get("/register", UserController.renderRegister);
 
-router.get("/login", UserController.renderLogin);
+router.get("/login", UserController.conditionalRenderLogin);
 
 router.get("/verify/:token", UserController.verify);
 
