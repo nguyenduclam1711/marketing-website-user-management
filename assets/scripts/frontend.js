@@ -5,7 +5,7 @@ import "bootstrap/js/dist/dropdown";
 import "bootstrap/js/dist/collapse";
 import "bootstrap/js/dist/carousel";
 import "bootstrap/js/dist/alert";
-import {alertTimeout} from "./helper.js"
+import { alertTimeout } from "./helper.js"
 require("./polygons");
 require("../css/style.scss");
 
@@ -30,7 +30,7 @@ const toggleNL = (remove = false) => {
           headers: {
             "content-type": "application/json"
           },
-          body: JSON.stringify({email}) // data can be `string` or {object}!
+          body: JSON.stringify({ email }) // data can be `string` or {object}!
         })
           .then(res => res.json())
           .then(response => {
@@ -207,7 +207,7 @@ function objectToCsv(data) {
 }
 
 function downloadCsv(data) {
-  const blob = new Blob([data], {type: "text/csv"});
+  const blob = new Blob([data], { type: "text/csv" });
   const url = window.URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.setAttribute("id", "csv");
@@ -224,11 +224,11 @@ $("#downloadCSV").on("click", function (e) {
     .then(resp => resp.json())
     .then(data => {
       let leads = data
-      .map(lead => ({
-        ...lead,
-        utm_params: lead.utm_params ? JSON.stringify(lead.utm_params) : "",
-        locations: lead.locations && lead.locations[0] ? lead.locations[0].name : ""
-      }));
+        .map(lead => ({
+          ...lead,
+          utm_params: lead.utm_params ? JSON.stringify(lead.utm_params) : "",
+          locations: lead.locations && lead.locations[0] ? lead.locations[0].name : ""
+        }));
       console.log('leads', leads);
       let csvRow = objectToCsv(leads);
       downloadCsv(csvRow);
@@ -267,7 +267,7 @@ Array.from(document.querySelectorAll(".ajaxform")).map(form => {
         setTimeout(() => {
           $(".alert").alert("close");
         }, alertTimeout || 5000);
-        if(data.response.filepath){
+        if (data.response.filepath) {
           window.open(`${window.location.origin}/images/${data.response.filepath}`, '_blank')
         }
       })
@@ -330,3 +330,25 @@ if (jobcenterSelect) {
     })
   })
 }
+function normalizeSlideHeights() {
+  Array.from(document.querySelectorAll('.carousel')).map(carousel => {
+    var items = carousel.querySelectorAll('.carousel-item')
+    var maxHeight = Math.max.apply(null,
+      Array.from(items).map(function (i) {
+        return i.offsetHeight
+      }));
+    document.querySelector('.carousel-inner').style.height = maxHeight + 80 + 'px'
+    Array.from(items).map((b) => {
+      b.style.minHeight = 0
+      b.querySelector('.rounded-md.border').style.minHeight = 0
+    })
+    Array.from(items).map((b) => {
+      b.style.minHeight = maxHeight + 'px'
+      b.querySelector('.rounded-md.border').style.minHeight = maxHeight + 'px'
+    })
+  })
+}
+
+$(window).on(
+  'load resize orientationchange',
+  throttle(normalizeSlideHeights, 300));
