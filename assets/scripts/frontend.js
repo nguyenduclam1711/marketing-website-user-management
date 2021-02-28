@@ -331,22 +331,26 @@ if (jobcenterSelect) {
   })
 }
 function normalizeSlideHeights() {
-  Array.from(document.querySelectorAll('.carousel')).map(carousel => {
-    var items = carousel.querySelectorAll('.carousel-item')
-    var maxHeight = Math.max.apply(null,
-      Array.from(items).map(function (i) {
-        return i.offsetHeight
-      }));
-    document.querySelector('.carousel-inner').style.height = maxHeight + 80 + 'px'
-    Array.from(items).map((b) => {
-      b.style.minHeight = 0
-      b.querySelector('.rounded-md.border').style.minHeight = 0
+  if (document.querySelector('.carousel')) {
+    Array.from(document.querySelectorAll('.carousel')).map(carousel => {
+      var items = carousel.querySelectorAll('.carousel-item')
+      var maxHeight = Math.max.apply(null,
+        Array.from(items).map(function (i) {
+          return i.offsetHeight
+        }));
+      document.querySelector('.carousel-inner').style.height = maxHeight + 80 + 'px'
+      if (carousel.querySelector('.rounded-md.border')) {
+        Array.from(items).map((b) => {
+          b.style.minHeight = 0
+          b.querySelector('.rounded-md.border').style.minHeight = 0
+        })
+        Array.from(items).map((b) => {
+          b.style.minHeight = maxHeight + 'px'
+          b.querySelector('.rounded-md.border').style.minHeight = maxHeight + 'px'
+        })
+      }
     })
-    Array.from(items).map((b) => {
-      b.style.minHeight = maxHeight + 'px'
-      b.querySelector('.rounded-md.border').style.minHeight = maxHeight + 'px'
-    })
-  })
+  }
 }
 
 $(window).on(
