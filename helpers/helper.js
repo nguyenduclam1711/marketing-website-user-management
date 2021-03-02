@@ -155,4 +155,16 @@ exports.updateLocaleFile = async () => {
     await Promise.all(promises)
     resolve();
   });
+};
+
+exports.getFbClid = (req, res, next) => {
+  let fbc = /_fbc=(fb\.1\.\d+\.\w+)/.exec(req.headers.cookie);
+  if (!(fbc && fbc[1])) {
+    return null;
+  }
+  let fbclid = /\w{15,}/.exec(fbc[1]);
+  if (!(fbclid && fbclid[0])) {
+    return null;
+  }
+  return fbclid[0]
 }

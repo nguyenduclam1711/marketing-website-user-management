@@ -7,7 +7,7 @@ const Partner = require('../models/partner')
 const Employee = require('../models/employee')
 const Setting = require('../models/setting')
 const request = require('request')
-const { sendMail, getAsyncRedis } = require('../helpers/helper')
+const { sendMail, getAsyncRedis, getFbClid } = require('../helpers/helper')
 const { getAvailableTranslations } = require('./AbstractController')
 const fetchEventsByLocation = require("../helpers/fetch_events_by_location");
 let redisClient = null;
@@ -174,6 +174,7 @@ module.exports.contact = async (req, res, next) => {
     Object.keys(remainingUtmParams).map(q => q.startsWith('utm_') && delete remainingUtmParams[q])
 
     if (!!process.env.HUBSPOT_API_KEY) {
+      let fbclid = getFbClid(req, res, next);
       var options = {
         method: 'POST',
         url: `https://api.hubapi.com/contacts/v1/contact/createOrUpdate/email/${email}`,
@@ -195,6 +196,7 @@ module.exports.contact = async (req, res, next) => {
               { property: 'utm_term', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_term) : "" },
               { property: 'afa_jc_registered_', value: !jobcenter ? "No" : "Yes" },
               { property: 'form_are_you_currently_unemployed', value: unemployed },
+              { property: 'hs_facebook_click_id', value: fbclid},
               {
                 property: 'form_payload',
                 value: JSON.stringify({
