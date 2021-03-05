@@ -7,6 +7,7 @@ const Partner = require('../models/partner')
 const Employee = require('../models/employee')
 const Setting = require('../models/setting')
 const request = require('request')
+const requestPromise = require("request-promise");
 const { sendMail, getAsyncRedis, getFbClid } = require('../helpers/helper')
 const { getAvailableTranslations } = require('./AbstractController')
 const fetchEventsByLocation = require("../helpers/fetch_events_by_location");
@@ -196,7 +197,7 @@ module.exports.contact = async (req, res, next) => {
               { property: 'utm_term', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_term) : "" },
               { property: 'afa_jc_registered_', value: !jobcenter ? "No" : "Yes" },
               { property: 'form_are_you_currently_unemployed', value: unemployed },
-              { property: 'hs_facebook_click_id', value: fbclid},
+              { property: 'hs_facebook_click_id', value: fbclid },
               {
                 property: 'form_payload',
                 value: JSON.stringify({
@@ -211,14 +212,14 @@ module.exports.contact = async (req, res, next) => {
         },
         json: true
       };
-      hubspotPromise = request(options)
+      hubspotPromise = requestPromise(options)
     }
     // TODO remove logging statement
     console.log(req.session);
     console.log(options.body.properties);
     // to save time, mail get send out without waiting for the response
     const info = sendMail(res, req, mailOptions)
-    const resolved = await Promise.all([hubspotPromise])
+    const result = await Promise.all([hubspotPromise])
 
     if (req.headers['content-type'] === 'application/json') {
       const response = {
