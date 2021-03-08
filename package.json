@@ -39,6 +39,7 @@
     "mongoose": "^5.8.9",
     "mongoose-url-slugs": "^1.0.2",
     "multer": "*",
+    "newrelic": "^7.1.2",
     "node-cron": "^2.0.3",
     "node-fetch": "^2.3.0",
     "node-sass": "^4.13.1",
