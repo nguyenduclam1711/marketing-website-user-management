@@ -91,6 +91,9 @@
 .navbar-light .navbar-nav .nav-link {
   color: $bluedark;
 }
+.nav-link {
+  padding: 5px !important;
+}
 
 #headernav > li {
   > .contactlink {

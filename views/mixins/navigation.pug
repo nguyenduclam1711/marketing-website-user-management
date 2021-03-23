@@ -17,13 +17,13 @@ mixin navigation
       #collapsingNavbar3.navbar-collapse.collapse.w-100.mt-4.mt-md-0.align-items-stretch
         ul.nav.navbar-nav.my-3.my-lg-0.ml-auto.w-100.justify-content-end#headernav(class=currentPath && currentPath.includes('/courses') && currentPath.lastIndexOf('/') > 0 ? 'not-set-active' : ' ' )
           li.position-relative.nav-item.dropdown
-            a.mx-0.mx-xl-3.mx-lg-2.nav-link.d-flex.align-items-center.h-100.z-1(class= currentPath && currentPath.includes('/courses') && !currentPath.includes('/admin') ? "active" : "", href="/courses")
+            a.mx-0.mx-xl-3.mx-lg-2.nav-link.d-flex.align-items-center.h-100.z-1.nav-link( style=course && currentPath.includes("/courses") && course.coloraccent ? `color: ${course.coloraccent}!important` : `` href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
               =__("Courses")
 
             .dropdown-menu.border-radius-0.shadow-sm.z-0.p-0(aria-labelledby='navbarDropdownMenuLink')
-              a.dropdown-item.nav-link.px-2(class= currentPath.includes("/courses") ? "active" : "" href='/courses')=__("All courses")
+              a.dropdown-item.nav-link.px-2(class= currentPath == "/courses" ? "active" : "" href='/courses')=__("All courses")
               each course in courses
-                a.dropdown-item.nav-link.px-2(class= currentPath.includes("/courses/" + course.slug) ? "active" : "" href='/courses/'+ course.slug)=course.headline
+                a.dropdown-item.nav-link.px-2(class=course && course.coloraccent ? `` : `bg-primary`, style=course && currentPath.includes(course.slug) && course.coloraccent ? `background-color: ${course.coloraccent}!important` : `` href='/courses/'+ course.slug)=course.headline
           li.position-relative.nav-item
             a.mx-0.mx-xl-3.mx-lg-2.nav-link.d-flex.align-items-center.h-100.z-1(class=currentPath && currentPath.includes('/events') && !currentPath.includes('/admin') ? "active" : "", href='/events')
               =__("Events")
@@ -58,10 +58,11 @@ mixin navigation
                   if page.metapage
                     a.dropdown-item.nav-link(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
           li.position-relative.nav-item.dropdown.z-foreground
-            a.contactlinktext.dropdown-toggle.mx-0.mx-xl-3.mx-lg-2.nav-link.d-flex.align-items-center.h-100( href="#", data-toggle='modal', data-target='#contactFormModal' aria-haspopup="true" aria-expanded="false" class=course && course.coloraccent ? `` : `text-white` )=__("Contact")
+            a.contactlinktext.dropdown-toggle.mx-0.mx-xl-3.mx-lg-2.nav-link.d-flex.align-items-center.h-100( href="#", class=course && course.coloraccent ? `` : `text-white`  aria-haspopup="true" aria-expanded="false"  data-toggle="dropdown" )=__("Contact")
             .contactlink(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
             .dropdown-menu.p-0.border-radius-0.shadow-sm(aria-labelledby='navbarDropdownMenuLink')
-              a.dropdown-item.nav-link(href="/contact", class=currentPath == "/contact" ? "active" : "")=__("Campuses")
+              a.dropdown-item.nav-link(data-toggle='modal', data-target='#contactFormModal' aria-haspopup="true" aria-expanded="false" href="/contact", class=currentPath == "/contact" ? "active" : "")=__("Campuses")
+              a.dropdown-item.nav-link(href="/contact", class=currentPath == "/contact" ? "active" : "")=__("Contact")
 
           li.position-relative.nav-item.d-flex.align-items-center
             a.ml-xl-3.ml-lg-2.nav-link.d-flex.align-items-center.h-100(href="/i18n/de" class=locale === "de" ? "active" : "") DE
