@@ -61,8 +61,8 @@ mixin navigation
             a.contactlinktext.dropdown-toggle.mx-0.mx-xl-3.mx-lg-2.nav-link.d-flex.align-items-center.h-100( href="#", class=course && course.coloraccent ? `` : `text-white`  aria-haspopup="true" aria-expanded="false"  data-toggle="dropdown" )=__("Contact")
             .contactlink(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
             .dropdown-menu.p-0.border-radius-0.shadow-sm(aria-labelledby='navbarDropdownMenuLink')
-              a.dropdown-item.nav-link(data-toggle='modal', data-target='#contactFormModal' aria-haspopup="true" aria-expanded="false" href="/contact", class=currentPath == "/contact" ? "active" : "")=__("Campuses")
-              a.dropdown-item.nav-link(href="/contact", class=currentPath == "/contact" ? "active" : "")=__("Contact")
+              a.dropdown-item.nav-link(data-toggle='modal', data-target='#contactFormModal' aria-haspopup="true" aria-expanded="false" href="/contact")=__("Contact")
+              a.dropdown-item.nav-link(href="/contact", class=currentPath == "/contact" ? "active" : "")=__("Campuses")
 
           li.position-relative.nav-item.d-flex.align-items-center
             a.ml-xl-3.ml-lg-2.nav-link.d-flex.align-items-center.h-100(href="/i18n/de" class=locale === "de" ? "active" : "") DE
