@@ -16,7 +16,7 @@ mixin singleCourse
               span.font-weight-bold.text-uppercase.d-flex.align-items-center(style=`color: ${course.textColor}`)
                 ="Online"
           div.my-3.my-y-xl-5
-            a.btn.btn-white.px-4.mt-3.mt-y-xl-5(data-toggle='modal', data-target='#contactFormModal' class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}!important` : `` ): +translate("Apply Now")
+            a.btn.btn-white.px-4.mt-3.mt-y-xl-5(data-toggle='modal', data-target='#contactFormModal' class=course && course.coloraccent ? `` : `text-primary`, style=`color: --var(dark)!important` : `` ): +translate("Apply Now")
         .col-md-6.py-5.py-md-0
           .floatings.h-100
             .w-100.px-lg-5.align-items-end.h-100.justify-content-end.d-flex.flex-column
