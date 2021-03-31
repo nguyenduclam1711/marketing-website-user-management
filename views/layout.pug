@@ -24,7 +24,7 @@ include mixins/fullstory
 include mixins/curriculumForm
 
 doctype html
-html.h-100(lang='en')
+html.h-100(lang=locale === "de" ? 'de': 'en')
   head
     if live
       // Google Optimize anit-flicker code https://support.google.com/optimize/answer/7100284?hl=en
@@ -49,7 +49,7 @@ html.h-100(lang='en')
     meta(name='viewport', content='width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86')
     meta(name='description', content='Start your digital Career. Learn digital skills with us to get the most fulfilling jobs. At our Institute you learn the most relevant technology skills of today from Web Development, Digital Marketing, Product Management to Data.font-weight-bold.')
     meta(name='keywords', content='Web Development, Digital Marketing, Product Management, Data Science, School, Jobs')
-    meta(property='og:locale', content='en_GB')
+    meta(property='og:locale', content=locale === "de" ? 'de_DE': 'en_GB')
     meta(property='og:locale:alternate', content='de_DE')
     meta(property='og:type', content='website')
     meta(property='og:title', content='Digital Career Institute')
@@ -77,9 +77,9 @@ html.h-100(lang='en')
           color: black !important;
           background-color: #{course.coloraccent} !important;
         }
-        .active:hover {
-          background-color: #{course.coloraccent};
-        }
+          .active:hover {
+            background-color: #{course.coloraccent};
+          }
   body.h-100.d-flex.flex-column(data-spy='scroll', data-target='#courseScrollspy', data-offset='1', class=`${pathclass+(currentPath && currentPath.includes('/admin') ? ' admin' : currentPath == "/" ? "index" : "" )}`)
 
     if live

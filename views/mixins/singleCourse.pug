@@ -3,7 +3,7 @@ mixin singleCourse
     .container-md
       .row
         .col-md-6.bg-panel.right.py-3.py-md-5.px-5.pl-md-0(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
-          h1.display-1.my-3.mt-y-xl-5(style=`color: ${course.textColor}`)=course.headline
+          h1.display-1.my-3.mt-y-xl-5.word-wrap-break-word(style=`color: ${course.textColor}`)=course.headline
           p.lead.mb-3.pt-3(style=`color: ${course.textColor}`)=course.subheading
           .d-flex.align-items-center.line-height-2-5.pt-3.mt-y-xl-5
             .bg-white.circle.mr-2.p-2(style=`color: ${course.coloraccent}`)
