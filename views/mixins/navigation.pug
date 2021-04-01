@@ -17,7 +17,7 @@ mixin navigation
       #collapsingNavbar3.navbar-collapse.collapse.w-100.mt-4.mt-md-0.align-items-stretch
         ul.nav.navbar-nav.my-3.my-lg-0.ml-auto.w-100.justify-content-end#headernav(class=currentPath && currentPath.includes('/courses') && currentPath.lastIndexOf('/') > 0 ? 'not-set-active' : ' ' )
           li.position-relative.nav-item.dropdown-custom
-            a.dropdown-toggle.mx-0.mx-xl-3.mx-lg-2.nav-link.d-flex.align-items-center.h-100.z-1( class=currentPath === "/courses" || ( currentPath.includes("/courses") && course && course.coloraccent ) ? `active` : `` href="#" aria-haspopup="true" aria-expanded="false")
+            a.courseslink.dropdown-toggle.mx-0.mx-xl-3.mx-lg-2.nav-link.d-flex.align-items-center.h-100.z-1( class=currentPath === "/courses" || ( currentPath.includes("/courses") && course && course.coloraccent ) ? `active` : ``  href="#" aria-haspopup="true" aria-expanded="false")
               =__("Courses")
 
             .dropdown-menu.border-radius-0.shadow-sm.z-0.p-0(aria-labelledby='navbarDropdownMenuLink')

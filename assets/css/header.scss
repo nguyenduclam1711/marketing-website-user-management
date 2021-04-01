@@ -131,7 +131,7 @@
   > a:focus-within,
   > a:hover {
     &:not(.contactlink) {
-      color: $primary !important;
+      color: $primary;
     }
   }
 }
@@ -144,7 +144,7 @@
     > a:focus-within,
     > a:hover {
       &:not(.contactlink) {
-        color: #040a3b !important;
+        color: #040a3b;
       }
     }
   }
@@ -156,7 +156,7 @@
   &:focus-within,
   &:hover {
     a.contactlinktext {
-      color: white !important;
+      color: white;
     }
   }
 }
@@ -170,10 +170,10 @@
       background-color: white;
     }
     .dropdown-item {
-      background-color: transparent !important;
-      color: $bluedark !important;
+      background-color: transparent ;
+      color: $bluedark ;
       &:hover {
-        color: $primary !important;
+        color: $primary ;
       }
     }
     @include media-breakpoint-down(md) {
@@ -208,8 +208,8 @@
     .dropdown-item:active,
     .dropdown-item:focus,
     .dropdown-item.active {
-      background: $primary !important;
-      color: white !important;
+      background: $primary;
+      color: white;
     }
   }
 }
