@@ -1,6 +1,6 @@
 extends layout.pug
 block content
-  .section.overflow-hidden
+  .section
     .content
       section.homeSection.d-flex.flex-column.position-relative.bg-light-grey
         if currentPath == "/"
@@ -20,8 +20,7 @@ block content
       section#ourcourses.position-relative.offset_title.pb-5
         header.offset_header.text-center
           .d-inline-block.position-relative
-            .bluepolygon.z-minus(style="transform: rotate(-45deg) skew(20deg, 0) translateX(-3em)")
-            h2.position-relative.d-inline-block.display-1.text-center.text-white
+            h2.position-relative.d-inline-block.display-1.text-center.text-white.bg-primary.px-5.py-4
               +translate("Our courses")
         .container.pt-5.text-center
           .row.mx-md-5.justify-content-center
@@ -46,8 +45,7 @@ block content
         .position-relative.offset_title
           header.offset_header.text-left
             .d-inline-block.position-relative
-              .bluepolygon.z-minus.right(style="transform: rotate(25deg) skew(10deg, -10deg) translate(1em, -2em)")
-              h2.position-relative.d-inline-block.display-1.text-center.text-white.ml-3
+              h2.position-relative.d-inline-block.display-1.text-center.text-white.bg-primary.px-5.py-4
                 +translate("Mission")
 
 
@@ -150,8 +148,7 @@ block content
       section#stories.my-5.offset_title.position-relative
         header.offset_header.text-right
           .d-inline-block.position-relative
-            .bluepolygon.z-minus.left(style="transform: rotate(-45deg) skew(-20deg, 10deg) translate(2em, -2em)")
-            h2.position-relative.d-inline-block.display-1.text-center.text-white.mr-3
+            h2.position-relative.d-inline-block.display-1.text-center.text-white.bg-primary.px-5.py-4
               +translate("Stories")
 
         if stories
