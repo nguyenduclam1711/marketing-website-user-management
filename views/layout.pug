@@ -73,7 +73,8 @@ html.h-100(lang=locale === "de" ? 'de': 'en')
 
     if course && course.coloraccent
       style(type='text/css').
-        .dropdown:hover .dropdown-menu .dropdown-item:hover {
+       .dropdown-custom:hover .dropdown-menu .dropdown-item:hover,
+       .dropdown:hover .dropdown-menu .dropdown-item:hover {
           color: black !important;
           background-color: #{course.coloraccent} !important;
         }

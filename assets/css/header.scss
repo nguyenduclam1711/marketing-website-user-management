@@ -160,7 +160,10 @@
     }
   }
 }
-.dropdown {
+.dropdown-custom {
+  @extend .dropdown;
+}
+.dropdown-custom {
   .dropdown-menu {
     background-color: transparent;
     @include media-breakpoint-up(lg) {
@@ -179,7 +182,7 @@
     }
   }
 }
-.dropdown,
+.dropdown-custom,
 .dropdown-toggle {
   .dropdown-menu.show,
   &:hover ~ .dropdown-menu,
