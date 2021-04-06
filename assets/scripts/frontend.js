@@ -356,3 +356,10 @@ function normalizeSlideHeights() {
 $(window).on(
   'load resize orientationchange',
   throttle(normalizeSlideHeights, 300));
+
+Array.from(document.querySelectorAll('.dropdown-custom')).map(dropdown => {
+  dropdown.addEventListener('click', function (e) {
+    dropdown.classList.toggle("show")
+    dropdown.querySelector('.dropdown-menu').classList.toggle('show')
+  })
+})

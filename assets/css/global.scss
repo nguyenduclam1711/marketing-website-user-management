@@ -29,6 +29,9 @@ $theme-colors: (
 @import "../../node_modules/bootstrap/scss/bootstrap";
 @import "../../node_modules/quill/dist/quill.snow.css";
 
+:root {
+  --dark: #040a3b;
+}
 
 .bg-light-grey {
   background-color: $light-grey !important;
