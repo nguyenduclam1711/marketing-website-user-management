@@ -17,7 +17,6 @@ $light-blue: lighten($blue, 60);
 $green: #7aff29;
 $red: #ff4200;
 $yellow: #ffdb00;
-$yellow-light: #FFF7BF;
 $purple: #5c00ff;
 $pink: #a800ff;
 $turquoise: #3dbaf7;
@@ -50,12 +49,10 @@ $theme-colors: (
     background-color: $light-blue;
   }
 }
-.bg-light-yellow {
-    background-color: $yellow-light;
-}
 
 .btn-secondary {
   color: $light-grey;
+  box-shadow: 0px 20px 25px -10px rgba(255, 110, 24, 0.45);
 }
 .bg-section {
   background-color: $bluetrans;

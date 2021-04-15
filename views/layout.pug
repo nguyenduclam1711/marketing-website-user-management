@@ -1,5 +1,4 @@
 include mixins/navigation
-include mixins/storylist
 include mixins/courselist
 include mixins/pagelist
 include mixins/joblist
@@ -22,6 +21,8 @@ include mixins/adminButtonGroup
 include mixins/translate
 include mixins/fullstory
 include mixins/curriculumForm
+include mixins/courseOverviewCard
+include mixins/successCarousel
 
 doctype html
 html.h-100(lang=locale === "de" ? 'de': 'en')
@@ -206,7 +207,7 @@ html.h-100(lang=locale === "de" ? 'de': 'en')
       .modal#dataPrivacy
         +dataPrivacy
     
-    if (course && course.curriculumPdf) || currentPath === '/jobcenter'
+    if (course && course.curriculumPdf) || currentPath === '/jobcenter'|| currentPath === '/tour'
       +curriculumForm
 
     if currentPath && !currentPath.includes('admin') && !currentPath.includes('users')
