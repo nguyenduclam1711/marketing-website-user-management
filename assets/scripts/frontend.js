@@ -267,6 +267,9 @@ Array.from(document.querySelectorAll(".ajaxform")).map(form => {
         setTimeout(() => {
           $(".alert").alert("close");
         }, alertTimeout || 5000);
+        if (data.response.contact_id && e.target.dataset.redirect === "true") {
+          window.location.replace(`${window.location.origin}/thank-you/${data.response.contact_id}`);
+        }
         if (data.response.filepath) {
           window.open(`${window.location.origin}/images/${data.response.filepath}`, '_blank')
         }
@@ -336,9 +339,12 @@ function normalizeSlideHeights() {
       var items = carousel.querySelectorAll('.carousel-item')
       var maxHeight = Math.max.apply(null,
         Array.from(items).map(function (i) {
-          return i.offsetHeight
+          i.style.display = "block"
+          const height = i.offsetHeight
+          i.removeAttribute('style')
+          return height
         }));
-      document.querySelector('.carousel-inner').style.height = maxHeight + 80 + 'px'
+      document.querySelector('.carousel-inner').style.height = maxHeight + 130 + 'px'
       if (carousel.querySelector('.rounded-md.border')) {
         Array.from(items).map((b) => {
           b.style.minHeight = 0

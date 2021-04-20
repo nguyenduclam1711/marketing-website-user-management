@@ -39,7 +39,7 @@ block content
                   img.mw-150.object-fit-contain.partners-logo(alt=partner.title, src="/images/" + partner.partnerlogo)
 
     .w-100.d-flex.justify-content-center.justify-content-md-left.mb-5.mb-md-0
-      .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
+      .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center.text-white
         include ../assets/icons/cross.svg
     .container.mt-5.mt-xl-0.text-center.text-md-left
       .row
@@ -83,31 +83,7 @@ block content
             p=__("We offer a range of courses that help our students enter the job market and future-proof their careers.")
         .row.justify-content-center
           each course in courses
-            .col-md-6.floatings.mb-5.mb-md-4
-              .p-5.h-100(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )
-                a.text-dark(href=`/courses/${course.slug}`)
-                  h5.font-weight-bold=course.headline
-                .my-3
-                  strong.font-weight-bold.mr-2=__("Duration")+":"
-                  span.padded-text()=course.courselength
-                if course.massnahmeNumber
-                  .my-3
-                    strong.font-weight-bold.mr-2=__("Number")+":"
-                    span.padded-text()=course.massnahmeNumber
-                if course.startInterval
-                  .my-3
-                    strong.font-weight-bold.mr-2=__("Starts every")+":"
-                    span.padded-text()=course.startInterval
-                if course.courseLanguages
-                  .my-3
-                    strong.font-weight-bold.mr-2=__("Language")+":"
-                    span.padded-text()=course.courseLanguages
-                if course.curriculumPdf
-                  a.text-dark(href='#' data-toggle='modal', data-target=`#curriculumpopup` data-course=`${course.slug}`) 
-                    .d-flex.justify-content-between.align-items-center.mt-4
-                      =__("Download complete course curriculum")
-                      .w-4.h-4
-                        include ../assets/icons/download.svg
+            +courseOverviewCard(course)
     .pb-5
     .d-flex.justify-content-end
       .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
@@ -240,35 +216,7 @@ block content
             =__("Successstories")
           p=__("See what our participants say")
 
-        #careersuccesscarousel.carousel.slide.mb-5.pt-3.pb-5(data-ride="carousel" data-interval="40000")
-          .carousel-inner
-            each story, index in storysWithTestimonial
-              .carousel-item(class= index === 0 ? ` active` : ``)
-                .container
-                  .mx-lg-5
-                    .mx-lg-5.px-lg-2
-                      .bg-white.p-4.rounded-md.border.pb-5
-                        if user && story && user.userId === story.userId || user && user.admin === "true"
-                          a.position-absolute.right.bottom.btn.btn-outline-primary.z-foreground(href=`/admin/stories/edit/${story.slug}`) Edit
-                            
-                        div.position-relative
-                          .p-5.story-item
-                            blockquote.blockquote.z-0
-                              .quotesign.z-minus(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
-                                include ../assets/icons/om_quote.svg
-                              =story.excerpt
-                          .d-flex.justify-content-end.align-items-center.align-items-md-end.flex-column.flex-md-row
-                            
-                            .text-center.text-md-right.px-3.mb-4.mb-md-0.order-12.order-md-1
-                              h3=story.subtitle
-                              h4.font-italic=story.workPosition
-                            a.stretched-link.text-right.rounded-circle.overflow-hidden.mb-5.mb-md-0.order-1.order-md-12(href=`/stories/${story.slug}` style=`box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1f3fc7 !important`};`)
-                              img.mw-150.object-fit-contain.w-8.square(src="/media/pixel.gif" style=`background-image: url('/images/${story.avatar}'); box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1f3fc7 !important`}`)
-
-            if storysWithTestimonial.length > 1
-              ol.carousel-indicators
-                each story, index in storysWithTestimonial
-                  li(data-target="#careersuccesscarousel" data-slide-to=index class=index==0 ? " active": "")
+          +successCarousel(stories)
 
             //- if storysWithTestimonial.length > 1
             //-   a.carousel-control-prev(href="#careersuccesscarousel" role="button" data-slide="prev")

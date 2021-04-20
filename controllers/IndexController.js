@@ -91,11 +91,20 @@ module.exports.contact = async (req, res, next) => {
     const { firstname, lastname, age, email, body, phone, locations, companytour, TermsofService, jobcenter, unemployed } = req.body
     if (age) {
       console.log('Bot stepped into honeypot!')
-      req.flash(
-        'success',
-        res.__(`Thanks for your message`)
-      )
-      res.redirect(req.headers.referer)
+      if (req.headers['content-type'] === 'application/json') {
+        const response = {
+          message: res.__(`Thanks for your message`)
+        }
+        return res.json({
+          response
+        })
+      } else {
+        req.flash(
+          'success',
+          res.__(`Thanks for your message`)
+        );
+        res.redirect(req.headers.referer)
+      }
       next()
       return;
     }
@@ -224,7 +233,8 @@ module.exports.contact = async (req, res, next) => {
 
     if (req.headers['content-type'] === 'application/json') {
       const response = {
-        message: res.__(`Thanks for your message`)
+        message: res.__(`Thanks for your message`),
+        contact_id: contact.id
       }
       return res.json({
         response
@@ -250,7 +260,6 @@ module.exports.tour = async (req, res) => {
   try {
     const query = await getAvailableTranslations(req, res)
     const partners = await Partner.find(query)
-      .sort("-createdAt")
       .exec();
     res.locals.title = 'Become our Hiring Partner | DigitalCareerInstitute'
     res.render('tour', { companytour: true, partners })
@@ -396,7 +405,8 @@ module.exports.downloadCourseCurriculum = async (req, res, next) => {
     if (req.headers['content-type'] === 'application/json') {
       const response = {
         message: res.__(`Thanks for your message`),
-        filepath: course.curriculumPdf
+        filepath: course.curriculumPdf,
+        contact_id: contact.id
       }
       return res.json({
         response
@@ -458,5 +468,29 @@ module.exports.jobcenter = async (req, res) => {
   } catch (err) {
     console.log(err)
     res.redirect(req.headers.referer)
+  }
+}
+module.exports.thankYou = async (req, res) => {
+  try {
+    const page = req.path.replace('/', ' ')
+    if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+      const matchinContactRequest = await Contact.findById(req.params.id)
+      if (matchinContactRequest) {
+        res.locals.title = 'Thank you | DigitalCareerInstitute'
+        res.setHeader("X-Robots-Tag", "noindex, follow");
+        res.render('thankyou', matchinContactRequest)
+      } else {
+        return res.render('404', {
+          page: page
+        })
+      }
+    } else {
+      return res.render('404', {
+        page: page
+      })
+    }
+  } catch (err) {
+    console.log(err)
+    res.redirect('/')
   }
 }

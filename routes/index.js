@@ -25,6 +25,8 @@ router.post("/newsletter-signup", IndexController.newsletter);
 
 router.get("/jobcenter", IndexController.jobcenter);
 
+router.get("/thank-you/:id", IndexController.thankYou);
+
 router.get("/robots.txt", function (req, res) {
   res.type("text/plain");
   res.send("User-agent: *");
