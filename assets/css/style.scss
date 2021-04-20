@@ -1242,8 +1242,10 @@ div[class*=" #{$class-slug}"] {
     padding: 0 100px;
   }
 }
- .carousel-indicators {
-  bottom: 75px;
+.carousel-indicators {
+  clear: both;
+  position: relative;
+  bottom: 40px;
   li {
     width: 10px;
     height: 10px;

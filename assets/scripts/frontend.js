@@ -336,6 +336,7 @@ if (jobcenterSelect) {
 function normalizeSlideHeights() {
   if (document.querySelector('.carousel')) {
     Array.from(document.querySelectorAll('.carousel')).map(carousel => {
+      document.querySelector('.carousel-inner').removeAttribute('style')
       var items = carousel.querySelectorAll('.carousel-item')
       var maxHeight = Math.max.apply(null,
         Array.from(items).map(function (i) {
