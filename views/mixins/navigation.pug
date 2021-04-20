@@ -65,7 +65,7 @@ mixin navigation
               a.dropdown-item.nav-link(href="/contact", class=currentPath == "/contact" ? "active" : "")=__("Campuses")
 
           li.position-relative.nav-item.d-flex.align-items-center
-            a.ml-xl-3.ml-lg-2.nav-link.d-flex.align-items-center.h-100(style=course && course.coloraccent && locale === "de" ? `color: ${course.coloraccent}!important` : `` class=locale === "de" ? "active" : "" href="/i18n/de") DE
+            a.ml-xl-3.ml-lg-2.nav-link.d-flex.align-items-center.h-100(style=course && course.coloraccent && locale === "de" ? `color: ${course.coloraccent}!important` : `` class=locale === "de" ? "active cursor-default" : "" href=locale === "de" ? "#": "/i18n/de") DE
             = "|"
-            a.mr-xl-3.mr-lg-2.nav-link.d-flex.align-items-center.h-100(style=course && course.coloraccent && locale === "en" ? `color: ${course.coloraccent}!important` : `` class=locale === "en" ? "active" : "" href="/i18n/en") EN
+            a.mr-xl-3.mr-lg-2.nav-link.d-flex.align-items-center.h-100(style=course && course.coloraccent && locale === "en" ? `color: ${course.coloraccent}!important` : `` class=locale === "en" ? "active cursor-default" : "" href=locale === "en" ? "#": "/i18n/en") EN
 

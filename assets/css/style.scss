@@ -746,6 +746,9 @@ body:not(.admin) {
 .cursor-pointer {
   cursor: pointer;
 }
+.cursor-default {
+  cursor: default;
+}
 
 /* Create a custom checkbox */
 .checkmark {
