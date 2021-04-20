@@ -199,14 +199,15 @@ module.exports.contact = async (req, res, next) => {
               { property: 'lastname', value: lastname },
               { property: 'email', value: email },
               { property: 'phone', value: phone },
-              { property: 'utm_source', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_source) : "" },
-              { property: 'utm_medium', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_medium) : "" },
-              { property: 'utm_campaign', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_campaign) : "" },
-              { property: 'utm_content', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_content) : "" },
-              { property: 'utm_term', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_term) : "" },
+              { property: 'utm_source', value: req.session.utmParams ? req.session.utmParams.utm_source : "" },
+              { property: 'utm_medium', value: req.session.utmParams ? req.session.utmParams.utm_medium : "" },
+              { property: 'utm_campaign', value: req.session.utmParams ? req.session.utmParams.utm_campaign : "" },
+              { property: 'utm_content', value: req.session.utmParams ? req.session.utmParams.utm_content : "" },
+              { property: 'utm_term', value: req.session.utmParams ? req.session.utmParams.utm_term : "" },
               { property: 'afa_jc_registered_', value: !jobcenter ? "No" : "Yes" },
               { property: 'form_are_you_currently_unemployed', value: unemployed },
               { property: 'hs_facebook_click_id', value: fbclid },
+              { property: 'last_touchpoint', value: 'website_contact_form' },
               {
                 property: 'form_payload',
                 value: JSON.stringify({
@@ -380,11 +381,12 @@ module.exports.downloadCourseCurriculum = async (req, res, next) => {
           properties:
             [
               { property: 'email', value: email },
-              { property: 'utm_source', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_source) : "" },
-              { property: 'utm_medium', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_medium) : "" },
-              { property: 'utm_campaign', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_campaign) : "" },
-              { property: 'utm_content', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_content) : "" },
-              { property: 'utm_term', value: req.session.utmParams ? JSON.stringify(req.session.utmParams.utm_term) : "" },
+              { property: 'utm_source', value: req.session.utmParams ? req.session.utmParams.utm_source : "" },
+              { property: 'utm_medium', value: req.session.utmParams ? req.session.utmParams.utm_medium : "" },
+              { property: 'utm_campaign', value: req.session.utmParams ? req.session.utmParams.utm_campaign : "" },
+              { property: 'utm_content', value: req.session.utmParams ? req.session.utmParams.utm_content : "" },
+              { property: 'utm_term', value: req.session.utmParams ? req.session.utmParams.utm_term : "" },
+              { property: 'last_touchpoint', value: 'curriculum_download'},
               {
                 property: 'form_payload',
                 value: JSON.stringify({
