@@ -56,7 +56,7 @@ block content
         =__("stand out")
         = "?"
       .row 
-        .col-md-6
+        .col-md-12
           p.text-muted.mb-5=__("Our 1-year program develops higly-motivated individuals into great tech and digital professionals with a broad skill set.")
 
       .px-4.px-md-0
@@ -71,10 +71,10 @@ block content
   .container.mt-5.text-center.text-md-left
     h2.mb-3.pb-3.mb-4=__( "Additional training" )
     .row 
-      .col-md-6
+      .col-md-12
         p.text-muted.mb-5=__("On top of all the technical knowledge, our students will work around their soft skills: time management, agile project management and much more.")
   .bg-primary.py-3.container-md
-    .container
+    .container-sm
       .mx-lg-5
         .mx-xl-5
           .row
@@ -84,7 +84,7 @@ block content
                   .mr-0.mr-md-0.px-1.p-md-3.p-lg-5.w-100.square-6.square-md-none
                     .px-md-3
                       include ../assets/media/careersuccess_languages.svg
-                  small.h-3.d-flex.flex-column.justify-content-center.overflow-wrap-anywhere.hyphen.text-center
+                  small.h-3.d-flex.flex-column.justify-content-center.word-wrap-break-word.hyphen.text-center
                     =__("Soft Skill Training")
             .col-6.col-md-4.py-2.justify-content-md-center.my-2.d-flex.floatings.justify-content-end
               .px-md-4.w-100
@@ -92,7 +92,7 @@ block content
                   .mr-0.mr-md-0.px-1.p-md-3.p-lg-5.w-100.square-6.square-md-none
                     .px-md-3
                       include ../assets/media/careersuccess_time.svg
-                  small.h-3.d-flex.flex-column.justify-content-center.overflow-wrap-anywhere.hyphen.text-center
+                  small.h-3.d-flex.flex-column.justify-content-center.word-wrap-break-word.hyphen.text-center
                     =__("Time management")
             .col-6.col-md-4.py-2.justify-content-md-center.my-2.d-flex.floatings
               .px-md-4.w-100
@@ -100,7 +100,7 @@ block content
                   .mr-0.mr-md-0.px-1.p-md-3.p-lg-5.w-100.square-6.square-md-none
                     .px-md-3
                       include ../assets/media/careersuccess_team_meeting.svg
-                  small.h-3.d-flex.flex-column.justify-content-center.overflow-wrap-anywhere.hyphen.text-center
+                  small.h-3.d-flex.flex-column.justify-content-center.word-wrap-break-word.hyphen.text-center
                     =__("Agile project management")
             .col-6.col-md-4.py-2.justify-content-md-center.my-2.d-flex.floatings.justify-content-end
               .px-md-4.w-100
@@ -108,7 +108,7 @@ block content
                   .mr-0.mr-md-0.px-1.p-md-3.p-lg-5.w-100.square-6.square-md-none
                     .px-md-3
                       include ../assets/media/careersuccess_data_analytics.svg
-                  small.h-3.d-flex.flex-column.justify-content-center.overflow-wrap-anywhere.hyphen.text-center
+                  small.h-3.d-flex.flex-column.justify-content-center.word-wrap-break-word.hyphen.text-center
                     =__("Language courses")
             .col-6.col-md-4.py-2.justify-content-md-center.my-2.d-flex.floatings
               .px-md-4.w-100
@@ -116,7 +116,7 @@ block content
                   .mr-0.mr-md-0.px-1.p-md-3.p-lg-5.w-100.square-6.square-md-none
                     .px-md-3
                       include ../assets/media/careersuccess_consulting.svg
-                  small.h-3.d-flex.flex-column.justify-content-center.overflow-wrap-anywhere.hyphen.text-center
+                  small.h-3.d-flex.flex-column.justify-content-center.word-wrap-break-word.hyphen.text-center
                     =__("Job coaching")
             .col-6.col-md-4.py-2.justify-content-md-center.my-2.d-flex.floatings.justify-content-end
               .px-md-4.w-100
@@ -124,7 +124,7 @@ block content
                   .mr-3.mr-md-0.px-1.p-md-3.p-lg-5.w-100.square-6.square-md-none
                     .px-md-3
                       include ../assets/media/careersuccess_online_lesson.svg
-                  .h-3.d-flex.flex-column.justify-content-center.overflow-wrap-anywhere.hyphen.text-center
+                  .h-3.d-flex.flex-column.justify-content-center.word-wrap-break-word.hyphen.text-center
                     =__("Mentoring")
 
   if partners
@@ -137,7 +137,6 @@ block content
           h2.pb-3.mb-1
             =__("Success Stories")
           =__("See what companies are saying about our students.")
-          .px-5
         +successCarousel(partnersWithTestimonial)
   else if user
     .text-center

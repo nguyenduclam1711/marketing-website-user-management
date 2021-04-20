@@ -19,13 +19,12 @@ mixin successCarousel(stories)
                       =story.excerpt
                 .d-flex.justify-content-end.align-items-center.align-items-md-end.flex-column.flex-md-row
                   
-                  .text-center.text-md-right.px-3.mb-4.mb-md-0.order-12.order-md-1
-                    if story.subtitle
-                      h3=story.subtitle
-                    if story.title
-                      h6.font-weight-bold.text-muted=story.title 
-                    else
-                      h6.font-weight-bold.text-muted=story.workPosition
+                  if story.subtitle || story.workPosition
+                    .text-center.text-md-right.px-3.mb-4.mb-md-0.order-12.order-md-1
+                      if story.subtitle
+                        h3=story.subtitle
+                      if story.workPosition
+                        h6.font-weight-bold.text-muted=story.workPosition
                   if story.partnerlogo
                     .text-right.rounded-circle.overflow-hidden.mb-5.mb-md-0.order-1.order-md-12(style=`box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1f3fc7 !important`};`)
                       img.mw-150.w-8.h-8(src=`/images/${story.partnerlogo ? story.partnerlogo : story.avatar}` style=`box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1f3fc7 !important`}` class=story.partnerlogo ? "object-fit-contain" : "object-fit-cover")
