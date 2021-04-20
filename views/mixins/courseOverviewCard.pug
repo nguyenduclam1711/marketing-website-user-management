@@ -2,7 +2,7 @@ mixin courseOverviewCard(course, classes="col-md-6")
   .floatings.mb-5.mb-md-4(class=classes)
     .p-5.h-100(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )
       .py-4.d-flex.flex-column.justify-content-between
-        div
+        div.word-wrap-break-word
           a.text-dark(href=`/courses/${course.slug}`)
             h5.font-weight-bold=course.headline
           .my-3

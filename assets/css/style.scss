@@ -45,11 +45,11 @@ body {
   font-family: "Gordita-Regular", sans-serif;
   color: $bluedark !important;
   font-weight: 200;
+  font-size: 18px;
 }
 
 body:not(.admin).btn {
   border-radius: 2px;
-  font-size: 1rem;
   border-width: 3px;
   line-height: 1.5;
   background-color: $blue;
