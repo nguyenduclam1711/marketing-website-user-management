@@ -207,7 +207,7 @@ module.exports.contact = async (req, res, next) => {
               { property: 'afa_jc_registered_', value: !jobcenter ? "No" : "Yes" },
               { property: 'form_are_you_currently_unemployed', value: unemployed },
               { property: 'hs_facebook_click_id', value: fbclid },
-              { property: 'last_touchpoint': value: 'website_contact_form' },
+              { property: 'last_touchpoint', value: 'website_contact_form' },
               {
                 property: 'form_payload',
                 value: JSON.stringify({
