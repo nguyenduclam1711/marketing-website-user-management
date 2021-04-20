@@ -1450,6 +1450,11 @@ canvas#polygons {
     width: 50%;
   }
 }
+.w-md-auto {
+  @include media-breakpoint-up(md) {
+    width: auto !important;
+  }
+}
 
 .mh-33 {
   min-height: 33vh;
