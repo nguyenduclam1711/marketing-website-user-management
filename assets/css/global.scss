@@ -28,6 +28,21 @@ $theme-colors: (
 @import "../../node_modules/bootstrap/scss/bootstrap";
 @import "../../node_modules/quill/dist/quill.snow.css";
 
+@mixin btn-color($color-pri, $color-sec, $color-border) {
+  background-color: $color-pri;
+  color: $color-sec !important;
+  border: 1px solid;
+  border-color: $color-border;
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    background-color: darken($color-pri, 10%) !important;
+    color: $color-sec !important;
+    border-color: darken($color-border, 10%) !important;
+  }
+}
+
 :root {
   --dark: #040a3b;
 }
@@ -51,26 +66,18 @@ $theme-colors: (
 }
 
 .btn-secondary {
-  color: $light-grey;
+  @include btn-color($secondary, white, transparent);
+  transition: all $transition ease;
   box-shadow: 0px 20px 25px -10px rgba(255, 110, 24, 0.45);
-}
-.bg-section {
-  background-color: $bluetrans;
-}
-
-@mixin btn-color($color-pri, $color-sec, $color-border) {
-  background-color: $color-pri;
-  color: $color-sec !important;
-  border: 1px solid;
-  border-color: $color-border;
   &:hover,
   &:focus,
   &:active,
   &.active {
-    background-color: darken($color-pri, 10%) !important;
-    color: $color-sec !important;
-    border-color: darken($color-border, 10%) !important;
+    box-shadow: 0px 25px 35px -10px rgba(255, 110, 24, 0.45);
   }
+}
+.bg-section {
+  background-color: $bluetrans;
 }
 
 .btn[class*="-outline-"] {
