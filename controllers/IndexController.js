@@ -185,25 +185,11 @@ module.exports.contact = async (req, res, next) => {
 
     if (!!process.env.HUBSPOT_API_KEY) {
       let fbclid = getFbClid(req, res, next);
-      var options = {
-        method: 'POST',
-        url: `https://api.hubapi.com/contacts/v1/contact/createOrUpdate/email/${email}`,
-        qs: { hapikey: process.env.HUBSPOT_API_KEY },
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: {
-          properties:
-            [
+      var properties = [
               { property: 'firstname', value: firstname },
               { property: 'lastname', value: lastname },
               { property: 'email', value: email },
               { property: 'phone', value: phone },
-              { property: 'utm_source', value: req.session.utmParams ? req.session.utmParams.utm_source : "" },
-              { property: 'utm_medium', value: req.session.utmParams ? req.session.utmParams.utm_medium : "" },
-              { property: 'utm_campaign', value: req.session.utmParams ? req.session.utmParams.utm_campaign : "" },
-              { property: 'utm_content', value: req.session.utmParams ? req.session.utmParams.utm_content : "" },
-              { property: 'utm_term', value: req.session.utmParams ? req.session.utmParams.utm_term : "" },
               { property: 'afa_jc_registered_', value: !jobcenter ? "No" : "Yes" },
               { property: 'form_are_you_currently_unemployed', value: unemployed },
               { property: 'hs_facebook_click_id', value: fbclid },
@@ -218,7 +204,32 @@ module.exports.contact = async (req, res, next) => {
                   'utm_params': remainingUtmParams
                 })
               }
-            ],
+            ];
+      if(req.session.utmParams && req.session.utmParams.utm_source){
+        properties.push({property: 'utm_source', value: req.session.utmParams.utm_source} ) 
+      }
+      if(req.session.utmParams && req.session.utmParams.utm_medium){
+        properties.push({property: 'utm_medium', value: req.session.utmParams.utm_medium} ) 
+      }
+      if(req.session.utmParams && req.session.utmParams.utm_campaign){
+        properties.push({property: 'utm_campaign', value: req.session.utmParams.utm_campaign} ) 
+      }
+      if(req.session.utmParams && req.session.utmParams.utm_content){
+        properties.push({property: 'utm_content', value: req.session.utmParams.utm_content} ) 
+      }
+      if(req.session.utmParams && req.session.utmParams.utm_term){
+        properties.push({property: 'utm_term', value: req.session.utmParams.utm_term} ) 
+      }
+
+      var options = {
+        method: 'POST',
+        url: `https://api.hubapi.com/contacts/v1/contact/createOrUpdate/email/${email}`,
+        qs: { hapikey: process.env.HUBSPOT_API_KEY },
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: {
+          properties: properties,
         },
         json: true
       };
@@ -370,22 +381,10 @@ module.exports.downloadCourseCurriculum = async (req, res, next) => {
     let remainingUtmParams = req.session.utmParams ? { ...req.session.utmParams } : []
     Object.keys(remainingUtmParams).map(q => q.startsWith('utm_') && delete remainingUtmParams[q])
     if (!!process.env.HUBSPOT_API_KEY) {
-      var options = {
-        method: 'POST',
-        url: `https://api.hubapi.com/contacts/v1/contact/createOrUpdate/email/${email}`,
-        qs: { hapikey: process.env.HUBSPOT_API_KEY },
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: {
-          properties:
-            [
+      
+
+      var properties = [
               { property: 'email', value: email },
-              { property: 'utm_source', value: req.session.utmParams ? req.session.utmParams.utm_source : "" },
-              { property: 'utm_medium', value: req.session.utmParams ? req.session.utmParams.utm_medium : "" },
-              { property: 'utm_campaign', value: req.session.utmParams ? req.session.utmParams.utm_campaign : "" },
-              { property: 'utm_content', value: req.session.utmParams ? req.session.utmParams.utm_content : "" },
-              { property: 'utm_term', value: req.session.utmParams ? req.session.utmParams.utm_term : "" },
               { property: 'last_touchpoint', value: 'curriculum_download'},
               {
                 property: 'form_payload',
@@ -394,7 +393,33 @@ module.exports.downloadCourseCurriculum = async (req, res, next) => {
                   'utm_params': remainingUtmParams
                 })
               }
-            ],
+            ];
+
+      if(req.session.utmParams && req.session.utmParams.utm_source){
+        properties.push({property: 'utm_source', value: req.session.utmParams.utm_source} ) 
+      }
+      if(req.session.utmParams && req.session.utmParams.utm_medium){
+        properties.push({property: 'utm_medium', value: req.session.utmParams.utm_medium} ) 
+      }
+      if(req.session.utmParams && req.session.utmParams.utm_campaign){
+        properties.push({property: 'utm_campaign', value: req.session.utmParams.utm_campaign} ) 
+      }
+      if(req.session.utmParams && req.session.utmParams.utm_content){
+        properties.push({property: 'utm_content', value: req.session.utmParams.utm_content} ) 
+      }
+      if(req.session.utmParams && req.session.utmParams.utm_term){
+        properties.push({property: 'utm_term', value: req.session.utmParams.utm_term} ) 
+      }
+
+      var options = {
+        method: 'POST',
+        url: `https://api.hubapi.com/contacts/v1/contact/createOrUpdate/email/${email}`,
+        qs: { hapikey: process.env.HUBSPOT_API_KEY },
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: {
+          properties: properties,
         },
         json: true
       };
