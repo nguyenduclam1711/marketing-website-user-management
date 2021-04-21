@@ -2,21 +2,22 @@ mixin successCarousel(stories)
   #careersuccesscarousel.carousel.slide.mb-5.pt-3.pb-5(data-ride="carousel" data-interval="40000")
     .carousel-inner.py-5
       each story, index in stories
-        .carousel-item.px-3.px-sm-5(class= index === 0 ? ` active` : ``)
+        .carousel-item.h-100.px-3.px-sm-5(class= index === 0 ? ` active` : ``)
           .py-5.shadow.rounded-sm.h-100.position-relative
             if user && story && user.userId === story.userId || user && user.admin === "true"
               a.position-absolute.right.bottom.btn.btn-outline-primary.z-foreground(href=`/admin/stories/edit/${story.slug}`) Edit
             .bg-white.p-4.rounded-sm.h-100
                   
-              div.position-relative.h-100.d-flex.flex-column.justify-content-between
-                .px-5.story-item
+              div.position-relative.h-100.d-flex.flex-column.justify-content-around
+                .px-sm-5.story-item
                   blockquote.blockquote.z-0
-                    .quotesign.z-minus(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
-                      include ../../assets/icons/om_quote.svg
-                    if story.testimonial_content
-                      = story.testimonial_content
-                    else 
-                      =story.excerpt
+                    small
+                      .quotesign.z-minus(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
+                        include ../../assets/icons/om_quote.svg
+                      if story.testimonial_content
+                        = story.testimonial_content
+                      else 
+                        =story.excerpt
                 .d-flex.justify-content-end.align-items-center.align-items-md-end.flex-column.flex-md-row
                   
                   if story.subtitle || story.workPosition
@@ -26,10 +27,10 @@ mixin successCarousel(stories)
                       if story.workPosition
                         h6.font-weight-bold.text-muted=story.workPosition
                   if story.partnerlogo
-                    .text-right.rounded-circle.overflow-hidden.mb-5.mb-md-0.order-1.order-md-12(style=`box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1f3fc7 !important`};`)
+                    .text-right.rounded-circle.overflow-hidden.mb-md-0.order-1.order-md-12(style=`box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1f3fc7 !important`};`)
                       img.mw-150.w-8.h-8(src=`/images/${story.partnerlogo ? story.partnerlogo : story.avatar}` style=`box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1f3fc7 !important`}` class=story.partnerlogo ? "object-fit-contain" : "object-fit-cover")
                   else 
-                    a.text-right.rounded-circle.overflow-hidden.mb-5.mb-md-0.order-1.order-md-12.flex-shrink-0(href=story.partnerlogo ? `#` : `/stories/${story.slug}` style=`box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1f3fc7 !important`};` class=story.partnerlogo ? "" : "streched-link")
+                    a.text-right.rounded-circle.overflow-hidden.order-1.order-md-12.flex-shrink-0(href=story.partnerlogo ? `#` : `/stories/${story.slug}` style=`box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1f3fc7 !important`};` class=story.partnerlogo ? "" : "streched-link")
                       img.mw-150.w-8.h-8(src=`/images/${story.partnerlogo ? story.partnerlogo : story.avatar}` style=`box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1f3fc7 !important`}` class=story.partnerlogo ? "object-fit-contain" : "object-fit-cover")
       if stories.length > 1
         ol.carousel-indicators
