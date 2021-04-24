@@ -1812,3 +1812,11 @@ body[class*="pages-"] {
   -webkit-hyphens: auto;
   hyphens: auto;
 }
+.dotted {
+  &.red {
+    background-image: url("~/media/dot_red.svg");
+  }
+  &.blue {
+    background-image: url("~/media/dot_blue.svg");
+  }
+}

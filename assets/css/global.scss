@@ -122,14 +122,3 @@ $theme-colors: (
 .border-radius-0 {
   border-radius: 0;
 }
-.avoid-polygon1 {
-  @include media-breakpoint-down(md) {
-    max-width: 65%;
-  }
-}
-.avoid-polygon2 {
-  @include media-breakpoint-down(md) {
-    max-width: 80%;
-    float: right;
-  }
-}
