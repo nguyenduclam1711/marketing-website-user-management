@@ -2,22 +2,27 @@ extends layout.pug
 block content
   .section
     .content
-      section.homeSection.d-flex.flex-column.position-relative.bg-light-grey
+      section.homeSection.d-flex.flex-column.position-relative
         if currentPath == "/"
           +navigation
         div.mainHome.d-flex.w-100.z-1.py-md-5
+          .intersection_observed.bg-primary.w-5.h-5.position-absolute
+          .intersection_observed.bg-light-blue.position-absolute.z-minus.w-5.h-5.ml-3.mt-3
           div.m-auto.container.py-md-5
-            .dotted.blue.w-10.h-10
-            .dotted.red.w-10.h-10
-            .row
+            .dotted.red.w-10.h-10.rounded-circle.position-absolute.right.mr-5
+            .dotted.blue.w-10.h-10.rounded-circle.position-absolute.left.bottom.ml-3
+            .row.my-5.py-5
               .col-md-6.py-5.order-12.order-md-1
                 h1.font-weight-bold.display-1: +translate('Start your')
                 h2.mb-5.display-1.font-weight-bold: +translate('Digital career')
                 p.subtitle.h5.mb-5.text-shadow-light-blue: +translate("Learn digital skills with us to get the most fulfilling jobs")
                 .d-flex
-                  a.mb-3.btn.btn-lg.btn-secondary.mr-2.mr-md-4.scrollbutton(href='#ourcourses', role='button'): +translate("Browse Courses")
-              .col-md-6.py-5.order-1.order-md-12
+                  a.mb-3.btn.btn-lg.btn-secondary.mr-2.mr-md-4.scrollbutton.w-100(href='#ourcourses', role='button'): +translate("Browse Courses")
+              .col-md-6.py-5.order-1.order-md-12.d-none.d-md-block
                 img.w-100(src="/media/hero.svg", alt="")
+            .mb-5.position-relative
+              .intersection_observed.bg-primary.w-5.h-5.position-absolute.bottom.right
+              .intersection_observed.bg-light-blue.position-absolute.z-minus.w-5.h-5.mr-3.mb-3.bottom.right
 
       section#ourcourses.position-relative.offset_title.pb-5
         header.offset_header.text-center

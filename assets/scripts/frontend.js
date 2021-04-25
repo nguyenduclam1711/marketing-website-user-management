@@ -149,10 +149,24 @@ function elementInViewport(el) {
   );
 }
 
-window.onscroll = throttle(function () {
-  showFloatings();
-  countUp();
-}, 50);
+window.onscroll = () => {
+  throttle(
+    function () {
+      showFloatings();
+      countUp();
+    }
+    , 50)
+  animatedPolygons()
+};
+
+const animatedPolygons = () => {
+  const elements = document.querySelectorAll('.intersection_observed')
+  Array.from(elements).map((element, index) => {
+    if (elementInViewport(element)) {
+      element.style.transform = `translateY(${Math.floor(window.scrollY / 10)}px)`
+    }
+  })
+}
 
 $("#contactFormModal").on("shown.bs.modal", function (e) {
   window.document.querySelector("#track").value = window.location.href;
@@ -375,3 +389,23 @@ Array.from(document.querySelectorAll('.dropdown-custom')).map(dropdown => {
     dropdown.querySelector('.dropdown-menu').classList.toggle('show')
   })
 })
+
+// const setObserver = (ref) => {
+//   let options = {
+//     threshold: 0.9
+//   }
+//   let observer = new IntersectionObserver(handler, options);
+//   observer.observe(ref);
+// }
+// function handler(entries, observer) {
+//   entries.map(entry => {
+//     console.log('entry', Date.now());
+//     if (entry.isIntersecting) {
+//       console.log("Hey", entry);
+//       entry.target.style.transform = `translateY(${window.scrollY}px)`
+//     } else {
+//       console.log("Ho");
+//     }
+//   })
+// }
+// setObserver(document.querySelector('.intersection_observed'))
