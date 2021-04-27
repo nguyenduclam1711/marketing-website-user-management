@@ -5,10 +5,10 @@ block content
       .row 
         .col-md-6.order-12.order-md-1
           h1.mt-5.mb-3=__("Become our Hiring Partner")
-          h4.font-weight-light.mb-3=__("We connect companies to the most talented Web Developers and Online Marketers.")
+          p.mb-3=__("We connect companies to the most talented Web Developers and Online Marketers.")
           .mt-5
             .py-md-5
-              a.btn.btn-secondary.btn-lg(href='/contact', data-toggle='modal', data-target='#contactFormModal')
+              a.btn.btn-secondary.btn-lg.w-100.w-md-auto(href='/contact', data-toggle='modal', data-target='#contactFormModal')
                 =__("Join Our Network")
         .col-md-6.order-1.order-md-12
           .floatings
@@ -56,10 +56,11 @@ block content
         =__("stand out")
         = "?"
       .row 
-        .col-md-6
-          p.text-muted.mb-5=__("Our 1-year program develops higly-motivated individuals into great tech and digital professionals with a broad skill set.")
+        .col-md-12
+          p.text-muted.mb-5=__("Our unique, in-depth courses provide our highly motivated students with a solid foundation. We work with a modern curriculum that incorporates the latest technologies, current trends in marketing and a variety of hands-on projects.")
+          p.text-muted.mb-5=__("DCI offers much more than what is normally provided by ordinary bootcamps. Our comprehensive courses are designed to provide students with in-depth knowledge of tech topics. At the end of every DCI course, our students have become well-rounded professionals who are ready to take the next step in their careers.")
 
-      .px-4.px-md-0
+      div
         .row.justify-content-center
           each course in courses.filter(c => c.feature_on_companies_page)
             +courseOverviewCard(course, 'col-lg-4 col-md-6')
@@ -71,61 +72,60 @@ block content
   .container.mt-5.text-center.text-md-left
     h2.mb-3.pb-3.mb-4=__( "Additional training" )
     .row 
-      .col-md-6
-        p.text-muted.mb-5=__("On top of all the technical knowledge, our students will work around their soft skills: time management, agile project management and much more.")
-  .bg-primary.py-3.container-md
-    .container
-      .mx-lg-5
-        .mx-xl-5
-          .row
-            .col-6.col-md-4.py-2.justify-content-md-center.my-2.d-flex.floatings
-              .px-md-4.w-100
-                .d-flex.bg-white.p-2.align-items-center.rounded.h-100.w-100.flex-md-column
-                  .mr-3.mr-md-0.px-1.p-md-3.p-lg-5.w-100.square-6.square-md-none
-                    .px-md-3
-                      include ../assets/media/careersuccess_languages.svg
-                  .h-3.d-flex.flex-column.justify-content-center.overflow-wrap-anywhere.hyphen.text-center
-                    =__("Soft Skill Training")
-            .col-6.col-md-4.py-2.justify-content-md-center.my-2.d-flex.floatings.justify-content-end
-              .px-md-4.w-100
-                .d-flex.bg-white.p-2.align-items-center.rounded.h-100.w-100.flex-md-column
-                  .mr-3.mr-md-0.px-1.p-md-3.p-lg-5.w-100.square-6.square-md-none
-                    .px-md-3
-                      include ../assets/media/careersuccess_time.svg
-                  .h-3.d-flex.flex-column.justify-content-center.overflow-wrap-anywhere.hyphen.text-center
-                    =__("Time management")
-            .col-6.col-md-4.py-2.justify-content-md-center.my-2.d-flex.floatings
-              .px-md-4.w-100
-                .d-flex.bg-white.p-2.align-items-center.rounded.h-100.w-100.flex-md-column
-                  .mr-3.mr-md-0.px-1.p-md-3.p-lg-5.w-100.square-6.square-md-none
-                    .px-md-3
-                      include ../assets/media/careersuccess_team_meeting.svg
-                  .h-3.d-flex.flex-column.justify-content-center.overflow-wrap-anywhere.hyphen.text-center
-                    =__("Agile project management")
-            .col-6.col-md-4.py-2.justify-content-md-center.my-2.d-flex.floatings.justify-content-end
-              .px-md-4.w-100
-                .d-flex.bg-white.p-2.align-items-center.rounded.h-100.w-100.flex-md-column
-                  .mr-3.mr-md-0.px-1.p-md-3.p-lg-5.w-100.square-6.square-md-none
-                    .px-md-3
-                      include ../assets/media/careersuccess_data_analytics.svg
-                  .h-3.d-flex.flex-column.justify-content-center.overflow-wrap-anywhere.hyphen.text-center
-                    =__("Language courses")
-            .col-6.col-md-4.py-2.justify-content-md-center.my-2.d-flex.floatings
-              .px-md-4.w-100
-                .d-flex.bg-white.p-2.align-items-center.rounded.h-100.w-100.flex-md-column
-                  .mr-3.mr-md-0.px-1.p-md-3.p-lg-5.w-100.square-6.square-md-none
-                    .px-md-3
-                      include ../assets/media/careersuccess_consulting.svg
-                  .h-3.d-flex.flex-column.justify-content-center.overflow-wrap-anywhere.hyphen.text-center
-                    =__("Job coaching")
-            .col-6.col-md-4.py-2.justify-content-md-center.my-2.d-flex.floatings.justify-content-end
-              .px-md-4.w-100
-                .d-flex.bg-white.p-2.align-items-center.rounded.h-100.w-100.flex-md-column
-                  .mr-3.mr-md-0.px-1.p-md-3.p-lg-5.w-100.square-6.square-md-none
-                    .px-md-3
-                      include ../assets/media/careersuccess_online_lesson.svg
-                  .h-3.d-flex.flex-column.justify-content-center.overflow-wrap-anywhere.hyphen.text-center
-                    =__("Mentoring")
+      .col-md-12
+        p.text-muted.mb-5=__("On top of all the technical knowledge, our students will work around their soft skills\: Time management, agile project management and much more.")
+  .bg-primary.py-3.container-sm
+    .mx-lg-5
+      .mx-xl-5
+        .row
+          .col-6.col-md-4.px-2.py-2.justify-content-md-center.my-2.d-flex.floatings
+            .px-md-4.w-100
+              .d-flex.bg-white.p-1.align-items-center.rounded.h-100.w-100.flex-md-column
+                .mr-0.mr-md-0.px-1.p-md-3.p-lg-5.w-100.square-5.square-md-none
+                  .px-md-3
+                    include ../assets/media/careersuccess_languages.svg
+                small.h-3.d-flex.flex-column.justify-content-center.word-wrap-break-word.hyphen.text-center
+                  =__("Soft Skill Training")
+          .col-6.col-md-4.px-2.py-2.justify-content-md-center.my-2.d-flex.floatings.justify-content-end
+            .px-md-4.w-100
+              .d-flex.bg-white.p-1.align-items-center.rounded.h-100.w-100.flex-md-column
+                .mr-0.mr-md-0.px-1.p-md-3.p-lg-5.w-100.square-5.square-md-none
+                  .px-md-3
+                    include ../assets/media/careersuccess_time.svg
+                small.h-3.d-flex.flex-column.justify-content-center.word-wrap-break-word.hyphen.text-center
+                  =__("Time management")
+          .col-6.col-md-4.px-2.py-2.justify-content-md-center.my-2.d-flex.floatings
+            .px-md-4.w-100
+              .d-flex.bg-white.p-1.align-items-center.rounded.h-100.w-100.flex-md-column
+                .mr-0.mr-md-0.px-1.p-md-3.p-lg-5.w-100.square-5.square-md-none
+                  .px-md-3
+                    include ../assets/media/careersuccess_team_meeting.svg
+                small.h-3.d-flex.flex-column.justify-content-center.word-wrap-break-word.hyphen.text-center
+                  =__("Agile project management")
+          .col-6.col-md-4.px-2.py-2.justify-content-md-center.my-2.d-flex.floatings.justify-content-end
+            .px-md-4.w-100
+              .d-flex.bg-white.p-1.align-items-center.rounded.h-100.w-100.flex-md-column
+                .mr-0.mr-md-0.px-1.p-md-3.p-lg-5.w-100.square-5.square-md-none
+                  .px-md-3
+                    include ../assets/media/careersuccess_data_analytics.svg
+                small.h-3.d-flex.flex-column.justify-content-center.word-wrap-break-word.hyphen.text-center
+                  =__("Language courses")
+          .col-6.col-md-4.px-2.py-2.justify-content-md-center.my-2.d-flex.floatings
+            .px-md-4.w-100
+              .d-flex.bg-white.p-1.align-items-center.rounded.h-100.w-100.flex-md-column
+                .mr-0.mr-md-0.px-1.p-md-3.p-lg-5.w-100.square-5.square-md-none
+                  .px-md-3
+                    include ../assets/media/careersuccess_consulting.svg
+                small.h-3.d-flex.flex-column.justify-content-center.word-wrap-break-word.hyphen.text-center
+                  =__("Job coaching")
+          .col-6.col-md-4.px-2.py-2.justify-content-md-center.my-2.d-flex.floatings.justify-content-end
+            .px-md-4.w-100
+              .d-flex.bg-white.p-2.align-items-center.rounded.h-100.w-100.flex-md-column
+                .mr-3.mr-md-0.px-1.p-md-3.p-lg-5.w-100.square-5.square-md-none
+                  .px-md-3
+                    include ../assets/media/careersuccess_online_lesson.svg
+                .h-3.d-flex.flex-column.justify-content-center.word-wrap-break-word.hyphen.text-center
+                  =__("Mentoring")
 
   if partners
     .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center.mt-5
@@ -133,11 +133,10 @@ block content
     - partnersWithTestimonial = partners.filter(p => p.testimonial_name && p.testimonial_job && p.testimonial_content && p.testimonial_show )
     if partnersWithTestimonial.length > 0
       .container-md
-        div
+        div.pt-4
           h2.pb-3.mb-1
             =__("Success Stories")
           =__("See what companies are saying about our students.")
-          .px-5
         +successCarousel(partnersWithTestimonial)
   else if user
     .text-center
@@ -223,7 +222,7 @@ block content
         .bg-light-blue.p-5
           .mx-md-5
             h5.font-weight-bold.mb-5.mx-md-5=__("Ready to join? Fill in your Development & Marketing Positions")
-            a.btn.btn-secondary.btn-lg(href='/contact', data-toggle='modal', data-target='#contactFormModal')
+            a.btn.btn-secondary.btn-lg.w-100.w-md-auto(href='/contact', data-toggle='modal', data-target='#contactFormModal')
               =__("Become a Hiring Partner")
 
   .pb-5

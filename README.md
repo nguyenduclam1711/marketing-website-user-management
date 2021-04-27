@@ -89,7 +89,7 @@ db.users.findOneAndUpdate({email: "user@digitalcareerinstitute.org}, {$set: {adm
 
 ## Features
 
-For some actions you need a superadmin account, for some a normal admin role is enought. Contact [@spielhoelle](mailto:thomas.kuhnert@digitalcareerinstitute.org) or [@LeandroDCI](https://github.com/LeandroDCI) for extended access rights.
+For some actions you need a superadmin account, for some a normal admin role is enough. Contact [@spielhoelle](mailto:thomas.kuhnert@digitalcareerinstitute.org) or [@LeandroDCI](https://github.com/LeandroDCI) for extended access rights.
 
 ### Events from eventbrite
 
@@ -119,7 +119,7 @@ Pagelocation defines where and whether the page should be visible in a menu. Pro
 *Order* Defines the position of the pages amongst their location (header-page => 1, 2, 3 ... | footer-pages => 1, 2, 3)
 
 `Call to action`
-Offers posiibility to show a prominent box on the page frontend. If not set, bos is not visible.
+Offers posibility to show a prominent box on the page frontend. If not set, bos is not visible.
 
 `Translations`
 By default all entries are created in a english namespace and are also just visible on the english version in the frontend. If you translate a entry, it creates a clone and links the original with the translated pendant. All fields are individual editable. If you switch in the frontend the language, the adequate version will be displayed.

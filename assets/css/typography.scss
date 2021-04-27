@@ -29,6 +29,18 @@ h6 {
   font-family: "Gordita", sans-serif;
   font-weight: 300 !important;
 }
+h1, .h1 {
+  font-size: 2.6rem;
+}
+h2, .h2 {
+    font-size: 2.2rem;
+}
+h3, .h3 {
+    font-size: 1.25rem;
+}
+small, .small {
+    font-size: 89%;
+}
 //h4 {
 //  font-size: 1rem;
 //}
@@ -37,6 +49,9 @@ a:link {
 }
 .font-weight-light {
   font-family: "Gordita-Regular", sans-serif !important;
+}
+.font-weight-bolder {
+  font-weight: 900 !important;
 }
 .font-weight-bold {
   font-weight: 100 !important;

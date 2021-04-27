@@ -60,13 +60,13 @@ footer.site-footer {
     border-color: transparent transparent $secondary ;
     position: absolute;
     bottom: 0;
-    right: 0;
+    right: 1px;
     z-index: 101;
     svg {
       width: 2.5em;
       height: 2.5em;
       position: absolute;
-      left: -48px;
+      left: -54px;
       top: 45px;
       z-index: 99999;
       transform: rotate(-45deg);
