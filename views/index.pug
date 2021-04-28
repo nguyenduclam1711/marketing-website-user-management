@@ -24,44 +24,53 @@ block content
               .intersection_observed.bg-primary.w-5.h-5.position-absolute.bottom.right
               .intersection_observed.bg-light-blue.position-absolute.z-minus.w-5.h-5.mr-3.mb-3.bottom.right
 
-      section#ourcourses.position-relative.offset_title.pb-5
-        header.offset_header.text-center
+      section#partners.py-5.bg-light
+        .container.py-5.text-center
+          h2.display-1.text-center.mb-5: +translate("Company that hired our students")
+          - randompartners = [...partners]
+          - for (let i = randompartners.length - 1; i > 0; i--) {
+              - const j = Math.floor(Math.random() * (i + 1));
+              - [randompartners[i], randompartners[j]] = [randompartners[j], randompartners[i]];
+          - }  
+          .row
+            each partner, index in randompartners.splice(0,6)
+              if partner.link
+                a.col-3.col-md-2.partner.h-4.align-items-center.justify-content-center(href=partner.link target="_blank" rel="noopener" class=index > 3 ? "d-none d-md-block" : "")
+                  img.partners-logo.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo)
+              else
+                img.col-3.col-md-2.partners-logo.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo class=index > 3 ? "d-none d-md-block" : "")
+
+      section#partners.py-5
+        header.offset_header.position-relative
+          .intersection_observed.bg-light-blue.position-absolute.w-5.h-5.w-md-10.h-md-10.mr-3.mb-3.top.left
           .d-inline-block.position-relative
-            h2.position-relative.d-inline-block.display-1.text-center.text-white.bg-primary.px-5.py-4
+            h2
               +translate("Our courses")
-        .container.pt-5.text-center
+        .container.pt-5
           .row.mx-md-5.justify-content-center
             each course in courses
               .col-md-6.mb-5.mb-sm-4.floatings
-                .bg-white.px-5.py-3.px-md-2.text-center.hover-shadow.h-100.d-flex.flex-column
+                .bg-white.hover-shadow.h-100.d-flex.flex-column
                   a.card-link.d-block(href="/courses/" + course.slug).flex-grow.justify-content-between.h-100
-                    .m-3.row.position-relative
-                      .col-10.offset-1.col-md-8.offset-md-2.align-items-center.my-4
-                        img.object-fit-cover.img-fluid.square(src="/media/pixel.gif" alt=course.headline style=`background-image: url('${course.icon ? `/images/` + course.icon : `/media/circuit-board.svg`}')`)
-                    h3.text-dark= course.headline
-                    p.text-dark=course.subheading
-                  div
-                    hr
-                    a.text-dark.font-weight-bold(href="/courses/" + course.slug): +translate("View course details")
-            .col-md-6.mb-5.mb-sm-4.floatings
-              .bg-white.px-5.py-3.px-md-2.text-center.hover-shadow.h-100.d-flex.flex-column
-                a.card-link.d-block(href="https://careers.deliveryhero.com/global/en/techacademy" target="_blank").flex-grow.justify-content-between.h-100
-                  .m-3.row.position-relative
-                    .col-10.offset-1.col-md-8.offset-md-2.align-items-center.my-4
-                      img.object-fit-cover.img-fluid.square(src="/media/pixel.gif" alt="Delivery hero" style=`background-image: url('/media/delivery_hero.png')`)
-                  h3.text-dark="Python & Java"
-                  p.text-dark: +translate("You will learn the fundamentals of python or java to start a career as a junior engineer at Delivery Hero.")
-                div
-                  hr
-                  a.text-dark.font-weight-bold(href="https://careers.deliveryhero.com/global/en/techacademy"): +translate("View course details")
+                    .py-3.px-5.px-md-4
+                      .px-2
+                        .row.position-relative
+                          .col-4.col-md-3.my-4
+                            img.object-fit-cover.img-fluid.square(src="/media/pixel.gif" alt=course.headline style=`background-image: url('${course.icon ? `/images/` + course.icon : `/media/circuit-board.svg`}')`)
+                          .col-8.col-md-12.d-flex.flex-column.justify-content-center
+                            h3.text-muted= course.headline
+                            p.text-muted= course.courselength
+                        p.text-dark=course.subheading
+                        div.text-right
+                          a.btn.btn-outline-secondary(href="/courses/" + course.slug): +translate("View course details")
           a.z-1.btn.btn-lg.btn-secondary.my-5(href='/courses/', role='button', aria-pressed='true')
             +translate("All")
             = " "
             +translate("Courses")
 
       section#mission.bg-light
-        .position-relative.offset_title
-          header.offset_header.text-left
+        .container
+          .text-left
             .d-inline-block.position-relative
               h2.position-relative.d-inline-block.display-1.text-center.text-white.bg-primary.px-5.py-4
                 +translate("Mission")
@@ -197,15 +206,6 @@ block content
 
           .text-center
             a.btn.btn-lg.btn-secondary.mx-5(href='/events/'): +translate("All Events")
-      section.py-5.section-services#partners
-        .container.py-5.text-center
-          h2.display-1.text-center.mb-5: +translate("Our Partners")
-          each partner in partners
-            if partner.link
-              a(href=partner.link target="_blank" rel="noopener")
-                img.partners-logo.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo)
-            else
-              img.partners-logo.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo)
       section.call-to-action.pt-5.bg-dark.overflow-hidden.position-relative.z-0.d-flex.flex-column.justify-content-center.pb-200
         .z-1.container.text-white
           h2.mb-5: +translate("Join the Tech Disruption at DCI")

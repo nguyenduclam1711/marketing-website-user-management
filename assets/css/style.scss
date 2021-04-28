@@ -633,7 +633,6 @@ button[data-toggle="collapse"]{
 
 .partners-logo {
   display: inline-block;
-  margin: 0 1rem;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -1365,6 +1364,14 @@ div[class*=" #{$class-slug}"] {
   }
   .w-#{ $i } {
     width: 1em * $i!important;
+  }
+  @include media-breakpoint-up(md) {
+    .h-md-#{ $i } {
+      height: 1em * $i!important;
+    }
+    .w-md-#{ $i } {
+      width: 1em * $i!important;
+    }
   }
 }
 .w-300 {

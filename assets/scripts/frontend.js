@@ -151,10 +151,8 @@ function elementInViewport(el) {
 
 window.onscroll = () => {
   throttle(
-    function () {
-      showFloatings();
-      countUp();
-    }
+    showFloatings(),
+    countUp()
     , 50)
   animatedPolygons()
 };
