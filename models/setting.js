@@ -16,6 +16,7 @@ var SettingSchema = new Schema({
   careersuccesspage_students: Number,  
   careersuccesspage_companypartners: Number,
   careersuccesspage_employmentrate: Number,
+  landingpage_different_nationalities: Number,
 });
 
 module.exports = mongoose.model("Setting", SettingSchema);

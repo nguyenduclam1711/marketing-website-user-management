@@ -30,7 +30,7 @@ mixin successCarousel(stories)
                     .text-right.rounded-circle.overflow-hidden.mb-md-0.order-1.order-md-12(style=`box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1f3fc7 !important`};`)
                       img.mw-150.w-8.h-8(src=`/images/${story.partnerlogo ? story.partnerlogo : story.avatar}` style=`box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1f3fc7 !important`}` class=story.partnerlogo ? "object-fit-contain" : "object-fit-cover")
                   else 
-                    a.text-right.rounded-circle.overflow-hidden.order-1.order-md-12.flex-shrink-0(href=story.partnerlogo ? `#` : `/stories/${story.slug}` style=`box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1f3fc7 !important`};` class=story.partnerlogo ? "" : "streched-link")
+                    a.text-right.rounded-circle.overflow-hidden.order-1.order-md-12.flex-shrink-0(href=story.partnerlogo ? `#` : `/stories/${story.slug}` style=`box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1f3fc7 !important`};` class=story.partnerlogo ? "" : "stretched-link")
                       img.mw-150.w-8.h-8(src=`/images/${story.partnerlogo ? story.partnerlogo : story.avatar}` style=`box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1f3fc7 !important`}` class=story.partnerlogo ? "object-fit-contain" : "object-fit-cover")
       if stories.length > 1
         ol.carousel-indicators

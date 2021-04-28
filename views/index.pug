@@ -51,14 +51,15 @@ block content
             each course in courses
               .col-md-6.mb-5.mb-sm-4.floatings
                 .bg-white.hover-shadow.h-100.d-flex.flex-column
-                  a.card-link.d-block(href="/courses/" + course.slug).flex-grow.justify-content-between.h-100
+                  .d-block.flex-grow.justify-content-between.h-100
                     .py-3.px-5.px-md-4
                       .px-2
                         .row.position-relative
                           .col-4.col-md-3.my-4
                             img.object-fit-cover.img-fluid.square(src="/media/pixel.gif" alt=course.headline style=`background-image: url('${course.icon ? `/images/` + course.icon : `/media/circuit-board.svg`}')`)
                           .col-8.col-md-12.d-flex.flex-column.justify-content-center
-                            h3.text-muted= course.headline
+                            a.stretched-link(href="/courses/" + course.slug)
+                              h3.text-muted= course.headline
                             p.text-muted= course.courselength
                         p.text-dark=course.subheading
                         div.text-right
@@ -68,109 +69,75 @@ block content
             = " "
             +translate("Courses")
 
-      section#mission.bg-light
+      section#mission.position-relative
+        .container.section-counter
+          h2
+            +translate("Mission")
+          p= __("The Digital Career Institute was born as an initiative to integrate refugees into digital jobs. Today it is committed to train anyone who wants to pursue a tech career.")
+          .py-5.row
+            .col-md-6
+              .bg-primary.rounded
+                img.rounded.h-100.w-100.object-fit-cover.half-transparent.h-100(alt="people programming" src='/media/bg4.jpg')
+            .col-md-6
+              .row
+                .col-6
+                  .counter-item
+                    .counter-number.font-weight-bold
+                      h2.display-1
+                        span.counter-count=locals.settings.landingpage_archivements_students || 600
+                        = "+"
+                    p: +translate("Students")
+                .col-6
+                  .counter-item
+                    .counter-number.font-weight-bold
+                      h2.display-1
+                        span.counter-count=locals.settings.landingpage_archivements_courses || 50
+                        = "+"
+                    p: +translate("Courses started")
+                .col-6
+                  .counter-item
+                    .counter-number.font-weight-bold
+                      h2.display-1
+                        span.counter-count=locals.settings.landingpage_archivements_tours || 300
+                        = "+"
+                    p: +translate("Company tours")
+                .col-6
+                  .counter-item
+                    .counter-number.font-weight-bold
+                      h2.display-1
+                        span.counter-count=locals.settings.landingpage_archivements_locations || 5
+                    p: +translate("Locations")
+                .col-6
+                  .counter-item
+                    .counter-number.font-weight-bold
+                      h2.display-1
+                        span.counter-count=locals.settings.careersuccesspage_employmentrate || 87
+                    p: +translate("Placement rate")
+                .col-6
+                  .counter-item
+                    .counter-number.font-weight-bold
+                      h2.display-1
+                        span.counter-count=locals.settings.landingpage_different_nationalities || 90
+                    p: +translate("Different nationalities of students and teachers")
+
+        .bg-light-blue.position-absolute.h-50.w-100.z-minus.bottom
+
+      section#hiring.bg-light-blue.py-5
         .container
-          .text-left
-            .d-inline-block.position-relative
-              h2.position-relative.d-inline-block.display-1.text-center.text-white.bg-primary.px-5.py-4
-                +translate("Mission")
+          .row
+            .col-md-6
+              h2: +translate("Meet our hiring partners")
+              p=__("We work with over 400 hiring partners to match our students with tech jobs after graduation, including unique networking opportunities. DCI alumni work in top tech companies as front-end developers, full-stack developers, technical product managers, marketing managers, SEO specialists and more.")
+              a(href="/tour" title=__("Companies"))=__("Learn more about our partner companies")
 
-
-          .position-relative.container.overflow-hidden.my-5
-            .bg-light.p-4.rounded
-              .history-line.justify-content-between.row.text-center.text-shadow-white
-                .col-md-2.d-flex.flex-column.justify-content-end
-                  div.font-weight-bold.h3-md 2016
-                  div: +translate("1st Campus in Berlin")
-                .col-md-2
-                  div.d-md-none.font-weight-bold.h3-md 2017
-                  div.d-md-none: +translate("New Campuses in Düsseldorf & Hamburg")
-                .col-md-2.flex-column.justify-content-end
-                  div.d-none.d-md-block.font-weight-bold.h3-md 2018
-                  div.d-none.d-md-block: +translate("Partnership with Facebook")
-                .col-md-2
-                .col-md-2
-                  div.d-none.d-md-block.font-weight-bold.h3-md 2020
-                  div.d-none.d-md-block: +translate("Courses run 100% remotely")
-
-              .history-line.justify-content-between.row.text-center.text-shadow-white.pb-3.d-none.d-md-flex
-                div.flex-grow-1
-                  .line
-                    .circle
-                    hr
-                div.flex-grow-1
-                  .line
-                    .circle
-                    hr
-                div.flex-grow-1
-                  .line
-                    .circle
-                    hr
-                div.flex-grow-1
-                  .line
-                    .circle
-                    hr.arrow
-                div.flex-grow-1
-                .col-1
-
-              .history-line.justify-content-between.row.text-center.text-shadow-white
-                .col-md-2
-                .col-md-2
-                  div.d-md-block.d-none.font-weight-bold.h3-md 2017
-                  div.d-md-block.d-none: +translate("New Campuses in Düsseldorf & Hamburg")
-                .col-md-2.flex-column.justify-content-end
-                  div.d-md-none.font-weight-bold.h3-md 2018
-                  div.d-md-none: +translate("Partnership with Facebook")
-                .col-md-2
-                  div.font-weight-bold.h3-md 2019
-                  div: +translate("Launched Online Marketing course and Leipzig Campus")
-                .col-md-2
-
-
-
-            section#stats.section-counter.py-5.mb-5.row
-              div.col-lg-9
-                //-iframe(frameborder='0', height='100%', width='100%', src='https://youtube.com/embed/BLUfMfcN82c?controls=0&showinfo=0&autohide=1')
-                .bg-primary.rounded
-                  img.rounded.h-100.w-100.object-fit-cover.half-transparent(alt="people programming" src='/media/bg4.jpg')
-              .col-lg-3
-                .p-3.h-100.d-flex.flex-column.justify-content-center
-                  i.h3.m-0.text-shadow-white
-                    ="\""
-                    = __("The Digital Career Institute was born as an initiative to integrate refugees into digital jobs. Today it is committed to train anyone who wants to pursue a tech career.")
-
-              .container.container-counter.mt-4
-                .col-12.py-5
-                  .row
-                    .col-sm-6.col-md-3
-                      .counter-item
-                        .counter-number.font-weight-bold
-                          h2.display-1
-                            span.counter-count=locals.settings.landingpage_archivements_students || 600
-                            = "+"
-                        h4.font-weight-bold: +translate("Students")
-                    .col-sm-6.col-md-3
-                      .counter-item
-                        .counter-number.font-weight-bold
-                          h2.display-1
-                            span.counter-count=locals.settings.landingpage_archivements_courses || 50
-                            = "+"
-                        h4.font-weight-bold
-                          +translate("Courses started")
-                    .col-sm-6.col-md-3
-                      .counter-item
-                        .counter-number.font-weight-bold
-                          h2.display-1
-                            span.counter-count=locals.settings.landingpage_archivements_tours || 300
-                            = "+"
-                        h4.font-weight-bold: +translate("Company tours")
-                    .col-sm-6.col-md-3
-                      .counter-item
-                        .counter-number.font-weight-bold
-                          h2.display-1
-                            span.counter-count=locals.settings.landingpage_archivements_locations || 5
-                        h4.font-weight-bold: +translate("Locations")
-
+            .col-md-6
+              .row.bg-white.p-5
+                each partner, index in partners
+                  if partner.link
+                    a.col-4.h-4.align-items-center.justify-content-center(href=partner.link target="_blank" rel="noopener" class=index > 3 ? "d-none d-md-block" : "")
+                      img.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo)
+                  else
+                    img.col-4.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo class=index > 3 ? "d-none d-md-block" : "")
 
       section#stories.my-5.offset_title.position-relative
         header.offset_header.text-right
