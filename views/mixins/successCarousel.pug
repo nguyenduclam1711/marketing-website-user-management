@@ -3,7 +3,7 @@ mixin successCarousel(stories)
     .carousel-inner.py-5
       each story, index in stories
         .carousel-item.h-100.px-3.px-sm-5(class= index === 0 ? ` active` : ``)
-          .py-5.shadow.rounded-sm.h-100.position-relative
+          .py-5.shadow.rounded-sm.h-100.position-relative.bg-white
             if user && story && user.userId === story.userId || user && user.admin === "true"
               a.position-absolute.right.bottom.btn.btn-outline-primary.z-foreground(href=`/admin/stories/edit/${story.slug}`) Edit
             .bg-white.p-4.rounded-sm.h-100
