@@ -77,7 +77,7 @@ try {
 app.use(compression())
 
 i18n.configure({
-  objectNotation: true,
+  objectNotation: false,
   locales: ['en', 'de'],
   queryParameter: 'lang',
   autoReload: true,
