@@ -42,8 +42,8 @@ block content
                     h3.text-white.position-absolute.transform-absolute-center.w-100.text-center=location.name
                   .col-md-6.d-flex.flex-column.justify-content-center.text-center.py-5 
                     if user
-                      .adminnote
-                        | This User is the first of the users bound to a location that has email and phone number
+                      //- .adminnote
+                      //-   | This User is the first of the users bound to a location that has email and phone number
                     - contactEmployeeWithContactInfo = location.contactEmployee.find(e => e.phone && e.email)
                     if contactEmployeeWithContactInfo
                       .row.jobcenter-location-employee.justify-content-center
