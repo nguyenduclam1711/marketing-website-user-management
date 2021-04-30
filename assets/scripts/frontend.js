@@ -6,7 +6,6 @@ import "bootstrap/js/dist/collapse";
 import "bootstrap/js/dist/carousel";
 import "bootstrap/js/dist/alert";
 import { alertTimeout } from "./helper.js"
-require("./polygons");
 require("../css/style.scss");
 
 const toggleNL = (remove = false) => {
@@ -154,14 +153,19 @@ window.onscroll = () => {
     showFloatings(),
     countUp()
     , 50)
-  animatedPolygons()
+  throttle(
+    animatedPolygons()
+    , 200)
 };
 
+const classes = ['shift-up', 'shift-left', 'shift-bottom', 'shift-right']
+const elements = document.querySelectorAll('.intersection_observed')
 const animatedPolygons = () => {
-  const elements = document.querySelectorAll('.intersection_observed')
   Array.from(elements).map((element, index) => {
-    if (elementInViewport(element)) {
-      element.style.transform = `translateY(${Math.floor(window.scrollY / 10)}px)`
+    if (element.getBoundingClientRect().y > window.outerHeight * 2 / 3 || window.scrollY < 20) {
+      classes.map(cl => element.classList.remove(cl))
+    } else {
+      element.classList.add(element.dataset.class)
     }
   })
 }

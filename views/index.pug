@@ -6,27 +6,34 @@ block content
         if currentPath == "/"
           +navigation
         div.mainHome.d-flex.w-100.z-1.py-md-5
-          .intersection_observed.bg-primary.w-5.h-5.position-absolute
-          .intersection_observed.bg-light-blue.position-absolute.z-minus.w-5.h-5.ml-3.mt-3
           div.m-auto.container.py-md-5
-            .dotted.red.w-10.h-10.rounded-circle.position-absolute.right.mr-5
-            .dotted.blue.w-10.h-10.rounded-circle.position-absolute.left.bottom.ml-3
-            .row.my-5.py-5
+            .intersection_observed.d-lg-none.bg-primary.w-5.h-5.position-absolute(data-class="shift-left")
+            .intersection_observed.d-lg-none.bg-light-blue.position-absolute.z-minus.w-5.h-5.ml-3.mt-3(data-class="shift-left")
+            .dotted.d-lg-none.red.w-8.h-8.rounded-circle.position-absolute.right.mr-5
+            .dotted.d-lg-none.blue.w-8.h-8.rounded-circle.position-absolute.left.bottom.ml-3
+            .row.my-5
               .col-md-6.py-5.order-12.order-md-1
-                h1.font-weight-bold.display-1: +translate('Start your')
-                h2.mb-5.display-1.font-weight-bold: +translate('Digital career')
-                p.subtitle.h5.mb-5.text-shadow-light-blue: +translate("Learn digital skills with us to get the most fulfilling jobs")
-                .d-flex
-                  a.mb-3.btn.btn-lg.btn-secondary.mr-2.mr-md-4.scrollbutton.w-100(href='#ourcourses', role='button'): +translate("Browse Courses")
+                .py-md-5
+                  h1.font-weight-bold.display-1: +translate('Start your')
+                  h2.mb-5.display-1.font-weight-bold: +translate('Digital career')
+                  p.subtitle.h5.mb-5.text-shadow-light-blue: +translate("Learn digital skills with us to get the most fulfilling jobs")
+                  .d-flex
+                    a.mb-3.btn.btn-lg.btn-secondary.mr-2.mr-md-4.scrollbutton.w-100(href='#ourcourses', role='button'): +translate("Browse Courses")
               .col-md-6.py-5.order-1.order-md-12.d-none.d-md-block
-                img.w-100(src="/media/hero.svg", alt="")
+                .row.h-50
+                  .col-6.h-100.bg-primary
+                  .col-6.h-100
+                .row.h-50
+                  .col-6.h-100
+                    img.position-absolute.top.left.w-100.shift-vertical(src="/media/hero.svg", alt="")
+                  .col-6.h-100.bg-primary.z-minus
             .mb-5.position-relative
-              .intersection_observed.bg-primary.w-5.h-5.position-absolute.bottom.right
-              .intersection_observed.bg-light-blue.position-absolute.z-minus.w-5.h-5.mr-3.mb-3.bottom.right
+              .intersection_observed.d-lg-none.bg-primary.w-5.h-5.position-absolute.bottom.right(data-class="shift-right")
+              .intersection_observed.d-lg-none.bg-light-blue.position-absolute.z-minus.w-5.h-5.mr-3.mb-3.bottom.right(data-class="shift-right")
 
       section#partners.py-5.bg-light
         .container.py-5.text-center
-          h2.display-1.text-center.mb-5: +translate("Company that hired our students")
+          h2.display-1.text-center.mb-5: +translate("Companies that hired our students")
           - randompartners = [...partners]
           - for (let i = randompartners.length - 1; i > 0; i--) {
               - const j = Math.floor(Math.random() * (i + 1));
@@ -40,34 +47,35 @@ block content
               else
                 img.partner.col-3.col-md-2.partners-logo.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo class=index > 3 ? "d-none d-md-block" : "")
 
-      section#partners.py-5
-        header.offset_header.position-relative
-          .intersection_observed.bg-light-blue.position-absolute.w-5.h-5.w-md-10.h-md-10.mr-3.mb-3.top.left
-          .d-inline-block.position-relative
-            h2
-              +translate("Our courses")
-        .container.pt-5
-          .row.mx-md-5.justify-content-center
-            each course in courses
-              .col-md-6.mb-5.mb-sm-4.floatings
-                .bg-white.hover-shadow.h-100.d-flex.flex-column
-                  .d-block.flex-grow.justify-content-between.h-100
-                    .py-3.px-5.px-md-4
-                      .px-2
-                        .row.position-relative
-                          .col-4.col-md-3.my-4
-                            img.object-fit-cover.img-fluid.square(src="/media/pixel.gif" alt=course.headline style=`background-image: url('${course.icon ? `/images/` + course.icon : `/media/circuit-board.svg`}')`)
-                          .col-8.col-md-12.d-flex.flex-column.justify-content-center
-                            a.stretched-link(href="/courses/" + course.slug)
-                              h3.text-muted= course.headline
-                            p.text-muted= course.courselength
-                        p.text-dark=course.subheading
-                        div.text-right
-                          a.btn.btn-outline-secondary(href="/courses/" + course.slug): +translate("View course details")
-          a.z-1.btn.btn-lg.btn-secondary.my-5(href='/courses/', role='button', aria-pressed='true')
-            +translate("All")
-            = " "
-            +translate("Courses")
+      section#partners.position-relative
+        .intersection_observed.bg-light-blue.position-absolute.w-15.h-13.w-md-10.h-md-10.mr-3.mb-3.top.left.z-minus(data-class="shift-right")
+        .py-5
+          h2
+            +translate("Our courses")
+          .container.pt-5.position-relative
+            .dotted.red.w-20.w-lg-30.h-20.h-lg-30.rounded-circle.position-absolute.right.mr-n5.intersection_observed(data-class="shift-right")
+            .dotted.blue.w-10.w-lg-20.h-10.h-lg-20.position-absolute.left.bottom.ml-n5.intersection_observed(data-class="shift-bottom")
+            .row.mx-md-5.justify-content-center
+              each course in courses
+                .col-md-6.mb-5.mb-sm-4.floatings
+                  .bg-white.hover-shadow.h-100.d-flex.flex-column
+                    .d-block.flex-grow.justify-content-between.h-100
+                      .py-3.px-5.px-md-4
+                        .px-2
+                          .row.position-relative
+                            .col-4.col-md-3.my-4
+                              img.object-fit-cover.img-fluid.square(src="/media/pixel.gif" alt=course.headline style=`background-image: url('${course.icon ? `/images/` + course.icon : `/media/circuit-board.svg`}')`)
+                            .col-8.col-md-12.d-flex.flex-column.justify-content-center
+                              a.stretched-link(href="/courses/" + course.slug)
+                                h3.text-muted= course.headline
+                              p.text-muted= course.courselength
+                          p.text-dark=course.subheading
+                          div.text-right
+                            a.btn.btn-outline-secondary(href="/courses/" + course.slug): +translate("View course details")
+            a.z-1.btn.btn-lg.btn-secondary.my-5(href='/courses/', role='button', aria-pressed='true')
+              +translate("All")
+              = " "
+              +translate("Courses")
 
       section#mission.position-relative
         .container.section-counter
@@ -140,29 +148,24 @@ block content
                     img.col-4.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo class=index > 3 ? "d-none d-md-block" : "")
 
       if stories
-        section#stories.my-5.offset_title.position-relative
-          .container
+        section#stories.py-5
+          .container.position-relative
             h2: +translate("Stories")
             p=__("Our students come from all around the world and have different professional backgrounds. Discover how the DCI experience changed their lives.")
-            .dotted.red.w-15.h-15.rounded-circle.position-absolute.right.mr-5
-            .dotted.blue.w-15.h-15.position-absolute.left.bottom.ml-3
+            .dotted.red.w-15.h-15.rounded-circle.position-absolute.right.mr-n5.intersection_observed(data-class="shift-right")
+            .dotted.blue.w-15.h-15.position-absolute.left.bottom.ml-n5.intersection_observed(data-class="shift-left")
             - storysWithTestimonial = stories
             if storysWithTestimonial.length > 0
               +successCarousel(storysWithTestimonial)
 
-        .pt-4.text-center
-          a.btn.btn-lg.btn-secondary.mx-5(href="/stories"): +translate("Show all Stories")
+          .py-5.text-center
+            a.btn.btn-lg.btn-secondary.mx-5(href="/stories"): +translate("Show all Stories")
 
       if events
         section#events.bg-primary.py-5
-          each event, index in events
-            div.text-white
-              =event.start
-              = " - "
-              =event.name
           .container
             h2.text-white.mb-5: +translate("Upcoming events")
-            .row.mx-md-5
+            .row.mx-xl-5
               .col-md-6.floatings.mb-5.pb-4
                 .card.border-0.bg-white.p-4.rounded.shadow-sm.h-100.d-flex.flex-column.justify-content-between(href=events[0].url, target="_blank" rel="noopener")
                   .text-center.d-flex
@@ -216,20 +219,21 @@ block content
                               a.text-right.d-block.stretched-link.font-weight-bold(href=event.url target="_blank" rel="noopener")="Register" 
           .text-right
             a.btn.btn-lg.btn-link.text-white.text-underline(href='/events/'): +translate("Viw all upcoming events")
-      section.call-to-action.pt-5.bg-dark.overflow-hidden.position-relative.z-0.d-flex.flex-column.justify-content-center.pb-200
-        .z-1.container.text-white
-          h2.mb-5: +translate("Join the Tech Disruption at DCI")
-          .row.mb-5
-            .col-md-6
-              .shape-md-outside
-              div.right-shape-md: +translate("Do you want to become one of the digital pioneers and show your creativity to the world, or change careers Then join entrepreneurs and disruptors at DCI")
-            .col-md-6
-              .shape-md-outside.shape-left
-              div.left-shape-md: +translate("Are you a company looking to hire Grads? or would you like to become one of our partner companies and host company tours? Then ..")
-          .text-center.mb-5
-            a.btn.btn-lg.btn-secondary.mb-3.mx-5(href='/contact', data-toggle='modal', data-target='#contactFormModal'): +translate("Apply now")
-            a#calltoaction.btn.btn-lg.btn-tertiary.mb-3.mx-5(href='/tour')=__("Become a Hiring Partner")
-        canvas.z-minus#polygons(width="1000", height="400")
+            
+      section.pt-5.bg-light-blue.overflow-hidden.position-relative.z-0.d-flex.flex-column.justify-content-center.pb-200
+        .container.position-relative
 
+          .dotted.red.w-15.h-15.rounded-circle.position-absolute.right.mr-n5.intersection_observed(data-class="shift-left")
+          .dotted.blue.w-15.h-15.position-absolute.right.mr-n5.mt-n5.intersection_observed(data-class="shift-right")
 
+          .dotted.red.w-15.h-15.rounded-circle.position-absolute.left.bottom.ml-n5.intersection_observed(data-class="shift-right")
+          .dotted.blue.w-15.h-15.position-absolute.left.bottom.intersection_observed(data-class="shift-left")
+
+          .bg-white.p-5.mb-5.position-relative
+            h2.mb-5: +translate("Join the Tech Disruption at DCI")
+            div: +translate("Do you want to become one of the digital pioneers and show your creativity to the world, or change careers Then join entrepreneurs and disruptors at DCI")
+            div: +translate("Are you a company looking to hire Grads? or would you like to become one of our partner companies and host company tours? Then ..")
+            .text-center.mt-5
+              a.btn.btn-lg.btn-secondary.mb-3.mx-5(href='/contact', data-toggle='modal', data-target='#contactFormModal'): +translate("Apply now")
+              a#calltoaction.btn.btn-lg.btn-outline-primary.mb-3.mx-5(href='/tour')=__("Browse Courses")
 
