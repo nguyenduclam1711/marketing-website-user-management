@@ -162,7 +162,7 @@ const classes = ['shift-up', 'shift-left', 'shift-bottom', 'shift-right']
 const elements = document.querySelectorAll('.intersection_observed')
 const animatedPolygons = () => {
   Array.from(elements).map((element, index) => {
-    if (element.getBoundingClientRect().y > window.outerHeight * 2 / 3 || window.scrollY < 20) {
+    if (element.getBoundingClientRect().y > window.outerHeight / 2 || window.scrollY < 100) {
       classes.map(cl => element.classList.remove(cl))
     } else {
       element.classList.add(element.dataset.class)
