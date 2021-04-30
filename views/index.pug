@@ -1,194 +1,214 @@
 extends layout.pug
 block content
-  .section
-    .content
-      section.homeSection.d-flex.flex-column.position-relative
-        if currentPath == "/"
-          +navigation
-        div.mainHome.d-flex.w-100.z-1.py-md-5
-          div.m-auto.container.py-md-5
-            .intersection_observed.d-lg-none.bg-primary.w-5.h-5.position-absolute(data-class="shift-left")
-            .intersection_observed.d-lg-none.bg-light-blue.position-absolute.z-minus.w-5.h-5.ml-3.mt-3(data-class="shift-left")
-            .dotted.d-lg-none.red.w-8.h-8.rounded-circle.position-absolute.right.mr-5
-            .dotted.d-lg-none.blue.w-8.h-8.rounded-circle.position-absolute.left.bottom.ml-3
-            .row.my-5
-              .col-md-6.py-5.order-12.order-md-1
-                .py-md-5
-                  h1.font-weight-bold.display-1: +translate('Start your')
-                  h2.mb-5.display-1.font-weight-bold: +translate('Digital career')
-                  p.subtitle.h5.mb-5.text-shadow-light-blue: +translate("Learn digital skills with us to get the most fulfilling jobs")
-                  .d-flex
-                    a.mb-3.btn.btn-lg.btn-secondary.mr-2.mr-md-4.scrollbutton.w-100(href='#ourcourses', role='button'): +translate("Browse Courses")
-              .col-md-6.py-5.order-1.order-md-12.d-none.d-md-block
-                .row.h-50
-                  .col-6.h-100.bg-primary
-                  .col-6.h-100
-                .row.h-50
-                  .col-6.h-100
-                    img.position-absolute.top.left.w-100.shift-vertical(src="/media/hero.svg", alt="")
-                  .col-6.h-100.bg-primary.z-minus
-            .mb-5.position-relative
-              .intersection_observed.d-lg-none.bg-primary.w-5.h-5.position-absolute.bottom.right(data-class="shift-right")
-              .intersection_observed.d-lg-none.bg-light-blue.position-absolute.z-minus.w-5.h-5.mr-3.mb-3.bottom.right(data-class="shift-right")
+  main
+    section.d-flex.flex-column.position-relative
+      if currentPath == "/"
+        +navigation
+      div.container-lg
+        .intersection_observed.d-lg-none.bg-primary.w-5.h-5.position-absolute.ml-n3(data-class="shift-left")
+        .intersection_observed.d-lg-none.bg-light-blue.position-absolute.z-minus.w-5.h-5.mt-3.ml-3(data-class="shift-left")
+        .intersection_observed.dotted.d-lg-none.red.w-8.h-8.rounded-circle.position-absolute.right.mr-5(data-class="shift-left")
+        .intersection_observed.dotted.d-lg-none.blue.w-8.h-8.rounded-circle.position-absolute.left.bottom.ml-3.mb-5(data-class="shift-left")
+        .row
+          .col-md-6.py-5.order-12.order-md-1
+            .py-5
+              .py-5
+                h1.font-weight-bold: +translate('Start your')
+                h2.mb-5.font-weight-bold: +translate('Digital career')
+                p.subtitle.h5.mb-5.text-shadow-light-blue: +translate("Learn digital skills with us to get the most fulfilling jobs")
+                .d-flex
+                  a.mb-3.btn.btn-lg.btn-secondary.mr-2.mr-md-4.scrollbutton.w-100.w-md-auto(href='#ourcourses', role='button'): +translate("Browse Courses")
+          .col-md-6.order-1.order-md-12.d-none.d-md-block
+            img.position-absolute.top.left.w-100.top-50.shift-bottom-minus-percent(src="/media/hero.svg", alt="")
+            .row.h-50
+              .col-6.h-100.bg-primary.z-minus
+              .col-6.h-100
+            .row.h-50
+              .col-6.h-100
+              .col-6.h-100.bg-primary.z-minus
+        .mb-5.position-relative.d-lg-none
+          .intersection_observed.bg-light-blue.position-absolute.w-5.h-5.mr-4.mb-4.bottom.right(data-class="shift-right")
+          .intersection_observed.bg-primary.w-5.h-5.position-absolute.bottom.right.z-minus(data-class="shift-right")
 
-      section#partners.py-5.bg-light
-        .container.py-5.text-center
-          h2.display-1.text-center.mb-5: +translate("Companies that hired our students")
-          - randompartners = [...partners]
-          - for (let i = randompartners.length - 1; i > 0; i--) {
-              - const j = Math.floor(Math.random() * (i + 1));
-              - [randompartners[i], randompartners[j]] = [randompartners[j], randompartners[i]];
-          - }  
-          .row
-            each partner, index in randompartners.splice(0,6)
-              if partner.link
-                a.col-3.col-md-2.partner.h-4.align-items-center.justify-content-center(href=partner.link target="_blank" rel="noopener" class=index > 3 ? "d-none d-md-block" : "")
-                  img.partners-logo.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo)
-              else
-                img.partner.col-3.col-md-2.partners-logo.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo class=index > 3 ? "d-none d-md-block" : "")
+    section#partners.bg-light
+      .container.py-3.py-md-5.text-center
+        h5.text-center.mb-3.mb-md-5.font-weight-bold.text-muted: +translate("Our partners")
+        - randompartners = [...partners]
+        - for (let i = randompartners.length - 1; i > 0; i--) {
+            - const j = Math.floor(Math.random() * (i + 1));
+            - [randompartners[i], randompartners[j]] = [randompartners[j], randompartners[i]];
+        - }  
+        .row
+          each partner, index in randompartners.splice(0,6)
+            if partner.link
+              a.col-3.col-md-2.partner.h-4.flex-column.align-items-center.justify-content-center(href=partner.link target="_blank" rel="noopener" class=index > 3 ? "d-none d-lg-flex" : "d-flex")
+                img.partners-logo.w-100.mw-150.flex-column.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo)
+            else
+              img.partner.col-3.col-md-2.partners-logo.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo class=index > 3 ? "d-none d-lg-flex" : "d-flex")
 
-      section#partners.position-relative
-        .intersection_observed.bg-light-blue.position-absolute.w-15.h-13.w-md-10.h-md-10.mr-3.mb-3.top.left.z-minus(data-class="shift-right")
-        .py-5
+    section#courses.position-relative.overflow-hidden
+      .intersection_observed.bg-light-blue.position-absolute.w-15.h-13.w-md-10.h-md-10.mr-3.mb-3.top.left.z-minus(data-class="shift-right")
+      .py-md-5
+        .container.pt-5.position-relative
           h2
             +translate("Our courses")
-          .container.pt-5.position-relative
-            .dotted.red.w-20.w-lg-30.h-20.h-lg-30.rounded-circle.position-absolute.right.mr-n5.intersection_observed(data-class="shift-right")
-            .dotted.blue.w-10.w-lg-20.h-10.h-lg-20.position-absolute.left.bottom.ml-n5.intersection_observed(data-class="shift-bottom")
-            .row.mx-md-5.justify-content-center
-              each course in courses
-                .col-md-6.mb-5.mb-sm-4.floatings
-                  .bg-white.hover-shadow.h-100.d-flex.flex-column
-                    .d-block.flex-grow.justify-content-between.h-100
-                      .py-3.px-5.px-md-4
-                        .px-2
-                          .row.position-relative
-                            .col-4.col-md-3.my-4
-                              img.object-fit-cover.img-fluid.square(src="/media/pixel.gif" alt=course.headline style=`background-image: url('${course.icon ? `/images/` + course.icon : `/media/circuit-board.svg`}')`)
-                            .col-8.col-md-12.d-flex.flex-column.justify-content-center
-                              a.stretched-link(href="/courses/" + course.slug)
-                                h3.text-muted= course.headline
-                              p.text-muted= course.courselength
-                          p.text-dark=course.subheading
-                          div.text-right
-                            a.btn.btn-outline-secondary(href="/courses/" + course.slug): +translate("View course details")
-            a.z-1.btn.btn-lg.btn-secondary.my-5(href='/courses/', role='button', aria-pressed='true')
-              +translate("All")
-              = " "
-              +translate("Courses")
+          .dotted.red.w-20.w-lg-30.h-20.h-lg-30.rounded-circle.position-absolute.right.mr-n5.intersection_observed(data-class="shift-right")
+          .dotted.blue.w-10.w-lg-20.h-10.h-lg-20.rounded-circle.position-absolute.left.bottom.mr-5.mb-5.intersection_observed(data-class="shift-bottom")
 
-      section#mission.position-relative
-        .container.section-counter
-          h2
-            +translate("Mission")
-          p= __("The Digital Career Institute was born as an initiative to integrate refugees into digital jobs. Today it is committed to train anyone who wants to pursue a tech career.")
-          .py-5.row
-            .col-md-6
-              .bg-primary.rounded
-                img.rounded.h-100.w-100.object-fit-cover.half-transparent.h-100(alt="people programming" src='/media/bg4.jpg')
-            .col-md-6
-              .row
-                .col-6
-                  .counter-item
-                    .counter-number.font-weight-bold
-                      h2.display-1
-                        span.counter-count=locals.settings.landingpage_archivements_students || 600
-                        = "+"
-                    p: +translate("Students")
-                .col-6
-                  .counter-item
-                    .counter-number.font-weight-bold
-                      h2.display-1
-                        span.counter-count=locals.settings.landingpage_archivements_courses || 50
-                        = "+"
-                    p: +translate("Courses started")
-                .col-6
-                  .counter-item
-                    .counter-number.font-weight-bold
-                      h2.display-1
-                        span.counter-count=locals.settings.landingpage_archivements_tours || 300
-                        = "+"
-                    p: +translate("Company tours")
-                .col-6
-                  .counter-item
-                    .counter-number.font-weight-bold
-                      h2.display-1
-                        span.counter-count=locals.settings.landingpage_archivements_locations || 5
-                    p: +translate("Locations")
-                .col-6
-                  .counter-item
-                    .counter-number.font-weight-bold
-                      h2.display-1
-                        span.counter-count=locals.settings.careersuccesspage_employmentrate || 87
-                    p: +translate("Placement rate")
-                .col-6
-                  .counter-item
-                    .counter-number.font-weight-bold
-                      h2.display-1
-                        span.counter-count=locals.settings.landingpage_different_nationalities || 90
-                    p: +translate("Different nationalities of students and teachers")
+          .dotted.red.w-10.w-lg-20.h-10.h-lg-20.rounded-circle.position-absolute.right.bottom.intersection_observed(data-class="shift-right")
+          .dotted.blue.w-10.w-lg-15.h-10.h-lg-15.position-absolute.right.bottom.ml-5.mb-5.intersection_observed(data-class="shift-bottom")
+          .row.mx-md-5.justify-content-center
+            each course in courses
+              .col-md-6.mb-5.mb-sm-4.floatings
+                .bg-white.hover-shadow.h-100.d-flex.flex-column
+                  .d-block.flex-grow.justify-content-between.h-100
+                    .py-3.px-5.px-md-4
+                      .px-2
+                        .row.position-relative.my-4.my-md-0
+                          .col-3.col-md-4.mb-md-3
+                            img.object-fit-cover.img-fluid.square(src="/media/pixel.gif" alt=course.headline style=`background-image: url('${course.icon ? `/images/` + course.icon : `/media/circuit-board.svg`}')`)
+                          .col-9.col-md-12.d-flex.flex-column.justify-content-center
+                            a.stretched-link(href="/courses/" + course.slug)
+                              h3.text-muted= course.headline
+                            p.text-muted.mb-0= course.courselength
+                        p.text-dark=course.subheading
+                        div.text-right
+                          a.btn.btn-outline-secondary(href="/courses/" + course.slug): +translate("View course details")
+          a.z-1.btn.btn-lg.btn-secondary.my-5(href='/courses/', role='button', aria-pressed='true')
+            +translate("All")
+            = " "
+            +translate("Courses")
 
-        .bg-light-blue.position-absolute.h-50.w-100.z-minus.bottom
+    section#mission.position-relative
+      .container.section-counter
+        h2
+          +translate("Mission")
+        p= __("The Digital Career Institute was born as an initiative to integrate refugees into digital jobs. Today it is committed to train anyone who wants to pursue a tech career.")
+        .py-5.row
+          .col-md-6
+            .bg-primary.rounded
+              img.rounded.h-100.w-100.object-fit-cover.half-transparent.h-100(alt="people programming" src='/media/bg4.jpg')
+          .col-md-6.mt-5.mt-md-0
+            .row
+              .col-6
+                .counter-item
+                  .counter-number.font-weight-bold
+                    h2
+                      span.counter-count=locals.settings.landingpage_archivements_students || 600
+                      = "+"
+                  p: +translate("Students")
+              .col-6
+                .counter-item
+                  .counter-number.font-weight-bold
+                    h2
+                      span.counter-count=locals.settings.landingpage_archivements_courses || 50
+                      = "+"
+                  p: +translate("Courses started")
+              .col-6
+                .counter-item
+                  .counter-number.font-weight-bold
+                    h2
+                      span.counter-count=locals.settings.landingpage_archivements_tours || 300
+                      = "+"
+                  p: +translate("Company tours")
+              .col-6
+                .counter-item
+                  .counter-number.font-weight-bold
+                    h2
+                      span.counter-count=locals.settings.landingpage_archivements_locations || 5
+                  p: +translate("Locations")
+              .col-6
+                .counter-item
+                  .counter-number.font-weight-bold
+                    h2
+                      span.counter-count=locals.settings.careersuccesspage_employmentrate || 87
+                  p: +translate("Placement rate")
+              .col-6
+                .counter-item
+                  .counter-number.font-weight-bold
+                    h2
+                      span.counter-count=locals.settings.landingpage_different_nationalities || 90
+                  p: +translate("Different nationalities of students and teachers")
 
-      section#hiring.bg-light-blue.py-5
-        .container
-          .row
-            .col-md-6
-              h2: +translate("Meet our hiring partners")
-              p=__("We work with over 400 hiring partners to match our students with tech jobs after graduation, including unique networking opportunities. DCI alumni work in top tech companies as front-end developers, full-stack developers, technical product managers, marketing managers, SEO specialists and more.")
-              a(href="/tour" title=__("Companies"))=__("Learn more about our partner companies")
+      .bg-light-blue.position-absolute.h-50.w-100.z-minus.bottom
 
-            .col-md-6
-              .row.bg-white.p-5
-                each partner, index in partners
-                  if partner.link
-                    a.col-4.h-4.align-items-center.justify-content-center(href=partner.link target="_blank" rel="noopener" class=index > 3 ? "d-none d-md-block" : "")
-                      img.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo)
-                  else
-                    img.col-4.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo class=index > 3 ? "d-none d-md-block" : "")
+    section#hiring.bg-light-blue.py-5
+      .container
+        .row
+          .col-md-6
+            h2: +translate("Meet our hiring partners")
+            p=__("We work with over 400 hiring partners to match our students with tech jobs after graduation, including unique networking opportunities. DCI alumni work in top tech companies as front-end developers, full-stack developers, technical product managers, marketing managers, SEO specialists and more.")
+            a(href="/tour" title=__("Companies"))=__("Learn more about our partner companies")
 
-      if stories
-        section#stories.py-5
+          .col-md-6.mt-5.mt-md-0
+            .row.bg-white.p-5
+              each partner, index in partners
+                if partner.link
+                  a.col-4.h-4.align-items-center.justify-content-center(href=partner.link target="_blank" rel="noopener" class=index > 3 ? "d-none d-md-block" : "")
+                    img.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo)
+                else
+                  img.col-4.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo class=index > 3 ? "d-none d-md-block" : "")
+
+    if stories
+      section#stories.py-5.overflow-hidden
+        .container.position-relative
+          h2: +translate("Stories")
+          p=__("Our students come from all around the world and have different professional backgrounds. Discover how the DCI experience changed their lives.")
+          .dotted.red.w-15.h-15.rounded-circle.position-absolute.right.mr-n5.intersection_observed(data-class="shift-right")
+          .dotted.blue.w-15.h-15.position-absolute.left.bottom.ml-n5.intersection_observed(data-class="shift-left")
+          - storysWithTestimonial = stories
+          if storysWithTestimonial.length > 0
+            +successCarousel(storysWithTestimonial)
+
+        .py-5.text-center
+          a.btn.btn-lg.btn-secondary.mx-5(href="/stories"): +translate("Show all Stories")
+
+    if events
+      section#events.bg-primary.py-5
+        .py-5.overflow-hidden
           .container.position-relative
-            h2: +translate("Stories")
-            p=__("Our students come from all around the world and have different professional backgrounds. Discover how the DCI experience changed their lives.")
-            .dotted.red.w-15.h-15.rounded-circle.position-absolute.right.mr-n5.intersection_observed(data-class="shift-right")
-            .dotted.blue.w-15.h-15.position-absolute.left.bottom.ml-n5.intersection_observed(data-class="shift-left")
-            - storysWithTestimonial = stories
-            if storysWithTestimonial.length > 0
-              +successCarousel(storysWithTestimonial)
-
-          .py-5.text-center
-            a.btn.btn-lg.btn-secondary.mx-5(href="/stories"): +translate("Show all Stories")
-
-      if events
-        section#events.bg-primary.py-5
-          .py-5.overflow-hidden
-            .container.position-relative
-              .intersection_observed.bg-white.quarter-transparent.position-absolute.w-30.h-30.mt-n5.ml-n5(data-class="shift-right")
-              .intersection_observed.bg-white.quarter-transparent.position-absolute.w-30.h-30.right(data-class="shift-bottom")
-              .intersection_observed.bg-white.quarter-transparent.position-absolute.w-30.h-30.bottom.right.mr-n5.mt-5(data-class="shift-left")
-              h2.text-white.mb-5: +translate("Upcoming events")
-              .row.mx-xl-5
-                .col-md-6.floatings.mb-5.pb-4
-                  .card.border-0.bg-white.p-4.rounded.shadow-sm.h-100.d-flex.flex-column.justify-content-between(href=events[0].url, target="_blank" rel="noopener")
-                    .text-center.d-flex
-                      .d-flex.rounded.w-100.flex-wrap
-                        figure.mw-lg-150.p-0.position-relative.col-12.mb-0.col-lg
-                          .col.d-flex.flex-column.justify-content-center.h-100
-                            img.card-img-top.mb-3.mb-md-0(alt=events[0].name src=events[0].imageurl)
-                        .col.text-left.order-3.order-sm-2.d-flex.flex-column.justify-content-center
-                          h6.font-weight-bold.text-dark.mb-3=events[0].name
-                          
-                    =events[0].text
-                    p.text-muted.mb-0
-                      span.mr-1.mr-xl-3.w-1.d-inline-block.mb-3.mb-xl-0
-                        img.mb-1.w-100(src="/media/events_clock-thin.svg", alt="Event time")
-                      =moment(events[0].start).format('HH:SS A DD. MMM YYYY')
-                    a.text-right.d-block.stretched-link.font-weight-bold(href=events[0].url target="_blank" rel="noopener")="Register" 
-                .col-md-6
-                  each event, index in events.splice(1,2)
-                    .floatings.mb-5.pb-4
+            .intersection_observed.bg-white.quarter-transparent.position-absolute.w-30.h-30.mt-n5.ml-n5(data-class="shift-right")
+            .intersection_observed.bg-white.quarter-transparent.position-absolute.w-30.h-30.right(data-class="shift-bottom")
+            .intersection_observed.bg-white.quarter-transparent.position-absolute.w-30.h-30.bottom.right.mr-n5.mt-5(data-class="shift-left")
+            h2.text-white.mb-5: +translate("Upcoming events")
+            .row.mx-xl-5
+              .col-md-6.floatings.mb-5.pb-4
+                .card.border-0.bg-white.p-4.rounded.shadow-sm.h-100.d-flex.flex-column.justify-content-between(href=events[0].url, target="_blank" rel="noopener")
+                  .text-center.d-flex
+                    .d-flex.rounded.w-100.flex-wrap
+                      figure.mw-lg-150.p-0.position-relative.col-12.mb-0.col-lg
+                        .col.d-flex.flex-column.justify-content-center.h-100
+                          img.card-img-top.mb-3.mb-md-0(alt=events[0].name src=events[0].imageurl)
+                      .col.text-left.order-3.order-sm-2.d-flex.flex-column.justify-content-center
+                        h6.font-weight-bold.text-dark.mb-3=events[0].name
+                        
+                  =events[0].text
+                  p.text-muted.mb-0
+                    span.mr-1.mr-xl-3.w-1.d-inline-block.mb-3.mb-xl-0
+                      img.mb-1.w-100(src="/media/events_clock-thin.svg", alt="Event time")
+                    =moment(events[0].start).format('HH:SS A DD. MMM YYYY')
+                  a.text-right.d-block.stretched-link.font-weight-bold(href=events[0].url target="_blank" rel="noopener")="Register" 
+              .col-md-6
+                each event, index in events.splice(1,2)
+                  .floatings.mb-5.pb-4
+                    .card.border-0.bg-white.p-4.rounded.shadow-sm.h-100.d-flex.flex-column.justify-content-between(href=event.url, target="_blank" rel="noopener")
+                      .text-center.d-flex
+                        .d-flex.rounded.w-100.flex-wrap
+                          figure.mw-lg-150.p-0.position-relative.col-12.mb-0.col-lg
+                            .col.d-flex.flex-column.justify-content-center.h-100
+                              img.card-img-top.mb-3.mb-md-0(alt=event.name src=event.imageurl)
+                          .col.text-left.order-3.order-sm-2.d-flex.flex-column.justify-content-center
+                            h6.font-weight-bold.text-dark.mb-3=event.name
+                            
+                            p.text-muted.mb-0.mb-3
+                              span.mr-1.mr-xl-3.w-1.d-inline-block.mb-3.mb-xl-0
+                                img.mb-1.w-100(src="/media/events_clock-thin.svg", alt="Event time")
+                              =moment(event.start).format('HH:SS A DD. MMM YYYY')
+                            a.text-right.d-block.stretched-link.font-weight-bold(href=event.url target="_blank" rel="noopener")="Register" 
+              .col
+                .row
+                  each event, index in events.splice(1,3)
+                    .col-md-6.floatings.mb-5.pb-4.w-100
                       .card.border-0.bg-white.p-4.rounded.shadow-sm.h-100.d-flex.flex-column.justify-content-between(href=event.url, target="_blank" rel="noopener")
                         .text-center.d-flex
                           .d-flex.rounded.w-100.flex-wrap
@@ -203,41 +223,23 @@ block content
                                   img.mb-1.w-100(src="/media/events_clock-thin.svg", alt="Event time")
                                 =moment(event.start).format('HH:SS A DD. MMM YYYY')
                               a.text-right.d-block.stretched-link.font-weight-bold(href=event.url target="_blank" rel="noopener")="Register" 
-                .col
-                  .row
-                    each event, index in events.splice(1,3)
-                      .col-md-6.floatings.mb-5.pb-4.w-100
-                        .card.border-0.bg-white.p-4.rounded.shadow-sm.h-100.d-flex.flex-column.justify-content-between(href=event.url, target="_blank" rel="noopener")
-                          .text-center.d-flex
-                            .d-flex.rounded.w-100.flex-wrap
-                              figure.mw-lg-150.p-0.position-relative.col-12.mb-0.col-lg
-                                .col.d-flex.flex-column.justify-content-center.h-100
-                                  img.card-img-top.mb-3.mb-md-0(alt=event.name src=event.imageurl)
-                              .col.text-left.order-3.order-sm-2.d-flex.flex-column.justify-content-center
-                                h6.font-weight-bold.text-dark.mb-3=event.name
-                                
-                                p.text-muted.mb-0.mb-3
-                                  span.mr-1.mr-xl-3.w-1.d-inline-block.mb-3.mb-xl-0
-                                    img.mb-1.w-100(src="/media/events_clock-thin.svg", alt="Event time")
-                                  =moment(event.start).format('HH:SS A DD. MMM YYYY')
-                                a.text-right.d-block.stretched-link.font-weight-bold(href=event.url target="_blank" rel="noopener")="Register" 
-              .text-right
-                a.btn.btn-lg.btn-link.text-white.text-underline(href='/events/'): +translate("Viw all upcoming events")
-              
-      section.pt-5.bg-light-blue.overflow-hidden.position-relative.z-0.d-flex.flex-column.justify-content-center.pb-200
-        .container.position-relative
+            .text-right
+              a.btn.btn-lg.btn-link.text-white.text-underline(href='/events/'): +translate("Viw all upcoming events")
+            
+    section.pt-5.bg-light-blue.overflow-hidden.position-relative.z-0.d-flex.flex-column.justify-content-center.pb-200
+      .container.position-relative
 
-          .dotted.red.w-15.h-15.rounded-circle.position-absolute.right.mr-n5.intersection_observed(data-class="shift-left")
-          .dotted.blue.w-15.h-15.position-absolute.right.mr-n5.mt-n5.intersection_observed(data-class="shift-right")
+        .dotted.red.w-15.h-15.rounded-circle.position-absolute.right.mr-n5.intersection_observed(data-class="shift-left")
+        .dotted.blue.w-15.h-15.position-absolute.right.mr-n5.mt-n5.intersection_observed(data-class="shift-right")
 
-          .dotted.red.w-15.h-15.rounded-circle.position-absolute.left.bottom.ml-n5.intersection_observed(data-class="shift-right")
-          .dotted.blue.w-15.h-15.position-absolute.left.bottom.intersection_observed(data-class="shift-left")
+        .dotted.red.w-15.h-15.rounded-circle.position-absolute.left.bottom.ml-n5.intersection_observed(data-class="shift-right")
+        .dotted.blue.w-15.h-15.position-absolute.left.bottom.intersection_observed(data-class="shift-left")
 
-          .bg-white.p-5.mb-5.position-relative
-            h2.mb-5: +translate("Join the Tech Disruption at DCI")
-            div: +translate("Do you want to become one of the digital pioneers and show your creativity to the world, or change careers Then join entrepreneurs and disruptors at DCI")
-            div: +translate("Are you a company looking to hire Grads? or would you like to become one of our partner companies and host company tours? Then ..")
-            .text-center.mt-5
-              a.btn.btn-lg.btn-secondary.mb-3.mx-5(href='/contact', data-toggle='modal', data-target='#contactFormModal'): +translate("Apply now")
-              a#calltoaction.btn.btn-lg.btn-outline-primary.mb-3.mx-5(href='/tour')=__("Browse Courses")
+        .bg-white.p-5.mb-5.position-relative
+          h2.mb-5: +translate("Join the Tech Disruption at DCI")
+          div: +translate("Do you want to become one of the digital pioneers and show your creativity to the world, or change careers Then join entrepreneurs and disruptors at DCI")
+          div: +translate("Are you a company looking to hire Grads? or would you like to become one of our partner companies and host company tours? Then ..")
+          .text-center.mt-5
+            a.btn.btn-lg.btn-secondary.mb-3.mx-5(href='/contact', data-toggle='modal', data-target='#contactFormModal'): +translate("Apply now")
+            a#calltoaction.btn.btn-lg.btn-outline-primary.mb-3.mx-5(href='/tour')=__("Browse Courses")
 

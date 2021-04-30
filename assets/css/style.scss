@@ -1245,6 +1245,9 @@ body:not(.admin) {
 .shift-bottom {
   transform: translateY(50px);
 }
+.shift-bottom-minus-percent {
+  transform: translateY(-50%);
+}
 .shift-bottom-percent {
   transform: translateY(50%);
 }
