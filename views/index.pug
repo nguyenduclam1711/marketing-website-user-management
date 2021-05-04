@@ -5,17 +5,17 @@ block content
       if currentPath == "/"
         +navigation
       div.container-lg
-        .intersection_observed.d-lg-none.bg-primary.w-5.h-5.position-absolute.ml-n3(data-class="shift-left")
-        .intersection_observed.d-lg-none.bg-light-blue.position-absolute.z-minus.w-5.h-5.mt-3.ml-3(data-class="shift-left")
-        .intersection_observed.dotted.d-lg-none.red.w-8.h-8.rounded-circle.position-absolute.right.mr-5(data-class="shift-left")
-        .intersection_observed.dotted.d-lg-none.blue.w-8.h-8.rounded-circle.position-absolute.left.bottom.ml-3.mb-5(data-class="shift-left")
+        .d-md-none.bg-primary.w-5.h-5.position-absolute.ml-n3
+        .d-md-none.bg-light-blue.position-absolute.z-minus.w-5.h-5.mt-3.ml-3
+        .dotted.d-md-none.red.w-8.h-8.rounded-circle.position-absolute.right.mr-5
+        .dotted.d-md-none.blue.w-8.h-8.rounded-circle.position-absolute.left.bottom.ml-3.mb-5
         .row
           .col-md-6.py-5.order-12.order-md-1
             .py-5
               .py-5
                 h1.font-weight-bold: +translate('Start your')
                 h2.mb-5.font-weight-bold: +translate('Digital career')
-                p.subtitle.h5.mb-5.text-shadow-light-blue: +translate("Learn digital skills with us to get the most fulfilling jobs")
+                p.subtitle.h5.mb-5.text-shadow-light-blue: +translate("Build a strong foundation for your digital career with in-depth courses at DCI. Learn the skills to launch your new career in web development, online marketing or cloud computing.")
                 .d-flex
                   a.mb-3.btn.btn-lg.btn-secondary.mr-2.mr-md-4.scrollbutton.w-100.w-md-auto(href='#ourcourses', role='button'): +translate("Browse Courses")
           .col-md-6.order-1.order-md-12.d-none.d-md-block
@@ -27,8 +27,8 @@ block content
               .col-6.h-100
               .col-6.h-100.bg-primary.z-minus
         .mb-5.position-relative.d-lg-none
-          .intersection_observed.bg-light-blue.position-absolute.w-5.h-5.mr-4.mb-4.bottom.right(data-class="shift-right")
-          .intersection_observed.bg-primary.w-5.h-5.position-absolute.bottom.right.z-minus(data-class="shift-right")
+          .bg-light-blue.position-absolute.w-5.h-5.mr-4.mb-4.bottom.right
+          .bg-primary.w-5.h-5.position-absolute.bottom.right.z-minus
 
     section#partners.bg-light
       .container.py-3.py-md-5.text-center
@@ -47,16 +47,16 @@ block content
               img.partner.col-3.col-md-2.partners-logo.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo class=index > 3 ? "d-none d-lg-flex" : "d-flex")
 
     section#courses.position-relative.overflow-hidden
-      .intersection_observed.bg-light-blue.position-absolute.w-15.h-13.w-md-10.h-md-10.mr-3.mb-3.top.left.z-minus(data-class="shift-right")
+      .bg-light-blue.position-absolute.w-15.h-13.w-md-10.h-md-10.mr-3.mb-3.top.left.z-minus
       .py-md-5
         .container.pt-5.position-relative
           h2
             +translate("Our courses")
-          .dotted.red.w-20.w-lg-30.h-20.h-lg-30.rounded-circle.position-absolute.right.mr-n5.intersection_observed(data-class="shift-right")
-          .dotted.blue.w-10.w-lg-20.h-10.h-lg-20.rounded-circle.position-absolute.left.bottom.mr-5.mb-5.intersection_observed(data-class="shift-bottom")
+          .dotted.red.w-20.w-lg-30.h-20.h-lg-30.rounded-circle.position-absolute.right.mr-n5
+          .dotted.blue.w-10.w-lg-20.h-10.h-lg-20.rounded-circle.position-absolute.left.bottom.mr-5.mb-5
 
-          .dotted.red.w-10.w-lg-20.h-10.h-lg-20.rounded-circle.position-absolute.right.bottom.intersection_observed(data-class="shift-right")
-          .dotted.blue.w-10.w-lg-15.h-10.h-lg-15.position-absolute.right.bottom.ml-5.mb-5.intersection_observed(data-class="shift-bottom")
+          .dotted.red.w-10.w-lg-20.h-10.h-lg-20.rounded-circle.position-absolute.right.bottom
+          .dotted.blue.w-10.w-lg-15.h-10.h-lg-15.position-absolute.right.bottom.ml-5.mb-5
           .row.mx-md-5.justify-content-center
             each course in courses
               .col-md-6.mb-5.mb-sm-4.floatings
@@ -154,8 +154,8 @@ block content
         .container.position-relative
           h2: +translate("Stories")
           p=__("Our students come from all around the world and have different professional backgrounds. Discover how the DCI experience changed their lives.")
-          .dotted.red.w-15.h-15.rounded-circle.position-absolute.right.mr-n5.intersection_observed(data-class="shift-right")
-          .dotted.blue.w-15.h-15.position-absolute.left.bottom.ml-n5.intersection_observed(data-class="shift-left")
+          .dotted.red.w-15.h-15.rounded-circle.position-absolute.right.mr-n5
+          .dotted.blue.w-15.h-15.position-absolute.left.bottom.ml-n5
           - storysWithTestimonial = stories
           if storysWithTestimonial.length > 0
             +successCarousel(storysWithTestimonial)
@@ -167,9 +167,9 @@ block content
       section#events.bg-primary.py-5
         .py-5.overflow-hidden
           .container.position-relative
-            .intersection_observed.bg-white.quarter-transparent.position-absolute.w-30.h-30.mt-n5.ml-n5(data-class="shift-right")
-            .intersection_observed.bg-white.quarter-transparent.position-absolute.w-30.h-30.right(data-class="shift-bottom")
-            .intersection_observed.bg-white.quarter-transparent.position-absolute.w-30.h-30.bottom.right.mr-n5.mt-5(data-class="shift-left")
+            .bg-white.quarter-transparent.position-absolute.w-30.h-30.mt-n5.ml-n5
+            .bg-white.quarter-transparent.position-absolute.w-30.h-30.right
+            .bg-white.quarter-transparent.position-absolute.w-30.h-30.bottom.right.mr-n5.mt-5
             h2.text-white.mb-5: +translate("Upcoming events")
             .row.mx-xl-5
               .col-md-6.floatings.mb-5.pb-4
@@ -229,11 +229,11 @@ block content
     section.pt-5.bg-light-blue.overflow-hidden.position-relative.z-0.d-flex.flex-column.justify-content-center.pb-200
       .container.position-relative
 
-        .dotted.red.w-15.h-15.rounded-circle.position-absolute.right.mr-n5.intersection_observed(data-class="shift-left")
-        .dotted.blue.w-15.h-15.position-absolute.right.mr-n5.mt-n5.intersection_observed(data-class="shift-right")
+        .dotted.red.w-15.h-15.rounded-circle.position-absolute.right.mr-n5
+        .dotted.blue.w-15.h-15.position-absolute.right.mr-n5.mt-n5
 
-        .dotted.red.w-15.h-15.rounded-circle.position-absolute.left.bottom.ml-n5.intersection_observed(data-class="shift-right")
-        .dotted.blue.w-15.h-15.position-absolute.left.bottom.intersection_observed(data-class="shift-left")
+        .dotted.red.w-15.h-15.rounded-circle.position-absolute.left.bottom.ml-n5
+        .dotted.blue.w-15.h-15.position-absolute.left.bottom
 
         .bg-white.p-5.mb-5.position-relative
           h2.mb-5: +translate("Join the Tech Disruption at DCI")
