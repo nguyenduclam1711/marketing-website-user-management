@@ -42,17 +42,16 @@ module.exports.landingpage = async (req, res) => {
         .find({ ...query })
         .sort('order')
         .exec({})
-      const locations = Location.find({})
-        .sort({ order: 1 })
-        .exec()
-      const partners = Partner.find({ ...query })
+      const partners = Partner.find({ ...query }, 'link title partnerlogo')
         .sort('order')
         .exec({})
+      console.time("A")
       const courses = Course
-        .find(query)
+        .find(query, 'icon headline slug subheading')
         .sort({ order: 1 })
         .exec()
-      indexData = await Promise.all([stories, locations, partners, courses])
+      console.timeEnd("A")
+      indexData = await Promise.all([stories, partners, courses])
       const events = await fetchEventsByLocation(true, res.locals.settings.landingpage_number_events);
       indexData.push(events)
       if (process.env.USE_REDIS === 'true') {
@@ -63,13 +62,12 @@ module.exports.landingpage = async (req, res) => {
         }
       }
     }
-    const [storiesRes, locationsRes, partnersRes, coursesRes, events] = indexData;
+    const [storiesRes, partnersRes, coursesRes, events] = indexData;
 
     res.render('index', {
       events,
       stories: storiesRes,
       partners: partnersRes,
-      locations: locationsRes,
       courses: coursesRes
     })
   } catch (err) {

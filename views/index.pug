@@ -7,8 +7,8 @@ block content
       div.container-lg
         .d-md-none.bg-primary.w-5.h-5.position-absolute.ml-n3
         .d-md-none.bg-light-blue.position-absolute.z-minus.w-5.h-5.mt-3.ml-3
-        .dotted.d-md-none.red.w-8.h-8.rounded-circle.position-absolute.right.mr-5
-        .dotted.d-md-none.blue.w-8.h-8.rounded-circle.position-absolute.left.bottom.ml-3.mb-5
+        .dotted.d-md-none.red.w-6.h-6.rounded-circle.position-absolute.right.mr-5
+        .dotted.d-md-none.blue.w-7.h-7.rounded-circle.position-absolute.left.bottom.ml-3.mb-5
         .row
           .col-md-6.py-5.order-12.order-md-1
             .py-5
@@ -26,13 +26,13 @@ block content
             .row.h-50
               .col-6.h-100
               .col-6.h-100.bg-primary.z-minus
-        .mb-5.position-relative.d-lg-none
+        .position-relative.d-lg-none
           .bg-light-blue.position-absolute.w-5.h-5.mr-4.mb-4.bottom.right
           .bg-primary.w-5.h-5.position-absolute.bottom.right.z-minus
 
     section#partners.bg-light
       .container.py-3.py-md-5.text-center
-        h5.text-center.mb-3.mb-md-5.font-weight-bold.text-muted: +translate("Our partners")
+        h6.text-center.mb-3.mb-md-5.font-weight-bold.text-muted: +translate("Our partners")
         - randompartners = [...partners]
         - for (let i = randompartners.length - 1; i > 0; i--) {
             - const j = Math.floor(Math.random() * (i + 1));
@@ -44,32 +44,34 @@ block content
               a.col-3.col-md-2.partner.h-4.flex-column.align-items-center.justify-content-center(href=partner.link target="_blank" rel="noopener" class=index > 3 ? "d-none d-lg-flex" : "d-flex")
                 img.partners-logo.w-100.mw-150.flex-column.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo)
             else
-              img.partner.col-3.col-md-2.partners-logo.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo class=index > 3 ? "d-none d-lg-flex" : "d-flex")
+              img.partner.col-3.col-md-2.partners-logo.w-100.mw-150.mh-150.object-fit-contain(alt=partner.title, src="/images/" + partner.partnerlogo class=index > 3 ? "d-none d-lg-flex" : "d-flex")
 
     section#courses.position-relative.overflow-hidden
       .bg-light-blue.position-absolute.w-15.h-13.w-md-10.h-md-10.mr-3.mb-3.top.left.z-minus
       .py-md-5
         .container.pt-5.position-relative
-          h2
+          h2.mb-5.mb-md-0
             +translate("Our courses")
-          .dotted.red.w-20.w-lg-30.h-20.h-lg-30.rounded-circle.position-absolute.right.mr-n5
-          .dotted.blue.w-10.w-lg-20.h-10.h-lg-20.rounded-circle.position-absolute.left.bottom.mr-5.mb-5
 
+          .dotted.red.w-15.w-lg-28.h-15.h-lg-28.rounded-circle.position-absolute.right.mr-n5.mt-5.top-20
+          .dotted.blue.w-15.w-lg-28.h-15.h-lg-28.rounded-circle.position-absolute.left.bottom.top-40
           .dotted.red.w-10.w-lg-20.h-10.h-lg-20.rounded-circle.position-absolute.right.bottom
-          .dotted.blue.w-10.w-lg-15.h-10.h-lg-15.position-absolute.right.bottom.ml-5.mb-5
+          .dotted.blue.w-10.w-lg-15.h-10.h-lg-15.position-absolute.right.bottom.mr-5.mb-5
+
           .row.mx-md-5.justify-content-center
             each course in courses
-              .col-md-6.mb-5.mb-sm-4.floatings
-                .bg-white.hover-shadow.h-100.d-flex.flex-column
+              .col-md-6.mb-5.floatings
+                .bg-white.hover-shadow.h-100.d-flex.flex-column.rounded
                   .d-block.flex-grow.justify-content-between.h-100
-                    .py-3.px-5.px-md-4
-                      .px-2
+                    .py-3.px-4.px-md-4
+                      .px-md-2
                         .row.position-relative.my-4.my-md-0
-                          .col-3.col-md-4.mb-md-3
-                            img.object-fit-cover.img-fluid.square(src="/media/pixel.gif" alt=course.headline style=`background-image: url('${course.icon ? `/images/` + course.icon : `/media/circuit-board.svg`}')`)
-                          .col-9.col-md-12.d-flex.flex-column.justify-content-center
-                            a.stretched-link(href="/courses/" + course.slug)
-                              h3.text-muted= course.headline
+                          .col-4.col-md-4.mb-md-3.pr-0.pr-md-3
+                            .square.position-relative
+                              img.img-fluid.position-absolute.top.left.h-100.w-100(src=course.icon ? `/images/` + course.icon : `/media/circuit-board.svg` alt=course.headline )
+                          .col-8.col-md-12.d-flex.flex-column.justify-content-center
+                            a.stretched-link.text-dark(href="/courses/" + course.slug)
+                              h3= course.headline
                             p.text-muted.mb-0= course.courselength
                         p.text-dark=course.subheading
                         div.text-right
@@ -81,56 +83,60 @@ block content
 
     section#mission.position-relative
       .container.section-counter
+        .h-3.mb-5
+          .position-absolute
+            .d-md-none.bg-primary.w-3.h-3.ml-n3.z-minus
+            .d-md-none.bg-light-blue.z-minus.w-3.h-3.mt-3.position-absolute.top.left
         h2
           +translate("Mission")
         p= __("The Digital Career Institute was born as an initiative to integrate refugees into digital jobs. Today it is committed to train anyone who wants to pursue a tech career.")
         .py-5.row
           .col-md-6
             .bg-primary.rounded
-              img.rounded.h-100.w-100.object-fit-cover.half-transparent.h-100(alt="people programming" src='/media/bg4.jpg')
+              img.d-none.d-md-block.rounded.h-100.w-100.object-fit-cover.half-transparent.h-100(alt="people programming" src='/media/bg4.jpg')
           .col-md-6.mt-5.mt-md-0
             .row
-              .col-6
+              .col-6.border-left.py-4
                 .counter-item
                   .counter-number.font-weight-bold
                     h2
                       span.counter-count=locals.settings.landingpage_archivements_students || 600
                       = "+"
                   p: +translate("Students")
-              .col-6
+              .col-6.border-left.py-4
                 .counter-item
                   .counter-number.font-weight-bold
                     h2
                       span.counter-count=locals.settings.landingpage_archivements_courses || 50
                       = "+"
                   p: +translate("Courses started")
-              .col-6
+              .col-6.border-left.py-4
                 .counter-item
                   .counter-number.font-weight-bold
                     h2
                       span.counter-count=locals.settings.landingpage_archivements_tours || 300
                       = "+"
                   p: +translate("Company tours")
-              .col-6
+              .col-6.border-left.py-4
                 .counter-item
                   .counter-number.font-weight-bold
                     h2
                       span.counter-count=locals.settings.landingpage_archivements_locations || 5
                   p: +translate("Locations")
-              .col-6
+              .col-6.border-left.py-4
                 .counter-item
                   .counter-number.font-weight-bold
                     h2
                       span.counter-count=locals.settings.careersuccesspage_employmentrate || 87
                   p: +translate("Placement rate")
-              .col-6
+              .col-6.border-left.py-4
                 .counter-item
                   .counter-number.font-weight-bold
                     h2
                       span.counter-count=locals.settings.landingpage_different_nationalities || 90
                   p: +translate("Different nationalities of students and teachers")
 
-      .bg-light-blue.position-absolute.h-50.w-100.z-minus.bottom
+      .bg-light-blue.position-absolute.h-25-percent.h-md-50-percent.w-100.z-minus.bottom
 
     section#hiring.bg-light-blue.py-5
       .container
@@ -138,24 +144,30 @@ block content
           .col-md-6
             h2: +translate("Meet our hiring partners")
             p=__("We work with over 400 hiring partners to match our students with tech jobs after graduation, including unique networking opportunities. DCI alumni work in top tech companies as front-end developers, full-stack developers, technical product managers, marketing managers, SEO specialists and more.")
-            a(href="/tour" title=__("Companies"))=__("Learn more about our partner companies")
+            a.d-none.d-md-block(href="/tour" title=__("Companies"))=__("Learn more about our partner companies")
 
           .col-md-6.mt-5.mt-md-0
             .row.bg-white.p-5
               each partner, index in partners
                 if partner.link
-                  a.col-4.h-4.align-items-center.justify-content-center(href=partner.link target="_blank" rel="noopener" class=index > 3 ? "d-none d-md-block" : "")
-                    img.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo)
+                  a.d-flex.col-4.h-4.align-items-center.justify-content-center(href=partner.link target="_blank" rel="noopener" )
+                    img.w-100.mw-150.mh-150(alt=partner.title, src="/images/" + partner.partnerlogo)
                 else
-                  img.col-4.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo class=index > 3 ? "d-none d-md-block" : "")
+                  .d-flex.col-4.h-4.align-items-center.justify-content-center
+                    img.w-100.mw-150.mh-150(alt=partner.title, src="/images/" + partner.partnerlogo )
 
     if stories
       section#stories.py-5.overflow-hidden
         .container.position-relative
+
+          .h-3.mb-5
+            .position-absolute
+              .d-md-none.bg-primary.w-3.h-3.ml-n3.z-minus
+              .d-md-none.bg-light-blue.z-minus.w-3.h-3.mt-3.position-absolute.top.left
           h2: +translate("Stories")
           p=__("Our students come from all around the world and have different professional backgrounds. Discover how the DCI experience changed their lives.")
-          .dotted.red.w-15.h-15.rounded-circle.position-absolute.right.mr-n5
-          .dotted.blue.w-15.h-15.position-absolute.left.bottom.ml-n5
+          .d-none.d-md-block.dotted.red.w-15.h-15.rounded-circle.position-absolute.right.mr-n5
+          .d-none.d-md-block.dotted.blue.w-15.h-15.position-absolute.left.bottom.ml-n5
           - storysWithTestimonial = stories
           if storysWithTestimonial.length > 0
             +successCarousel(storysWithTestimonial)
@@ -167,9 +179,9 @@ block content
       section#events.bg-primary.py-5
         .py-5.overflow-hidden
           .container.position-relative
-            .bg-white.quarter-transparent.position-absolute.w-30.h-30.mt-n5.ml-n5
-            .bg-white.quarter-transparent.position-absolute.w-30.h-30.right
-            .bg-white.quarter-transparent.position-absolute.w-30.h-30.bottom.right.mr-n5.mt-5
+            .bg-white.quarter-transparent.position-absolute.w-25.h-25.left-md-60.top-md-40
+            .bg-white.quarter-transparent.position-absolute.w-25.h-25.left-md-30.top
+            .bg-white.quarter-transparent.position-absolute.w-25.h-25.bottom.top-md-40
             h2.text-white.mb-5: +translate("Upcoming events")
             .row.mx-xl-5
               .col-md-6.floatings.mb-5.pb-4
@@ -235,8 +247,8 @@ block content
         .dotted.red.w-15.h-15.rounded-circle.position-absolute.left.bottom.ml-n5
         .dotted.blue.w-15.h-15.position-absolute.left.bottom
 
-        .bg-white.p-5.mb-5.position-relative
-          h2.mb-5: +translate("Join the Tech Disruption at DCI")
+        .bg-white.p-5.mb-5.position-relative.text-center
+          h2: +translate("Join the Tech Disruption at DCI")
           div: +translate("Do you want to become one of the digital pioneers and show your creativity to the world, or change careers Then join entrepreneurs and disruptors at DCI")
           div: +translate("Are you a company looking to hire Grads? or would you like to become one of our partner companies and host company tours? Then ..")
           .text-center.mt-5
