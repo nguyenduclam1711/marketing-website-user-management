@@ -993,80 +993,9 @@ body:not(.admin) {
   width: 100%;
   border: none;
 }
-
-/*************steps to apply***************/
-
-.courseApply {
-  display: flex;
-  margin-top: 2rem;
-}
-
-.courseApply-step {
-  flex: 1;
-  padding-right: 1rem;
-  position: relative;
-}
-
-.courseApply-step:not(:last-child):before {
-  content: "";
-  background: $blue;
-  height: 3px;
-  width: 100%;
-  position: absolute;
-  top: 30px;
-  left: 0;
-}
-
-.courseApply-stepCount {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: $blue;
-  color: white;
-  font-weight: 600;
-  text-align: center;
-  line-height: 60px;
-  margin-bottom: 1rem;
-  display: block;
-  position: relative;
-}
-
-/******************************************
-   SUPER ADMIN/ USERS SECTION
-*******************************************/
-.usersListContainer {
-  border-bottom: 1px solid;
-
-  .usersList {
-    border-top: 1px solid;
-
-    .userInfoHalfWidth {
-      width: 50%;
-    }
-
-    .userInfoFullWidth {
-      width: 100%;
-    }
-  }
-}
-
-/********************************************************
-  MEDIA QUERY BREAKPOINT | SINGLE PAGE COURSES !WORK HERE
-********************************************************/
-/* ----------- iPad Pro Start----------- */
-/* Portrait and Landscape */
-
 @media (max-width: 1199.98px) {
-  .courses-scroll {
-    display: none;
-  }
-
   .container-fluid-courses {
     width: 100%;
-  }
-
-  .blue-headline {
-    font-size: 2.5rem;
   }
 }
 
@@ -1074,41 +1003,12 @@ body:not(.admin) {
   .card-img-top {
     height: 10vw;
   }
-
-  #courses-scroll {
-    position: absolute;
-    margin-top: 2.8%;
-    width: 200px;
-  }
-
-  .subtitle-jumbotron {
-    font-size: 3rem;
-  }
 }
 
 @include media-breakpoint-down(md) {
-  .subtitle-jumbotron {
-    font-size: 1.5rem;
-  }
-
   .card-img-top {
     height: 25vw;
   }
-
-  .courseApply-step:not(:last-child):before {
-    visibility: hidden;
-    clear: both;
-  }
-
-  .courseApply {
-    display: block;
-  }
-
-  .courseApply-stepCount {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   .container-fluid-courses,
   .row-courses,
   .col-courses {
