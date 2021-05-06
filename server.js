@@ -145,16 +145,16 @@ app.use(function (req, res, next) {
       .replace(/\-$/g, '')
       .toLowerCase())
   const path = req.url.replace(/(.*)\?.*/, '$1')
-  const pathSegments = path.split("/")
-  const siteTitle = pathSegments.reduce((acc, pathSegement) => {
-    if (!pathSegement.startsWith("?") && pathSegement !== req.session.locale) {
-      const adjustedPathSegment = acc + (acc !== "" ? " - " : "") + pathSegement.charAt(0).toUpperCase() + pathSegement.substr(1)
+  const pathSegments = path.split("/").filter(pS => pS !== "")
+  const siteTitle = pathSegments.reverse().reduce((acc, pathSegement) => {
+    if (!pathSegement.startsWith("?") && pathSegement !== req.session.locale && pathSegement !== 'pages') {
+      const adjustedPathSegment = acc + (acc !== "" ? " - " : "") + pathSegement.replace(/-/g, ' ').charAt(0).toUpperCase() + pathSegement.replace(/-/g, ' ').substr(1)
       return adjustedPathSegment
     } else {
       return acc
     }
-  })
-  res.locals.title = 'DigitalCareerInstitute'
+  }, "")
+  res.locals.title = 'Digital Career Institute'
   app.locals.moment = require('moment')
   res.locals.live = req.headers.host.includes('digitalcareerinstitute.org')
   if (siteTitle) {
