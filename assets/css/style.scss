@@ -1246,6 +1246,22 @@ div[class*=" #{$class-slug}"] {
       left: 10% * $i;
     }
   }
+  .right-#{ $i * 10 } {
+    right: 10% * $i;
+  }
+  @include media-breakpoint-up(md) {
+    .right-md-#{ $i * 10 } {
+      right: 10% * $i;
+    }
+  }
+  .bottom-#{ $i * 10 } {
+    bottom: 10% * $i;
+  }
+  @include media-breakpoint-up(md) {
+    .bottom-md-#{ $i * 10 } {
+      bottom: 10% * $i;
+    }
+  }
 }
 @for $i from 1 through 30 {
   .h-#{ $i } {
@@ -1837,4 +1853,7 @@ body[class*="pages-"] {
   &.blue {
     background-image: url("~/media/dot_blue.svg");
   }
+}
+.grayscale {
+  filter: grayscale(1);
 }
