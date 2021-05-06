@@ -14,6 +14,12 @@
   background-color: $primary;
   color: #fff;
 }
+body {
+  font-family: "Gordita-Regular", sans-serif;
+  color: $body;
+  font-weight: 200;
+  font-size: 18px;
+}
 h1,
 h2,
 h3,
@@ -22,6 +28,7 @@ h5,
 h6,
 div[class^="display-"] {
   font-family: "Gordita-Bold", sans-serif;
+  color: $bluedark;
 }
 h4,
 h5,

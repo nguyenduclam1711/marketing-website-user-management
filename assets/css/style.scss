@@ -205,13 +205,6 @@ body:not(.index) #nav-primary {
   }
 } */
 
-body {
-  font-family: "Gordita-Regular", sans-serif;
-  color: $bluedark !important;
-  font-weight: 200;
-  font-size: 18px;
-}
-
 body:not(.admin).btn {
   border-radius: 2px;
   border-width: 3px;

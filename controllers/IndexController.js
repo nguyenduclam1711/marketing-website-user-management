@@ -37,7 +37,6 @@ module.exports.landingpage = async (req, res) => {
     }
     if (indexData === null) {
       let query = await getAvailableTranslations(req, res)
-
       const stories = Story
         .find({ ...query })
         .sort('order')
@@ -45,12 +44,10 @@ module.exports.landingpage = async (req, res) => {
       const partners = Partner.find({ ...query }, 'link title partnerlogo')
         .sort('order')
         .exec({})
-      console.time("A")
       const courses = Course
         .find(query, 'icon headline slug subheading')
         .sort({ order: 1 })
         .exec()
-      console.timeEnd("A")
       indexData = await Promise.all([stories, partners, courses])
       const events = await fetchEventsByLocation(true, res.locals.settings.landingpage_number_events);
       indexData.push(events)
