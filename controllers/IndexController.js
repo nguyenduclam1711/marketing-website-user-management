@@ -272,7 +272,7 @@ module.exports.tour = async (req, res) => {
     const query = await getAvailableTranslations(req, res)
     const partners = await Partner.find(query)
       .exec();
-    res.locals.title = 'Become our Hiring Partner | DigitalCareerInstitute'
+    res.locals.title = 'Become our Hiring Partner | Digital Career Institute'
     res.render('tour', { companytour: true, partners })
   } catch (err) {
     console.log(err)
@@ -501,7 +501,7 @@ module.exports.thankYou = async (req, res) => {
     if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
       const matchinContactRequest = await Contact.findById(req.params.id)
       if (matchinContactRequest) {
-        res.locals.title = 'Thank you | DigitalCareerInstitute'
+        res.locals.title = 'Thank you | Digital Career Institute'
         res.setHeader("X-Robots-Tag", "noindex, follow");
         res.render('thankyou', matchinContactRequest)
       } else {
