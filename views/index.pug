@@ -7,17 +7,18 @@ block content
       div.container-lg
         .d-md-none.bg-primary.w-5.h-5.position-absolute.ml-n3
         .d-md-none.bg-light-blue.position-absolute.z-minus.w-5.h-5.mt-3.ml-3
-        .dotted.d-md-none.red.w-6.h-6.rounded-circle.position-absolute.right.mr-5
+        .dotted.d-md-none.red.w-6.h-6.rounded-circle.position-absolute.right.mr-5.top-30
         .dotted.d-md-none.blue.w-7.h-7.rounded-circle.position-absolute.left.bottom.ml-3.mb-5
         .row
           .col-md-6.py-5.order-12.order-md-1
             .py-5
-              .py-5
-                h1.font-weight-bold: +translate('Start your')
-                h2.mb-5.font-weight-bold: +translate('Digital career')
-                p.h5.mb-5: +translate("Build a strong foundation for your digital career with in-depth courses at DCI. Learn the skills to launch your new career in web development, online marketing or cloud computing.")
+              .py-4
+                .mb-4
+                  h1.font-weight-bold: +translate('Start your')
+                  h1.font-weight-bold: +translate('Digital career')
+                p.lead.mb-5: +translate("Build a strong foundation for your digital career with in-depth courses at DCI. Learn the skills to launch your new career in web development, online marketing or cloud computing.")
                 .d-flex
-                  a.mb-3.btn.btn-lg.btn-secondary.mr-2.mr-md-4.scrollbutton.w-100.w-md-auto(href='#ourcourses', role='button'): +translate("Browse Courses")
+                  a.mb-3.btn.btn-lg.btn-secondary.mr-2.mr-md-4.scrollbutton.w-100.w-md-auto(href='#courses', role='button'): +translate("Browse Courses")
           .col-md-6.order-1.order-md-12.d-none.d-md-block
             img.position-absolute.top.left.w-100.top-50.shift-bottom-minus-percent(src="/media/hero.svg", alt="")
             .row.h-50
@@ -27,13 +28,13 @@ block content
               .col-6.h-100
               .col-6.h-100.bg-primary.z-minus
         .position-relative.d-lg-none
-          .bg-light-blue.position-absolute.w-5.h-5.mr-4.mb-4.bottom.right
-          .bg-primary.w-5.h-5.position-absolute.bottom.right.z-minus
+          .bg-light-blue.position-absolute.w-5.h-5.mr-3.mb-4.bottom.right
+          .bg-primary.w-5.h-5.position-absolute.bottom.right.z-minus.mr-n3
 
     section#partners.bg-light
       .container.py-3.py-md-4.text-center
-        h6.text-center.mb-3.font-weight-bold.text-muted: +translate("Our partners")
-        - randompartners = [...partners]
+        h6.text-center.mb-3.font-weight-bold.text-muted: +translate("Where Our Graduates Work")
+        - randompartners = [...partners.filter(p => p.is_alumni_employer)]
         - for (let i = randompartners.length - 1; i > 0; i--) {
             - const j = Math.floor(Math.random() * (i + 1));
             - [randompartners[i], randompartners[j]] = [randompartners[j], randompartners[i]];
@@ -65,19 +66,20 @@ block content
                   .col-md-6.mb-5.floatings
                     .bg-white.hover-shadow.h-100.d-flex.flex-column.rounded
                       .d-block.flex-grow.justify-content-between.h-100
-                        .py-3.px-4.px-md-4
-                          .px-md-2
-                            .row.position-relative.my-4.my-md-0
-                              .col-4.col-md-5.mb-md-3.pr-0.pr-md-3
-                                .square.position-relative
-                                  img.img-fluid.position-absolute.top.left.h-100.w-100(src=course.icon ? `/images/` + course.icon : `/media/circuit-board.svg` alt=course.headline )
-                              .col-8.col-md-12.d-flex.flex-column.justify-content-center
-                                a.stretched-link.text-dark(href="/courses/" + course.slug)
-                                  h3= course.headline
-                                p.text-muted.mb-0= course.courselength
-                            p.text-dark=course.subheading
+                        .pt-3.pb-5.px-4.px-md-4.h-100
+                          .d-flex.flex-column.justify-content-between.h-100
+                            .px-md-2
+                              .row.position-relative.my-3
+                                .col-4.col-md-5.mb-md-3.pr-0.pr-md-3
+                                  .square.position-relative
+                                    img.img-fluid.position-absolute.top.left.h-100.w-100(src=course.icon ? `/images/` + course.icon : `/media/circuit-board.svg` alt=course.headline )
+                                .col-8.col-md-12.d-flex.flex-column.justify-content-center
+                                  a.stretched-link.text-dark(href="/courses/" + course.slug)
+                                    h3.mb-2= course.headline
+                                  p.text-muted.mb-0= course.courselength
+                              p.text-dark.pb-0.pb-md-4=course.subheading
                             div.text-right
-                              a.btn.btn-outline-secondary(href="/courses/" + course.slug): +translate("View course details")
+                              a.btn.btn-outline-secondary(href="/courses/" + course.slug): +translate("View course")
 
     section#mission.position-relative
       .container.section-counter
@@ -86,8 +88,8 @@ block content
             .bg-primary.w-3.h-3.ml-n3.z-minus
             .bg-light-blue.z-minus.w-3.h-3.mt-3.position-absolute.top.left
         h2
-          +translate("Mission")
-        p= __("The Digital Career Institute was born as an initiative to integrate refugees into digital jobs. Today it is committed to train anyone who wants to pursue a tech career.")
+          +translate("Our Mission")
+        p= __("The Digital Career Institute was born as an initiative to integrate refugees into digital jobs. Today we are committed to training anyone interested in pursuing a career in tech. We provide everything our students need to succeed, including computer equipment, language books, and mobile internet when necessary.")
         .py-5.row
           .col-md-6
             .rounded.h-100.pr-md-4.pt-md-4
@@ -100,27 +102,27 @@ block content
                     h2
                       span.counter-count=locals.settings.landingpage_archivements_students || 600
                       = "+"
-                  p: +translate("Students")
+                  p: +translate("Students & alumni from all over the world.")
               .col-6.border-left.py-4
                 .counter-item
                   .counter-number.font-weight-bold
                     h2
                       span.counter-count=locals.settings.landingpage_archivements_courses || 50
                       = "+"
-                  p: +translate("Courses started")
+                  p: +translate("Courses started since we were founded.")
               .col-6.border-left.py-4
                 .counter-item
                   .counter-number.font-weight-bold
                     h2
                       span.counter-count=locals.settings.landingpage_archivements_tours || 300
                       = "+"
-                  p: +translate("Company tours")
+                  p: +translate("Hiring partners in Germany.")
               .col-6.border-left.py-4
                 .counter-item
                   .counter-number.font-weight-bold
                     h2
                       span.counter-count=locals.settings.landingpage_archivements_locations || 5
-                  p: +translate("Locations")
+                  p: +translate("Campuses in Berlin, Düsseldorf, Hamburg and Leipzig.")
               .col-6.border-left.py-4
                 .counter-item
                   .counter-number.font-weight-bold
@@ -134,14 +136,14 @@ block content
                       span.counter-count=locals.settings.landingpage_different_nationalities || 90
                   p: +translate("Different nationalities of students and teachers")
 
-      .bg-light-blue.position-absolute.h-25-percent.h-md-50-percent.w-100.z-minus.bottom
+      .bg-light-blue.position-absolute.h-30-percent.h-md-40-percent.w-100.z-minus.bottom
 
     section#hiring.bg-light-blue.py-5.overflow-hidden
       .container.mt-md-5.position-relative.mb-5
         .row
           .col-md-6
-            h2: +translate("Meet our hiring partners")
-            p=__("We work with over 400 hiring partners to match our students with tech jobs after graduation, including unique networking opportunities. DCI alumni work in top tech companies as front-end developers, full-stack developers, technical product managers, marketing managers, SEO specialists and more.")
+            h2: +translate("Meet Our Hiring Partners")
+            p=__("We work with over 400 hiring partners to match our students with tech jobs after graduation, including unique networking opportunities. DCI alumni work in top tech companies as front-end developers, full-stack developers, technical product managers, marketing managers, social media managers and more.")
             a.d-none.d-md-block.mt-5(href="/tour" title=__("Companies"))=__("Learn more about our partner companies")
 
           .col-md-6.mt-5.mt-md-0.position-relative.z-0
@@ -154,7 +156,7 @@ block content
                   else
                     .d-flex.col-4.h-4.align-items-center.justify-content-center
                       img.w-100.mw-150.mh-150(alt=partner.title, src="/images/" + partner.partnerlogo )
-              .dotted.red.w-15.w-lg-24.h-15.h-lg-24.position-absolute.right.mr-n5.mt-5.bottom.mr-n5.mb-n5.z-minus.grayscale
+              .dotted.red.w-23.w-lg-24.h-23.h-lg-20.position-absolute.right.mr-n5.mt-5.bottom.mr-n5.mb-n5.z-minus.grayscale
 
     if stories
       section#stories.py-5.overflow-hidden
@@ -164,7 +166,7 @@ block content
             .position-absolute
               .bg-primary.w-3.h-3.ml-n3.z-minus
               .bg-light-blue.z-minus.w-3.h-3.mt-3.position-absolute.top.left
-          h2: +translate("Stories")
+          h2: +translate("Alumni Stories")
           p=__("Our students come from all around the world and have different professional backgrounds. Discover how the DCI experience changed their lives.")
           .d-none.d-md-block.dotted.red.w-15.h-15.rounded-circle.position-absolute.right.mr-n5
           .d-none.d-md-block.dotted.blue.w-15.h-15.position-absolute.left.bottom.ml-n5
@@ -172,46 +174,42 @@ block content
           if storysWithTestimonial.length > 0
             +successCarousel(storysWithTestimonial)
 
-        .py-5.text-center
-          a.btn.btn-lg.btn-secondary.mx-5(href="/stories"): +translate("Show all Stories")
-
     if events
-      section#events.bg-primary.py-5
+      section#events.bg-primary.py-0.py-md-5
         .py-5.overflow-hidden
           .container.position-relative
-            .bg-white.quarter-transparent.position-absolute.w-100.w-md-25.h-10.h-lg-25.left-md-60.top-20.top-md-40
-            .bg-white.quarter-transparent.position-absolute.w-100.w-md-25.h-10.h-lg-25.left-md-50.top-40.top-md-0
-            .bg-white.quarter-transparent.position-absolute.w-100.w-md-25.h-10.h-lg-25.bottom-10.top-md-40
-            h2.text-white.mb-5: +translate("Upcoming events")
-            .row.mx-xl-5
+            .bg-white.quarter-transparent.position-absolute.w-100.w-lg-25.h-20.h-lg-25.right-md-0.bottom-40.bottom-md-0
+            .bg-white.quarter-transparent.position-absolute.w-100.w-lg-25.h-20.h-lg-25.left-md-40.top-10.top-md-0
+            .bg-white.quarter-transparent.position-absolute.w-100.w-lg-25.h-20.h-lg-25.bottom-10.bottom-md-0
+            h2.text-center.text-md-left.text-white.mb-5: +translate("Upcoming events")
+            .row.mx-xl-5.pt-4.pt-md-0
               .col-md-6.floatings.mb-5.pb-4
                 .card.border-0.bg-white.p-4.rounded.shadow-sm.h-100.d-flex.flex-column.justify-content-between(href=events[0].url, target="_blank" rel="noopener")
-                  .text-center.d-flex
-                    .d-flex.rounded.w-100.flex-wrap
-                      figure.mw-lg-150.p-0.position-relative.col-12.mb-0.col-lg
-                        .col.d-flex.flex-column.justify-content-center.h-100
-                          img.card-img-top.mb-3.mb-md-0(alt=events[0].name src=events[0].imageurl)
+                  .text-center.d-flex.py-3
+                    .d-flex.rounded.w-100
+                      figure.mw-lg-150.p-0.position-relative.mb-0.col-4.col-lg-12
+                        .d-flex.flex-column.justify-content-center.h-100
+                          img.mb-3.mb-md-0(alt=events[0].name src=events[0].imageurl)
                       .col.text-left.order-3.order-sm-2.d-flex.flex-column.justify-content-center
                         h6.font-weight-bold.text-dark.mb-3=events[0].name
                         
-                  =events[0].text
-                  p.text-muted.mb-0
-                    span.mr-1.mr-xl-3.w-1.d-inline-block.mb-3.mb-xl-0
-                      img.mb-1.w-100(src="/media/events_clock-thin.svg", alt="Event time")
-                    =moment(events[0].start).format('HH:SS A DD. MMM YYYY')
-                  a.text-right.d-block.stretched-link.font-weight-bold(href=events[0].url target="_blank" rel="noopener")="Register" 
+                        .d-none.d-md-block=events[0].text
+                        p.text-muted.mb-0
+                          span.mr-1.mr-xl-3.w-1.d-inline-block.mb-3.mb-xl-0
+                            img.mb-1.w-100(src="/media/events_clock-thin.svg", alt="Event time")
+                          =moment(events[0].start).format('HH:SS A DD. MMM YYYY')
+                        a.text-right.d-block.stretched-link.font-weight-bold(href=events[0].url target="_blank" rel="noopener")="Register" 
               .col-md-6
                 each event, index in events.splice(1,2)
                   .floatings.mb-5.pb-4
                     .card.border-0.bg-white.p-4.rounded.shadow-sm.h-100.d-flex.flex-column.justify-content-between(href=event.url, target="_blank" rel="noopener")
-                      .text-center.d-flex
-                        .d-flex.rounded.w-100.flex-wrap
-                          figure.mw-lg-150.p-0.position-relative.col-12.mb-0.col-lg
-                            .col.d-flex.flex-column.justify-content-center.h-100
-                              img.card-img-top.mb-3.mb-md-0(alt=event.name src=event.imageurl)
+                      .text-center.d-flex.py-3
+                        .d-flex.rounded.w-100
+                          figure.mw-lg-150.p-0.position-relative.mb-0.col-4.col-lg-12
+                            .d-flex.flex-column.justify-content-center.h-100
+                              img.mb-3.mb-md-0(alt=event.name src=event.imageurl)
                           .col.text-left.order-3.order-sm-2.d-flex.flex-column.justify-content-center
                             h6.font-weight-bold.text-dark.mb-3=event.name
-                            
                             p.text-muted.mb-0.mb-3
                               span.mr-1.mr-xl-3.w-1.d-inline-block.mb-3.mb-xl-0
                                 img.mb-1.w-100(src="/media/events_clock-thin.svg", alt="Event time")
@@ -222,11 +220,11 @@ block content
                   each event, index in events.splice(1,3)
                     .col-md-6.floatings.mb-5.pb-4.w-100
                       .card.border-0.bg-white.p-4.rounded.shadow-sm.h-100.d-flex.flex-column.justify-content-between(href=event.url, target="_blank" rel="noopener")
-                        .text-center.d-flex
-                          .d-flex.rounded.w-100.flex-wrap
-                            figure.mw-lg-150.p-0.position-relative.col-12.mb-0.col-lg
-                              .col.d-flex.flex-column.justify-content-center.h-100
-                                img.card-img-top.mb-3.mb-md-0(alt=event.name src=event.imageurl)
+                        .text-center.d-flex.py-3
+                          .d-flex.rounded.w-100
+                            figure.mw-lg-150.p-0.position-relative.mb-0.col-4.col-lg-12
+                              .d-flex.flex-column.justify-content-center.h-100
+                                img.mb-3.mb-md-0(alt=event.name src=event.imageurl)
                             .col.text-left.order-3.order-sm-2.d-flex.flex-column.justify-content-center
                               h6.font-weight-bold.text-dark.mb-3=event.name
                               
@@ -235,24 +233,26 @@ block content
                                   img.mb-1.w-100(src="/media/events_clock-thin.svg", alt="Event time")
                                 =moment(event.start).format('HH:SS A DD. MMM YYYY')
                               a.text-right.d-block.stretched-link.font-weight-bold(href=event.url target="_blank" rel="noopener")="Register" 
+
+          .container.position-relative.d-none.d-md-block
             .text-right
-              a.btn.btn-lg.btn-link.text-white.text-underline(href='/events/'): +translate("Viw all upcoming events")
+              a.btn.btn-lg.btn-link.text-white.text-underline(href='/events/'): +translate("View all upcoming events")
             
     section.pt-5.bg-light-blue.overflow-hidden.position-relative.z-0.d-flex.flex-column.justify-content-center.pb-200
       .container.position-relative
+        .dotted.red.w-7.h-7.rounded-circle.position-absolute.left-40.mt-4
+        .dotted.blue.w-7.h-7.position-absolute.left-30
 
-        .dotted.red.w-15.h-15.rounded-circle.position-absolute.right.mr-n5
-        .dotted.blue.w-15.h-15.position-absolute.right.mr-n5.mt-n5
+        .dotted.red.w-7.h-7.rounded-circle.position-absolute.left-40.bottom-10
+        .dotted.blue.w-7.h-7.position-absolute.left-30.bottom-10.mb-4
+        .pb-4.pt-5
 
-        .dotted.red.w-15.h-15.rounded-circle.position-absolute.left.bottom.ml-n5
-        .dotted.blue.w-15.h-15.position-absolute.left.bottom
-
-        .bg-white.p-5.mb-5.position-relative.text-center
-          .p-md-5
-            h3: +translate("Join the Tech Disruption at DCI")
-            div: +translate("Do you want to become one of the digital pioneers and show your creativity to the world, or change careers Then join entrepreneurs and disruptors at DCI")
-            div: +translate("Are you a company looking to hire Grads? or would you like to become one of our partner companies and host company tours? Then ..")
-            .text-center.mt-5
-              a.btn.btn-lg.btn-secondary.mx-3.mb-4.mb-mb-0.w-100.w-md-auto(href='/contact', data-toggle='modal', data-target='#contactFormModal'): +translate("Apply now")
-              a#calltoaction.btn.btn-lg.btn-outline-primary.mx-3.w-100.w-md-auto(href='/tour')=__("Browse Courses")
+          .py-5
+            .bg-white.p-5.mb-5.position-relative.text-center
+              .p-md-5
+                h3: +translate("Ready to join? Apply now and join the disruption.")
+                div: +translate("Our admission team is always there for you regardless of your location")
+                .text-center.mt-5
+                  a.btn.btn-lg.btn-secondary.mx-3.mb-4.mb-md-0.w-100.w-md-auto(href='/contact', data-toggle='modal', data-target='#contactFormModal'): +translate("Apply now")
+                  a#calltoaction.btn.btn-lg.btn-outline-primary.mx-3.w-100.w-md-auto(href='/tour')=__("Browse Courses")
 

@@ -25,12 +25,20 @@ mixin partnerForm
         button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Defines the order the partners are displayed. 0,1,2,3,4')
           | ?
       input#inputOrder.form-control(name='order', type='number', placeholder='Order', required='', autofocus='', value=editPath ? partner.order : "")
-    label.checkbox.text-muted(for='testimonial_show')
-      ="Show testimonial on careersuccesspage?"
-      button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='To show the testimonial in the careersucess-page in the grid tick this box. To show it you must provide also a name, the content AND the job.')
-        | ?
-      input#testimonial_show(type='checkbox', name='testimonial_show', value="on", checked=partner && partner.testimonial_show && !!partner.testimonial_show ? true: false )
-      span.checkmark
+    .form-group
+      label.checkbox.text-muted(for='testimonial_show')
+        ="Show testimonial on careersuccesspage?"
+        button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='To show the testimonial in the careersucess-page in the grid tick this box. To show it you must provide also a name, the content AND the job.')
+          | ?
+        input#testimonial_show(type='checkbox', name='testimonial_show', value="on", checked=partner && partner.testimonial_show && !!partner.testimonial_show ? true: false )
+        span.checkmark
+    .form-group
+      label.checkbox.text-muted(for='is_alumni_employer')
+        ="Is partner a alumni employer?"
+        button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='If checked, the partnerlogo appears prominent on the landingpage in the uppper section')
+          | ?
+        input#is_alumni_employer(type='checkbox', name='is_alumni_employer', value="on", checked=partner && partner.is_alumni_employer && !!partner.is_alumni_employer ? true: false )
+        span.checkmark
 
     .form-group
       label.d-block(for='testimonial_name') Testimonial name

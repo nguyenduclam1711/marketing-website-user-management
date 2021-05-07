@@ -41,8 +41,8 @@ module.exports.landingpage = async (req, res) => {
         .find({ ...query })
         .sort('order')
         .exec({})
-      const partners = Partner.find({ ...query }, 'link title partnerlogo')
-        .sort('order')
+      const partners = Partner.find({ ...query }, 'link title partnerlogo is_alumni_employer')
+      .sort('order')
         .exec({})
       const courses = Course
         .find(query, 'icon headline slug subheading courselength')
