@@ -101,7 +101,7 @@ module.exports.login = function(req, res, next) {
           return next(err);
         }
         req.flash("success", `Welcome ${user.username}!`);
-        return res.redirect(req.session.redirectTo ? req.session.redirectTo : "/admin/contacts");
+        return res.redirect(req.session.redirectTo ? req.session.redirectTo : "/admin/settings");
       });
     }
   })(req, res, next);
