@@ -216,7 +216,7 @@ mixin singleCourse
               div(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
                 include ../../assets/icons/course_personal_data.svg
             strong.text-muted: +translate("Individual Appointment with DCI")
-            .d-none.d-md-block.position-absolute.right.h-3.shift-vertical.top-50 
+            .d-none.d-md-block.position-absolute.right.h-3.shift-down-left.top-50 
               .rotate-180(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
                 include ../../assets/icons/back-button-arrow-left.svg
 
@@ -226,7 +226,7 @@ mixin singleCourse
               div(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
                 include ../../assets/icons/course_job_interview.svg
             strong.text-muted: +translate("Appointment with AfA/ JobCenter")
-            .d-none.d-md-block.position-absolute.right.h-3.shift-vertical.top-50 
+            .d-none.d-md-block.position-absolute.right.h-3.shift-down-left.top-50 
               .rotate-180(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
                 include ../../assets/icons/back-button-arrow-left.svg
           .col-md-4.text-center.p-5

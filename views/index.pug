@@ -18,7 +18,9 @@ block content
                   h1.font-weight-bold: +translate('Digital career')
                 p.lead.mb-5: +translate("Build a strong foundation for your digital career with in-depth courses at DCI. Learn the skills to launch your new career in web development, online marketing or cloud computing.")
                 .d-flex
-                  a.mb-3.btn.btn-lg.btn-secondary.mr-2.mr-md-4.scrollbutton.w-100.w-md-auto(href='#courses', role='button'): +translate("Browse Courses")
+                  a.mb-3.btn.btn-lg.btn-secondary.mr-2.mr-md-4.scrollbutton.w-100.w-md-auto(href='#courses', role='button')
+                    .py-2.py-md-3
+                      +translate("Browse Courses")
           .col-md-6.order-1.order-md-12.d-none.d-md-block
             img.position-absolute.top.left.w-100.top-50.shift-bottom-minus-percent(src="/media/hero.svg", alt="")
             .row.h-50
@@ -49,7 +51,7 @@ block content
 
     section#courses.overflow-hidden
       .container.pt-5.position-relative
-        .bg-light-blue.ml-n5.position-absolute.w-20.h-18.w-md-10.h-md-10.mr-3.mb-3.top.left.z-minus.shift-right
+        .bg-light-blue.ml-n5.position-absolute.w-20.h-18.w-md-10.h-md-10.mr-3.mb-3.top.left.z-minus
         h2.mb-5
           +translate("Our courses")
 
@@ -80,6 +82,10 @@ block content
                               p.text-dark.pb-0.pb-md-4=course.subheading
                             div.text-right
                               a.btn.btn-outline-secondary(href="/courses/" + course.slug): +translate("View course")
+
+    section#avaz
+      .bg-light.d-flex.justify-content-center.py-5.mb-5
+        img.w-150(src="/media/azav.png", alt="")
 
     section#mission.position-relative
       .container.section-counter
@@ -144,7 +150,6 @@ block content
           .col-md-6
             h2: +translate("Meet Our Hiring Partners")
             p=__("We work with over 400 hiring partners to match our students with tech jobs after graduation, including unique networking opportunities. DCI alumni work in top tech companies as front-end developers, full-stack developers, technical product managers, marketing managers, social media managers and more.")
-            a.d-none.d-md-block.mt-5(href="/tour" title=__("Companies"))=__("Learn more about our partner companies")
 
           .col-md-6.mt-5.mt-md-0.position-relative.z-0
             .ml-3.mr-4.mx-md-0
@@ -174,26 +179,26 @@ block content
           if storysWithTestimonial.length > 0
             +successCarousel(storysWithTestimonial)
 
+    - shadows = ["shadow-right-bottom", "shadow-bottom-left", "shadow-left-top", "shadow-top-right"]
     if events
       section#events.bg-primary.py-0.py-md-5
         .py-5.overflow-hidden
           .container.position-relative
-            .bg-white.quarter-transparent.position-absolute.w-100.w-lg-25.h-20.h-lg-25.right-md-0.bottom-40.bottom-md-0
-            .bg-white.quarter-transparent.position-absolute.w-100.w-lg-25.h-20.h-lg-25.left-md-40.top-10.top-md-0
-            .bg-white.quarter-transparent.position-absolute.w-100.w-lg-25.h-20.h-lg-25.bottom-10.bottom-md-0
+            .bg-white.quarter-transparent.position-absolute.w-lg-25.h-20.h-lg-25.right-md-0.bottom-40.bottom-md-0.d-none.d-md-block.mb-5
+            .bg-white.quarter-transparent.position-absolute.w-lg-25.h-20.h-lg-25.left-md-40.top-10.top-md-0.d-none.d-md-block
+            .bg-white.quarter-transparent.position-absolute.w-lg-25.h-20.h-lg-25.bottom-10.bottom-md-0.d-none.d-md-block
             h2.text-center.text-md-left.text-white.mb-5: +translate("Upcoming events")
             .row.mx-xl-5.pt-4.pt-md-0
               .col-md-6.floatings.mb-5.pb-4
-                .card.border-0.bg-white.p-4.rounded.shadow-sm.h-100.d-flex.flex-column.justify-content-between(href=events[0].url, target="_blank" rel="noopener")
-                  .text-center.d-flex.py-3
+                .card.border-0.bg-white.p-4.rounded.shadow-lg-none.h-100.d-flex.flex-column.justify-content-between.shadow-right-bottom(href=events[0].url, target="_blank" rel="noopener" class=shadows[index % partners.length])
+                  .d-flex.pt-3.h-100
                     .d-flex.rounded.w-100
                       figure.mw-lg-150.p-0.position-relative.mb-0.col-4.col-lg-12
                         .d-flex.flex-column.justify-content-center.h-100
                           img.mb-3.mb-md-0(alt=events[0].name src=events[0].imageurl)
-                      .col.text-left.order-3.order-sm-2.d-flex.flex-column.justify-content-center
+                      .col.text-left.order-3.order-sm-2.d-flex.flex-column.justify-content-around.pr-0
                         h6.font-weight-bold.text-dark.mb-3=events[0].name
-                        
-                        .d-none.d-md-block=events[0].text
+                        .d-none.d-md-block=events[0].text.substr(0, 300)
                         p.text-muted.mb-0
                           span.mr-1.mr-xl-3.w-1.d-inline-block.mb-3.mb-xl-0
                             img.mb-1.w-100(src="/media/events_clock-thin.svg", alt="Event time")
@@ -202,13 +207,13 @@ block content
               .col-md-6
                 each event, index in events.splice(1,2)
                   .floatings.mb-5.pb-4
-                    .card.border-0.bg-white.p-4.rounded.shadow-sm.h-100.d-flex.flex-column.justify-content-between(href=event.url, target="_blank" rel="noopener")
-                      .text-center.d-flex.py-3
+                    .card.border-0.bg-white.p-4.rounded.shadow-lg-none.h-100.d-flex.flex-column.justify-content-between(href=event.url, target="_blank" rel="noopener" class=shadows[index + 1 % partners.length])
+                      .text-center.d-flex.pt-3
                         .d-flex.rounded.w-100
                           figure.mw-lg-150.p-0.position-relative.mb-0.col-4.col-lg-12
                             .d-flex.flex-column.justify-content-center.h-100
                               img.mb-3.mb-md-0(alt=event.name src=event.imageurl)
-                          .col.text-left.order-3.order-sm-2.d-flex.flex-column.justify-content-center
+                          .col.text-left.order-3.order-sm-2.d-flex.flex-column.justify-content-center.pr-0
                             h6.font-weight-bold.text-dark.mb-3=event.name
                             p.text-muted.mb-0.mb-3
                               span.mr-1.mr-xl-3.w-1.d-inline-block.mb-3.mb-xl-0
@@ -219,13 +224,13 @@ block content
                 .row
                   each event, index in events.splice(1,3)
                     .col-md-6.floatings.mb-5.pb-4.w-100
-                      .card.border-0.bg-white.p-4.rounded.shadow-sm.h-100.d-flex.flex-column.justify-content-between(href=event.url, target="_blank" rel="noopener")
-                        .text-center.d-flex.py-3
+                      .card.border-0.bg-white.p-4.rounded.shadow-lg-none.h-100.d-flex.flex-column.justify-content-between.shadow-bottom-left(href=event.url, target="_blank" rel="noopener" class=shadows[index + 2 % partners.length])
+                        .text-center.d-flex.pt-3
                           .d-flex.rounded.w-100
                             figure.mw-lg-150.p-0.position-relative.mb-0.col-4.col-lg-12
                               .d-flex.flex-column.justify-content-center.h-100
                                 img.mb-3.mb-md-0(alt=event.name src=event.imageurl)
-                            .col.text-left.order-3.order-sm-2.d-flex.flex-column.justify-content-center
+                            .col.text-left.order-3.order-sm-2.d-flex.flex-column.justify-content-center.pr-0
                               h6.font-weight-bold.text-dark.mb-3=event.name
                               
                               p.text-muted.mb-0.mb-3
@@ -240,19 +245,20 @@ block content
             
     section.pt-5.bg-light-blue.overflow-hidden.position-relative.z-0.d-flex.flex-column.justify-content-center.pb-200
       .container.position-relative
-        .dotted.red.w-7.h-7.rounded-circle.position-absolute.left-40.mt-4
-        .dotted.blue.w-7.h-7.position-absolute.left-30
+        .dotted.blue.w-7.h-7.w-md-15.h-md-15.position-absolute.left-30.left-md-0.top-md-0
+        .dotted.red.w-7.h-7.w-md-13.h-md-13.rounded-circle.position-absolute.left-40.left-md-0.mt-5.ml-md-5
 
-        .dotted.red.w-7.h-7.rounded-circle.position-absolute.left-40.bottom-10
-        .dotted.blue.w-7.h-7.position-absolute.left-30.bottom-10.mb-4
+        .dotted.blue.w-7.h-7.w-md-15.h-md-15.position-absolute.right-50.bottom-0.right-md-0.mb-5.mr-md-5
+        .dotted.red.w-7.h-7.w-md-13.h-md-13.rounded-circle.position-absolute.right-40.bottom-0.right-md-0
         .pb-4.pt-5
 
-          .py-5
+          .py-5.p-md-5
             .bg-white.p-5.mb-5.position-relative.text-center
-              .p-md-5
-                h3: +translate("Ready to join? Apply now and join the disruption.")
-                div: +translate("Our admission team is always there for you regardless of your location")
-                .text-center.mt-5
-                  a.btn.btn-lg.btn-secondary.mx-3.mb-4.mb-md-0.w-100.w-md-auto(href='/contact', data-toggle='modal', data-target='#contactFormModal'): +translate("Apply now")
-                  a#calltoaction.btn.btn-lg.btn-outline-primary.mx-3.w-100.w-md-auto(href='/tour')=__("Browse Courses")
+              .py-md-4
+                .p-md-5
+                  h3: +translate("Ready to join? Apply now and join the disruption.")
+                  div: +translate("Our admission team is always there for you regardless of your location")
+                  .text-center.mt-5
+                    a.btn.btn-lg.btn-secondary.mx-3.mb-4.mb-md-0.w-100.w-md-auto(href='/contact', data-toggle='modal', data-target='#contactFormModal'): +translate("Apply now")
+                    a#calltoaction.btn.btn-lg.btn-outline-primary.mx-3.w-100.w-md-auto(href='/tour')=__("Browse Courses")
 
