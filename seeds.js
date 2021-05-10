@@ -91,6 +91,11 @@ async function seedRandomNtoN(arrayOfRecords, relationship, model) {
 }
 
 async function seedRandomImages() {
+
+  if (!fs.existsSync(imageUploadDir)){
+    fs.mkdirSync(imageUploadDir);
+  }
+
   var images = [
     "./assets/media/bg1.jpg",
     "./assets/media/bg2.jpg",
