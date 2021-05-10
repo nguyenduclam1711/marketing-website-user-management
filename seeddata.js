@@ -16,6 +16,17 @@ exports.adminUser = {
   verifiedAt: new Date()
 };
 
+exports.locations = [
+  {
+    name: "Berlin",
+    street: "Teststr 1"
+  },
+  {
+    name: "Leipzig",
+    street: "Teststr. 2"
+  }
+];
+
 exports.partners = [
   {
     title: "Sofatutor",
