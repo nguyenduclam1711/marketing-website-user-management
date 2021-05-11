@@ -69,6 +69,17 @@ block content
     .marker.w-8.h-7.d-flex.justify-content-center.align-items-center.text-primary
       .rotate-45
         include ../assets/icons/cross.svg
+
+  .bg-light.py-5
+    .container.text-center
+      .row
+        .col-md-6.offset-md-3
+          blockquote.blockquote.mb-0
+            .quotesign.text-primary.quarter-transparent
+              include ../assets/icons/om_quote.svg
+            h2.position-relative.z-1.font-weight-light
+              i=__("Did you know: Employers can be reimbursed 50% of the salary paid for half of the time the student is hired.")
+
   .container.mt-5.text-center.text-md-left
     h2.mb-3.pb-3.mb-4=__( "Additional training" )
     .row 
@@ -93,7 +104,7 @@ block content
                   .px-md-3
                     include ../assets/media/careersuccess_time.svg
                 small.h-3.d-flex.flex-column.justify-content-center.word-wrap-break-word.hyphen.text-center
-                  =__("Time management")
+                  =__("Practical Projects")
           .col-6.col-md-4.px-2.py-2.justify-content-md-center.my-2.d-flex.floatings
             .px-md-4.w-100
               .d-flex.bg-white.p-1.align-items-center.rounded.h-100.w-100.flex-md-column
@@ -182,7 +193,7 @@ block content
     h5.mb-5=__("Our partners benefit from the following all for free!")
     .px-4
       .px-0.px-md-5
-        .row
+        .row.justify-content-center
           .col-md-6.mb-4.floatings
             .py-md-3.h-100
               .h-100.d-flex.flex-column.p-5.justify-content-center.shadow-sm
@@ -198,11 +209,6 @@ block content
               .h-100.d-flex.flex-column.p-5.justify-content-center.shadow-sm
                 h5.font-weight-bold.mb-4=__("Host a company tour for our students")
                 p.font-weight-light.font-size-normal-below-md=__("Show our students what it is like to work in tech by inviting them to your (virtual) offices")
-          .col-md-6.mb-4.floatings
-            .py-md-3.h-100
-              .h-100.d-flex.flex-column.p-5.justify-content-center.shadow-sm
-                h5.font-weight-bold.mb-4=__("Receive financial support when hiring DCI graduates")
-                p.font-weight-light.font-size-normal-below-md=__("Employer can be reimbursed 50% of the salary paid for half of the time the student is hired")
           .col-md-6.mb-4.floatings
             .py-md-3.h-100
               .h-100.d-flex.flex-column.p-5.justify-content-center.shadow-sm
