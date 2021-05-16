@@ -84,8 +84,38 @@ block content
                               a.btn.btn-outline-secondary(href="/courses/" + course.slug): +translate("View course")
 
     section#avaz
-      .bg-light.d-flex.justify-content-center.py-5.mb-5
-        img.w-150(src="/media/azav.png", alt="")
+      .container.py-5.mb-5
+        .row
+          .col-md-4.border-right.border-width-2.border-light-blue
+            .px-4.pb-3 
+              .py-4
+                img.h-5.w-5.object-fit-contain(src="/media/azav.png", alt="")
+              p.font-weight-bold.text-muted AVAZ Certified
+              p=__("We are an AZAV certified German educational institution with recognition in Europe and beyond.")
+              a.py-3.text-primary(href="")
+                =__("Learn more")
+                .ml-2.d-inline-block(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
+                  include ../assets/icons/arrow.svg
+          .col-md-4.border-right.border-left.border-width-2.border-light-blue
+            .px-4.pb-3 
+              .py-4
+                img.h-5.w-5.object-fit-contain(src="/media/aws.svg", alt="")
+              p.font-weight-bold.text-muted AWS re/Start Programm
+              p=__("We are collaborating together with AWS to support learners in building new careers in cloud computing. ")
+              a.py-3.text-primary(href="")
+                =__("Learn more")
+                .ml-2.d-inline-block(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
+                  include ../assets/icons/arrow.svg
+          .col-md-4.border-left.border-width-2.border-light-blue
+            .px-4.pb-3 
+              .py-4
+                img.h-5.w-5.object-fit-contain(src="/media/delivery_hero.svg", alt="")
+              p.font-weight-bold.text-muted Delivery Hero Tech Academy
+              p=__("We are exclusively working together with Delivery Hero to build the next generation of Software Engineers! ")
+              a.py-3.text-primary(href="")
+                =__("Learn more")
+                .ml-2.d-inline-block(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
+                  include ../assets/icons/arrow.svg
 
     section#mission.position-relative
       .container.section-counter

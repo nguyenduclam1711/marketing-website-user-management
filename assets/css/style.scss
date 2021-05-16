@@ -1725,11 +1725,17 @@ body[class*="pages-"] {
   }
 }
 
+.border-width-2 {
+  border-width: 2px !important;
+}
 .border-top-2 {
   border-top-width: 2px;
 }
 .border-red {
   border-color: $red-light!important;
+}
+.border-light-blue {
+  border-color: $light-blue!important;
 }
 .border-md-0 {
   @include media-breakpoint-up(md) {

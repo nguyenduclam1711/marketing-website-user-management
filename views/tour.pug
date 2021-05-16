@@ -22,32 +22,32 @@ block content
           .col-6.col-md-3.my-4.my-md-0.border-white.border-right.d-flex.flex-column.justify-content-center
             .counter-item
               .counter-number.font-weight-bold
-                h2.display-2
+                h2.display-2.text-white
                   span.counter-count=locals.settings.careersuccesspage_alumni ? locals.settings.careersuccesspage_alumni : user ? "setting not defined" : ""
                   = "+"
-              h4.hyphen.w-100.font-weight-bold.shadowed.center.w-min-width.m-0-auto: +translate("DCI Alumni")
+              h4.text-white.hyphen.w-100.font-weight-bold.shadowed.center.w-min-width.m-0-auto: +translate("DCI Alumni")
           .col-6.col-md-3.my-4.my-md-0.border-white.border-left.border-right-0.border-right-md.d-flex.flex-column.justify-content-center
             .counter-item
               .counter-number.font-weight-bol
-                h2.display-2
+                h2.display-2.text-white
                   span.counter-count=locals.settings.careersuccesspage_students ? locals.settings.careersuccesspage_students : user ? "setting not defined" : ""
                   = "+"
-              h4.hyphen.w-100.font-weight-bold.shadowed.center.w-min-width.m-0-auto
+              h4.text-white.hyphen.w-100.font-weight-bold.shadowed.center.w-min-width.m-0-auto
                 +translate("DCI Students")
           .col-6.col-md-3.my-4.my-md-0.border-white.border-right.border-left-0.border-left-md.d-flex.flex-column.justify-content-center
             .counter-item
               .counter-number.font-weight-bold
-                h2.display-2
+                h2.display-2.text-white
                   span.counter-count=locals.settings.careersuccesspage_companypartners ? locals.settings.careersuccesspage_companypartners : user ? "setting not defined" : ""
                   = "+"
-              h4.hyphen.w-100.font-weight-bold.shadowed.center.w-min-width.m-0-auto: +translate("Company Partners")
+              h4.text-white.hyphen.w-100.font-weight-bold.shadowed.center.w-min-width.m-0-auto: +translate("Company Partners")
           .col-6.col-md-3.my-4.my-md-0.border-white.border-left.d-flex.flex-column.justify-content-center
             .counter-item
               .counter-number.font-weight-bold
-                h2.display-2
+                h2.display-2.text-white
                   span.counter-count=locals.settings.careersuccesspage_employmentrate ? locals.settings.careersuccesspage_employmentrate : user ? "setting not defined" : ""
                   = "%"
-              h4.hyphen.w-100.font-weight-bold.shadowed.center.w-min-width.m-0-auto: +translate("Employment rate within 6 months")
+              h4.text-white.hyphen.w-100.font-weight-bold.shadowed.center.w-min-width.m-0-auto: +translate("Employment rate within 6 months")
   .container.pt-5
     .pb-lg-5
       h2.mb-3.pb-3.mb-4
@@ -128,7 +128,7 @@ block content
                   =__("Mentoring")
 
   if partners
-    .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center.mt-5
+    .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center.mt-5.text-white
       include ../assets/icons/arrow.svg
     - partnersWithTestimonial = partners.filter(p => p.testimonial_name && p.testimonial_job && p.testimonial_content && p.testimonial_show )
     if partnersWithTestimonial.length > 0
@@ -171,7 +171,7 @@ block content
 
   .d-flex.justify-content-end
     .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
-      .rotate-90
+      .rotate-90.text-white
         include ../assets/icons/arrow.svg
   .container.my-5
     h2.pb-3.pt-5
