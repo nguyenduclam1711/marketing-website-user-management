@@ -53,27 +53,32 @@ const toggleNL = (remove = false) => {
 })();
 
 let counted = false;
+const animationDuration = 4000;
+const frameDuration = 1000 / 60;
+const totalFrames = Math.round(animationDuration / frameDuration);
+const easeOutQuad = t => t * (2 - t);
+const animateCountUp = el => {
+  let frame = 0;
+  const countTo = parseInt(el.innerHTML, 10);
+  const counter = setInterval(() => {
+    frame++;
+    const progress = easeOutQuad(frame / totalFrames);
+    const currentCount = Math.round(countTo * progress);
+    if (parseInt(el.innerHTML, 10) !== currentCount) {
+      el.innerHTML = currentCount;
+    }
+    if (frame === totalFrames) {
+      clearInterval(counter);
+    }
+  }, frameDuration);
+};
+
 const countUp = () => {
   const counter = document.querySelector(".section-counter");
-
   if (counter && elementInViewport(counter) && !counted) {
-    counted = true;
-    $(".counter-count").each(function () {
-      $(this)
-        .prop("Counter", 0)
-        .animate(
-          {
-            Counter: $(this).text()
-          },
-          {
-            duration: 5000,
-            easing: "swing",
-            step: function (now) {
-              $(this).text(Math.ceil(now));
-            }
-          }
-        );
-    });
+    counted = true
+    const countupEls = document.querySelectorAll('.counter-count');
+    countupEls.forEach(animateCountUp);
   }
 };
 
