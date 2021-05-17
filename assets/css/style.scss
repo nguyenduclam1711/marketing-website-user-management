@@ -684,11 +684,6 @@ body[class*="pages-"] {
 .shadow-top-right {
   box-shadow: -15px 15px 0px 0px rgba(255, 255, 255, 0.25);
 }
-@include media-breakpoint-up(lg) {
-  .shadow-lg-none {
-    box-shadow: none;
-  }
-}
 .blue-shadow {
   position: relative;
 
@@ -1188,6 +1183,9 @@ body:not(.admin) {
 .rotate-180 {
   transform: rotate(180deg);
 }
+.rotate-270 {
+  transform: rotate(270deg);
+}
 .rotate-135 {
   transform: rotate(135deg);
 }
@@ -1441,6 +1439,16 @@ div[class*=" #{$class-slug}"] {
 }
 .shadow-sm-md-none {
   @include media-breakpoint-up(md) {
+    box-shadow: none !important;
+  }
+}
+@include media-breakpoint-up(md) {
+  .shadow-md-none {
+    box-shadow: none !important;
+  }
+}
+@include media-breakpoint-up(lg) {
+  .shadow-lg-none {
     box-shadow: none !important;
   }
 }

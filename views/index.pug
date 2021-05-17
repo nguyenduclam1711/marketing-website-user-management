@@ -83,39 +83,75 @@ block content
                             div.text-right
                               a.btn.btn-outline-secondary(href="/courses/" + course.slug): +translate("View course")
 
-    section#avaz
-      .container.py-5.mb-5
+    section#avaz.overflow-hidden
+      .container.py-5.mb-5.position-relative
+        .position-absolute.w-100.h-100.bg-primary.quarter-transparent.top.left.shift-left-percent.d-md-none
         .row
-          .col-md-4.border-right.border-width-2.border-light-blue
-            .px-4.pb-3 
-              .py-4
-                img.h-5.w-5.object-fit-contain(src="/media/azav.png", alt="")
-              p.font-weight-bold.text-muted AVAZ Certified
-              p=__("We are an AZAV certified German educational institution with recognition in Europe and beyond.")
+          .col-md-4.border-right.border-width-2.border-light-blue.mb-4
+            .affiliate_header.px-4.bg-white.mb-2.mb-md-0.shadow-sm.shadow-md-none(data-toggle='collapse', data-target='#affiliate_partner1') 
+              .d-flex.align-items-center.justify-content-between
+                .py-4
+                  img.h-5.w-5.object-fit-contain(src="/media/azav.png", alt="")
+                p.font-weight-bold.text-muted.p-3.flex-grow-1.m-0 AVAZ Certified
+                button.btn.btn-link.p-3.d-md-none(data-toggle='collapse', data-target='#affiliate_partner1')
+                  .rotate-270
+                    include ../assets/icons/arrow.svg
+            .d-none.d-md-block
+              p=__("We are an AZAV certified German educational institution. This not only allows DCI to be funded by the Agentur für Arbeit and Jobcenter, but also ensures the continuous quality of our courses. The certification proves that we are an educational institute recognized by the German state, who’s certificates are recognized in Europe and beyond.")
+              a.py-3.text-primary(href="" data-toggle='collapse', data-target='#affiliate_partner_textblock1')
+                =__("Learn more")
+                .ml-2.d-inline-block(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
+                include ../assets/icons/arrow.svg
+            #affiliate_partner1.collapse.d-md-none.bg-white.p-4.shadow-sm
+              p=__("We are an AZAV certified German educational institution. This not only allows DCI to be funded by the Agentur für Arbeit and Jobcenter, but also ensures the continuous quality of our courses. The certification proves that we are an educational institute recognized by the German state, who’s certificates are recognized in Europe and beyond.")
               a.py-3.text-primary(href="")
                 =__("Learn more")
                 .ml-2.d-inline-block(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
-                  include ../assets/icons/arrow.svg
-          .col-md-4.border-right.border-left.border-width-2.border-light-blue
-            .px-4.pb-3 
-              .py-4
-                img.h-5.w-5.object-fit-contain(src="/media/aws.svg", alt="")
-              p.font-weight-bold.text-muted AWS re/Start Programm
-              p=__("We are collaborating together with AWS to support learners in building new careers in cloud computing. ")
-              a.py-3.text-primary(href="")
+                include ../assets/icons/arrow.svg
+          .col-md-4.border-right.border-left.border-width-2.border-light-blue.mb-4
+            
+            .affiliate_header.px-4.bg-white.mb-2.mb-md-0.shadow-sm.shadow-md-none(data-toggle='collapse', data-target='#affiliate_partner2') 
+              .d-flex.align-items-center.justify-content-between
+                .py-4
+                  img.h-5.w-5.object-fit-contain(src="/media/aws.svg", alt="")
+                p.font-weight-bold.text-muted.p-3.flex-grow-1.m-0 AWS re/Start Programm
+                button.btn.btn-link.p-3.d-md-none(data-toggle='collapse', data-target='#affiliate_partner2')
+                  .rotate-270
+                    include ../assets/icons/arrow.svg
+            .d-none.d-md-block
+              p=__("We are collaborating together with AWS to support learners in building new careers in cloud computing. The AWS re/Start program is centered around scenario-based learning, hands-on labs, and coursework. The participants will learn everything they need to know for an entry level cloud career such as cloud operations, site reliability and infrastructure support.")
+              a.py-3.text-primary(href=`/courses/${courses.find(e => e.headline.toLowerCase().includes("aws")).slug}`)
                 =__("Learn more")
                 .ml-2.d-inline-block(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
-                  include ../assets/icons/arrow.svg
-          .col-md-4.border-left.border-width-2.border-light-blue
-            .px-4.pb-3 
-              .py-4
-                img.h-5.w-5.object-fit-contain(src="/media/delivery_hero.svg", alt="")
-              p.font-weight-bold.text-muted Delivery Hero Tech Academy
-              p=__("We are exclusively working together with Delivery Hero to build the next generation of Software Engineers! ")
-              a.py-3.text-primary(href="")
+                include ../assets/icons/arrow.svg
+            #affiliate_partner2.collapse.d-md-none.bg-white.p-4.shadow-sm
+              p=__("We are collaborating together with AWS to support learners in building new careers in cloud computing. The AWS re/Start program is centered around scenario-based learning, hands-on labs, and coursework. The participants will learn everything they need to know for an entry level cloud career such as cloud operations, site reliability and infrastructure support.")
+              a.py-3.text-primary(href=`/courses/${courses.find(e => e.headline.toLowerCase().includes('aws')).slug}`)
                 =__("Learn more")
                 .ml-2.d-inline-block(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
-                  include ../assets/icons/arrow.svg
+                include ../assets/icons/arrow.svg
+          .col-md-4.border-left.border-width-2.border-light-blue.mb-4
+            
+            .affiliate_header.px-4.bg-white.mb-2.mb-md-0.shadow-sm.shadow-md-none(data-toggle='collapse', data-target='#affiliate_partner3') 
+              .d-flex.align-items-center.justify-content-between
+                .py-4
+                  img.h-5.w-5.object-fit-contain(src="/media/delivery_hero.svg", alt="")
+                p.font-weight-bold.text-muted.p-3.flex-grow-1.m-0 Delivery Hero Tech Academy
+                button.btn.btn-link.p-3.d-md-none(data-toggle='collapse', data-target='#affiliate_partner3')
+                  .rotate-270
+                    include ../assets/icons/arrow.svg
+            .d-none.d-md-block
+              p=__("We are exclusively working together with Delivery Hero to build the next generation of Software Engineers! The Delivery Hero Tech Academy (DHTA) is based in Berlin and on a mission to increase diversity and inclusion within the tech industry. Plus the chance to land a full-time job. Learn more about our exclusive partnership here.")
+              a.py-3.text-primary(href="https://careers.deliveryhero.com/global/en/techacademy" target="_blank")
+                =__("Learn more")
+                .ml-2.d-inline-block(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
+                include ../assets/icons/arrow.svg
+            #affiliate_partner3.collapse.d-md-none.bg-white.p-4.shadow-sm
+              p=__("We are exclusively working together with Delivery Hero to build the next generation of Software Engineers! The Delivery Hero Tech Academy (DHTA) is based in Berlin and on a mission to increase diversity and inclusion within the tech industry. Plus the chance to land a full-time job. Learn more about our exclusive partnership here.")
+              a.py-3.text-primary(href="https://careers.deliveryhero.com/global/en/techacademy" target="_blank")
+                =__("Learn more")
+                .ml-2.d-inline-block(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
+                include ../assets/icons/arrow.svg
 
     section#mission.position-relative
       .container.section-counter
