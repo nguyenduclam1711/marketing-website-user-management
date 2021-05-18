@@ -2,7 +2,7 @@ $primary: #1f3fc7;
 $primary-light: #0064FF;
 $primary-dark: #04083C;
 $body: #46464A;
-$primary-trans: #cddfffa6;
+$primary-trans: #E6EFFF;
 $red-light: #FFDFDD;
 $light-grey: #DCE0F2;
 
@@ -56,6 +56,9 @@ $theme-colors: (
 
 .bg-primary-dark {
   background-color: $primary-dark !important;
+}
+.bg-primary-trans {
+  background-color: $primary-trans !important;
 }
 
 .bg-light-blue {

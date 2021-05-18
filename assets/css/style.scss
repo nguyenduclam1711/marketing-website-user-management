@@ -1,38 +1,35 @@
 @font-face {
-  font-family: "Gordita-Regular";
+  font-family: "Gordita";
   src: url("~/fonts/Gordita-Regular.eot");
   src: url("~/fonts/Gordita-Regular.eot?#iefix") format("embedded-opentype"),
     url("~/fonts/Gordita-Regular.woff2") format("woff2"),
     url("~/fonts/Gordita-Regular.woff") format("woff"),
     url("~/fonts/Gordita-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
 }
 
 @font-face {
-  font-family: "Gordita-Light";
-  src: url("~/fonts/Gordita-Light.eot");
-  src: url("~/fonts/Gordita-Light.eot?#iefix") format("embedded-opentype"),
-    url("~/fonts/Gordita-Light.woff2") format("woff2"),
-    url("~/fonts/Gordita-Light.woff") format("woff"),
-    url("~/fonts/Gordita-Light.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "Gordita-Bold";
+  font-family: "Gordita";
   src: url("~/fonts/Gordita-Bold.eot");
   src: url("~/fonts/Gordita-Bold.eot?#iefix") format("embedded-opentype"),
     url("~/fonts/Gordita-Bold.woff2") format("woff2"),
     url("~/fonts/Gordita-Bold.woff") format("woff"),
     url("~/fonts/Gordita-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
 }
 
 @font-face {
-  font-family: "Gordita-Medium";
+  font-family: "Gordita";
   src: url("~/fonts/GorditaMedium.eot");
   src: url("~/fonts/GorditaMedium.svg") format("svg");
   src: url("~/fonts/GorditaMedium.eot?#iefix") format("embedded-opentype"),
     url("~/fonts/GorditaMedium.woff2") format("woff2"),
     url("~/fonts/GorditaMedium.woff") format("woff"),
     url("~/fonts/GorditaMedium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
 }
 
 @import "global";
@@ -43,8 +40,8 @@
 #nav-primary {
   font-family: "Gordita", sans-serif;
   font-weight: 500;
+  color: $bluedark !important;
 }
-
 .navbar-light .navbar-nav .nav-link {
   color: $bluedark;
 }
@@ -79,7 +76,7 @@
   z-index: 0;
   a {
     font-weight: 500;
-    font-family: "Gordita-Medium", sans-serif;
+    font-family: "Gordita", sans-serif;
   }
   &:hover > a,
   > a.active,
@@ -209,10 +206,13 @@ body:not(.admin) .btn {
   padding: 0.375rem 1.5rem;
 }
 
+.btn {
+  font-weight: 700; 
+}
 .btn,
 .nav-pills .nav-link {
   border-radius: 2px !important;
-  font-family: "Gordita-Bold", sans-serif;
+  font-family: "Gordita", sans-serif;
   position: relative;
 
   &.connection-line:after {
@@ -267,7 +267,7 @@ body:not(.admin) .btn {
 code {
   color: $dark;
   font-size: 100%;
-  font-family: "Gordita-Bold", sans-serif;
+  font-family: "Gordita", sans-serif;
 
   &:before {
     content: "- ";
@@ -312,7 +312,6 @@ ul.nav-courses-pills {
 }
 
 a.nav-link {
-  font-size: 1rem;
   padding: 5px;
 }
 

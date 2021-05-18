@@ -15,9 +15,9 @@
   color: #fff;
 }
 body {
-  font-family: "Gordita-Regular", sans-serif;
+  font-family: "Gordita", sans-serif;
   color: $body;
-  font-weight: 200;
+  // font-weight: 200;
   font-size: 18px;
   line-height: var(--lh);
 }
@@ -28,14 +28,9 @@ h4,
 h5,
 h6,
 div[class^="display-"] {
-  font-family: "Gordita-Bold", sans-serif;
-  color: $bluedark;
-}
-h4,
-h5,
-h6 {
   font-family: "Gordita", sans-serif;
-  font-weight: 300 !important;
+  color: $bluedark;
+  font-weight: 700 !important;
 }
 h1, .h1 {
   font-size: 2.6rem;
@@ -49,21 +44,14 @@ h3, .h3 {
 small, .small {
     font-size: 89%;
 }
+.font-weight-normal {
+  font-weight: 500 !important;
+}
 //h4 {
 //  font-size: 1rem;
 //}
 a:link {
   text-decoration: none !important;
-}
-.font-weight-light {
-  font-family: "Gordita-Regular", sans-serif !important;
-}
-.font-weight-bolder {
-  font-weight: 900 !important;
-}
-.font-weight-bold {
-  font-weight: 100 !important;
-  font-family: "Gordita-Bold", sans-serif;
 }
 .display-0 {
   font-size: 4rem !important;
