@@ -1897,3 +1897,6 @@ body[class*="pages-"] {
 .grayscale {
   filter: grayscale(1);
 }
+.pointer-events-none {
+  pointer-events: none;
+}
