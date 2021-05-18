@@ -277,8 +277,6 @@ block content
                           img.mb-1.w-100.object-fit-contain(src="/media/events_clock-thin.svg", alt="Event time")
                         =moment(events[0].start).format('HH:SS A DD. MMM YYYY')
                       a.text-right.d-block.stretched-link.font-weight-bold(href=events[0].url target="_blank" rel="noopener")="Register" 
-                        a.text-right.d-block.stretched-link.font-weight-bold(href=events[0].url target="_blank" rel="noopener")="Register" 
-                      a.text-right.d-block.stretched-link.font-weight-bold(href=events[0].url target="_blank" rel="noopener")="Register" 
               .col-md-6
                 each event, index in events.splice(1,2)
                   .floatings.mb-5.pb-4
