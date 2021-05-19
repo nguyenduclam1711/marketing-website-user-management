@@ -289,12 +289,12 @@ block content
                         .d-flex.rounded.w-100
                           figure.mw-lg-150.p-0.position-relative.mb-0.col-4.col-lg-12
                             .d-flex.flex-column.justify-content-center.h-100
-                              img.mb-3.mb-md-0(alt=event.name src=event.imageurl)
+                              img.mb-3.mb-md-0.object-fit-contain(alt=event.name src=event.imageurl)
                           .col.text-left.order-3.order-sm-2.d-flex.flex-column.justify-content-center.pr-0
                             h6.font-weight-bold.text-dark.mb-3=event.name
                             p.text-muted.mb-0.mb-3
                               span.mr-1.mr-xl-3.w-1.d-inline-block.mb-3.mb-xl-0
-                                img.mb-1.w-100(src="/media/events_clock-thin.svg", alt="Event time")
+                                img.mb-1.w-100.object-fit-contain(src="/media/events_clock-thin.svg", alt="Event time")
                               =moment(event.start).format('HH:SS A DD. MMM YYYY')
                             a.text-right.d-block.stretched-link.font-weight-bold(href=event.url target="_blank" rel="noopener")="Register" 
               .col
@@ -306,13 +306,13 @@ block content
                           .d-flex.rounded.w-100
                             figure.mw-lg-150.p-0.position-relative.mb-0.col-4.col-lg-12
                               .d-flex.flex-column.justify-content-center.h-100
-                                img.mb-3.mb-md-0(alt=event.name src=event.imageurl)
+                                img.mb-3.mb-md-0.object-fit-contain(alt=event.name src=event.imageurl)
                             .col.text-left.order-3.order-sm-2.d-flex.flex-column.justify-content-center.pr-0
                               h6.font-weight-bold.text-dark.mb-3=event.name
                               
                               p.text-muted.mb-0.mb-3
                                 span.mr-1.mr-xl-3.w-1.d-inline-block.mb-3.mb-xl-0
-                                  img.mb-1.w-100(src="/media/events_clock-thin.svg", alt="Event time")
+                                  img.mb-1.w-100.object-fit-contain(src="/media/events_clock-thin.svg", alt="Event time")
                                 =moment(event.start).format('HH:SS A DD. MMM YYYY')
                               a.text-right.d-block.stretched-link.font-weight-bold(href=event.url target="_blank" rel="noopener")="Register" 
 
