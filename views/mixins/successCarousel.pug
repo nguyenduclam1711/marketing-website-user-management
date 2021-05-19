@@ -1,11 +1,12 @@
 mixin successCarousel(stories)
-  #careersuccesscarousel.card.carousel.slide.mb-5.pt-3.pb-5(data-ride="carousel" data-interval="40000")
+  #careersuccesscarousel.card.carousel.bg-transparent.slide.mb-5.pt-3.pb-5(data-ride="carousel" data-interval="40000")
     .carousel-inner.py-5
       each story, index in stories
+        - isPartner = story.partnerlogo
         .carousel-item.h-100.px-3.px-sm-5(class= index === 0 ? ` active` : ``)
           .py-5.shadow.rounded-sm.h-100.position-relative.bg-white
             if user && story && user.userId === story.userId || user && user.admin === "true"
-              a.position-absolute.right.bottom.btn.btn-outline-primary.z-foreground(href=`/admin/stories/edit/${story.slug}`) Edit
+              a.position-absolute.right.bottom.btn.btn-outline-primary.z-foreground(href=`/admin/${isPartner ? `partners` : `stories`}/edit/${story.slug}`) Edit
             .bg-white.p-4.rounded-sm.h-100
                   
               div.position-relative.h-100.d-flex.flex-column.justify-content-around
@@ -19,13 +20,13 @@ mixin successCarousel(stories)
                       =story.excerpt
                 .d-flex.justify-content-end.align-items-center.align-items-md-end.flex-column.flex-md-row
                   
-                  if story.subtitle || story.workPosition
+                  if story.title || story.workPosition
                     .text-center.text-md-right.px-3.order-12.order-md-1
-                      if story.subtitle
-                        h3=story.subtitle
+                      if story.title
+                        h3=story.title
                       if story.workPosition
                         h6.font-weight-bold.text-muted=story.workPosition
-                  if story.partnerlogo
+                  if isPartner
                     .text-right.rounded-circle.overflow-hidden.mb-md-0.order-1.order-md-12(style=`box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1f3fc7 !important`};`)
                       img.mw-150.w-8.h-8(src=`/images/${story.partnerlogo ? story.partnerlogo : story.avatar}` style=`box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1f3fc7 !important`}` class=story.partnerlogo ? "object-fit-contain" : "object-fit-cover")
                   else 

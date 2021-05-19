@@ -249,9 +249,10 @@ block content
           p=__("Our students come from all around the world and have different professional backgrounds. Discover how the DCI experience changed their lives.")
           .d-none.d-md-block.dotted.red.w-15.h-15.rounded-circle.position-absolute.right.mr-n5
           .d-none.d-md-block.dotted.blue.w-15.h-15.position-absolute.left.bottom.ml-n5
-          - storysWithTestimonial = stories
-          if storysWithTestimonial.length > 0
-            +successCarousel(storysWithTestimonial)
+          .px-3.px-sm-5
+            - storysWithTestimonial = stories
+            if storysWithTestimonial.length > 0
+              +successCarousel(storysWithTestimonial)
 
     - shadows = ["shadow-right-bottom", "shadow-bottom-left", "shadow-left-top", "shadow-top-right"]
     if events
