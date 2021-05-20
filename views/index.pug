@@ -90,7 +90,7 @@ block content
               .d-flex.align-items-center.align-items-md-start.justify-content-between.flex-md-column
                 .py-3.py-md-0
                   img.h-5.w-5.object-fit-contain(src="/media/azav.png", alt="")
-                p.font-weight-bold.text-muted.pl-3.pl-md-0.py-md-3.flex-grow-1.m-0 AVAZ Certified
+                p.font-weight-bold.text-muted.pl-3.pl-md-0.py-md-3.flex-grow-1.m-0=__("AVAZ Certified")
                 button.btn.btn-link.p-3.d-md-none(data-toggle='collapse', data-target='#affiliate_partner1')
                   .rotate-270
                     include ../assets/icons/arrow.svg
@@ -134,7 +134,7 @@ block content
               .d-flex.align-items-center.align-items-md-start.justify-content-between.flex-md-column
                 .py-3.py-md-0
                   img.h-5.w-5.object-fit-contain(src="/media/delivery_hero.png", alt="")
-                p.font-weight-bold.text-muted.pl-3.pl-md-0.py-md-3.flex-grow-1.m-0 Delivery Hero Tech Academy
+                p.font-weight-bold.text-muted.pl-3.pl-md-0.py-md-3.flex-grow-1.m-0=__("Delivery Hero Tech Academy")
                 button.btn.btn-link.p-3.d-md-none(data-toggle='collapse', data-target='#affiliate_partner3')
                   .rotate-270
                     include ../assets/icons/arrow.svg
@@ -208,7 +208,7 @@ block content
                       span.counter-count
                         =locals.settings.landingpage_different_nationalities || 90
                       ="+"
-                  p: +translate("Different nationalities of students and teachers")
+                  p: +translate("Different nationalities of students and teachers.")
 
       .bg-light-blue.position-absolute.h-30-percent.h-md-40-percent.w-100.z-minus.bottom
 
@@ -277,7 +277,7 @@ block content
                         span.mr-1.mr-xl-3.w-1.d-inline-block.mb-3.mb-xl-0
                           img.mb-1.w-100.object-fit-contain(src="/media/events_clock-thin.svg", alt="Event time")
                         =moment(events[0].start).format('HH:SS A DD. MMM YYYY')
-                      a.text-right.d-block.stretched-link.font-weight-bold(href=events[0].url target="_blank" rel="noopener")="Register" 
+                      a.text-right.d-block.stretched-link.font-weight-bold(href=events[0].url target="_blank" rel="noopener")=__("Register")
               .col-md-6
                 each event, index in events.splice(1,2)
                   .floatings.mb-5.pb-4
@@ -293,7 +293,7 @@ block content
                               span.mr-1.mr-xl-3.w-1.d-inline-block.mb-3.mb-xl-0
                                 img.mb-1.w-100.object-fit-contain(src="/media/events_clock-thin.svg", alt="Event time")
                               =moment(event.start).format('HH:SS A DD. MMM YYYY')
-                            a.text-right.d-block.stretched-link.font-weight-bold(href=event.url target="_blank" rel="noopener")="Register" 
+                            a.text-right.d-block.stretched-link.font-weight-bold(href=event.url target="_blank" rel="noopener")=__("Register") 
               .col
                 .row
                   each event, index in events.splice(1,3)
@@ -311,7 +311,7 @@ block content
                                 span.mr-1.mr-xl-3.w-1.d-inline-block.mb-3.mb-xl-0
                                   img.mb-1.w-100.object-fit-contain(src="/media/events_clock-thin.svg", alt="Event time")
                                 =moment(event.start).format('HH:SS A DD. MMM YYYY')
-                              a.text-right.d-block.stretched-link.font-weight-bold(href=event.url target="_blank" rel="noopener")="Register" 
+                              a.text-right.d-block.stretched-link.font-weight-bold(href=event.url target="_blank" rel="noopener")=__("Register") 
 
           .container.position-relative.d-none.d-md-block
             .text-right
