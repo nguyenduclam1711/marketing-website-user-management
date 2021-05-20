@@ -68,7 +68,7 @@ html.h-100(lang=locale === "de" ? 'de': 'en')
       meta(name="robots" content="noindex")
 
     title=title
-    link(rel="stylesheet", href="/frontend.css")
+    link(rel="stylesheet", href=`/frontend.css${process.cwd().replace(/[^\d]/g, '') !== "" ? `?${process.cwd().replace(/[^\d]/g, '')}` : ``}`)
     link(rel="apple-touch-icon", sizes="180x180", href="/assets/apple-touch-icon.png")
     link(rel="icon", type="image/png", sizes="32x32", href="/assets/favicon-32x32.png")
     link(rel="icon", type="image/png", sizes="16x16", href="/assets/favicon-16x16.png")
@@ -227,6 +227,6 @@ html.h-100(lang=locale === "de" ? 'de': 'en')
 
 
 
-    script(src="/frontend.bundle.js")
+    script(src=`/frontend.bundle.js${process.cwd().replace(/[^\d]/g, '') !== "" ? `?${process.cwd().replace(/[^\d]/g, '')}` : ``}`)
     if currentPath && currentPath.includes('/admin')
-      script(src="/backend.bundle.js")
+      script(src=`/backend.bundle.js${process.cwd().replace(/[^\d]/g, '') !== "" ? `?${process.cwd().replace(/[^\d]/g, '')}` : ``}`)
