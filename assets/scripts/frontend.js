@@ -6,7 +6,6 @@ import "bootstrap/js/dist/collapse";
 import "bootstrap/js/dist/carousel";
 import "bootstrap/js/dist/alert";
 import { alertTimeout } from "./helper.js"
-require("./polygons");
 require("../css/style.scss");
 
 const toggleNL = (remove = false) => {
@@ -149,10 +148,27 @@ function elementInViewport(el) {
   );
 }
 
-window.onscroll = throttle(function () {
-  showFloatings();
-  countUp();
-}, 50);
+window.onscroll = () => {
+  throttle(
+    showFloatings(),
+    countUp()
+    , 50)
+  throttle(
+    animatedPolygons()
+    , 200)
+};
+
+const classes = ['shift-up', 'shift-left', 'shift-bottom', 'shift-right']
+const elements = document.querySelectorAll('.intersection_observed')
+const animatedPolygons = () => {
+  Array.from(elements).map((element, index) => {
+    if (element.getBoundingClientRect().y > window.outerHeight / 2 || window.scrollY < 100) {
+      classes.map(cl => element.classList.remove(cl))
+    } else {
+      element.classList.add(element.dataset.class)
+    }
+  })
+}
 
 $("#contactFormModal").on("shown.bs.modal", function (e) {
   window.document.querySelector("#track").value = window.location.href;
@@ -375,3 +391,23 @@ Array.from(document.querySelectorAll('.dropdown-custom')).map(dropdown => {
     dropdown.querySelector('.dropdown-menu').classList.toggle('show')
   })
 })
+
+// const setObserver = (ref) => {
+//   let options = {
+//     threshold: 0.9
+//   }
+//   let observer = new IntersectionObserver(handler, options);
+//   observer.observe(ref);
+// }
+// function handler(entries, observer) {
+//   entries.map(entry => {
+//     console.log('entry', Date.now());
+//     if (entry.isIntersecting) {
+//       console.log("Hey", entry);
+//       entry.target.style.transform = `translateY(${window.scrollY}px)`
+//     } else {
+//       console.log("Ho");
+//     }
+//   })
+// }
+// setObserver(document.querySelector('.intersection_observed'))

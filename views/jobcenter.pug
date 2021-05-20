@@ -15,14 +15,14 @@ block content
               .px-5.px-lg-0.px-lg-5.px-sm-5
                 .px-5.px-md-0.px-lg-5.px-sm-5.position-relative.z-foreground.pt-5.pt-lg-0
                   .bg-primary.floatings.shift-bottom
-                    picture.w-100.pb-md-0.quarter-transparent
+                    picture.w-100.pb-md-0.three-quarter-transparent
                       source(media="(max-width: 767px)" sizes="1px" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 1w")
                       source(media="(min-width: 768px)" sizes="300px" srcset="/media/jobcenter_header1-600.jpg 600w, /media/jobcenter_header1-300.jpg 300w")
                       img.w-100(src="/media/jobcenter_header1-600.jpg" alt="People working at computer")
 
                 .floatings.d-none.d-lg-block
                   .bg-primary.shift-md-right-percent.pb-5.pb-md-0.mt-n5
-                    picture.w-100.pb-md-0.quarter-transparent
+                    picture.w-100.pb-md-0.three-quarter-transparent
                       source(media="(max-width: 991px)" sizes="1px" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 1w")
                       source(media="(min-width: 992px)" sizes="600px" srcset="/media/jobcenter_header2-600.jpg 600w")
                       img.w-100(src="/media/jobcenter_header2-600.jpg" alt="People working at computer")
@@ -73,7 +73,7 @@ block content
                   .mw-150.ml-auto
                     +storyImages(ceo, 'col')
 
-    .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center#courses
+    .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center#courses.text-white
       include ../assets/icons/arrow.svg
     if courses
       .container.mt-5.mt-xl-0
@@ -87,7 +87,7 @@ block content
     .pb-5
     .d-flex.justify-content-end
       .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
-        .rotate-135
+        .rotate-135.text-white
           include ../assets/icons/arrow.svg
 
     .container.my-5.mt-xl-0
@@ -152,7 +152,7 @@ block content
                 p.mb-4=__("Testing center digital professions in online live distance learning (remote learning).")
               .d-flex.justify-content-end
                 .bg-primary-light.text-white.w-5.h-5.d-flex.justify-content-center.align-items-center
-                  h3.mb-0="01"
+                  h3.mb-0.text-white="01"
           .col-md-6.mb-5.px-2.mb-md-3
             .border.h-100.d-flex.flex-column.justify-content-between
               .px-5.pt-5
@@ -163,12 +163,12 @@ block content
                 p.mb-4=__("Further education to become an online marketing specialist or web and software developer incl. language courses.")
               .d-flex.justify-content-start
                 .bg-primary-light.text-white.w-5.h-5.d-flex.justify-content-center.align-items-center
-                  h3.mb-0="02"
+                  h3.mb-0.text-white="02"
           .col-md-6.mb-5.px-2.mb-md-3
             .border.h-100.d-flex.flex-column.justify-content-between
               .d-flex.justify-content-end
                 .bg-primary-light.text-white.w-5.h-5.d-flex.justify-content-center.align-items-center
-                  h3.mb-0="03"
+                  h3.mb-0.text-white="03"
               .px-5.pt-5.pt-md-3
                 .d-flex.justify-content-center.align-items-center.flex-column.mb-4
                   .w-13.h-9
@@ -179,7 +179,7 @@ block content
             .border.h-100.d-flex.flex-column.justify-content-between
               .d-flex.justify-content-start
                 .bg-primary-light.text-white.w-5.h-5.d-flex.justify-content-center.align-items-center
-                  h3.mb-0="04"
+                  h3.mb-0.text-white="04"
               .px-5.pt-5.pt-md-3
                 .d-flex.justify-content-center.align-items-center.flex-column.mb-4
                   .w-13.h-9

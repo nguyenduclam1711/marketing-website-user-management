@@ -1,18 +1,20 @@
 $primary: #1f3fc7;
 $primary-light: #0064FF;
 $primary-dark: #04083C;
-$primary-trans: #cddfffa6;
+$body: #46464A;
+$primary-trans: #E6EFFF;
 $red-light: #FFDFDD;
 $light-grey: #DCE0F2;
 
-$secondary: #f2793c;
+$secondary: #FF6E18;
 
 $blue: #1d3b8b;
-$bluedark: #040a3b;
+$bluedark: #04083C;
 $polygonbackground: #0032ff;
 $bluepale: #3d4269;
 $bluetrans: #f4f5f7;
 $light-blue: lighten($blue, 60);
+$muted: #868686;
 
 $green: #7aff29;
 $red: #ff4200;
@@ -45,6 +47,7 @@ $theme-colors: (
 
 :root {
   --dark: #040a3b;
+  --lh: 1.68;
 }
 
 .bg-light-grey {
@@ -53,6 +56,9 @@ $theme-colors: (
 
 .bg-primary-dark {
   background-color: $primary-dark !important;
+}
+.bg-primary-trans {
+  background-color: $primary-trans !important;
 }
 
 .bg-light-blue {
@@ -121,15 +127,4 @@ $theme-colors: (
 
 .border-radius-0 {
   border-radius: 0;
-}
-.avoid-polygon1 {
-  @include media-breakpoint-down(md) {
-    max-width: 65%;
-  }
-}
-.avoid-polygon2 {
-  @include media-breakpoint-down(md) {
-    max-width: 80%;
-    float: right;
-  }
 }

@@ -121,16 +121,16 @@ html.h-100(lang=locale === "de" ? 'de': 'en')
         div
           +navigation
           
-      .flex-grow-1.z-0(class=currentPath && /users|admin/.test(currentPath) ? ' bg-light pb-5' : "" )
+      .flex-grow-1.z-0.overflow-hidden(class=currentPath && /users|admin/.test(currentPath) ? ' bg-light pb-5' : "" )
         block content
       if currentPath && !currentPath.includes('admin') && !currentPath.includes('users')
         footer.site-footer(role='contentinfo' class=user ? "pb-5" : "" style=course && `color: ${course.textColor}`)
-          section.position-relative.px-4.px-md-0(class=course && course.coloraccent ? `` : `bg-primary-dark`, style=course && course.coloraccent ? `background-color: rgb(${course.coloraccent.replace(/.*\((.*)\)/g, "$1").split(',').map(i => Math.floor(i * 0.8)).join(', ')}` : `` )
+          section.position-relative.px-4.px-md-0.pb-5(class=course && course.coloraccent ? `` : `bg-primary-dark`, style=course && course.coloraccent ? `background-color: rgb(${course.coloraccent.replace(/.*\((.*)\)/g, "$1").split(',').map(i => Math.floor(i * 0.8)).join(', ')}` : `` )
             a.triangle.top-right(target="_blank" rel="noopener" href="https://github.com/DigitalCareerInstitute/marketing-website" title=__("Wanna contribute and help making this site better? Fork me on GitHub") style=course && course.coloraccent ? `border-color: transparent transparent rgb(${course.coloraccent.replace(/.*\((.*)\)/g, "$1").split(',').map(i => Math.floor(i * 0.6)).join(', ')}` : `` )
               include ../assets/icons/github-brands.svg
             if currentPath !== "/users/login" && currentPath !== "/users/register"
               +newsletter
-            .container.pb-5
+            .container
               .row
                 .col-6.col-sm-2.footers-two
                   p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-muted`)=__("Company")
@@ -177,22 +177,22 @@ html.h-100(lang=locale === "de" ? 'de': 'en')
                       li.my-2
                         a(class=!course ? "text-muted" : "text-white", href='/contact')=location.name
 
-              nav.d-flex.justify-content-between.align-items-center.pt-5
-                div.pt-md-5.d-flex.justify-content-between.w-100
-                  a.font-weight-bold.navbar-brand.text-light.h-60.mr-md-5.mt-n4.mt-md-0(href="/")
-                    include ../assets/media/dci.svg
-                  div.w-100.d-flex.justify-content-between.flex-column.flex-md-row
-                    div.mb-4.mb-md-0
-                      span.mr-3.mr-lg-5.d-block.d-md-inline(class=course && course.coloraccent ? ``: `text-muted` style=course && course.coloraccent ? `color: white` : ``)
-                        ="© 2021 Digital Career Institute gGmbH"
-                      span(class=course && course.coloraccent ? ``: `text-muted` style=course && course.coloraccent ? `color: white` : ``)
-                        =__("All Rights Reserved")
+            nav.d-flex.justify-content-between.align-items-center.pt-5
+              div.pt-md-5.d-flex.justify-content-between.w-100
+                a.font-weight-bold.navbar-brand.text-light.h-60.mr-md-5.mt-n4.mt-md-0(href="/")
+                  include ../assets/media/dci.svg
+                div.w-100.d-flex.justify-content-between.flex-column.flex-md-row
+                  div.mb-4.mb-md-0
+                    small.mr-3.mr-lg-5.d-block.d-md-inline(class=course && course.coloraccent ? ``: `text-muted` style=course && course.coloraccent ? `color: white` : ``)
+                      ="© 2021 Digital Career Institute gGmbH"
+                    small(class=course && course.coloraccent ? ``: `text-muted` style=course && course.coloraccent ? `color: white` : ``)
+                      =__("All Rights Reserved")
 
-                    div
-                      each page in footerPages
-                        span.ml-2.ml-md-4
-                          a(href='/pages/' + page.slug class=course && course.coloraccent ? ``: `text-muted` style=course && course.coloraccent ? `color: white` : ``)
-                            =page.title
+                  div
+                    each page in footerPages
+                      small.ml-2.ml-md-4
+                        a(href='/pages/' + page.slug class=course && course.coloraccent ? ``: `text-muted` style=course && course.coloraccent ? `color: white` : ``)
+                          =page.title
 
     if user
       +menuFooter

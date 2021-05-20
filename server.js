@@ -57,10 +57,10 @@ if (process.env.HUBSPOT_API_KEY === undefined) {
   process.exit()
 }
 if (process.env.USE_REDIS !== undefined && process.env.USE_REDIS === 'true') {
-  // console.log('Redis enabled')
+  console.log('Redis enabled')
   redisClient = getAsyncRedis()
 } else if (process.env.USE_REDIS === 'false') {
-  // console.log('Redis disabled')
+  console.log('Redis disabled')
 } else {
   console.error('USE_REDIS is not defined in .env')
   process.exit()
@@ -213,8 +213,6 @@ app.use(async (req, res, next) => {
     } catch (error) {
       console.error('Redis ERROR: Could not save navigation data: ' + error)
     }
-  } else {
-    console.log('using cached data')
   }
 
   const { courses, settings, locations, headerPages, footerPages } = navData
