@@ -52,33 +52,6 @@ footer.site-footer {
       @include btn-color($primary, white, white);
     }
   }
-  .triangle {
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width:  0 0 100px 100px;
-    border-color: transparent transparent $secondary ;
-    position: absolute;
-    bottom: 0;
-    right: 1px;
-    z-index: 101;
-    svg {
-      width: 2.5em;
-      height: 2.5em;
-      position: absolute;
-      left: -54px;
-      top: 45px;
-      z-index: 99999;
-      transform: rotate(-45deg);
-      color: white;
-    }
-    transition: transform .1s ease-out;
-    transform-origin: bottom right;
-    &:hover {
-      transform: scale(1.05);
-    }
-  }
-
   .col-xs-12{
     margin-top: 1.5rem;
   }

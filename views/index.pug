@@ -45,7 +45,7 @@ block content
           each partner, index in randompartners.splice(0,6)
             .col-3.col-md-2.partner.h-4.flex-column.align-items-center.justify-content-center(class=index > 3 ? "d-none d-lg-flex" : "d-flex")
               .p-0.p-md-2
-                img.partner.partners-logo.w-100.mw-150.mh-150.object-fit-contain(alt=partner.title, src="/images/" + partner.partnerlogo, )
+                img.partners-logo.w-100.px-0.px-md-3(alt=partner.title, src="/images/" + partner.partnerlogo, )
 
     section#courses.overflow-hidden
       .container.pt-5.position-relative
@@ -133,7 +133,7 @@ block content
             .card.affiliate_header.px-4.px-md-0.mb-2.mb-md-0.shadow-sm.shadow-md-none(data-toggle='collapse', data-target='#affiliate_partner3') 
               .d-flex.align-items-center.align-items-md-start.justify-content-between.flex-md-column
                 .py-3.py-md-0
-                  img.h-5.w-5.object-fit-contain(src="/media/delivery_hero.png", alt="")
+                  img.h-5.w-5.object-fit-contain(src="/media/delivery_hero.svg", alt="")
                 p.font-weight-bold.text-muted.pl-3.pl-md-0.py-md-3.flex-grow-1.m-0=__("Delivery Hero Tech Academy")
                 button.btn.btn-link.p-3.d-md-none(data-toggle='collapse', data-target='#affiliate_partner3')
                   .rotate-270
@@ -151,7 +151,7 @@ block content
                 .ml-2.d-inline-block(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
                 include ../assets/icons/arrow.svg
 
-    section#mission.position-relative
+    section#mission.position-relative.overflow-hidden
       .container.section-counter
         .h-3.mb-5.d-md-none
           .position-absolute
@@ -160,7 +160,7 @@ block content
         h2
           +translate("Our Mission")
         p= __("The Digital Career Institute was born as an initiative to integrate refugees into digital jobs. Today we are committed to training anyone interested in pursuing a career in tech. We provide everything our students need to succeed, including computer equipment, language books, and mobile internet when necessary.")
-        .py-5.row
+        .row
           .col-md-6
             .rounded.h-100.pr-md-4.pt-md-4
               img.d-none.d-md-block.rounded.h-100.w-100.object-fit-cover.h-100(alt="people programming" src='/media/bg4.jpg')
@@ -193,7 +193,8 @@ block content
                     h2
                       span.counter-count=locals.settings.landingpage_archivements_locations || 5
                   p: +translate("Campuses in Berlin, Düsseldorf, Hamburg and Leipzig.")
-              .col-6.border-left.py-4
+              .col-6.border-left.py-4.pb-5
+                .bg-light-blue.position-absolute.h-30-percent.h-md-40-percent.w-100.z-minus.bottom.mission-background
                 .counter-item
                   .counter-number.font-weight-bold
                     h2
@@ -201,7 +202,7 @@ block content
                         =locals.settings.careersuccesspage_employmentrate || 87
                       ="%"
                   p: +translate("Placement rate")
-              .col-6.border-left.py-4
+              .col-6.border-left.py-4.pb-5
                 .counter-item
                   .counter-number.font-weight-bold
                     h2
@@ -210,7 +211,6 @@ block content
                       ="+"
                   p: +translate("Different nationalities of students and teachers.")
 
-      .bg-light-blue.position-absolute.h-30-percent.h-md-40-percent.w-100.z-minus.bottom
 
     section#hiring.bg-light-blue.py-5.overflow-hidden
       .container.mt-md-5.position-relative.mb-5

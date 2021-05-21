@@ -126,8 +126,6 @@ html.h-100(lang=locale === "de" ? 'de': 'en')
       if currentPath && !currentPath.includes('admin') && !currentPath.includes('users')
         footer.site-footer(role='contentinfo' class=user ? "pb-5" : "" style=course && `color: ${course.textColor}`)
           section.position-relative.px-4.px-md-0.pb-5(class=course && course.coloraccent ? `` : `bg-primary-dark`, style=course && course.coloraccent ? `background-color: rgb(${course.coloraccent.replace(/.*\((.*)\)/g, "$1").split(',').map(i => Math.floor(i * 0.8)).join(', ')}` : `` )
-            a.triangle.top-right(target="_blank" rel="noopener" href="https://github.com/DigitalCareerInstitute/marketing-website" title=__("Wanna contribute and help making this site better? Fork me on GitHub") style=course && course.coloraccent ? `border-color: transparent transparent rgb(${course.coloraccent.replace(/.*\((.*)\)/g, "$1").split(',').map(i => Math.floor(i * 0.6)).join(', ')}` : `` )
-              include ../assets/icons/github-brands.svg
             if currentPath !== "/users/login" && currentPath !== "/users/register"
               +newsletter
             .container
@@ -169,6 +167,8 @@ html.h-100(lang=locale === "de" ? 'de': 'en')
                       a(class=!course ? "text-muted" : "text-white", target="_blank" rel="noopener" alt="DCI on Instagram" href="https://www.instagram.com/digitalcareerinstitute/") Instagram
                     li.my-2
                       a(class=!course ? "text-muted" : "text-white", target="_blank" rel="noopener" alt="DCI on LinkedIn" href="https://www.linkedin.com/school/dci-digital-career-institute/") LinkedIn
+                    li.my-2
+                      a(class=!course ? "text-muted" : "text-white", target="_blank" rel="noopener" alt="DCI on Github" href="https://github.com/DigitalCareerInstitute/marketing-website") Github
 
                 .col-6.col-sm-2.footers-five
                   p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-muted`)=__("Campus")
