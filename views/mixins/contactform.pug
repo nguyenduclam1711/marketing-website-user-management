@@ -1,5 +1,5 @@
 mixin contactform
-  form#contactForm.mt-3.ajaxform(method="POST" data-redirect=companytour ? "false" : "true" action="/contact")
+  form#contactForm.mt-3.ajaxform(method="POST" data-redirect="false" action="/contact")
     .row
       .col-md-6.mb-3
         label(for='firstname')=__("firstname")
@@ -26,25 +26,7 @@ mixin contactform
             option( contact && selected disabled value="")=__("Select your location here...")
             each location in locations
               option(value=(location._id) selected=contact && contact.locations && contact.locations[0].toString() === location._id.toString() ?  "selected" :  false )=location.name
-        if !companytour
-          p
-            label(for="unemployed")
-              =__("Are you currently unemployed?")
-
-            select.mb-3.custom-select.text-muted.form-control(name="unemployed" id="unemployed" required)
-              option(selected disabled value="")=__("Please select an answer here...")
-              option(value="Yes" selected=contact && contact.unemployed == "yes" ? "selected" : false)=__("yes")
-              option(value="No" selected=contact && contact.unemployed == "no" ? "selected" : false)=__("no")
-              option(value="No, but soon" selected=contact && contact.unemployed == "no but soon" ?  "selected" : false )=__("no but soon")
-          p
-            label(for="jobcenter")
-              =__("Are you registered with the Jobcenter or Agentur für Arbeit?")
-
-            select.mb-3.custom-select.text-muted.form-control(name="jobcenter" id="jobcenter" required)
-              option(selected=contact && !contact.jobcenter ? "selected" : false, disabled value="")=__("Please select an answer here...")
-              option(value=1 selected=contact && contact.jobcenter == true ? "selected" : false)=__("yes")
-              option(value=0 selected=contact && contact.jobcenter == false ? "selected" : false )=__("no")
-              
+ 
         p.dataPrivacyLink
           label.checkbox.TermsofService.text-muted
             =__("I have read and agree to the")

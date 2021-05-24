@@ -83,7 +83,7 @@ module.exports.contactLocations = async (req, res) => {
 };
 module.exports.contact = async (req, res, next) => {
   try {
-    const { firstname, lastname, age, email, body, phone, locations, companytour, TermsofService, jobcenter, unemployed } = req.body
+    const { firstname, lastname, age, age_years, language_german, language_english, email, body, phone, locations, companytour, signup_form, TermsofService, jobcenter, unemployed } = req.body
     if (age) {
       console.log('Bot stepped into honeypot!')
       if (req.headers['content-type'] === 'application/json') {
@@ -185,10 +185,8 @@ module.exports.contact = async (req, res, next) => {
               { property: 'lastname', value: lastname },
               { property: 'email', value: email },
               { property: 'phone', value: phone },
-              { property: 'afa_jc_registered_', value: !jobcenter ? "No" : "Yes" },
-              { property: 'form_are_you_currently_unemployed', value: unemployed },
               { property: 'hs_facebook_click_id', value: fbclid },
-              { property: 'last_touchpoint', value: 'website_contact_form' },
+              { property: 'last_touchpoint', value: signup_form? 'website_lead_form' : 'website_contact_form' },
               {
                 property: 'form_payload',
                 value: JSON.stringify({
@@ -200,6 +198,21 @@ module.exports.contact = async (req, res, next) => {
                 })
               }
             ];
+      if(jobcenter){
+        properties.push({property: 'afa_jc_registered_', value: !jobcenter ? "No" : "Yes" } ) 
+      }
+      if(unemployed){
+        properties.push({property: 'form_are_you_currently_unemployed', value: unemployed} ) 
+      }
+      if(age_years){
+        properties.push({property: 'age', value: age_years} ) 
+      }
+      if(language_german){
+        properties.push({property: 'language_level_english', value: language_german} ) 
+      }
+      if(language_english){
+        properties.push({property: 'language_level_german', value: language_english} ) 
+      }
       if(req.session.utmParams && req.session.utmParams.utm_source){
         properties.push({property: 'utm_source', value: req.session.utmParams.utm_source} ) 
       }
