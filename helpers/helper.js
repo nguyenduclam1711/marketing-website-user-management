@@ -7,6 +7,10 @@ const passport = require("passport");
 const User = require("../models/user");
 const LocalStrategy = require("passport-local").Strategy;
 const Stringtranslation = require("../models/stringtranslation");
+const util = require('util');
+const fsReaddir = util.promisify(fs.readdir);
+const fsReadFile = util.promisify(fs.readFile);
+const fsLstat = util.promisify(fs.lstat);
 exports.groupByKey = (items, key) => {
   return items.reduce(function (group, x) {
     (group[x[key]] = group[x[key]] || []).push(x);
@@ -167,4 +171,52 @@ exports.getFbClid = (req, res, next) => {
     return null;
   }
   return fbclid[0]
+}
+
+exports.searchFilesInDirectoryAsync = async (dir, filter, ext) => {
+  const localesFolder = path.resolve(__dirname, "../", "locales");
+  const enContent = JSON.parse(fs.readFileSync(`${localesFolder}/en.json`, { encoding: 'utf-8' }))
+  const englishTranslationKeys = Object.keys(enContent)
+  const files = await fsReaddir(dir).catch(err => {
+    throw new Error(err.message);
+  });
+  const foundFiles = await getFilesInDirectoryAsync(dir, ext);
+  const fileContents = await Promise.all(foundFiles
+    .filter(ff => !ff.includes('admin'))
+    .map(async (ff, index) => {
+      return { path: ff, content: await fsReadFile(ff, 'utf8') };
+    }))
+
+  let templateTranslations = new Set()
+  for (let file of fileContents) {
+    [...file.content.matchAll(/[\s|=][\+translate|__]*\(["|'](.*)["|']\)/g)].map(i => templateTranslations.add(i[1]))
+  }
+  const databaseStringtranslations = await Stringtranslation.find()
+  const missingTemplateKeysInDatabase = [...templateTranslations].filter(tt => {
+    return !databaseStringtranslations.map(i => i.title).includes(tt)
+  })
+  return missingTemplateKeysInDatabase
+}
+
+const getFilesInDirectoryAsync = async (dir, ext) => {
+  let files = [];
+  const filesFromDirectory = await fsReaddir(dir).catch(err => {
+    throw new Error(err.message);
+  });
+
+  for (let file of filesFromDirectory) {
+    const filePath = path.join(dir, file);
+    const stat = await fsLstat(filePath);
+
+    if (stat.isDirectory()) {
+      const nestedFiles = await getFilesInDirectoryAsync(filePath, ext);
+      files = files.concat(nestedFiles);
+    } else {
+      if (path.extname(file) === ext) {
+        files.push(filePath);
+      }
+    }
+  };
+
+  return files;
 }

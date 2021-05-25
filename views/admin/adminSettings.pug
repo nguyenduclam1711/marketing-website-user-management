@@ -5,6 +5,12 @@ block content
       = "Settings"
       button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover', delay=2,  data-trigger="hover",  data-placement='top', data-content='Archivements define the counting up numbers on the landing page. Number of events are limiting the events shown on the landing page and the /events page. Mail-, Tour-receiver define the email where the contact form email info should be send to. Langauage markers help you in the frontend finding the correct translation title (translation on the left side)')
         | ?
+    if missingDatabaseTranslations.length > 0
+      h3 Missing translations
+      .mb-3
+        each missingDatabaseTranslation in missingDatabaseTranslations
+          span.badge.badge-danger.mr-2
+            = missingDatabaseTranslation
     form.mb-5(method='POST', action='/admin/settings')
       each settingsKey in settingsKeys
         .mb-1

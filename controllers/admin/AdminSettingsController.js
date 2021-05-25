@@ -3,7 +3,8 @@ const Stringtranslation = require("../../models/stringtranslation");
 const Language = require("../../models/language");
 const Page = require("../../models/page");
 const Setting = require("../../models/setting");
-const {getAsyncRedis} = require("../../helpers/helper");
+const { getAsyncRedis, searchFilesInDirectoryAsync } = require("../../helpers/helper");
+const fs = require('fs');
 
 module.exports.getSettings = async (req, res) => {
   try {
@@ -25,7 +26,9 @@ module.exports.getSettings = async (req, res) => {
         languages
       })
     } else {
+      const missingDatabaseTranslations = await searchFilesInDirectoryAsync('./views', 'career', '.pug')
       res.render("admin/adminSettings", {
+        missingDatabaseTranslations,
         settings,
         stringtranslations,
         settingsKeys,
