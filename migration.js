@@ -68,6 +68,7 @@ mongoose.Promise = global.Promise;
           }
         })
       const stringtranslations = await Stringtranslation.deleteMany({ 'title': { $in: notFound } })
+      // TODO this kills the announcement_banner_string
       console.log('Translationdelete result: ', stringtranslations);
     }
 
