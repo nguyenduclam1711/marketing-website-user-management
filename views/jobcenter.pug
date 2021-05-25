@@ -127,7 +127,7 @@ block content
                             span.font-weight-bold Tel: 
                             a.text-dark(href=`tel:${employee.phone}`)=employee.phone
                       if employee.email
-                        .position-relative.z-1.ml-5.ml-md-0
+                        .position-relative.z-1(class=employee.phone ? "ml-5 ml-md-0" : "")
                           a.h-3.w-3.mt-3.mb-1.bg-primary-light.circle.d-md-none(href=`mailto:${employee.email}`)
                             include ../assets/icons/mail.svg
                           p.text-muted.d-none.d-md-block.mb-0
