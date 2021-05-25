@@ -103,7 +103,7 @@ module.exports.contact = async (req, res, next) => {
       next()
       return;
     }
-    if (!email || !firstname || !body || !phone || !TermsofService) {
+    if (!email || !firstname || !phone || !TermsofService) {
       req.flash('danger', 'Please fill out all form fields')
       res.redirect(req.headers.referer)
       next()
