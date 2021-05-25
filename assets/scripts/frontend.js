@@ -182,7 +182,7 @@ $("#contactFormModal").on("hidden.bs.modal", function (e) {
 
 $("#signupFormModal").on("shown.bs.modal", function (e) {
   window.document.querySelector("#track").value = window.location.href;
-  window.history.replaceState(window.location.pathname, "/", `/signup`);
+  window.history.replaceState(window.location.pathname, "/", `/`);
 });
 
 $("#signupFormModal").on("hidden.bs.modal", function (e) {
