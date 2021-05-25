@@ -8,14 +8,20 @@ mixin signupform
       .col-md-6.mb-3
         label(for='lastname')=__("lastname")
         input#lastname.form-control(name="lastname" type='text', placeholder='Lastname', value=contact ? contact.lastname : '', required)
-      .col.mb-3
+      .col-md-12
+        p
+          label(for="age_years")
+            =__("Age")
+          input#age_years.form-control(placeholder="30", name="age_years" type='number', value='', min="0", max="100", step="1", required)
+            
+      .col-md-12
         label(for='email')=__("Email")
         span.text-muted
         input#email.form-control(name="email" type='email', placeholder='email@example.com', value=contact ? contact.email : '', required)
       .col-md-12
         .form-group
           label(for='body')=__("Message")
-          textarea.mb-3#body.form-control(name="body" placeholder=__("Please, write your message here..."), required)=contact ? contact.body : ''
+          textarea.mb-3#body.form-control(name="body" placeholder=__("Please, write your message here..."))=contact ? contact.body : ''
         .form-group
           label(for='phone')=__("Phone")
           input#phone.form-control(name="phone" type='number', pattern="[\+]\d*", placeholder='0170123456789' , value=contact ? contact.phone : '', required)
@@ -44,12 +50,7 @@ mixin signupform
             option(value=1 selected=contact && contact.jobcenter == true ? "selected" : false)=__("yes")
             option(value=0 selected=contact && contact.jobcenter == false ? "selected" : false )=__("no")
 
-        p
-          label(for="age_years")
-            =__("How old are you (years)?")
 
-          input#age_years.form-control(name="age_years" type='number', value='', min="0", max="100", step="1", required)
-            
         p
           label(for="language_german")
             =__("Your German skills?")

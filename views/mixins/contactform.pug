@@ -15,10 +15,10 @@ mixin contactform
       .col-md-12
         .form-group
           label(for='body')=__("Message")
-          textarea.mb-3#body.form-control(name="body" placeholder=__("Please, write your message here..."), required)=contact ? contact.body : ''
+          textarea.mb-3#body.form-control(name="body" placeholder=__("Please, write your message here..."))=contact ? contact.body : ''
         .form-group
           label(for='phone')=__("Phone")
-          input#phone.form-control(name="phone" type='number', pattern="[\+]\d*", placeholder='0170123456789' , value=contact ? contact.phone : '', required)
+          input#phone.form-control(name="phone" type='number', pattern="[\+]\d*", placeholder='0170123456789' , value=contact ? contact.phone : '')
           input#age.agefield.form-control(name="age" tabindex="-1" type='text', placeholder='25')
         if locations && locations.length > 0
           label(for='location')=__("Location")

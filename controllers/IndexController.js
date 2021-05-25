@@ -198,7 +198,12 @@ module.exports.contact = async (req, res, next) => {
                 })
               }
             ];
-      if(jobcenter){
+
+
+      if(location){
+        properties.push({property: 'state_de_', value: location.name } )  
+      }
+      if(jobcenter !== undefined){
         properties.push({property: 'afa_jc_registered_', value: !jobcenter ? "No" : "Yes" } ) 
       }
       if(unemployed){
