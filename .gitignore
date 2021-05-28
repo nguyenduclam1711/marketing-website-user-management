@@ -6,6 +6,7 @@ uploads/images/*
 dump.rdb
 *.map
 public/*
+!public/service-worker.js
 backup.sh
 backup
 *.log
