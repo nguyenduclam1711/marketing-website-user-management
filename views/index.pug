@@ -255,12 +255,12 @@ block content
       section#events.bg-primary.py-0.py-md-5
         .py-5.overflow-hidden
           .container.position-relative
-            .bg-white.quarter-transparent.position-absolute.w-lg-25.h-20.h-lg-25.right-md-0.bottom-40.bottom-md-0.d-none.d-md-block.mb-5
-            .bg-white.quarter-transparent.position-absolute.w-lg-25.h-20.h-lg-25.left-md-40.top-10.top-md-0.d-none.d-md-block
-            .bg-white.quarter-transparent.position-absolute.w-lg-25.h-20.h-lg-25.bottom-10.bottom-md-0.d-none.d-md-block
+            .bg-white.quarter-transparent.position-absolute.w-lg-20.h-20.h-lg-20.right-md-0.bottom-40.bottom-md-0.d-none.d-md-block(class=events.length > 1 ? "mb-5" : "")
+            .bg-white.quarter-transparent.position-absolute.w-lg-20.h-20.h-lg-20.left-md-40.top-10.top-md-0.d-none.d-md-block
+            .bg-white.quarter-transparent.position-absolute.w-lg-20.h-20.h-lg-20.bottom-10.bottom-md-0.d-none.d-md-block
             h2.text-center.text-md-left.text-white.mb-5: +translate("Upcoming Events")
             .row.mx-xl-5.pt-4.pt-md-0.px-2
-              .col-md-6.floatings.mb-5.pb-4
+              .floatings.mb-5.pb-4(class=events.length == 1 ? "col-12" : "col-md-6")
                 .card.p-3.p-md-4.rounded.shadow-lg-none.h-100.d-flex.flex-column.justify-content-between.shadow-right-bottom(href=events[0].url, target="_blank" rel="noopener" class=shadows[index % partners.length])
                   .first-event-item.h-100
                     .d-flex.pt-3.h-100
