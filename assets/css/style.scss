@@ -1883,7 +1883,7 @@ body[class*="pages-"] {
 }
 .first-event-item {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-columns: 1fr 2fr;
   grid-template-rows: 1fr 1fr;
   > *:first-child {
     grid-column-start: 1;
@@ -1891,6 +1891,7 @@ body[class*="pages-"] {
     grid-row-start: 1;
     grid-row-end: 3;
     @include media-breakpoint-up(md) {
+      grid-template-columns: auto minmax(0, 1fr);
       grid-row-end: 2;
     }
   }
