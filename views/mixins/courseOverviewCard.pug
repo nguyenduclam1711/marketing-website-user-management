@@ -6,7 +6,7 @@ mixin courseOverviewCard(course, classes="col-md-6")
           a.text-dark(href=`/courses/${course.slug}`)
             h5.font-weight-bold=course.headline
             .text-muted.mt-3.mb-5.font-weight-bolder=course.courselength
-          if course.massnahmeNumber
+          if course.massnahmeNumber && currentPath !== "/tour"
             .my-3
               span.mr-2=__("Number")+":"
               span.padded-text()=course.massnahmeNumber

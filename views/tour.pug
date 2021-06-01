@@ -51,10 +51,7 @@ block content
   .container.pt-5
     .pb-lg-5
       h2.mb-3.pb-3.mb-4
-        =__("What makes our graduates")
-        =" "
-        =__("stand out")
-        = "?"
+        =__("What Makes Our Graduates Stand Out?")
       .row 
         .col-md-12
           p.text-muted.mb-5=__("Our unique, in-depth courses provide our highly motivated students with a solid foundation. We work with a modern curriculum that incorporates the latest technologies, current trends in marketing and a variety of hands-on projects.")
@@ -69,11 +66,13 @@ block content
     .marker.w-8.h-7.d-flex.justify-content-center.align-items-center.text-primary
       .rotate-45
         include ../assets/icons/cross.svg
+
   .container.mt-5.text-center.text-md-left
     h2.mb-3.pb-3.mb-4=__( "Additional training" )
     .row 
       .col-md-12
         p.text-muted.mb-5=__("On top of all the technical knowledge, our students will work around their soft skills\: Time management, agile project management and much more.")
+
   .bg-primary.py-3.container-sm
     .mx-lg-5
       .mx-xl-5
@@ -129,7 +128,7 @@ block content
 
   if partners
     .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center.mt-5.text-white
-      include ../assets/icons/arrow.svg
+      include ../assets/icons/arrow_fat.svg
     - partnersWithTestimonial = partners.filter(p => p.testimonial_name && p.testimonial_job && p.testimonial_content && p.testimonial_show )
     if partnersWithTestimonial.length > 0
       .container-md
@@ -172,17 +171,14 @@ block content
   .d-flex.justify-content-end
     .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
       .rotate-90.text-white
-        include ../assets/icons/arrow.svg
+        include ../assets/icons/arrow_fat.svg
   .container.my-5
     h2.pb-3.pt-5
-      =__("How our hiring partners")
-      = " "
-      =__("benefit")
-      ="?"
-    h5.mb-5=__("Our partners benefit from the following all for free!")
+      =__("What are the benefits of a partnership with us?")
+    p.mb-5=__("Our partners benefit from the following all for free!")
     .px-4
       .px-0.px-md-5
-        .row
+        .row.justify-content-center
           .col-md-6.mb-4.floatings
             .py-md-3.h-100
               .h-100.d-flex.flex-column.p-5.justify-content-center.shadow-sm
@@ -201,11 +197,6 @@ block content
           .col-md-6.mb-4.floatings
             .py-md-3.h-100
               .h-100.d-flex.flex-column.p-5.justify-content-center.shadow-sm
-                h5.font-weight-bold.mb-4=__("Receive financial support when hiring DCI graduates")
-                p.font-weight-light.font-size-normal-below-md=__("Employer can be reimbursed 50% of the salary paid for half of the time the student is hired")
-          .col-md-6.mb-4.floatings
-            .py-md-3.h-100
-              .h-100.d-flex.flex-column.p-5.justify-content-center.shadow-sm
                 h5.font-weight-bold.mb-4=__("Hire our graduates")
                 p.font-weight-light.font-size-normal-below-md=__("Hire our students for Intern positions, and our graduates for Junior/Trainee positions ")
           .col-md-6.mb-4.floatings
@@ -221,7 +212,7 @@ block content
       .px-0.px-md-5
         .bg-light-blue.p-5
           .mx-md-5
-            h5.font-weight-bold.mb-5.mx-md-5=__("Ready to join? Fill in your Development & Marketing Positions")
+            h5.font-weight-bold.mb-5.mx-md-5=__("Ready to join? Apply now and join the disruption.")
             a.btn.btn-secondary.btn-lg.w-100.w-md-auto(href='/contact', data-toggle='modal', data-target='#contactFormModal')
               =__("Become a Hiring Partner")
 
