@@ -35,7 +35,7 @@ mixin partnerForm
     .form-group
       label.checkbox.text-muted(for='is_alumni_employer')
         ="Is partner a alumni employer?"
-        button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='If checked, the partnerlogo appears prominent on the landingpage in the uppper section')
+        button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='If checked, the partnerlogo appears prominent ONLY on the landingpage in the uppper section and not on the jobcenter or tour page')
           | ?
         input#is_alumni_employer(type='checkbox', name='is_alumni_employer', value="on", checked=partner && partner.is_alumni_employer && !!partner.is_alumni_employer ? true: false )
         span.checkmark

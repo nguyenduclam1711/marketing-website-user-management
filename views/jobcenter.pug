@@ -29,29 +29,28 @@ block content
     if partners
       .bg-light.text-center
         .container
-          - partnersWithTestimonialsShown = partners
+          - partnersWithTestimonialsShown = partners.filter(p => !p.is_alumni_employer)
           if partnersWithTestimonialsShown.length > 0
             p.m-0.pt-4.pb-3.font-weight-bold=__("Our Partners")
-            .row
+            .row.justify-content-center.pb-5
               each partner, index in partnersWithTestimonialsShown
                 //- .splice(0,6)
                 .col-md-3.col-6.text-center.my-4.d-flex.flex-column.justify-content-center.align-items-center
                   img.mw-150.object-fit-contain.partners-logo(alt=partner.title, src="/images/" + partner.partnerlogo)
 
-    .w-100.d-flex.justify-content-center.justify-content-md-left.mb-5.mb-md-0
+    .w-100.d-flex.justify-content-center.justify-content-lg-start.mb-5.mb-md-0
       .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center.text-white
         include ../assets/icons/cross.svg
-    .container.mt-5.mt-xl-0.text-center.text-md-left
+    .container.mt-5.mt-xl-0.text-center.text-lg-left
       .row
-        .col-md-6.d-flex.flex-column.justify-content-center
+        .col-lg-6.d-flex.flex-column.justify-content-center
           h2.mb-3=__("Who we are")
           p=__("The Digital Career Institute gGmbH is a non-profit, AZAV-certified educational institution that specializes in offering continuing education courses in the digital field or for professions in the field of information and communication technology (ICT). What began as a small initiative to integrate refugees into the German labor market is now an established educational institute with over 100 employees throughout Germany. We benefit from the professional expertise and many years of experience of our founders, colleagues and lecturers, who are also strongly networked in the industry.")
-        .col-md-6.text-center.order-md-12.mb-5.mb-5.mb-md-0.mt-5.mt-md-0
+        .col-lg-6.text-center.order-lg-12.mb-5.mb-5.mb-lg-0.mt-5.mt-lg-0
           .px-5.mb-4.text-left
-            .px-sm-5.px-md-0.px-lg-5.text-left.text-md-center
-              .px-5.px-md-0
-                .px-5.px-md-0
-                  img.w-100.w-150(src="/media/azav.png", alt="")
+            .px-sm-5.px-lg-0.px-lg-5.text-left.text-lg-center
+              .px-5.px-lg-0
+                img.w-100.w-150(src="/media/azav.png", alt="")
 
     - ceo = employees.find(e => e.feature_on_jobcenter)
     if ceo
@@ -74,7 +73,7 @@ block content
                     +storyImages(ceo, 'col')
 
     .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center#courses.text-white
-      include ../assets/icons/arrow.svg
+      include ../assets/icons/arrow_fat.svg
     if courses
       .container.mt-5.mt-xl-0
         .row
@@ -88,7 +87,7 @@ block content
     .d-flex.justify-content-end
       .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
         .rotate-135.text-white
-          include ../assets/icons/arrow.svg
+          include ../assets/icons/arrow_fat.svg
 
     .container.my-5.mt-xl-0
       h2.mb-3=__("Find your contact person") 
@@ -113,10 +112,10 @@ block content
             .shadow-sm.shadow-sm-md-none
               .row.jobcenter-location-employee.mb-5.mb-md-4(class=index != 0 ? "hidden": "",  data-location=location.name)
                 each employee, index2 in location.contactEmployee
-                  .col-md-3.mb-4.mb-md-0
+                  .col-md-3.mb-4.mb-md-5
                     .px-0.px-lg-3.pt-4.mw-150.mx-auto
                       +storyImages(employee, 'col')
-                  .col-md-9.d-flex.flex-column.justify-content-end.text-center.text-md-left
+                  .col-md-9.d-flex.flex-column.justify-content-end.text-center.text-md-left.mb-4.mb-md-5
                     h6.font-weight-bold=employee.name
                     .d-flex.flex-md-column.justify-content-center.mb-4.mb-md-0
                       if employee.phone
@@ -187,24 +186,24 @@ block content
                 h5.font-weight-bold=__("Inclusion")
                 p.mb-4=__("Placement in an employment employment subject to social insurance.")
 
-    .bg-light.position-relative.overflow-hidden.mb-3
+    .bg-light.position-relative.overflow-hidden.mb-3.py-5
       .container
         .position-absolute.bg-panel.bg-primary.left.bottom.top.shift-left-percent.w-100
         .row
           .col-md-6
             .p-5.pl-md-0
-              div.mb-3
-                .p-3.mt-4.bg-primary.d-inline-block.text-white
+              div.mb-4
+                .p-3.bg-primary.d-inline-block.text-white
                   .font-weight-bold.font-size-120.px-4
                     =__("Sustainable")
-              p.mb-5=__("The digital sector is one of the fastest growing industries in Germany and is proving itself to be a sustainable and crisis-proof industry, especially now.")
+              p.pt-2.mb-5=__("The digital sector is one of the fastest growing industries in Germany and is proving itself to be a sustainable and crisis-proof industry, especially now.")
           .col-md-6.text-white
             .p-5
-              div.mb-3
-                .p-3.mt-4.bg-white.d-inline-block
+              div.mb-4
+                .p-3.bg-white.d-inline-block
                   .font-weight-bold.text-primary.font-size-120.px-4
                     =__("Digital")
-              p.mb-5=__("Job profiles of our graduates include: Programmer, IT Consultant, Web Designer, Online Marketing Manager, Social Media Manager and many more.")
+              p.pt-2.mb-5=__("Job profiles of our graduates include: Programmer, IT Consultant, Web Designer, Online Marketing Manager, Social Media Manager and many more.")
 
     .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
       include ../assets/icons/circle.svg
