@@ -7,12 +7,13 @@ const Employee = require("../../models/employee");
 const Location = require("../../models/location");
 const uuid = require("uuid");
 const AbstractController = require("./AbstractController");
+const { getAvailableTranslations } = require('../AbstractController')
 
 module.exports.getEmployees = async function (req, res) {
   try {
-
+    const query = await getAvailableTranslations(req, res)
     let locations = await Location.find({})
-    let employees = await Employee.find({})
+    let employees = await Employee.find({ ...query })
       .populate('language')
       .populate('languageVersion')
       .populate("locations")
