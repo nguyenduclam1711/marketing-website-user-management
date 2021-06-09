@@ -12,10 +12,10 @@ NodeJs/Express/Passport/Pug/Redis, React in the backend
 
 ## Installation:
 1. Install `NodeJS/npm`
-1. Install `MongoDB`
-1. Install caching `Redis`. [Install info](https://redis.io/download#installation)
-1. copy the `.env.example` to `.env` and fill in the neccessary secret keys (you get them from an admin): ``
-1. It can happend that it complains about a missing global `webpack` and `webpack-cli`. Just install them global: `npm i webpack webpack-cli -g`
+1. Install `MongoDB` locally or run in a docker container `docker run --name dci-mongo -d mongo:latest`
+1. Install `Redis` or run it in a docker container `docker run --name dci-redis -d redis`
+1. copy the `.env.example` to `.env` and fill in the neccessary real secret keys what an admin eventually provides you.
+1. It can happend that it complains about a missing global `webpack` and `webpack-cli`. Just un\/install them global: `npm i webpack webpack-cli -g`
 
 
 #### Example .env:
@@ -48,15 +48,30 @@ HUBSPOT_API_KEY=XXXXXXXX-00XX-0000-0000-XXXXXXXXXXXX
 Start normal: `npm start`  
 Start development: `npm run dev`
 
-### Insert example data in database
+### Databasecontents
 
-##### Create a few Stories and Menulocations in the selected DB.
+#### Use seeds
 
 Insert example data:  
 `npm run seed`
 
 Remove all seeds from database:  
 `npm run seed:delete`
+
+#### Get a DB dump and restore (replace `DIRNAME` by the folderpath containing the .bson files)
+
+`mongorestore -h localhost:27017 -d marketing-website DIRNAME --drop`
+
+### Backendaccess
+
+To get access to the admin-area, you need to create a user.
+Go to [register](http://localhost:3000/users/register) and submit the form. You should then have a database users record which needs to be `verified` and then `activated`. Finally you want to make yourself a `admin` and `superadmin`. Use the following command to accomplish all.
+
+```
+db.users.findOneAndUpdate({email: "user@digitalcareerinstitute.org"}, {$set: {admin: "true", superAdmin: "true", verifiedAt: ISODate(), activatedAt: ISODate()}})
+```
+Then you can login per [login](http://localhost:3000/users/login)
+
 
 ### Contribution
 - Check out the [Issues](https://github.com/DigitalCareerInstitute/marketing-website/issues) for a `good first issue` and let yourself invite to Trello by [@spielhoelle](mailto:thomas.kuhnert@digitalcareerinstitute.org)
@@ -68,7 +83,8 @@ Remove all seeds from database:
 `docker-compose up`
 
 ### Deployment
-In the private [infrastructure repo](https://github.com/DigitalCareerInstitute/infrastructure) we manage the deployment and the server provision per [Ansible](https://www.ansible.com/). If you need to deploy, require ssh access to the live environment from an admin.
+If you push to the staging-branch, a github action triggers a new release in the [staging environment](https://staging.digitalcareerinstitute.org). 
+For more control over the deployment porcess, acquire access to the private [infrastructure repo](https://github.com/DigitalCareerInstitute/infrastructure) and make sure to have ssh-access to the prod/staging env. Here we manage the deployment and the server provision per [Ansible](https://www.ansible.com/). 
 
 
 ## Server & database access
@@ -84,12 +100,12 @@ Then you can run normal mongo commands in your local mongo-terminal towards the 
 
 Eg. update a users admin privileges:
 ```
-db.users.findOneAndUpdate({email: "user@digitalcareerinstitute.org}, {$set: {admin: "true", superAdmin: "true"}})
+db.users.findOneAndUpdate({email: "user@digitalcareerinstitute.org}, {$set: {admin: "true", superAdmin: "true", activatedAt: ISODate()}})
 ```
 
 ## Features
 
-For some actions you need a superadmin account, for some a normal admin role is enough. Contact [@spielhoelle](mailto:thomas.kuhnert@digitalcareerinstitute.org) or [@LeandroDCI](https://github.com/LeandroDCI) for extended access rights.
+For some actions you need a superadmin account, for some a normal admin role is enough. Contact [@spielhoelle](mailto:thomas.kuhnert@digitalcareerinstitute.org) or [@ majofi](https://github.com/majofi) for extended access rights.
 
 ### Events from eventbrite
 
