@@ -1,1 +1,1 @@
-importScripts("https://dci.pushengage.com/service-worker.js?ver=2.3.0");
+importScripts('https://cdn.webpushr.com/sw-server.min.js');
