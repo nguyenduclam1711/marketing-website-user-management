@@ -1,6 +1,8 @@
 name: trigger_deploy
 on:
-  push  
+  push:
+    branches:
+      - staging
 jobs:
   deploy-remote-repo:
     runs-on: ubuntu-latest
