@@ -193,7 +193,7 @@ exports.searchFilesInDirectoryAsync = async (dir, filter, ext) => {
   }
   const databaseStringtranslations = await Stringtranslation.find()
   const missingTemplateKeysInDatabase = [...templateTranslations].filter(tt => {
-    return !databaseStringtranslations.map(i => i.title).includes(tt)
+    return !databaseStringtranslations.map(i => i.title).includes(tt.replace(/\\/, ''))
   })
   return missingTemplateKeysInDatabase
 }
