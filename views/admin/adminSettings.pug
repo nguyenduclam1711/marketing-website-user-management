@@ -30,4 +30,13 @@ block content
       button.btn.btn-primary(type='submit')="Save"
 
     h2 String translations
+    if missingDatabaseTranslations.length > 0
+      h3 
+        | Missing translations
+        button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover', delay=2,  data-trigger="hover",  data-placement='top', data-content='These missing translation-keys exist in the code, but not in the database. Copy the missing translation in the left String translations "Title" column, translate it to english and german and safe')
+          | ?
+      .mb-3
+        each missingDatabaseTranslation in missingDatabaseTranslations
+          span.badge.badge-danger.mr-2
+            = missingDatabaseTranslation
     #stringtranslationroot
