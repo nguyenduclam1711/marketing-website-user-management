@@ -18,7 +18,7 @@ block content
                   h1.font-weight-bold: +translate('Digital career')
                 p.lead.mb-5: +translate("Build a strong foundation at the Digital Career Institute with our in-depth courses. Learn the skills to launch your new career in web development, online marketing or cloud computing.")
                 .d-flex
-                  a.mb-3.btn.btn-lg.btn-secondary.mr-2.mr-md-4.scrollbutton.w-100.w-md-auto(href='#courses', role='button')
+                  a.mb-3.btn.btn-lg.btn-secondary.mr-2.mr-md-4.scrollbutton.w-100.w-md-auto(href=`${locale !== 'en' ? `/` + locale : ``}/#courses`, role='button')
                     .py-2.py-md-1.pointer-events-none
                       +translate("Browse Courses")
           .col-md-6.order-1.order-md-12.d-none.d-md-block
@@ -334,5 +334,5 @@ block content
                   div: +translate("Our admission team is always there for you regardless of your location")
                   .text-center.mt-5
                     a.btn.btn-lg.btn-secondary.mx-3.mb-4.mb-lg-0.w-100.w-md-auto(href='/contact', data-toggle='modal', data-target='#signupFormModal'): +translate("Apply now")
-                    a#calltoaction.btn.btn-lg.btn-outline-primary.mx-3.w-100.w-md-auto.scrollbutton(href='#courses')=__("Browse Courses")
+                    a#calltoaction.btn.btn-lg.btn-outline-primary.mx-3.w-100.w-md-auto.scrollbutton(href=`${locale !== 'en' ? `/` + locale : ``}/#courses`)=__("Browse Courses")
 

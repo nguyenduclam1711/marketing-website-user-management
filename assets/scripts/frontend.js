@@ -85,7 +85,7 @@ const scrollbuttons = document.getElementsByClassName("scrollbutton");
 for (let i = 0, len = scrollbuttons.length; i < len; i++) {
   scrollbuttons[i].addEventListener("click", function (event) {
     event.preventDefault();
-    document.querySelector(event.target.attributes.href.value).scrollIntoView({
+    document.querySelector(event.target.attributes.href.value.replace(/.*(#.*)/, '$1')).scrollIntoView({
       behavior: "smooth",
       block: "start",
       inline: "nearest"

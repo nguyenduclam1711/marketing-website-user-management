@@ -234,7 +234,7 @@ mixin singleCourse
               h2.font-weight-bold=`03`
               div(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
                 include ../../assets/icons/course_checklist.svg
-            strong.text-muted=course.startYourClass ? course.startYourClass : ("Start your Class")
+            strong.text-muted=course.startYourClass ? course.startYourClass : __("Start your Class")
 
       if course.financingoption
         section.text-center
