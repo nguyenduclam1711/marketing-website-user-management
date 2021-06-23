@@ -213,10 +213,10 @@ module.exports.contact = async (req, res, next) => {
         properties.push({property: 'age', value: age_years} ) 
       }
       if(language_german){
-        properties.push({ property: 'language_german', value: language_german })
+        properties.push({ property: 'language_level_german', value: language_german })
       }
       if(language_english){
-        properties.push({ property: 'language_english', value: language_english })
+        properties.push({ property: 'language_level_english', value: language_english })
       }
       if(req.session.utmParams && req.session.utmParams.utm_source){
         properties.push({property: 'utm_source', value: req.session.utmParams.utm_source} ) 
