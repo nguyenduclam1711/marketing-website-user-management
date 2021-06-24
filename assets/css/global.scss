@@ -1,15 +1,15 @@
-$primary: #1f3fc7;
-$primary-light: #0064FF;
-$primary-dark: #04083C;
-$body: #46464A;
-$primary-trans: #E6EFFF;
-$red-light: #FFDFDD;
-$light-grey: #DCE0F2;
+$primary: #1b39ca;
+$primary-light: #0064ff;
+$primary-dark: #04083c;
+$body: #46464a;
+$primary-trans: #e6efff;
+$red-light: #ffdfdd;
+$light-grey: #dce0f2;
 
-$secondary: #FF6E18;
+$secondary: #ff6e18;
 
 $blue: #1d3b8b;
-$bluedark: #04083C;
+$bluedark: #04083c;
 $polygonbackground: #0032ff;
 $bluepale: #3d4269;
 $bluetrans: #f4f5f7;
@@ -23,12 +23,12 @@ $purple: #5c00ff;
 $pink: #a800ff;
 $turquoise: #3dbaf7;
 $textOrange: #da9446;
-$transition: .15s;
+$transition: 0.15s;
 $theme-colors: (
-        "secondary": $secondary
+  'secondary': $secondary,
 );
-@import "../../node_modules/bootstrap/scss/bootstrap";
-@import "../../node_modules/quill/dist/quill.snow.css";
+@import '../../node_modules/bootstrap/scss/bootstrap';
+@import '../../node_modules/quill/dist/quill.snow.css';
 
 @mixin btn-color($color-pri, $color-sec, $color-border) {
   background-color: $color-pri;
@@ -86,7 +86,7 @@ $theme-colors: (
   background-color: $bluetrans;
 }
 
-.btn[class*="-outline-"] {
+.btn[class*='-outline-'] {
   border-width: 2.5px;
   border-radius: 5px;
 }
