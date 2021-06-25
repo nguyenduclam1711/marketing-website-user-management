@@ -21,7 +21,7 @@ module.exports.landingpage = async (req, res) => {
       // console.log('Redis enabled')
       redisClient = getAsyncRedis()
     } else if (process.env.USE_REDIS === 'false') {
-      // console.log('Redis disabled')
+      console.log('Redis disabled')
     } else {
       console.error('USE_REDIS is not defined in .env')
       process.exit()

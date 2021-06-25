@@ -1,7 +1,7 @@
 
 extends layout.pug
 mixin employeeimage(location)
-  img.blue-shadow.object-fit-cover.img-fluid.rounded-circle.square(src="/media/pixel.gif" alt= location.contactEmployee ? location.contactEmployee.name : " " style=`background-image: url('${location.contactEmployee && location.contactEmployee.avatar ? `/images/` + location.contactEmployee.avatar : `/media/circuit-board.svg`}')`)
+  img.blue-shadow.object-fit-cover.img-fluid.rounded-circle.square(src="/media/pixel.gif" alt= location.contactEmployee ? location.contactEmployee.name : " Location image" style=`background-image: url('${location.contactEmployee && location.contactEmployee.avatar ? `/images/` + location.contactEmployee.avatar : `/media/circuit-board.svg`}')`)
 block content
   .jumbotron.jumbotron-fluid.mb-0.bg-section
     .container

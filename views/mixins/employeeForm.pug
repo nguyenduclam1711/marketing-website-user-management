@@ -7,7 +7,7 @@ mixin employeeForm
         .form-group
           label.d-block(for='avatar') Employee Icon
           if employee && employee.avatar !== "false"
-            img.w-100.mw-150.mh-150.object-fit-cover(src="/images/"+employee.avatar)
+            img.w-100.mw-150.mh-150.object-fit-cover(alt="employee image" src="/images/"+employee.avatar)
           input#avatar.form-control-file(type='file' name='avatar')
 
         .form-group
@@ -51,9 +51,9 @@ mixin employeeForm
                 label.custom-control-label(for=location.name)=location.name
         if editPath
           .btn-group
-            a.btn.btn-outline-primary(href="/admin/employees/edit/"+employee.slug) Edit
+            a.btn.btn-outline-primary(href="/admin/employees/edit/"+employee.slug title=employee.name) Edit
 
-            a.btn.btn-outline-primary(href="/employees" target="_blank" rel="noopener") Show
+            a.btn.btn-outline-primary(href="/employees" target="_blank" rel="noopener" title=employee.name) Show
             button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Employee"
             button.btn.btn-outline-danger(type='submit' form='deleteform') Delete
       if editPath

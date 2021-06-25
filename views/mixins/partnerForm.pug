@@ -16,7 +16,7 @@ mixin partnerForm
     .form-group
       label.d-block(for='partnerlogo') Partner Logo
       if partner && partner.partnerlogo
-        img.w-100.mw-150.mh-150.object-fit-cover(src="/images/"+partner.partnerlogo)
+        img.w-100.mw-150.mh-150.object-fit-cover(alt="partner image" src="/images/"+partner.partnerlogo)
       input#partnerlogo.form-control-file(type='file' name='partnerlogo')
 
     .mb-3
