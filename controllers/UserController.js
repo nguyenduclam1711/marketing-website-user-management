@@ -61,6 +61,7 @@ module.exports.register = async (req, res, next) => {
         token: userToken
       });
       User.createUser(newUser, async (err, user) => {
+        console.log(err)
         if (err) throw err;
         try {
           await sendVerificationMail(res, req, userToken);
@@ -76,6 +77,7 @@ module.exports.register = async (req, res, next) => {
         }
       });
     } catch (error) {
+      console.log(error)
       res.redirect(req.headers.referer);
     }
   }

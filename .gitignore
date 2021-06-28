@@ -12,3 +12,4 @@ backup
 *.log
 .idea
 locales/*
+.DS_STORE

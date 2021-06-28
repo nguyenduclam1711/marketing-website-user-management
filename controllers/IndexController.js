@@ -60,7 +60,7 @@ module.exports.landingpage = async (req, res) => {
       }
     }
     const [storiesRes, partnersRes, coursesRes, events] = indexData;
-
+    
     res.render('index', {
       events,
       stories: storiesRes,
