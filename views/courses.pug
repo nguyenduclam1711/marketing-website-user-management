@@ -4,7 +4,7 @@ block content
     .container.h-100
       .h-100.py-3.py-md-5
         .row.py-5.justify-content-center
-          each course, index in courses
+          each course in courses
             .col-md-6.mb-5.mb-sm-4.floatings
               .bg-white.px-5.py-3.text-center.hover-shadow.h-100.d-flex.flex-column
                 a.card-link.d-block(tabindex="-1" href="/courses/" + course.slug title=course.title).flex-grow.justify-content-between.h-100

@@ -64,7 +64,7 @@ module.exports.register = async (req, res, next) => {
         console.log(err)
         if (err) throw err;
         try {
-          // await sendVerificationMail(res, req, userToken);
+          await sendVerificationMail(res, req, userToken);
           req.flash(
             "success",
             `Email ${email} registered. Please check your mails for verification.`
