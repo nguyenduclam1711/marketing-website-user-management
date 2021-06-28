@@ -53,16 +53,16 @@ mixin storyForm
         input#exampleFormControlFile1.form-control-file(type='file' name='avatar')
 
         if story && story.avatar
-          img.w-100.mw-150.mh-150.object-fit-cover(src="/images/"+story.avatar)
+          img.w-100.mw-150.mh-150.object-fit-cover(alt="story avatar image" src="/images/"+story.avatar)
       .form-group.col-md-6
         label(for='avatar') Upload Company Logo
         input#exampleFormControlFile1.form-control-file(type='file' name='companylogo')
 
         if story && story.companylogo
-          img.w-100.mw-150.mh-150.object-fit-cover(src="/images/"+story.companylogo)
+          img.w-100.mw-150.mh-150.object-fit-cover(alt="story company logo image" src="/images/"+story.companylogo)
 
     .btn-group
       if editPath
-        a.btn.btn-outline-primary(href="/admin/stories")="Back"
-        a.btn.btn-outline-primary(target="_blank" rel="noopener" href="/stories/"+story.slug)="Show"
+        a.btn.btn-outline-primary(href="/admin/stories" title="Back")="Back"
+        a.btn.btn-outline-primary(target="_blank" rel="noopener" href="/stories/"+story.slug title="Show")="Show"
       button.btn.btn-primary(type='submit')=editPath ? "Update" :"Create a new Story"

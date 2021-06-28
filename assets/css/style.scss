@@ -1905,3 +1905,8 @@ body[class*="pages-"] {
   width: 200vw !important;
   height: 100%;
 }
+a[tabindex="0"]:focus {
+  border: 3px solid #9AC7F9;
+  padding: 3px;
+  border-radius: 2px;
+}

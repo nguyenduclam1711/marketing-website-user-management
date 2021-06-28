@@ -6,7 +6,7 @@ mixin successCarousel(stories)
         .carousel-item.h-100.px-3.px-sm-5(class= index === 0 ? ` active` : ``)
           .py-5.shadow.rounded-sm.h-100.position-relative.bg-white
             if user && story && user.userId === story.userId || user && user.admin === "true"
-              a.position-absolute.right.bottom.btn.btn-outline-primary.z-foreground(href=`/admin/${isPartner ? `partners` : `stories`}/edit/${story.slug}`) Edit
+              a.position-absolute.right.bottom.btn.btn-outline-primary.z-foreground(href=`/admin/${isPartner ? `partners` : `stories`}/edit/${story.slug}` title=story.title) Edit
             .bg-white.p-4.rounded-sm.h-100
                   
               div.position-relative.h-100.d-flex.flex-column.justify-content-around
@@ -28,10 +28,10 @@ mixin successCarousel(stories)
                         h6.font-weight-bold.text-muted=story.workPosition
                   if isPartner
                     .text-right.rounded-circle.overflow-hidden.mb-md-0.order-1.order-md-12(style=`box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1B39CA !important`};`)
-                      img.mw-150.w-6.h-6.w-md-8.h-md-8(src=`/images/${story.partnerlogo ? story.partnerlogo : story.avatar}` style=`box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1B39CA !important`}` class=story.partnerlogo ? "object-fit-contain" : "object-fit-cover")
+                      img.mw-150.w-6.h-6.w-md-8.h-md-8(src=`/images/${story.partnerlogo ? story.partnerlogo : story.avatar}` style=`box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1B39CA !important`}` class=story.partnerlogo ? "object-fit-contain" : "object-fit-cover" alt="story partner logo")
                   else 
                     a.text-right.rounded-circle.overflow-hidden.order-1.order-md-12.flex-shrink-0.mb-4.mb-md-0(href=story.partnerlogo ? `#` : `/stories/${story.slug}` style=`box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1B39CA !important`};` class=story.partnerlogo ? "" : "stretched-link")
-                      img.mw-150.w-6.h-6.w-md-8.h-md-8(src=`/images/${story.partnerlogo ? story.partnerlogo : story.avatar}` style=`box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1B39CA !important`}` class=story.partnerlogo ? "object-fit-contain" : "object-fit-cover")
+                      img.mw-150.w-6.h-6.w-md-8.h-md-8(src=`/images/${story.partnerlogo ? story.partnerlogo : story.avatar}` style=`box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1B39CA !important`}` class=story.partnerlogo ? "object-fit-contain" : "object-fit-cover" alt="story partner logo")
       if stories.length > 1
         ol.carousel-indicators
           each story, index in stories

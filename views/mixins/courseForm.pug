@@ -49,13 +49,13 @@ mixin courseForm
     .mb-3
       label.d-block.d-block(for='icon') Course Title Icon
       if course && course.icon
-        img.mw-150.mh-150.w-100.mw-150.mh-150.object-fit-cover(src="/images/"+course.icon)
+        img.mw-150.mh-150.w-100.mw-150.mh-150.object-fit-cover(alt="course icon" src="/images/"+course.icon)
       input#icon.form-control.form-control-file(type='file' name='icon')
 
     .mb-3
       label.d-block.d-block(for='subicon') Course Sub Icon
       if course && course.subicon
-        img.mw-150.mh-150.w-100.mw-150.mh-150.object-fit-cover(src="/images/"+course.subicon)
+        img.mw-150.mh-150.w-100.mw-150.mh-150.object-fit-cover(alt="course icon" src="/images/"+course.subicon)
       input.form-control#subicon.form-control-file(type='file' name='subicon')
 
     .mb-3
@@ -140,7 +140,7 @@ mixin courseForm
             | ?
         .d-flex
           if course && course.archivements[i] && course.archivements[i].icon
-            img.mw-150.mh-150(src="/images/"+course.archivements[i].icon)
+            img.mw-150.mh-150(alt="course image" src="/images/"+course.archivements[i].icon)
           .w-100
             input.form-control#exampleFormControlFile1.form-control-file(type=archivementGroup.fileField.type name=archivementGroup.fileField.name)
 
@@ -153,7 +153,7 @@ mixin courseForm
         label.d-block(for=featuresGroup.fileField.for)=featuresGroup.fileField.label
         .d-flex
           if course && course.features[i] && course.features[i].icon
-            img.mw-150.mh-150(src="/images/"+course.features[i].icon)
+            img.mw-150.mh-150(alt="course features icon" src="/images/"+course.features[i].icon)
           .w-100
             input.form-control#exampleFormControlFile1.form-control-file(type=featuresGroup.fileField.type name=featuresGroup.fileField.name)
 

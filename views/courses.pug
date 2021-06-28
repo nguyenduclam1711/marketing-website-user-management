@@ -7,7 +7,7 @@ block content
           each course in courses
             .col-md-6.mb-5.mb-sm-4.floatings
               .bg-white.px-5.py-3.text-center.hover-shadow.h-100.d-flex.flex-column
-                a.card-link.d-block(href="/courses/" + course.slug).flex-grow.justify-content-between.h-100
+                a.card-link.d-block(href="/courses/" + course.slug title=course.title).flex-grow.justify-content-between.h-100
                   .m-3.row.position-relative
                     .col-12.align-items-center.my-4
                       .square.position-relative
@@ -17,4 +17,4 @@ block content
                   p.text-dark=course.subheading
                 div
                   hr
-                  a.text-dark.font-weight-bold(href="/courses/" + course.slug): +translate("View course")
+                  a.text-dark.font-weight-bold(href="/courses/" + course.slug title=course.title): +translate("View course")

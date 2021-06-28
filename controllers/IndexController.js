@@ -21,7 +21,7 @@ module.exports.landingpage = async (req, res) => {
       // console.log('Redis enabled')
       redisClient = getAsyncRedis()
     } else if (process.env.USE_REDIS === 'false') {
-      // console.log('Redis disabled')
+      console.log('Redis disabled')
     } else {
       console.error('USE_REDIS is not defined in .env')
       process.exit()
@@ -251,8 +251,8 @@ module.exports.contact = async (req, res, next) => {
     contact.properties = properties
     const contactSavepromise = contact.save()
     // TODO remove logging statement
-    console.log(req.session);
-    console.log(options.body.properties);
+    console.log("+++++>>>>",req.session);
+    console.log("========>>>>>",options.body.properties);
     // to save time, mail get send out without waiting for the response
     const info = sendMail(res, req, mailOptions)
     const result = await Promise.all([hubspotPromise, contactSavepromise])
