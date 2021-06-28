@@ -254,7 +254,7 @@ module.exports.contact = async (req, res, next) => {
     console.log(req.session);
     console.log(options.body.properties);
     // to save time, mail get send out without waiting for the response
-    // const info = sendMail(res, req, mailOptions)
+    const info = sendMail(res, req, mailOptions)
     const result = await Promise.all([hubspotPromise, contactSavepromise])
     console.log('result', result);
 
