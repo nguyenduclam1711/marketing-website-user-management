@@ -20,7 +20,8 @@ var ContactSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  isCompany: String
+  isCompany: String,
+  properties: Object
 });
 
 module.exports = mongoose.model("Contact", ContactSchema);
