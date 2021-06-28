@@ -192,15 +192,15 @@ app.use(async (req, res, next) => {
     const footerCat = await Menulocation.findOne({ name: 'footer' })
     const headerCat = await Menulocation.findOne({ name: 'header' })
 
-    const [locations, settings, footerPages, headerPages] = await Promise.all([
-      Location.find({ isCampus: false }).sort({ order: 1 }).exec(),
+    const [global_locations, settings, footerPages, headerPages] = await Promise.all([
+      Location.find({}).sort({ order: 1 }).exec(),
       Setting.findOne().exec({}),
       Page.find(Object.assign(query, { menulocations: { $in: [footerCat] } })).sort({ order: 1 }),
       Page.find(Object.assign(query, { menulocations: { $in: [headerCat] } })).sort({ order: 1 })
     ])
     navData = {
       courses,
-      locations,
+      global_locations,
       settings,
       headerPages,
       footerPages
@@ -215,12 +215,12 @@ app.use(async (req, res, next) => {
     }
   }
 
-  const { courses, settings, locations, headerPages, footerPages } = navData
+  const { courses, settings, global_locations, headerPages, footerPages } = navData
 
   res.locals.user = req.user || null
   const rawPath = req.path.replace(`${req.session.locale}/`, '')
   res.locals.currentPath = rawPath
-  res.locals.locations = locations
+  res.locals.global_locations = global_locations
   res.locals.courses = courses
   res.locals.settings = settings
   res.locals.headerPages = headerPages

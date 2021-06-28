@@ -45,7 +45,7 @@ mixin employeeForm
               | ?
 
           .d-flex.flex-wrap
-            each location in locations
+            each location in global_locations
               .custom-control.custom-checkbox.mr-3.mb-3
                 input.custom-control-input(name="locations" type='checkbox' id=location.name value=location._id  checked=(location.selected))
                 label.custom-control-label(for=location.name)=location.name

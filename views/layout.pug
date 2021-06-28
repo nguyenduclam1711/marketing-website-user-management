@@ -174,7 +174,7 @@ html.h-100(lang=locale === "de" ? 'de': 'en')
                 .col-6.col-sm-2.footers-five
                   p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-muted`)=__("Campus")
                   ul.list-unstyled
-                    each location in locations.filter(l => l.isCampus) 
+                    each location in global_locations.filter(l => l.isCampus)
                       li.my-2
                         a(class=!course ? "text-muted" : "text-white", href='/contact')=location.name
 
