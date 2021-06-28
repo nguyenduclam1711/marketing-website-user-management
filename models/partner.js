@@ -13,6 +13,10 @@ const PartnerSchema = new Schema({
   testimonial_content: String,
   testimonial_job: String,
   testimonial_show: Boolean,
+  is_alumni_employer: {
+    type: Boolean,
+    default: false
+  },
   updatedAt: {
     type: Date,
     default: Date.now

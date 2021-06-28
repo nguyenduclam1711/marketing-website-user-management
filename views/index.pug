@@ -1,244 +1,338 @@
 extends layout.pug
 block content
-  .section.overflow-hidden
-    .content
-      section.homeSection.d-flex.flex-column.position-relative.bg-light-grey
-        if currentPath == "/"
-          +navigation
-        div.mainHome.d-flex.w-100.z-1.py-md-5
-          div.m-auto.container.py-md-5
-            .row
-              .col-md-6.py-5.order-12.order-md-1
-                h1.font-weight-bold.display-1: +translate('Start your')
-                h2.mb-5.display-1.font-weight-bold: +translate('Digital career')
-                p.subtitle.h5.mb-5.text-shadow-light-blue.avoid-polygon1: +translate("Learn digital skills with us to get the most fulfilling jobs")
+  main
+    section.d-flex.flex-column.position-relative
+      if currentPath == "/"
+        +navigation
+      div.container-lg
+        .d-md-none.bg-primary.w-5.h-5.position-absolute.ml-n3
+        .d-md-none.bg-light-blue.position-absolute.z-minus.w-5.h-5.mt-3.ml-3
+        .dotted.d-md-none.red.w-6.h-6.rounded-circle.position-absolute.right.mr-5.top-30.shift-top
+        .dotted.d-md-none.blue.w-7.h-7.rounded-circle.position-absolute.left.bottom.ml-3.mb-5
+        .row
+          .col-md-6.py-5.order-12.order-md-1
+            .py-5
+              .py-4
+                .mb-4
+                  h1.font-weight-bold: +translate('Start your')
+                  h1.font-weight-bold: +translate('Digital career')
+                p.lead.mb-5: +translate("Build a strong foundation at the Digital Career Institute with our in-depth courses. Learn the skills to launch your new career in web development, online marketing or cloud computing.")
                 .d-flex
-                  a.mb-3.btn.btn-lg.btn-secondary.mr-2.mr-md-4.scrollbutton(href='#ourcourses', role='button'): +translate("Browse Courses")
-              .col-md-6.py-5.order-1.order-md-12
-                img.w-100(src="/media/hero.svg", alt="")
+                  a.mb-3.btn.btn-lg.btn-secondary.mr-2.mr-md-4.scrollbutton.w-100.w-md-auto(href=`${locale !== 'en' ? `/` + locale : ``}/#courses`, role='button')
+                    .py-2.py-md-1.pointer-events-none
+                      +translate("Browse Courses")
+          .col-md-6.order-1.order-md-12.d-none.d-md-block
+            img.position-absolute.top.left.w-100.top-50.shift-bottom-minus-percent(src="/media/hero.svg", alt="")
+            .row.h-50
+              .col-6.h-100.bg-primary.z-minus
+              .col-6.h-100
+            .row.h-50
+              .col-6.h-100
+              .col-6.h-100.bg-primary.z-minus
+        .position-relative.d-lg-none
+          .bg-light-blue.position-absolute.w-5.h-5.mr-3.mb-4.bottom.right
+          .bg-primary.w-5.h-5.position-absolute.bottom.right.z-minus.mr-n3
 
-      section#ourcourses.position-relative.offset_title.pb-5
-        header.offset_header.text-center
-          .d-inline-block.position-relative
-            .bluepolygon.z-minus(style="transform: rotate(-45deg) skew(20deg, 0) translateX(-3em)")
-            h2.position-relative.d-inline-block.display-1.text-center.text-white
-              +translate("Our courses")
-        .container.pt-5.text-center
-          .row.mx-md-5.justify-content-center
-            each course in courses
-              .col-md-6.mb-5.mb-sm-4.floatings
-                .bg-white.px-5.py-3.px-md-2.text-center.hover-shadow.h-100.d-flex.flex-column
-                  a.card-link.d-block(href="/courses/" + course.slug).flex-grow.justify-content-between.h-100
-                    .m-3.row.position-relative
-                      .col-10.offset-1.col-md-8.offset-md-2.align-items-center.my-4
-                        img.object-fit-cover.img-fluid.square(src="/media/pixel.gif" alt=course.headline style=`background-image: url('${course.icon ? `/images/` + course.icon : `/media/circuit-board.svg`}')`)
-                    h3.text-dark= course.headline
-                    p.text-dark=course.subheading
-                  div
-                    hr
-                    a.text-dark.font-weight-bold(href="/courses/" + course.slug): +translate("View course details")
-          a.z-1.btn.btn-lg.btn-secondary.my-5(href='/courses/', role='button', aria-pressed='true')
-            +translate("All")
-            = " "
-            +translate("Courses")
+    section#partners.bg-light
+      .container.py-3.py-md-4.text-center
+        h6.text-center.mb-3.font-weight-bold.text-muted: +translate("Where Our Graduates Work")
+        - randompartners = [...partners.filter(p => p.is_alumni_employer)]
+        - for (let i = randompartners.length - 1; i > 0; i--) {
+            - const j = Math.floor(Math.random() * (i + 1));
+            - [randompartners[i], randompartners[j]] = [randompartners[j], randompartners[i]];
+        - }  
+        .row.justify-content-center
+          each partner, index in randompartners.splice(0,6)
+            .col-3.col-md-2.partner.h-4.flex-column.align-items-center.justify-content-center(class=index > 3 ? "d-none d-lg-flex" : "d-flex")
+              .p-0.p-lg-2
+                img.partners-logo.w-100.px-0.px-lg-3(alt=partner.title, src="/images/" + partner.partnerlogo, )
 
-      section#mission.bg-light
-        .position-relative.offset_title
-          header.offset_header.text-left
-            .d-inline-block.position-relative
-              .bluepolygon.z-minus.right(style="transform: rotate(25deg) skew(10deg, -10deg) translate(1em, -2em)")
-              h2.position-relative.d-inline-block.display-1.text-center.text-white.ml-3
-                +translate("Mission")
+    section#courses.overflow-hidden
+      .container.pt-5.position-relative
+        .bg-light-blue.ml-n5.position-absolute.w-20.h-18.w-md-10.h-md-10.mr-3.mb-3.top.left.z-minus
+        h2.mb-5
+          +translate("Our Courses")
 
+        .dotted.red.w-15.h-15.w-lg-20.h-lg-20.rounded-circle.position-absolute.right.mr-n5.top-10
+        .dotted.blue.w-15.h-15.w-lg-24.h-lg-24.rounded-circle.position-absolute.left.bottom.top-40
+        .dotted.red.w-10.h-10.w-lg-15.h-lg-15.rounded-circle.position-absolute.right.bottom
+        .dotted.blue.w-10.w-lg-15.h-10.h-lg-15.position-absolute.right-10.bottom-10
 
-          .position-relative.container.overflow-hidden.my-5
-            .bg-light.p-4.rounded
-              .history-line.justify-content-between.row.text-center.text-shadow-white
-                .col-md-2.d-flex.flex-column.justify-content-end
-                  div.font-weight-bold.h3-md 2016
-                  div: +translate("1st Campus in Berlin")
-                .col-md-2
-                  div.d-md-none.font-weight-bold.h3-md 2017
-                  div.d-md-none: +translate("New Campuses in Düsseldorf & Hamburg")
-                .col-md-2.flex-column.justify-content-end
-                  div.d-none.d-md-block.font-weight-bold.h3-md 2018
-                  div.d-none.d-md-block: +translate("Partnership with Facebook")
-                .col-md-2
-                .col-md-2
-                  div.d-none.d-md-block.font-weight-bold.h3-md 2020
-                  div.d-none.d-md-block: +translate("Courses run 100% remotely")
+        .mx-xl-5.px-2
+          .mx-lg-5.pb-lg-5
+            .mx-lg-5.pb-lg-5
+              .row.justify-content-center
+                each course in courses
+                  .col-md-6.mb-5.floatings
+                    .card.hover-shadow.h-100.flex-column.rounded
+                      .d-block.flex-grow.justify-content-between.h-100
+                        .pt-3.pb-4.px-4.px-md-4.h-100
+                          .d-flex.flex-column.justify-content-between.h-100
+                            .px-md-2
+                              .row.position-relative.my-3
+                                .col-3.col-md-5.mb-md-3.pr-0.pr-md-3
+                                  .square.position-relative
+                                    img.img-fluid.position-absolute.top.left.h-100.w-100(src=course.icon ? `/images/` + course.icon : `/media/circuit-board.svg` alt=course.headline )
+                                .col-8.col-md-12.d-flex.flex-column.justify-content-center
+                                  a.stretched-link.text-dark(href="/courses/" + course.slug)
+                                    h3.mb-2= course.headline
+                                  p.text-muted.mb-0.font-weight-normal= course.courselength
+                              p.text-dark.pb-0.pb-md-4=course.subheading
+                            div.text-right
+                              a.btn.btn-outline-secondary(href="/courses/" + course.slug): +translate("View course")
 
-              .history-line.justify-content-between.row.text-center.text-shadow-white.pb-3.d-none.d-md-flex
-                div.flex-grow-1
-                  .line
-                    .circle
-                    hr
-                div.flex-grow-1
-                  .line
-                    .circle
-                    hr
-                div.flex-grow-1
-                  .line
-                    .circle
-                    hr
-                div.flex-grow-1
-                  .line
-                    .circle
-                    hr.arrow
-                div.flex-grow-1
-                .col-1
+    section#avaz.overflow-hidden
+      .container.py-5.mb-5.position-relative
+        .position-absolute.w-100.h-100.bg-primary-trans.top.left.shift-left-percent.d-md-none
+        .row
+          .col-md-4.border-width-0.border-md-width-2.border-right.border-light-blue.mb-4
+            .card.affiliate_header.px-4.px-md-0.mb-2.mb-md-0.shadow-sm.shadow-md-none(data-toggle='collapse', data-target='#affiliate_partner1') 
+              .d-flex.align-items-center.align-items-md-start.justify-content-between.flex-md-column
+                .py-3.py-md-0
+                  img.h-5.w-5.object-fit-contain(src="/media/azav.png", alt="")
+                p.font-weight-bold.text-muted.pl-3.pl-md-0.py-md-3.flex-grow-1.m-0=__("AVAZ Certified")
+                button.btn.btn-link.p-3.d-md-none(data-toggle='collapse', data-target='#affiliate_partner1')
+                  .rotate-270
+                    include ../assets/icons/arrow.svg
+            .card.d-none.d-md-block
+              p=__("We are an AZAV certified German educational institution. This not only allows DCI to be funded by the Agentur für Arbeit and Jobcenter, but also ensures the continuous quality of our courses. The certification is recognized in Germany and all of Europe.")
+              a.pt-3.text-primary(href="/jobcenter" )
+                =__("Learn more")
+                .ml-2.d-inline-block(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
+                include ../assets/icons/arrow.svg
+            #affiliate_partner1.card.collapse.d-md-none.bg-white.p-4.shadow-sm
+              p=__("We are an AZAV certified German educational institution. This not only allows DCI to be funded by the Agentur für Arbeit and Jobcenter, but also ensures the continuous quality of our courses. The certification is recognized in Germany and all of Europe.")
+              a.pt-3.text-primary(href="/jobcenter")
+                =__("Learn more")
+                .ml-2.d-inline-block(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
+                include ../assets/icons/arrow.svg
+          .col-md-4.border-width-0.border-md-width-2.border-right.border-left.border-width-2.border-light-blue.mb-4
+            
+            .card.affiliate_header.px-4.px-md-0.mb-2.mb-md-0.shadow-sm.shadow-md-none(data-toggle='collapse', data-target='#affiliate_partner2') 
+              .d-flex.align-items-center.align-items-md-start.justify-content-between.flex-md-column
+                .py-3.py-md-0
+                  img.h-5.w-5.object-fit-contain(src="/media/aws.svg", alt="")
+                p.font-weight-bold.text-muted.pl-3.pl-md-0.py-md-3.flex-grow-1.m-0 AWS re/Start Programm
+                button.btn.btn-link.p-3.d-md-none(data-toggle='collapse', data-target='#affiliate_partner2')
+                  .rotate-270
+                    include ../assets/icons/arrow.svg
+            .card.d-none.d-md-block
+              p=__("We are collaborating together with AWS to support learners in building new careers in cloud computing. The participants will learn everything they need to know for an entry level cloud career such as cloud operations, site reliability and infrastructure support.")
+              a.pt-3.text-primary(href=`/courses/${courses.find(e => e.headline.toLowerCase().includes("aws")).slug}`)
+                =__("Learn more")
+                .ml-2.d-inline-block(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
+                include ../assets/icons/arrow.svg
+            #affiliate_partner2.card.collapse.d-md-none.bg-white.p-4.shadow-sm
+              p=__("We are collaborating together with AWS to support learners in building new careers in cloud computing. The participants will learn everything they need to know for an entry level cloud career such as cloud operations, site reliability and infrastructure support.")
+              a.pt-3.text-primary(href=`/courses/${courses.find(e => e.headline.toLowerCase().includes('aws')).slug}`)
+                =__("Learn more")
+                .ml-2.d-inline-block(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
+                include ../assets/icons/arrow.svg
+          .col-md-4.border-width-0.border-md-width-2.border-left.border-width-2.border-light-blue.mb-4
+            
+            .card.affiliate_header.px-4.px-md-0.mb-2.mb-md-0.shadow-sm.shadow-md-none(data-toggle='collapse', data-target='#affiliate_partner3') 
+              .d-flex.align-items-center.align-items-md-start.justify-content-between.flex-md-column
+                .py-3.py-md-0
+                  img.h-5.w-5.object-fit-contain(src="/media/delivery_hero.svg", alt="")
+                p.font-weight-bold.text-muted.pl-3.pl-md-0.py-md-3.flex-grow-1.m-0=__("Delivery Hero Tech Academy")
+                button.btn.btn-link.p-3.d-md-none(data-toggle='collapse', data-target='#affiliate_partner3')
+                  .rotate-270
+                    include ../assets/icons/arrow.svg
+            .card.d-none.d-md-block
+              p=__("We are exclusively working together with Delivery Hero to build the next generation of Software Engineers! The Delivery Hero Tech Academy (DHTA) is based in Berlin and on a mission to increase diversity and inclusion within the tech industry.")
+              a.pt-3.text-primary(href="https://careers.deliveryhero.com/global/en/techacademy" target="_blank")
+                =__("Learn more")
+                .ml-2.d-inline-block(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
+                include ../assets/icons/arrow.svg
+            #affiliate_partner3.card.collapse.d-md-none.bg-white.p-4.shadow-sm
+              p=__("We are exclusively working together with Delivery Hero to build the next generation of Software Engineers! The Delivery Hero Tech Academy (DHTA) is based in Berlin and on a mission to increase diversity and inclusion within the tech industry.")
+              a.pt-3.text-primary(href="https://careers.deliveryhero.com/global/en/techacademy" target="_blank")
+                =__("Learn more")
+                .ml-2.d-inline-block(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
+                include ../assets/icons/arrow.svg
 
-              .history-line.justify-content-between.row.text-center.text-shadow-white
-                .col-md-2
-                .col-md-2
-                  div.d-md-block.d-none.font-weight-bold.h3-md 2017
-                  div.d-md-block.d-none: +translate("New Campuses in Düsseldorf & Hamburg")
-                .col-md-2.flex-column.justify-content-end
-                  div.d-md-none.font-weight-bold.h3-md 2018
-                  div.d-md-none: +translate("Partnership with Facebook")
-                .col-md-2
-                  div.font-weight-bold.h3-md 2019
-                  div: +translate("Launched Online Marketing course and Leipzig Campus")
-                .col-md-2
-
-
-
-            section#stats.section-counter.py-5.mb-5.row
-              div.col-lg-9
-                //-iframe(frameborder='0', height='100%', width='100%', src='https://youtube.com/embed/BLUfMfcN82c?controls=0&showinfo=0&autohide=1')
-                .bg-primary.rounded
-                  img.rounded.h-100.w-100.object-fit-cover.half-transparent(alt="people programming" src='/media/bg4.jpg')
-              .col-lg-3
-                .p-3.h-100.d-flex.flex-column.justify-content-center.avoid-polygon2
-                  i.h3.m-0.text-shadow-white
-                    ="\""
-                    = __("The Digital Career Institute was born as an initiative to integrate refugees into digital jobs. Today it is committed to train anyone who wants to pursue a tech career.")
-
-              .container.container-counter.mt-4
-                .col-12.py-5
-                  .row
-                    .col-sm-6.col-md-3
-                      .counter-item
-                        .counter-number.font-weight-bold
-                          h2.display-1
-                            span.counter-count=locals.settings.landingpage_archivements_students || 600
-                            = "+"
-                        h4.font-weight-bold: +translate("Students")
-                    .col-sm-6.col-md-3
-                      .counter-item
-                        .counter-number.font-weight-bold
-                          h2.display-1
-                            span.counter-count=locals.settings.landingpage_archivements_courses || 50
-                            = "+"
-                        h4.font-weight-bold
-                          +translate("Courses started")
-                    .col-sm-6.col-md-3
-                      .counter-item
-                        .counter-number.font-weight-bold
-                          h2.display-1
-                            span.counter-count=locals.settings.landingpage_archivements_tours || 300
-                            = "+"
-                        h4.font-weight-bold: +translate("Company tours")
-                    .col-sm-6.col-md-3
-                      .counter-item
-                        .counter-number.font-weight-bold
-                          h2.display-1
-                            span.counter-count=locals.settings.landingpage_archivements_locations || 5
-                        h4.font-weight-bold: +translate("Locations")
-
-
-      section#stories.my-5.offset_title.position-relative
-        header.offset_header.text-right
-          .d-inline-block.position-relative
-            .bluepolygon.z-minus.left(style="transform: rotate(-45deg) skew(-20deg, 10deg) translate(2em, -2em)")
-            h2.position-relative.d-inline-block.display-1.text-center.text-white.mr-3
-              +translate("Stories")
-
-        if stories
-          - storysWithTestimonial = stories
-          if storysWithTestimonial.length > 0
-            .container
-              .mx-lg-5
-                .mx-lg-5.px-lg-2
-                  .py-5
-                    h2.pb-3.bar-bottom.mb-5.p-1.bg-white
-                      =__("What companies")
-                      span.badge.badge-primary-trans.text-primary.font-weight-normal.mx-1=__("love")
-                      =__("about our graduates")
-            #careersuccesscarousel.carousel.slide.mb-5.pt-3.pb-5(data-ride="carousel")
-              .carousel-inner
-                each story, index in storysWithTestimonial
-                  .carousel-item(class= index === 0 ? ` active` : ``)
-                    .container
-                      .mx-lg-5
-                        .mx-lg-5.px-lg-2
-                          .bg-white.p-4.rounded-md.border.pb-5
-                            if user && story && user.userId === story.userId || user && user.admin === "true"
-                              a.position-absolute.right.bottom.btn.btn-outline-primary.z-foreground(href=`/admin/stories/edit/${story.slug}`) Edit
-                                
-                            div.position-relative
-                              .p-5.story-item
-                                blockquote.blockquote.z-1
-                                  .quotesign.text-primary.z-minus
-                                    include ../assets/icons/om_quote.svg
-                                  =story.excerpt
-                              .d-flex.justify-content-end.align-items-end
-                                
-                                div.text-right.px-3
-                                  h3=story.subtitle
-                                  h4.font-italic=story.workPosition
-                                a.stretched-link.text-right.rounded-circle.overflow-hidden(href=`/stories/${story.slug}` style=`box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1f3fc7 !important`};`)
-                                  img.mw-150.object-fit-contain.w-8.square(src="/media/pixel.gif" style=`background-image: url('/images/${story.avatar}'); box-shadow: 3px 3px ${course && course.coloraccent ? course.coloraccent : `#1f3fc7 !important`}`)
-
-                if storysWithTestimonial.length > 1
-                  ol.carousel-indicators
-                    each story, index in storysWithTestimonial
-                      li(data-target="#careersuccesscarousel" data-slide-to=index class=index==0 ? " active": "")
-
-                if storysWithTestimonial.length > 1
-                  a.carousel-control-prev(href="#careersuccesscarousel" role="button" data-slide="prev")
-                    span.carousel-control-prev-icon(aria-hidden="true")
-                    span.sr-only Previous
-                  a.carousel-control-next(href="#careersuccesscarousel" role="button" data-slide="next")
-                    span.carousel-control-next-icon(aria-hidden="true")
-                    span.sr-only Next
-        .pt-4.text-center
-          a.btn.btn-lg.btn-secondary.mx-5(href="/stories"): +translate("Show all Stories")
-
-      if events
-        section#events.bg-light.py-5
-          .container
-            h2.display-1.text-center: +translate("Upcoming events")
-            h3.mb-5.text-center.text-muted: +translate("Meet us in person in several locations in Germany")
-            .row.mx-md-5
-              each event in events
-                +singleEvent(event)
-
-          .text-center
-            a.btn.btn-lg.btn-secondary.mx-5(href='/events/'): +translate("All Events")
-      section.py-5.section-services#partners
-        .container.py-5.text-center
-          h2.display-1.text-center.mb-5: +translate("Our Partners")
-          each partner in partners
-            if partner.link
-              a(href=partner.link target="_blank" rel="noopener")
-                img.partners-logo.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo)
-            else
-              img.partners-logo.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title, src="/images/" + partner.partnerlogo)
-      section.call-to-action.pt-5.bg-dark.overflow-hidden.position-relative.z-0.d-flex.flex-column.justify-content-center.pb-200
-        .z-1.container.text-white
-          h2.mb-5: +translate("Join the Tech Disruption at DCI")
-          .row.mb-5
-            .col-md-6
-              .shape-md-outside
-              div.right-shape-md: +translate("Do you want to become one of the digital pioneers and show your creativity to the world, or change careers Then join entrepreneurs and disruptors at DCI")
-            .col-md-6
-              .shape-md-outside.shape-left
-              div.left-shape-md: +translate("Are you a company looking to hire Grads? or would you like to become one of our partner companies and host company tours? Then ..")
-          .text-center.mb-5
-            a.btn.btn-lg.btn-secondary.mb-3.mx-5(href='/contact', data-toggle='modal', data-target='#contactFormModal'): +translate("Apply now")
-            a#calltoaction.btn.btn-lg.btn-tertiary.mb-3.mx-5(href='/tour')=__("Become a Hiring Partner")
-        canvas.z-minus#polygons(width="1000", height="400")
+    section#mission.position-relative.overflow-hidden
+      .container.section-counter
+        .h-3.mb-5.d-md-none
+          .position-absolute
+            .bg-primary.w-3.h-3.ml-n3.z-minus
+            .bg-light-blue.z-minus.w-3.h-3.mt-3.position-absolute.top.left
+        h2
+          +translate("Our Mission")
+        p= __("The Digital Career Institute was born as an initiative to integrate refugees into digital jobs. Today we are committed to training anyone interested in pursuing a career in tech. We provide everything our students need to succeed, including computer equipment, language books, and mobile internet when necessary.")
+        .row
+          .col-md-6
+            .rounded.h-100.pr-md-4.pt-md-4
+              img.d-none.d-md-block.rounded.h-100.w-100.object-fit-cover.h-100(alt="people programming" src='/media/bg4.jpg')
+          .col-md-6.mt-5.mt-md-0
+            .row.h-100.pl-3
+              .col-6.border-left.py-4
+                .counter-item
+                  .counter-number.font-weight-bold
+                    h2
+                      span.counter-count=locals.settings.landingpage_archivements_students || 600
+                      = "+"
+                  p: +translate("Students & alumni from all over the world.")
+              .col-6.border-left.py-4
+                .counter-item
+                  .counter-number.font-weight-bold
+                    h2
+                      span.counter-count=locals.settings.landingpage_archivements_courses || 50
+                      = "+"
+                  p: +translate("Courses started since we were founded.")
+              .col-6.border-left.py-4
+                .counter-item
+                  .counter-number.font-weight-bold
+                    h2
+                      span.counter-count=locals.settings.landingpage_archivements_tours || 300
+                      = "+"
+                  p: +translate("Hiring partners in Germany.")
+              .col-6.border-left.py-4
+                .counter-item
+                  .counter-number.font-weight-bold
+                    h2
+                      span.counter-count=locals.settings.landingpage_archivements_locations || 5
+                  p: +translate("Campuses in Berlin, Düsseldorf, Hamburg and Leipzig.")
+              .col-6.border-left.py-4.pb-5
+                .bg-light-blue.position-absolute.h-30-percent.h-md-40-percent.w-100.z-minus.bottom.mission-background
+                .counter-item
+                  .counter-number.font-weight-bold
+                    h2
+                      span.counter-count
+                        =locals.settings.careersuccesspage_employmentrate || 87
+                      ="%"
+                  p: +translate("Placement rate")
+              .col-6.border-left.py-4.pb-5
+                .counter-item
+                  .counter-number.font-weight-bold
+                    h2
+                      span.counter-count
+                        =locals.settings.landingpage_different_nationalities || 90
+                      ="+"
+                  p: +translate("Different nationalities of students and teachers.")
 
 
+    section#hiring.bg-light-blue.py-5.overflow-hidden
+      .container.mt-md-5.position-relative.mb-5
+        .row
+          .col-md-6
+            h2: +translate("Meet Our Hiring Partners")
+            p=__("We work with over 400 hiring partners to match our students with tech jobs after graduation, including unique networking opportunities. DCI alumni work in top tech companies as front-end developers, full-stack developers, technical product managers, marketing managers, social media managers and more.")
+
+          .col-md-6.mt-5.mt-md-0.position-relative.z-0
+            .ml-3.mr-4.mx-md-0
+              .row.bg-white.p-3.p-md-5.z-1
+                each partner, index in partners.filter(p => !p.is_alumni_employer)
+                  if partner.link
+                    a.d-flex.col-4.h-4.align-items-center.justify-content-center(href=partner.link target="_blank" rel="noopener" )
+                      .p-2.p-md-0.p-lg-2
+                        img.w-100.mw-150.mh-150(alt=partner.title, src="/images/" + partner.partnerlogo)
+                  else
+                    .d-flex.col-4.h-4.align-items-center.justify-content-center
+                      .p-2.p-md-0.p-lg-2
+                        img.w-100.mw-150.mh-150(alt=partner.title, src="/images/" + partner.partnerlogo )
+              .dotted.red.w-23.w-lg-24.h-23.h-lg-20.position-absolute.right.mr-n5.mt-5.bottom.mr-n5.mb-n5.z-minus.grayscale
+
+    if stories
+      section#stories.py-5.overflow-hidden
+        .container.position-relative
+
+          .h-3.mb-5.d-md-none
+            .position-absolute
+              .bg-primary.w-3.h-3.ml-n3.z-minus
+              .bg-light-blue.z-minus.w-3.h-3.mt-3.position-absolute.top.left
+          h2: +translate("Alumni Stories")
+          p=__("Our students come from all around the world and have different professional backgrounds. Discover how the DCI experience changed their lives.")
+          .d-none.d-md-block.dotted.red.w-15.h-15.rounded-circle.position-absolute.right.mr-n5
+          .d-none.d-md-block.dotted.blue.w-15.h-15.position-absolute.left.bottom.ml-n5
+          .px-3.px-sm-5
+            - storysWithTestimonial = stories
+            if storysWithTestimonial.length > 0
+              +successCarousel(storysWithTestimonial)
+
+    - shadows = ["shadow-right-bottom", "shadow-bottom-left", "shadow-left-top", "shadow-top-right"]
+    if events
+      section#events.bg-primary.py-0.py-md-5
+        .py-5.overflow-hidden
+          .container.position-relative
+            .bg-white.quarter-transparent.position-absolute.w-lg-20.h-20.h-lg-20.right-md-0.bottom-40.bottom-md-0.d-none.d-md-block(class=events.length > 1 ? "mb-5" : "")
+            .bg-white.quarter-transparent.position-absolute.w-lg-20.h-20.h-lg-20.left-md-40.top-10.top-md-0.d-none.d-md-block
+            .bg-white.quarter-transparent.position-absolute.w-lg-20.h-20.h-lg-20.bottom-10.bottom-md-0.d-none.d-md-block
+            h2.text-center.text-md-left.text-white.mb-5: +translate("Upcoming Events")
+            .row.mx-xl-5.pt-4.pt-md-0.px-2
+              .floatings.mb-5.pb-4(class=events.length == 1 ? "col-12" : "col-md-6")
+                .card.p-3.p-md-4.rounded.shadow-lg-none.h-100.d-flex.flex-column.justify-content-between.shadow-right-bottom(href=events[0].url, target="_blank" rel="noopener" class=shadows[index % partners.length])
+                  .first-event-item.h-100
+                    .d-flex.pt-3.h-100
+                      .d-flex.rounded.w-100
+                        figure.mw-lg-150.p-0.position-relative.mb-0
+                          .d-flex.flex-column.justify-content-center.h-100
+                            img.w-100.mb-3.mb-md-0.object-fit-contain(alt=events[0].name src=events[0].imageurl)
+                    .col.text-left.order-3.order-sm-2.d-flex.flex-column.justify-content-around.pr-0
+                      h6.font-weight-bold.text-dark.mb-3=events[0].name
+                    
+                    .col.px-md-0
+                      p.d-none.d-md-block=events[0].text.substr(0, 300)
+                      p.text-muted.mb-0
+                        span.mr-1.mr-xl-3.w-1.d-inline-block.mb-3.mb-xl-0
+                          img.mb-1.w-100.object-fit-contain(src="/media/events_clock-thin.svg", alt="Event time")
+                        =moment(events[0].start).format('HH:SS A DD. MMM YYYY')
+                      a.text-right.d-block.stretched-link.font-weight-bold(href=events[0].url target="_blank" rel="noopener")=__("Register")
+              .col-md-6
+                each event, index in events.splice(1,2)
+                  .floatings.mb-5.pb-4
+                    .card.p-3.p-md-4.shadow-lg-none.h-100.d-flex.flex-column.justify-content-between(href=event.url, target="_blank" rel="noopener" class=shadows[index + 1 % partners.length])
+                      .text-center.d-flex.pt-3
+                        .d-flex.rounded.w-100
+                          figure.mw-lg-150.p-0.position-relative.mb-0.col-4.col-lg-12
+                            .d-flex.flex-column.justify-content-center.h-100
+                              img.mb-3.mb-md-0.object-fit-contain(alt=event.name src=event.imageurl)
+                          .col.text-left.order-3.order-sm-2.d-flex.flex-column.justify-content-center.pr-0
+                            h6.font-weight-bold.text-dark.mb-3=event.name
+                            p.text-muted.mb-0.mb-3
+                              span.mr-1.mr-xl-3.w-1.d-inline-block.mb-3.mb-xl-0
+                                img.mb-1.w-100.object-fit-contain(src="/media/events_clock-thin.svg", alt="Event time")
+                              =moment(event.start).format('HH:SS A DD. MMM YYYY')
+                            a.text-right.d-block.stretched-link.font-weight-bold(href=event.url target="_blank" rel="noopener")=__("Register") 
+              .col
+                .row
+                  each event, index in events.splice(1,3)
+                    .col-md-6.floatings.mb-5.pb-4.w-100
+                      .card.p-3.p-md-4.rounded.shadow-lg-none.h-100.d-flex.flex-column.justify-content-between.shadow-bottom-left(href=event.url, target="_blank" rel="noopener" class=shadows[index + 2 % partners.length])
+                        .text-center.d-flex.pt-3
+                          .d-flex.rounded.w-100
+                            figure.mw-lg-150.p-0.position-relative.mb-0.col-4.col-lg-12
+                              .d-flex.flex-column.justify-content-center.h-100
+                                img.mb-3.mb-md-0.object-fit-contain(alt=event.name src=event.imageurl)
+                            .col.text-left.order-3.order-sm-2.d-flex.flex-column.justify-content-center.pr-0
+                              h6.font-weight-bold.text-dark.mb-3=event.name
+                              
+                              p.text-muted.mb-0.mb-3
+                                span.mr-1.mr-xl-3.w-1.d-inline-block.mb-3.mb-xl-0
+                                  img.mb-1.w-100.object-fit-contain(src="/media/events_clock-thin.svg", alt="Event time")
+                                =moment(event.start).format('HH:SS A DD. MMM YYYY')
+                              a.text-right.d-block.stretched-link.font-weight-bold(href=event.url target="_blank" rel="noopener")=__("Register") 
+
+          .container.position-relative.d-none.d-md-block
+            .text-right
+              a.btn.btn-lg.btn-link.text-white.text-underline(href='/events/'): +translate("View all upcoming events")
+            
+    section.pt-5.bg-light-blue.overflow-hidden.position-relative.z-0.d-flex.flex-column.justify-content-center.pb-200
+      .container.position-relative
+        .dotted.blue.w-7.h-7.w-md-15.h-md-15.position-absolute.left-30.left-md-0.top-md-0
+        .dotted.red.w-7.h-7.w-md-13.h-md-13.rounded-circle.position-absolute.left-40.left-md-0.mt-5.ml-md-5
+
+        .dotted.blue.w-7.h-7.w-md-15.h-md-15.position-absolute.right-50.bottom-0.right-md-0.mb-5.mr-md-5
+        .dotted.red.w-7.h-7.w-md-13.h-md-13.rounded-circle.position-absolute.right-40.bottom-0.right-md-0
+        .pb-4.pt-5
+
+          .py-5.p-md-5
+            .bg-white.p-5.mb-5.position-relative.text-center
+              .py-md-4
+                .p-md-5
+                  h3: +translate("Ready to join? Apply now and join the disruption.")
+                  div: +translate("Our admission team is always there for you regardless of your location")
+                  .text-center.mt-5
+                    a.btn.btn-lg.btn-secondary.mx-3.mb-4.mb-lg-0.w-100.w-md-auto(href='/contact', data-toggle='modal', data-target='#signupFormModal'): +translate("Apply now")
+                    a#calltoaction.btn.btn-lg.btn-outline-primary.mx-3.w-100.w-md-auto.scrollbutton(href=`${locale !== 'en' ? `/` + locale : ``}/#courses`)=__("Browse Courses")
 

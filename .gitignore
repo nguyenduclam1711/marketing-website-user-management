@@ -6,6 +6,7 @@ uploads/images/*
 dump.rdb
 *.map
 public/*
+!public/webpushr-sw.js
 backup.sh
 backup
 *.log

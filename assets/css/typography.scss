@@ -14,6 +14,13 @@
   background-color: $primary;
   color: #fff;
 }
+body {
+  font-family: "Gordita", sans-serif;
+  color: $body;
+  // font-weight: 200;
+  font-size: 18px;
+  line-height: var(--lh);
+}
 h1,
 h2,
 h3,
@@ -21,13 +28,24 @@ h4,
 h5,
 h6,
 div[class^="display-"] {
-  font-family: "Gordita-Bold", sans-serif;
-}
-h4,
-h5,
-h6 {
   font-family: "Gordita", sans-serif;
-  font-weight: 300 !important;
+  color: $bluedark;
+  font-weight: 700 !important;
+}
+h1, .h1 {
+  font-size: 2.6rem;
+}
+h2, .h2 {
+    font-size: 2.2rem;
+}
+h3, .h3 {
+    font-size: 1.375rem;
+}
+small, .small {
+    font-size: 89%;
+}
+.font-weight-normal {
+  font-weight: 500 !important;
 }
 //h4 {
 //  font-size: 1rem;
@@ -35,12 +53,8 @@ h6 {
 a:link {
   text-decoration: none !important;
 }
-.font-weight-light {
-  font-family: "Gordita-Regular", sans-serif !important;
-}
-.font-weight-bold {
-  font-weight: 100 !important;
-  font-family: "Gordita-Bold", sans-serif;
+.display-0 {
+  font-size: 4rem !important;
 }
 .display-1 {
   font-size: 3rem !important;
@@ -48,10 +62,8 @@ a:link {
 .display-2 {
   font-size: 1.7rem;
 }
-@include media-breakpoint-down(lg) {
-  .lead {
-    font-size: 1rem !important;
-  }
+.lead {
+  font-size: 20px;
 }
 @include media-breakpoint-up(lg) {
   .responsiveD-3 {
@@ -115,9 +127,6 @@ a:link {
 .text-shadow-white {
   text-shadow: 1px 2px 0 white;
 }
-.text-shadow-light-blue {
-  text-shadow: 1px 2px 2px $light-blue;
-}
 .text-light {
   color: $light!important;
 }
@@ -138,4 +147,8 @@ a:link {
 
 label {
   font-size: 0.8em;
+}
+
+.text-muted {
+  color: $muted !important;
 }

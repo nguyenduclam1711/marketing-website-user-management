@@ -40,7 +40,8 @@ const {
   adminUser,
   contacts,
   employees,
-  languages
+  languages,
+  locations
 } = require("./seeddata");
 const imageUploadDir = IMAGE_UPLOAD_DIR;
 
@@ -90,6 +91,11 @@ async function seedRandomNtoN(arrayOfRecords, relationship, model) {
 }
 
 async function seedRandomImages() {
+
+  if (!fs.existsSync(imageUploadDir)){
+    fs.mkdirSync(imageUploadDir);
+  }
+
   var images = [
     "./assets/media/bg1.jpg",
     "./assets/media/bg2.jpg",
@@ -108,9 +114,8 @@ async function loadData() {
     await Promise.all(await seedRandomImages());
     console.log(`Images saved to ${imageUploadDir}`);
     await EventsController.fetchevents();
-
     const createdMenulocations = await Menulocation.insertMany(menulocations);
-    const createdLocations = await Location.find();
+    const createdLocations = await Location.insertMany(locations); //Location.find();
     await Course.insertMany(courses);
     await Employee.insertMany(employees);
     await Story.insertMany(stories);

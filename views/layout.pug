@@ -1,11 +1,11 @@
 include mixins/navigation
-include mixins/storylist
 include mixins/courselist
 include mixins/pagelist
 include mixins/joblist
 include mixins/singleEvent
 include mixins/singleEmployee
 include mixins/contactform
+include mixins/signupform
 include mixins/dataPrivacy
 include mixins/storyForm
 include mixins/courseForm
@@ -22,9 +22,11 @@ include mixins/adminButtonGroup
 include mixins/translate
 include mixins/fullstory
 include mixins/curriculumForm
+include mixins/courseOverviewCard
+include mixins/successCarousel
 
 doctype html
-html.h-100(lang='en')
+html.h-100(lang=locale === "de" ? 'de': 'en')
   head
     if live
       // Google Optimize anit-flicker code https://support.google.com/optimize/answer/7100284?hl=en
@@ -47,9 +49,9 @@ html.h-100(lang='en')
 
     meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
     meta(name='viewport', content='width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86')
-    meta(name='description', content='Start your digital Career. Learn digital skills with us to get the most fulfilling jobs. At our Institute you learn the most relevant technology skills of today from Web Development, Digital Marketing, Product Management to Data.font-weight-bold.')
+    meta(name='description', content='Start your digital Career. Learn digital skills with us to get the most fulfilling jobs. At our Institute you learn the most relevant technology skills of today from Web Development, Digital Marketing, Product Management to Data.')
     meta(name='keywords', content='Web Development, Digital Marketing, Product Management, Data Science, School, Jobs')
-    meta(property='og:locale', content='en_GB')
+    meta(property='og:locale', content=locale === "de" ? 'de_DE': 'en_GB')
     meta(property='og:locale:alternate', content='de_DE')
     meta(property='og:type', content='website')
     meta(property='og:title', content='Digital Career Institute')
@@ -63,14 +65,42 @@ html.h-100(lang='en')
     meta(name='twitter:creator', content='@DevugeesOrg')
     meta(name="msapplication-TileColor", content="#ffffff")
     meta(name="theme-color", content="#ffffff")
+    if currentPath.includes("/thank-you")
+      meta(name="robots" content="noindex")
+
     title=title
-    link(rel="stylesheet", href="/frontend.css")
+    link(rel="stylesheet", href=`/frontend.css${process.cwd().replace(/[^\d]/g, '') !== "" ? `?${process.cwd().replace(/[^\d]/g, '')}` : ``}`)
     link(rel="apple-touch-icon", sizes="180x180", href="/assets/apple-touch-icon.png")
     link(rel="icon", type="image/png", sizes="32x32", href="/assets/favicon-32x32.png")
     link(rel="icon", type="image/png", sizes="16x16", href="/assets/favicon-16x16.png")
     link(rel="manifest", href="/assets/site.webmanifest")
     link(rel="mask-icon", href="/assets/safari-pinned-tab.svg", color="#5bbad5")
 
+    if course && course.coloraccent
+      style(type='text/css').
+       .dropdown-custom:hover .dropdown-menu .dropdown-item:hover,
+       .dropdown:hover .dropdown-menu .dropdown-item:hover {
+          color: black !important;
+          background-color: #{course.coloraccent} !important;
+        }
+        .dropdown-custom .dropdown-menu.show .dropdown-item:active,
+        .dropdown-custom .dropdown-menu.show .dropdown-item:focus {
+          background-color: #{course.coloraccent} !important;
+          color: var(--dark) !important;
+        }
+        @media (min-width: 768px) {
+          .dropdown-menu .active:hover {
+            background-color: #{course.coloraccent};
+          }
+        }
+        .courseslink {
+          color: #{course.coloraccent}!important;
+        }
+        @media (min-width: 768px) {
+          .courseslink {
+            color: var(--dark) !important;
+          }
+        }
   body.h-100.d-flex.flex-column(data-spy='scroll', data-target='#courseScrollspy', data-offset='1', class=`${pathclass+(currentPath && currentPath.includes('/admin') ? ' admin' : currentPath == "/" ? "index" : "" )}`)
 
     if live
@@ -96,12 +126,10 @@ html.h-100(lang='en')
         block content
       if currentPath && !currentPath.includes('admin') && !currentPath.includes('users')
         footer.site-footer(role='contentinfo' class=user ? "pb-5" : "" style=course && `color: ${course.textColor}`)
-          section.position-relative.px-4.px-md-0(class=course && course.coloraccent ? `` : `bg-primary-dark`, style=course && course.coloraccent ? `background-color: rgb(${course.coloraccent.replace(/.*\((.*)\)/g, "$1").split(',').map(i => Math.floor(i * 0.8)).join(', ')}` : `` )
-            a.triangle.top-right(target="_blank" rel="noopener" href="https://github.com/DigitalCareerInstitute/marketing-website" title=__("Wanna contribute and help making this site better? Fork me on GitHub") style=course && course.coloraccent ? `border-color: transparent transparent rgb(${course.coloraccent.replace(/.*\((.*)\)/g, "$1").split(',').map(i => Math.floor(i * 0.6)).join(', ')}` : `` )
-              include ../assets/icons/github-brands.svg
+          section.position-relative.px-4.px-md-0.pb-5(class=course && course.coloraccent ? `` : `bg-primary-dark`, style=course && course.coloraccent ? `background-color: rgb(${course.coloraccent.replace(/.*\((.*)\)/g, "$1").split(',').map(i => Math.floor(i * 0.8)).join(', ')}` : `` )
             if currentPath !== "/users/login" && currentPath !== "/users/register"
               +newsletter
-            .container.pb-5
+            .container
               .row
                 .col-6.col-sm-2.footers-two
                   p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-muted`)=__("Company")
@@ -116,7 +144,7 @@ html.h-100(lang='en')
                       a(class=!course ? "text-muted" : "text-white", href='/jobcenter')
                         =__("Jobcenter")
                     li.my-2
-                      a(class=!course ? "text-muted" : "text-white", href='/#partners')
+                      a.scrollbutton(class=!course ? "text-muted" : "text-white", href=`${locale !== 'en' ? `/` + locale : ``}/#hiring`)
                         =__("Partners")
 
                 .col-6.col-sm-5.footers-three
@@ -140,6 +168,8 @@ html.h-100(lang='en')
                       a(class=!course ? "text-muted" : "text-white", target="_blank" rel="noopener" alt="DCI on Instagram" href="https://www.instagram.com/digitalcareerinstitute/") Instagram
                     li.my-2
                       a(class=!course ? "text-muted" : "text-white", target="_blank" rel="noopener" alt="DCI on LinkedIn" href="https://www.linkedin.com/school/dci-digital-career-institute/") LinkedIn
+                    li.my-2
+                      a(class=!course ? "text-muted" : "text-white", target="_blank" rel="noopener" alt="DCI on Github" href="https://github.com/DigitalCareerInstitute/marketing-website") Github
 
                 .col-6.col-sm-2.footers-five
                   p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-muted`)=__("Campus")
@@ -148,22 +178,22 @@ html.h-100(lang='en')
                       li.my-2
                         a(class=!course ? "text-muted" : "text-white", href='/contact')=location.name
 
-              nav.d-flex.justify-content-between.align-items-center.pt-5
-                div.pt-md-5.d-flex.justify-content-between.w-100
-                  a.font-weight-bold.navbar-brand.text-light.h-60.mr-md-5.mt-n4.mt-md-0(href="/")
-                    include ../assets/media/dci.svg
-                  div.w-100.d-flex.justify-content-between.flex-column.flex-md-row
-                    div.mb-4.mb-md-0
-                      span.mr-3.mr-lg-5.d-block.d-md-inline(class=course && course.coloraccent ? ``: `text-muted` style=course && course.coloraccent ? `color: white` : ``)
-                        ="© 2021 DigitalCareerInstitute gGmbH"
-                      span(class=course && course.coloraccent ? ``: `text-muted` style=course && course.coloraccent ? `color: white` : ``)
-                        =__("All Rights Reserved")
+            nav.d-flex.justify-content-between.align-items-center.pt-5.container
+              div.pt-md-5.d-flex.justify-content-between.w-100
+                a.font-weight-bold.navbar-brand.text-light.h-60.mr-md-5.mt-n4.mt-md-0(href="/")
+                  include ../assets/media/dci.svg
+                div.w-100.d-flex.justify-content-between.flex-column.flex-md-row
+                  div.mb-4.mb-md-0
+                    small.mr-3.mr-lg-5.d-block.d-md-inline(class=course && course.coloraccent ? ``: `text-muted` style=course && course.coloraccent ? `color: white` : ``)
+                      ="© 2021 Digital Career Institute gGmbH"
+                    small(class=course && course.coloraccent ? ``: `text-muted` style=course && course.coloraccent ? `color: white` : ``)
+                      =__("All Rights Reserved")
 
-                    div
-                      each page in footerPages
-                        span.ml-2.ml-md-4
-                          a(href='/pages/' + page.slug class=course && course.coloraccent ? ``: `text-muted` style=course && course.coloraccent ? `color: white` : ``)
-                            =page.title
+                  div
+                    each page in footerPages
+                      small.ml-2.ml-md-4
+                        a(href='/pages/' + page.slug class=course && course.coloraccent ? ``: `text-muted` style=course && course.coloraccent ? `color: white` : ``)
+                          =page.title
 
     if user
       +menuFooter
@@ -174,14 +204,24 @@ html.h-100(lang='en')
           .p-4
             .mb-2
               h2.display-4.text-center.text-uppercase=__('Contact us')
-              p.mb-3.text-center.text-muted=__("Let’s connect! Our admissions team will call you soon to chat about our courses and your goals")
+              p.mb-3.text-center.text-muted=__("Let’s connect! We'll come back to you as soon as possible")
             +contactform
+
+    #signupFormModal.modal(tabindex='-1', role='dialog', aria-labelledby='contactFormModal', aria-hidden='true')
+      .modal-dialog.modal-dialog-centered
+        .modal-content.bg-light.border-radius-0
+          .p-4
+            .mb-2
+              h2.display-4.text-center.text-uppercase=__('Signup')
+              p.mb-3.text-center.text-muted=__("Let’s connect! Our admissions team will call you soon to chat about our courses and your goals")
+            +signupform
+
 
     if currentPath && !currentPath.includes('admin') && !currentPath.includes('users')
       .modal#dataPrivacy
         +dataPrivacy
     
-    if (course && course.curriculumPdf) || currentPath === '/jobcenter'
+    if (course && course.curriculumPdf) || currentPath === '/jobcenter'|| currentPath === '/tour'
       +curriculumForm
 
     if currentPath && !currentPath.includes('admin') && !currentPath.includes('users')
@@ -198,6 +238,6 @@ html.h-100(lang='en')
 
 
 
-    script(src="/frontend.bundle.js")
+    script(src=`/frontend.bundle.js${process.cwd().replace(/[^\d]/g, '') !== "" ? `?${process.cwd().replace(/[^\d]/g, '')}` : ``}`)
     if currentPath && currentPath.includes('/admin')
-      script(src="/backend.bundle.js")
+      script(src=`/backend.bundle.js${process.cwd().replace(/[^\d]/g, '') !== "" ? `?${process.cwd().replace(/[^\d]/g, '')}` : ``}`)

@@ -15,7 +15,7 @@ block content
   .bg-primary
     .container.text-center.text-white.py-5
       .py-md-5
-        h2: +translate("Remote Learning")
+        h2.text-white: +translate("Remote Learning")
         p: +translate("Learn from the comfort of your home in a virtual and professional learning enviroment. Our educational Counselors will bring you up to speed and help you secure your spot.")
         .row.mt-5.mb-5
           .col-md-6.mb-5.mb-md-0
@@ -27,7 +27,7 @@ block content
               include ../assets/media/computer-thin.svg
             +translate("We will equip you with the right devices")
 
-        a.btn.btn-lg.btn-secondary.mb-3.mx-5(href='/contact', data-toggle='modal', data-target='#contactFormModal'): +translate("Apply now")
+        a.btn.btn-lg.btn-secondary.mb-3.mx-5(href='#contactform_section', data-toggle='modal', data-target='#signupFormModal'): +translate("Apply now")
   .bg-light
     .bg-white
       .container
@@ -42,8 +42,8 @@ block content
                     h3.text-white.position-absolute.transform-absolute-center.w-100.text-center=location.name
                   .col-md-6.d-flex.flex-column.justify-content-center.text-center.py-5 
                     if user
-                      .adminnote
-                        | This User is the first of the users bound to a location that has email and phone number
+                      //- .adminnote
+                      //-   | This User is the first of the users bound to a location that has email and phone number
                     - contactEmployeeWithContactInfo = location.contactEmployee.find(e => e.phone && e.email)
                     if contactEmployeeWithContactInfo
                       .row.jobcenter-location-employee.justify-content-center
@@ -82,7 +82,7 @@ block content
                           include ../assets/icons/mail.svg
                         div                   
                           =location.email
-  .bg-light.pb-200
+  .bg-light.pb-200#contactform_section
     .container.py-5
       div.py-5
         .row

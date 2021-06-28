@@ -7,12 +7,13 @@ const Employee = require("../../models/employee");
 const Location = require("../../models/location");
 const uuid = require("uuid");
 const AbstractController = require("./AbstractController");
+const { getAvailableTranslations } = require('../AbstractController')
 
 module.exports.getEmployees = async function (req, res) {
   try {
-
+    const query = await getAvailableTranslations(req, res)
     let locations = await Location.find({})
-    let employees = await Employee.find({})
+    let employees = await Employee.find({ ...query })
       .populate('language')
       .populate('languageVersion')
       .populate("locations")
@@ -30,7 +31,6 @@ module.exports.getEmployees = async function (req, res) {
       })
       return e
     })
-    console.log('employees', employees);
     res.render("admin/employees", {
       employees
     });
@@ -78,42 +78,54 @@ module.exports.editEmployee = async function (req, res) {
 };
 
 module.exports.updateEmployee = async (req, res) => {
-  const employee = await Employee.findOne({ slug: req.params.slug })
-  if (req.body.avatar && employee.avatar && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, employee.avatar))) {
-    await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, employee.avatar));
+  try {
+    const employee = await Employee.findOne({ slug: req.params.slug })
+    if (req.body.avatar && employee.avatar && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, employee.avatar))) {
+      await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, employee.avatar));
+    }
+    employee.name = req.body.name;
+    employee.position = req.body.position;
+    employee.phone = req.body.phone;
+    employee.order = req.body.order;
+    employee.mail = req.body.mail;
+    employee.content = req.body.content;
+    employee.locations = req.body.locations;
+    employee.feature_on_jobcenter = !!req.body.feature_on_jobcenter ? true : false;
+    employee.phone = req.body.phone;
+    employee.email = req.body.email;
+    employee.avatar = req.body.avatar ? req.body.avatar : employee.avatar;
+    await employee.save()
+    req.flash("success", `Successfully updated ${employee.name}`);
+    res.redirect("/admin/employees/edit/" + employee.slug);
+  } catch (err) {
+    console.log(err);
+    req.flash("danger", JSON.stringify(err));
+    res.redirect("/admin/employees/edit/" + employee.slug);
   }
-  employee.name = req.body.name;
-  employee.position = req.body.position;
-  employee.phone = req.body.phone;
-  employee.order = req.body.order;
-  employee.mail = req.body.mail;
-  employee.content = req.body.content;
-  employee.locations = req.body.locations;
-  employee.feature_on_jobcenter = !!req.body.feature_on_jobcenter ? true : false;
-  employee.phone = req.body.phone;
-  employee.email = req.body.email;
-  employee.avatar = req.body.avatar ? req.body.avatar : employee.avatar;
-  await employee.save()
-  req.flash("success", `Successfully updated ${employee.name}`);
-  res.redirect("/admin/employees/edit/" + employee.slug);
 };
 
 module.exports.createEmployee = async function (req, res) {
-  var employee = await new Employee();
+  try {
+    var employee = await new Employee();
+    employee.name = req.body.name;
+    employee.locations = req.body.locations;
+    employee.feature_on_jobcenter = !!req.body.feature_on_jobcenter ? true : false;
+    employee.position = req.body.position;
+    employee.phone = req.body.phone;
+    if (!!req.body.order) {
+      employee.order = req.body.order;
+    }
+    employee.email = req.body.email;
+    employee.avatar = req.body.avatar ? req.body.avatar : employee.avatar;
 
-  employee.name = req.body.name;
-  employee.locations = req.body.locations;
-  employee.feature_on_jobcenter = !!req.body.feature_on_jobcenter ? true : false;
-
-  employee.position = req.body.position;
-  employee.phone = req.body.phone;
-  employee.order = req.body.order;
-  employee.email = req.body.email;
-  employee.avatar = req.body.avatar ? req.body.avatar : employee.avatar;
-
-  const result = await employee.save()
-  req.flash("success", `Successfully created ${employee.title}`);
-  res.redirect("/admin/employees");
+    await employee.save()
+    req.flash("success", `Successfully created ${employee.title}`);
+    res.redirect("/admin/employees");
+  } catch (err) {
+    console.log(err);
+    req.flash("danger", JSON.stringify(err));
+    res.redirect("/admin/employees");
+  }
 }
 const storage = multer.diskStorage({
   destination: function (request, file, next) {

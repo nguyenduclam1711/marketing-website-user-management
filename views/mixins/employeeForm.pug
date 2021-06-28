@@ -18,7 +18,7 @@ mixin employeeForm
             | Order
           button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Defines the order the item is displayed. 0, 1, 2, 3, 4. Try to avoid two items with the same order.')
             | ?
-          input#order.form-control(name='order', type='number', placeholder='Order', autofocus='', value=employee ? employee.order : "")
+          input#order.form-control(name='order', type='number', placeholder='Order', autofocus='', value=employee ? employee.order : 999)
         .form-group
           label(for='phone') Phone
           input#phone.form-control(name='phone', type='tel', placeholder='Phone',autofocus='', value=editPath ? employee.phone : "")

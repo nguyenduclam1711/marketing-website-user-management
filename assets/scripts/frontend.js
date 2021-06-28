@@ -6,7 +6,6 @@ import "bootstrap/js/dist/collapse";
 import "bootstrap/js/dist/carousel";
 import "bootstrap/js/dist/alert";
 import { alertTimeout } from "./helper.js"
-require("./polygons");
 require("../css/style.scss");
 
 const toggleNL = (remove = false) => {
@@ -53,27 +52,32 @@ const toggleNL = (remove = false) => {
 })();
 
 let counted = false;
+const animationDuration = 4000;
+const frameDuration = 1000 / 60;
+const totalFrames = Math.round(animationDuration / frameDuration);
+const easeOutQuad = t => t * (2 - t);
+const animateCountUp = el => {
+  let frame = 0;
+  const countTo = parseInt(el.innerHTML, 10);
+  const counter = setInterval(() => {
+    frame++;
+    const progress = easeOutQuad(frame / totalFrames);
+    const currentCount = Math.round(countTo * progress);
+    if (parseInt(el.innerHTML, 10) !== currentCount) {
+      el.innerHTML = currentCount;
+    }
+    if (frame === totalFrames) {
+      clearInterval(counter);
+    }
+  }, frameDuration);
+};
+
 const countUp = () => {
   const counter = document.querySelector(".section-counter");
-
   if (counter && elementInViewport(counter) && !counted) {
-    counted = true;
-    $(".counter-count").each(function () {
-      $(this)
-        .prop("Counter", 0)
-        .animate(
-          {
-            Counter: $(this).text()
-          },
-          {
-            duration: 5000,
-            easing: "swing",
-            step: function (now) {
-              $(this).text(Math.ceil(now));
-            }
-          }
-        );
-    });
+    counted = true
+    const countupEls = document.querySelectorAll('.counter-count');
+    countupEls.forEach(animateCountUp);
   }
 };
 
@@ -81,7 +85,7 @@ const scrollbuttons = document.getElementsByClassName("scrollbutton");
 for (let i = 0, len = scrollbuttons.length; i < len; i++) {
   scrollbuttons[i].addEventListener("click", function (event) {
     event.preventDefault();
-    document.querySelector(event.target.attributes.href.value).scrollIntoView({
+    document.querySelector(event.target.attributes.href.value.replace(/.*(#.*)/, '$1')).scrollIntoView({
       behavior: "smooth",
       block: "start",
       inline: "nearest"
@@ -144,10 +148,27 @@ function elementInViewport(el) {
   );
 }
 
-window.onscroll = throttle(function () {
-  showFloatings();
-  countUp();
-}, 50);
+window.onscroll = () => {
+  throttle(
+    showFloatings(),
+    countUp()
+    , 50)
+  throttle(
+    animatedPolygons()
+    , 200)
+};
+
+const classes = ['shift-up', 'shift-left', 'shift-bottom', 'shift-right']
+const elements = document.querySelectorAll('.intersection_observed')
+const animatedPolygons = () => {
+  Array.from(elements).map((element, index) => {
+    if (element.getBoundingClientRect().y > window.outerHeight / 2 || window.scrollY < 100) {
+      classes.map(cl => element.classList.remove(cl))
+    } else {
+      element.classList.add(element.dataset.class)
+    }
+  })
+}
 
 $("#contactFormModal").on("shown.bs.modal", function (e) {
   window.document.querySelector("#track").value = window.location.href;
@@ -158,6 +179,17 @@ $("#contactFormModal").on("hidden.bs.modal", function (e) {
   window.document.querySelector("#track").value = "";
   window.history.replaceState({}, "/", window.history.state);
 });
+
+$("#signupFormModal").on("shown.bs.modal", function (e) {
+  window.document.querySelector("#track").value = window.location.href;
+  window.history.replaceState(window.location.pathname, "/", `/`);
+});
+
+$("#signupFormModal").on("hidden.bs.modal", function (e) {
+  window.document.querySelector("#track").value = "";
+  window.history.replaceState({}, "/", window.history.state);
+});
+
 // $('[data-spy="scroll"]').on('activate.bs.scrollspy', function () {
 //   console.debug("yo")
 // })
@@ -267,6 +299,9 @@ Array.from(document.querySelectorAll(".ajaxform")).map(form => {
         setTimeout(() => {
           $(".alert").alert("close");
         }, alertTimeout || 5000);
+        if (data.response.contact_id && e.target.dataset.redirect === "true") {
+          window.location.replace(`${window.location.origin}/thank-you/${data.response.contact_id}`);
+        }
         if (data.response.filepath) {
           window.open(`${window.location.origin}/images/${data.response.filepath}`, '_blank')
         }
@@ -333,12 +368,16 @@ if (jobcenterSelect) {
 function normalizeSlideHeights() {
   if (document.querySelector('.carousel')) {
     Array.from(document.querySelectorAll('.carousel')).map(carousel => {
+      document.querySelector('.carousel-inner').removeAttribute('style')
       var items = carousel.querySelectorAll('.carousel-item')
       var maxHeight = Math.max.apply(null,
         Array.from(items).map(function (i) {
-          return i.offsetHeight
+          i.style.display = "block"
+          const height = i.offsetHeight
+          i.removeAttribute('style')
+          return height
         }));
-      document.querySelector('.carousel-inner').style.height = maxHeight + 80 + 'px'
+      document.querySelector('.carousel-inner').style.height = maxHeight + 130 + 'px'
       if (carousel.querySelector('.rounded-md.border')) {
         Array.from(items).map((b) => {
           b.style.minHeight = 0
@@ -356,3 +395,30 @@ function normalizeSlideHeights() {
 $(window).on(
   'load resize orientationchange',
   throttle(normalizeSlideHeights, 300));
+
+Array.from(document.querySelectorAll('.dropdown-custom')).map(dropdown => {
+  dropdown.addEventListener('click', function (e) {
+    dropdown.classList.toggle("show")
+    dropdown.querySelector('.dropdown-menu').classList.toggle('show')
+  })
+})
+
+// const setObserver = (ref) => {
+//   let options = {
+//     threshold: 0.9
+//   }
+//   let observer = new IntersectionObserver(handler, options);
+//   observer.observe(ref);
+// }
+// function handler(entries, observer) {
+//   entries.map(entry => {
+//     console.log('entry', Date.now());
+//     if (entry.isIntersecting) {
+//       console.log("Hey", entry);
+//       entry.target.style.transform = `translateY(${window.scrollY}px)`
+//     } else {
+//       console.log("Ho");
+//     }
+//   })
+// }
+// setObserver(document.querySelector('.intersection_observed'))

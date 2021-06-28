@@ -7,26 +7,25 @@ block content
         .col-md-8
           .row
             each employee in employees
-              if !employee.language || employee.language && employee.language.title == "en"
-                .col-md-4.mb-3
-                  .p-3.bg-white.hover-shadow.h-100
-                    h2.text-center=employee.name
-                    .px-5.pb-3
-                      img.blue-shadow.object-fit-cover.img-fluid.rounded-circle.square(alt=employee.name src="/media/pixel.gif" style="background-image: url('/images/" + employee.avatar + "')")
-                    if employee.order
-                      div=`Order: ${employee.order}`
-                    if employee.contactLocation
-                      | Contactperson locations: 
-                      each loc in employee.contactLocation
+              .col-md-4.mb-3
+                .p-3.bg-white.hover-shadow.h-100
+                  h2.text-center=employee.name
+                  .px-5.pb-3
+                    img.blue-shadow.object-fit-cover.img-fluid.rounded-circle.square(alt=employee.name src="/media/pixel.gif" style="background-image: url('/images/" + employee.avatar + "')")
+                  if employee.order
+                    div=`Order: ${employee.order}`
+                  if employee.contactLocation
+                    | Contactperson locations: 
+                    each loc in employee.contactLocation
+                      span.badge.badge-primary.mr-1= loc.name
+                  if employee.locations.length
+                    .position-relative.z-1.mb-2
+                      +translate("About-us locations")
+                      = ": "
+                      each loc in employee.locations
                         span.badge.badge-primary.mr-1= loc.name
-                    if employee.locations.length
-                      .position-relative.z-1.mb-2
-                        +translate("About-us locations")
-                        = ": "
-                        each loc in employee.locations
-                          span.badge.badge-primary.mr-1= loc.name
-                    if user && (user.admin === "true" || user.superAdmin === "true") && currentPath.includes('/admin')
-                      +buttonGroup(employee, `employees`, `name`)
+                  if user && (user.admin === "true" || user.superAdmin === "true") && currentPath.includes('/admin')
+                    +buttonGroup(employee, `employees`, `name`)
 
         .col-md-4
           +employeeForm

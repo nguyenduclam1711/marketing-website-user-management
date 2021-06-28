@@ -57,10 +57,10 @@ if (process.env.HUBSPOT_API_KEY === undefined) {
   process.exit()
 }
 if (process.env.USE_REDIS !== undefined && process.env.USE_REDIS === 'true') {
-  // console.log('Redis enabled')
+  console.log('Redis enabled')
   redisClient = getAsyncRedis()
 } else if (process.env.USE_REDIS === 'false') {
-  // console.log('Redis disabled')
+  console.log('Redis disabled')
 } else {
   console.error('USE_REDIS is not defined in .env')
   process.exit()
@@ -77,7 +77,7 @@ try {
 app.use(compression())
 
 i18n.configure({
-  objectNotation: true,
+  objectNotation: false,
   locales: ['en', 'de'],
   queryParameter: 'lang',
   autoReload: true,
@@ -144,14 +144,21 @@ app.use(function (req, res, next) {
       .replace(/\//g, '-')
       .replace(/\-$/g, '')
       .toLowerCase())
-  let match = req.url.match('[^/]+(?=/$|$)')
-  res.locals.title = 'DigitalCareerInstitute'
+  const path = req.url.replace(/(.*)\?.*/, '$1')
+  const pathSegments = path.split("/").filter(pS => pS !== "")
+  const siteTitle = pathSegments.reverse().reduce((acc, pathSegement) => {
+    if (!pathSegement.startsWith("?") && pathSegement !== req.session.locale && pathSegement !== 'pages') {
+      const adjustedPathSegment = acc + (acc !== "" ? " - " : "") + pathSegement.replace(/-/g, ' ').charAt(0).toUpperCase() + pathSegement.replace(/-/g, ' ').substr(1)
+      return adjustedPathSegment
+    } else {
+      return acc
+    }
+  }, "")
+  res.locals.title = 'Digital Career Institute'
   app.locals.moment = require('moment')
   res.locals.live = req.headers.host.includes('digitalcareerinstitute.org')
-  if (match) {
-    match = match[0].replace(/\//g, ' ')
-    res.locals.title =
-      match.charAt(0).toUpperCase() + match.slice(1).replace(/(.*)\?.*/, "$1") + ' | ' + res.locals.title
+  if (siteTitle) {
+    res.locals.title = siteTitle + " | " + res.locals.title
   }
   console.log(req.method, req.headers.host + req.url)
   next()
@@ -206,8 +213,6 @@ app.use(async (req, res, next) => {
     } catch (error) {
       console.error('Redis ERROR: Could not save navigation data: ' + error)
     }
-  } else {
-    console.log('using cached data')
   }
 
   const { courses, settings, locations, headerPages, footerPages } = navData

@@ -6,23 +6,29 @@ block content
       .col-md-8
         .row
           each partner in partners
-            .col-md-4.mb-3
-              .bg-white.p-3.hover-shadow.h-100.d-flex.flex-column.justify-content-between
-                h2.mr-3=partner.title
-                if partner && partner.partnerlogo
-                  img.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title src="/images/"+partner.partnerlogo)
-                div.mr-3
-                  span.d-block.mr-2
-                    = "Order: "
-                    =partner.order
+            if !partner.language || partner.language && partner.language.title == "en"
+              .col-md-6.col-lg-4.mb-3
+                .bg-white.p-3.hover-shadow.h-100.d-flex.flex-column.justify-content-between
+                  h2.mr-3=partner.title
+                  if partner && partner.partnerlogo
+                    img.w-100.mw-150.mh-150.object-fit-cover(alt=partner.title src="/images/"+partner.partnerlogo)
+                  div.mr-3
+                    span.d-block.mr-2
+                      = "Order: "
+                      =partner.order
 
-                  span.d-block.mr-2
-                    = "Testimonial on careersuccess: "
-                    label.checkbox.text-muted(for='testimonial_show')
-                      input#testimonial_show(disabled type='checkbox', name='testimonial_show', value="on", checked=partner && partner.testimonial_show && !!partner.testimonial_show ? true: false )
-                      span.checkmark
-                if user && user.admin === "true"
-                  +buttonGroup(partner, `partners`)
+                    span.d-block.mr-2
+                      = "Testimonial on careersuccess: "
+                      label.text-muted(for='testimonial_show')
+                        input#testimonial_show(disabled type='checkbox', name='testimonial_show', value="on", checked=partner && partner.testimonial_show && !!partner.testimonial_show ? true: false )
+                        span.checkmark
+                    span.d-block.mr-2
+                      = "Is alumni employer: "
+                      label.text-muted(for='is_alumni_employer')
+                        input#is_alumni_employer(disabled type='checkbox', name='is_alumni_employer', value="on", checked=partner && partner.is_alumni_employer && !!partner.is_alumni_employer ? true: false )
+                        span.checkmark
+                  if user && user.admin === "true"
+                    +buttonGroup(partner, `partners`)
       .col-md-4
         +partnerForm
 

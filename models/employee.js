@@ -36,7 +36,8 @@ var EmployeeSchema = new Schema({
   languageVersion: {type: Schema.ObjectId, ref: "Employee"},
   order: {
     type: Number,
-    default: 99
+    required: true,
+    default: 999,
   },
   feature_on_jobcenter: {
     type: Boolean,

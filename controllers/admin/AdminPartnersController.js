@@ -56,6 +56,7 @@ module.exports.updatePartner = async (req, res) => {
   partner.testimonial_content = req.body.testimonial_content !== "" ? req.body.testimonial_content : ""
   partner.testimonial_job = req.body.testimonial_job !== "" ? req.body.testimonial_job : ""
   partner.testimonial_show = req.body.testimonial_show === "on" ? true : false
+  partner.is_alumni_employer = req.body.is_alumni_employer === "on" ? true : false
   await partner.save();
   req.flash("success", `Successfully updated ${partner.title}`);
   res.redirect("/admin/partners/edit/" + partner.slug);
@@ -71,6 +72,7 @@ module.exports.createPartner = async function(req, res) {
   partner.testimonial_content = req.body.testimonial_content
   partner.testimonial_job = req.body.testimonial_job
   partner.testimonial_show = req.body.testimonial_show === "on" ? true: false
+  partner.is_alumni_employer = req.body.is_alumni_employer === "on" ? true : false
 
   partner.partnerlogo = req.files.partnerlogo
     ? req.body.partnerlogo
