@@ -172,15 +172,15 @@ module.exports.contact = async (req, res, next) => {
       text: mailTemplate,
       html: mailTemplate
     }
-    await contact.save()
     let hubspotPromise = new Promise(() => { })
 
     let remainingUtmParams = req.session.utmParams ? { ...req.session.utmParams } : []
     Object.keys(remainingUtmParams).map(q => q.startsWith('utm_') && delete remainingUtmParams[q])
+    let properties
 
     if (!!process.env.HUBSPOT_API_KEY) {
       let fbclid = getFbClid(req, res, next);
-      var properties = [
+      properties = [
               { property: 'firstname', value: firstname },
               { property: 'lastname', value: lastname },
               { property: 'email', value: email },
@@ -248,12 +248,15 @@ module.exports.contact = async (req, res, next) => {
       };
       hubspotPromise = requestPromise(options)
     }
+    contact.properties = properties
+    const contactSavepromise = contact.save()
     // TODO remove logging statement
     console.log(req.session);
     console.log(options.body.properties);
     // to save time, mail get send out without waiting for the response
-    const info = sendMail(res, req, mailOptions)
-    const result = await Promise.all([hubspotPromise])
+    // const info = sendMail(res, req, mailOptions)
+    const result = await Promise.all([hubspotPromise, contactSavepromise])
+    console.log('result', result);
 
     if (req.headers['content-type'] === 'application/json') {
       const response = {
@@ -388,15 +391,15 @@ module.exports.downloadCourseCurriculum = async (req, res, next) => {
     }
     contact.createdAt = new Date()
     const settings = await Setting.findOne()
-    await contact.save()
     let hubspotPromise = new Promise(() => { })
 
     let remainingUtmParams = req.session.utmParams ? { ...req.session.utmParams } : []
     Object.keys(remainingUtmParams).map(q => q.startsWith('utm_') && delete remainingUtmParams[q])
+    let properties
     if (!!process.env.HUBSPOT_API_KEY) {
       
 
-      var properties = [
+      properties = [
               { property: 'email', value: email },
               { property: 'last_touchpoint', value: 'curriculum_download'},
               {
@@ -438,7 +441,11 @@ module.exports.downloadCourseCurriculum = async (req, res, next) => {
       };
       hubspotPromise = request(options)
     }
-    const resolved = await Promise.all([hubspotPromise])
+
+    contact.properties = properties
+    const contactSavepromise = contact.save()
+    const resolved = await Promise.all([hubspotPromise, contactSavepromise])
+    console.log('resolved', resolved);
 
     if (req.headers['content-type'] === 'application/json') {
       const response = {
