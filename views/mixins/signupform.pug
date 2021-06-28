@@ -26,11 +26,11 @@ mixin signupform
           label(for='phone')=__("Phone")
           input#phone.form-control(name="phone" type='number', pattern="[\+]\d*", placeholder='0170123456789' , value=contact ? contact.phone : '', required)
           input#age.agefield.form-control(name="age" tabindex="-1" type='text', placeholder='25')
-        if locations && locations.length > 0
+        if global_locations && global_locations.length > 0
           label(for='location')=__("Location")
           select.mb-3.custom-select.text-muted.form-control(required='', name="locations" id="location")
             option( contact && selected disabled value="")=__("Select your location here...")
-            each location in locations
+            each location in global_locations.filter(l => !l.isCampus)
               option(value=(location._id) selected=contact && contact.locations && contact.locations[0].toString() === location._id.toString() ?  "selected" :  false )=location.name
         p
           label(for="unemployed")

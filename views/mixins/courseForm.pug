@@ -172,7 +172,7 @@ mixin courseForm
     //-     input.form-control(type="text", id=timelineGroup.time.name name=timelineGroup.time.name, placeholder=timelineGroup.time.label, value= course && course.timeline[i]? course.timeline[i].time : "")
 
     h3.mt-3 Course available in locations:
-    each location in locations
+    each location in global_locations
       .custom-control.custom-checkbox
         input.custom-control-input(name="locations" type='checkbox' id=location.name value=location._id  checked=(location.selected))
         label.custom-control-label(for=location.name)=location.name
