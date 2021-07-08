@@ -100,7 +100,7 @@ block content
               select.text-center.pr-5(style="padding-right: 80px !impor tant" class="jobcenter-location-select")
                 each location in locations.filter(l => l.isCampus)
                   option(data-address=`${location.street}`,data-location=`${location.zip} ${location.name}` data-phone=`${location.phone}`, data-email=`${location.email}`)=location.name
-          .p-5.d-flex.justify-content-center.flex-column.align-items-center.text-center
+          .pt-5.pr-5.d-flex.justify-content-center.flex-column.align-items-center.text-center
             .w-5.h-5.text-muted.mb-4
               include ../assets/icons/jobcenter_location.svg
             - firstLocation = locations.filter(l => l.isCampus)[0]
