@@ -16,7 +16,7 @@ mixin courseOverviewCard(course, classes="col-md-6")
               span.padded-text()=course.courseLanguages
         if course.curriculumPdf
         div
-          a.text-dark(href=`/images/${course.slug}-jc.pdf` target="_blank")
+          a.text-dark(href=`/media/${course.slug}-jc.pdf` target="_blank")
               .d-flex.justify-content-between.align-items-center.mt-4
                 .text-muted=__("Download complete course curriculum")
                 .w-4.h-4

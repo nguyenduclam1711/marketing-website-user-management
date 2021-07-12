@@ -97,7 +97,7 @@ block content
         .col-md-5.pr-3.pr-sm-5
           .pr-0.pr-sm-5
             .customselect.mr-0.mr-md-5
-              select.text-center.pr-5(style="padding-right: 80px !impor tant" class="jobcenter-location-select")
+              select.text-center.pr-5(style="padding-right: 80px !important" class="jobcenter-location-select")
                 each location in locations.filter(l => l.isCampus)
                   option(data-address=`${location.street}`,data-location=`${location.zip} ${location.name}` data-phone=`${location.phone}`, data-email=`${location.email}`)=location.name
           .pt-5.pr-5.d-flex.justify-content-center.flex-column.align-items-center.text-center
