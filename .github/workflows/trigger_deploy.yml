@@ -23,4 +23,4 @@ jobs:
           curl -s -X POST https://api.telegram.org/${{secrets.TELEGRAM_BOT_ID}}/sendMessage \
           -H 'Accept: application/vnd.github.everest-preview+json' \
           -d chat_id=${{ secrets.TELEGRAM_BOT_CHAT_ID }} \
-          -d text="Deploy of `marketing-website` successful"
+          -d text="Deploy of 'marketing-website' on $(date) successful"
