@@ -83,8 +83,8 @@ module.exports.contactLocations = async (req, res) => {
 };
 module.exports.contact = async (req, res, next) => {
   try {
-    const { firstname, lastname, age, age_years, language_level_english, language_level_german, email, body, phone, locations, companytour, signup_form, TermsofService, afa_jc_registered_, form_are_you_currently_unemployed } = req.body
-    if (age) {
+    const { firstname, lastname, email, age_field, body, phone, locations, companytour, signup_form, TermsofService, afa_jc_registered_, form_are_you_currently_unemployed } = req.body
+    if (age_field) {
       console.log('Bot stepped into honeypot!')
       if (req.headers['content-type'] === 'application/json') {
         const response = {
@@ -208,25 +208,30 @@ module.exports.contact = async (req, res, next) => {
           })
         }
       ];
-
+      const filteredPayload = Object.keys(req.body).reduce((acc, v) => {
+        if (![
+          "nb-confirmation-token",
+          "nb-result",
+          "nb-transaction-token",
+          "termsofservice",
+          "email",
+          "firstname",
+          "lastname",
+          "phone",
+          "track",
+          "body",
+          "age_field",
+          "locations",
+        ].map(i => i.toLowerCase()).includes(v.toLowerCase())) {
+          acc[v] = req.body[v]
+        }
+        return acc
+      }, {})
+  
+      Object.keys(filteredPayload).map(i => properties.push({ property: i, value: filteredPayload[i] }))
 
       if(location){
         properties.push({property: 'state_de_', value: location.name } )  
-      }
-      if(jobcenter !== undefined){
-        properties.push({property: 'afa_jc_registered_', value: !jobcenter ? "No" : "Yes" } ) 
-      }
-      if(unemployed){
-        properties.push({property: 'form_are_you_currently_unemployed', value: unemployed} ) 
-      }
-      if(age_years){
-        properties.push({property: 'age', value: age_years} ) 
-      }
-      if (language_level_english) {
-        properties.push({ property: 'language_level_english', value: language_level_english })
-      }
-      if (language_level_german) {
-        properties.push({ property: 'language_level_german', value: language_level_german })
       }
       if(req.session.utmParams && req.session.utmParams.utm_source){
         properties.push({property: 'utm_source', value: req.session.utmParams.utm_source} ) 
@@ -287,9 +292,19 @@ module.exports.contact = async (req, res, next) => {
   } catch (e) {
     console.error(`Error in /controllers/IndexController.js`)
     console.error(e)
-
-    req.flash('danger', e.message);
-    res.redirect(req.headers.referer)
+    if (req.headers['content-type'] === 'application/json') {
+      const response = {
+        error: res.__(e.message),
+      }
+      return res.json({
+        response
+      })
+    } else {
+      req.flash('danger', 'Please fill out all form fields')
+      res.redirect(req.headers.referer)
+      next()
+      return
+    }
   }
 }
 module.exports.tour = async (req, res) => {

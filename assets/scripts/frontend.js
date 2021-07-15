@@ -268,8 +268,8 @@ Array.from(document.querySelectorAll(".ajaxform")).map(form => {
     e.target.querySelector('button').disabled = true;
     e.target.querySelector('#contactform_text').classList.add("d-none")
     e.target.querySelector('#contactform_spinner').classList.remove("d-none")
-    get_form_payload(e.target.elements)
-    payload = { ...payload, course: e.target.dataset.course }
+    const form_payload = get_form_payload(e.target.elements)
+    const payload = { ...form_payload, course: e.target.dataset.course }
     fetch(e.target.action, {
       method: "POST",
       headers: {

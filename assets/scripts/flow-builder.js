@@ -68,7 +68,7 @@ const findAnswers = (questions, model) => {
 				+ `</select>`)).join("") : ""}
               ${buttons.map(answer => {
 					return `<div class="form-group">
-                <input type="radio" data-trigger="${canTrigger(questions, model)}" id="${answer.name}" name="${question.extras.questionidentifier}" class="btn-check dynamicinputradio" data-question="${question.extras.questionidentifier}" data-nextquestions="${nextQuestions.map(a => a.id)}" value="${answer.name}" required/>
+                <input type="radio" value="${answer.extras.answeridentifier}" data-trigger="${canTrigger(questions, model)}" id="${answer.name}" name="${question.extras.questionidentifier}" class="btn-check dynamicinputradio" data-question="${question.extras.questionidentifier}" data-nextquestions="${nextQuestions.map(a => a.id)}" required/>
                 <label class=" btn btn-lg mb-4 btn-white blue-light-shadow answerbutton w-100 mb-3 mr-3" for="${answer.name}">${isGerman && answer.extras.answertranslation ? answer.extras.answertranslation : answer.name}</label>
                 </div>`
 				}).join('')}
@@ -153,10 +153,6 @@ const jumpToNextQuestion = (e, diagramNodes, model) => {
 		submitButton.innerText = "Loading..."
 		submitButton.disabled = true
 		let payload = JSON.parse(localStorage.getItem('dcianswers'))
-		if (payload.age) {
-			payload.age_years = payload.age
-			delete payload.age
-		}
 		fetch(`/contact`, {
 			method: "POST",
 			headers: {
@@ -174,7 +170,7 @@ const jumpToNextQuestion = (e, diagramNodes, model) => {
 					const div = document.createElement('div')
 					submitButton.innerText = buttonOriginalText
 					submitButton.disabled = false
-					div.innerHTML = `<div class="flash m-0 mr-3 alert fade show alert-danger ">Please fill out all form fields<button class="close ml-3" type="button" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button></div>`
+					div.innerHTML = `<div class="flash m-0 mr-3 alert fade show alert-danger ">${data.response.error}<button class="close ml-3" type="button" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button></div>`
 					document.body.appendChild(div)
 				}
 			})
