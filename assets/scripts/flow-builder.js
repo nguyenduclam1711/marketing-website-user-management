@@ -61,14 +61,47 @@ const findAnswers = (questions, model) => {
               <div class="w-100 px-5 px-lg-3 px-xl-5">
               ${freeanswers.length > 0 ? "<div class='row'>" + freeanswers.map(answer => {
 				return `<div class="${freeanswers.length === 1 ? "col-md-12" : "col-md-6"}"><label for="freeanswer_${answer.extras.answeridentifier}" >${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ? answer.extras.answertranslation.split(':')[0] : answer.extras.answertranslation) : (answer.name.indexOf(':') !== -1 ? answer.name.split(':')[0] : answer.name)}</label>
-                <input placeholder="${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ? answer.extras.answertranslation.split(':')[1] : "") : (answer.name.indexOf(':') !== -1 ? answer.name.split(':')[1] : "")}" class="form-control mb-4 freeanswer dynamicinput" name="${answer.extras.answeridentifier}" data-type="question" type="${answer.extras.answeridentifier.includes("email") ? "email" : answer.extras.answeridentifier.match(/phone/i) ? "tel" : "text"}"  id="freeanswer_${answer.extras.answeridentifier}" required/> </div>`
+                <input 
+				placeholder="${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ? answer.extras.answertranslation.split(':')[1] : "") : (answer.name.indexOf(':') !== -1 ? answer.name.split(':')[1] : "")}" 
+				class="form-control mb-4 freeanswer dynamicinput" 
+				name="${answer.extras.answeridentifier}" 
+				data-type="question" 
+				type="${answer.extras.freeanswer_type ? answer.extras.freeanswer_type : "text"}" 
+				id="freeanswer_${answer.extras.answeridentifier}" 
+				required/>
+				</div>`
 			}).join('') + "</div><span id='error-msg' class='text-danger'></span>" : ""}
-              ${dropdowns.length > 0 ? dropdowns.map(answer => (`<label for="dropdown_${answer.extras.answeridentifier}" >${isGerman && answer.extras.answertranslation ? answer.extras.answertranslation.split(":")[0] : answer.name.split(":")[0]}</label><select id="dropdown_${answer.extras.answeridentifier}" name="${answer.extras.answeridentifier}" class='form-select mb-3' class="dynamicinput dropdown" required="required"><option class="form-control mb-4" name="button" type="text" data-type="question" placeholder="${isGerman ? "Auswählen..." : "Select..."}" type="text" value="" disabled selected>${isGerman ? "Auswählen..." : "Select..."}</option>` +
-								(isGerman && answer.extras.answertranslation ? answer.extras.answertranslation : answer.name).split(":").reverse()[0].split(',').map(dropdownItem => `<option class="form-control mb-4" name="button" type="text" data-type="question" value="${dropdownItem.replace(/\(.*\)/, '').trim()}" placeholder="${answer.extras.answeridentifier}" type="text"> ${dropdownItem.replace(/.*\((.*)\)/, '$1')}`).join('')
+              ${dropdowns.length > 0 ? dropdowns.map(answer => (`
+			  <label for="dropdown_${answer.extras.answeridentifier}">${isGerman && answer.extras.answertranslation ? answer.extras.answertranslation.split(":")[0] : answer.name.split(":")[0]}</label>
+			  <select 
+			  id="dropdown_${answer.extras.answeridentifier}" 
+			  name="${answer.extras.answeridentifier}" 
+			  class='form-select mb-3 dynamicinput dropdown" 
+			  required="required">
+			  <option 
+			  class="form-control mb-4" name="button" type="text" data-type="question" placeholder="${isGerman ? "Auswählen..." : "Select..."}" type="text" value="" disabled selected>${isGerman ? "Auswählen..." : "Select..."}</option>` +
+								(isGerman && answer.extras.answertranslation ? answer.extras.answertranslation : answer.name).split(":").reverse()[0].split(',').map(dropdownItem => `
+								<option class="form-control mb-4" 
+								name="button" 
+								type="text" 
+								data-type="question" 
+								value="${dropdownItem.replace(/\(.*\)/, '').trim()}" 
+								placeholder="${answer.extras.answeridentifier}" 
+								type="text">${dropdownItem.replace(/.*\((.*)\)/, '$1')}`).join('')
 				+ `</select>`)).join("") : ""}
               ${buttons.map(answer => {
 					return `<div class="form-group">
-                <input type="radio" value="${answer.extras.answeridentifier}" data-trigger="${canTrigger(questions, model)}" id="${answer.name}" name="${question.extras.questionidentifier}" class="btn-check dynamicinputradio" data-question="${question.extras.questionidentifier}" data-nextquestions="${nextQuestions.map(a => a.id)}" required/>
+                <input 
+				type="radio" 
+				value="${answer.extras.answeridentifier}" 
+				data-trigger="${canTrigger(questions, model)}" 
+				id="${answer.name}" 
+				name="${question.extras.questionidentifier}" 
+				class="btn-check dynamicinputradio" 
+				data-question="${question.extras.questionidentifier}" 
+				data-nextquestions="${nextQuestions.map(a => a.id)}" 
+				required
+				/>
                 <label class=" btn btn-lg mb-4 btn-white blue-light-shadow answerbutton w-100 mb-3 mr-3" for="${answer.name}">${isGerman && answer.extras.answertranslation ? answer.extras.answertranslation : answer.name}</label>
                 </div>`
 				}).join('')}

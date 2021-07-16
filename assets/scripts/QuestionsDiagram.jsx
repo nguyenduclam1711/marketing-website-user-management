@@ -105,14 +105,15 @@ function QuestionsDiagram() {
           e.isSelected ? setbutton('update') : setbutton('add')
           if (e.isSelected) {
             const formFromClickedNode = {
-              "question": e.isSelected && item.options.extras.customType === "question" ? item.options.name : "",
-              'questionidentifier': e.isSelected ? item.options.extras.questionidentifier : "",
-              'questiontranslation': e.isSelected ? item.options.extras.questiontranslation : "",
-              "answer": e.isSelected && item.options.extras.customType === "answer" ? item.options.name : "",
-              "answeridentifier": e.isSelected ? item.options.extras.answeridentifier : "",
-              "answertranslation": e.isSelected ? item.options.extras.answertranslation : "",
-              "freeanswer": e.isSelected ? item.options.extras.freeanswer : "",
-              "dropdown": e.isSelected ? item.options.extras.dropdown : "",
+              "question": item.options.extras.customType === "question" ? item.options.name : "",
+              'questionidentifier': item.options.extras.customType === "question" ? item.options.extras.questionidentifier : "",
+              'questiontranslation': item.options.extras.customType === "question" ? item.options.extras.questiontranslation : "",
+              "answer": item.options.extras.customType === "answer" ? item.options.name : "",
+              "answeridentifier": item.options.extras.customType === "answer" ? item.options.extras.answeridentifier : "",
+              "answertranslation": item.options.extras.customType === "answer" ? item.options.extras.answertranslation : "",
+              "freeanswer": item.options.extras.customType === "answer" ? item.options.extras.freeanswer : "",
+              "dropdown": item.options.extras.customType === "answer" ? item.options.extras.dropdown : "",
+              "freeanswer_type": item.options.extras.customType === "answer" ? item.options.extras.freeanswer_type : "text",
               "flowname": name
             }
             setForm({ ...formRef.current, ...formFromClickedNode })
@@ -125,6 +126,7 @@ function QuestionsDiagram() {
               "answeridentifier": "",
               "answertranslation": "",
               "freeanswer": "",
+              "freeanswer_type": "text",
               "dropdown": ""
             }
             setForm({ ...formRef.current, formClone })
@@ -197,6 +199,7 @@ function QuestionsDiagram() {
       node.options.extras.dropdown = form['dropdown']
       node.options.extras.answeridentifier = form['answeridentifier']
       node.options.extras.answertranslation = form['answertranslation']
+      node.options.extras.freeanswer_type = form['freeanswer_type']
     } else {
       node = new CustomNodeModel({
         name: e.target.elements.answer.value,
@@ -204,6 +207,7 @@ function QuestionsDiagram() {
         extras: {
           customType: e.target.elements.answer.dataset.type,
           freeanswer: !!e.target.elements.freeanswer && !!e.target.elements.freeanswer.checked,
+          freeanswer_type: !!e.target.elements.freeanswer_type && !!e.target.elements.freeanswer_type.selectedOptions[0].value,
           dropdown: !!e.target.elements.dropdown && !!e.target.elements.dropdown.checked,
           answeridentifier: e.target.elements.answeridentifier.value,
           answertranslation: e.target.elements.answertranslation.value
@@ -247,6 +251,7 @@ function QuestionsDiagram() {
         })
       } else {
         Object.values(question.portsOut[0].links).map(link => {
+          // if not just freeanswers
           if (answers.filter(a => !a.options.extras.freeanswer).length > 0) {
             if (hbField) {
               question.options.color = questioncolor
@@ -263,6 +268,11 @@ function QuestionsDiagram() {
               engine.getModel().getNode(link.targetPort.parent.options.id).options.color = colorError
             }
             return link.targetPort.parent
+          } else {
+            // set freeanswers to colorDefault
+            answers.map(a => {
+              a.options.color = colorFreeanswer
+            })
           }
         }).filter(l => !!l)
       }
@@ -463,6 +473,18 @@ function QuestionsDiagram() {
                       setForm({ ...form, [e.target.name]: e.target.value })
                     }} data-type="answeridentifier" data-color={questioncolor} style={{ borderColor: "rgb(255, 204, 1)", borderStyle: "solid" }} id="answeridentifier" required />
                 </div>
+                <select
+                  id="type"
+                  className={`custom-select w-auto mr-2`}
+                  onChange={e => {
+                    console.log('e', e);
+                    setForm({ ...form, freeanswer_type: e.target.selectedOptions[0].value })
+                  }}>
+                  <option disabled value='' defaultChecked>select type</option>
+                  {["text", "email", "number"].map((f, i) => (
+                    <option key={i} selected={f == form['freeanswer_type']} defaultChecked={f == form['freeanswer_type']} value={f}>{f}</option>
+                  ))}
+                </select>
                 <button className="btn btn-primary ml-1" type="submit">{button}</button>
               </div>
             </div>
