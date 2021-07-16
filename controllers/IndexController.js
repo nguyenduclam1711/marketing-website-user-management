@@ -204,7 +204,8 @@ module.exports.contact = async (req, res, next) => {
             'locations': location,
             'body': body,
             'is_company': companytour,
-            'utm_params': remainingUtmParams
+            'utm_params': remainingUtmParams,
+            'all_fields': req.body
           })
         }
       ];
