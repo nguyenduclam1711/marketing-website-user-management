@@ -13,3 +13,4 @@ backup
 .idea
 locales/*
 .DS_STORE
+.github/workflows/test.yml
