@@ -76,7 +76,7 @@ const findAnswers = (questions, model) => {
 			  <select 
 			  id="dropdown_${answer.extras.answeridentifier}" 
 			  name="${answer.extras.answeridentifier}" 
-			  class='form-select mb-3 dynamicinput dropdown" 
+			  class="form-select mb-3 dynamicinput dropdown" 
 			  required="required">
 			  <option 
 			  class="form-control mb-4" name="button" type="text" data-type="question" placeholder="${isGerman ? "Auswählen..." : "Select..."}" type="text" value="" disabled selected>${isGerman ? "Auswählen..." : "Select..."}</option>` +
