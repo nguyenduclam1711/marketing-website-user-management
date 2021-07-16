@@ -70,10 +70,10 @@ export class CustomNodeWidget extends DefaultNodeWidget {
 					<TitleName>{this.props.node.getOptions().name}</TitleName>
 				</Title>
 				{this.props.node.options.extras.customType === "question" && (
-					<TitleName>Key: {this.props.node.options.extras.questionidentifier}</TitleName>
+					<TitleName>DE trans: {this.props.node.options.extras.questiontranslation}</TitleName>
 				)}
 				{this.props.node.options.extras.customType === "question" && (
-					<TitleName>DE trans: {this.props.node.options.extras.questiontranslation}</TitleName>
+					<TitleName>Key: {this.props.node.options.extras.questionidentifier}</TitleName>
 				)}
 				{this.props.node.options.extras.customType === "answer" && this.props.node.options.extras.dropdown && (
 					<TitleName>Type: dropdown</TitleName>
@@ -85,7 +85,7 @@ export class CustomNodeWidget extends DefaultNodeWidget {
 					<TitleName>DE trans: {this.props.node.options.extras.answertranslation}</TitleName>
 				)}
 				{this.props.node.options.extras.customType === "answer" && this.props.node.options.extras.freeanswer && (
-					<TitleName>Freeanswer</TitleName>
+					<TitleName>Type: Freeanswer</TitleName>
 				)}
 				{this.props.node.options.extras.customType === "answer" && this.props.node.options.extras.freeanswer_type && this.props.node.options.extras.freeanswer && (
 					<TitleName>Type: {this.props.node.options.extras.freeanswer_type}</TitleName>
