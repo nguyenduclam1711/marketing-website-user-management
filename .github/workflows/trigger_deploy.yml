@@ -35,4 +35,4 @@ jobs:
         run: |
            curl -X POST https://hooks.slack.com/services/${{secrets.SLACK_WEBHOOK}} \
            -H 'Content-type: application/json' \
-           --data "{'text':'Deploy of marketing-website $GIT_BRANCH_NAME $GITHUB_SHA on $(date) successful'}"
+           --data "{'text':'Deploy of marketing-website ${{ github.event.client_payload.branch_name }} $GITHUB_SHA on $(date) successful'}"
