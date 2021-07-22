@@ -10,7 +10,7 @@ const AbstractController = require("./AbstractController");
 module.exports.getPartners = async function(req, res) {
   try {
     let partners = await Partner.find({})
-      .sort("-createdAt")
+      .sort("order")
       .populate("language")
       .populate("languageVersion")
       .exec();
