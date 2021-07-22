@@ -197,7 +197,6 @@ const jumpToNextQuestion = (e, diagramNodes, model) => {
 				if (data.response.contact_id) {
 					submitButton.innerText = "Thanks"
 					localStorage.removeItem('dcianswers')
-					questionroot.querySelector('#popup').innerHTML = `<h2 class="text-center">Thanks</h2>`
 					window.location.replace(`${window.location.origin}/thank-you/${data.response.contact_id}`);
 				} else if (data.response.error) {
 					const div = document.createElement('div')
