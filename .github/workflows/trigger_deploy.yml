@@ -21,7 +21,7 @@ jobs:
           curl -X POST https://api.github.com/repos/DigitalCareerInstitute/infrastructure/dispatches \
           -H 'Accept: application/vnd.github.everest-preview+json' \
           -u ${{ secrets.ACCESS_TOKEN }} \
-          --data '{"event_type": "trigger_deploy", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'", "branch_name": "'"$GIT_BRANCH_NAME"'"  }}'
+          --data '{"event_type": "trigger_deploy", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'", "branch_name": "'"$GIT_BRANCH_NAME"'", "sha": "'"$GITHUB_SHA"'"   }}'
       - name: ACK Telegram - Acknowledge deploy_successful from remote infrastructure repository
         if: github.event.action == 'deploy_successful'
         run: |
@@ -36,5 +36,5 @@ jobs:
         run: |
            curl -X POST https://hooks.slack.com/services/${{secrets.SLACK_WEBHOOK}} \
            -H 'Content-type: application/json' \
-           --data "{'text':'Deploy of marketing-website ${{ github.event.client_payload.branch_name }} $GITHUB_SHA on $(date) successful'}"
+           --data "{'text':'Deploy of marketing-website ${{ github.event.client_payload.branch_name }} ${{ github.event.client_payload.sha }} on $(date) successful'}"
 
