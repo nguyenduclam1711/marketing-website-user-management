@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - staging
+      - github-action-deploy-by-branchname
 jobs:
   deploy-remote-repo:
     runs-on: ubuntu-latest
