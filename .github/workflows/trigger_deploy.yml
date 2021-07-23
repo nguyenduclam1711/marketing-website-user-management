@@ -27,7 +27,7 @@ jobs:
           curl -s -X POST https://api.telegram.org/${{secrets.TELEGRAM_BOT_ID}}/sendMessage \
           -H 'Accept: application/vnd.github.everest-preview+json' \
           -d chat_id=${{ secrets.TELEGRAM_BOT_CHAT_ID }} \
-          -d text="Deploy of 'marketing-website' $GIT_BRANCH_NAME $GITHUB_SHA on $(date) successful"
+          -d text="Deploy of marketing-website ${{ github.event.client_payload.branch_name }} ${{ github.event.client_payload.sha }} on $(date) successful"
       - name: ACK Slack - Acknowledge deploy_successful from remote infrastructure repository
         # TODO notify on master deploys
         # if: github.event.action == 'deploy_successful' && ${{ env.GIT_BRANCH_NAME == 'master'}}
