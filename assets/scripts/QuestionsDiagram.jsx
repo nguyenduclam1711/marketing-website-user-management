@@ -37,7 +37,7 @@ const CanvasWrapper = styled.div`
   position: relative;
   & > div {
     height: 100%;
-    width: 100vw;
+    width: 100%;
     background: white;
   }
 `
@@ -146,12 +146,12 @@ function QuestionsDiagram() {
           availableFields = res.payload.hb_fields
           setallFlows(res.payload.questions)
           setanswers(res.payload.answers)
-          if (res.payload.questions[0].model) {
-            model.deserializeModel(res.payload.questions[0].model, engine);
+          if (initialModel.model) {
+            model.deserializeModel(initialModel.model, engine);
           }
-          setForm({ ...form, flowname: res.payload.questions[0].name, active: res.payload.questions[0].active })
-          setmodelState(res.payload.questions[0]._id)
-          addEventListeners(res.payload.questions[0].name)
+          setForm({ ...form, flowname: initialModel.name, active: initialModel.active })
+          setmodelState(initialModel._id)
+          addEventListeners(initialModel.name)
           engine.setModel(model);
         }
       }).catch(err => {
@@ -197,6 +197,7 @@ function QuestionsDiagram() {
       node = selectedNodes[0]
       node.options.name = form['answer']
       node.options.extras.dropdown = form['dropdown']
+      node.options.extras.freeanswer = form['freeanswer']
       node.options.extras.answeridentifier = form['answeridentifier']
       node.options.extras.answertranslation = form['answertranslation']
       node.options.extras.freeanswer_type = form['freeanswer_type']
@@ -222,6 +223,16 @@ function QuestionsDiagram() {
     parseAllNodesForHubspotFields()
   }
 
+  var checkDropDown = (availableFields, aI) => {
+    const subHbFields = availableFields.find(aF => aF.name === aI.options.extras.answeridentifier)
+    const dropdownAnswers = aI.options.name.split(":").reverse()[0]
+    const rawAnswers = dropdownAnswers.split(',').map(a => a.trim())
+    const rawAnswersWithoutLabels = rawAnswers.map(a => a.replace(/\(.*\)/, '').trim())
+    return rawAnswersWithoutLabels.filter(rA => {
+      return !subHbFields.options.map(s => s.value).includes(rA)
+    })
+  }
+
   var checkIfQuestionsMatchWithAnswersAndSyncWithHubspot = (question) => {
     let errors = []
     if (Object.values(model.layers[1].models).length > 0) {
@@ -230,52 +241,30 @@ function QuestionsDiagram() {
       const answers = As.filter(a => {
         return Object.values(a.ports.In.links)[0] && Object.keys(question.ports.Out.links).includes(Object.values(a.ports.In.links)[0].options.id)
       })
-      if (answers.filter(a => !a.options.extras.dropdown).length === 0) {
-        answers.map(aI => {
-          const subHbFields = availableFields.find(aF => aF.name === aI.options.extras.answeridentifier)
-          const dropdownAnswers = aI.options.name.split(":").reverse()[0]
-          const rawAnswers = dropdownAnswers.split(',').map(a => a.trim())
-          const rawAnswersWithoutLabels = rawAnswers.map(a => a.replace(/\(.*\)/, '').trim())
-          const notExistingAnswers = rawAnswersWithoutLabels.filter(rA => {
-            return !subHbFields.options.map(s => s.value).includes(rA)
-          })
+
+      answers.map(answer => {
+        if (answer.options.extras.freeanswer) {
+          answer.options.color = colorFreeanswer
+        } else if (answer.options.extras.dropdown) {
+          const notExistingAnswers = checkDropDown(availableFields, answer)
           if (notExistingAnswers.length == 0) {
-            aI.setSelected(false)
-            aI.options.color = colorDropdown
+            answer.options.color = colorDropdown
           } else {
-            console.log('notExistingAnswers', notExistingAnswers);
-            aI.setSelected(true)
-            aI.options.color = colorError
-            errors.push(`'${notExistingAnswers.join(", ")}' doesnt exist on '${aI.options.name}'`)
+            answer.options.color = colorError
+            errors.push(`'${notExistingAnswers.join(", ")}' doesnt exist on '${answer.options.name}'`)
           }
-        })
       } else {
-        Object.values(question.portsOut[0].links).map(link => {
-          // if not just freeanswers
-          if (answers.filter(a => !a.options.extras.freeanswer).length > 0) {
-            if (hbField) {
-              question.options.color = questioncolor
-              const matchingQuestions = hbField && hbField.options.length > 0 ? hbField.options.filter(f => f.value === link.targetPort.parent.options.extras.answeridentifier) : []
-              if (hbField.options.length > 0 && matchingQuestions.length == 0) {
-                errors.push(`This answer is not present on Hubspot: "${link.targetPort.parent.options.name}"\n\r`)
-                engine.getModel().getNode(link.targetPort.parent.options.id).options.color = colorError
-              } else {
-                engine.getModel().getNode(link.targetPort.parent.options.id).options.color = colorAnswer
-              }
-            } else {
-              question.options.color = colorError
-              errors.push(`This question is not present on Hubspot: "${question.options.name}"\n\r`)
-              engine.getModel().getNode(link.targetPort.parent.options.id).options.color = colorError
-            }
-            return link.targetPort.parent
+          const notExistingAnswers = hbField.options.filter(field => field.value.toLowerCase() == answer.options.extras.answeridentifier.toLowerCase())
+          if (notExistingAnswers.length === 0) {
+            answer.options.color = colorError
+            question.options.color = colorError
+            errors.push(`'${answer.options.name}' doesnt exist on '${question.options.name}'`)
           } else {
-            // set freeanswers to colorDefault
-            answers.map(a => {
-              a.options.color = colorFreeanswer
+            answer.options.color = colorAnswer
+              question.options.color = questioncolor
+              }
+            }
             })
-          }
-        }).filter(l => !!l)
-      }
     }
     return errors
   }
@@ -325,8 +314,8 @@ function QuestionsDiagram() {
 
       <div className={!answersvisiblity ? `d-none` : ``}>
         <div className={`card`}>
-          {answers.map(a => (
-            <Pre className={""}>{JSON.stringify(a.answers)}</Pre>
+          {answers.map((a, i) => (
+            <Pre key={i} className={""}>{JSON.stringify(a.answers)}</Pre>
           ))}
         </div>
       </div>
@@ -338,8 +327,9 @@ function QuestionsDiagram() {
               <select
                 id="flowselector"
                 className={`custom-select w-auto mr-2`}
+                value={currentModelId}
                 onChange={e => {
-                  const theModelToSet = allFlows.find(f => f.name === e.target.selectedOptions[0].value)
+                  const theModelToSet = allFlows.find(f => f._id === e.target.selectedOptions[0].value)
                   if (theModelToSet.model) {
                     model.deserializeModel(theModelToSet.model, engine);
                     setForm({ ...form, flowname: theModelToSet.name, active: theModelToSet.active })
@@ -352,9 +342,9 @@ function QuestionsDiagram() {
                   }
                   addEventListeners(theModelToSet.name)
                 }}>
-                <option disabled value='' defaultChecked>select flow...</option>
+                <option disabled>select flow...</option>
                 {allFlows.map((f, i) => (
-                  <option key={i} defaultChecked={f._id == currentModelId} value={f.name} >{f.name}</option>
+                  <option key={i} value={f._id}>{f.name}</option>
                 ))}
               </select>
             </div>
@@ -464,10 +454,10 @@ function QuestionsDiagram() {
                 }} data-type="answertranslation" data-color={questioncolor} style={{ borderColor: "rgb(256, 204, 1)", borderStyle: "solid" }} id="answertranslation" required />
             </div>
             <div className="col-md-4">
-              <div className='d-flex align-items-end'>
-                <div className="w-100">
+              <div className='d-flex align-items-end flex-wrap'>
+                <div className="flex-grow-1">
                   <label htmlFor="answeridentifier">Questionidentifier</label>
-                  <input className="form-control w-100" name="answeridentifier" type="text" value={form['answeridentifier']}
+                  <input className="form-control " name="answeridentifier" type="text" value={form['answeridentifier']}
                     onChange={(e) => {
                       e.stopPropagation();
                       setForm({ ...form, [e.target.name]: e.target.value })
@@ -476,13 +466,13 @@ function QuestionsDiagram() {
                 <select
                   id="type"
                   className={`custom-select w-auto mr-2`}
+                  value={form['freeanswer_type']}
                   onChange={e => {
-                    console.log('e', e);
                     setForm({ ...form, freeanswer_type: e.target.selectedOptions[0].value })
                   }}>
-                  <option disabled value='' defaultChecked>select type</option>
-                  {["text", "email", "number"].map((f, i) => (
-                    <option key={i} selected={f == form['freeanswer_type']} defaultChecked={f == form['freeanswer_type']} value={f}>{f}</option>
+                  <option disabled>select type</option>
+                  {["text", "email", "number", "tel", "text"].map((f, i) => (
+                    <option key={i} value={f}>{f}</option>
                   ))}
                 </select>
                 <button className="btn btn-primary ml-1" type="submit">{button}</button>
