@@ -75,6 +75,7 @@ module.exports.editCourse = async function(req, res) {
 };
 module.exports.createCourse = async function(req, res) {
   const curriculumPdf = req.body.curriculumPdf ? `${req.body.curriculumPdf.split('.')[0]}_${uuid(4)}.${req.body.curriculumPdf.split('.').reverse()[0]}` : undefined
+  const jobcenterPdf = req.body.jobcenterPdf ? `${req.body.jobcenterPdf.split('.')[0]}_${uuid(4)}.${req.body.jobcenterPdf.split('.').reverse()[0]}` : undefined
   const storys = await Story.find()
     .select("title slug")
     .exec();
@@ -103,6 +104,7 @@ module.exports.createCourse = async function(req, res) {
   course.joinTheTechDisruption = req.body.joinTheTechDisruption;
   course.startYourClass = req.body.startYourClass;
   course.curriculumPdf = req.body.curriculumPdf ? req.body.curriculumPdf : undefined;
+  course.jobcenterPdf = req.body.jobcenterPdf ? req.body.jobcenterPdf : undefined;
   course.feature_on_companies_page = !!req.body.feature_on_companies_page ? true : false;
 
   if(!!req.body.successStory) {
@@ -193,6 +195,7 @@ module.exports.uploadImages = multer({
   }
 }).fields([
   { name: "curriculumPdf", maxCount: 1 },
+  { name: "jobcenterPdf", maxCount: 1 },
   { name: "icon", maxCount: 1 },
   { name: "subicon", maxCount: 1 },
   { name: "archivement_icon_1", maxCount: 1 },
@@ -260,6 +263,9 @@ module.exports.updateCourse = async function(req, res) {
   if(req.body.curriculumPdf && course.curriculumPdf && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.curriculumPdf))) {
     await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.curriculumPdf));
   }
+  if(req.body.jobcenterPdf && course.jobcenterPdf && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.jobcenterPdf))) {
+    await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.jobcenterPdf));
+  }
   if(req.body.icon && course.icon && await fs.existsSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.icon))) {
     await fs.unlinkSync(path.resolve(process.env.IMAGE_UPLOAD_DIR, course.icon));
   }
@@ -317,6 +323,7 @@ module.exports.updateCourse = async function(req, res) {
   course.courselength = req.body.courselength;
   course.locations = req.body.locations;
   course.curriculumPdf = req.body.curriculumPdf ? req.body.curriculumPdf : course.curriculumPdf;
+  course.jobcenterPdf = req.body.jobcenterPdf ? req.body.jobcenterPdf : course.jobcenterPdf;
   course.icon = req.files.icon ? req.body.icon : course.icon;
   course.subicon = req.files.subicon ? req.body.subicon : course.subicon;
   course.curriculumSectionSubheading = req.body.curriculumSectionSubheading;
@@ -425,6 +432,7 @@ module.exports.updateCourse = async function(req, res) {
   verbose(archivements);
   verbose(timeline);
   verbose(features);
+
   try {
     await course.save();
     req.flash("success", `Successfully updated ${course.title}`);
