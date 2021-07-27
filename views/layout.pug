@@ -213,7 +213,11 @@ html.h-100(lang=locale === "de" ? 'de': 'en')
         +dataPrivacy
     
     if (course && course.curriculumPdf) || currentPath === '/jobcenter'|| currentPath === '/tour'
-      +curriculumForm
+      #curriculumpopup.modal(tabindex='-1', role='dialog', aria-labelledby='curriculumpopup', aria-hidden='true')
+        .modal-dialog.modal-dialog-centered
+          .modal-content.border-radius-0
+            .p-4
+              +curriculumForm
 
     if currentPath && !currentPath.includes('admin') && !currentPath.includes('users')
       #cookiehint.fixed-bottom.faded(role='alert')

@@ -276,7 +276,7 @@ mixin singleCourse
                 if course.curriculumPdf
                   .mb-3
                     h3: +translate("Download Course Overview")
-                  a.btn.btn-lg.px-4.btn-secondary.border-0.text-white(href='#' data-toggle='modal', data-target='#curriculumpopup' data-course=`${course.slug}` class=course && course.coloraccent ? `hover-transparent` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` ) 
+                  a.btn.btn-lg.px-4.border-0.text-white(href='#' data-toggle='modal', data-target='#curriculumpopup' data-course=`${course.slug}` class=course && course.coloraccent ? `hover-transparent` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` ) 
                     div.h-2.w-2.d-inline-block.mr-2
                       include ../../assets/icons/download.svg
                     ="Download"

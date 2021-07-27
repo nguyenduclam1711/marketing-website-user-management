@@ -28,7 +28,7 @@ const itiConfig = {
 	separateDialCode: true,
 	preferredCountries: ["de", "gb"]
 }
-const findAnswers = (questions, flow) => {
+const render = (questions, flow) => {
 	const questionroot = document.querySelector(flow.renderselector)
 	if (questionroot) {
 		const diagramLinks = flow.model.layers.find(layer => layer.type === "diagram-links").models
@@ -61,9 +61,9 @@ const findAnswers = (questions, flow) => {
               <p class="text-center">${isGerman && question.extras.questiontranslation ? question.extras.questiontranslation : question.name}</p>
             </div>
             <div class="">
-              <div class="w-100 px-lg-3">
-              ${freeanswers.length > 0 ? "<div class='row'>" + freeanswers.map(answer => {
-				  return `<div class="${freeanswers.length === 1 ? "col-md-12" : "col-md-6"}"><label for="freeanswer_${answer.extras.answeridentifier}" >${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ? answer.extras.answertranslation.split(':')[0] : answer.extras.answertranslation) : (answer.name.indexOf(':') !== -1 ? answer.name.split(':')[0] : answer.name)}</label>
+              <div class="w-100 px-3">
+              ${freeanswers.length > 0 ? "<div class='row'>" + freeanswers.map((answer, index) => {
+				  return `<div class="${freeanswers.length === 1 || (index === freeanswers.length - 1) ? "col-md-12" : "col-md-6"}"><label for="freeanswer_${answer.extras.answeridentifier}" >${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ? answer.extras.answertranslation.split(':')[0] : answer.extras.answertranslation) : (answer.name.indexOf(':') !== -1 ? answer.name.split(':')[0] : answer.name)}</label>
                 <input 
 				placeholder="${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ? answer.extras.answertranslation.split(':')[1] : "") : (answer.name.indexOf(':') !== -1 ? answer.name.split(':')[1] : "")}" 
 				class="form-control mb-4 freeanswer dynamicinput" 
@@ -106,7 +106,7 @@ const findAnswers = (questions, flow) => {
 				data-nextquestions="${nextQuestions.map(a => a.id)}" 
 				required
 				/>
-                <label class=" btn btn-lg mb-4 btn-white blue-light-shadow answerbutton w-100 mb-3 mr-3" for="${answer.extras.answeridentifier}">${isGerman && answer.extras.answertranslation ? answer.extras.answertranslation : answer.name}</label>
+                <label class=" btn btn-lg mb-4 btn-white blue-light-shadow answerbutton w-100 mb-3 px-5" for="${answer.extras.answeridentifier}">${isGerman && answer.extras.answertranslation ? answer.extras.answertranslation : answer.name}</label>
                 </div>`
 			  }).join('')}
               ${canTrigger(questions, flow.model) ? `<button class="d-none fakebutton btn btn-lg w-100 btn-outline-secondary mb-4  mr-2 answerbutton" data-nextquestions="${nextQuestions.map(a => a.id)}" type="submit">${isGerman ? `Weiter` : `Next`}</button>` : ``}
@@ -180,7 +180,7 @@ fetch(`/admin/questions/overview/getquestionrenderselectors`, {
 		fullFlows.map(res => res.payload.questions).map(question => {
 			const diagramNodes = question.model.layers.find(layer => layer.type === "diagram-nodes").models
 			const startquestion = Object.values(diagramNodes).filter(model => model.ports.find(port => port.label === "In").links.length === 0)
-			findAnswers(startquestion, question)
+			render(startquestion, question)
 			document.addEventListener('submit', (e) => {
 				if (question.name === e.target.closest('form').dataset.flow) {
 					jumpToNextQuestion(e, diagramNodes, question)
@@ -208,7 +208,7 @@ const jumpToNextQuestion = (e, diagramNodes, flow) => {
 	localStorage.setItem(`dcianswers_${flow.name}`, JSON.stringify({ ...JSON.parse(localStorage.getItem('dcianswers')), ...form_payload }))
 	const nextQuestions = Object.values(diagramNodes).filter(n => [...e.target.elements].find(i => i.type === "submit").dataset.nextquestions.includes(n.id.split(',')))
 	if (nextQuestions.length > 0) {
-		findAnswers(nextQuestions, flow)
+		render(nextQuestions, flow)
 	} else {
 		const submitButton = document.querySelector("button[data-nextquestions='']")
 		const buttonOriginalText = submitButton.innerText
