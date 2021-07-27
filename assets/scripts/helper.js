@@ -1,5 +1,5 @@
 export const get_form_payload = (elements) => {
-	const notUnselectedInputs = [...elements].filter(e => e.type === 'radio' && e.checked || e.type != 'radio')
+	const notUnselectedInputs = [...elements].filter(e => e.type === 'radio' && e.checked || e.type != 'radio').filter(e => e.type !== 'hidden')
 		.filter(i => i.type !== "submit")
 	return notUnselectedInputs
 		.reduce((acc, el) => {

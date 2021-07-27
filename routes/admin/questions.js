@@ -13,6 +13,9 @@ router
     redirectNonSuperAdmin,
     AdminQuestionsController.getQuestions)
 router
+  .get("/overview/:getquestionrenderselectors",
+    AdminQuestionsController.getQuestionRenderSelectors)
+router
   .get("/fetch/:questions",
     AdminQuestionsController.getQuestion)
 router

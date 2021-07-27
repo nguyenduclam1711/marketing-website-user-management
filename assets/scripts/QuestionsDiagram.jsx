@@ -146,10 +146,11 @@ function QuestionsDiagram() {
           availableFields = res.payload.hb_fields
           setallFlows(res.payload.questions)
           setanswers(res.payload.answers)
+          const initialModel = res.payload.questions[0]
           if (initialModel.model) {
             model.deserializeModel(initialModel.model, engine);
           }
-          setForm({ ...form, flowname: initialModel.name, active: initialModel.active })
+          setForm({ ...form, flowname: initialModel.name, active: initialModel.active, renderselector: initialModel.renderselector })
           setmodelState(initialModel._id)
           addEventListeners(initialModel.name)
           engine.setModel(model);
@@ -332,7 +333,7 @@ function QuestionsDiagram() {
                   const theModelToSet = allFlows.find(f => f._id === e.target.selectedOptions[0].value)
                   if (theModelToSet.model) {
                     model.deserializeModel(theModelToSet.model, engine);
-                    setForm({ ...form, flowname: theModelToSet.name, active: theModelToSet.active })
+                    setForm({ ...form, flowname: theModelToSet.name, active: theModelToSet.active, renderselector: theModelToSet.renderselector })
                     setmodelState(theModelToSet._id)
                     engine.setModel(model);
                   } else {
@@ -363,6 +364,13 @@ function QuestionsDiagram() {
             <div className="col-auto">
               <label htmlFor="flowname">Flow name</label>
               <input className="form-control" id="flowname" name="flowname" value={form['formname']} value={form.flowname} onChange={(e) => {
+                e.stopPropagation();
+                setForm({ ...form, [e.target.name]: e.target.value })
+              }} />
+            </div>
+            <div className="col-auto">
+              <label htmlFor="renderselector">Flow renderselector</label>
+              <input className="form-control" id="renderselector" name="renderselector" value={form['formname']} value={form.renderselector} onChange={(e) => {
                 e.stopPropagation();
                 setForm({ ...form, [e.target.name]: e.target.value })
               }} />
@@ -527,7 +535,8 @@ function QuestionsDiagram() {
                 _id: currentModelId,
                 name: form['flowname'],
                 model: model.serialize(),
-                active: form.active
+                active: form.active,
+                renderselector: form.renderselector,
               })
             }).then(res => res.json())
               .then(res => {

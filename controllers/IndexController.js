@@ -103,7 +103,7 @@ module.exports.contact = async (req, res, next) => {
       next()
       return;
     }
-    if (!email || !firstname || !phone || !TermsofService) {
+    if (!email || !TermsofService) {
       if (req.headers['content-type'] === 'application/json') {
         const response = {
           error: res.__(`Please fill out all form fields`),
@@ -122,7 +122,9 @@ module.exports.contact = async (req, res, next) => {
     contact.firstname = firstname
     contact.lastname = lastname
     contact.email = email
-    contact.phone = phone.replace(/[a-z]/g, '')
+    if (phone) {
+      contact.phone = phone.replace(/[a-z]/g, '')
+    }
     contact.track = req.headers.referer
     contact.body = body
     contact.jobcenter = afa_jc_registered_

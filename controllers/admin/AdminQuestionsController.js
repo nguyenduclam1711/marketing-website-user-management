@@ -44,6 +44,20 @@ module.exports.getQuestions = async (req, res) => {
     console.log(err);
   }
 };
+module.exports.getQuestionRenderSelectors = async (req, res) => {
+  try {
+    let questions = await Question.find()
+      .select("name renderselector")
+      .exec();
+    console.log('questions', questions);
+    const response = {
+      questions
+    }
+    return jsonResponseObject(res, response)
+  } catch (err) {
+    console.log(err);
+  }
+};
 module.exports.getQuestion = async (req, res) => {
   try {
     let questions = await Question.findOne({ name: req.params.questions })
@@ -67,6 +81,7 @@ module.exports.updateQuestion = async (req, res) => {
         question.name = req.body.name
         question.model = req.body.model
         question.active = req.body.active
+        question.renderselector = req.body.renderselector
       }
     }
     await question.save()

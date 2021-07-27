@@ -172,15 +172,15 @@ const animatedPolygons = () => {
   })
 }
 
-$("#contactFormModal").on("shown.bs.modal", function (e) {
-  window.document.querySelector("#track").value = window.location.href;
-  window.history.replaceState(window.location.pathname, "/", `/contact`);
-});
+// $("#contactFormModal").on("shown.bs.modal", function (e) {
+//   window.document.querySelector("#track").value = window.location.href;
+//   window.history.replaceState(window.location.pathname, "/", `/contact`);
+// });
 
-$("#contactFormModal").on("hidden.bs.modal", function (e) {
-  window.document.querySelector("#track").value = "";
-  window.history.replaceState({}, "/", window.history.state);
-});
+// $("#contactFormModal").on("hidden.bs.modal", function (e) {
+//   window.document.querySelector("#track").value = "";
+//   window.history.replaceState({}, "/", window.history.state);
+// });
 
 // $('[data-spy="scroll"]').on('activate.bs.scrollspy', function () {
 //   console.debug("yo")
