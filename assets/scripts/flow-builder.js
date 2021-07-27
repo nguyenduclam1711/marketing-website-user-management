@@ -63,6 +63,7 @@ placeholder="${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ?
 				class="form-control mb-4 freeanswer dynamicinput" 
 				name="${answer.extras.answeridentifier}" 
 				data-type="question" 
+				${answer.extras.freeanswer_type === 'hidden' ? `value="${answer.extras.freeanswer_type === 'hidden' ? `true` : answer.extras.answeridentifier}"` : ``}
 				type="${answer.extras.freeanswer_type ? answer.extras.freeanswer_type : "text"}" 
 				id="freeanswer_${answer.extras.answeridentifier}"
 				required`

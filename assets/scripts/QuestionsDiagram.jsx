@@ -129,7 +129,7 @@ function QuestionsDiagram() {
               "freeanswer_type": "text",
               "dropdown": ""
             }
-            setForm({ ...formRef.current, formClone })
+            setForm({ ...formRef.current, form: formClone })
           }
         }
       });
@@ -256,7 +256,7 @@ function QuestionsDiagram() {
           }
         } else {
           const notExistingAnswers = hbField.options.filter(field => field.value.toLowerCase() == answer.options.extras.answeridentifier.toLowerCase())
-          if (notExistingAnswers.length === 0) {
+          if (notExistingAnswers.length === 0 && answer.options.extras.freeanswer_type !== "hidden") {
             answer.options.color = colorError
             question.options.color = colorError
             errors.push(`'${answer.options.name}' doesnt exist on '${question.options.name}'`)
@@ -463,7 +463,7 @@ function QuestionsDiagram() {
             <div className="col-md-4">
               <div className='d-flex align-items-end flex-wrap'>
                 <div className="flex-grow-1">
-                  <label htmlFor="answeridentifier">Questionidentifier</label>
+                  <label htmlFor="answeridentifier">Answeridentifier</label>
                   <input className="form-control " name="answeridentifier" type="text" value={form['answeridentifier']}
                     onChange={(e) => {
                       e.stopPropagation();
@@ -475,10 +475,10 @@ function QuestionsDiagram() {
                   className={`custom-select w-auto mr-2`}
                   value={form['freeanswer_type']}
                   onChange={e => {
-                    setForm({ ...form, freeanswer_type: e.target.selectedOptions[0].value })
+                    setForm({ ...form, freeanswer_type: e.target.selectedOptions[0].value, dropdown: false, freeanswer: true })
                   }}>
                   <option disabled>select type</option>
-                  {["text", "email", "number", "tel", "textarea"].map((f, i) => (
+                  {["text", "email", "number", "tel", "textarea", "hidden"].map((f, i) => (
                     <option key={i} value={f}>{f}</option>
                   ))}
                 </select>
