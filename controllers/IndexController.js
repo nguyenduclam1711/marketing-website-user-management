@@ -498,10 +498,6 @@ module.exports.jobcenter = async (req, res) => {
     indexData = await Promise.all([storiesQuery, locationsQuery, partnersQuery, coursesQuery, employeeQuery])
 
     let [stories, locations, partners, courses, employees] = indexData;
-    partners.map(b => {
-      var random = Math.floor(Math.random() * partners.length)
-      partners.splice(random, 1)
-    })
     res.render('jobcenter', {
       stories,
       locations,
