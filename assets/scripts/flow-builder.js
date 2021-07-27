@@ -50,7 +50,7 @@ const render = (questions, flow) => {
 			questionroot.innerHTML = `
 		<div class="w-100">
 		<div id="popup" class="py-5 d-flex flex-column justify-content-between w-300px w-100">
-      <form data-flow="${flow.name}" onSubmit="return false;" class="dynamicinputform">
+      <form data-flow="${flow.name}" onSubmit="return false;" class="dynamicinputform d-flex flex-column justify-content-center">
         ${questions.map((question, index) => {
 			const answers = getAnswers(question, flow.model);
 			const buttons = answers.filter(answer => !answer.extras.freeanswer && !answer.extras.dropdown);
@@ -72,7 +72,7 @@ placeholder="${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ?
               <p class="text-center">${isGerman && question.extras.questiontranslation ? question.extras.questiontranslation : question.name}</p>
             </div>
             <div class="">
-              <div class="w-100 px-3">
+              <div class="w-100">
               ${freeanswers.length > 0 ? "<div class='row'>" + freeanswers.map((answer, index) => {
 				  return `<div class="
 				  ${freeanswers.length === 1 || (index === freeanswers.length - 1) || answer.extras.freeanswer_type === 'textarea' || (freeanswers[index + 1] && freeanswers[index + 1].extras.freeanswer_type === 'textarea') ? 'col-12' : 'col-6'} ) ? "col-md-12" : "col-md-6"}">
@@ -91,7 +91,7 @@ placeholder="${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ?
 			  <select 
 			  id="dropdown_${answer.extras.answeridentifier}" 
 			  name="${answer.extras.answeridentifier}" 
-			  class="form-select mb-3 dynamicinput dropdown" 
+			  class="form-select mb-5 dynamicinput dropdown"
 			  required="required">
 			  <option 
 			  class="form-control mb-4" name="button" type="text" data-type="question" placeholder="${isGerman ? "Auswählen..." : "Select..."}" type="text" value="" disabled selected>${isGerman ? "Auswählen..." : "Select..."}</option>` +
@@ -124,14 +124,15 @@ placeholder="${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ?
               ${canTrigger(questions, flow.model) ? `<button class="d-none fakebutton btn btn-lg w-100 btn-outline-secondary mb-4  mr-2 answerbutton" data-nextquestions="${nextQuestions.map(a => a.id)}" type="submit">${isGerman ? `Weiter` : `Next`}</button>` : ``}
                   </div>
                 </div>` }).join('')}
-              <div class="px-3 mt-5">
+                ${nextQuestions.length === 0 ? `
+				<div class="px-3 mt-5">
               <div class="">
-                ${nextQuestions.length === 0 ? `<p><label class="checkbox TermsofService text-muted">${isGerman ? `Gelesen und akzeptiert` : `I have read and agree to the`}<input type="checkbox" name="TermsofService" value="true" required="required"><span class="checkmark"></span></label><a href="#" class="ml-1 font-weight-normal text-dark text-decoration-none" data-toggle="modal" data-target="#dataPrivacy">${isGerman ? `Datenschutz` : `Data privacy`}</a></p>` : ``}
+				<p><label class="checkbox TermsofService text-muted">${isGerman ? `Gelesen und akzeptiert` : `I have read and agree to the`}<input type="checkbox" name="TermsofService" value="true" required="required"><span class="checkmark"></span></label><a href="#" class="ml-1 font-weight-normal text-dark text-decoration-none" data-toggle="modal" data-target="#dataPrivacy">${isGerman ? `Datenschutz` : `Data privacy`}</a></p>` : ``}
                 ${canTrigger(questions, flow.model) ? `` : `<div class="d-flex justify-content-end"><button class="btn btn-lg mb-4 answerbutton ${nextQuestions.length === 0 ? "w-md-50 w-100 btn-secondary" : "btn-outline-secondary w-100"}" data-nextquestions="${nextQuestions.map(a => a.id)}" type="submit">${nextQuestions.length === 0 ? (isGerman ? `Abschicken` : `Submit`) : (isGerman ? `Weiter` : `Next`)}`}</button></div>
-                ${nextQuestions.length === 0 ? `<p class='text-muted small asterix'>${isGerman ? `Durch Deine Registrierung stimmst Du zu, dass personenbezogene Daten gespeichert werden. Diese dürfen von der Digital Career Institute gGmbH genutzt werden, um mit Dir in Kontakt zu treten, sofern Du dies nicht ausdrücklich untersagst.` : `With this registration you agree with the storage of your data. These data will be used by Digital Career Institute gGmbH to contact you. You have the right to access, modify, rectify and delete these data.`}</p>` : ``}
-
-              </div>
+                ${nextQuestions.length === 0 ? `<p class='text-muted small asterix'>${isGerman ? `Durch Deine Registrierung stimmst Du zu, dass personenbezogene Daten gespeichert werden. Diese dürfen von der Digital Career Institute gGmbH genutzt werden, um mit Dir in Kontakt zu treten, sofern Du dies nicht ausdrücklich untersagst.` : `With this registration you agree with the storage of your data. These data will be used by Digital Career Institute gGmbH to contact you. You have the right to access, modify, rectify and delete these data.`}</p>
+				</div>
             </div>
+			` : ``}
         </form>
       </div>
     </div>`
