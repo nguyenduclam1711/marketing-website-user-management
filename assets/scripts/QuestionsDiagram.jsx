@@ -495,7 +495,7 @@ function QuestionsDiagram() {
                 onChange={(e) => {
                   e.stopPropagation();
 
-                  setForm({ ...form, [e.target.name]: e.target.checked })
+                  setForm({ ...form, [e.target.name]: e.target.checked, dropdown: false })
                 }} style={{ borderColor: "rgb(255, 204, 1)", borderStyle: "solid" }} id="freeanswer" />
               <label className="form-check-label" htmlFor="freeanswer">Free answer</label>
               <button className="btn btn-secondary badge ml-2" type="button" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="If checked you can split by a ':' between the fieldlabel and the placeholder. Eg: fieldlabel:placeholder or Phone:+490987654321" data-original-title="" title=""> ? </button>
@@ -507,7 +507,7 @@ function QuestionsDiagram() {
                 type="checkbox" name="dropdown" className="form-check-input"
                 onChange={(e) => {
                   e.stopPropagation();
-                  setForm({ ...form, [e.target.name]: e.target.checked })
+                  setForm({ ...form, [e.target.name]: e.target.checked, freeanswer: false })
                 }} style={{ borderColor: "rgb(255, 204, 1)", borderStyle: "solid" }} id="dropdown" />
               <label className="form-check-label" htmlFor="dropdown">Is dropdown</label>
               <button className="btn btn-secondary badge ml-2" type="button" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="If checked, the name field gets more complex. Use a label followed by semicolon and then a comma seperated list to define the dropdown and its items. You can provide a optional dropdown label also with putting it in ().Eg: 'Whats your language level: A1(Beginner), A2, B1, B2(Mother tongue)' - or: 'State: Berlin(Haupstadt), Bayern'." data-original-title="" title=""> ? </button>
