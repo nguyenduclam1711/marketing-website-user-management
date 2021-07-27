@@ -56,6 +56,17 @@ const render = (questions, flow) => {
 			const buttons = answers.filter(answer => !answer.extras.freeanswer && !answer.extras.dropdown);
 			const freeanswers = answers.filter(answer => answer.extras.freeanswer && !answer.extras.dropdown);
 			const dropdowns = answers.filter(answer => answer.extras.dropdown);
+			const attributes = (answer) => `
+placeholder="${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ? answer.extras.answertranslation.split(':')[1] : "") : (answer.name.indexOf(':') !== -1 ? answer.name.split(':')[1] : "")}"
+				placeholder="${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ? answer.extras.answertranslation.split(':')[1] : "") : (answer.name.indexOf(':') !== -1 ? answer.name.split(':')[1] : "")}" 
+placeholder="${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ? answer.extras.answertranslation.split(':')[1] : "") : (answer.name.indexOf(':') !== -1 ? answer.name.split(':')[1] : "")}"
+				class="form-control mb-4 freeanswer dynamicinput" 
+				name="${answer.extras.answeridentifier}" 
+				data-type="question" 
+				type="${answer.extras.freeanswer_type ? answer.extras.freeanswer_type : "text"}" 
+				id="freeanswer_${answer.extras.answeridentifier}"
+				required`
+
 			return `
             <div class="d-flex justify-content-center mb-5 px-3">
               <p class="text-center">${isGerman && question.extras.questiontranslation ? question.extras.questiontranslation : question.name}</p>
@@ -63,15 +74,16 @@ const render = (questions, flow) => {
             <div class="">
               <div class="w-100 px-3">
               ${freeanswers.length > 0 ? "<div class='row'>" + freeanswers.map((answer, index) => {
-				  return `<div class="${freeanswers.length === 1 || (index === freeanswers.length - 1) ? "col-md-12" : "col-md-6"}"><label for="freeanswer_${answer.extras.answeridentifier}" >${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ? answer.extras.answertranslation.split(':')[0] : answer.extras.answertranslation) : (answer.name.indexOf(':') !== -1 ? answer.name.split(':')[0] : answer.name)}</label>
-                <input 
-				placeholder="${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ? answer.extras.answertranslation.split(':')[1] : "") : (answer.name.indexOf(':') !== -1 ? answer.name.split(':')[1] : "")}" 
-				class="form-control mb-4 freeanswer dynamicinput" 
-				name="${answer.extras.answeridentifier}" 
-				data-type="question" 
-				type="${answer.extras.freeanswer_type ? answer.extras.freeanswer_type : "text"}" 
-				id="freeanswer_${answer.extras.answeridentifier}" 
-				required/>
+				  return `<div class="
+				  ${freeanswers.length === 1 || (index === freeanswers.length - 1) || answer.extras.freeanswer_type === 'textarea' || (freeanswers[index + 1] && freeanswers[index + 1].extras.freeanswer_type === 'textarea') ? 'col-12' : 'col-6'} ) ? "col-md-12" : "col-md-6"}">
+				  <label for="freeanswer_${answer.extras.answeridentifier}">
+				  ${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ? answer.extras.answertranslation.split(':')[0] : answer.extras.answertranslation) : (answer.name.indexOf(':') !== -1 ? answer.name.split(':')[0] : answer.name)}</label>
+				  ${answer.extras.freeanswer_type === 'textarea' ? `
+					<textarea ${attributes(answer)} ></textarea>
+						` : `
+						<input ${attributes(answer)} />
+							`}
+
 				</div>`
 			  }).join('') + "</div><span id='error-msg' class='text-danger'></span>" : ""}
               ${dropdowns.length > 0 ? dropdowns.map(answer => (`

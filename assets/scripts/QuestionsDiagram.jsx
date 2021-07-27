@@ -478,7 +478,7 @@ function QuestionsDiagram() {
                     setForm({ ...form, freeanswer_type: e.target.selectedOptions[0].value })
                   }}>
                   <option disabled>select type</option>
-                  {["text", "email", "number", "tel", "text"].map((f, i) => (
+                  {["text", "email", "number", "tel", "textarea"].map((f, i) => (
                     <option key={i} value={f}>{f}</option>
                   ))}
                 </select>
