@@ -254,7 +254,7 @@ function QuestionsDiagram() {
             answer.options.color = colorError
             errors.push(`'${notExistingAnswers.join(", ")}' doesnt exist on '${answer.options.name}'`)
           }
-      } else {
+        } else {
           const notExistingAnswers = hbField.options.filter(field => field.value.toLowerCase() == answer.options.extras.answeridentifier.toLowerCase())
           if (notExistingAnswers.length === 0) {
             answer.options.color = colorError
@@ -262,10 +262,10 @@ function QuestionsDiagram() {
             errors.push(`'${answer.options.name}' doesnt exist on '${question.options.name}'`)
           } else {
             answer.options.color = colorAnswer
-              question.options.color = questioncolor
-              }
-            }
-            })
+            question.options.color = questioncolor
+          }
+        }
+      })
     }
     return errors
   }
@@ -308,7 +308,39 @@ function QuestionsDiagram() {
         }}>Show answers</button>
         <button className={`btn btn-secondary mr-2 word-break-break-all`} onClick={e => {
           setnodevisibility(!nodevisibility)
-        }}>Add Nodes</button>
+        }}>{!nodevisibility ? `Add Nodes ` : `Hide nodespanel`} </button>
+
+        <button className={`btn btn-secondary mr-2`} onClick={e => {
+          if (form.flowname) {
+            setloading(true)
+            const newModel = new StartNodeModel();
+            fetch(`/admin/questions/update`, {
+              method: "POST",
+              headers: {
+                "content-type": "application/json"
+              },
+              body: JSON.stringify({
+                _id: "",
+                name: "New Flow",
+                model: newModel.serialize(),
+              })
+            }).then(res => res.json())
+              .then(res => {
+                if (res.error) {
+                  seterror([...error, res.error])
+                } else {
+                  engine.setModel(newModel)
+                  setallFlows([...allFlows, res.payload])
+                  setForm({ ...form, flowname: res.payload.name })
+                  setmodelState(res.payload._id)
+                }
+                setloading(false)
+              })
+            seterror(error.splice(error.findIndex(e => e === `Name must be provided`), 1))
+          } else {
+            seterror([...error, `Name must be provided`])
+          }
+        }}>Add new Flow</button>
       </h2>
 
 
@@ -374,39 +406,6 @@ function QuestionsDiagram() {
                 e.stopPropagation();
                 setForm({ ...form, [e.target.name]: e.target.value })
               }} />
-            </div>
-            <div className="col-auto">
-              <button className={`btn btn-secondary mr-2`} onClick={e => {
-                if (form.flowname) {
-                  setloading(true)
-                  const newModel = new StartNodeModel();
-                  fetch(`/admin/questions/update`, {
-                    method: "POST",
-                    headers: {
-                      "content-type": "application/json"
-                    },
-                    body: JSON.stringify({
-                      _id: "",
-                      name: "New Flow",
-                      model: newModel.serialize(),
-                    })
-                  }).then(res => res.json())
-                    .then(res => {
-                      if (res.error) {
-                        seterror([...error, res.error])
-                      } else {
-                        engine.setModel(newModel)
-                        setallFlows([...allFlows, res.payload])
-                        setForm({ ...form, flowname: res.payload.name })
-                        setmodelState(res.payload._id)
-                      }
-                      setloading(false)
-                    })
-                  seterror(error.splice(error.findIndex(e => e === `Name must be provided`), 1))
-                } else {
-                  seterror([...error, `Name must be provided`])
-                }
-              }}>Add Flow</button>
             </div>
           </div>
           <div className=" row">

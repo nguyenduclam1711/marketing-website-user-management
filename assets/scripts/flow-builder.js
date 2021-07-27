@@ -106,16 +106,16 @@ const render = (questions, flow) => {
 				data-nextquestions="${nextQuestions.map(a => a.id)}" 
 				required
 				/>
-                <label class=" btn btn-lg mb-4 btn-white blue-light-shadow answerbutton w-100 mb-3 px-5" for="${answer.extras.answeridentifier}">${isGerman && answer.extras.answertranslation ? answer.extras.answertranslation : answer.name}</label>
+                <label class=" btn btn-lg py-4 mb-5 btn-white blue-light-shadow answerbutton w-100 mb-3 px-5" for="${answer.extras.answeridentifier}">${isGerman && answer.extras.answertranslation ? answer.extras.answertranslation : answer.name}</label>
                 </div>`
 			  }).join('')}
               ${canTrigger(questions, flow.model) ? `<button class="d-none fakebutton btn btn-lg w-100 btn-outline-secondary mb-4  mr-2 answerbutton" data-nextquestions="${nextQuestions.map(a => a.id)}" type="submit">${isGerman ? `Weiter` : `Next`}</button>` : ``}
                   </div>
                 </div>` }).join('')}
-              <div class="px-5 px-lg-3 px-xl-5 mt-5">
+              <div class="px-3 mt-5">
               <div class="">
                 ${nextQuestions.length === 0 ? `<p><label class="checkbox TermsofService text-muted">${isGerman ? `Gelesen und akzeptiert` : `I have read and agree to the`}<input type="checkbox" name="TermsofService" value="true" required="required"><span class="checkmark"></span></label><a href="#" class="ml-1 font-weight-normal text-dark text-decoration-none" data-toggle="modal" data-target="#dataPrivacy">${isGerman ? `Datenschutz` : `Data privacy`}</a></p>` : ``}
-                ${canTrigger(questions, flow.model) ? `` : `<div class="d-flex justify-content-end"><button class="btn btn-lg mb-4  mr-2 answerbutton ${nextQuestions.length === 0 ? "w-md-50 w-100 btn-secondary" : "btn-outline-secondary w-100"}" data-nextquestions="${nextQuestions.map(a => a.id)}" type="submit">${nextQuestions.length === 0 ? (isGerman ? `Abschicken` : `Submit`) : (isGerman ? `Weiter` : `Next`)}`}</button></div>
+                ${canTrigger(questions, flow.model) ? `` : `<div class="d-flex justify-content-end"><button class="btn btn-lg mb-4 answerbutton ${nextQuestions.length === 0 ? "w-md-50 w-100 btn-secondary" : "btn-outline-secondary w-100"}" data-nextquestions="${nextQuestions.map(a => a.id)}" type="submit">${nextQuestions.length === 0 ? (isGerman ? `Abschicken` : `Submit`) : (isGerman ? `Weiter` : `Next`)}`}</button></div>
                 ${nextQuestions.length === 0 ? `<p class='text-muted small asterix'>${isGerman ? `Durch Deine Registrierung stimmst Du zu, dass personenbezogene Daten gespeichert werden. Diese dürfen von der Digital Career Institute gGmbH genutzt werden, um mit Dir in Kontakt zu treten, sofern Du dies nicht ausdrücklich untersagst.` : `With this registration you agree with the storage of your data. These data will be used by Digital Career Institute gGmbH to contact you. You have the right to access, modify, rectify and delete these data.`}</p>` : ``}
 
               </div>
