@@ -166,15 +166,17 @@ placeholder="${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ?
 				id="freeanswer_${answer.extras.answeridentifier}"
 				required`
 
+			const notTextAreas = freeanswers.filter(f => f.extras.freeanswer_type !== 'textarea' && f.extras.freeanswer_type !== 'hidden')
+			const textAreas = freeanswers.filter(f => f.extras.freeanswer_type === 'textarea')
 			return `
             <div class="d-flex justify-content-center mb-5 px-3">
               <p class="text-center">${isGerman && question.extras.questiontranslation ? question.extras.questiontranslation : question.name}</p>
             </div>
             <div class="">
               <div class="w-100">
-              ${freeanswers.length > 0 ? "<div class='row'>" + freeanswers.map((answer, index) => {
+              ${freeanswers.length > 0 ? "<div class='row'>" + [...notTextAreas, ...textAreas].map((answer, index) => {
 				  return `<div class="
-				  ${freeanswers.length === 1 || (index === freeanswers.length - 1) || answer.extras.freeanswer_type === 'textarea' || (freeanswers[index + 1] && freeanswers[index + 1].extras.freeanswer_type === 'textarea' && index % 2 == 0) || (freeanswers[index - 1] && freeanswers[index - 1].extras.freeanswer_type === 'textarea' && index % 2 == 0) ? 'col-12' : 'col-6'}">
+				  ${((index === notTextAreas.length - 1) && (index % 2 == 0)) || answer.extras.freeanswer_type === 'textarea' ? 'col-12' : 'col-6'}">
 				  ${answer.extras.freeanswer_type !== 'hidden' ? `<label for="freeanswer_${answer.extras.answeridentifier}">
 				  ${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ? answer.extras.answertranslation.split(':')[0] : answer.extras.answertranslation) : (answer.name.indexOf(':') !== -1 ? answer.name.split(':')[0] : answer.name)}</label>` : ``}
 				  ${answer.extras.freeanswer_type === 'textarea' ? `
