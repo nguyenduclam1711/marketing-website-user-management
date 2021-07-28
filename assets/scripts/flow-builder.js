@@ -28,6 +28,103 @@ const itiConfig = {
 	separateDialCode: true,
 	preferredCountries: ["de", "gb"]
 }
+
+
+fetch(`/admin/questions/overview/getquestionrenderselectors`, {
+	headers: {
+		"content-type": "application/json"
+	},
+})
+	.then(res => res.json())
+	.then(async (res) => {
+		const allFlows = []
+		res.payload.questions.map(flow => {
+			if (
+				flow.renderselector
+				// && !localStorage.getItem('dcianswers') 
+			) {
+				allFlows.push(fetch(`/admin/questions/fetch/${flow.name} `, {
+					headers: {
+						"content-type": "application/json"
+					},
+				}))
+			}
+		})
+		const partiallyResolved = await Promise.all(allFlows)
+		const fullFlows = await Promise.all(partiallyResolved.map(res => res.json()))
+		fullFlows.map(res => res.payload.questions).map(question => {
+			const diagramNodes = question.model.layers.find(layer => layer.type === "diagram-nodes").models
+			const startquestion = Object.values(diagramNodes).filter(model => model.ports.find(port => port.label === "In").links.length === 0)
+			render(startquestion, question)
+			document.addEventListener('submit', (e) => {
+				if (question.name === e.target.closest('form').dataset.flow) {
+					jumpToNextQuestion(e, diagramNodes, question)
+				}
+			})
+		})
+		document.addEventListener('change', (e) => {
+			fullFlows.map(res => res.payload.questions).map(flow => {
+				const questionroot = document.querySelector(flow.renderselector)
+				if (questionroot) {
+					if (flow.name === e.target.dataset.flow && e.target.dataset.trigger === "true") {
+						const diagramNodes = flow.model.layers.find(layer => layer.type === "diagram-nodes").models
+						e.target.elements = [e.target, [...e.target.closest('form').elements].find(i => i.type === "submit")]
+						jumpToNextQuestion(e, diagramNodes, flow)
+					}
+				}
+			})
+		})
+	})
+
+
+const jumpToNextQuestion = (e, diagramNodes, flow) => {
+	e.preventDefault()
+	const form_payload = get_form_payload(e.target.elements)
+	localStorage.setItem(`dcianswers_${flow.name}`, JSON.stringify({ ...JSON.parse(localStorage.getItem(`dcianswers_${flow.name}`)), ...form_payload }))
+	const nextQuestions = Object.values(diagramNodes).filter(n => [...e.target.elements].find(i => i.type === "submit").dataset.nextquestions.includes(n.id.split(',')))
+	if (nextQuestions.length > 0) {
+		render(nextQuestions, flow)
+	} else {
+		const submitButton = document.querySelector("button[data-nextquestions='']")
+		const buttonOriginalText = submitButton.innerText
+		submitButton.innerText = "Loading..."
+		submitButton.disabled = true
+		let payload = JSON.parse(localStorage.getItem(`dcianswers_${flow.name}`))
+		fetch(`/contact`, {
+			method: "POST",
+			headers: {
+				"content-type": "application/json"
+			},
+			body: JSON.stringify(payload)
+		}).then(res => res.json())
+			.then(data => {
+				if (data.response.contact_id) {
+					submitButton.innerText = "Thanks"
+					localStorage.removeItem(`dcianswers_${flow.name}`)
+					if (data.response.curriculumPdf) {
+						$("#curriculumpopup").modal('hide')
+						window.open(`${window.location.origin}/images/${data.response.curriculumPdf}`, '_blank')
+
+					} else {
+						window.location.replace(`${window.location.origin}/thank-you/${data.response.contact_id}`);
+					}
+				} else if (data.response.error) {
+					const div = document.createElement('div')
+					submitButton.innerText = buttonOriginalText
+					submitButton.disabled = false
+					div.innerHTML = `<div class="flash m-0 mr-3 alert fade show alert-danger ">${data.response.error}<button class="close ml-3" type="button" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button></div>`
+					document.body.appendChild(div)
+				}
+			}).catch(e => {
+				console.log('e', e);
+			})
+	}
+}
+
+const input = document.querySelector('input[name*="phone"]')
+if (input) {
+	const iti = intlTelInput(input, itiConfig);
+}
 const render = (questions, flow) => {
 	const questionroot = document.querySelector(flow.renderselector)
 	if (questionroot) {
@@ -180,100 +277,4 @@ placeholder="${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ?
 			})
 		}
 	}
-}
-
-fetch(`/admin/questions/overview/getquestionrenderselectors`, {
-	headers: {
-		"content-type": "application/json"
-	},
-})
-	.then(res => res.json())
-	.then(async (res) => {
-		const allFlows = []
-		res.payload.questions.map(flow => {
-			if (
-				flow.renderselector
-				// && !localStorage.getItem('dcianswers') 
-			) {
-				allFlows.push(fetch(`/admin/questions/fetch/${flow.name} `, {
-					headers: {
-						"content-type": "application/json"
-					},
-				}))
-			}
-		})
-		const partiallyResolved = await Promise.all(allFlows)
-		const fullFlows = await Promise.all(partiallyResolved.map(res => res.json()))
-		fullFlows.map(res => res.payload.questions).map(question => {
-			const diagramNodes = question.model.layers.find(layer => layer.type === "diagram-nodes").models
-			const startquestion = Object.values(diagramNodes).filter(model => model.ports.find(port => port.label === "In").links.length === 0)
-			render(startquestion, question)
-			document.addEventListener('submit', (e) => {
-				if (question.name === e.target.closest('form').dataset.flow) {
-					jumpToNextQuestion(e, diagramNodes, question)
-				}
-			})
-		})
-		document.addEventListener('change', (e) => {
-			fullFlows.map(res => res.payload.questions).map(flow => {
-				const questionroot = document.querySelector(flow.renderselector)
-				if (questionroot) {
-					if (flow.name === e.target.dataset.flow && e.target.dataset.trigger === "true") {
-						const diagramNodes = flow.model.layers.find(layer => layer.type === "diagram-nodes").models
-						e.target.elements = [e.target, [...e.target.closest('form').elements].find(i => i.type === "submit")]
-						jumpToNextQuestion(e, diagramNodes, flow)
-					}
-				}
-			})
-		})
-	})
-
-
-const jumpToNextQuestion = (e, diagramNodes, flow) => {
-	e.preventDefault()
-	const form_payload = get_form_payload(e.target.elements)
-	localStorage.setItem(`dcianswers_${flow.name}`, JSON.stringify({ ...JSON.parse(localStorage.getItem(`dcianswers_${flow.name}`)), ...form_payload }))
-	const nextQuestions = Object.values(diagramNodes).filter(n => [...e.target.elements].find(i => i.type === "submit").dataset.nextquestions.includes(n.id.split(',')))
-	if (nextQuestions.length > 0) {
-		render(nextQuestions, flow)
-	} else {
-		const submitButton = document.querySelector("button[data-nextquestions='']")
-		const buttonOriginalText = submitButton.innerText
-		submitButton.innerText = "Loading..."
-		submitButton.disabled = true
-		let payload = JSON.parse(localStorage.getItem(`dcianswers_${flow.name}`))
-		fetch(`/contact`, {
-			method: "POST",
-			headers: {
-				"content-type": "application/json"
-			},
-			body: JSON.stringify(payload)
-		}).then(res => res.json())
-			.then(data => {
-				if (data.response.contact_id) {
-					submitButton.innerText = "Thanks"
-					localStorage.removeItem(`dcianswers_${flow.name}`)
-					if (data.response.curriculumPdf) {
-						$("#curriculumpopup").modal('hide')
-						window.open(`${window.location.origin}/images/${data.response.curriculumPdf}`, '_blank')
-
-					} else {
-						window.location.replace(`${window.location.origin}/thank-you/${data.response.contact_id}`);
-					}
-				} else if (data.response.error) {
-					const div = document.createElement('div')
-					submitButton.innerText = buttonOriginalText
-					submitButton.disabled = false
-					div.innerHTML = `<div class="flash m-0 mr-3 alert fade show alert-danger ">${data.response.error}<button class="close ml-3" type="button" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button></div>`
-					document.body.appendChild(div)
-				}
-			}).catch(e => {
-				console.log('e', e);
-			})
-	}
-}
-
-const input = document.querySelector('input[name*="phone"]')
-if (input) {
-	const iti = intlTelInput(input, itiConfig);
 }
