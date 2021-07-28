@@ -254,8 +254,8 @@ const jumpToNextQuestion = (e, diagramNodes, flow) => {
 					submitButton.innerText = "Thanks"
 					localStorage.removeItem(`dcianswers_${flow.name}`)
 					if (data.response.curriculumPdf) {
-						window.open(`${window.location.origin}/images/${data.response.curriculumPdf}`, '_blank')
 						$("#curriculumpopup").modal('hide')
+						window.open(`${window.location.origin}/images/${data.response.curriculumPdf}`, '_blank')
 
 					} else {
 						window.location.replace(`${window.location.origin}/thank-you/${data.response.contact_id}`);
@@ -267,6 +267,8 @@ const jumpToNextQuestion = (e, diagramNodes, flow) => {
 					div.innerHTML = `<div class="flash m-0 mr-3 alert fade show alert-danger ">${data.response.error}<button class="close ml-3" type="button" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button></div>`
 					document.body.appendChild(div)
 				}
+			}).catch(e => {
+				console.log('e', e);
 			})
 	}
 }

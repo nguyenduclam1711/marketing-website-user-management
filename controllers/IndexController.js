@@ -122,7 +122,9 @@ module.exports.contact = async (req, res, next) => {
     }
     let courseReq
     if (reqComesFromCoursePage(req)) {
-      courseReq = Course.findOne({ slug: req.headers.referer.replace(/.*\/(.*)\?.*/, '$1') }, 'curriculumPdf')
+      var requestString = new URL(req.headers.referer)
+      var courseSlug = requestString.pathname.substring(requestString.pathname.lastIndexOf('/') + 1)
+      courseReq = Course.findOne({ slug: courseSlug }, 'curriculumPdf')
     }
     const contact = new Contact()
     contact.firstname = firstname
@@ -290,7 +292,9 @@ module.exports.contact = async (req, res, next) => {
       let course
       if (reqComesFromCoursePage(req)) {
         course = await courseReq
-        response.curriculumPdf = course.curriculumPdf
+        if (course) {
+          response.curriculumPdf = course.curriculumPdf
+        }
       }
       return res.json({
         response
