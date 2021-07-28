@@ -39,6 +39,9 @@ var CourseSchema = new Schema({
   jobcenterPdf: {
     type: String
   },
+  companiesPdf: {
+    type: String
+  },
   successStory: {
     type: Schema.ObjectId, ref: "Story",
   },

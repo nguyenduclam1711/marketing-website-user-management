@@ -57,6 +57,14 @@ mixin courseForm
         input#jobcenterPdf.form-control-file(type='file' name='jobcenterPdf')
     
     .mb-3
+      label.d-block.d-block(for='icon') Companies PDF
+      if course && course.companiesPdf
+        input#companiesPdf.hidePlaceholder.form-control-file(type='file' name='companiesPdf')
+        span=course.companiesPdf
+      else
+        input#companiesPdf.form-control-file(type='file' name='companiesPdf')
+
+    .mb-3
       label.d-block.d-block(for='icon') Course Title Icon
       if course && course.icon
         img.mw-150.mh-150.w-100.mw-150.mh-150.object-fit-cover(alt="course icon" src="/images/"+course.icon)
