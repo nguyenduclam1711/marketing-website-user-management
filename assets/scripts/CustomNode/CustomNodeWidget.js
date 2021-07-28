@@ -88,9 +88,6 @@ export class CustomNodeWidget extends DefaultNodeWidget {
 				{this.props.node.options.extras.customType === "answer" && this.props.node.options.extras.freeanswer && (
 					<TitleName>Type: Freeanswer</TitleName>
 				)}
-				{this.props.node.options.extras.customType === "answer" && this.props.node.options.extras.freeanswer_type === 'hidden' && (
-					<TitleName>Type: Hidden</TitleName>
-				)}
 				{this.props.node.options.extras.customType === "answer" && this.props.node.options.extras.freeanswer_type && this.props.node.options.extras.freeanswer && (
 					<TitleName>Type: {this.props.node.options.extras.freeanswer_type}</TitleName>
 				)}

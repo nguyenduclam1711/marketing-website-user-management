@@ -74,13 +74,14 @@ module.exports.updateQuestion = async (req, res) => {
   try {
     let question
     if (req.body._id === "") {
-      question = new Question({ name: req.body.name, model: req.body.model, active: false });
+      question = new Question({ name: req.body.name, model: req.body.model, active: false, sendaltemail: false, renderselector: "" });
     } else {
       question = await Question.findById(req.body._id).exec({});
       if (question) {
         question.name = req.body.name
         question.model = req.body.model
         question.active = req.body.active
+        question.sendaltemail = req.body.sendaltemail
         question.renderselector = req.body.renderselector
       }
     }

@@ -47,7 +47,8 @@ const render = (questions, flow) => {
 						}
 					})
 				});
-			questionroot.innerHTML = `
+
+			const html = `
 		<div class="w-100">
 		<div id="popup" class="py-5 d-flex flex-column justify-content-between w-300px w-100">
       <form data-flow="${flow.name}" onSubmit="return false;" class="dynamicinputform d-flex flex-column justify-content-center">
@@ -140,6 +141,16 @@ placeholder="${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ?
       </div>
     </div>`
 
+			const questionRootRenderElement = document.getElementById(`questionroot_render_element_${flow.name}`)
+			console.log(`questionRootRenderElement`, questionRootRenderElement);
+			if (!questionRootRenderElement) {
+				const renderElement = document.createElement(`div`)
+				renderElement.id = `questionroot_render_element_${flow.name}`
+				renderElement.innerHTML = html
+				questionroot.appendChild(renderElement)
+			} else {
+				questionRootRenderElement.innerHTML = html
+			}
 			const phoneFields = document.querySelectorAll('input[name*="phone"]')
 			Array.from(phoneFields).map(input => {
 				if (input) {
