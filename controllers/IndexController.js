@@ -182,7 +182,7 @@ module.exports.contact = async (req, res, next) => {
 
     const mailOptions = {
       from: 'contact@digitalcareerinstitute.org',
-      to: !req.headers.host.includes('digitalcareerinstitute.org')
+      to: ['localhost', 'staging'].some(el => req.headers.host.includes(el))
         ? process.env.MAILRECEIVER
         : sendaltemail
           ? settings.tourmailreceiver
@@ -278,8 +278,8 @@ module.exports.contact = async (req, res, next) => {
     contact.properties = properties
     const contactSavepromise = contact.save()
     // TODO remove logging statement
-    console.log("+++++>>>>",req.session);
-    console.log("========>>>>>",options.body.properties);
+    // console.log("+++++>>>>",req.session);
+    // console.log("========>>>>>",options.body.properties);
     // to save time, mail get send out without waiting for the response
     const info = sendMail(res, req, mailOptions)
     const result = await Promise.all([hubspotPromise, contactSavepromise])
@@ -296,6 +296,7 @@ module.exports.contact = async (req, res, next) => {
           response.curriculumPdf = course.curriculumPdf
         }
       }
+      console.log(response)
       return res.json({
         response
       })
