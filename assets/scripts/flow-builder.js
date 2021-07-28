@@ -77,7 +77,7 @@ placeholder="${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ?
               <div class="w-100">
               ${freeanswers.length > 0 ? "<div class='row'>" + freeanswers.map((answer, index) => {
 				  return `<div class="
-				  ${freeanswers.length === 1 || (index === freeanswers.length - 1) || answer.extras.freeanswer_type === 'textarea' || (freeanswers[index + 1] && freeanswers[index + 1].extras.freeanswer_type === 'textarea') ? 'col-12' : 'col-6'}">
+				  ${freeanswers.length === 1 || (index === freeanswers.length - 1) || answer.extras.freeanswer_type === 'textarea' || (freeanswers[index + 1] && freeanswers[index + 1].extras.freeanswer_type === 'textarea' && index % 2 == 0) || (freeanswers[index - 1] && freeanswers[index - 1].extras.freeanswer_type === 'textarea' && index % 2 == 0) ? 'col-12' : 'col-6'}">
 				  ${answer.extras.freeanswer_type !== 'hidden' ? `<label for="freeanswer_${answer.extras.answeridentifier}">
 				  ${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ? answer.extras.answertranslation.split(':')[0] : answer.extras.answertranslation) : (answer.name.indexOf(':') !== -1 ? answer.name.split(':')[0] : answer.name)}</label>` : ``}
 				  ${answer.extras.freeanswer_type === 'textarea' ? `
