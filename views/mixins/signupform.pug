@@ -10,9 +10,9 @@ mixin signupform
         input#lastname.form-control(name="lastname" type='text', placeholder='Lastname', value=contact ? contact.lastname : '', required)
       .col-md-12
         p
-          label(for="age_years")
+          label(for="age")
             =__("Age")
-          input#age_years.form-control(placeholder="30", name="age_years" type='number', value='', min="0", max="100", step="1", required)
+          input#age.form-control(placeholder="30", name="age" type='number', value='', min="0", max="100", step="1", required)
             
       .col-md-12
         label(for='email')=__("Email")
@@ -25,7 +25,7 @@ mixin signupform
         .form-group
           label(for='phone')=__("Phone")
           input#phone.form-control(name="phone" type='number', pattern="[\+]\d*", placeholder='0170123456789' , value=contact ? contact.phone : '', required)
-          input#age.agefield.form-control(name="age" tabindex="-1" type='text', placeholder='25')
+          input#age_field.agefield.form-control(name="age_field" tabindex="-1" type='text', placeholder='25')
         if global_locations && global_locations.length > 0
           label(for='location')=__("Location")
           select.mb-3.custom-select.text-muted.form-control(required='', name="locations" id="location")

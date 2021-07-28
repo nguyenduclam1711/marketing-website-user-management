@@ -5,7 +5,9 @@ import "bootstrap/js/dist/dropdown";
 import "bootstrap/js/dist/collapse";
 import "bootstrap/js/dist/carousel";
 import "bootstrap/js/dist/alert";
-import { alertTimeout } from "./helper.js"
+import { alertTimeout, get_form_payload } from "./helper.js"
+import "./flow-builder"
+
 require("../css/style.scss");
 
 const toggleNL = (remove = false) => {
@@ -170,25 +172,15 @@ const animatedPolygons = () => {
   })
 }
 
-$("#contactFormModal").on("shown.bs.modal", function (e) {
-  window.document.querySelector("#track").value = window.location.href;
-  window.history.replaceState(window.location.pathname, "/", `/contact`);
-});
+// $("#contactFormModal").on("shown.bs.modal", function (e) {
+//   window.document.querySelector("#track").value = window.location.href;
+//   window.history.replaceState(window.location.pathname, "/", `/contact`);
+// });
 
-$("#contactFormModal").on("hidden.bs.modal", function (e) {
-  window.document.querySelector("#track").value = "";
-  window.history.replaceState({}, "/", window.history.state);
-});
-
-$("#signupFormModal").on("shown.bs.modal", function (e) {
-  window.document.querySelector("#track").value = window.location.href;
-  window.history.replaceState(window.location.pathname, "/", `/`);
-});
-
-$("#signupFormModal").on("hidden.bs.modal", function (e) {
-  window.document.querySelector("#track").value = "";
-  window.history.replaceState({}, "/", window.history.state);
-});
+// $("#contactFormModal").on("hidden.bs.modal", function (e) {
+//   window.document.querySelector("#track").value = "";
+//   window.history.replaceState({}, "/", window.history.state);
+// });
 
 // $('[data-spy="scroll"]').on('activate.bs.scrollspy', function () {
 //   console.debug("yo")
@@ -276,10 +268,8 @@ Array.from(document.querySelectorAll(".ajaxform")).map(form => {
     e.target.querySelector('button').disabled = true;
     e.target.querySelector('#contactform_text').classList.add("d-none")
     e.target.querySelector('#contactform_spinner').classList.remove("d-none")
-    let payload = Array.from(e.target.elements)
-      .filter(i => i.type !== "submit")
-      .reduce((acc, el) => ({ ...acc, [el.name]: el.type === "checkbox" ? el.checked : el.name === "jobcenter" ? !!Number(el.value) : el.value }), {})
-    payload = { ...payload, course: e.target.dataset.course }
+    const form_payload = get_form_payload(e.target.elements)
+    const payload = { ...form_payload, course: e.target.dataset.course }
     fetch(e.target.action, {
       method: "POST",
       headers: {

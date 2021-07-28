@@ -12,7 +12,9 @@ const { sendMail, getAsyncRedis, getFbClid } = require('../helpers/helper')
 const { getAvailableTranslations } = require('./AbstractController')
 const fetchEventsByLocation = require("../helpers/fetch_events_by_location");
 let redisClient = null;
-
+const reqComesFromCoursePage = (req) => {
+  return /\/courses\/\w*/.test(req.headers.referer)
+}
 module.exports.landingpage = async (req, res) => {
 
   let indexData = null
@@ -42,7 +44,7 @@ module.exports.landingpage = async (req, res) => {
         .sort('order')
         .exec({})
       const partners = Partner.find({ ...query }, 'link title partnerlogo is_alumni_employer')
-      .sort('order')
+        .sort('order')
         .exec({})
       const courses = Course
         .find(query, 'icon headline slug subheading courselength')
@@ -60,7 +62,7 @@ module.exports.landingpage = async (req, res) => {
       }
     }
     const [storiesRes, partnersRes, coursesRes, events] = indexData;
-    
+
     res.render('index', {
       events,
       stories: storiesRes,
@@ -83,8 +85,8 @@ module.exports.contactLocations = async (req, res) => {
 };
 module.exports.contact = async (req, res, next) => {
   try {
-    const { firstname, lastname, age, age_years, language_german, language_english, email, body, phone, locations, companytour, signup_form, TermsofService, jobcenter, unemployed } = req.body
-    if (age) {
+    const { firstname, lastname, email, age_field, body, phone, locations, sendaltemail, signup_form, TermsofService, afa_jc_registered_, form_are_you_currently_unemployed } = req.body
+    if (age_field) {
       console.log('Bot stepped into honeypot!')
       if (req.headers['content-type'] === 'application/json') {
         const response = {
@@ -103,26 +105,43 @@ module.exports.contact = async (req, res, next) => {
       next()
       return;
     }
-    if (!email || !firstname || !phone || !TermsofService) {
-      req.flash('danger', 'Please fill out all form fields')
-      res.redirect(req.headers.referer)
-      next()
-      return;
+    if (!email || !TermsofService) {
+      if (req.headers['content-type'] === 'application/json') {
+        const response = {
+          error: res.__(`Please fill out all form fields`),
+        }
+        return res.json({
+          response
+        })
+      } else {
+        req.flash('danger', 'Please fill out all form fields')
+        res.redirect(req.headers.referer)
+        next()
+        return
+      }
+    }
+    let courseReq
+    if (reqComesFromCoursePage(req)) {
+      var requestString = new URL(req.headers.referer)
+      var courseSlug = requestString.pathname.substring(requestString.pathname.lastIndexOf('/') + 1)
+      courseReq = Course.findOne({ slug: courseSlug }, 'curriculumPdf')
     }
     const contact = new Contact()
     contact.firstname = firstname
     contact.lastname = lastname
     contact.email = email
-    contact.phone = phone.replace(/[a-z]/g, '')
+    if (phone) {
+      contact.phone = phone.replace(/[a-z]/g, '')
+    }
     contact.track = req.headers.referer
     contact.body = body
-    contact.jobcenter = !!jobcenter
-    contact.unemployed = unemployed
+    contact.jobcenter = afa_jc_registered_
+    contact.unemployed = form_are_you_currently_unemployed
     if (req.session.utmParams) {
       contact.utm_params = req.session.utmParams
     }
     contact.createdAt = new Date()
-    contact.isCompany = companytour
+    contact.isCompany = sendaltemail
     contact.locations = locations
     if (!contact.email) {
       res.redirect(req.headers.referer)
@@ -145,12 +164,12 @@ module.exports.contact = async (req, res, next) => {
       <td>Email: </td>
       <td>${email}</td>
     </tr>
-    ${!companytour && `<tr>
+    ${!sendaltemail && `<tr>
       <td>Is registered at Jobcenter:</td>
-      <td>${!!jobcenter}</td>
+      <td>${afa_jc_registered_}</td>
     </tr><tr>
       <td>Is unemployed:</td>
-      <td>${unemployed}</td>
+      <td>${form_are_you_currently_unemployed}</td>
     </tr>`}
     <tr>
       <td>Content: </td>
@@ -163,10 +182,12 @@ module.exports.contact = async (req, res, next) => {
 
     const mailOptions = {
       from: 'contact@digitalcareerinstitute.org',
-      to: companytour
-        ? settings.tourmailreceiver
-        : settings.mailreceiver,
-      subject: companytour
+      to: ['localhost', 'staging'].some(el => req.headers.host.includes(el))
+        ? process.env.MAILRECEIVER
+        : sendaltemail
+          ? settings.tourmailreceiver
+          : settings.mailreceiver,
+      subject: sendaltemail
         ? 'Company Tour request from website'
         : 'Message on website',
       text: mailTemplate,
@@ -175,48 +196,54 @@ module.exports.contact = async (req, res, next) => {
     let hubspotPromise = new Promise(() => { })
 
     let remainingUtmParams = req.session.utmParams ? { ...req.session.utmParams } : []
-    Object.keys(remainingUtmParams).map(q => q.startsWith('utm_') && delete remainingUtmParams[q])
     let properties
 
     if (!!process.env.HUBSPOT_API_KEY) {
       let fbclid = getFbClid(req, res, next);
       properties = [
-              { property: 'firstname', value: firstname },
-              { property: 'lastname', value: lastname },
-              { property: 'email', value: email },
-              { property: 'phone', value: phone },
-              { property: 'hs_facebook_click_id', value: fbclid },
-              { property: 'last_touchpoint', value: signup_form? 'website_lead_form' : 'website_contact_form' },
-              {
-                property: 'form_payload',
-                value: JSON.stringify({
-                  'track': req.headers.referer,
-                  'locations': location,
-                  'body': body,
-                  'is_company': companytour,
-                  'utm_params': remainingUtmParams
-                })
-              }
-            ];
-
+        { property: 'firstname', value: firstname },
+        { property: 'lastname', value: lastname },
+        { property: 'email', value: email },
+        { property: 'phone', value: phone },
+        { property: 'hs_facebook_click_id', value: fbclid },
+        { property: 'last_touchpoint', value: signup_form ? 'website_lead_form' : 'website_contact_form' },
+        {
+          property: 'form_payload',
+          value: JSON.stringify({
+            'track': req.headers.referer,
+            'locations': location,
+            'body': body,
+            'is_company': sendaltemail,
+            'utm_params': remainingUtmParams,
+            'all_fields': req.body
+          })
+        }
+      ];
+      const filteredPayload = Object.keys(req.body).reduce((acc, v) => {
+        if (![
+          "nb-confirmation-token",
+          "nb-result",
+          "nb-transaction-token",
+          "termsofservice",
+          "email",
+          "firstname",
+          "lastname",
+          "sendaltemail",
+          "phone",
+          "track",
+          "body",
+          "age_field",
+          "locations",
+        ].map(i => i.toLowerCase()).includes(v.toLowerCase())) {
+          acc[v] = req.body[v]
+        }
+        return acc
+      }, {})
+  
+      Object.keys(filteredPayload).map(i => properties.push({ property: i, value: filteredPayload[i] }))
 
       if(location){
         properties.push({property: 'state_de_', value: location.name } )  
-      }
-      if(jobcenter !== undefined){
-        properties.push({property: 'afa_jc_registered_', value: !jobcenter ? "No" : "Yes" } ) 
-      }
-      if(unemployed){
-        properties.push({property: 'form_are_you_currently_unemployed', value: unemployed} ) 
-      }
-      if(age_years){
-        properties.push({property: 'age', value: age_years} ) 
-      }
-      if(language_german){
-        properties.push({ property: 'language_level_german', value: language_german })
-      }
-      if(language_english){
-        properties.push({ property: 'language_level_english', value: language_english })
       }
       if(req.session.utmParams && req.session.utmParams.utm_source){
         properties.push({property: 'utm_source', value: req.session.utmParams.utm_source} ) 
@@ -251,8 +278,8 @@ module.exports.contact = async (req, res, next) => {
     contact.properties = properties
     const contactSavepromise = contact.save()
     // TODO remove logging statement
-    console.log("+++++>>>>",req.session);
-    console.log("========>>>>>",options.body.properties);
+    // console.log("+++++>>>>",req.session);
+    // console.log("========>>>>>",options.body.properties);
     // to save time, mail get send out without waiting for the response
     const info = sendMail(res, req, mailOptions)
     const result = await Promise.all([hubspotPromise, contactSavepromise])
@@ -262,6 +289,14 @@ module.exports.contact = async (req, res, next) => {
         message: res.__(`Thanks for your message`),
         contact_id: contact.id
       }
+      let course
+      if (reqComesFromCoursePage(req)) {
+        course = await courseReq
+        if (course) {
+          response.curriculumPdf = course.curriculumPdf
+        }
+      }
+      console.log(response)
       return res.json({
         response
       })
@@ -277,9 +312,19 @@ module.exports.contact = async (req, res, next) => {
   } catch (e) {
     console.error(`Error in /controllers/IndexController.js`)
     console.error(e)
-
-    req.flash('danger', e.message);
-    res.redirect(req.headers.referer)
+    if (req.headers['content-type'] === 'application/json') {
+      const response = {
+        error: res.__(e.message),
+      }
+      return res.json({
+        response
+      })
+    } else {
+      req.flash('danger', 'Please fill out all form fields')
+      res.redirect(req.headers.referer)
+      next()
+      return
+    }
   }
 }
 module.exports.tour = async (req, res) => {
@@ -354,123 +399,7 @@ module.exports.newsletter = (req, res) => {
     )
   }
 }
-module.exports.downloadCourseCurriculum = async (req, res, next) => {
-  try {
-    const { email, age, TermsofService, course: requestedCourse } = req.body
-    if (age) {
-      console.log('Bot stepped into honeypot!')
-      req.flash(
-        'success',
-        res.__(`Thanks for your message`)
-      )
-      res.redirect(req.headers.referer)
-      next()
-      return;
-    }
-    if (!email) {
-      req.flash('danger', 'Please fill in your email')
-      res.redirect(req.headers.referer)
-      next()
-      return;
-    }
-    if (!TermsofService) {
-      req.flash('danger', 'Please accept the terms of service')
-      res.redirect(req.headers.referer)
-      next()
-      return;
-    }
-    const course = await Course
-      .findOne({ slug: requestedCourse })
-      .exec()
-    const contact = new Contact()
-    contact.email = email
-    contact.track = req.headers.referer
-    if (req.session.utmParams) {
-      contact.utm_params = req.session.utmParams
-    }
-    contact.createdAt = new Date()
-    const settings = await Setting.findOne()
-    let hubspotPromise = new Promise(() => { })
 
-    let remainingUtmParams = req.session.utmParams ? { ...req.session.utmParams } : []
-    Object.keys(remainingUtmParams).map(q => q.startsWith('utm_') && delete remainingUtmParams[q])
-    let properties
-    if (!!process.env.HUBSPOT_API_KEY) {
-      
-
-      properties = [
-              { property: 'email', value: email },
-              { property: 'last_touchpoint', value: 'curriculum_download'},
-              {
-                property: 'form_payload',
-                value: JSON.stringify({
-                  'track': req.headers.referer,
-                  'utm_params': remainingUtmParams
-                })
-              }
-            ];
-
-      if(req.session.utmParams && req.session.utmParams.utm_source){
-        properties.push({property: 'utm_source', value: req.session.utmParams.utm_source} ) 
-      }
-      if(req.session.utmParams && req.session.utmParams.utm_medium){
-        properties.push({property: 'utm_medium', value: req.session.utmParams.utm_medium} ) 
-      }
-      if(req.session.utmParams && req.session.utmParams.utm_campaign){
-        properties.push({property: 'utm_campaign', value: req.session.utmParams.utm_campaign} ) 
-      }
-      if(req.session.utmParams && req.session.utmParams.utm_content){
-        properties.push({property: 'utm_content', value: req.session.utmParams.utm_content} ) 
-      }
-      if(req.session.utmParams && req.session.utmParams.utm_term){
-        properties.push({property: 'utm_term', value: req.session.utmParams.utm_term} ) 
-      }
-
-      var options = {
-        method: 'POST',
-        url: `https://api.hubapi.com/contacts/v1/contact/createOrUpdate/email/${email}`,
-        qs: { hapikey: process.env.HUBSPOT_API_KEY },
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: {
-          properties: properties,
-        },
-        json: true
-      };
-      hubspotPromise = request(options)
-    }
-
-    contact.properties = properties
-    const contactSavepromise = contact.save()
-    const resolved = await Promise.all([hubspotPromise, contactSavepromise])
-    console.log('resolved', resolved);
-
-    if (req.headers['content-type'] === 'application/json') {
-      const response = {
-        message: res.__(`Thanks for your message`),
-        filepath: course.curriculumPdf,
-        contact_id: contact.id
-      }
-      return res.json({
-        response
-      })
-    } else {
-      req.flash(
-        'success',
-        res.__(`Thanks for your message`)
-      );
-      res.redirect(req.headers.referer)
-    }
-    delete req.session.utmParams
-    next()
-  } catch (e) {
-    console.error(`Error in /controllers/IndexController.js`)
-    console.error(e)
-    req.flash('danger', e.message);
-    res.redirect(req.headers.referer)
-  }
-}
 module.exports.jobcenter = async (req, res) => {
   try {
     let query = await getAvailableTranslations(req, res)
@@ -533,4 +462,14 @@ module.exports.thankYou = async (req, res) => {
     console.log(err)
     res.redirect('/')
   }
+}
+
+module.exports.signupCourse = async (req, res, next) => {
+  let query = await getAvailableTranslations(req, res)
+  const partners = await Partner.find({ ...query }, 'link title partnerlogo is_alumni_employer')
+    .sort('order')
+    .exec({})
+  return res.render('signup', {
+    partners
+  })
 }

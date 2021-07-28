@@ -27,7 +27,7 @@ block content
               include ../assets/media/computer-thin.svg
             +translate("We will equip you with the right devices")
 
-        a.btn.btn-lg.btn-secondary.mb-3.mx-5(href='#contactform_section' tabindex="0" data-toggle='modal', data-target='#signupFormModal'): +translate("Apply now")
+        a.btn.btn-lg.btn-secondary.mb-3.mx-5(href="/signup" tabindex="0" ): +translate("Apply now")
   .bg-light
     .bg-white
       .container
@@ -82,11 +82,11 @@ block content
                           include ../assets/icons/mail.svg
                         div                   
                           =location.email
-  .bg-light.pb-200#contactform_section
+  .pb-200#contactform_section
     .container.py-5
       div.py-5
         .row
           .col-md-8.offset-md-2
             h2.display-1.text-center.text-uppercase=__('Contact us')
             p.mb-5.text-center.text-muted=__('Let’s connect! Our admissions team will call you soon to chat about our courses and your goals')
-            +contactform
+            
