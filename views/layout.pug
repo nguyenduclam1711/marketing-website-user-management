@@ -207,16 +207,16 @@ html.h-100(lang=locale === "de" ? 'de': 'en')
               h2.display-4.text-center.text-uppercase=__('Contact us')
             +contactform
 
-    if currentPath && !currentPath.includes('admin') && !currentPath.includes('users')
-      .modal#dataPrivacy
-        +dataPrivacy
-    
     if (course && course.curriculumPdf) || currentPath === '/jobcenter'|| currentPath === '/tour'
       #curriculumpopup.modal(tabindex='-1', role='dialog', aria-labelledby='curriculumpopup', aria-hidden='true')
         .modal-dialog.modal-dialog-centered
           .modal-content.border-radius-0
             .p-4
               +curriculumForm
+
+    if currentPath && !currentPath.includes('admin') && !currentPath.includes('users')
+      .modal#dataPrivacy
+        +dataPrivacy
 
     if currentPath && !currentPath.includes('admin') && !currentPath.includes('users')
       #cookiehint.fixed-bottom.faded(role='alert')

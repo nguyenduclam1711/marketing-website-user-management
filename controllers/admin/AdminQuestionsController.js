@@ -49,7 +49,6 @@ module.exports.getQuestionRenderSelectors = async (req, res) => {
     let questions = await Question.find()
       .select("name renderselector")
       .exec();
-    console.log('questions', questions);
     const response = {
       questions
     }
