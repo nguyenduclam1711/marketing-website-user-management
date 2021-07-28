@@ -12,7 +12,9 @@ const { sendMail, getAsyncRedis, getFbClid } = require('../helpers/helper')
 const { getAvailableTranslations } = require('./AbstractController')
 const fetchEventsByLocation = require("../helpers/fetch_events_by_location");
 let redisClient = null;
-
+const reqComesFromCoursePage = (req) => {
+  return /\/courses\/\w*/.test(req.headers.referer)
+}
 module.exports.landingpage = async (req, res) => {
 
   let indexData = null
@@ -117,6 +119,10 @@ module.exports.contact = async (req, res, next) => {
         next()
         return
       }
+    }
+    let courseReq
+    if (reqComesFromCoursePage(req)) {
+      courseReq = Course.findOne({ slug: req.headers.referer.replace(/.*\/(.*)\?.*/, '$1') }, 'curriculumPdf')
     }
     const contact = new Contact()
     contact.firstname = firstname
@@ -280,6 +286,11 @@ module.exports.contact = async (req, res, next) => {
       const response = {
         message: res.__(`Thanks for your message`),
         contact_id: contact.id
+      }
+      let course
+      if (reqComesFromCoursePage(req)) {
+        course = await courseReq
+        response.curriculumPdf = course.curriculumPdf
       }
       return res.json({
         response

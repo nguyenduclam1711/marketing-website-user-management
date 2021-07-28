@@ -253,7 +253,13 @@ const jumpToNextQuestion = (e, diagramNodes, flow) => {
 				if (data.response.contact_id) {
 					submitButton.innerText = "Thanks"
 					localStorage.removeItem(`dcianswers_${flow.name}`)
-					window.location.replace(`${window.location.origin}/thank-you/${data.response.contact_id}`);
+					if (data.response.curriculumPdf) {
+						window.open(`${window.location.origin}/images/${data.response.curriculumPdf}`, '_blank')
+						$("#curriculumpopup").modal('hide')
+
+					} else {
+						window.location.replace(`${window.location.origin}/thank-you/${data.response.contact_id}`);
+					}
 				} else if (data.response.error) {
 					const div = document.createElement('div')
 					submitButton.innerText = buttonOriginalText
