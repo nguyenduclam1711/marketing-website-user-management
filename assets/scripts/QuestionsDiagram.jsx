@@ -150,7 +150,13 @@ function QuestionsDiagram() {
           if (initialModel.model) {
             model.deserializeModel(initialModel.model, engine);
           }
-          setForm({ ...form, flowname: initialModel.name, active: initialModel.active, renderselector: initialModel.renderselector })
+          setForm({
+            ...form,
+            flowname: initialModel.name,
+            active: initialModel.active,
+            renderselector: initialModel.renderselector,
+            sendaltemail: initialModel.sendaltemail
+          })
           setmodelState(initialModel._id)
           addEventListeners(initialModel.name)
           engine.setModel(model);
@@ -365,7 +371,7 @@ function QuestionsDiagram() {
                   const theModelToSet = allFlows.find(f => f._id === e.target.selectedOptions[0].value)
                   if (theModelToSet.model) {
                     model.deserializeModel(theModelToSet.model, engine);
-                    setForm({ ...form, flowname: theModelToSet.name, active: theModelToSet.active, renderselector: theModelToSet.renderselector })
+                    setForm({ ...form, flowname: theModelToSet.name, active: theModelToSet.active, renderselector: theModelToSet.renderselector, sendaltemail: theModelToSet.sendaltemail })
                     setmodelState(theModelToSet._id)
                     engine.setModel(model);
                   } else {
@@ -392,6 +398,17 @@ function QuestionsDiagram() {
                   setForm({ ...form, [e.target.name]: e.target.checked })
                 }} style={{ borderColor: colorAnswer, borderStyle: "solid" }} id="active" />
               <label className="form-check-label" htmlFor="active">Active?</label>
+            </div>
+            <div className="col-auto px-3 align-items-center d-flex">
+              <input
+                checked={form['sendaltemail']}
+                name='sendaltemail'
+                type="checkbox" name="sendaltemail" className="form-check-input"
+                onChange={(e) => {
+                  e.stopPropagation();
+                  setForm({ ...form, [e.target.name]: e.target.checked })
+                }} style={{ borderColor: colorAnswer, borderStyle: "solid" }} id="sendaltemail" />
+              <label className="form-check-label" htmlFor="sendaltemail">Send alt email?</label>
             </div>
             <div className="col-auto">
               <label htmlFor="flowname">Flow name</label>
@@ -535,6 +552,7 @@ function QuestionsDiagram() {
                 name: form['flowname'],
                 model: model.serialize(),
                 active: form.active,
+                sendaltemail: form.sendaltemail,
                 renderselector: form.renderselector,
               })
             }).then(res => res.json())

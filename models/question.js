@@ -9,6 +9,7 @@ var QuestionSchema = new Schema({
   },
   model: Object,
   active: Boolean,
+  sendaltemail: Boolean,
   renderselector: String
 });
 

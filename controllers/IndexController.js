@@ -83,7 +83,7 @@ module.exports.contactLocations = async (req, res) => {
 };
 module.exports.contact = async (req, res, next) => {
   try {
-    const { firstname, lastname, email, age_field, body, phone, locations, companytour, signup_form, TermsofService, afa_jc_registered_, form_are_you_currently_unemployed } = req.body
+    const { firstname, lastname, email, age_field, body, phone, locations, sendaltemail, signup_form, TermsofService, afa_jc_registered_, form_are_you_currently_unemployed } = req.body
     if (age_field) {
       console.log('Bot stepped into honeypot!')
       if (req.headers['content-type'] === 'application/json') {
@@ -133,7 +133,7 @@ module.exports.contact = async (req, res, next) => {
       contact.utm_params = req.session.utmParams
     }
     contact.createdAt = new Date()
-    contact.isCompany = companytour
+    contact.isCompany = sendaltemail
     contact.locations = locations
     if (!contact.email) {
       res.redirect(req.headers.referer)
@@ -156,7 +156,7 @@ module.exports.contact = async (req, res, next) => {
       <td>Email: </td>
       <td>${email}</td>
     </tr>
-    ${!companytour && `<tr>
+    ${!sendaltemail && `<tr>
       <td>Is registered at Jobcenter:</td>
       <td>${afa_jc_registered_}</td>
     </tr><tr>
@@ -176,10 +176,10 @@ module.exports.contact = async (req, res, next) => {
       from: 'contact@digitalcareerinstitute.org',
       to: !req.headers.host.includes('digitalcareerinstitute.org')
         ? process.env.MAILRECEIVER
-        : companytour
+        : sendaltemail
           ? settings.tourmailreceiver
           : settings.mailreceiver,
-      subject: companytour
+      subject: sendaltemail
         ? 'Company Tour request from website'
         : 'Message on website',
       text: mailTemplate,
@@ -205,7 +205,7 @@ module.exports.contact = async (req, res, next) => {
             'track': req.headers.referer,
             'locations': location,
             'body': body,
-            'is_company': companytour,
+            'is_company': sendaltemail,
             'utm_params': remainingUtmParams,
             'all_fields': req.body
           })
@@ -220,6 +220,7 @@ module.exports.contact = async (req, res, next) => {
           "email",
           "firstname",
           "lastname",
+          "sendaltemail",
           "phone",
           "track",
           "body",
