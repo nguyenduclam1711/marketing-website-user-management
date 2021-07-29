@@ -2096,6 +2096,8 @@ input[name*="phone"] {
 body div[id^="nb-field-"] div.nb-feedback { 
   margin-top: 5px !important;
   padding: 0.5em !important;
+  box-shadow: none !important;
+  border: 0 none !important;
 }
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
