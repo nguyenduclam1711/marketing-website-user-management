@@ -146,7 +146,7 @@ const render = (questions, flow) => {
 				});
 
 			const html = `
-		<div class="w-100">
+		<div class="w-100 container">
 		<div id="popup" class="py-5 d-flex flex-column justify-content-between w-300px w-100">
       <form data-flow="${flow.name}" onSubmit="return false;" class="dynamicinputform d-flex flex-column justify-content-center">
         ${questions.map((question, index) => {
