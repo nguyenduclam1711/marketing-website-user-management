@@ -293,7 +293,7 @@ app.use('/admin/questions', questionsAdminRoutes)
 app.use('/admin/users', usersAdminRoutes)
 app.use('/admin/redirects', redirectsAdminRoutes)
 
-app.use('/admin*', contactsAdminRoutes)
+app.use('/admin*', settingsAdminRoutes)
 app.use(redirects)
 // app.get('*', function (req, res) {
 //   res.redirect('/')
