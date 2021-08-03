@@ -132,35 +132,38 @@ app.use(function (req, res, next) {
   next()
 })
 app.use(function (req, res, next) {
-  (res.locals.messages = {
-    danger: req.flash('danger'),
-    warning: req.flash('warning'),
-    success: req.flash('success')
-  }),
-    (app.locals.pathclass = req.url
-      .replace(/^\/de/g, '')
-      .replace(/^\/en/g, '')
-      .replace(/^\//g, '')
-      .replace(/\//g, '-')
-      .replace(/\-$/g, '')
-      .toLowerCase())
-  const path = req.url.replace(/(.*)\?.*/, '$1')
-  const pathSegments = path.split("/").filter(pS => pS !== "")
-  const siteTitle = pathSegments.reverse().reduce((acc, pathSegement) => {
-    if (!pathSegement.startsWith("?") && pathSegement !== req.session.locale && pathSegement !== 'pages') {
-      const adjustedPathSegment = acc + (acc !== "" ? " - " : "") + pathSegement.replace(/-/g, ' ').charAt(0).toUpperCase() + pathSegement.replace(/-/g, ' ').substr(1)
-      return adjustedPathSegment
-    } else {
-      return acc
+  if (req.headers['content-type'] !== 'application/json') {
+    (res.locals.messages = {
+      danger: req.flash('danger'),
+      warning: req.flash('warning'),
+      success: req.flash('success')
+    }),
+      (app.locals.pathclass = req.url
+        .replace(/^\/de/g, '')
+        .replace(/^\/en/g, '')
+        .replace(/^\//g, '')
+        .replace(/\//g, '-')
+        .replace(/\-$/g, '')
+        .toLowerCase())
+    const path = req.url.replace(/(.*)\?.*/, '$1')
+    const pathSegments = path.split("/").filter(pS => pS !== "")
+    const siteTitle = pathSegments.reverse().reduce((acc, pathSegment) => {
+      if (!pathSegment.startsWith("?") && pathSegment !== req.session.locale && pathSegment !== 'pages') {
+        const upperCasePathSegment = pathSegment.replace(/-/g, ' ').charAt(0).toUpperCase() + pathSegment.replace(/-/g, ' ').substr(1);
+        const translagedPathSegement = i18n.__(upperCasePathSegment)
+        return acc + (acc !== "" ? " - " : "") + translagedPathSegement
+      } else {
+        return acc
+      }
+    }, "")
+    res.locals.title = 'Digital Career Institute'
+    app.locals.moment = require('moment')
+    res.locals.live = req.headers.host.includes('digitalcareerinstitute.org')
+    if (siteTitle) {
+      res.locals.title = siteTitle + " | " + res.locals.title
     }
-  }, "")
-  res.locals.title = 'Digital Career Institute'
-  app.locals.moment = require('moment')
-  res.locals.live = req.headers.host.includes('digitalcareerinstitute.org')
-  if (siteTitle) {
-    res.locals.title = siteTitle + " | " + res.locals.title
+    console.log(req.method, req.headers.host + req.url)
   }
-  console.log(req.method, req.headers.host + req.url)
   next()
 })
 const methodOverride = require('method-override')
