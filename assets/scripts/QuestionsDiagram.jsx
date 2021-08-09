@@ -85,7 +85,18 @@ const questioncolor = "rgb(0, 128, 129)"
 let availableFields = []
 function QuestionsDiagram() {
   let [loading, setloading] = useState(true)
-  let [form, setForm] = useState({})
+  const emptyForm = {
+    "question": "",
+    'questionidentifier': "",
+    'questiontranslation': "",
+    "answer": "",
+    "answeridentifier": "",
+    "answertranslation": "",
+    "freeanswer": "",
+    "freeanswer_type": "text",
+    "dropdown": ""
+  }
+  let [form, setForm] = useState(emptyForm)
   let formRef = useRef(form)
   let [button, setbutton] = useState('Add')
   let [nodevisibility, setnodevisibility] = useState(false)
@@ -118,18 +129,7 @@ function QuestionsDiagram() {
             }
             setForm({ ...formRef.current, ...formFromClickedNode })
           } else {
-            const formClone = {
-              "question": "",
-              'questionidentifier': "",
-              'questiontranslation': "",
-              "answer": "",
-              "answeridentifier": "",
-              "answertranslation": "",
-              "freeanswer": "",
-              "freeanswer_type": "text",
-              "dropdown": ""
-            }
-            setForm({ ...formRef.current, form: formClone })
+            setForm({ ...formRef.current, ...emptyForm })
           }
         }
       });
@@ -307,53 +307,55 @@ function QuestionsDiagram() {
   return (
     <div className="h-100 d-flex flex-column">
       <h2> Questions
-        <button className="btn btn-secondary badge ml-2" type="button" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Link questions to one or multiple answers. If a question is followed by a freeanswer, it should be the only anwer of that question" data-original-title="" title=""> ?
+        <button className="btn btn-secondary badge mx-2" type="button" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Link questions to one or multiple answers. If a question is followed by a freeanswer, it should be the only anwer of that question" data-original-title="" title=""> ?
         </button>
-        <button className="btn btn-link text-left ml-3" type="button" onClick={e => {
+        <button className="btn btn-outline-secondary text-left mr-2" type="button" onClick={e => {
           setanswersvisiblity(!answersvisiblity)
         }}>Show answers</button>
-        <button className={`btn btn-secondary mr-2 word-break-break-all`} onClick={e => {
-          setnodevisibility(!nodevisibility)
-        }}>{!nodevisibility ? `Add Nodes ` : `Hide nodespanel`} </button>
-
-        <button className={`btn btn-secondary mr-2`} onClick={e => {
-          if (form.flowname) {
-            setloading(true)
-            const newModel = new StartNodeModel();
-            fetch(`/admin/questions/update`, {
-              method: "POST",
-              headers: {
-                "content-type": "application/json"
-              },
-              body: JSON.stringify({
-                _id: "",
-                name: "New Flow",
-                model: newModel.serialize(),
-              })
-            }).then(res => res.json())
-              .then(res => {
-                if (res.error) {
-                  seterror([...error, res.error])
-                } else {
-                  setallFlows([...allFlows, res.payload])
-                  setForm({
-                    ...formRef.current,
-                    flowname: res.payload.name,
-                    active: false,
-                    sendaltemail: false,
-                    renderselector: ""
-                  })
-                  setmodelState(res.payload._id)
-                  model.deserializeModel(res.payload.model, engine);
-                  engine.setModel(newModel)
-                }
-                setloading(false)
-              })
-            seterror(error.splice(error.findIndex(e => e === `Name must be provided`), 1))
-          } else {
-            seterror([...error, `Name must be provided`])
+        <button className={`btn btn-outline-secondary mr-2`} onClick={e => {
+          if (confirm("This will create a new empty flow in the database. Sure?")) {
+            if (form.flowname) {
+              setloading(true)
+              const newModel = new StartNodeModel();
+              fetch(`/admin/questions/update`, {
+                method: "POST",
+                headers: {
+                  "content-type": "application/json"
+                },
+                body: JSON.stringify({
+                  _id: "",
+                  name: "New Flow",
+                  model: newModel.serialize(),
+                })
+              }).then(res => res.json())
+                .then(res => {
+                  if (res.error) {
+                    seterror([...error, res.error])
+                  } else {
+                    setallFlows([...allFlows, res.payload])
+                    setForm({
+                      ...formRef.current,
+                      flowname: res.payload.name,
+                      active: false,
+                      sendaltemail: false,
+                      renderselector: ""
+                    })
+                    setmodelState(res.payload._id)
+                    model.deserializeModel(res.payload.model, engine);
+                    engine.setModel(newModel)
+                  }
+                  setloading(false)
+                })
+              seterror(error.splice(error.findIndex(e => e === `Name must be provided`), 1))
+            } else {
+              seterror([...error, `Name must be provided`])
+            }
           }
         }}>Add new Flow</button>
+        <button className={`btn btn-secondary mr-2 word-break-break-all`} onClick={e => {
+          setnodevisibility(!nodevisibility)
+        }}>{!nodevisibility ? `Configure current flow ` : `Hide nodespanel`} </button>
+
       </h2>
 
 
@@ -394,6 +396,20 @@ function QuestionsDiagram() {
                 ))}
               </select>
             </div>
+            <div className="col-auto">
+              <label htmlFor="flowname">Flow name</label>
+              <input className="form-control" id="flowname" name="flowname" value={form['formname']} value={form.flowname} onChange={(e) => {
+                e.stopPropagation();
+                setForm({ ...form, [e.target.name]: e.target.value })
+              }} />
+            </div>
+            <div className="col-auto ">
+              <label htmlFor="renderselector">Flow renderselector</label>
+              <input className="form-control" id="renderselector" name="renderselector" value={form['formname']} value={form.renderselector} onChange={(e) => {
+                e.stopPropagation();
+                setForm({ ...form, [e.target.name]: e.target.value })
+              }} />
+            </div>
             <div className="col-auto px-3 align-items-center d-flex">
               <input
                 checked={form['active']}
@@ -416,20 +432,6 @@ function QuestionsDiagram() {
                   setForm({ ...form, [e.target.name]: e.target.checked })
                 }} style={{ borderColor: colorAnswer, borderStyle: "solid" }} id="sendaltemail" />
               <label className="form-check-label" htmlFor="sendaltemail">Send alt email?</label>
-            </div>
-            <div className="col-auto">
-              <label htmlFor="flowname">Flow name</label>
-              <input className="form-control" id="flowname" name="flowname" value={form['formname']} value={form.flowname} onChange={(e) => {
-                e.stopPropagation();
-                setForm({ ...form, [e.target.name]: e.target.value })
-              }} />
-            </div>
-            <div className="col-auto">
-              <label htmlFor="renderselector">Flow renderselector</label>
-              <input className="form-control" id="renderselector" name="renderselector" value={form['formname']} value={form.renderselector} onChange={(e) => {
-                e.stopPropagation();
-                setForm({ ...form, [e.target.name]: e.target.value })
-              }} />
             </div>
           </div>
           <div className=" row">
