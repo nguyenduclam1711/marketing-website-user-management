@@ -32,13 +32,14 @@ mixin courseForm
             input#textColor2.custom-control-input(type="radio" name="textColor" value="white" checked=course && course.textColor == "white")
             label.custom-control-label(for="textColor2") White
 
-      .col
+      .col.mb-3
         label.d-block.d-block(for='icon') Course Curriculum PDF
         if course && course.curriculumPdf
           input#curriculumPdf.hidePlaceholder.form-control-file(type='file' name='curriculumPdf')
           span=course.curriculumPdf
         else
           input#curriculumPdf.form-control-file(type='file' name='curriculumPdf')
+
     if !editpath && course && course.slug
       .mb-3
         label(for='slug')
@@ -46,6 +47,23 @@ mixin courseForm
           button.btn.btn-secondary.badge.ml-2(type='button', data-container='body', data-toggle='popover',  data-trigger="hover",  data-placement='top', data-content='Changing this has negative effects on SEO if it not fresh created. To regenerate the slug, clear the fields and update the record.')
             | ?
         input#slug.form-control(name='slug', type='text', placeholder='Slug', value=course.slug)
+        
+    .mb-3
+      label.d-block.d-block(for='icon') Jobcenter PDF
+      if course && course.jobcenterPdf
+        input#jobcenterPdf.hidePlaceholder.form-control-file(type='file' name='jobcenterPdf')
+        span=course.jobcenterPdf
+      else
+        input#jobcenterPdf.form-control-file(type='file' name='jobcenterPdf')
+    
+    .mb-3
+      label.d-block.d-block(for='icon') Companies PDF
+      if course && course.companiesPdf
+        input#companiesPdf.hidePlaceholder.form-control-file(type='file' name='companiesPdf')
+        span=course.companiesPdf
+      else
+        input#companiesPdf.form-control-file(type='file' name='companiesPdf')
+
     .mb-3
       label.d-block.d-block(for='icon') Course Title Icon
       if course && course.icon
