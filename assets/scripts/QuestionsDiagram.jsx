@@ -306,7 +306,7 @@ function QuestionsDiagram() {
 
   return (
     <div className="h-100 d-flex flex-column">
-      <h2> Questions
+      <h2>Contactforms
         <button className="btn btn-secondary badge mx-2" type="button" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Link questions to one or multiple answers. If a question is followed by a freeanswer, it should be the only anwer of that question" data-original-title="" title=""> ?
         </button>
         <button className="btn btn-outline-secondary text-left mr-2" type="button" onClick={e => {
