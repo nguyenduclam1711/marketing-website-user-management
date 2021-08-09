@@ -1,12 +1,7 @@
 import intlTelInput from 'intl-tel-input';
 import { get_form_payload } from "./helper.js"
 import utilsScript from "./intl-tel-input-utils.min.js"
-let studentquestionroot = document.getElementById("questionroot")
-let company_questionroot = document.getElementById("company_questionroot")
-let curriculum_questionroot = document.getElementById("curriculum_questionroot")
-
-// const questionroot = studentquestionroot ? studentquestionroot: company_questionroot
-
+const animtionDuration = 0.3;
 const isGerman = window.location.pathname.indexOf('/de') !== -1
 
 const getAnswers = (question, model) => Object.values(model.layers.find(layer => layer.type === "diagram-nodes").models)
@@ -28,7 +23,6 @@ const itiConfig = {
 	separateDialCode: true,
 	preferredCountries: ["de", "gb"]
 }
-
 
 fetch(`/admin/questions/overview/getquestionrenderselectors`, {
 	headers: {
@@ -76,14 +70,16 @@ fetch(`/admin/questions/overview/getquestionrenderselectors`, {
 		})
 	})
 
-
 const jumpToNextQuestion = (e, diagramNodes, flow) => {
 	e.preventDefault()
 	const form_payload = get_form_payload(e.target.elements)
 	localStorage.setItem(`dcianswers_${flow.name}`, JSON.stringify({ ...JSON.parse(localStorage.getItem(`dcianswers_${flow.name}`)), ...form_payload }))
 	const nextQuestions = Object.values(diagramNodes).filter(n => [...e.target.elements].find(i => i.type === "submit").dataset.nextquestions.includes(n.id.split(',')))
 	if (nextQuestions.length > 0) {
-		render(nextQuestions, flow)
+		document.querySelector(".dynamicinputform").classList.add('fade-out')
+		setTimeout(() => {
+			render(nextQuestions, flow)
+		}, animtionDuration * 1000);
 	} else {
 		const submitButton = document.querySelector("button[data-nextquestions='']")
 		const buttonOriginalText = submitButton.innerText
@@ -148,7 +144,7 @@ const render = (questions, flow) => {
 			const html = `
 		<div class="w-100 container">
 		<div id="popup" class="py-5 d-flex flex-column justify-content-between w-300px w-100">
-      <form data-flow="${flow.name}" onSubmit="return false;" class="dynamicinputform d-flex flex-column justify-content-center">
+      <form data-flow="${flow.name}" onSubmit="return false;" class="dynamicinputform d-flex flex-column justify-content-center" style="animation-duration: ${animtionDuration}s">
         ${questions.map((question, index) => {
 			const answers = getAnswers(question, flow.model);
 			const buttons = answers.filter(answer => !answer.extras.freeanswer && !answer.extras.dropdown);
@@ -238,13 +234,13 @@ placeholder="${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ?
 			` : ``}
         </form>
       </div>
-    </div>`
+    </div>`;
 
 			const questionRootRenderElement = document.getElementById(`questionroot_render_element_${flow.name}`)
-			console.log(`questionRootRenderElement`, questionRootRenderElement);
 			if (!questionRootRenderElement) {
 				const renderElement = document.createElement(`div`)
 				renderElement.id = `questionroot_render_element_${flow.name}`
+				renderElement.classList.add('w-100')
 				renderElement.innerHTML = html
 				questionroot.appendChild(renderElement)
 			} else {
