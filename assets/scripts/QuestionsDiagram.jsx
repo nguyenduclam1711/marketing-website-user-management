@@ -335,10 +335,17 @@ function QuestionsDiagram() {
                 if (res.error) {
                   seterror([...error, res.error])
                 } else {
-                  engine.setModel(newModel)
                   setallFlows([...allFlows, res.payload])
-                  setForm({ ...form, flowname: res.payload.name })
+                  setForm({
+                    ...formRef.current,
+                    flowname: res.payload.name,
+                    active: false,
+                    sendaltemail: false,
+                    renderselector: ""
+                  })
                   setmodelState(res.payload._id)
+                  model.deserializeModel(res.payload.model, engine);
+                  engine.setModel(newModel)
                 }
                 setloading(false)
               })
