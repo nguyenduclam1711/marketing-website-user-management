@@ -248,6 +248,9 @@ function QuestionsDiagram() {
       const answers = As.filter(a => {
         return Object.values(a.ports.In.links)[0] && Object.keys(question.ports.Out.links).includes(Object.values(a.ports.In.links)[0].options.id)
       })
+      if (answers.filter(a => !a.options.extras.freeanswer).length === 0) {
+        question.options.color = questioncolor
+      }
 
       answers.map(answer => {
         if (answer.options.extras.freeanswer) {
