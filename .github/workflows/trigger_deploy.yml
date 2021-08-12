@@ -1,6 +1,9 @@
 name: trigger_deploy
 on:
   repository_dispatch:
+  release:
+    types: 
+      - created
   push:
     branches:
       - staging
