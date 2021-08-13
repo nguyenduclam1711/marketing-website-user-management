@@ -75,7 +75,7 @@ module.exports.landingpage = async (req, res) => {
 }
 module.exports.contactLocations = async (req, res) => {
   const locations = await Location.find({}).populate('contactEmployee').sort({ order: 1 }).exec();
-  const sortedEmployees = locations.map(l => l.contactEmployee.sort((a,b) => a.order - b.order))
+  const sortedEmployees = locations.map(l => l.contactEmployee.sort((a, b) => a.order - b.order))
   locations.contactEmployee = sortedEmployees
   const contact = req.body
   res.render('contactLocations', {
@@ -84,7 +84,6 @@ module.exports.contactLocations = async (req, res) => {
   })
 };
 module.exports.contact = async (req, res, next) => {
-  try {
     const { firstname, lastname, email, age_field, body, phone, locations, sendaltemail, signup_form, TermsofService, afa_jc_registered_, form_are_you_currently_unemployed } = req.body
     if (age_field) {
       console.log('Bot stepped into honeypot!')
@@ -282,8 +281,21 @@ module.exports.contact = async (req, res, next) => {
     // console.log("========>>>>>",options.body.properties);
     // to save time, mail get send out without waiting for the response
     const info = sendMail(res, req, mailOptions)
+  try {
     const result = await Promise.all([hubspotPromise, contactSavepromise])
-
+    console.log('### Result of 1st hubspotPromise', JSON.stringify(result));
+    finish(res, req, contact)
+  } catch (e) {
+    console.error(`### Error 2nd catch`, e.message)
+    try {
+      const filteredOptions = options.body.properties
+      e.error.validationResults.map((missingP => {
+        filteredOptions.splice(filteredOptions.findIndex(i => i.property === missingP.name), 1)
+      }))
+      console.log(`### Try a second HS request without invalid properties: ${JSON.stringify(e.error.validationResults.map(i => i.name))}`)
+      options.body.properties = filteredOptions
+      const hubspotPromise2 = await requestPromise(options)
+      console.log('### Result of 2nd hubspotPromise', hubspotPromise2);
     if (req.headers['content-type'] === 'application/json') {
       const response = {
         message: res.__(`Thanks for your message`),
@@ -296,7 +308,34 @@ module.exports.contact = async (req, res, next) => {
           response.curriculumPdf = course.curriculumPdf
         }
       }
-      console.log(response)
+      delete req.session.utmParams
+      return res.json({
+        response
+      })
+    } else {
+      req.flash('danger', 'Please fill out all form fields')
+      res.redirect(req.headers.referer)
+      finish(res, req, contact, courseReq)
+    }
+  } catch (e) {
+      finish(res, req, contact, courseReq)
+      console.error("### Error 1st catch", e.message)
+    }
+  }
+}
+const finish = async (res, req, contact, courseReq) => {
+    if (req.headers['content-type'] === 'application/json') {
+      const response = {
+        message: res.__(`Thanks for your message`),
+        contact_id: contact.id
+      }
+      let course
+      if (reqComesFromCoursePage(req)) {
+        course = await courseReq
+        if (course) {
+          response.curriculumPdf = course.curriculumPdf
+        }
+      }
       return res.json({
         response
       })
@@ -306,26 +345,9 @@ module.exports.contact = async (req, res, next) => {
         res.__(`Thanks for your message`)
       );
       res.redirect(req.headers.referer)
-    }
-    delete req.session.utmParams
-    next()
-  } catch (e) {
-    console.error(`Error in /controllers/IndexController.js`)
-    console.error(e)
-    if (req.headers['content-type'] === 'application/json') {
-      const response = {
-        error: res.__(e.message),
-      }
-      return res.json({
-        response
-      })
-    } else {
-      req.flash('danger', 'Please fill out all form fields')
-      res.redirect(req.headers.referer)
-      next()
-      return
-    }
   }
+  delete req.session.utmParams
+  next()
 }
 module.exports.tour = async (req, res) => {
   try {
