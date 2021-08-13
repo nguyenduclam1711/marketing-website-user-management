@@ -19,18 +19,27 @@ module.exports.getQuestions = async (req, res) => {
       questions
     }
     if (req.session.passport && req.session.passport.user && req.headers.referer.indexOf('/admin') !== -1) {
-      var options = {
-        method: 'GET',
-        url: `https://api.hubapi.com/properties/v1/contacts/properties`,
-        qs: { hapikey: process.env.HUBSPOT_API_KEY },
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        json: true
-      };
+      const properties = [
+        `https://api.hubapi.com/properties/v1/contacts/properties`,
+        `https://api.hubapi.com/properties/v1/companies/properties`,
+      ]
+      let promises = []
+      properties.forEach(property => {
+        var options = {
+          method: 'GET',
+          url: property,
+          qs: { hapikey: process.env.HUBSPOT_API_KEY },
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          json: true
+        };
+        promises.push(requestPromise(options))
+      })
       try {
-        const [hubspotCache, answers] = await Promise.all([requestPromise(options), Answer.find().exec()])
-        response.hb_fields = hubspotCache
+        const [contactProperties, companyProperties, answers] = await Promise.all([...promises, Answer.find().exec()])
+        console.log('contactProperties, companyProperties', contactProperties, companyProperties);
+        response.hb_fields = [...contactProperties, ...companyProperties]
         response.answers = answers
       } catch (error) {
         console.log('error', error);
