@@ -123,7 +123,7 @@ html.h-100(lang=locale === "de" ? 'de': 'en')
         div
           +navigation
           
-      .flex-grow-1.z-0(class=currentPath && /users|admin/.test(currentPath) ? 'admin-main bg-light pb-5' : "" )
+      .flex-grow-1.z-0(class=currentPath && /users|admin/.test(currentPath) ? 'pt-100 bg-light pb-5' : "pt-100" )
         block content
       if currentPath && !currentPath.includes('admin') && !currentPath.includes('users')
         footer.site-footer(role='contentinfo' class=user ? "pb-5" : "" style=course && `color: ${course.textColor}`)
