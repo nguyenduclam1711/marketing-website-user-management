@@ -29,45 +29,87 @@
 @import "footer";
 @import "typography";
 
+main {
+  padding-top: 140px;
+}
+
+ .admin-main {
+  padding-top: 100px;
+}
+
 #nav-primary {
   font-family: "Gordita", sans-serif;
-  font-weight: 500;
-  color: $bluedark !important;
+  font-weight: 400;
+  background-color: white;
+  height:140px;
+  max-height: 140px;
+  .navbar-brand{
+    height: 85%;
+  }
+  .lang-switch{
+    a{
+      color: black!important;
+      font-weight: 400;
+      &:hover{
+        color: black!important;
+        font-weight: 500;
+      }
+    }
+    a.active{
+      font-weight: 500;
+    }
+  }
 }
+
+
 .navbar-light .navbar-nav .nav-link {
   color: $bluedark;
 }
+
 .nav-link {
-  padding: 5px !important;
+  padding: 5px 7px ​!important;
 }
 
+
 #headernav > li {
-  > .contactlink {
-    content: "";
-    transition: transform 0.3s ease, color 0.3s ease, opacity 0.3s ease;
-    background: inherit;
-    top: 0;
-    display: block;
-    position: absolute;
-    z-index: -1;
-    opacity: 1;
-    color: white;
-    height: 2em;
-    transform: skew(-15deg) scale(1, 1);
-    left: -10px;
-    width: calc(100% + 20px);
-    @include media-breakpoint-up(lg) {
-      height: 100%;
-      transform: skew(-45deg) scale(1, 1);
-      left: -1px;
-      width: calc(100% + 2px);
-    }
-  }
+  // > .contactlink {
+  //   content: "";
+  //   transition: transform 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+  //   background: inherit;
+  //   top: 0;
+  //   display: block;
+  //   position: absolute;
+  //   z-index: -1;
+  //   opacity: 1;
+  //   color: white;
+  //   height: 2em;
+  //   transform: skew(-15deg) scale(1, 1);
+  //   left: -10px;
+  //   width: calc(100% + 20px);
+  //   @include media-breakpoint-up(lg) {
+  //     height: 100%;
+  //     transform: skew(-45deg) scale(1, 1);
+  //     left: -1px;
+  //     width: calc(100% + 2px);
+  //   }
+  // }
   z-index: 0;
   a {
     font-weight: 500;
+    font-size: 14px;
     font-family: "Gordita", sans-serif;
   }
+
+  a.contactlinktext{
+    color: $primary!important;
+    // border: 1px solid $primary;
+    // border-radius: 2px;
+    &:hover{
+      color: white!important;
+    }
+  }
+
+
   &:hover > a,
   > a.active,
   > a:active,
@@ -79,6 +121,7 @@
     }
   }
 }
+
 @include media-breakpoint-up(lg) {
   #headernav.not-set-active > li {
     &:hover > a,
@@ -93,6 +136,7 @@
     }
   }
 }
+
 #headernav > li {
   &.active,
   &:active,
