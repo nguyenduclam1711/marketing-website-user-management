@@ -200,12 +200,7 @@ module.exports.contact = async (req, res, next) => {
     if (!!process.env.HUBSPOT_API_KEY) {
       let fbclid = getFbClid(req, res, next);
       properties = [
-        { property: 'firstname', value: firstname },
-        { property: 'lastname', value: lastname },
-        { property: 'email', value: email },
-        { property: 'phone', value: phone },
         { property: 'hs_facebook_click_id', value: fbclid },
-        { property: 'last_touchpoint', value: signup_form ? 'website_lead_form' : 'website_contact_form' },
         {
           property: 'form_payload',
           value: JSON.stringify({
@@ -220,19 +215,15 @@ module.exports.contact = async (req, res, next) => {
       ];
       const filteredPayload = Object.keys(req.body).reduce((acc, v) => {
         if (![
+          "age_field",
           "nb-confirmation-token",
           "nb-result",
           "nb-transaction-token",
           "termsofservice",
-          "email",
-          "firstname",
-          "lastname",
           "sendaltemail",
-          "phone",
           "track",
-          "body",
-          "age_field",
           "locations",
+          "body",
         ].map(i => i.toLowerCase()).includes(v.toLowerCase())) {
           acc[v] = req.body[v]
         }
