@@ -105,27 +105,38 @@ function QuestionsDiagram() {
   let [currentModelId, setmodelState] = useState("")
   let [error, seterror] = useState([])
   let [hbFields, sethbFields] = useState([])
+  let hbFieldsRef = useRef(undefined)
   let [hbFieldsAnswers, sethbFieldsAnswers] = useState([])
   useEffect(() => {
     formRef.current = form
   }, [form])
+  useEffect(() => {
+    hbFieldsRef.current = hbFields
+  }, [hbFields.length])
   const addEventListeners = (name) => {
-    Object.values(model.activeNodeLayer.models).forEach((item) => {
-      item.registerListener({
+    Object.values(model.activeNodeLayer.models).forEach((currentNode) => {
+      currentNode.registerListener({
         eventDidFire: (e) => {
           e.stopPropagation();
           e.isSelected ? setbutton('update') : setbutton('add')
           if (e.isSelected) {
+            const relatedQuestion = findQuestionFromAnswer(currentNode)
+            if (relatedQuestion) {
+              const foundHbField = hbFieldsRef.current.filter(f => f.name === relatedQuestion.options.extras.questionidentifier)[0]
+              if (foundHbField) {
+                sethbFieldsAnswers(foundHbField.options)
+              }
+            }
             const formFromClickedNode = {
-              "question": item.options.extras.customType === "question" ? item.options.name : "",
-              'questionidentifier': item.options.extras.customType === "question" ? item.options.extras.questionidentifier : "",
-              'questiontranslation': item.options.extras.customType === "question" ? item.options.extras.questiontranslation : "",
-              "answer": item.options.extras.customType === "answer" ? item.options.name : "",
-              "answeridentifier": item.options.extras.customType === "answer" ? item.options.extras.answeridentifier : "",
-              "answertranslation": item.options.extras.customType === "answer" ? item.options.extras.answertranslation : "",
-              "freeanswer": item.options.extras.customType === "answer" ? item.options.extras.freeanswer : "",
-              "dropdown": item.options.extras.customType === "answer" ? item.options.extras.dropdown : "",
-              "freeanswer_type": item.options.extras.customType === "answer" ? item.options.extras.freeanswer_type : "text",
+              "question": currentNode.options.extras.customType === "question" ? currentNode.options.name : relatedQuestion ? relatedQuestion.options.name : "",
+              'questionidentifier': currentNode.options.extras.customType === "question" ? currentNode.options.extras.questionidentifier : hbFieldsRef.current.find(f => f.name === relatedQuestion.options.extras.questionidentifier).name,
+              'questiontranslation': currentNode.options.extras.customType === "question" ? currentNode.options.extras.questiontranslation : relatedQuestion ? relatedQuestion.options.extras.questiontranslation : "",
+              "answer": currentNode.options.extras.customType === "answer" ? currentNode.options.name : "",
+              "answeridentifier": currentNode.options.extras.customType === "answer" ? currentNode.options.extras.answeridentifier : "",
+              "answertranslation": currentNode.options.extras.customType === "answer" ? currentNode.options.extras.answertranslation : "",
+              "freeanswer": currentNode.options.extras.customType === "answer" ? currentNode.options.extras.freeanswer : "",
+              "dropdown": currentNode.options.extras.customType === "answer" ? currentNode.options.extras.dropdown : "",
+              "freeanswer_type": currentNode.options.extras.customType === "answer" ? currentNode.options.extras.freeanswer_type : "text",
               "flowname": name
             }
             setForm({ ...formRef.current, ...formFromClickedNode })
@@ -196,7 +207,10 @@ function QuestionsDiagram() {
     engine.setModel(model);
     parseAllNodesForHubspotFields()
   }
-
+  const findQuestionFromAnswer = (answer) => {
+    const localquestions = Object.values(model.layers[1].models).filter(m => m.options.extras.customType === "question")
+    return localquestions.find(q => Object.keys(q.portsOut[0].links).includes(Object.keys(answer.portsIn[0].links)[0]))
+  }
   const addAnswer = (e) => {
     e.preventDefault()
     const selectedNodes = Object.values(engine.model.activeNodeLayer.models).filter(i => i.options.selected)
@@ -232,7 +246,7 @@ function QuestionsDiagram() {
   }
 
   var checkDropDown = (aI) => {
-    const subHbFields = hbField.find(aF => aF.name === aI.options.extras.answeridentifier)
+    const subHbFields = hbFields.find(aF => aF.name === aI.options.extras.answeridentifier)
     const dropdownAnswers = aI.options.name.split(":").reverse()[0]
     const rawAnswers = dropdownAnswers.split(',').map(a => a.trim())
     const rawAnswersWithoutLabels = rawAnswers.map(a => a.replace(/\(.*\)/, '').trim())
@@ -244,7 +258,7 @@ function QuestionsDiagram() {
   var checkIfQuestionsMatchWithAnswersAndSyncWithHubspot = (question) => {
     let errors = []
     if (Object.values(model.layers[1].models).length > 0) {
-      var selectedHbField = hbField.find(a => a.name === question.options.extras.questionidentifier)
+      var selectedHbField = hbFields.find(a => a.name === question.options.extras.questionidentifier)
       var As = Object.values(model.layers[1].models).filter(m => m.options.extras.customType === "answer")
       const answers = As.filter(a => {
         return Object.values(a.ports.In.links)[0] && Object.keys(question.ports.Out.links).includes(Object.values(a.ports.In.links)[0].options.id)

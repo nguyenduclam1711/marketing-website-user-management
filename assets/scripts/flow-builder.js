@@ -151,30 +151,29 @@ const render = (questions, flow) => {
 			const freeanswers = answers.filter(answer => answer.extras.freeanswer && !answer.extras.dropdown);
 			const dropdowns = answers.filter(answer => answer.extras.dropdown);
 			const attributes = (answer) => `
-placeholder="${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ? answer.extras.answertranslation.split(':')[1] : "") : (answer.name.indexOf(':') !== -1 ? answer.name.split(':')[1] : "")}"
-				placeholder="${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ? answer.extras.answertranslation.split(':')[1] : "") : (answer.name.indexOf(':') !== -1 ? answer.name.split(':')[1] : "")}" 
-placeholder="${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ? answer.extras.answertranslation.split(':')[1] : "") : (answer.name.indexOf(':') !== -1 ? answer.name.split(':')[1] : "")}"
+				placeholder="${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ? answer.extras.answertranslation.split(':')[1] : "") : (answer.name.indexOf(':') !== -1 ? answer.name.split(':')[1] : "")}"
 				class="form-control mb-4 freeanswer dynamicinput" 
-				name="${answer.extras.answeridentifier}" 
-				data-type="question" 
-				${answer.extras.freeanswer_type === 'hidden' ? `value="${answer.extras.freeanswer_type === 'hidden' ? `true` : answer.extras.answeridentifier}"` : ``}
+				name="${answer.extras.answeridentifier}"
+				data-type="question"
+				${answer.extras.freeanswer_type === 'hidden' ? `value="${answer.name}"` : ``}
 				type="${answer.extras.freeanswer_type ? answer.extras.freeanswer_type : "text"}" 
 				id="freeanswer_${answer.extras.answeridentifier}"
 				required`
 
 			const notTextAreas = freeanswers.filter(f => f.extras.freeanswer_type !== 'textarea' && f.extras.freeanswer_type !== 'hidden')
-			const textAreas = freeanswers.filter(f => f.extras.freeanswer_type === 'textarea')
+			const textAreas = freeanswers.filter(f => f.extras.freeanswer_type === 'textarea' && f.extras.freeanswer_type !== 'hidden')
+			const hiddens = freeanswers.filter(f => f.extras.freeanswer_type === 'hidden')
 			return `
-            <div class="d-flex justify-content-center mb-5 px-3">
-              <p class="text-center">${isGerman && question.extras.questiontranslation ? question.extras.questiontranslation : question.name}</p>
-            </div>
-            <div class="">
-              <div class="w-100">
-              ${freeanswers.length > 0 ? "<div class='row'>" + [...notTextAreas, ...textAreas].map((answer, index) => {
-				  return `<div class="
-				  ${((index === notTextAreas.length - 1) && (index % 2 == 0)) || answer.extras.freeanswer_type === 'textarea' ? 'col-12' : 'col-6'}">
-				  ${answer.extras.freeanswer_type !== 'hidden' ? `<label for="freeanswer_${answer.extras.answeridentifier}">
-				  ${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ? answer.extras.answertranslation.split(':')[0] : answer.extras.answertranslation) : (answer.name.indexOf(':') !== -1 ? answer.name.split(':')[0] : answer.name)}</label>` : ``}
+				<div class="d-flex justify-content-center mb-5 px-3">
+				<p class="text-center">${isGerman && question.extras.questiontranslation ? question.extras.questiontranslation : question.name}</p>
+				</div>
+				<div class="">
+				<div class="w-100">
+				${freeanswers.length > 0 ? "<div class='row'>" + [...notTextAreas, ...textAreas].map((answer, index) => {
+					return `<div class="
+					${((index === notTextAreas.length - 1) && (index % 2 == 0)) || answer.extras.freeanswer_type === 'textarea' ? 'col-12' : 'col-6'}">
+					${answer.extras.freeanswer_type !== 'hidden' ? `<label for="freeanswer_${answer.extras.answeridentifier}">
+					${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ? answer.extras.answertranslation.split(':')[0] : answer.extras.answertranslation) : (answer.name.indexOf(':') !== -1 ? answer.name.split(':')[0] : answer.name)}</label>` : ``}
 				  ${answer.extras.freeanswer_type === 'textarea' ? `
 					<textarea ${attributes(answer)} ></textarea>
 						` : `
@@ -182,7 +181,9 @@ placeholder="${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ?
 							`}
 
 				</div>`
-			  }).join('') + "</div><span id='error-msg' class='text-danger'></span>" : ""}
+				}).join('') + `${hiddens.map((answer, index) => {
+					return `<input ${attributes(answer)} />`
+				}).join('')}` + "</div><span id='error-msg' class='text-danger'></span>" : ""}
               ${dropdowns.length > 0 ? dropdowns.map(answer => (`
 			  <label for="dropdown_${answer.extras.answeridentifier}">${isGerman && answer.extras.answertranslation ? answer.extras.answertranslation.split(":")[0] : answer.name.split(":")[0]}</label>
 			  <select 
