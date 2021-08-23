@@ -30,28 +30,35 @@
 @import "typography";
 
 .pt-100 {
-  padding-top: 100px;
+  padding-top: 130px;
 }
 
 #nav-primary {
   font-family: "Gordita", sans-serif;
   font-weight: 400;
   background-color: white;
-  max-height: 140px;
-  .navbar-brand{
-    height: 85%;
+  .nav-banner{
+    height:40px;
+    font-size: initial;
   }
-  .lang-switch{
-    a{
-      color: black!important;
-      font-weight: 400;
-      &:hover{
+  .nav-content{
+    height:80px;
+    .navbar-brand{
+      height: 85%;
+    }
+
+    .lang-switch{
+      a{
         color: black!important;
+        font-weight: 400;
+        &:hover{
+          color: black!important;
+          font-weight: 500;
+        }
+      }
+      a.active{
         font-weight: 500;
       }
-    }
-    a.active{
-      font-weight: 500;
     }
   }
 }
