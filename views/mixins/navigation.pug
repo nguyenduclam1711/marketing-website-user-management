@@ -1,5 +1,5 @@
 mixin navigation
-  nav#nav-primary.fixed-top.pb-3.z-1.navbar.navbar-expand-lg.navbar-light.py-0.bg-tranition.px-0.px-md-0.flex-column(class=currentPath == "/" ? " z-foreground " : "")
+  nav#nav-primary.fixed-top.z-1.navbar.navbar-expand-lg.navbar-light.py-0.bg-tranition.px-0.px-md-0.flex-column(class=currentPath == "/" ? " z-foreground " : "")
     if currentPath && !currentPath.includes('admin') && !currentPath.includes('users') && locals.settings && locals.settings.announcement_banner_string
      .w-100.text-white.p-2.nav-banner.text-center.z-foreground(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent};  color: ${course.textColor} !important` : `` : `` )
       div
@@ -21,9 +21,14 @@ mixin navigation
               =__("Courses")
 
             .dropdown-menu.border-radius-0.shadow-sm.z-0.p-0(aria-labelledby='navbarDropdownMenuLink')
-              a.dropdown-item.nav-link.px-2(class= currentPath == "/courses" ? "active" : "" style=currentPath === "/courses" ? "color: white!important;" : "" href='/courses')=__("All courses")
+              //- a.dropdown-item.nav-link.px-2(class= currentPath == "/courses" ? "active" : "" style=currentPath === "/courses" ? "color: white!important;" : "" href='/courses')=__("All courses")
               each course in courses
-                a.dropdown-item.nav-link.px-2(class=course && currentPath.includes(course.slug) && !course.coloraccent ? `bg-primary text-white` : ``, style=course && currentPath.includes(course.slug) && course.coloraccent ? `background-color: ${course.coloraccent}!important` : `` href='/courses/'+ course.slug)=course.headline
+                a.dropdown-item.nav-link.px-2(class=course && currentPath.includes(course.slug) && !course.coloraccent ? `bg-primary text-white` : ``, style=course && currentPath.includes(course.slug) && course.coloraccent ? `background-color: ${course.coloraccent}!important` : `` href='/courses/'+ course.slug)
+                  div.icon-container
+                    p=course.headline  
+                  div.details-container
+                    img.object-fit-cover(alt=course.headline src="/images/" + course.menuicon)
+                    span=course.courselength
           li.position-relative.nav-item
             a.mx-0.mx-xl-3.mx-lg-1.nav-link.d-flex.align-items-center.h-100.z-1(class=currentPath && currentPath.includes('/events') && !currentPath.includes('/admin') ? "active" : "", href='/events')
               =__("Events")
