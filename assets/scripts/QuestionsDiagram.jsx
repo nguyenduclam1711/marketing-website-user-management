@@ -82,7 +82,6 @@ const colorFreeanswer = "rgb(182, 133, 1)"
 const colorAnswer = "rgb(255, 204, 1)"
 const colorError = "rgb(255,0,0)"
 const questioncolor = "rgb(0, 128, 129)"
-let availableFields = []
 function QuestionsDiagram() {
   let [loading, setloading] = useState(true)
   const emptyForm = {
@@ -105,26 +104,39 @@ function QuestionsDiagram() {
   let [answers, setanswers] = useState([])
   let [currentModelId, setmodelState] = useState("")
   let [error, seterror] = useState([])
+  let [hbFields, sethbFields] = useState([])
+  let hbFieldsRef = useRef(undefined)
+  let [hbFieldsAnswers, sethbFieldsAnswers] = useState([])
   useEffect(() => {
     formRef.current = form
   }, [form])
+  useEffect(() => {
+    hbFieldsRef.current = hbFields
+  }, [hbFields.length])
   const addEventListeners = (name) => {
-    Object.values(model.activeNodeLayer.models).forEach((item) => {
-      item.registerListener({
+    Object.values(model.activeNodeLayer.models).forEach((currentNode) => {
+      currentNode.registerListener({
         eventDidFire: (e) => {
           e.stopPropagation();
           e.isSelected ? setbutton('update') : setbutton('add')
           if (e.isSelected) {
+            const relatedQuestion = findQuestionFromAnswer(currentNode)
+            if (relatedQuestion) {
+              const foundHbField = hbFieldsRef.current.filter(f => f.name === relatedQuestion.options.extras.questionidentifier)[0]
+              if (foundHbField) {
+                sethbFieldsAnswers(foundHbField.options)
+              }
+            }
             const formFromClickedNode = {
-              "question": item.options.extras.customType === "question" ? item.options.name : "",
-              'questionidentifier': item.options.extras.customType === "question" ? item.options.extras.questionidentifier : "",
-              'questiontranslation': item.options.extras.customType === "question" ? item.options.extras.questiontranslation : "",
-              "answer": item.options.extras.customType === "answer" ? item.options.name : "",
-              "answeridentifier": item.options.extras.customType === "answer" ? item.options.extras.answeridentifier : "",
-              "answertranslation": item.options.extras.customType === "answer" ? item.options.extras.answertranslation : "",
-              "freeanswer": item.options.extras.customType === "answer" ? item.options.extras.freeanswer : "",
-              "dropdown": item.options.extras.customType === "answer" ? item.options.extras.dropdown : "",
-              "freeanswer_type": item.options.extras.customType === "answer" ? item.options.extras.freeanswer_type : "text",
+              "question": currentNode.options.extras.customType === "question" ? currentNode.options.name : relatedQuestion ? relatedQuestion.options.name : "",
+              'questionidentifier': currentNode.options.extras.customType === "question" ? currentNode.options.extras.questionidentifier : hbFieldsRef.current.find(f => f.name === relatedQuestion.options.extras.questionidentifier).name,
+              'questiontranslation': currentNode.options.extras.customType === "question" ? currentNode.options.extras.questiontranslation : relatedQuestion ? relatedQuestion.options.extras.questiontranslation : "",
+              "answer": currentNode.options.extras.customType === "answer" ? currentNode.options.name : "",
+              "answeridentifier": currentNode.options.extras.customType === "answer" ? currentNode.options.extras.answeridentifier : "",
+              "answertranslation": currentNode.options.extras.customType === "answer" ? currentNode.options.extras.answertranslation : "",
+              "freeanswer": currentNode.options.extras.customType === "answer" ? currentNode.options.extras.freeanswer : "",
+              "dropdown": currentNode.options.extras.customType === "answer" ? currentNode.options.extras.dropdown : "",
+              "freeanswer_type": currentNode.options.extras.customType === "answer" ? currentNode.options.extras.freeanswer_type : "text",
               "flowname": name
             }
             setForm({ ...formRef.current, ...formFromClickedNode })
@@ -143,7 +155,7 @@ function QuestionsDiagram() {
     }).then(res => res.json())
       .then(res => {
         if (res.payload.questions.length > 0) {
-          availableFields = res.payload.hb_fields
+          sethbFields(res.payload.hb_fields)
           setallFlows(res.payload.questions)
           setanswers(res.payload.answers)
           const initialModel = res.payload.questions[0]
@@ -195,7 +207,10 @@ function QuestionsDiagram() {
     engine.setModel(model);
     parseAllNodesForHubspotFields()
   }
-
+  const findQuestionFromAnswer = (answer) => {
+    const localquestions = Object.values(model.layers[1].models).filter(m => m.options.extras.customType === "question")
+    return localquestions.find(q => Object.keys(q.portsOut[0].links).includes(Object.keys(answer.portsIn[0].links)[0]))
+  }
   const addAnswer = (e) => {
     e.preventDefault()
     const selectedNodes = Object.values(engine.model.activeNodeLayer.models).filter(i => i.options.selected)
@@ -230,8 +245,8 @@ function QuestionsDiagram() {
     parseAllNodesForHubspotFields()
   }
 
-  var checkDropDown = (availableFields, aI) => {
-    const subHbFields = availableFields.find(aF => aF.name === aI.options.extras.answeridentifier)
+  var checkDropDown = (aI) => {
+    const subHbFields = hbFields.find(aF => aF.name === aI.options.extras.answeridentifier)
     const dropdownAnswers = aI.options.name.split(":").reverse()[0]
     const rawAnswers = dropdownAnswers.split(',').map(a => a.trim())
     const rawAnswersWithoutLabels = rawAnswers.map(a => a.replace(/\(.*\)/, '').trim())
@@ -243,7 +258,7 @@ function QuestionsDiagram() {
   var checkIfQuestionsMatchWithAnswersAndSyncWithHubspot = (question) => {
     let errors = []
     if (Object.values(model.layers[1].models).length > 0) {
-      var hbField = availableFields.find(a => a.name === question.options.extras.questionidentifier)
+      var selectedHbField = hbFields.find(a => a.name === question.options.extras.questionidentifier)
       var As = Object.values(model.layers[1].models).filter(m => m.options.extras.customType === "answer")
       const answers = As.filter(a => {
         return Object.values(a.ports.In.links)[0] && Object.keys(question.ports.Out.links).includes(Object.values(a.ports.In.links)[0].options.id)
@@ -256,7 +271,7 @@ function QuestionsDiagram() {
         if (answer.options.extras.freeanswer) {
           answer.options.color = colorFreeanswer
         } else if (answer.options.extras.dropdown) {
-          const notExistingAnswers = checkDropDown(availableFields, answer)
+          const notExistingAnswers = checkDropDown(answer)
           if (notExistingAnswers.length == 0) {
             answer.options.color = colorDropdown
           } else {
@@ -264,7 +279,7 @@ function QuestionsDiagram() {
             errors.push(`'${notExistingAnswers.join(", ")}' doesnt exist on '${answer.options.name}'`)
           }
         } else {
-          const notExistingAnswers = hbField.options.filter(field => field.value.toLowerCase() == answer.options.extras.answeridentifier.toLowerCase())
+          const notExistingAnswers = selectedHbField.options.filter(field => field.value.toLowerCase() == answer.options.extras.answeridentifier.toLowerCase())
           if (notExistingAnswers.length === 0 && answer.options.extras.freeanswer_type !== "hidden") {
             answer.options.color = colorError
             question.options.color = colorError
@@ -455,8 +470,8 @@ function QuestionsDiagram() {
                 }} data-type="questiontranslation" data-color={questioncolor} style={{ borderColor: { questioncolor }, borderStyle: "solid" }} id="addquestiontranslation" required />
             </div>
             <div className="col-md-4">
-              <div className='d-flex align-items-end'>
-                <div className="w-100">
+              <div className='d-flex align-items-end flex-wrap'>
+                <div className="flex-grow-1">
                   <label htmlFor="addquestionidentifier">Questionidentifier</label>
                   <input className="form-control" name="questionidentifier" type="text" value={form['questionidentifier']}
                     onChange={(e) => {
@@ -464,6 +479,20 @@ function QuestionsDiagram() {
                       setForm({ ...form, [e.target.name]: e.target.value })
                     }} data-type="questionidentifier" data-color={questioncolor} style={{ borderColor: { questioncolor }, borderStyle: "solid" }} id="addquestionidentifier" required />
                 </div>
+                <select
+                  id="type"
+                  className={`custom-select w-auto mr-2`}
+                  value={form['questionidentifier']}
+                  onChange={e => {
+                    const matchingSubHbFields = hbFields.find(f => f.name === e.target.value)
+                    setForm({ ...form, questionidentifier: matchingSubHbFields.name })
+                    sethbFieldsAnswers(matchingSubHbFields.options)
+                  }}>
+                  <option disabled>select type</option>
+                  {(hbFields ? hbFields : []).map((f, i) => (
+                    <option key={i} value={f.name}>{f.name}</option>
+                  ))}
+                </select>
                 <button className="btn btn-primary ml-1" type="submit">{button}</button>
               </div>
             </div>
@@ -509,6 +538,18 @@ function QuestionsDiagram() {
                   <option disabled>select type</option>
                   {["text", "email", "number", "tel", "textarea", "hidden"].map((f, i) => (
                     <option key={i} value={f}>{f}</option>
+                  ))}
+                </select>
+                <select
+                  id="type"
+                  className={`custom-select w-auto mr-2`}
+                  value={form['answeridentifier']}
+                  onChange={e => {
+                    setForm({ ...form, answeridentifier: e.target.selectedOptions[0].value, dropdown: false, freeanswer: true })
+                  }}>
+                  <option disabled>select type</option>
+                  {(hbFieldsAnswers ? hbFieldsAnswers : []).map((f, i) => (
+                    <option key={i} value={f.value}>{f.value}</option>
                   ))}
                 </select>
                 <button className="btn btn-primary ml-1" type="submit">{button}</button>

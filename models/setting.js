@@ -11,6 +11,7 @@ var SettingSchema = new Schema({
   announcement_banner_cta: String,
   tourmailreceiver: String,
   mailreceiver: String,
+  adminreceiver: String,
   show_language_markers: Boolean,
   careersuccesspage_alumni: Number,  
   careersuccesspage_students: Number,  
