@@ -78,7 +78,6 @@ html.h-100(lang=locale === "de" ? 'de': 'en')
 
   body.h-100.d-flex.flex-column(data-spy='scroll', data-target='#courseScrollspy', data-offset='1', class=`${pathclass+(currentPath && currentPath.includes('/admin') ? ' admin' : currentPath == "/" ? "index" : "" )} ${user ? `loggedin` : ``}`)
 
-
     if live
       noscript
         iframe(src='https://www.googletagmanager.com/ns.html?id=GTM-KS4DGK3' height='0' width='0' style='display:none;visibility:hidden')

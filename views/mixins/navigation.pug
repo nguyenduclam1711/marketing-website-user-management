@@ -8,7 +8,7 @@ mixin navigation
           a.btn.btn-link.ml-3.btn-secondary.py-0(class=course && course.coloraccent ? `btn-white` : `btn-secondary` style=course && course.coloraccent ? `color: ${course.coloraccent} !important` : `` href=locals.settings.announcement_banner_cta)=__("Show More")
     if course && course.coloraccent
       div.position-absolute.left.w-50.h-100.z-minus.d-none.d-lg-block(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}!important` : ``)
-    .align-items-stretch.pl-md-0.nav-content(class=currentPath && currentPath.includes('/admin') ? ' container-fluid' : " container-md" )
+    .align-items-stretch.pl-md-0.nav-content(class=currentPath && currentPath.includes('/admin') ? ' container-fluid' : " container-lg" )
       a.navbar-brand.py-3.pl-sm-3.h-60(href="/" class=course && course.coloraccent ? 'text-white-responsive' : 'text-primary' )
         include ../../assets/media/dci.svg
       button.navbar-toggler(type='button', data-toggle='collapse', data-target='#collapsingNavbar3')
@@ -17,7 +17,7 @@ mixin navigation
       #collapsingNavbar3.navbar-collapse.collapse.w-100.mt-0.mt-md-0.align-items-stretch
         ul.nav.navbar-nav.my-3.my-lg-0.ml-auto.w-100.justify-content-end.flex-nowrap#headernav(class=currentPath && currentPath.includes('/courses') && currentPath.lastIndexOf('/') > 0 ? 'not-set-active' : ' ' )
           li.position-relative.nav-item.dropdown-custom
-            a.courseslink.dropdown-toggle.mx-0.mx-xl-3.mx-lg-1.nav-link.d-flex.align-items-center.h-100.z-1( class=currentPath === "/courses" || ( currentPath.includes("/courses") && course && course.coloraccent ) ? `active` : ``  href="#" aria-haspopup="true" aria-expanded="false")
+            a.courseslink.dropdown-toggle.mx-0.mx-xl-3.mx-lg-1.nav-link.d-flex.align-items-center.z-1.h-100( class=currentPath === "/courses" || ( currentPath.includes("/courses") && course && course.coloraccent ) ? `active` : ``  href="#" aria-haspopup="true" aria-expanded="false")
               =__("Courses")
             .dropdown-menu.dropdown-menu-left.border-radius-0.shadow-sm.z-0.p-0.courses-dropdown(aria-labelledby='navbarDropdownMenuLink')
                 div.grid-layout
@@ -30,12 +30,12 @@ mixin navigation
                           p.mb-1=course.headline
                           small=course.courselength
           li.position-relative.nav-item
-            a.mx-0.mx-xl-3.mx-lg-1.nav-link.d-flex.align-items-center.h-100.z-1(class=currentPath && currentPath.includes('/events') && !currentPath.includes('/admin') ? "active" : "", href='/events')
+            a.mx-0.mx-xl-3.mx-lg-1.nav-link.d-flex.align-items-center.z-1.h-100(class=currentPath && currentPath.includes('/events') && !currentPath.includes('/admin') ? "active" : "", href='/events')
               =__("Events")
           li.position-relative.nav-item
-            a.mx-0.mx-xl-3.mx-lg-1.nav-link.d-flex.align-items-center.h-100.z-1(href="/contact", class=currentPath == "/contact" ? "active" : "")=__("Campuses")
+            a.mx-0.mx-xl-3.mx-lg-1.nav-link.d-flex.align-items-center.z-1.h-100(href="/contact", class=currentPath == "/contact" ? "active" : "")=__("Campuses")
           li.position-relative.nav-item
-            a.mx-0.mx-xl-3.mx-lg-1.nav-link.d-flex.align-items-center.h-100.z-1(class=currentPath && currentPath.includes("/jobcenter") ? "active" : "", href='/jobcenter')=__("Jobcenter")
+            a.mx-0.mx-xl-3.mx-lg-1.nav-link.d-flex.align-items-center.z-1.h-100(class=currentPath && currentPath.includes("/jobcenter") ? "active" : "", href='/jobcenter')=__("Jobcenter")
 
           if headerPages
             each page in headerPages
@@ -55,12 +55,12 @@ mixin navigation
           li.position-relative.nav-item.dropdown-custom
             a.dropdown-toggle.mx-0.mx-xl-3.mx-lg-1.nav-link.d-flex.align-items-center.h-100(class=( page && (page.metapage != "true") && currentPath && currentPath.includes("/pages") ) || ( currentPath && currentPath.includes("/about-us") ) ? "active" : "", href="#", aria-haspopup="true" aria-expanded="false")=__("Get involved")
             .dropdown-menu.p-0.border-radius-0.shadow-sm(aria-labelledby='navbarDropdownMenuLink')
-              a.dropdown-item.nav-link(href='/about-us/', class=currentPath && currentPath.includes("/about-us") ? "active" : "")=__("About us")
-              a.dropdown-item.nav-link(href='https://dci.jobs.personio.de/', class=currentPath == "/jobs" ? "active" : "")=__("Jobs")
+              a.dropdown-item.nav-link.p-2.px-2(href='/about-us/', class=currentPath && currentPath.includes("/about-us") ? "active" : "")=__("About us")
+              a.dropdown-item.nav-link.p-2.px-2(href='https://dci.jobs.personio.de/', class=currentPath == "/jobs" ? "active" : "")=__("Jobs")
               if headerPages
                 each page in headerPages
                   if page.metapage
-                    a.dropdown-item.nav-link(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
+                    a.dropdown-item.nav-link.p-2.px-2(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
 
           li.position-relative.nav-item.z-foreground.d-flex.justify-content-center.align-items-center
            div

@@ -39,6 +39,33 @@
   background-color: white;
   #collapsingNavbar3{
     background-color:white;
+    @include media-breakpoint-down(md) {
+      // width: 100vw!important;
+      height: calc(100vh - 80px);
+      &:before{
+        content: "";
+        display: block;
+        border-bottom: 1px solid #e8e8e8;
+        margin: 1rem;
+      }
+      ul {
+        height: 100vh;
+        justify-content: flex-start!important;
+        li{
+          padding: 1rem;
+        }
+        .lang-switch{
+          a{
+            &:first-child{
+              padding: 0 .5rem 0 0;
+            }
+            &:last-child{
+              padding: 0 0 0 .5rem;
+            }
+          }
+        }
+      }
+    }
   }
   .nav-banner{
     height:40px;
@@ -48,6 +75,14 @@
     height:80px;
     .navbar-brand{
       height: 90%;
+      @include media-breakpoint-down(md) {
+        padding-left:1rem;
+      }
+    }
+    .navbar-toggler{
+      @include media-breakpoint-down(md) {
+        padding-right:1rem;
+      }
     }
     .lang-switch{
       a{
@@ -73,7 +108,6 @@
 .nav-link {
   padding: 5px 7px ​!important;
 }
-
 
 #headernav > li {
   // > .contactlink {
@@ -102,6 +136,9 @@
     font-weight: 500;
     font-size: 14px;
     font-family: "Gordita", sans-serif;
+    @include media-breakpoint-down(md) {
+      height: fit-content!important;
+    }
   }
 
   a.contactlinktext{
@@ -155,6 +192,7 @@
 .dropdown-custom {
   @extend .dropdown;
 }
+
 .dropdown-custom {
   .dropdown-menu {
     background-color: transparent;
@@ -166,7 +204,7 @@
       background-color: transparent ;
       color: $bluedark ;
       &:hover {
-        color: $primary ;
+        background-color: $pale-blue ;
       }
     }
     @include media-breakpoint-down(md) {
@@ -180,11 +218,16 @@
 .dropdown-toggle {
   .grid-layout.show,
   &:hover ~ .grid-layout,
-  &:hover .grid-layout {
+  &:hover .grid-layout ,
+  .grid-layout{
     display: grid;
     grid-template-columns: auto auto;
     grid-gap: 10px;
     padding: 20px;
+    @include media-breakpoint-down(md) {
+      grid-template-columns: auto;
+      padding:0;
+    }
     .dropdown-item{
       display: flex;
       justify-content: left;
@@ -192,18 +235,16 @@
       border-radius: 2px;
       .icon-container{
         padding: 10px 20px 10px 0;
+        @include media-breakpoint-down(md) {
+          display:none;
+        }
       }
       .details-container{
         padding-right: 15px;
+        @include media-breakpoint-down(md) {
+          padding-left:5px;
+        }
       }
-    }
-    .dropdown-item:hover,
-    .dropdown-item:focus-within,
-    .dropdown-item:active,
-    .dropdown-item:focus,
-    .dropdown-item.active {
-      background: $pale-blue!important;
-      color: inherit!important;
     }
   }
 
