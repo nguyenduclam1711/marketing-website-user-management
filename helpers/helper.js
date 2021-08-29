@@ -127,7 +127,6 @@ exports.sendMail = async (res, req, mailOptions) => {
         reject(error);
       }
 
-      console.log("Mail send out ", info);
       resolve(info);
     });
   });

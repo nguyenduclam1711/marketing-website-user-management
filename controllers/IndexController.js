@@ -268,8 +268,9 @@ module.exports.contact = async (req, res, next) => {
     contact.properties = properties
     const contactSavepromise = contact.save()
     // TODO remove logging statement
-    // console.log("+++++>>>>",req.session);
-    // console.log("========>>>>>",options.body.properties);
+  console.log("req.session", req.session);
+  console.log("req.body", req.body);
+  console.log("options.body.properties", options.body.properties);
     // to save time, mail get send out without waiting for the response
     const info = sendMail(res, req, mailOptions)
   try {
@@ -287,9 +288,9 @@ module.exports.contact = async (req, res, next) => {
       const errorMailOptions = {
         from: 'admin@digitalcareerinstitute.org',
         to: settings.adminreceiver.split(','),
-        subject: 'Broken fields in Hubspot-request',
-        text: `Broken fields ${JSON.stringify(e.error.validationResults.map(i => i.name))}`,
-        html: `Broken fields ${JSON.stringify(e.error.validationResults.map(i => i.name))}`,
+        subject: 'Failed Hubspot request',
+        html: `Broken fields ${JSON.stringify(e.error.validationResults.map(i => i.name))}, <br/><br/><br/>Request body:<br/> <code style="500px">${JSON.stringify(req.body).replace('", "', '",<br/><br/><br/>"')} </code><br/><br/><br/>Session:<br/><code>${JSON.stringify(req.session)}</code><br/><br/><br/>Properties: <br/><code>${JSON.stringify(req.session)}</code><br/><br/><br/>`,
+        text: `Broken fields ${JSON.stringify(e.error.validationResults.map(i => i.name))}, Request body: ${JSON.stringify(req.body)}`,
       }
       const info = sendMail(res, req, errorMailOptions)
       options.body.properties = filteredOptions
