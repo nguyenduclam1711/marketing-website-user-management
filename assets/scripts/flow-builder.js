@@ -24,7 +24,7 @@ const itiConfig = {
 	preferredCountries: ["de", "gb"]
 }
 
-fetch(`/admin/questions/overview/getquestionrenderselectors`, {
+fetch(`/admin/questions/overview`, {
 	headers: {
 		"content-type": "application/json"
 	},
@@ -32,7 +32,7 @@ fetch(`/admin/questions/overview/getquestionrenderselectors`, {
 	.then(res => res.json())
 	.then(async (res) => {
 		const allFlows = []
-		res.payload.questions.map(flow => {
+		res.payload.questions.filter(q => document.querySelector(q.renderselector)).map(flow => {
 			if (
 				flow.renderselector
 				// && !localStorage.getItem('dcianswers') 
