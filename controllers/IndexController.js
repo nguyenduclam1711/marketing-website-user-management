@@ -84,7 +84,7 @@ module.exports.contactLocations = async (req, res) => {
   })
 };
 module.exports.contact = async (req, res, next) => {
-    const { firstname, lastname, email, age_field, body, phone, locations, sendaltemail, signup_form, TermsofService, afa_jc_registered_, form_are_you_currently_unemployed } = req.body
+  const { firstname, lastname, email, age_field, body, phone, locations, sendaltemail, TermsofService, afa_jc_registered_, form_are_you_currently_unemployed } = req.body
     if (age_field) {
       console.log('Bot stepped into honeypot!')
       if (req.headers['content-type'] === 'application/json') {
@@ -104,16 +104,17 @@ module.exports.contact = async (req, res, next) => {
       next()
       return;
     }
-    if (!email || !TermsofService) {
+  var emptyFields = Object.entries(req.body).filter(([key, value]) => typeof value === "string" && value.trim() === "").map(a => a[0]).filter(a => !["nb-transaction-token", "nb-confirmation-token", "age_field"].includes(a))
+  if (emptyFields.length > 0 || !email || !TermsofService) {
       if (req.headers['content-type'] === 'application/json') {
         const response = {
-          error: res.__(`Please fill out all form fields`),
+          error: res.__(`Some fields are invalid or empty: ${emptyFields.map(a => `${a}, `)}`),
         }
         return res.json({
           response
         })
       } else {
-        req.flash('danger', 'Please fill out all form fields')
+        req.flash('danger', res.__(`Some fields are invalid or empty: ${emptyFields.map(a => `${a}, `)}`))
         res.redirect(req.headers.referer)
         next()
         return
@@ -225,7 +226,9 @@ module.exports.contact = async (req, res, next) => {
           "locations",
           "body",
         ].map(i => i.toLowerCase()).includes(v.toLowerCase())) {
-          acc[v] = req.body[v]
+          if (req.body[v].trim() !== '') {
+            acc[v] = req.body[v]
+          }
         }
         return acc
       }, {})

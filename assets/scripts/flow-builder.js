@@ -183,7 +183,7 @@ const render = (questions, flow) => {
 				</div>`
 				}).join('') + `${hiddens.map((answer, index) => {
 					return `<input ${attributes(answer)} />`
-				}).join('')}` + "</div><span id='error-msg' class='text-danger'></span>" : ""}
+				}).join('')}` + "</div><span id='error-msg' class='text-danger d-block'></span>" : ""}
               ${dropdowns.length > 0 ? dropdowns.map(answer => (`
 			  <label for="dropdown_${answer.extras.answeridentifier}">${isGerman && answer.extras.answertranslation ? answer.extras.answertranslation.split(":")[0] : answer.name.split(":")[0]}</label>
 			  <select 
