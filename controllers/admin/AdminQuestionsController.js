@@ -38,7 +38,6 @@ module.exports.getQuestions = async (req, res) => {
       })
       try {
         const [contactProperties, companyProperties, answers] = await Promise.all([...promises, Answer.find().exec()])
-        console.log('contactProperties, companyProperties', contactProperties, companyProperties);
         response.hb_fields = [...contactProperties, ...companyProperties]
         response.answers = answers
       } catch (error) {

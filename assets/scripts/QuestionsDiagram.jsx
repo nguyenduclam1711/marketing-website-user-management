@@ -98,7 +98,7 @@ function QuestionsDiagram() {
   let [form, setForm] = useState(emptyForm)
   let formRef = useRef(form)
   let [button, setbutton] = useState('Add')
-  let [nodevisibility, setnodevisibility] = useState(false)
+  let [nodevisibility, setnodevisibility] = useState(true)
   let [answersvisiblity, setanswersvisiblity] = useState(false)
   let [allFlows, setallFlows] = useState([])
   let [answers, setanswers] = useState([])
@@ -119,30 +119,39 @@ function QuestionsDiagram() {
         eventDidFire: (e) => {
           e.stopPropagation();
           e.isSelected ? setbutton('update') : setbutton('add')
-          if (e.isSelected) {
-            const relatedQuestion = findQuestionFromAnswer(currentNode)
-            if (relatedQuestion) {
-              const foundHbField = hbFieldsRef.current.filter(f => f.name === relatedQuestion.options.extras.questionidentifier)[0]
-              if (foundHbField) {
-                sethbFieldsAnswers(foundHbField.options)
+          if (e.function === "selectionChanged") {
+            if (e.isSelected) {
+              const relatedQuestion = findQuestionFromAnswer(currentNode)
+              if (relatedQuestion) {
+                const foundHbField = hbFieldsRef.current.filter(f => f.name === relatedQuestion.options.extras.questionidentifier)[0]
+                if (foundHbField && currentNode.options.extras.freeanswer !== true && currentNode.options.extras.dropdown !== true) {
+                  sethbFieldsAnswers(foundHbField.options)
+                } else {
+                  sethbFieldsAnswers([{ name: "Type is freeanswer or dropdown. No answer available." }])
+                }
               }
+              const corospondingHsField = hbFieldsRef.current.find(f => f.name === relatedQuestion.options.extras.questionidentifier)
+              if (!corospondingHsField) {
+                alert(`${relatedQuestion.options.extras.questionidentifier} not found`)
+              }
+              const formFromClickedNode = {
+                "question": currentNode.options.extras.customType === "question" ? currentNode.options.name : relatedQuestion ? relatedQuestion.options.name : "",
+                'questionidentifier': currentNode.options.extras.customType === "question" ? currentNode.options.extras.questionidentifier : corospondingHsField.name,
+                'questiontranslation': currentNode.options.extras.customType === "question" ? currentNode.options.extras.questiontranslation : relatedQuestion ? relatedQuestion.options.extras.questiontranslation : "",
+                "answer": currentNode.options.extras.customType === "answer" ? currentNode.options.name : "",
+                "answeridentifier": currentNode.options.extras.customType === "answer" ? currentNode.options.extras.answeridentifier : "",
+                "answertranslation": currentNode.options.extras.customType === "answer" ? currentNode.options.extras.answertranslation : "",
+                "freeanswer": currentNode.options.extras.customType === "answer" ? currentNode.options.extras.freeanswer : "",
+                "dropdown": currentNode.options.extras.customType === "answer" ? currentNode.options.extras.dropdown : "",
+                "freeanswer_type": currentNode.options.extras.customType === "answer" ? currentNode.options.extras.freeanswer_type : "text",
+                "flowname": name
+              }
+              setForm({ ...formRef.current, ...formFromClickedNode })
             }
-            const formFromClickedNode = {
-              "question": currentNode.options.extras.customType === "question" ? currentNode.options.name : relatedQuestion ? relatedQuestion.options.name : "",
-              'questionidentifier': currentNode.options.extras.customType === "question" ? currentNode.options.extras.questionidentifier : hbFieldsRef.current.find(f => f.name === relatedQuestion.options.extras.questionidentifier).name,
-              'questiontranslation': currentNode.options.extras.customType === "question" ? currentNode.options.extras.questiontranslation : relatedQuestion ? relatedQuestion.options.extras.questiontranslation : "",
-              "answer": currentNode.options.extras.customType === "answer" ? currentNode.options.name : "",
-              "answeridentifier": currentNode.options.extras.customType === "answer" ? currentNode.options.extras.answeridentifier : "",
-              "answertranslation": currentNode.options.extras.customType === "answer" ? currentNode.options.extras.answertranslation : "",
-              "freeanswer": currentNode.options.extras.customType === "answer" ? currentNode.options.extras.freeanswer : "",
-              "dropdown": currentNode.options.extras.customType === "answer" ? currentNode.options.extras.dropdown : "",
-              "freeanswer_type": currentNode.options.extras.customType === "answer" ? currentNode.options.extras.freeanswer_type : "text",
-              "flowname": name
+            else {
+              setForm({ ...formRef.current, ...emptyForm })
             }
-            setForm({ ...formRef.current, ...formFromClickedNode })
-          } else {
-            setForm({ ...formRef.current, ...emptyForm })
-          }
+        }
         }
       });
     });
@@ -246,7 +255,7 @@ function QuestionsDiagram() {
   }
 
   var checkDropDown = (aI) => {
-    const subHbFields = hbFields.find(aF => aF.name === aI.options.extras.answeridentifier)
+    const subHbFields = hbFieldsRef.current.find(aF => aF.name === aI.options.extras.answeridentifier)
     const dropdownAnswers = aI.options.name.split(":").reverse()[0]
     const rawAnswers = dropdownAnswers.split(',').map(a => a.trim())
     const rawAnswersWithoutLabels = rawAnswers.map(a => a.replace(/\(.*\)/, '').trim())
@@ -258,7 +267,7 @@ function QuestionsDiagram() {
   var checkIfQuestionsMatchWithAnswersAndSyncWithHubspot = (question) => {
     let errors = []
     if (Object.values(model.layers[1].models).length > 0) {
-      var selectedHbField = hbFields.find(a => a.name === question.options.extras.questionidentifier)
+      var selectedHbField = hbFieldsRef.current.find(a => a.name === question.options.extras.questionidentifier)
       var As = Object.values(model.layers[1].models).filter(m => m.options.extras.customType === "answer")
       const answers = As.filter(a => {
         return Object.values(a.ports.In.links)[0] && Object.keys(question.ports.Out.links).includes(Object.values(a.ports.In.links)[0].options.id)
@@ -392,7 +401,7 @@ function QuestionsDiagram() {
               <label htmlFor="flowselector">flowselector</label>
               <select
                 id="flowselector"
-                className={`custom-select w-auto mr-2`}
+                className={`form-control w-100 mr-2`}
                 value={currentModelId}
                 onChange={e => {
                   const theModelToSet = allFlows.find(f => f._id === e.target.selectedOptions[0].value)
@@ -452,7 +461,7 @@ function QuestionsDiagram() {
               <label className="form-check-label" htmlFor="sendaltemail">Send alt email?</label>
             </div>
           </div>
-          <div className=" row">
+          <div className="row">
             <div className="col-md-4">
               <label htmlFor="addquestion">Add Question</label>
               <input className="form-control" name="question" type="text" value={form['question']}
@@ -460,17 +469,17 @@ function QuestionsDiagram() {
                   e.stopPropagation();
                   setForm({ ...form, [e.target.name]: e.target.value })
                 }} data-type="question" data-color={questioncolor} style={{ borderColor: { questioncolor }, borderStyle: "solid" }} id="addquestion" required />
-            </div>
-            <div className="col-md-4">
+              <div >
               <label htmlFor="addquestiontranslation">DE Questiontranslation</label>
               <input className="form-control" name="questiontranslation" type="text" value={form['questiontranslation']}
-                onChange={(e) => {
-                  e.stopPropagation();
-                  setForm({ ...form, [e.target.name]: e.target.value })
-                }} data-type="questiontranslation" data-color={questioncolor} style={{ borderColor: { questioncolor }, borderStyle: "solid" }} id="addquestiontranslation" required />
+                  onChange={(e) => {
+                    e.stopPropagation();
+                    setForm({ ...form, [e.target.name]: e.target.value })
+                  }} data-type="questiontranslation" data-color={questioncolor} style={{ borderColor: { questioncolor }, borderStyle: "solid" }} id="addquestiontranslation" required />
+              </div>
             </div>
-            <div className="col-md-4">
-              <div className='d-flex align-items-end flex-wrap'>
+            <div className="col">
+              <div className=''>
                 <div className="flex-grow-1">
                   <label htmlFor="addquestionidentifier">Questionidentifier</label>
                   <input className="form-control" name="questionidentifier" type="text" value={form['questionidentifier']}
@@ -479,25 +488,29 @@ function QuestionsDiagram() {
                       setForm({ ...form, [e.target.name]: e.target.value })
                     }} data-type="questionidentifier" data-color={questioncolor} style={{ borderColor: { questioncolor }, borderStyle: "solid" }} id="addquestionidentifier" required />
                 </div>
-                <select
-                  id="type"
-                  className={`custom-select w-auto mr-2`}
-                  value={form['questionidentifier']}
-                  onChange={e => {
-                    const matchingSubHbFields = hbFields.find(f => f.name === e.target.value)
-                    setForm({ ...form, questionidentifier: matchingSubHbFields.name })
-                    sethbFieldsAnswers(matchingSubHbFields.options)
-                  }}>
-                  <option disabled>select type</option>
-                  {(hbFields ? hbFields : []).map((f, i) => (
-                    <option key={i} value={f.name}>{f.name}</option>
-                  ))}
-                </select>
-                <button className="btn btn-primary ml-1" type="submit">{button}</button>
+                <div className='d-flex align-items-end flex-wrap flex-grow-1'>
+                  <div className="flex-grow-1">
+                    <label htmlFor="type">Type</label>
+                    <select
+                      id="type"
+                      className={` w-100 mr-2 form-control`}
+                      value={form['questionidentifier']}
+                      onChange={e => {
+                        const matchingSubHbFields = hbFieldsRef.current.find(f => f.name === e.target.value)
+                        setForm({ ...form, questionidentifier: matchingSubHbFields.name })
+                        sethbFieldsAnswers(matchingSubHbFields.options)
+                      }}>
+                      <option disabled>select type</option>
+                      {(hbFieldsRef.current ? hbFieldsRef.current : []).map((f, i) => (
+                        <option key={i} value={f.name}>{f.name}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <button className="btn btn-primary ml-1" type="submit">{button}</button>
+                </div>
               </div>
             </div>
           </div>
-
         </form>
 
         <form className="" onSubmit={addAnswer}>
@@ -509,8 +522,7 @@ function QuestionsDiagram() {
                   e.stopPropagation();
                   setForm({ ...form, [e.target.name]: e.target.value })
                 }} type="text" data-type="answer" data-color="rgb(256, 204, 1)" style={{ borderColor: "rgb(255, 204, 1)", borderStyle: "solid" }} id="addanswer" />
-            </div>
-            <div className="col-md-4">
+              <div>
               <label htmlFor="answertranslation">Answertranslation</label>
               <input className="form-control w-99" name="answertranslation" type="text" value={form['answertranslation']}
                 onChange={(e) => {
@@ -518,9 +530,10 @@ function QuestionsDiagram() {
                   setForm({ ...form, [e.target.name]: e.target.value })
                 }} data-type="answertranslation" data-color={questioncolor} style={{ borderColor: "rgb(256, 204, 1)", borderStyle: "solid" }} id="answertranslation" required />
             </div>
-            <div className="col-md-4">
-              <div className='d-flex align-items-end flex-wrap'>
-                <div className="flex-grow-1">
+            </div>
+            <div className="col">
+              <div className='flex-grow-1'>
+                <div>
                   <label htmlFor="answeridentifier">Answeridentifier</label>
                   <input className="form-control " name="answeridentifier" type="text" value={form['answeridentifier']}
                     onChange={(e) => {
@@ -528,31 +541,41 @@ function QuestionsDiagram() {
                       setForm({ ...form, [e.target.name]: e.target.value })
                     }} data-type="answeridentifier" data-color={questioncolor} style={{ borderColor: "rgb(255, 204, 1)", borderStyle: "solid" }} id="answeridentifier" required />
                 </div>
-                <select
-                  id="type"
-                  className={`custom-select w-auto mr-2`}
-                  value={form['freeanswer_type']}
-                  onChange={e => {
-                    setForm({ ...form, freeanswer_type: e.target.selectedOptions[0].value, dropdown: false, freeanswer: true })
-                  }}>
-                  <option disabled>select type</option>
-                  {["text", "email", "number", "tel", "textarea", "hidden"].map((f, i) => (
-                    <option key={i} value={f}>{f}</option>
-                  ))}
-                </select>
-                <select
-                  id="type"
-                  className={`custom-select w-auto mr-2`}
-                  value={form['answeridentifier']}
-                  onChange={e => {
-                    setForm({ ...form, answeridentifier: e.target.selectedOptions[0].value, dropdown: false, freeanswer: true })
-                  }}>
-                  <option disabled>select type</option>
-                  {(hbFieldsAnswers ? hbFieldsAnswers : []).map((f, i) => (
-                    <option key={i} value={f.value}>{f.value}</option>
-                  ))}
-                </select>
-                <button className="btn btn-primary ml-1" type="submit">{button}</button>
+                <div className="flex-grow-1 d-flex align-items-end">
+                  <div className="flex-grow-1">
+                    <label htmlFor="type">Type</label>
+                    <select
+                      id="type"
+                      className={`w-100 mr-2 form-control`}
+                      value={form['freeanswer_type']}
+                      onChange={e => {
+                        setForm({ ...form, freeanswer_type: e.target.selectedOptions[0].value, dropdown: false, freeanswer: true })
+                      }}>
+                      <option disabled>select type</option>
+                      {["text", "email", "number", "tel", "textarea", "hidden"].map((f, i) => (
+                        <option key={i} value={f}>{f}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="flex-grow-1">
+                    <label htmlFor="type2">HS answers</label>
+                    <select
+                      id="type2"
+                      className={`w-100 mr-2 form-control`}
+                      value={form['answeridentifier']}
+                      onChange={e => {
+                        setForm({ ...form, answeridentifier: e.target.selectedOptions[0].value, dropdown: false, freeanswer: true })
+                      }}>
+                      <option disabled>select type</option>
+                      {(hbFieldsAnswers ? hbFieldsAnswers : []).map((f, i) => (
+                        <option key={i} value={f.value}>{f.value}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <button className="btn btn-primary ml-1" type="submit">{button}</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
