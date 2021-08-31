@@ -33,6 +33,10 @@
   padding-top: 110px;
 }
 
+.no-scroll{
+  overflow: hidden;
+}
+
 #nav-primary {
   font-family: "Gordita", sans-serif;
   font-weight: 400;
@@ -51,6 +55,7 @@
       ul {
         height: 100vh;
         justify-content: flex-start!important;
+        overflow-y: auto;
         li{
           padding: 1rem;
         }
