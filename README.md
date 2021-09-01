@@ -129,6 +129,9 @@ Todo
 ### Employees
 Todo
 
+### Display blank content without navigation and footer
+If you append the query parameter `dci_blank=true` behind every page/url you get a raw page, just displaying the content without header and footer. This is useful for Iframes where you just want to eg. render a questionaire. You can create a page without content. Each page gets the page-title added as ID to the main container. If you create a page with a empty content you can use it as a target for a renderselector from the questionaire.
+
 ### Pages
 > Static-sites are main content deliverers and can serve as landingpages, general information
 
