@@ -156,6 +156,7 @@ const render = (questions, flow) => {
 				name="${answer.extras.answeridentifier}"
 				data-type="question"
 				${answer.extras.freeanswer_type === 'hidden' ? `value="${answer.name}"` : ``}
+				${answer.extras.freeanswer_type === 'tel' ? `pattern="^\\+?\\d+$"` : ``}
 				type="${answer.extras.freeanswer_type ? answer.extras.freeanswer_type : "text"}" 
 				id="freeanswer_${answer.extras.answeridentifier}"
 				required`
