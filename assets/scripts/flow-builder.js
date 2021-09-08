@@ -172,7 +172,7 @@ const render = (questions, flow) => {
 				<div class="w-100">
 				${freeanswers.length > 0 ? "<div class='row'>" + [...notTextAreas, ...textAreas].map((answer, index) => {
 					return `<div class="
-					${((index === notTextAreas.length - 1) && (index % 2 == 0)) || answer.extras.freeanswer_type === 'textarea' ? 'col-12' : 'col-6'}">
+					${((index === notTextAreas.length - 1) && (index % 2 == 0)) || answer.extras.freeanswer_type === 'textarea' || answer.extras.freeanswer_type === 'email' || answer.extras.freeanswer_type === 'tel' ? 'col-12' : 'col-6'}">
 					${answer.extras.freeanswer_type !== 'hidden' ? `<label for="freeanswer_${answer.extras.answeridentifier}">
 					${isGerman ? (answer.extras.answertranslation.indexOf(':') !== -1 ? answer.extras.answertranslation.split(':')[0] : answer.extras.answertranslation) : (answer.name.indexOf(':') !== -1 ? answer.name.split(':')[0] : answer.name)}</label>` : ``}
 				  ${answer.extras.freeanswer_type === 'textarea' ? `
