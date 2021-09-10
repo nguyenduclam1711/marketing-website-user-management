@@ -52,10 +52,26 @@
         border-bottom: 1px solid #e8e8e8;
         margin: 1rem;
       }
+      .apply-now-collapsed{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        background: white;
+        width: -webkit-fill-available;
+        text-align: center;
+        border-top: 1px solid #e8e8e8;
+        padding: 20px 20px;
+        a { 
+          font-weight: 500;
+          font-size: 14px;
+          font-family: "Gordita", sans-serif;
+        }
+      }
       ul {
         height: 100vh;
         justify-content: flex-start!important;
         overflow-y: auto;
+        padding-bottom: 250px;
         li{
           padding: 1rem;
         }
@@ -73,7 +89,6 @@
     }
   }
   .nav-banner{
-    height:40px;
     font-size: initial;
   }
   .nav-content{

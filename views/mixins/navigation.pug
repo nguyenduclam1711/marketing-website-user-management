@@ -62,7 +62,7 @@ mixin navigation
                   if page.metapage
                     a.dropdown-item.nav-link.p-2.px-2(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
 
-          li.position-relative.nav-item.z-foreground.d-flex.justify-content-center.align-items-center
+          li.d-none.position-relative.nav-item.z-foreground.d-lg-flex.justify-content-center.align-items-center
            div
              a.btn.btn-outline-primary.contactlinktext.mx-0.mx-xl-2.mx-lg-1.nav-link.d-flex.align-items-stretch.h-100.white-space-nowrap(href="/signup" class=course && course.coloraccent ? `` : `text-white` )=__("Apply now")
              .contactlink(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
@@ -72,3 +72,7 @@ mixin navigation
             = "|"
             a.mr-xl-2.mr-lg-1.nav-link.d-flex.align-items-center.h-100(style=course && course.coloraccent && locale === "en" ? `font-weight: 500` : `` class=locale === "en" ? "active cursor-default" : "" href=locale === "en" ? "#": "/i18n/en") EN
 
+        div.apply-now-collapsed.d-lg-none.nav-item.z-foreground.d-sm-flex.justify-content-center.align-items-stretch
+          div
+            a.btn.btn-primary.contactlinktext.mx-0.mx-xl-2.mx-lg-1.nav-link.d-flex.align-items-stretch.h-100.white-space-nowrap.justify-content-center(href="/signup" class=course && course.coloraccent ? `` : `text-white` )=__("Apply now")
+            .contactlink(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
