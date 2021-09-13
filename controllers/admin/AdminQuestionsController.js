@@ -20,8 +20,7 @@ module.exports.getQuestions = async (req, res) => {
     }
     if (req.session.passport && req.session.passport.user && req.headers.referer.indexOf('/admin') !== -1) {
       const properties = [
-        `https://api.hubapi.com/properties/v1/contacts/properties`,
-        `https://api.hubapi.com/properties/v1/companies/properties`,
+        `https://api.hubapi.com/properties/v1/contacts/properties`
       ]
       let promises = []
       properties.forEach(property => {
@@ -37,8 +36,8 @@ module.exports.getQuestions = async (req, res) => {
         promises.push(requestPromise(options))
       })
       try {
-        const [contactProperties, companyProperties, answers] = await Promise.all([...promises, Answer.find().exec()])
-        response.hb_fields = [...contactProperties, ...companyProperties]
+        const [contactProperties, answers] = await Promise.all([...promises, Answer.find().exec()])
+        response.hb_fields = [...contactProperties]
         response.answers = answers
       } catch (error) {
         console.log('error', error);

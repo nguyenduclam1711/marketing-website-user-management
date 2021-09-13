@@ -164,13 +164,17 @@ function QuestionsDiagram() {
     }).then(res => res.json())
       .then(res => {
         if (res.payload.questions.length > 0) {
+          var searchParams = new URLSearchParams(window.location.search);
+          const cachedFlow = searchParams.get("flow");
           sethbFields(res.payload.hb_fields)
           setallFlows(res.payload.questions)
           setanswers(res.payload.answers)
-          const initialModel = res.payload.questions[0]
+          const initialModel = res.payload.questions.find(f => f._id === cachedFlow) || res.payload.questions[0]
           if (initialModel.model) {
             model.deserializeModel(initialModel.model, engine);
           }
+          setmodelState(initialModel._id)
+          addEventListeners(initialModel.name)
           setForm({
             ...form,
             flowname: initialModel.name,
@@ -178,8 +182,6 @@ function QuestionsDiagram() {
             renderselector: initialModel.renderselector,
             sendaltemail: initialModel.sendaltemail
           })
-          setmodelState(initialModel._id)
-          addEventListeners(initialModel.name)
           engine.setModel(model);
         }
       }).catch(err => {
