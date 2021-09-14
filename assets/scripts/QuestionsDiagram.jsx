@@ -120,20 +120,20 @@ function QuestionsDiagram() {
           e.stopPropagation();
           e.isSelected ? setbutton('update') : setbutton('add')
           if (e.function === "selectionChanged") {
+            let relatedQuestion
+            let corospondingHsField
             if (e.isSelected) {
-              const relatedQuestion = findQuestionFromAnswer(currentNode)
-              if (relatedQuestion) {
-                const foundHbField = hbFieldsRef.current.filter(f => f.name === relatedQuestion.options.extras.questionidentifier)[0]
-                if (foundHbField && currentNode.options.extras.freeanswer !== true && currentNode.options.extras.dropdown !== true) {
-                  sethbFieldsAnswers(foundHbField.options)
+              if (currentNode.options.extras.customType === "answer") {
+                relatedQuestion = findQuestionFromAnswer(currentNode)
+                corospondingHsField = hbFieldsRef.current.find(f => f.name === relatedQuestion.options.extras.questionidentifier)
+                if (corospondingHsField) {
+                  sethbFieldsAnswers(corospondingHsField.options)
                 } else {
-                  sethbFieldsAnswers([{ name: "Type is freeanswer or dropdown. No answer available." }])
+                  alert(`${relatedQuestion.options.extras.questionidentifier} not found`)
                 }
-              }
-              const corospondingHsField = hbFieldsRef.current.find(f => f.name === relatedQuestion.options.extras.questionidentifier)
-              if (!corospondingHsField) {
-                alert(`${relatedQuestion.options.extras.questionidentifier} not found`)
-              }
+              } /* else {
+                sethbFieldsAnswers([{ name: "Type is freeanswer or dropdown. No answer available." }])
+              } */
               const formFromClickedNode = {
                 "question": currentNode.options.extras.customType === "question" ? currentNode.options.name : relatedQuestion ? relatedQuestion.options.name : "",
                 'questionidentifier': currentNode.options.extras.customType === "question" ? currentNode.options.extras.questionidentifier : corospondingHsField.name,
@@ -151,7 +151,7 @@ function QuestionsDiagram() {
             else {
               setForm({ ...formRef.current, ...emptyForm })
             }
-        }
+          }
         }
       });
     });
