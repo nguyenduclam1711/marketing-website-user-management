@@ -59,7 +59,7 @@ mixin pageForm
     .mb-3
       label(for='content') Content
       #editor.bg-white(value=editPath ? page.content : "")
-      textarea#inputContent.d-none(name='content', placeholder='Content', required='', )=editPath ? JSON.stringify(page.content) : ""
+      textarea#inputContent.d-none(name='content', placeholder='Content', )=editPath ? JSON.stringify(page.content) : ""
     .btn-group
       if editPath
         a.btn.btn-outline-primary(href="/admin/pages")="Back"
