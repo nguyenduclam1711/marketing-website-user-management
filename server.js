@@ -147,9 +147,6 @@ app.use(function (req, res, next) {
         .toLowerCase())
     const path = req.url.replace(/(.*)\?.*/, '$1')
     const pathSegments = path.split("/").filter(pS => pS !== "")
-    if (req.query.dci_blank === "true") {
-      res.locals.blank = true
-    }
     const siteTitle = pathSegments.reverse().reduce((acc, pathSegment) => {
       if (!pathSegment.startsWith("?") && pathSegment !== req.session.locale && pathSegment !== 'pages') {
         const upperCasePathSegment = pathSegment.replace(/-/g, ' ').charAt(0).toUpperCase() + pathSegment.replace(/-/g, ' ').substr(1);

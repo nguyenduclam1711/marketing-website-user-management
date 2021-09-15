@@ -8,9 +8,6 @@ var CourseSchema = new Schema({
   subicon: {
     type: String
   },
-  menuicon: {
-    type: String
-  },
   headline: {
     type: String,
     trim: true,

@@ -2,11 +2,8 @@ extends layout.pug
 block content
 
   .container.pt-5.pb-200
-    if !blank
-      h1.display-1.d-block=page.title
-      p.lead.pSize !{page.toHTML}
-    else
-      div(id=page.title)  
+    h1.display-1.d-block=page.title
+    p.lead.pSize !{page.toHTML}
 
     if page.cta_text || page.cta_button_url
       .bg-section.box-shadow.p-5.text-center.d-inline-block.mb-5
