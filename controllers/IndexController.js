@@ -494,8 +494,9 @@ module.exports.signupCourse = async (req, res, next) => {
   const partners = await Partner.find({ ...query }, 'link title partnerlogo is_alumni_employer')
     .sort('order')
     .exec({})
+  const path = req.url.replace(/\/(.*)\//gm, "$1").replace(/(\w*)\//gm, "$1").replace("/", '-').replace(/(.*)\?.*/, "$1")
   return res.render('signup', {
     partners,
-    path: req.url.replace(/\/(.*)\//gm, "$1").replace(/(\w*)\//gm, "$1").replace("/", '-')
+    path
   })
 }
