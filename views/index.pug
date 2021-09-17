@@ -1,9 +1,9 @@
 extends layout.pug
 block content
   main
+    if currentPath == "/"
+      +navigation
     section.d-flex.flex-column.position-relative
-      if currentPath == "/"
-        +navigation
       div.container-lg
         .d-md-none.bg-primary.w-5.h-5.position-absolute.ml-n3
         .d-md-none.bg-light-blue.position-absolute.z-minus.w-5.h-5.mt-3.ml-3

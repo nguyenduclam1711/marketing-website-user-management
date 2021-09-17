@@ -29,10 +29,6 @@
 @import "footer";
 @import "typography";
 
-.pt-100 {
-  padding-top: 110px;
-}
-
 .no-scroll{
   overflow: hidden;
 }
@@ -1413,6 +1409,7 @@ div[class*=" #{$class-slug}"] {
 }
 .carousel, .carousel-inner {
   height: 100%;
+  z-index:1;
 }
 .carousel-item {
   @include media-breakpoint-up(sm) {
