@@ -129,14 +129,14 @@ function QuestionsDiagram() {
                 if (corospondingHsField) {
                   sethbFieldsAnswers(corospondingHsField.options)
                 } else {
-                  alert(`${relatedQuestion.options.extras.questionidentifier} not found`)
+                  // alert(`${relatedQuestion.options.extras.questionidentifier} not found`)
                 }
               } /* else {
                 sethbFieldsAnswers([{ name: "Type is freeanswer or dropdown. No answer available." }])
               } */
               const formFromClickedNode = {
                 "question": currentNode.options.extras.customType === "question" ? currentNode.options.name : relatedQuestion ? relatedQuestion.options.name : "",
-                'questionidentifier': currentNode.options.extras.customType === "question" ? currentNode.options.extras.questionidentifier : corospondingHsField.name,
+                'questionidentifier': currentNode.options.extras.customType === "question" ? currentNode.options.extras.questionidentifier : relatedQuestion ? relatedQuestion.options.name : "",
                 'questiontranslation': currentNode.options.extras.customType === "question" ? currentNode.options.extras.questiontranslation : relatedQuestion ? relatedQuestion.options.extras.questiontranslation : "",
                 "answer": currentNode.options.extras.customType === "answer" ? currentNode.options.name : "",
                 "answeridentifier": currentNode.options.extras.customType === "answer" ? currentNode.options.extras.answeridentifier : "",
