@@ -33,10 +33,105 @@
   padding-top: 110px;
 }
 
+.no-scroll{
+  overflow: hidden;
+}
+
+.nav-scrolled{
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
 #nav-primary {
   font-family: "Gordita", sans-serif;
-  font-weight: 500;
-  color: $bluedark !important;
+  font-weight: 400;
+  background-color: white;
+  
+  #collapsingNavbar3{
+    background-color:white;
+    @include media-breakpoint-down(md) {
+      // width: 100vw!important;
+      height: calc(100vh - 80px);
+      &:before{
+        content: "";
+        display: block;
+        border-bottom: 1px solid #e8e8e8;
+        margin: 1rem;
+      }
+      .apply-now-collapsed{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        background: white;
+        width: -webkit-fill-available;
+        text-align: center;
+        border-top: 1px solid #e8e8e8;
+        padding: 20px 20px;
+        a { 
+          font-weight: 500;
+          font-size: 14px;
+          font-family: "Gordita", sans-serif;
+        }
+      }
+      ul {
+        height: 100vh;
+        justify-content: flex-start!important;
+        overflow-y: auto;
+        padding-bottom: 250px;
+        li{
+          padding: 1rem;
+        }
+        .lang-switch{
+          a{
+            &:first-child{
+              padding: 0 .5rem 0 0;
+            }
+            &:last-child{
+              padding: 0 0 0 .5rem;
+            }
+          }
+          
+        }
+      }
+    }
+    .nav-button-scrolled {
+      background: $primary!important;
+      color: white!important;
+      &:hover{
+        background: $primary-light!important;
+        border-color: $primary-light!important;
+      }
+    }
+  }
+  .nav-banner{
+    font-size: initial;
+  }
+  .nav-content{
+    height:80px;
+    .navbar-brand{
+      height: 90%;
+      @include media-breakpoint-down(md) {
+        padding-left:1rem;
+      }
+    }
+    .navbar-toggler{
+      @include media-breakpoint-down(md) {
+        padding-right:1rem;
+      }
+    }
+    .lang-switch{
+      a{
+        color: black!important;
+        font-weight: 400;
+        &:hover{
+          color: black!important;
+          font-weight: 500;
+        }
+      }
+      a.active{
+        font-weight: 500;
+      }
+    }
+  }
 }
 .navbar-light .navbar-nav .nav-link {
   color: $bluedark;

@@ -61,6 +61,10 @@ mixin navigation
                   each page in headerPages
                     if page.metapage
                       a.dropdown-item.nav-link(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
+            li.d-none.position-relative.nav-item.z-foreground.d-lg-flex.justify-content-center.align-items-center
+            div
+              a.apply-now.btn.btn-outline-primary.contactlinktext.mx-0.mx-xl-2.mx-lg-1.nav-link.d-flex.align-items-stretch.h-100.white-space-nowrap(href="/signup")=__("Apply now")
+              .contactlink(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
 
             li.position-relative.nav-item.z-foreground
               a.contactlinktext.mx-0.mx-xl-2.mx-lg-0.nav-link.d-flex.align-items-center.h-100.white-space-nowrap(href="/signup" class=course && course.coloraccent ? `` : `text-white` )=__("Apply now short")
