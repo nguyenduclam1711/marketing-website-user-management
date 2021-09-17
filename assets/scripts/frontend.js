@@ -95,6 +95,7 @@ for (let i = 0, len = scrollbuttons.length; i < len; i++) {
     window.history.pushState({}, {}, event.target.attributes.href.value)
   });
 }
+
 const throttle = (func, limit) => {
   let lastFunc;
   let lastRan;
@@ -156,8 +157,22 @@ window.onscroll = () => {
     countUp()
     , 50)
   throttle(
-    animatedPolygons()
+    animatedPolygons(),
+    handleNavigation()
     , 200)
+    
+};
+
+const handleNavigation = () => {
+  let applyNow = document.querySelector('.apply-now');
+  let nav = document.querySelector('#nav-primary');
+  if (window.scrollY > 50) {
+    applyNow.classList.add('nav-button-scrolled');
+    nav.classList.add('nav-scrolled');
+  } else {
+    applyNow.classList.remove('nav-button-scrolled');
+    nav.classList.remove('nav-scrolled');
+  }
 };
 
 const classes = ['shift-up', 'shift-left', 'shift-bottom', 'shift-right']

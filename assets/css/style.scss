@@ -37,10 +37,15 @@
   overflow: hidden;
 }
 
+.nav-scrolled{
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
 #nav-primary {
   font-family: "Gordita", sans-serif;
   font-weight: 400;
   background-color: white;
+  
   #collapsingNavbar3{
     background-color:white;
     @include media-breakpoint-down(md) {
@@ -84,7 +89,16 @@
               padding: 0 0 0 .5rem;
             }
           }
+          
         }
+      }
+    }
+    .nav-button-scrolled {
+      background: $primary!important;
+      color: white!important;
+      &:hover{
+        background: $primary-light!important;
+        border-color: $primary-light!important;
       }
     }
   }
