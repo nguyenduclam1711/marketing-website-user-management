@@ -334,14 +334,14 @@ window.onload = function () {
 // console.log(typedCursor)
 
 
-function stickyNavigation(element) {
-  const nav = document.querySelector('nav.navbar');
-  if (window.scrollY >= element.offsetHeight / 2) {
-    nav.classList.add('bg-white');
-  } else {
-    nav.classList.remove('bg-white');
-  }
-}
+// function stickyNavigation(element) {
+//   const nav = document.querySelector('nav.navbar');
+//   if (window.scrollY >= element.offsetHeight / 2) {
+//     nav.classList.add('bg-white');
+//   } else {
+//     nav.classList.remove('bg-white');
+//   }
+// }
 
 const notFoundTimer = document.querySelector('.timerRedirect')
 if (notFoundTimer) {
