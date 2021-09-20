@@ -417,6 +417,7 @@ $('#collapsingNavbar3').on('hidden.bs.collapse', function () {
 
 $('#collapsingNavbar3').on('shown.bs.collapse', function () {
   $('body').toggleClass('no-scroll');
+  document.getElementsByClassName('nav-content')[0].scrollIntoView({behavior:'smooth'});
 });
 
 // const burger = document.querySelector('#collapsingNavbar3');

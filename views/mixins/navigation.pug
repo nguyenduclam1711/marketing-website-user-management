@@ -9,7 +9,7 @@ mixin navigation
     if course && course.coloraccent
       div.position-absolute.left.w-50.h-100.z-minus.d-none.d-lg-block(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}!important` : ``)
     .align-items-stretch.pl-md-0.nav-content(class=currentPath && currentPath.includes('/admin') ? ' container-fluid' : " container-lg" )
-      a.navbar-brand.py-3.pl-sm-3.h-60(href="/" class=course && course.coloraccent ? 'text-white-responsive' : 'text-primary' )
+      a.navbar-brand.py-3.pl-sm-3.h-4(href="/" class=course && course.coloraccent ? 'text-white-responsive' : 'text-primary' )
         include ../../assets/media/dci.svg
       button.navbar-toggler(type='button', data-toggle='collapse', data-target='#collapsingNavbar3')
         span.navbar-toggler-icon
@@ -17,7 +17,7 @@ mixin navigation
       #collapsingNavbar3.navbar-collapse.collapse.w-100.mt-0.mt-md-0.align-items-stretch
         ul.nav.navbar-nav.my-3.my-lg-0.ml-auto.w-100.justify-content-end.flex-nowrap#headernav(class=currentPath && currentPath.includes('/courses') && currentPath.lastIndexOf('/') > 0 ? 'not-set-active' : ' ' )
           li.position-relative.nav-item.dropdown-custom
-            a.courseslink.dropdown-toggle.mx-0.mx-xl-3.mx-lg-1.nav-link.d-flex.align-items-center.z-1.h-100( class=currentPath === "/courses" || ( currentPath.includes("/courses") && course && course.coloraccent ) ? `active` : ``  href="#" aria-haspopup="true" aria-expanded="false")
+            a.courseslink.dropdown-toggle.mx-0.mx-xl-3.mx-lg-1.nav-link.d-flex.align-items-center.z-1.h-100( class=currentPath === "/courses" || ( currentPath.includes("/courses") && course && course.coloraccent ) ? `active` : ``  aria-haspopup="true" aria-expanded="false")
               =__("Courses")
             .dropdown-menu.dropdown-menu-left.border-radius-0.shadow-sm.z-0.p-0.courses-dropdown(aria-labelledby='navbarDropdownMenuLink')
                 div.grid-layout
@@ -53,7 +53,7 @@ mixin navigation
             a.mx-0.mx-xl-3.mx-lg-1.nav-link.d-flex.align-items-center.h-100.z-1(class=currentPath && currentPath.includes("/tour") ? "active" : "" href='/tour')=__("Companies")
 
           li.position-relative.nav-item.dropdown-custom
-            a.dropdown-toggle.mx-0.mx-xl-3.mx-lg-1.nav-link.d-flex.align-items-center.h-100(class=( page && (page.metapage != "true") && currentPath && currentPath.includes("/pages") ) || ( currentPath && currentPath.includes("/about-us") ) ? "active" : "", href="#", aria-haspopup="true" aria-expanded="false")=__("Get involved")
+            a.dropdown-toggle.mx-0.mx-xl-3.mx-lg-1.nav-link.d-flex.align-items-center.h-100(class=( page && (page.metapage != "true") && currentPath && currentPath.includes("/pages") ) || ( currentPath && currentPath.includes("/about-us") ) ? "active" : "", aria-haspopup="true" aria-expanded="false")=__("Get involved")
             .dropdown-menu.p-0.border-radius-0.shadow-sm(aria-labelledby='navbarDropdownMenuLink')
               a.dropdown-item.nav-link.p-2.px-2(href='/about-us/', class=currentPath && currentPath.includes("/about-us") ? "active" : "")=__("About us")
               a.dropdown-item.nav-link.p-2.px-2(href='https://dci.jobs.personio.de/', class=currentPath == "/jobs" ? "active" : "")=__("Jobs")
