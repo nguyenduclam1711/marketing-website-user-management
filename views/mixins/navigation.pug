@@ -72,10 +72,10 @@ mixin navigation
             .dropdown-menu.p-0.border-radius-0.shadow-sm(aria-labelledby='navbarDropdownMenuLink')
               a.dropdown-item.nav-link.p-2.px-2(href='/about-us/', class=currentPath && currentPath.includes("/about-us") ? "active" : "")=__("About us")
               a.dropdown-item.nav-link.p-2.px-2(href='https://dci.jobs.personio.de/', class=currentPath == "/jobs" ? "active" : "")=__("Jobs")
-              if headerPages
-                each page in headerPages
-                  if page.metapage
-                    a.dropdown-item.nav-link.p-2.px-2(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
+              //- if headerPages
+              //-   each page in headerPages
+              //-     if page.metapage
+              //-       a.dropdown-item.nav-link.p-2.px-2(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
 
             li.position-relative.nav-item.dropdown-custom
               a.dropdown-toggle.mx-0.mx-xl-2.mx-lg-0.nav-link.d-flex.align-items-center.h-100(class=( page && (page.metapage != "true") && currentPath && currentPath.includes("/pages") ) || ( currentPath && currentPath.includes("/about-us") ) ? "active" : "", href="#", aria-haspopup="true" aria-expanded="false")=__("Get involved")
