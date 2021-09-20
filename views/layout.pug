@@ -120,6 +120,8 @@ html.h-100(lang=locale === "de" ? 'de': 'en')
                     li.my-2
                       a.scrollbutton(class=!course ? "text-muted" : "text-white", href=`${locale !== 'en' ? `/` + locale : ``}/#hiring`, title="Partners")
                         =__("Partners")
+                    li.my-2
+                      a(class=!course ? "text-muted" : "text-white", href="/press")=__("Press")
 
                 .col-6.col-sm-5.footers-three
                   p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-muted`)=__("Courses")

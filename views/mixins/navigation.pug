@@ -57,10 +57,10 @@ mixin navigation
             .dropdown-menu.p-0.border-radius-0.shadow-sm(aria-labelledby='navbarDropdownMenuLink')
               a.dropdown-item.nav-link.p-2.px-2(href='/about-us/', class=currentPath && currentPath.includes("/about-us") ? "active" : "")=__("About us")
               a.dropdown-item.nav-link.p-2.px-2(href='https://dci.jobs.personio.de/', class=currentPath == "/jobs" ? "active" : "")=__("Jobs")
-              if headerPages
-                each page in headerPages
-                  if page.metapage
-                    a.dropdown-item.nav-link.p-2.px-2(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
+              //- if headerPages
+              //-   each page in headerPages
+              //-     if page.metapage
+              //-       a.dropdown-item.nav-link.p-2.px-2(class= currentPath === ("/pages/" + page.slug) ? "active" : "" href='/pages/'+ page.slug)=page.title
 
           li.d-none.position-relative.nav-item.z-foreground.d-lg-flex.justify-content-center.align-items-center
            div
