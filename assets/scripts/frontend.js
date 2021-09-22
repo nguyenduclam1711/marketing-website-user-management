@@ -411,13 +411,36 @@ Array.from(document.querySelectorAll('.dropdown-custom')).map(dropdown => {
   })
 })
 
-$('#collapsingNavbar3').on('hidden.bs.collapse', function () {
+$('#collapsingNavbar3').on('hide.bs.collapse', function () {
   $('body').toggleClass('no-scroll');
+  $('#burger-icon').fadeToggle(300);
+  $('#burger-closed-icon').fadeToggle(300);
+  $('.navbar-toggler-icon').animate(
+    { deg: 0 },
+    {
+      duration: 300,
+      step: function(now) {
+        $(this).css({ transform: 'rotate(' + now + 'deg)' });
+      }
+    }
+  );
 });
 
-$('#collapsingNavbar3').on('shown.bs.collapse', function () {
+$('#collapsingNavbar3').on('show.bs.collapse', function () {
+
   $('body').toggleClass('no-scroll');
-  document.getElementsByClassName('nav-content')[0].scrollIntoView({behavior:'smooth'});
+  $('.nav-content')[0].scrollIntoView({behavior:'smooth'});
+  $('#burger-icon').fadeToggle(300);
+  $('#burger-closed-icon').fadeToggle(300);
+  $('.navbar-toggler-icon').animate(
+    { deg: 180 },
+    {
+      duration: 300,
+      step: function(now) {
+        $(this).css({ transform: 'rotate(' + now + 'deg)' });
+      }
+    }
+  );
 });
 
 // const burger = document.querySelector('#collapsingNavbar3');
