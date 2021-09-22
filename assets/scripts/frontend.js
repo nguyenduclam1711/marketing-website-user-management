@@ -35,15 +35,19 @@ const toggleNL = (remove = false) => {
         })
           .then(res => res.json())
           .then(response => {
-            const nlHeadline = document.getElementById("nlheadline");
-
+            const responseContainer = document.getElementById("response");
+            const alertContainer = document.createElement("div");
+            alertContainer.classList = "alert"
             if (response.code === 200) {
-              nlHeadline.innerHTML = response.message;
+              toggleNL(true);
+              responseContainer.classList.add("alert-success")
+              alertContainer.innerHTML = `Check your Emails`
             } else if (response.code === 422) {
               toggleNL(true);
-              nlHeadline.innerHTML =
-                "User already in list, check your mails for a existing verification mail";
+              responseContainer.classList.add("alert-danger")
+              alertContainer.innerHTML = response.message.error
             }
+            responseContainer.innerHTML = alertContainer.innerHTML
           })
           .catch(error => {
             console.error("Error:", error);
