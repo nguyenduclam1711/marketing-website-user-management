@@ -41,6 +41,15 @@
   font-family: "Gordita", sans-serif;
   font-weight: 400;
   background-color: white;
+  .navbar-toggler-icon {
+    background-image: none;
+    #burger-closed-icon{
+      display: none;
+    }
+    svg{
+      transform: rotate(0);
+    }
+  }
     #collapsingNavbar3{
       background-color: white;
     @include media-breakpoint-down(md) {

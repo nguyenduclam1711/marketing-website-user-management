@@ -13,6 +13,7 @@ mixin navigation
         include ../../assets/media/dci.svg
       button.navbar-toggler(type='button', data-toggle='collapse', data-target='#collapsingNavbar3')
         span.navbar-toggler-icon
+          include ../../assets/icons/burger.svg
         span.sr-only="Toggle menu"
       #collapsingNavbar3.navbar-collapse.collapse.w-100.mt-0.mt-md-0.align-items-stretch
         ul.nav.navbar-nav.my-3.my-lg-0.ml-auto.w-100.justify-content-end.flex-nowrap#headernav(class=currentPath && currentPath.includes('/courses') && currentPath.lastIndexOf('/') > 0 ? 'not-set-active' : ' ' )
