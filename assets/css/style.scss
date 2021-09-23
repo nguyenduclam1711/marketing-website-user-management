@@ -319,11 +319,30 @@
 }
 
 .dropdown-toggle {
-  &:after {
-    border: none;
-    margin: 0;
+  @include media-breakpoint-up(md) {
+    &:after{
+      display: none;
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    &:after {
+      transition: transform .2s ease-in-out;
+      border: none;
+      margin: 0;
+      content: url(~/assets/submenu-arrow.svg);
+      position:absolute;
+      right: 20px;
+      width: 18px;
+    }
   }
 }
+.rotated{
+  &:after{
+    transform: rotate(-90deg);
+  }
+}
+
+
 body:not(.index) #nav-primary {
   margin-top: 0 !important;
 }
