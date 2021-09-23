@@ -443,6 +443,11 @@ $('#collapsingNavbar3').on('show.bs.collapse', function () {
   );
 });
 
+
+$('.dropdown-toggle').on('click', function () {
+  $(this).toggleClass('rotated');
+});
+
 // const burger = document.querySelector('#collapsingNavbar3');
 // if(burger)(
 //   burger.addEventListener("click", function (event) {
