@@ -319,12 +319,12 @@
 }
 
 .dropdown-toggle {
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(lg) {
     &:after{
       display: none;
     }
   }
-  @include media-breakpoint-down(sm) {
+  @include media-breakpoint-down(lg) {
     &:after {
       transition: transform .2s ease-in-out;
       border: none;
