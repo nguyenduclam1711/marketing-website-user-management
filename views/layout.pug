@@ -130,7 +130,7 @@ html.h-100(lang=locale === "de" ? 'de': 'en')
           section.position-relative.px-4.px-md-0.pb-5(class=course && course.coloraccent ? `` : `bg-primary-dark`, style=course && course.coloraccent ? `background-color: rgb(${course.coloraccent.replace(/.*\((.*)\)/g, "$1").split(',').map(i => Math.floor(i * 0.8)).join(', ')}` : `` )
             if currentPath !== "/users/login" && currentPath !== "/users/register" && currentPath !== '/jobcenter' && !currentPath.includes('/signup') && !blank
               +newsletter
-            .container#footer-items-container
+            .container#footer-items-container(class=currentPath !== "/users/login" && currentPath !== "/users/register" && currentPath !== '/jobcenter' && !currentPath.includes('/signup') || blank ? '' : 'pt-100')
               .row
                 .col-6.col-sm-2.footers-two
                   p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-muted`)=__("Company")
@@ -160,14 +160,26 @@ html.h-100(lang=locale === "de" ? 'de': 'en')
                         a(class=!course ? "text-muted" : "text-white", target="_blank" rel="noopener" alt="DCI on LinkedIn" href="https://www.linkedin.com/school/dci-digital-career-institute/") LinkedIn
                       li.my-2
                         a(class=!course ? "text-muted" : "text-white", target="_blank" rel="noopener" alt="DCI on Github" href="https://github.com/DigitalCareerInstitute/marketing-website") Github
+                
+                .col-6.col-sm-3.footers-four
+                  p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-muted`)=__("Community")
+                  ul.list-unstyled
+                    li.my-2
+                      a(class=!course ? "text-muted" : "text-white", target="_blank" rel="noopener" alt="DCI on Facebook" href="https://www.facebook.com/digitalcareerinstitute") Facebook
+                    li.my-2
+                      a(class=!course ? "text-muted" : "text-white", target="_blank" rel="noopener" alt="DCI on Instagram" href="https://www.instagram.com/digitalcareerinstitute/") Instagram
+                    li.my-2
+                      a(class=!course ? "text-muted" : "text-white", target="_blank" rel="noopener" alt="DCI on LinkedIn" href="https://www.linkedin.com/school/dci-digital-career-institute/") LinkedIn
+                    li.my-2
+                      a(class=!course ? "text-muted" : "text-white", target="_blank" rel="noopener" alt="DCI on Github" href="https://github.com/DigitalCareerInstitute/marketing-website") Github
 
 
-                  .col-6.col-sm-2.footers-five
-                    p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-muted`)=__("Campus")
-                    ul.list-unstyled
-                      each location in global_locations.filter(l => l.isCampus)
-                        li.my-2
-                          a(class=!course ? "text-muted" : "text-white", href='/contact')=location.name
+                .col-6.col-sm-2.footers-five
+                  p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-muted`)=__("Campus")
+                  ul.list-unstyled
+                    each location in global_locations.filter(l => l.isCampus)
+                      li.my-2
+                        a(class=!course ? "text-muted" : "text-white", href='/contact')=location.name
 
               nav.d-flex.justify-content-between.align-items-center.py-5.container
                 div.pt-md-5.d-flex.justify-content-between.w-100

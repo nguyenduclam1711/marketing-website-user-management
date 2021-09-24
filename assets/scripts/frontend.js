@@ -427,7 +427,6 @@ $('#collapsingNavbar3').on('hide.bs.collapse', function () {
 });
 
 $('#collapsingNavbar3').on('show.bs.collapse', function () {
-
   $('body').toggleClass('no-scroll');
   $('.nav-content')[0].scrollIntoView({behavior:'smooth'});
   $('#burger-icon').fadeToggle(300);
