@@ -301,7 +301,7 @@
       display: block;
     }
     @include media-breakpoint-down(md) {
-      // margin: 1em 0 1em 0!important;
+      margin: 1em 0 1em 0!important;
     }
     &:after {
       content: "";
@@ -344,6 +344,7 @@
     transform: rotate(-90deg);
   }
 }
+
 
 body:not(.index) #nav-primary {
   margin-top: 0 !important;
@@ -449,6 +450,28 @@ nav.container:after {
   opacity: 0.333;
 }
 
+// MAIN NAVBAR DRAWER 
+@media (max-width: 992px) {
+  #collapsingNavbar3 {
+      position: fixed;
+      top: 75px;
+      right: 0px;
+  }
+
+  #collapsingNavbar3.collapsing {
+      right: -100%;
+      transition: right 0s ease;
+  }
+
+  #collapsingNavbar3.show {
+      right: 0;
+      transition: right 300ms ease-in-out;
+  }
+
+  .navbar-toggler.collapsed ~ #collapsingNavbar3 {
+      transition: right 500ms ease-in-out;
+  }
+}
 /******************************************
 //////////////////////////////////////////
  ONE YEAR COURSE STYLING
@@ -1493,6 +1516,7 @@ div[class*=" #{$class-slug}"] {
 }
 .carousel, .carousel-inner {
   height: 100%;
+  z-index:1;
 }
 .carousel-item {
   @include media-breakpoint-up(sm) {
