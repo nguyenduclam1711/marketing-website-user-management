@@ -407,6 +407,9 @@ function QuestionsDiagram() {
                 value={currentModelId}
                 onChange={e => {
                   const theModelToSet = allFlows.find(f => f._id === e.target.selectedOptions[0].value)
+                  var searchParams = new URLSearchParams(window.location.search);
+                  searchParams.set("flow", theModelToSet._id);
+                  window.history.replaceState({}, '', `${location.pathname}?${searchParams}`);
                   if (theModelToSet.model) {
                     model.deserializeModel(theModelToSet.model, engine);
                     setForm({ ...form, flowname: theModelToSet.name, active: theModelToSet.active, renderselector: theModelToSet.renderselector, sendaltemail: theModelToSet.sendaltemail })
