@@ -279,7 +279,6 @@ module.exports.contact = async (req, res, next) => {
   try {
     const result = await Promise.all([hubspotPromise, contactSavepromise])
     console.log('### Result of 1st hubspotPromise', JSON.stringify(result));
-    finish(res, req, contact)
   } catch (e) {
     console.error(`### Error 2nd catch`, e.message)
     try {
@@ -299,31 +298,11 @@ module.exports.contact = async (req, res, next) => {
       options.body.properties = filteredOptions
       const hubspotPromise2 = await requestPromise(options)
       console.log('### Result of 2nd hubspotPromise', hubspotPromise2);
-      if (req.headers['content-type'] === 'application/json') {
-        const response = {
-          message: res.__(`Thanks for your message`),
-          contact_id: contact.id
-        }
-        let course
-        if (reqComesFromCoursePage(req)) {
-          course = await courseReq
-          if (course) {
-            response.curriculumPdf = course.curriculumPdf
-          }
-        }
-        delete req.session.utmParams
-        return res.json({
-          response
-        })
-      } else {
-        req.flash('danger', 'Please fill out all form fields')
-        res.redirect(req.headers.referer)
-        finish(res, req, contact, courseReq)
-      }
     } catch (e) {
-      finish(res, req, contact, courseReq)
       console.error("### Error 1st catch", e.message)
     }
+  } finally {
+    finish(res, req, contact, courseReq)
   }
 }
 const finish = async (res, req, contact, courseReq) => {
