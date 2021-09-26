@@ -39,12 +39,10 @@ const toggleNL = (remove = false) => {
             const alertContainer = document.createElement("div");
             alertContainer.classList = "alert"
             if (response.code === 200) {
-              toggleNL(true);
               responseContainer.classList.remove("alert-danger")
               responseContainer.classList.add("alert-success")
               alertContainer.innerHTML = isGerman ? `Du solltest eine Bestätigungs Email bekommen haben. Check deinen Posteingang` : `You should have got a subscription confimation email. Check your inbox`
             } else if (response.code === 422) {
-              toggleNL(true);
               responseContainer.classList.remove("alert-success")
               responseContainer.classList.add("alert-danger")
               alertContainer.innerHTML = response.message.includes("already a list member") && isGerman ? response.message.replace("is already a list member", 'befindet sich schon in der Liste') : response.message
@@ -53,6 +51,9 @@ const toggleNL = (remove = false) => {
           })
           .catch(error => {
             console.error("Error:", error);
+          })
+          .finally(() => {
+            toggleNL(true);
           });
       }
     });
