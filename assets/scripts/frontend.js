@@ -5,7 +5,7 @@ import "bootstrap/js/dist/dropdown";
 import "bootstrap/js/dist/collapse";
 import "bootstrap/js/dist/carousel";
 import "bootstrap/js/dist/alert";
-import { alertTimeout, get_form_payload } from "./helper.js"
+import { alertTimeout, get_form_payload, isGerman } from "./helper.js"
 import "./flow-builder"
 
 require("../css/style.scss");
@@ -40,12 +40,14 @@ const toggleNL = (remove = false) => {
             alertContainer.classList = "alert"
             if (response.code === 200) {
               toggleNL(true);
+              responseContainer.classList.remove("alert-danger")
               responseContainer.classList.add("alert-success")
-              alertContainer.innerHTML = `Check your Emails`
+              alertContainer.innerHTML = isGerman ? `Du solltest eine Bestätigungs Email bekommen haben. Check deinen Posteingang` : `You should have got a subscription confimation email. Check your inbox`
             } else if (response.code === 422) {
               toggleNL(true);
+              responseContainer.classList.remove("alert-success")
               responseContainer.classList.add("alert-danger")
-              alertContainer.innerHTML = response.message.error
+              alertContainer.innerHTML = response.message.includes("already a list member") && isGerman ? response.message.replace("is already a list member", 'befindet sich schon in der Liste') : response.message
             }
             responseContainer.innerHTML = alertContainer.innerHTML
           })

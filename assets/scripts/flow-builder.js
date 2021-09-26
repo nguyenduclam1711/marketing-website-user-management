@@ -1,8 +1,7 @@
 import intlTelInput from 'intl-tel-input';
-import { get_form_payload } from "./helper.js"
+import { get_form_payload, isGerman } from "./helper.js"
 import utilsScript from "./intl-tel-input-utils.min.js"
 const animtionDuration = 0.3;
-const isGerman = window.location.pathname.indexOf('/de') !== -1
 
 const getAnswers = (question, model) => Object.values(model.layers.find(layer => layer.type === "diagram-nodes").models)
 	.filter(links => Object.values(model.layers.find(layer => layer.type === "diagram-links").models)

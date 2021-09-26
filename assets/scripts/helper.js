@@ -16,3 +16,4 @@ export const get_form_payload = (elements) => {
 }
 const flashAlertTimeout = 5000
 export var alertTimeout= flashAlertTimeout
+export const isGerman = window.location.pathname.indexOf('/de/') !== -1
