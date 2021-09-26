@@ -85,69 +85,69 @@ module.exports.contactLocations = async (req, res) => {
 };
 module.exports.contact = async (req, res, next) => {
   const { firstname, lastname, email, age_field, body, phone, locations, sendaltemail, TermsofService, afa_jc_registered_, form_are_you_currently_unemployed } = req.body
-    if (age_field) {
-      console.log('Bot stepped into honeypot!')
-      if (req.headers['content-type'] === 'application/json') {
-        const response = {
-          message: res.__(`Thanks for your message`)
-        }
-        return res.json({
-          response
-        })
-      } else {
-        req.flash(
-          'success',
-          res.__(`Thanks for your message`)
-        );
-        res.redirect(req.headers.referer)
+  if (age_field) {
+    console.log('Bot stepped into honeypot!')
+    if (req.headers['content-type'] === 'application/json') {
+      const response = {
+        message: res.__(`Thanks for your message`)
       }
-      next()
-      return;
-    }
-  var emptyFields = Object.entries(req.body).filter(([key, value]) => typeof value === "string" && value.trim() === "").map(a => a[0]).filter(a => !["nb-transaction-token", "nb-confirmation-token", "age_field"].includes(a))
-  if (emptyFields.length > 0 || !email || !TermsofService) {
-      if (req.headers['content-type'] === 'application/json') {
-        const response = {
-          error: res.__(`Some fields are invalid or empty: ${emptyFields.map(a => `${a}, `)}`),
-        }
-        return res.json({
-          response
-        })
-      } else {
-        req.flash('danger', res.__(`Some fields are invalid or empty: ${emptyFields.map(a => `${a}, `)}`))
-        res.redirect(req.headers.referer)
-        next()
-        return
-      }
-    }
-    let courseReq
-    if (reqComesFromCoursePage(req)) {
-      var requestString = new URL(req.headers.referer)
-      var courseSlug = requestString.pathname.substring(requestString.pathname.lastIndexOf('/') + 1)
-      courseReq = Course.findOne({ slug: courseSlug }, 'curriculumPdf')
-    }
-    const contact = new Contact()
-    contact.firstname = firstname
-    contact.lastname = lastname
-    contact.email = email
-    if (phone) {
-      contact.phone = phone.replace(/[a-z]/g, '')
-    }
-    contact.track = req.headers.referer
-    contact.body = body
-    contact.jobcenter = afa_jc_registered_
-    contact.unemployed = form_are_you_currently_unemployed
-    if (req.session.utmParams) {
-      contact.utm_params = req.session.utmParams
-    }
-    contact.createdAt = new Date()
-    contact.isCompany = sendaltemail
-    contact.locations = locations
-    if (!contact.email) {
+      return res.json({
+        response
+      })
+    } else {
+      req.flash(
+        'success',
+        res.__(`Thanks for your message`)
+      );
       res.redirect(req.headers.referer)
     }
-    const location = await Location.findById(locations)
-    const mailTemplate = `Contact from: <table>
+    next()
+    return;
+  }
+  var emptyFields = Object.entries(req.body).filter(([key, value]) => typeof value === "string" && value.trim() === "").map(a => a[0]).filter(a => !["nb-transaction-token", "nb-confirmation-token", "age_field"].includes(a))
+  if (emptyFields.length > 0 || !email || !TermsofService) {
+    if (req.headers['content-type'] === 'application/json') {
+      const response = {
+        error: res.__(`Some fields are invalid or empty: ${emptyFields.map(a => `${a}, `)}`),
+      }
+      return res.json({
+        response
+      })
+    } else {
+      req.flash('danger', res.__(`Some fields are invalid or empty: ${emptyFields.map(a => `${a}, `)}`))
+      res.redirect(req.headers.referer)
+      next()
+      return
+    }
+  }
+  let courseReq
+  if (reqComesFromCoursePage(req)) {
+    var requestString = new URL(req.headers.referer)
+    var courseSlug = requestString.pathname.substring(requestString.pathname.lastIndexOf('/') + 1)
+    courseReq = Course.findOne({ slug: courseSlug }, 'curriculumPdf')
+  }
+  const contact = new Contact()
+  contact.firstname = firstname
+  contact.lastname = lastname
+  contact.email = email
+  if (phone) {
+    contact.phone = phone.replace(/[a-z]/g, '')
+  }
+  contact.track = req.headers.referer
+  contact.body = body
+  contact.jobcenter = afa_jc_registered_
+  contact.unemployed = form_are_you_currently_unemployed
+  if (req.session.utmParams) {
+    contact.utm_params = req.session.utmParams
+  }
+  contact.createdAt = new Date()
+  contact.isCompany = sendaltemail
+  contact.locations = locations
+  if (!contact.email) {
+    res.redirect(req.headers.referer)
+  }
+  const location = await Location.findById(locations)
+  const mailTemplate = `Contact from: <table>
     <tr>
       <td>Message send from: </td>
       <a href=${req.headers.referer}>${req.headers.referer}</a>
@@ -178,104 +178,104 @@ module.exports.contact = async (req, res, next) => {
     ${locations && `<tr> <td>Locations: </td> <td>${location.name}</td> </tr>`}
     </table>
   `
-    const settings = await Setting.findOne()
+  const settings = await Setting.findOne()
 
-    const mailOptions = {
-      from: 'contact@digitalcareerinstitute.org',
-      to: ['localhost', 'staging'].some(el => req.headers.host.includes(el))
-        ? process.env.MAILRECEIVER
-        : sendaltemail
-          ? settings.tourmailreceiver
-          : settings.mailreceiver,
-      subject: sendaltemail
-        ? 'Company Tour request from website'
-        : 'Message on website',
-      text: mailTemplate,
-      html: mailTemplate
-    }
-    let hubspotPromise = new Promise(() => { })
+  const mailOptions = {
+    from: 'contact@digitalcareerinstitute.org',
+    to: ['localhost', 'staging'].some(el => req.headers.host.includes(el))
+      ? process.env.MAILRECEIVER
+      : sendaltemail
+        ? settings.tourmailreceiver
+        : settings.mailreceiver,
+    subject: sendaltemail
+      ? 'Company Tour request from website'
+      : 'Message on website',
+    text: mailTemplate,
+    html: mailTemplate
+  }
+  let hubspotPromise = new Promise(() => { })
 
-    let remainingUtmParams = req.session.utmParams ? { ...req.session.utmParams } : []
-    let properties
+  let remainingUtmParams = req.session.utmParams ? { ...req.session.utmParams } : []
+  let properties
 
-    if (!!process.env.HUBSPOT_API_KEY) {
-      let fbclid = getFbClid(req, res, next);
-      properties = [
-        { property: 'hs_facebook_click_id', value: fbclid },
-        {
-          property: 'form_payload',
-          value: JSON.stringify({
-            'track': req.headers.referer,
-            'locations': location,
-            'body': body,
-            'is_company': sendaltemail,
-            'utm_params': remainingUtmParams,
-            'all_fields': req.body
-          })
+  if (!!process.env.HUBSPOT_API_KEY) {
+    let fbclid = getFbClid(req, res, next);
+    properties = [
+      { property: 'hs_facebook_click_id', value: fbclid },
+      {
+        property: 'form_payload',
+        value: JSON.stringify({
+          'track': req.headers.referer,
+          'locations': location,
+          'body': body,
+          'is_company': sendaltemail,
+          'utm_params': remainingUtmParams,
+          'all_fields': req.body
+        })
+      }
+    ];
+    const filteredPayload = Object.keys(req.body).reduce((acc, v) => {
+      if (![
+        "age_field",
+        "nb-confirmation-token",
+        "nb-result",
+        "nb-transaction-token",
+        "termsofservice",
+        "sendaltemail",
+        "track",
+        "locations",
+        "body",
+      ].map(i => i.toLowerCase()).includes(v.toLowerCase())) {
+        if (req.body[v].trim() !== '') {
+          acc[v] = req.body[v]
         }
-      ];
-      const filteredPayload = Object.keys(req.body).reduce((acc, v) => {
-        if (![
-          "age_field",
-          "nb-confirmation-token",
-          "nb-result",
-          "nb-transaction-token",
-          "termsofservice",
-          "sendaltemail",
-          "track",
-          "locations",
-          "body",
-        ].map(i => i.toLowerCase()).includes(v.toLowerCase())) {
-          if (req.body[v].trim() !== '') {
-            acc[v] = req.body[v]
-          }
-        }
-        return acc
-      }, {})
-  
-      Object.keys(filteredPayload).map(i => properties.push({ property: i, value: filteredPayload[i] }))
+      }
+      return acc
+    }, {})
 
-      if(location){
-        properties.push({property: 'state_de_', value: location.name } )  
-      }
-      if(req.session.utmParams && req.session.utmParams.utm_source){
-        properties.push({property: 'utm_source', value: req.session.utmParams.utm_source} ) 
-      }
-      if(req.session.utmParams && req.session.utmParams.utm_medium){
-        properties.push({property: 'utm_medium', value: req.session.utmParams.utm_medium} ) 
-      }
-      if(req.session.utmParams && req.session.utmParams.utm_campaign){
-        properties.push({property: 'utm_campaign', value: req.session.utmParams.utm_campaign} ) 
-      }
-      if(req.session.utmParams && req.session.utmParams.utm_content){
-        properties.push({property: 'utm_content', value: req.session.utmParams.utm_content} ) 
-      }
-      if(req.session.utmParams && req.session.utmParams.utm_term){
-        properties.push({property: 'utm_term', value: req.session.utmParams.utm_term} ) 
-      }
+    Object.keys(filteredPayload).map(i => properties.push({ property: i, value: filteredPayload[i] }))
 
-      var options = {
-        method: 'POST',
-        url: `https://api.hubapi.com/contacts/v1/contact/createOrUpdate/email/${email}`,
-        qs: { hapikey: process.env.HUBSPOT_API_KEY },
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: {
-          properties: properties,
-        },
-        json: true
-      };
-      hubspotPromise = requestPromise(options)
+    if (location) {
+      properties.push({ property: 'state_de_', value: location.name })
     }
-    contact.properties = properties
-    const contactSavepromise = contact.save()
-    // TODO remove logging statement
+    if (req.session.utmParams && req.session.utmParams.utm_source) {
+      properties.push({ property: 'utm_source', value: req.session.utmParams.utm_source })
+    }
+    if (req.session.utmParams && req.session.utmParams.utm_medium) {
+      properties.push({ property: 'utm_medium', value: req.session.utmParams.utm_medium })
+    }
+    if (req.session.utmParams && req.session.utmParams.utm_campaign) {
+      properties.push({ property: 'utm_campaign', value: req.session.utmParams.utm_campaign })
+    }
+    if (req.session.utmParams && req.session.utmParams.utm_content) {
+      properties.push({ property: 'utm_content', value: req.session.utmParams.utm_content })
+    }
+    if (req.session.utmParams && req.session.utmParams.utm_term) {
+      properties.push({ property: 'utm_term', value: req.session.utmParams.utm_term })
+    }
+
+    var options = {
+      method: 'POST',
+      url: `https://api.hubapi.com/contacts/v1/contact/createOrUpdate/email/${email}`,
+      qs: { hapikey: process.env.HUBSPOT_API_KEY },
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: {
+        properties: properties,
+      },
+      json: true
+    };
+    hubspotPromise = requestPromise(options)
+  }
+  contact.properties = properties
+  const contactSavepromise = contact.save()
+  // TODO remove logging statement
   console.log("req.session", req.session);
   console.log("req.body", req.body);
   console.log("options.body.properties", options.body.properties);
-    // to save time, mail get send out without waiting for the response
-    const info = sendMail(res, req, mailOptions)
+  // to save time, mail get send out without waiting for the response
+  const info = sendMail(res, req, mailOptions)
   try {
     const result = await Promise.all([hubspotPromise, contactSavepromise])
     console.log('### Result of 1st hubspotPromise', JSON.stringify(result));
@@ -299,55 +299,55 @@ module.exports.contact = async (req, res, next) => {
       options.body.properties = filteredOptions
       const hubspotPromise2 = await requestPromise(options)
       console.log('### Result of 2nd hubspotPromise', hubspotPromise2);
-    if (req.headers['content-type'] === 'application/json') {
-      const response = {
-        message: res.__(`Thanks for your message`),
-        contact_id: contact.id
-      }
-      let course
-      if (reqComesFromCoursePage(req)) {
-        course = await courseReq
-        if (course) {
-          response.curriculumPdf = course.curriculumPdf
+      if (req.headers['content-type'] === 'application/json') {
+        const response = {
+          message: res.__(`Thanks for your message`),
+          contact_id: contact.id
         }
+        let course
+        if (reqComesFromCoursePage(req)) {
+          course = await courseReq
+          if (course) {
+            response.curriculumPdf = course.curriculumPdf
+          }
+        }
+        delete req.session.utmParams
+        return res.json({
+          response
+        })
+      } else {
+        req.flash('danger', 'Please fill out all form fields')
+        res.redirect(req.headers.referer)
+        finish(res, req, contact, courseReq)
       }
-      delete req.session.utmParams
-      return res.json({
-        response
-      })
-    } else {
-      req.flash('danger', 'Please fill out all form fields')
-      res.redirect(req.headers.referer)
-      finish(res, req, contact, courseReq)
-    }
-  } catch (e) {
+    } catch (e) {
       finish(res, req, contact, courseReq)
       console.error("### Error 1st catch", e.message)
     }
   }
 }
 const finish = async (res, req, contact, courseReq) => {
-    if (req.headers['content-type'] === 'application/json') {
-      const response = {
-        message: res.__(`Thanks for your message`),
-        contact_id: contact.id
+  if (req.headers['content-type'] === 'application/json') {
+    const response = {
+      message: res.__(`Thanks for your message`),
+      contact_id: contact.id
+    }
+    let course
+    if (reqComesFromCoursePage(req)) {
+      course = await courseReq
+      if (course) {
+        response.curriculumPdf = course.curriculumPdf
       }
-      let course
-      if (reqComesFromCoursePage(req)) {
-        course = await courseReq
-        if (course) {
-          response.curriculumPdf = course.curriculumPdf
-        }
-      }
-      return res.json({
-        response
-      })
-    } else {
-      req.flash(
-        'success',
-        res.__(`Thanks for your message`)
-      );
-      res.redirect(req.headers.referer)
+    }
+    return res.json({
+      response
+    })
+  } else {
+    req.flash(
+      'success',
+      res.__(`Thanks for your message`)
+    );
+    res.redirect(req.headers.referer)
   }
   delete req.session.utmParams
   next()
