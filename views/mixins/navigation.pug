@@ -10,10 +10,10 @@ mixin navigation
       div.position-absolute.left.w-50.h-100.z-minus.d-none.d-lg-block(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}!important` : ``)
     .align-items-stretch.pl-md-0.nav-content(class=currentPath && currentPath.includes('/admin') ? ' container-fluid' : " container-lg" )
       if !blank
-        a.navbar-brand.py-3.pl-sm-3.h-60(href="/" class=course && course.coloraccent ? 'text-white-responsive' : 'text-primary' )
+        a.navbar-brand.text-primary.py-3.pl-sm-3.h-60(href="/")
           include ../../assets/media/dci.svg
       else
-        span.navbar-brand.py-3.pl-sm-3.h-60(class=course && course.coloraccent ? 'text-white-responsive' : 'text-primary' )
+        span.navbar-brand.text-primary.py-3.pl-sm-3.h-60()
           include ../../assets/media/dci.svg
       if !blank
         button.navbar-toggler(type='button', data-toggle='collapse', data-target='#collapsingNavbar3')
