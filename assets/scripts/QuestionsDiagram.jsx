@@ -460,7 +460,8 @@ function QuestionsDiagram() {
                   e.stopPropagation();
                   setForm({ ...form, [e.target.name]: e.target.checked })
                 }} style={{ borderColor: colorAnswer, borderStyle: "solid" }} id="sendaltemail" />
-              <label className="form-check-label" htmlFor="sendaltemail">Send alt email?</label>
+              <label className="form-check-label" htmlFor="sendaltemail">Is form for company?</label>
+              <button className="btn btn-secondary badge ml-2" type="button" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="That results in sending a alternative email to settings.tourmailreceiver and prevents a redirect to /thank-you"> ? </button>
             </div>
           </div>
           <div className="row">

@@ -97,10 +97,16 @@ const jumpToNextQuestion = (e, diagramNodes, flow) => {
 				if (data.response.contact_id) {
 					submitButton.innerText = "Thanks"
 					localStorage.removeItem(`dcianswers_${flow.name}`)
-					if (data.response.curriculumPdf) {
+					if (flow.sendaltemail === true) {
+						const div = document.createElement('div')
+						submitButton.innerText = buttonOriginalText
+						submitButton.disabled = false
+						div.innerHTML = `<div class="flash m-0 mr-3 alert fade show alert-success">Thank you for being interested in getting to know DCI! Our Career Success Management will get in touch with you to further discover how we can support you!<button class="close ml-3" type="button" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button></div>`
+						document.body.appendChild(div)
+						$("#contactFormModal").modal('hide')
+					} else if (data.response.curriculumPdf) {
 						$("#curriculumpopup").modal('hide')
 						window.open(`${window.location.origin}/images/${data.response.curriculumPdf}`, '_blank')
-
 					} else {
 						window.location.replace(`${window.location.origin}/thank-you/${data.response.contact_id}`);
 					}
