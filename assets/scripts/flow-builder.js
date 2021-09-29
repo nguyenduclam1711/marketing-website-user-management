@@ -260,12 +260,12 @@ const render = (questions, flow) => {
 						var errorCode = iti.getValidationError();
 						if (errorCode !== 0) {
 							var errorMap = []
-							errorMap[-99] = "Invalid number"
-							errorMap[1] = "Invalid country code"
-							errorMap[2] = "Too short"
-							errorMap[3] = "Too long"
-							errorMap[4] = "Might be a local number only"
-							errorMap[5] = "Invalid length";
+							errorMap[-99] = "Please enter a valid phone number."
+							errorMap[1] = "Please enter a valid phone number."
+							errorMap[2] = "Please enter a valid phone number."
+							errorMap[3] = "Please enter a valid phone number."
+							errorMap[4] = "Please enter a valid phone number."
+							errorMap[5] = "Please enter a valid phone number.";
 							document.querySelector('#error-msg').innerHTML = errorMap[errorCode];
 						} else {
 							document.querySelector('#error-msg').innerHTML = "";
