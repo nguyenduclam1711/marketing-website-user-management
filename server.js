@@ -139,6 +139,7 @@ app.use(function (req, res, next) {
       success: req.flash('success')
     }),
       (app.locals.pathclass = req.url
+        .replace(/(.*)\?.*/, "$1")
         .replace(/^\/de/g, '')
         .replace(/^\/en/g, '')
         .replace(/^\//g, '')
