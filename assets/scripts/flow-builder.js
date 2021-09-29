@@ -252,6 +252,9 @@ const render = (questions, flow) => {
 			Array.from(phoneFields).map(input => {
 				if (input) {
 					const iti = intlTelInput(input, itiConfig);
+					input.addEventListener('change', (e) => {
+						e.target.value = e.target.value.replace(/[^\d]/g, "")
+					})
 					input.addEventListener('blur', (e) => {
 						var errorCode = iti.getValidationError();
 						if (errorCode !== 0) {
