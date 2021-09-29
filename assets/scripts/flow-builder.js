@@ -140,7 +140,8 @@ const render = (questions, flow) => {
 						}
 					})
 				});
-
+			const paramsString = window.location.search
+			let searchParams = new URLSearchParams(paramsString);
 			const html = `
 		<div class="w-100 container">
 		<div id="popup" class="py-5 d-flex flex-column justify-content-between w-300px w-100">
@@ -155,7 +156,7 @@ const render = (questions, flow) => {
 				class="form-control mb-4 freeanswer dynamicinput" 
 				name="${answer.extras.answeridentifier}"
 				data-type="question"
-				${answer.extras.freeanswer_type === 'hidden' ? `value="${answer.name}"` : ``}
+				${answer.extras.freeanswer_type === 'hidden' && searchParams.has(answer.extras.answeridentifier) ? `value="${searchParams.get(answer.extras.answeridentifier)}"` : answer.extras.freeanswer_type === 'hidden' ? `value="${answer.name}"` : ``}
 				${answer.extras.freeanswer_type === 'tel' ? `pattern="^\\+?\\d+$"` : ``}
 				type="${answer.extras.freeanswer_type ? answer.extras.freeanswer_type : "text"}" 
 				id="freeanswer_${answer.extras.answeridentifier}"
