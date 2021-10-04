@@ -1,8 +1,8 @@
 extends layout.pug
 block content
-  main
-    if currentPath == "/"
+  if currentPath == "/"
       +navigation
+  main
     section.d-flex.flex-column.position-relative
       div.container-lg
         .d-md-none.bg-primary.w-5.h-5.position-absolute.ml-n3
