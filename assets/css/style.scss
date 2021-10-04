@@ -137,11 +137,12 @@
         font-weight: 400;
         &:hover{
           color: black!important;
-          font-weight: 500;
+          font-weight: 400;
         }
       }
       a.active{
         font-weight: 500;
+        color: black!important;
       }
     }
   }
@@ -196,7 +197,7 @@
   > a:focus,
   > a:focus-within,
   > a:hover {
-    &:not(.contactlink) {
+    &:not(.contactlink){
       color: $primary!important;
     }
   }

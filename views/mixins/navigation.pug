@@ -74,9 +74,9 @@ mixin navigation
               .contactlink(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
 
           li.position-relative.nav-item.d-flex.align-items-center.lang-switch
-            a.ml-xl-2.ml-lg-1.nav-link.d-flex.align-items-center.h-100(style=course && course.coloraccent && locale === "de" ? `font-weight: 500` : `` class=locale === "de" ? "active cursor-default" : "" href=locale === "de" ? "#": "/i18n/de") DE
+            a.ml-xl-2.ml-lg-1.nav-link.d-flex.contactlink.align-items-center.h-100(style=course && course.coloraccent && locale === "de" ? `font-weight: 500` : `` class=locale === "de" ? "active cursor-default" : "" href=locale === "de" ? "#": "/i18n/de") DE
             = "|"
-            a.mr-xl-2.mr-lg-1.nav-link.d-flex.align-items-center.h-100(style=course && course.coloraccent && locale === "en" ? `font-weight: 500` : `` class=locale === "en" ? "active cursor-default" : "" href=locale === "en" ? "#": "/i18n/en") EN
+            a.mr-xl-2.mr-lg-1.nav-link.d-flex.contactlink.align-items-center.h-100(style=course && course.coloraccent && locale === "en" ? `font-weight: 500` : `` class=locale === "en" ? "active cursor-default" : "" href=locale === "en" ? "#": "/i18n/en") EN
 
         div.apply-now-collapsed.d-lg-none.nav-item.z-foreground.d-sm-flex.justify-content-center.align-items-stretch
           div
