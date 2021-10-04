@@ -197,7 +197,7 @@
   > a:focus-within,
   > a:hover {
     &:not(.contactlink) {
-      color: $primary;
+      color: $primary!important;
     }
   }
 }
