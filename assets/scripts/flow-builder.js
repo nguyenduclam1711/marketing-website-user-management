@@ -212,7 +212,7 @@ const render = (questions, flow) => {
 				id="${answer.extras.answeridentifier}"
 				data-flow="${flow.name}"
 				name="${question.extras.questionidentifier}" 
-				class="btn-check dynamicinputradio" 
+				class="btn-check dynamicinput"
 				data-trigger="${canTrigger(questions, flow.model)}"
 				data-question="${question.extras.questionidentifier}" 
 				data-nextquestions="${nextQuestions.map(a => a.id)}" 
