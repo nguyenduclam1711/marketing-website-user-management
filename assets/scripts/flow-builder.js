@@ -140,7 +140,8 @@ const render = (questions, flow) => {
 						}
 					})
 				});
-
+			const paramsString = window.location.search
+			let searchParams = new URLSearchParams(paramsString);
 			const html = `
 		<div class="w-100 container">
 		<div id="popup" class="py-5 d-flex flex-column justify-content-between w-300px w-100">
@@ -155,7 +156,7 @@ const render = (questions, flow) => {
 				class="form-control mb-4 freeanswer dynamicinput" 
 				name="${answer.extras.answeridentifier}"
 				data-type="question"
-				${answer.extras.freeanswer_type === 'hidden' ? `value="${answer.name}"` : ``}
+				${answer.extras.freeanswer_type === 'hidden' && searchParams.has(answer.extras.answeridentifier) ? `value="${searchParams.get(answer.extras.answeridentifier)}"` : answer.extras.freeanswer_type === 'hidden' ? `value="${answer.name}"` : ``}
 				${answer.extras.freeanswer_type === 'tel' ? `pattern="^\\+?\\d+$"` : ``}
 				type="${answer.extras.freeanswer_type ? answer.extras.freeanswer_type : "text"}" 
 				id="freeanswer_${answer.extras.answeridentifier}"
@@ -252,16 +253,19 @@ const render = (questions, flow) => {
 			Array.from(phoneFields).map(input => {
 				if (input) {
 					const iti = intlTelInput(input, itiConfig);
+					input.addEventListener('change', (e) => {
+						e.target.value = e.target.value.replace(/[^\d]/g, "")
+					})
 					input.addEventListener('blur', (e) => {
 						var errorCode = iti.getValidationError();
 						if (errorCode !== 0) {
 							var errorMap = []
-							errorMap[-99] = "Invalid number"
-							errorMap[1] = "Invalid country code"
-							errorMap[2] = "Too short"
-							errorMap[3] = "Too long"
-							errorMap[4] = "Might be a local number only"
-							errorMap[5] = "Invalid length";
+							errorMap[-99] = "Please enter a valid phone number."
+							errorMap[1] = "Please enter a valid phone number."
+							errorMap[2] = "Please enter a valid phone number."
+							errorMap[3] = "Please enter a valid phone number."
+							errorMap[4] = "Please enter a valid phone number."
+							errorMap[5] = "Please enter a valid phone number.";
 							document.querySelector('#error-msg').innerHTML = errorMap[errorCode];
 						} else {
 							document.querySelector('#error-msg').innerHTML = "";

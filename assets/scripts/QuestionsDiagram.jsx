@@ -126,9 +126,10 @@ function QuestionsDiagram() {
               if (currentNode.options.extras.customType === "answer") {
                 relatedQuestion = findQuestionFromAnswer(currentNode)
                 corospondingHsField = hbFieldsRef.current.find(f => f.name === relatedQuestion.options.extras.questionidentifier)
-                if (corospondingHsField) {
+                if (corospondingHsField && (!currentNode.options.extras.dropdown && !currentNode.options.extras.freeanswer)) {
                   sethbFieldsAnswers(corospondingHsField.options)
-                } else {
+                } else if (currentNode.options.extras.dropdown || currentNode.options.extras.freeanswer === true) {
+                  sethbFieldsAnswers([])
                   // alert(`${relatedQuestion.options.extras.questionidentifier} not found`)
                 }
               } /* else {
