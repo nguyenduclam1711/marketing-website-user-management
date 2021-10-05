@@ -14,5 +14,7 @@ mixin newsletter
                   div.mb-3
                     label.text-white.font-size-120(for='newsletter_email')=__("Email")
                     input#newsletter_email.subs_input.text-white.border-bottom.border-white.bg-transparent(type='email', required, name='email')
-                  button.float-right#nlbtn.btn.btn-outline-primary(type="submit", class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: rgb(${course.coloraccent.replace(/.*\((.*)\)/g, "$1").split(',').map(i => Math.floor(i * 0.8)).join(', ')}` : `` )
-                    span=__("Subscribe")
+                  .d-flex.flex-column.justify-content-end.align-items-end
+                    button.float-right#nlbtn.btn.btn-outline-primary(type="submit")
+                      span=__("Subscribe")
+              .alert.alert-dismissible.fade.show.mt-3#response(role="alert")

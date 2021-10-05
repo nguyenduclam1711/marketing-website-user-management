@@ -413,7 +413,7 @@ module.exports.newsletter = (req, res) => {
         } else {
           return res.status(422).json({
             code: json.errors ? 422 : response.statusCode,
-            message: json.errors
+            message: json.errors[0].error.includes("is already a list member") ? json.errors[0].error.replace(", do you want to update? please provide update_existing:true in the request body", '') : json.errors[0].error
           })
         }
       }
