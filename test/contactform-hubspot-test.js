@@ -29,6 +29,7 @@ let browser
                     defaultViewport: null,
                     headless: false,
                     // devtools: true
+                    args: ["--no-sandbox"]
                 });
                 const serverInstance = supertest(server).get("/")
                 const page = await browser.newPage();
@@ -153,6 +154,7 @@ let browser
                 }
                 request(options, function (error, response, body) {
                     if (error) throw new Error(error);
+                    console.log('JSON.parse(body)', JSON.parse(body));
                     assert.equal(JSON.parse(body).properties.phone.value, '+491234567890')
                     assert.equal(JSON.parse(body).properties.firstname.value, 'Testvalue')
                     assert.equal(JSON.parse(body).properties.age.value, '33')
