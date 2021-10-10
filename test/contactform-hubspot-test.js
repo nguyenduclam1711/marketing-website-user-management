@@ -2,13 +2,12 @@ require("dotenv").config({ path: __dirname + "/../.env" });
 const Location = require("../models/location");
 const request = require("request");
 const puppeteer = require('puppeteer');
-const email = "thomas.kuhnert@digitalcareerinstitute.org";
 const assert = require('assert');
 const supertest = require("supertest");
-const { url } = require("../helpers/helper.js");
 const mongoose = require("mongoose");
 
 const server = require("../server");
+let browser
 (async () => {
     let hubspotContactID
     describe('Contactform and hubspot contact existence', function () {
@@ -25,10 +24,10 @@ const server = require("../server");
             });
         });
         it('Fills the contact form and submits it', async function () {
-            return new Promise(async function (resolve) {
-                const browser = await puppeteer.launch({
+            return new Promise(async function (resolve, reject) {
+                browser = await puppeteer.launch({
                     defaultViewport: null,
-                    // headless: false,
+                    headless: false,
                     // devtools: true
                 });
                 const serverInstance = supertest(server).get("/")
@@ -70,7 +69,7 @@ const server = require("../server");
                                 if (emailInputs.length > 0) {
                                     Array.from(emailInputs).map(emailInput => {
                                         if (emailInput) {
-                                            emailInput.value = "thomas.kuhnert@digitalcareerinstitute.org";
+                                            emailInput.value = "thomas.kuhnert+test@digitalcareerinstitute.org";
 
                                         }
                                     })
@@ -102,21 +101,39 @@ const server = require("../server");
                                 TermsofService.click();
                                 await page.waitForTimeout(1000); // wait for 5 seconds
                                 await submitButton[0].click()
-                                page.on('response', async (response) => {
-                                    if (response.url() == `${serverInstance.url}contact`) {
-                                        console.log('XHR response received');
-                                        const responseJson = await response.json()
-                                        console.log('responseJson', responseJson.response.contact_id);
-                                        if (responseJson.response.contact_id) {
-                                            assert(responseJson.response.contact_id)
-                                            browser.close()
-                                            resolve();
-                                        }
-                                    }
-                                });
+                                await Promise.all([
+                                    page.waitForNavigation(),
+                                    page.waitForSelector('h1'),
+                                ]);
+                                const heading1 = await page.$eval("h1", el => el.textContent);
+                                console.log('heading1', heading1);
+                                if (heading1 === "Thank you for applying!") {
+                                    resolve()
+                                } else {
+                                    console.log('Error in Thank you page redirect', error);
+                                    reject()
+                                }
+                                // TODO 
+                                // page.on('response', async (response) => {
+                                //     if (response.url() == `${serverInstance.url}contact`) {
+                                //         const responseJson = await response.json()
+                                //         if (responseJson.response.contact_id) {
+                                //             assert(responseJson.response.contact_id)
+
+                                //             const heading1 = await page.$eval("h1", el => el.textContent);
+                                //             if (heading1 === "Thank you for applying!") {
+                                //                 console.log('heading1', heading1);
+                                //                 resolve();
+                                //             } else {
+                                //                 console.log('error', error);
+                                //                 reject()
+                                //             }
+                                //         }
+                                //     }
+                                // });
                             } else {
                                 if (!submitted) {
-                                    await page.waitForTimeout(1000);
+                                    await page.waitForTimeout(300);
                                     const nextSubmitButton = await page.$$('[data-nextquestions=""]')
                                     recursiveClick(nextSubmitButton)
                                 }
@@ -131,7 +148,7 @@ const server = require("../server");
             return new Promise(async function (resolve) {
                 var options = {
                     method: 'GET',
-                    url: `https://api.hubapi.com/contacts/v1/contact/email/thomas.kuhnert@digitalcareerinstitute.org/profile`,
+                    url: `https://api.hubapi.com/contacts/v1/contact/email/thomas.kuhnert+test@digitalcareerinstitute.org/profile`,
                     qs: { hapikey: process.env.HUBSPOT_API_KEY }
                 }
                 request(options, function (error, response, body) {
@@ -140,6 +157,7 @@ const server = require("../server");
                     assert.equal(JSON.parse(body).properties.firstname.value, 'Testvalue')
                     assert.equal(JSON.parse(body).properties.age.value, '33')
                     hubspotContactID = JSON.parse(body).vid
+                    console.log('hubspotContactID', hubspotContactID);
                     var options = {
                         method: 'DELETE',
                         url: `https://api.hubapi.com/contacts/v1/contact/vid/${hubspotContactID}`,
