@@ -7,7 +7,7 @@ const fetchEventsByLocation = require("../../helpers/fetch_events_by_location");
 // to catch the error if 'EVENTBRIDE_API_KEY' path not exist in .env file
 if (!process.env.EVENTBRIDE_API_KEY) {
   console.error("EVENTBRIDE_API_KEY MISSING");
-  process.exit();
+  // process.exit();
 }
 
 module.exports.getEvents = async (req, res) => {
@@ -30,7 +30,7 @@ module.exports.getEventsByLocation = async (req, res) => {
 };
 
 module.exports.fetchevents = async (req, res) => {
-  if(process.env.EVENTBRIDE_API_KEY.indexOf("XXXX") !== -1) return [];
+  if (!process.env.EVENTBRIDE_API_KEY) return [];
   const url = `https://www.eventbriteapi.com/v3/organizers/16608751086/events/?order_by=start_asc&expand=venue&start_date.range_start=${new Date().toISOString().substr(0, 19)}&token=${process.env.EVENTBRIDE_API_KEY}`;
   try {
     return new Promise(function (resolve, reject) {
