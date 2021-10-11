@@ -8,11 +8,12 @@ export const get_form_payload = (elements) => {
 			if (el.dataset.intlTelInputId) {
 				inputValue = iti.getNumber()
 			}
-			return {
+			return el.name !== "" && inputValue !== "" && el.classList.contains('dynamicinput')? {
 				...acc,
 				[el.name]: inputValue
-			}
+			} : acc
 		}, {})
 }
 const flashAlertTimeout = 5000
 export var alertTimeout= flashAlertTimeout
+export const isGerman = window.location.pathname.indexOf('/de/') !== -1

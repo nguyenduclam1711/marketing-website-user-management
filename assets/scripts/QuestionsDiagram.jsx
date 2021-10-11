@@ -126,9 +126,10 @@ function QuestionsDiagram() {
               if (currentNode.options.extras.customType === "answer") {
                 relatedQuestion = findQuestionFromAnswer(currentNode)
                 corospondingHsField = hbFieldsRef.current.find(f => f.name === relatedQuestion.options.extras.questionidentifier)
-                if (corospondingHsField) {
+                if (corospondingHsField && (!currentNode.options.extras.dropdown && !currentNode.options.extras.freeanswer)) {
                   sethbFieldsAnswers(corospondingHsField.options)
-                } else {
+                } else if (currentNode.options.extras.dropdown || currentNode.options.extras.freeanswer === true) {
+                  sethbFieldsAnswers([])
                   // alert(`${relatedQuestion.options.extras.questionidentifier} not found`)
                 }
               } /* else {
@@ -407,6 +408,9 @@ function QuestionsDiagram() {
                 value={currentModelId}
                 onChange={e => {
                   const theModelToSet = allFlows.find(f => f._id === e.target.selectedOptions[0].value)
+                  var searchParams = new URLSearchParams(window.location.search);
+                  searchParams.set("flow", theModelToSet._id);
+                  window.history.replaceState({}, '', `${location.pathname}?${searchParams}`);
                   if (theModelToSet.model) {
                     model.deserializeModel(theModelToSet.model, engine);
                     setForm({ ...form, flowname: theModelToSet.name, active: theModelToSet.active, renderselector: theModelToSet.renderselector, sendaltemail: theModelToSet.sendaltemail })
@@ -460,7 +464,8 @@ function QuestionsDiagram() {
                   e.stopPropagation();
                   setForm({ ...form, [e.target.name]: e.target.checked })
                 }} style={{ borderColor: colorAnswer, borderStyle: "solid" }} id="sendaltemail" />
-              <label className="form-check-label" htmlFor="sendaltemail">Send alt email?</label>
+              <label className="form-check-label" htmlFor="sendaltemail">Is form for company?</label>
+              <button className="btn btn-secondary badge ml-2" type="button" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="That results in sending a alternative email to settings.tourmailreceiver and prevents a redirect to /thank-you"> ? </button>
             </div>
           </div>
           <div className="row">

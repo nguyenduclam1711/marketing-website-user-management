@@ -1,8 +1,7 @@
 import intlTelInput from 'intl-tel-input';
-import { get_form_payload } from "./helper.js"
+import { get_form_payload, isGerman } from "./helper.js"
 import utilsScript from "./intl-tel-input-utils.min.js"
 const animtionDuration = 0.3;
-const isGerman = window.location.pathname.indexOf('/de') !== -1
 
 const getAnswers = (question, model) => Object.values(model.layers.find(layer => layer.type === "diagram-nodes").models)
 	.filter(links => Object.values(model.layers.find(layer => layer.type === "diagram-links").models)
@@ -97,10 +96,16 @@ const jumpToNextQuestion = (e, diagramNodes, flow) => {
 				if (data.response.contact_id) {
 					submitButton.innerText = "Thanks"
 					localStorage.removeItem(`dcianswers_${flow.name}`)
-					if (data.response.curriculumPdf) {
+					if (flow.sendaltemail === true) {
+						const div = document.createElement('div')
+						submitButton.innerText = buttonOriginalText
+						submitButton.disabled = false
+						div.innerHTML = `<div class="flash m-0 mr-3 alert fade show alert-success">Thank you for being interested in getting to know DCI! Our Career Success Management will get in touch with you to further discover how we can support you!<button class="close ml-3" type="button" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button></div>`
+						document.body.appendChild(div)
+						$("#contactFormModal").modal('hide')
+					} else if (data.response.curriculumPdf) {
 						$("#curriculumpopup").modal('hide')
 						window.open(`${window.location.origin}/images/${data.response.curriculumPdf}`, '_blank')
-
 					} else {
 						window.location.replace(`${window.location.origin}/thank-you/${data.response.contact_id}`);
 					}
@@ -140,7 +145,8 @@ const render = (questions, flow) => {
 						}
 					})
 				});
-
+			const paramsString = window.location.search
+			let searchParams = new URLSearchParams(paramsString);
 			const html = `
 		<div class="w-100 container">
 		<div id="popup" class="py-5 d-flex flex-column justify-content-between w-300px w-100">
@@ -155,7 +161,7 @@ const render = (questions, flow) => {
 				class="form-control mb-4 freeanswer dynamicinput" 
 				name="${answer.extras.answeridentifier}"
 				data-type="question"
-				${answer.extras.freeanswer_type === 'hidden' ? `value="${answer.name}"` : ``}
+				${answer.extras.freeanswer_type === 'hidden' && searchParams.has(answer.extras.answeridentifier) ? `value="${searchParams.get(answer.extras.answeridentifier)}"` : answer.extras.freeanswer_type === 'hidden' ? `value="${answer.name}"` : ``}
 				${answer.extras.freeanswer_type === 'tel' ? `pattern="^\\+?\\d+$"` : ``}
 				type="${answer.extras.freeanswer_type ? answer.extras.freeanswer_type : "text"}" 
 				id="freeanswer_${answer.extras.answeridentifier}"
@@ -211,7 +217,7 @@ const render = (questions, flow) => {
 				id="${answer.extras.answeridentifier}"
 				data-flow="${flow.name}"
 				name="${question.extras.questionidentifier}" 
-				class="btn-check dynamicinputradio" 
+				class="btn-check dynamicinput"
 				data-trigger="${canTrigger(questions, flow.model)}"
 				data-question="${question.extras.questionidentifier}" 
 				data-nextquestions="${nextQuestions.map(a => a.id)}" 
@@ -228,7 +234,7 @@ const render = (questions, flow) => {
               <div class="">
 				<input type="text" name="age_field" class="agefield"/>
 				${flow.sendaltemail ? `<input type="hidden" name="sendaltemail" value="true" class="sendaltemail"/>` : ``}
-				<p><label class="checkbox TermsofService text-muted">${isGerman ? `Gelesen und akzeptiert` : `I have read and agree to the`}<input type="checkbox" name="TermsofService" value="true" required="required"><span class="checkmark"></span></label><a href="#" class="ml-1 font-weight-normal text-dark text-decoration-none" data-toggle="modal" data-target="#dataPrivacy">${isGerman ? `Datenschutz` : `Data privacy`}</a></p>` : ``}
+				<p><label class="checkbox TermsofService text-muted">${isGerman ? `Gelesen und akzeptiert` : `I have read and agree to the`}<input type="checkbox" name="TermsofService" value="true" required="required" class="dynamicinput"><span class="checkmark"></span></label><a href="#" class="ml-1 font-weight-normal text-dark text-decoration-none" data-toggle="modal" data-target="#dataPrivacy">${isGerman ? `Datenschutz` : `Data privacy`}</a></p>` : ``}
                 ${canTrigger(questions, flow.model) ? `` : `<div class="d-flex justify-content-end"><button class="btn btn-lg mb-4 answerbutton ${nextQuestions.length === 0 ? "w-md-50 w-100 btn-secondary" : "btn-outline-secondary w-100"}" data-nextquestions="${nextQuestions.map(a => a.id)}" type="submit">${nextQuestions.length === 0 ? (isGerman ? `Abschicken` : `Submit`) : (isGerman ? `Weiter` : `Next`)}`}</button></div>
                 ${nextQuestions.length === 0 ? `<p class='text-muted small asterix'>${isGerman ? `Durch Deine Registrierung stimmst Du zu, dass personenbezogene Daten gespeichert werden. Diese dürfen von der Digital Career Institute gGmbH genutzt werden, um mit Dir in Kontakt zu treten, sofern Du dies nicht ausdrücklich untersagst.` : `With this registration you agree with the storage of your data. These data will be used by Digital Career Institute gGmbH to contact you. You have the right to access, modify, rectify and delete these data.`}</p>
 				</div>
@@ -252,16 +258,19 @@ const render = (questions, flow) => {
 			Array.from(phoneFields).map(input => {
 				if (input) {
 					const iti = intlTelInput(input, itiConfig);
+					input.addEventListener('change', (e) => {
+						e.target.value = e.target.value.replace(/[^\d]/g, "")
+					})
 					input.addEventListener('blur', (e) => {
 						var errorCode = iti.getValidationError();
 						if (errorCode !== 0) {
 							var errorMap = []
-							errorMap[-99] = "Invalid number"
-							errorMap[1] = "Invalid country code"
-							errorMap[2] = "Too short"
-							errorMap[3] = "Too long"
-							errorMap[4] = "Might be a local number only"
-							errorMap[5] = "Invalid length";
+							errorMap[-99] = "Please enter a valid phone number."
+							errorMap[1] = "Please enter a valid phone number."
+							errorMap[2] = "Please enter a valid phone number."
+							errorMap[3] = "Please enter a valid phone number."
+							errorMap[4] = "Please enter a valid phone number."
+							errorMap[5] = "Please enter a valid phone number.";
 							document.querySelector('#error-msg').innerHTML = errorMap[errorCode];
 						} else {
 							document.querySelector('#error-msg').innerHTML = "";
