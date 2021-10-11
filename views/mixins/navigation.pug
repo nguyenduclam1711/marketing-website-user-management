@@ -1,13 +1,13 @@
 mixin navigation
   if currentPath && !currentPath.includes('admin') && !currentPath.includes('users') && locals.settings && locals.settings.announcement_banner_string
-      .w-100.text-white.p-2.nav-banner.text-center.z-foreground(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent};  color: ${course.textColor} !important` : `` : `` )
+      .w-100.text-white.p-2.nav-banner.text-center.z-foreground(class=course  ? `` : `bg-primary`, style=course  ? `background-color: ${course.coloraccent};  color: ${course.textColor} !important` : `` : `` )
         div
           =__(locals.settings.announcement_banner_string)
           if locals.settings && locals.settings.announcement_banner_cta && locals.settings.announcement_banner_cta !== currentPath
-            a.btn.btn-link.ml-3.btn-secondary.py-0(class=course && course.coloraccent ? `btn-white` : `btn-secondary` style=course && course.coloraccent ? `color: ${course.coloraccent} !important` : `` href=locals.settings.announcement_banner_cta)=__("Show More")
+            a.btn.btn-link.ml-3.btn-secondary.py-0(class=course  ? `btn-white` : `btn-secondary` style=course  ? `color: ${course.coloraccent} !important` : `` href=locals.settings.announcement_banner_cta)=__("Show More")
   nav#nav-primary.sticky-top.z-1.navbar.navbar-expand-lg.navbar-light.py-0.bg-tranition.px-0.px-md-0.flex-column(class=currentPath == "/" ? " z-foreground " : "")
-    if course && course.coloraccent
-      div.position-absolute.left.w-50.h-100.z-minus.d-none.d-lg-block(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}!important` : ``)
+    if course 
+      div.position-absolute.left.w-50.h-100.z-minus.d-none.d-lg-block(class=course  ? `` : `bg-primary`, style=course  ? `background-color: ${course.coloraccent}!important` : ``)
     .align-items-stretch.pl-md-0.nav-content(class=currentPath && currentPath.includes('/admin') ? ' container-fluid' : " container-lg" )
       if !blank
         a.navbar-brand.text-primary.py-3.pl-sm-3.h-60(href="/")
@@ -23,7 +23,7 @@ mixin navigation
       #collapsingNavbar3.navbar-collapse.collapse.w-100.mt-0.mt-md-0.align-items-stretch
         ul.nav.navbar-nav.my-3.my-lg-0.ml-auto.w-100.justify-content-end.flex-nowrap#headernav(class=currentPath && currentPath.includes('/courses') && currentPath.lastIndexOf('/') > 0 ? 'not-set-active' : ' ' )
           li.position-relative.nav-item.dropdown-custom
-            a.courseslink.dropdown-toggle.cursor-default.mx-0.mx-xl-3.mx-lg-1.nav-link.d-flex.align-items-center.z-1.h-100( class=currentPath === "/courses" || ( currentPath.includes("/courses") && course && course.coloraccent ) ? `active` : ``  aria-haspopup="true" aria-expanded="false")
+            a.courseslink.dropdown-toggle.cursor-default.mx-0.mx-xl-3.mx-lg-1.nav-link.d-flex.align-items-center.z-1.h-100( class=currentPath === "/courses" || ( currentPath.includes("/courses") && course ) ? `active` : ``  aria-haspopup="true" aria-expanded="false")
               =__("Courses")
             .dropdown-menu.dropdown-menu-left.border-radius-0.shadow-sm.z-0.p-lg-3.courses-dropdown(aria-labelledby='navbarDropdownMenuLink')
                 div.grid-layout
@@ -71,14 +71,14 @@ mixin navigation
           li.d-none.position-relative.nav-item.z-foreground.d-lg-flex.justify-content-center.align-items-center
             div
               a.apply-now.btn.btn-outline-primary.contactlinktext.mx-0.mx-xl-2.mx-lg-1.nav-link.d-flex.align-items-stretch.h-100.white-space-nowrap(href="/signup")=__("Apply now")
-              .contactlink(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
+              .contactlink(class=course  ? `` : `bg-primary`, style=course  ? `background-color: ${course.coloraccent}` : `` )
 
           li.position-relative.nav-item.d-flex.align-items-center.lang-switch
-            a.ml-xl-2.ml-lg-1.nav-link.d-flex.contactlink.align-items-center.h-100(style=course && course.coloraccent && locale === "de" ? `font-weight: 500` : `` class=locale === "de" ? "active cursor-default" : "" href=locale === "de" ? "#": "/i18n/de") DE
+            a.ml-xl-2.ml-lg-1.nav-link.d-flex.contactlink.align-items-center.h-100(style=course  && locale === "de" ? `font-weight: 500` : `` class=locale === "de" ? "active cursor-default" : "" href=locale === "de" ? "#": "/i18n/de") DE
             = "|"
-            a.mr-xl-2.mr-lg-1.nav-link.d-flex.contactlink.align-items-center.h-100(style=course && course.coloraccent && locale === "en" ? `font-weight: 500` : `` class=locale === "en" ? "active cursor-default" : "" href=locale === "en" ? "#": "/i18n/en") EN
+            a.mr-xl-2.mr-lg-1.nav-link.d-flex.contactlink.align-items-center.h-100(style=course  && locale === "en" ? `font-weight: 500` : `` class=locale === "en" ? "active cursor-default" : "" href=locale === "en" ? "#": "/i18n/en") EN
 
           li.apply-now-collapsed.d-lg-none.nav-item.z-foreground.d-sm-flex.justify-content-center.align-items-stretch
             div
-              a.btn.btn-primary.mx-0.mx-xl-2.mx-lg-1.nav-link.d-flex.align-items-stretch.h-100.white-space-nowrap.justify-content-center(href="/signup" class=course && course.coloraccent ? `` : `text-white` )=__("Apply now")
-              .contactlink(class=course && course.coloraccent ? `` : `bg-primary`, style=course && course.coloraccent ? `background-color: ${course.coloraccent}` : `` )
+              a.btn.btn-primary.mx-0.mx-xl-2.mx-lg-1.nav-link.d-flex.align-items-stretch.h-100.white-space-nowrap.justify-content-center(href="/signup" class=course  ? `` : `text-white` )=__("Apply now")
+              .contactlink(class=course  ? `` : `bg-primary`, style=course  ? `background-color: ${course.coloraccent}` : `` )
