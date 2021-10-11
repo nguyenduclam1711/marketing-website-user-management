@@ -1,6 +1,6 @@
 mixin navigation
   if currentPath && !currentPath.includes('admin') && !currentPath.includes('users') && locals.settings && locals.settings.announcement_banner_string
-      .w-100.text-white.p-2.nav-banner.text-center.z-foreground(class=course  ? `` : `bg-primary`, style=course  ? `background-color: ${course.coloraccent};  color: ${course.textColor} !important` : `` : `` )
+      .w-100.text-white.p-2.nav-banner.text-center.z-foreground.bg-primary
         div
           =__(locals.settings.announcement_banner_string)
           if locals.settings && locals.settings.announcement_banner_cta && locals.settings.announcement_banner_cta !== currentPath
