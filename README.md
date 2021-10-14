@@ -83,8 +83,8 @@ Then you can login per [login](http://localhost:3000/users/login)
 `docker-compose up`
 
 ### Deployment
-If you push to the staging-branch, a github action triggers a new release in the [staging environment](https://staging.digitalcareerinstitute.org). 
-For more control over the deployment porcess, acquire access to the private [infrastructure repo](https://github.com/DigitalCareerInstitute/infrastructure) and make sure to have ssh-access to the prod/staging env. Here we manage the deployment and the server provision per [Ansible](https://www.ansible.com/). 
+If you push to the staging-branch, a github action triggers a new release in the [staging environment](https://staging.digitalcareerinstitute.org), if a new [release](https://github.com/DigitalCareerInstitute/marketing-website/releases) will be created - the GH action deploys to production.  
+For more control over the deployment porcess, acquire access to the private [infrastructure repo](https://github.com/DigitalCareerInstitute/infrastructure) and follow the containing `README.md`.
 
 
 ## Server & database access
