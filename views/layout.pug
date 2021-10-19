@@ -133,10 +133,11 @@ html.h-100(lang=locale === "de" ? 'de': 'en')
                         a(class=!course ? "text-muted" : "text-white", href='/courses')=__("All courses")
                       each currentCourse in courses
                         li.my-2
-                          a(class=!course ? "text-muted" : "text-white", target="_blank" rel="noopener" alt="DCI on LinkedIn" href="https://www.linkedin.com/school/dci-digital-career-institute/") LinkedIn
-                        li.my-2
-                          a(class=!course ? "text-muted" : "text-white", target="_blank" rel="noopener" alt="DCI on Github" href="https://github.com/DigitalCareerInstitute/marketing-website") Github
-                  
+                          a(class=!course ? "text-muted" : "text-white", href='/courses/' + currentCourse.slug)=currentCourse.headline
+                          if user && user.admin === "true"
+                            a(class=!course ? "text-muted" : "text-white", href='/admin/courses/edit/' + currentCourse.slug)
+                              small.text-monospace= " (Edit)"
+
                   .col-6.col-sm-3.footers-four
                     p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-muted`)=__("Community")
                     ul.list-unstyled
