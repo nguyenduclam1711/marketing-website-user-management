@@ -41,7 +41,7 @@
   padding: 5px !important;
 }
 
-.nav-scrolled{
+.nav-scrolled {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
@@ -51,23 +51,23 @@
   background-color: white;
   .navbar-toggler-icon {
     background-image: none;
-    #burger-closed-icon{
+    #burger-closed-icon {
       display: none;
     }
-    svg{
+    svg {
       transform: rotate(0);
     }
   }
-    #collapsingNavbar3{
+    #collapsingNavbar3 {
       background-color: white;
     @include media-breakpoint-down(md) {
-      &:before{
+      &:before {
         content: "";
         display: block;
         border-bottom: 1px solid #e8e8e8;
         margin: 1rem;
       }
-      .apply-now-collapsed{
+      .apply-now-collapsed {
         position: absolute;
         bottom: 0;
         transform: translateY(-100%);
@@ -90,15 +90,15 @@
         justify-content: flex-start!important;
         overflow-y: auto;
         padding-bottom: 200px;
-        li{
+        li {
           padding: 1rem;
         }
-        .lang-switch{
-          a{
-            &:first-child{
+        .lang-switch {
+          a {
+            &:first-child {
               padding: 0 .5rem 0 0;
             }
-            &:last-child{
+            &:last-child {
               padding: 0 0 0 .5rem;
             }
           }
@@ -109,37 +109,37 @@
     .nav-button-scrolled {
       background: $primary!important;
       color: white!important;
-      &:hover{
+      &:hover {
         background: $primary-light!important;
         border-color: $primary-light!important;
       }
     }
   }
-  .nav-banner{
+  .nav-banner {
     font-size: initial;
   }
-  .nav-content{
+  .nav-content {
     // padding: 5px 0 10px 0px;
-    .navbar-brand{
+    .navbar-brand {
       @include media-breakpoint-down(md) {
         padding-left:1rem;
       }
     }
-    .navbar-toggler{
+    .navbar-toggler {
       @include media-breakpoint-down(md) {
         padding-right:1rem;
       }
     }
-    .lang-switch{
-      a{
+    .lang-switch {
+      a {
         color: black!important;
         font-weight: 400;
-        &:hover{
+        &:hover {
           color: black!important;
           font-weight: 400;
         }
       }
-      a.active{
+      a.active {
         font-weight: 500;
         color: black!important;
       }
@@ -179,12 +179,12 @@
     }
   }
 
-  a.contactlinktext{
+  a.contactlinktext {
     color: $primary!important;
     padding: 5px 14px!important;
     border: 2px solid $primary;
     // border-radius: 2px;
-    &:hover{
+    &:hover {
       color: white!important;
     }
   }
@@ -260,7 +260,7 @@
   .grid-layout.show,
   &:hover ~ .grid-layout,
   &:hover .grid-layout ,
-  .grid-layout{
+  .grid-layout {
     display: grid;
     grid-template-columns: auto auto;
     grid-gap: 10px;
@@ -268,21 +268,21 @@
       grid-template-columns: auto;
       padding:0;
     }
-    .bg-nav-selected{
+    .bg-nav-selected {
       background-color: $pale-blue;
     }
-    .dropdown-item{
+    .dropdown-item {
       display: flex;
       justify-content: left;
       align-items: center;
       border-radius: 2px;
-      .icon-container{
+      .icon-container {
         padding: 10px 20px 10px 20px;
         @include media-breakpoint-down(md) {
           //display:none;
         }
       }
-      .details-container{
+      .details-container {
         padding-right: 15px;
         @include media-breakpoint-down(md) {
           padding-left:5px;
@@ -326,7 +326,7 @@
 
 .dropdown-toggle {
   @include media-breakpoint-up(lg) {
-    &:after{
+    &:after {
       display: none;
     }
   }
@@ -342,8 +342,8 @@
     }
   }
 }
-.rotated{
-  &:after{
+.rotated {
+  &:after {
     transform: rotate(-90deg);
   }
 }
@@ -398,7 +398,7 @@ body:not(.admin) .btn:not(.btn-lg) {
 .btn-group-lg > .btn {
   padding: 0.5em 1.5em;
 }
-.btn-outline-white{
+.btn-outline-white {
   @include button-variant(white, $blue, $blue);
 }
   .nav-pills .nav-link:hover,
@@ -1397,19 +1397,19 @@ div[class*=" #{$class-slug}"] {
   }
 }
 @include media-breakpoint-up(sm) {
-  .#{$class-slug}-sm-auto{
+  .#{$class-slug}-sm-auto {
     max-width: none!important;
     max-height: none!important;
   }
 }
 @include media-breakpoint-up(md) {
-  .#{$class-slug}-md-none{
+  .#{$class-slug}-md-none {
     max-width: none!important;
     max-height: none!important;
   }
 }
 @include media-breakpoint-up(lg) {
-  .#{$class-slug}-lg-none{
+  .#{$class-slug}-lg-none {
     max-width: none!important;
     max-height: none!important;
   }
@@ -2070,7 +2070,7 @@ body[class*="pages-"] {
 }
 .glow {
   box-shadow: 0px 10px 30px 10px rgba(0, 100, 255, 0.25);
-}.word-wrap-break-word{
+}.word-wrap-break-word {
   word-wrap: break-word;
 }
 .overflow-wrap-anywhere {
@@ -2164,7 +2164,7 @@ a[tabindex="0"]:focus {
 input[name*="phone"] {
   padding-left: 95px !important;
 }
-.asterix{ 
+.asterix { 
   position: relative;
   &:before {
     content: "*";
