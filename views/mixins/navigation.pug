@@ -27,7 +27,6 @@ mixin navigation
               =__("Courses")
             .dropdown-menu.dropdown-menu-left.border-radius-0.shadow-sm.z-0.p-lg-3.courses-dropdown(aria-labelledby='navbarDropdownMenuLink')
                 div.grid-layout
-                  //- a.dropdown-item.nav-link.px-2(class= currentPath == "/courses" ? "active" : "" style=currentPath === "/courses" ? "color: white!important;" : "" href='/courses')=__("All courses")
                   each course in courses
                     a.dropdown-item.p-2.nav-link.px-2(class=course && currentPath.includes(course.slug) ? `bg-nav-selected` : ``, href='/courses/'+ course.slug)
                         div.icon-container
