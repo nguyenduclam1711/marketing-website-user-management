@@ -107,8 +107,8 @@ html.h-100(lang=locale === "de" ? 'de': 'en')
               if currentPath !== "/users/login" && currentPath !== "/users/register" && currentPath !== '/jobcenter' && !currentPath.includes('/signup') && !blank
                 +newsletter
               .container#footer-items-container(class=currentPath !== "/users/login" && currentPath !== "/users/register" && currentPath !== '/jobcenter' && !currentPath.includes('/signup') || blank ? '' : 'pt-100')
-                .row
-                  .col-6.col-sm-2.footers-two
+                .row.px-md-5
+                  .col-6.col-sm-2.offset-1.footers-two
                     p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-muted`)=__("Company")
                     ul.list-unstyled
                       li.my-2
@@ -126,7 +126,7 @@ html.h-100(lang=locale === "de" ? 'de': 'en')
                       li.my-2
                         a(class=!course ? "text-muted" : "text-white", href="/press")=__("Press")
 
-                  .col-6.col-sm-5.footers-three
+                  .col-6.col-sm-3.footers-three
                     p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-muted`)=__("Courses")
                     ul.list-unstyled
                       li.my-2
@@ -151,14 +151,14 @@ html.h-100(lang=locale === "de" ? 'de': 'en')
                         a(class=!course ? "text-muted" : "text-white", target="_blank" rel="noopener" alt="DCI on Github" href="https://github.com/DigitalCareerInstitute/marketing-website") Github
 
 
-                  .col-6.col-sm-2.footers-five
+                  .col-6.col-sm-3.footers-five
                     p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-muted`)=__("Campus")
                     ul.list-unstyled
                       each location in global_locations.filter(l => l.isCampus)
                         li.my-2
                           a(class=!course ? "text-muted" : "text-white", href='/contact')=location.name
 
-                nav.d-flex.justify-content-between.align-items-center.py-5.container
+                nav.d-flex.justify-content-between.align-items-center.py-5.container.pl-0.pr-0
                   div.pt-md-5.d-flex.justify-content-between.w-100
                     a.font-weight-bold.navbar-brand.text-light.h-60.mr-md-5.mt-n4.mt-md-0(href="/")
                       include ../assets/media/dci.svg
