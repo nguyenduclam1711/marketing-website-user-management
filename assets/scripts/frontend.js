@@ -332,23 +332,6 @@ window.onload = function () {
     errorContainer.className = "cont_principal cont_error_active";
   }
 };
-//
-// let typedCursor = new Typed('.subtitle', {
-//   strings: ["Learn digital skills with us to get the most fulfilling jobs."],
-//   typeSpeed: 30,
-//   loop: true
-// });
-// console.log(typedCursor)
-
-
-// function stickyNavigation(element) {
-//   const nav = document.querySelector('nav.navbar');
-//   if (window.scrollY >= element.offsetHeight / 2) {
-//     nav.classList.add('bg-white');
-//   } else {
-//     nav.classList.remove('bg-white');
-//   }
-// }
 
 const notFoundTimer = document.querySelector('.timerRedirect')
 if (notFoundTimer) {
@@ -419,7 +402,7 @@ Array.from(document.querySelectorAll('.dropdown-custom')).map(dropdown => {
 })
 
 $('#collapsingNavbar3').on('hide.bs.collapse', function () {
-  $('body').toggleClass('no-scroll');
+  $('body').toggleClass('overflow-hidden');
   $('#burger-icon').fadeToggle(300);
   $('#burger-closed-icon').fadeToggle(300);
   $('.navbar-toggler-icon').animate(
@@ -437,7 +420,7 @@ $('#collapsingNavbar3').on('hide.bs.collapse', function () {
 });
 
 $('#collapsingNavbar3').on('show.bs.collapse', function () {
-  $('body').toggleClass('no-scroll');
+  $('body').toggleClass('overflow-hidden');
   $('.nav-content')[0].scrollIntoView({behavior:'smooth'});
   $('#burger-icon').fadeToggle(300);
   $('#burger-closed-icon').fadeToggle(300);
