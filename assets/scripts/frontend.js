@@ -416,7 +416,6 @@ $('#collapsingNavbar3').on('hide.bs.collapse', function () {
   );
   $('.dropdown-custom .dropdown-menu').removeClass('show');
   $('.dropdown-custom .dropdown-toggle').removeClass('rotated');
-  console.log('HIDING')
 });
 
 $('#collapsingNavbar3').on('show.bs.collapse', function () {
