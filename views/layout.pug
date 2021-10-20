@@ -107,8 +107,8 @@ html.h-100(lang=locale === "de" ? 'de': 'en')
               if currentPath !== "/users/login" && currentPath !== "/users/register" && currentPath !== '/jobcenter' && !currentPath.includes('/signup') && !blank
                 +newsletter
               .container#footer-items-container(class=currentPath !== "/users/login" && currentPath !== "/users/register" && currentPath !== '/jobcenter' && !currentPath.includes('/signup') || blank ? '' : 'pt-100')
-                .row.px-md-5
-                  .col-6.col-sm-2.offset-1.footers-two
+                .row.px-lg-5.px-md-0.px-sm-0
+                  .col-6.col-sm-2.offset-lg-1.offset-md-1.offset-sm-0.footers-two
                     p.font-weight-bold.mb-4(class=course && course.coloraccent ? `text-white` : `text-muted`)=__("Company")
                     ul.list-unstyled
                       li.my-2
