@@ -21,7 +21,7 @@ module.exports.getSingleCourse = async (req, res) => {
     .populate('locations')
     .populate('successStory')
     .exec()
-  renderLanguageVersion(req, res, course, 'course', 'courses')
+  renderLanguageVersion(req, res, course, 'course', 'courses', undefined, { title: `${course.headline} | Digital Career Institute`, metadescription: `${course.subtitle}` })
 }
 
 module.exports.financingOptions = async (req, res) => {
