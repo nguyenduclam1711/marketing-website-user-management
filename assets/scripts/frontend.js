@@ -401,42 +401,36 @@ Array.from(document.querySelectorAll('.dropdown-custom')).map(dropdown => {
   })
 })
 
+/**
+ * Handling main navigation animations
+ */
+const body = document.body;
+const burgerIcon = document.getElementById('burger-icon');
+const burgerClosedIcon = document.getElementById('burger-closed-icon');
+const navToggler = document.querySelector('.navbar-toggler-icon');
+const dropdownMenu = document.querySelector('.dropdown-custom .dropdown-menu');
+const dropdownToggle = document.querySelector('.dropdown-toggle');
+const navContent = document.querySelector('.nav-content');
+
 $('#collapsingNavbar3').on('hide.bs.collapse', function () {
-  $('body').toggleClass('overflow-hidden');
-  $('#burger-icon').fadeToggle(300);
-  $('#burger-closed-icon').fadeToggle(300);
-  $('.navbar-toggler-icon').animate(
-    { deg: 0 },
-    {
-      duration: 300,
-      step: function(now) {
-        $(this).css({ transform: 'rotate(' + now + 'deg)' });
-      }
-    }
-  );
-  $('.dropdown-custom .dropdown-menu').removeClass('show');
-  $('.dropdown-custom .dropdown-toggle').removeClass('rotated');
+  body.classList.toggle('overflow-hidden');
+  burgerIcon.classList.toggle('fully-transparent');
+  burgerClosedIcon.classList.toggle('fully-transparent');
+  navToggler.classList.toggle('rotate-180');
+  dropdownMenu.classList.remove('show');
+  dropdownToggle.classList.remove('rotated');
 });
 
 $('#collapsingNavbar3').on('show.bs.collapse', function () {
-  $('body').toggleClass('overflow-hidden');
-  $('.nav-content')[0].scrollIntoView({behavior:'smooth'});
-  $('#burger-icon').fadeToggle(300);
-  $('#burger-closed-icon').fadeToggle(300);
-  $('.navbar-toggler-icon').animate(
-    { deg: 180 },
-    {
-      duration: 300,
-      step: function(now) {
-        $(this).css({ transform: 'rotate(' + now + 'deg)' });
-      }
-    }
-  );
+  body.classList.toggle('overflow-hidden');
+  navContent.scrollIntoView({ behavior: 'smooth' });
+  burgerIcon.classList.toggle('fully-transparent');
+  navToggler.classList.toggle('rotate-180');
+  burgerClosedIcon.classList.toggle('fully-transparent');
 });
 
-
-$('.dropdown-toggle').on('click', function () {
-  $(this).toggleClass('rotated');
+$('.dropdown-toggle').on('click', function (e) {
+  e.target.classList.toggle('rotated');
 });
 
 // const burger = document.querySelector('#collapsingNavbar3');

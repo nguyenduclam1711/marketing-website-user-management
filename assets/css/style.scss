@@ -51,8 +51,13 @@
   background-color: white;
   .navbar-toggler-icon {
     background-image: none;
+    transition: transform .3s ease-in-out;
     #burger-closed-icon {
-      display: none;
+      opacity: 1;
+      transition: opacity .3s ease-in-out;
+    }
+    #burger-icon {
+      transition: opacity .3s ease-in-out;
     }
     svg {
       transform: rotate(0);
@@ -440,6 +445,12 @@ nav.container:after {
   display: none !important;
 }
 
+.opacity-1 {
+  opacity: 1;
+}
+.fully-transparent {
+  opacity: 0!important;
+}
 .quarter-transparent {
   opacity: 0.25;
 }

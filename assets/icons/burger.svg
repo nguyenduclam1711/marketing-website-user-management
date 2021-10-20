@@ -6,6 +6,6 @@
 	.st0{fill-rule:evenodd;clip-rule:evenodd;fill:#04083C;}
 </style>
 <path id="burger-icon" class="st0" d="M24,19H0v-1h24V19z M24,13H0v-1h24V13z M24,7H0V6h24V7z"/>
-<path id="burger-closed-icon" class="st0" d="M12.3,11.9l7.8-7.8l0.6,0.6l-7.8,7.8l7.8,7.8l-0.6,0.6l-7.8-7.8l-7.8,7.8L4,20.3l7.8-7.8L4.1,4.7
+<path id="burger-closed-icon" class="st0 fully-transparent" d="M12.3,11.9l7.8-7.8l0.6,0.6l-7.8,7.8l7.8,7.8l-0.6,0.6l-7.8-7.8l-7.8,7.8L4,20.3l7.8-7.8L4.1,4.7
 	l0.6-0.6L12.3,11.9z"/>
 </svg>
