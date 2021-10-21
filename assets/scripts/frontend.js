@@ -408,8 +408,8 @@ const body = document.body;
 const burgerIcon = document.getElementById('burger-icon');
 const burgerClosedIcon = document.getElementById('burger-closed-icon');
 const navToggler = document.querySelector('.navbar-toggler-icon');
-const dropdownMenu = document.querySelector('.dropdown-custom .dropdown-menu');
-const dropdownToggle = document.querySelector('.dropdown-toggle');
+const dropdownMenus = document.querySelectorAll('.dropdown-custom .dropdown-menu');
+const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
 const navContent = document.querySelector('.nav-content');
 
 $('#collapsingNavbar3').on('hide.bs.collapse', function () {
@@ -417,8 +417,12 @@ $('#collapsingNavbar3').on('hide.bs.collapse', function () {
   burgerIcon.classList.toggle('fully-transparent');
   burgerClosedIcon.classList.toggle('fully-transparent');
   navToggler.classList.toggle('rotate-180');
-  dropdownMenu.classList.remove('show');
-  dropdownToggle.classList.remove('rotated');
+  dropdownMenus.forEach((el) => {
+    el.classList.remove('show');
+  });
+  dropdownToggles.forEach((el) => {
+    el.classList.remove('rotated');
+  });
 });
 
 $('#collapsingNavbar3').on('show.bs.collapse', function () {
