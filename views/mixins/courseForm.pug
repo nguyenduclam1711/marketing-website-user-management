@@ -75,6 +75,12 @@ mixin courseForm
       if course && course.subicon
         img.mw-150.mh-150.w-100.mw-150.mh-150.object-fit-cover(alt="course icon" src="/images/"+course.subicon)
       input.form-control#subicon.form-control-file(type='file' name='subicon')
+    
+    .mb-3
+      label.d-block.d-block(for='menuicon') Course Navigation Icon
+      if course && course.menuicon
+        img.mw-150.mh-150.w-100.mw-150.mh-150.object-fit-cover(alt="course icon" src="/images/"+course.menuicon)
+      input.form-control#menuicon.form-control-file(type='file' name='menuicon')
 
     .mb-3
       label(for='headline') Headline *

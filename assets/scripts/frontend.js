@@ -102,6 +102,7 @@ for (let i = 0, len = scrollbuttons.length; i < len; i++) {
     window.history.pushState({}, {}, event.target.attributes.href.value)
   });
 }
+
 const throttle = (func, limit) => {
   let lastFunc;
   let lastRan;
@@ -163,8 +164,22 @@ window.onscroll = () => {
     countUp()
     , 50)
   throttle(
-    animatedPolygons()
+    animatedPolygons(),
+    handleNavigation()
     , 200)
+    
+};
+
+const handleNavigation = () => {
+  let applyNow = document.querySelector('.apply-now');
+  let nav = document.querySelector('#nav-primary');
+  if (window.scrollY > 50) {
+    applyNow.classList.add('nav-button-scrolled');
+    nav.classList.add('nav-scrolled');
+  } else {
+    applyNow.classList.remove('nav-button-scrolled');
+    nav.classList.remove('nav-scrolled');
+  }
 };
 
 const classes = ['shift-up', 'shift-left', 'shift-bottom', 'shift-right']
@@ -317,23 +332,6 @@ window.onload = function () {
     errorContainer.className = "cont_principal cont_error_active";
   }
 };
-//
-// let typedCursor = new Typed('.subtitle', {
-//   strings: ["Learn digital skills with us to get the most fulfilling jobs."],
-//   typeSpeed: 30,
-//   loop: true
-// });
-// console.log(typedCursor)
-
-
-function stickyNavigation(element) {
-  const nav = document.querySelector('nav.navbar');
-  if (window.scrollY >= element.offsetHeight / 2) {
-    nav.classList.add('bg-white');
-  } else {
-    nav.classList.remove('bg-white');
-  }
-}
 
 const notFoundTimer = document.querySelector('.timerRedirect')
 if (notFoundTimer) {
@@ -402,6 +400,49 @@ Array.from(document.querySelectorAll('.dropdown-custom')).map(dropdown => {
     dropdown.querySelector('.dropdown-menu').classList.toggle('show')
   })
 })
+
+/**
+ * Handling main navigation animations
+ */
+const body = document.body;
+const burgerIcon = document.getElementById('burger-icon');
+const burgerClosedIcon = document.getElementById('burger-closed-icon');
+const navToggler = document.querySelector('.navbar-toggler-icon');
+const dropdownMenus = document.querySelectorAll('.dropdown-custom .dropdown-menu');
+const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+const navContent = document.querySelector('.nav-content');
+
+$('#collapsingNavbar3').on('hide.bs.collapse', function () {
+  body.classList.toggle('overflow-hidden');
+  burgerIcon.classList.toggle('fully-transparent');
+  burgerClosedIcon.classList.toggle('fully-transparent');
+  navToggler.classList.toggle('rotate-180');
+  dropdownMenus.forEach((el) => {
+    el.classList.remove('show');
+  });
+  dropdownToggles.forEach((el) => {
+    el.classList.remove('rotated');
+  });
+});
+
+$('#collapsingNavbar3').on('show.bs.collapse', function () {
+  body.classList.toggle('overflow-hidden');
+  navContent.scrollIntoView({ behavior: 'smooth' });
+  burgerIcon.classList.toggle('fully-transparent');
+  navToggler.classList.toggle('rotate-180');
+  burgerClosedIcon.classList.toggle('fully-transparent');
+});
+
+$('.dropdown-toggle').on('click', function (e) {
+  e.target.classList.toggle('rotated');
+});
+
+// const burger = document.querySelector('#collapsingNavbar3');
+// if(burger)(
+//   burger.addEventListener("click", function (event) {
+//     document.body.toggleClass('no-scroll');
+// })
+// )
 
 // const setObserver = (ref) => {
 //   let options = {
