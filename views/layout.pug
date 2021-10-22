@@ -100,8 +100,9 @@ html.h-100(lang=locale === "de" ? 'de': 'en')
     .d-flex.flex-column.flex-grow-1(class=currentPath && /users|admin/.test(currentPath) ? 'h-100' : "" )
       .flex-grow-1.z-0(class=currentPath && /users|admin/.test(currentPath) ? 'bg-light pb-5' : "" )
         block content
-        if currentPath && !currentPath.includes('admin') && !currentPath.includes('users')
-          footer.site-footer(role='contentinfo' class=user ? "pb-5" : "" style=course && `color: ${course.textColor}`)
+      if currentPath && !currentPath.includes('admin') && !currentPath.includes('users')
+        footer.site-footer(role='contentinfo' class=user ? "pb-5" : "" style=course && `color: ${course.textColor}`)
+          if !blank
             section.position-relative.px-4.px-md-0.pb-5(class=course && course.coloraccent ? `` : `bg-primary-dark`, style=course && course.coloraccent ? `background-color: rgb(${course.coloraccent.replace(/.*\((.*)\)/g, "$1").split(',').map(i => Math.floor(i * 0.8)).join(', ')}` : `` )
               if currentPath !== "/users/login" && currentPath !== "/users/register" && currentPath !== '/jobcenter' && !currentPath.includes('/signup') && !blank
                 +newsletter
