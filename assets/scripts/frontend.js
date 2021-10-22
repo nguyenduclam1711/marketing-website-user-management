@@ -173,12 +173,14 @@ window.onscroll = () => {
 const handleNavigation = () => {
   let applyNow = document.querySelector('.apply-now');
   let nav = document.querySelector('#nav-primary');
-  if (window.scrollY > 50) {
-    applyNow.classList.add('nav-button-scrolled');
-    nav.classList.add('nav-scrolled');
-  } else {
-    applyNow.classList.remove('nav-button-scrolled');
-    nav.classList.remove('nav-scrolled');
+  if (applyNow && nav) {
+    if (window.scrollY > 50) {
+      applyNow.classList.add('nav-button-scrolled');
+      nav.classList.add('nav-scrolled');
+    } else {
+      applyNow.classList.remove('nav-button-scrolled');
+      nav.classList.remove('nav-scrolled');
+    }
   }
 };
 
