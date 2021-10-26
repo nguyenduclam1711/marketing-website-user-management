@@ -14,3 +14,4 @@ backup
 locales/*
 .DS_STORE
 .github/workflows/test.yml
+migration/*.json

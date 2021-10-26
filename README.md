@@ -108,6 +108,8 @@ db.users.findOneAndUpdate({email: "user@digitalcareerinstitute.org}, {$set: {adm
 To keep the database according to the changes to the model over time, you can create migrations to batch over all records. 
 
 Run them for example with `nodemon migration/runner.js MIGRATION_FILE_NAME.js`
+
+This is also used to sync contacts manually with hubspot. The [migration/manually_send_hubspot_payload.js](https://github.com/DigitalCareerInstitute/marketing-website/blob/staging/migration/manually_send_hubspot_payload.js) holds the DB backup, sanitizing and sync-process documentation.
 ## Features
 
 For some actions you need a superadmin account, for some a normal admin role is enough. Contact [@spielhoelle](mailto:thomas.kuhnert@digitalcareerinstitute.org) or [@ majofi](https://github.com/majofi) for extended access rights.
