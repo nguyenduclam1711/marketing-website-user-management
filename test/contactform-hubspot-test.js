@@ -10,6 +10,8 @@ const server = require("../server");
 let browser
 (async () => {
     let hubspotContactID
+    //TODO remove this line
+    console.log('process.env', Object.keys(process.env).map((key) => ({ [key]: process.env[key].slice(0, 10) + "..." })));
     describe('Contactform and hubspot contact existence', function () {
         before(function (done) {
             mongoose.connection.on("error", console.error.bind(console, "connection error"));
