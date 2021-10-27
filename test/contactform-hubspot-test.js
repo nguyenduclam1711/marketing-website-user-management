@@ -26,8 +26,8 @@ let browser
         it('Fills the contact form and submits it', async function () {
             return new Promise(async function (resolve, reject) {
                 browser = await puppeteer.launch({
-                    defaultViewport: null,
-                    headless: false,
+                    // defaultViewport: null,
+                    // headless: false,
                     // devtools: true
                     args: ["--no-sandbox"]
                 });
