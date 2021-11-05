@@ -19,6 +19,11 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
+    - name: Get env secrets
+      env:
+        HUBSPOT_API_KEY: ${{ secrets.HUBSPOT_API_KEY }}
+        USE_REDIS: ${{ secrets.USE_REDIS }}
+        EVENTBRIDE_API_KEY: ${{ secrets.EVENTBRIDE_API_KEY }}
     - name: Checkout repository
       uses: actions/checkout@v2
       with:
