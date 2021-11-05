@@ -70,7 +70,7 @@ let browser
                                 if (emailInputs.length > 0) {
                                     Array.from(emailInputs).map(emailInput => {
                                         if (emailInput) {
-                                            emailInput.value = "thomas.kuhnert+test@digitalcareerinstitute.org";
+                                            emailInput.value = "thomas.kuhnert@digitalcareerinstitute.org";
 
                                         }
                                     })
@@ -149,7 +149,7 @@ let browser
             return new Promise(async function (resolve) {
                 var options = {
                     method: 'GET',
-                    url: `https://api.hubapi.com/contacts/v1/contact/email/thomas.kuhnert+test@digitalcareerinstitute.org/profile`,
+                    url: `https://api.hubapi.com/contacts/v1/contact/email/thomas.kuhnert@digitalcareerinstitute.org/profile`,
                     qs: { hapikey: process.env.HUBSPOT_API_KEY }
                 }
                 request(options, function (error, response, body) {
