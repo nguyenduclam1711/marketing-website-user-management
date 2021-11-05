@@ -49,6 +49,7 @@ jobs:
           ${{ runner.os }}-
     - run: npm install
     - name: npm test
+      run: npm test
       env:
         HUBSPOT_API_KEY: ${{ secrets.HUBSPOT_API_KEY }}
         USE_REDIS: ${{ secrets.USE_REDIS }}
