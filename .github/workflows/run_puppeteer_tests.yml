@@ -19,6 +19,13 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
+    - name: Install dependencies
+      run: |
+        sudo apt install libgbm1
+        cd /Users/thomaskuhnert/develop/dci/marketing-website
+        sudo npm uninstall puppeteer -g --unsafe-perm=true
+        sudo npm install puppeteer -g --unsafe-perm=true
+        sudo npm link puppeteer
     - name: Checkout repository
       uses: actions/checkout@v2
       with:
@@ -34,7 +41,6 @@ jobs:
       uses: supercharge/mongodb-github-action@1.2.0
       with:
         mongodb-version: ${{ matrix.mongodb-version }}
-    - run: ls -la
     - name: Cache node modules
       uses: actions/cache@v2
       env:
