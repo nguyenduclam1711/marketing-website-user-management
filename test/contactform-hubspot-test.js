@@ -1,34 +1,52 @@
 require("dotenv").config({ path: __dirname + "/../.env" });
-const Location = require("../models/location");
+const Question = require("../models/question");
 const request = require("request");
 const puppeteer = require('puppeteer');
 const assert = require('assert');
 const supertest = require("supertest");
 const mongoose = require("mongoose");
+const test_mail = "thomas.kuhnert+test@digitalcareerinstitute.org"
 
 const server = require("../server");
 let browser
 (async () => {
     let hubspotContactID
     describe('Contactform and hubspot contact existence', function () {
-        before(function (done) {
-            mongoose.connection.on("error", console.error.bind(console, "connection error"));
-            mongoose.connection.once("open", function () {
-                console.log("We are connected to test database!");
-                new Location({
-                    name: "Berlin",
-                    street: "Vulkanstrasse 1",
-                    zip: "10243"
-                });
-                done();
+        before(async function () {
+            return new Promise(async resolve => {
+                const questions = await Question.find()
+                try {
+                    if (questions.length === 0) {
+                        console.log("No questions found in database. Fetching and reating questions...")
+                        var options = {
+                            method: 'GET',
+                            "content-type": "application/json",
+                            url: 'https://digitalcareerinstitute.org/admin/questions/fetch/student',
+                            qs: { hapikey: process.env.HUBSPOT_API_KEY }
+                        }
+                        request(options, async function (error, response, body) {
+                            const json = JSON.parse(response.body);
+                            if (error) throw new Error(error);
+                            studen_question_mock = json.payload.questions
+                            delete studen_question_mock._id
+                            delete studen_question_mock._v
+                            await Question.create(studen_question_mock);
+                            resolve()
+                        });
+                    }
+                } catch (error) {
+                    console.log('error', error);
+                } finally {
+                    resolve()
+                }
             });
-        });
+        })
         it('Fills the contact form and submits it', async function () {
             return new Promise(async function (resolve, reject) {
                 browser = await puppeteer.launch({
-                    // defaultViewport: null,
-                    // headless: false,
-                    // devtools: true
+                    defaultViewport: null,
+                    headless: false,
+                    devtools: true,
                     args: ["--no-sandbox"]
                 });
                 const serverInstance = supertest(server).get("/")
@@ -38,6 +56,14 @@ let browser
                 let submitted = false
                 page.waitForSelector('.dynamicinputform')
                     .then(async () => {
+                        const example = await page.$('.navbar-brand');
+                        const bounding_box = await example.boundingBox();
+
+                        await page.mouse.move(bounding_box.x + bounding_box.width / 2, bounding_box.y + bounding_box.height / 2);
+                        await page.mouse.down();
+                        await page.mouse.move(126, 19);
+                        await page.mouse.up();
+
                         const recursiveClick = async (submitButton) => {
                             await page.evaluate(() => {
                                 const dropdowns = document.querySelectorAll('select');
@@ -65,17 +91,16 @@ let browser
                                     })
                                 }
                             });
-                            await page.evaluate(() => {
+                            await page.evaluate((email) => {
                                 const emailInputs = document.querySelectorAll('input[type="email"]:not(.answerbutton)');
                                 if (emailInputs.length > 0) {
-                                    Array.from(emailInputs).map(emailInput => {
+                                    Array.from(emailInputs).map(async emailInput => {
                                         if (emailInput) {
-                                        emailInput.value = "thomas.kuhnert+test@digitalcareerinstitute.org";
-
+                                            emailInput.value = email;
                                         }
                                     })
                                 }
-                            });
+                            }, test_mail);
                             await page.evaluate(() => {
                                 const telInputs = document.querySelectorAll('input[type="tel"]:not(.answerbutton)');
                                 if (telInputs.length > 0) {
@@ -98,8 +123,7 @@ let browser
                             })
                             if (submitButton[0]) {
                                 submitted = true
-                                const TermsofService = await page.$('input[name="TermsofService"]');
-                                TermsofService.click();
+                                await page.$eval('input[name="TermsofService"]', check => check.checked = true);
                                 await page.waitForTimeout(1000); // wait for 5 seconds
                                 await submitButton[0].click()
                                 await Promise.all([
@@ -107,7 +131,6 @@ let browser
                                     page.waitForSelector('h1'),
                                 ]);
                                 const heading1 = await page.$eval("h1", el => el.textContent);
-                                console.log('heading1', heading1);
                                 if (heading1 === "Thank you for applying!") {
                                     resolve()
                                 } else {
@@ -134,7 +157,7 @@ let browser
                                 // });
                             } else {
                                 if (!submitted) {
-                                    await page.waitForTimeout(300);
+                                    await page.waitForTimeout(500);
                                     const nextSubmitButton = await page.$$('[data-nextquestions=""]')
                                     recursiveClick(nextSubmitButton)
                                 }
@@ -149,12 +172,11 @@ let browser
             return new Promise(async function (resolve) {
                 var options = {
                     method: 'GET',
-                    url: `https://api.hubapi.com/contacts/v1/contact/email/thomas.kuhnert+test@digitalcareerinstitute.org/profile`,
+                    url: `https://api.hubapi.com/contacts/v1/contact/email/${test_mail}/profile`,
                     qs: { hapikey: process.env.HUBSPOT_API_KEY }
                 }
                 request(options, function (error, response, body) {
                     if (error) throw new Error(error);
-                    console.log('JSON.parse(body)', JSON.parse(body));
                     assert.equal(JSON.parse(body).properties.phone.value, '+491234567890')
                     assert.equal(JSON.parse(body).properties.firstname.value, 'Testvalue')
                     assert.equal(JSON.parse(body).properties.age.value, '33')
@@ -172,6 +194,14 @@ let browser
                     });
                 });
             });
+        });
+        after(async function () {
+            return new Promise(async resolve => {
+                const res = await Question.collection.drop()
+                console.log('Questions cleared');
+                resolve()
+
+            })
         });
     });
 })();

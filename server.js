@@ -24,7 +24,6 @@ const { getAvailableTranslations } = require('./controllers/AbstractController')
 const compression = require('compression')
 const { updateLocaleFile } = require('./helpers/helper')
 //TODO remove this line
-console.log('process.env', Object.keys(process.env).map((key) => ({ [key]: process.env[key].slice(0, 10) + "..." })));
 // connect to redis server and get an extended client with promisified
 // methods getAsync() and setAsync()
 let redisClient = null;
