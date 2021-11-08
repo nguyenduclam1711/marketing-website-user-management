@@ -48,7 +48,7 @@ let browser
                     headless: false,
                     devtools: true,
                     args: [
-                        `--no-sandbox`
+                        `--no-sandbox`,
                         `--disable-setuid-sandbox`,
                     ],
                 });
