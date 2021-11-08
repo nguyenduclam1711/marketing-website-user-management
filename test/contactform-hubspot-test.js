@@ -45,8 +45,9 @@ let browser
             return new Promise(async function (resolve, reject) {
                 browser = await puppeteer.launch({
                     defaultViewport: null,
-                    headless: false,
-                    devtools: true,
+                    // headless: false,
+                    // devtools: true,
+                    dumpio: true,
                     args: [
                         `--no-sandbox`,
                         `--disable-setuid-sandbox`,
