@@ -350,6 +350,7 @@
 .rotated {
   &:after {
     transform: rotate(-90deg);
+    content: url(/assets/submenu-hollow-arrow.svg);
   }
 }
 
