@@ -22,7 +22,6 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get -yq update && apt-get -yq install
-        sudo apt-get update
         sudo apt-get install -y libgbm1
 
         # cd /home/runner/work/marketing-website/marketing-website/
