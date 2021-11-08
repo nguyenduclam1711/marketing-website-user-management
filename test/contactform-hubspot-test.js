@@ -47,7 +47,10 @@ let browser
                     defaultViewport: null,
                     headless: false,
                     devtools: true,
-                    args: ["--no-sandbox"]
+                    args: [
+                        `--no-sandbox`
+                        `--disable-setuid-sandbox`,
+                    ],
                 });
                 const serverInstance = supertest(server).get("/")
                 const page = await browser.newPage();

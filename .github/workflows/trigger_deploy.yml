@@ -1,4 +1,4 @@
-name: trigger_deploy
+name: Trigger deployment
 on:
   repository_dispatch:
   workflow_dispatch:

@@ -5,7 +5,7 @@ name: Run puppeteer tests
 
 on:
   push:
-
+  workflow_dispatch:
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -21,7 +21,9 @@ jobs:
     steps:
     - name: Install dependencies
       run: |
-        sudo apt install libgbm1
+        sudo apt-get update
+        sudo apt-get install -y libgbm1
+
         # cd /home/runner/work/marketing-website/marketing-website/
         sudo npm uninstall puppeteer -g --unsafe-perm=true
         sudo npm install puppeteer -g --unsafe-perm=true
