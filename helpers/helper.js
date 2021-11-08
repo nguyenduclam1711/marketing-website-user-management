@@ -112,7 +112,6 @@ exports.getRequestUrl = req => {
 };
 exports.sendMail = async (res, req, mailOptions) => {
   const envs = ["MAILHOST", "MAILPORT", "MAILUSER", "MAILPW"];
-  console.log('process.env', process.env);
   if (Object.keys(process.env).filter(e => envs.includes(e)).length !== envs.length || !mailOptions.to) {
     console.log("Mailer env variables not set");
     return "Mailer env variables not set"

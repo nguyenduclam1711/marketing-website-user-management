@@ -22,7 +22,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt install libgbm1
-        cd /Users/thomaskuhnert/develop/dci/marketing-website
+        # cd /home/runner/work/marketing-website/marketing-website/
         sudo npm uninstall puppeteer -g --unsafe-perm=true
         sudo npm install puppeteer -g --unsafe-perm=true
         sudo npm link puppeteer
