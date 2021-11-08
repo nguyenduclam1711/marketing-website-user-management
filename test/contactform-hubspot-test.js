@@ -50,7 +50,6 @@ let browser
                     dumpio: true,
                     args: [
                         `--no-sandbox`,
-                        `--disable-setuid-sandbox`,
                     ],
                 });
                 const serverInstance = supertest(server).get("/")

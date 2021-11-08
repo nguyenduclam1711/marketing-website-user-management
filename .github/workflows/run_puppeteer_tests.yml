@@ -21,9 +21,9 @@ jobs:
     steps:
     - name: Install dependencies
       run: |
-        sudo apt-get install libxml2-utils
-        sudo apt-get -yq update && sudo apt-get -yq install
-        sudo apt-get install -y libgbm1
+        # sudo apt-get install libxml2-utils
+        # sudo apt-get -yq update && sudo apt-get -yq install
+        # sudo apt-get install -y libgbm1
 
         # cd /home/runner/work/marketing-website/marketing-website/
         sudo npm uninstall puppeteer -g --unsafe-perm=true
