@@ -1,0 +1,380 @@
+[
+	{
+		"slug": "faqs",
+		"title": "FAQs",
+		"content": {
+			"ops": [
+				{
+					"attributes": {
+						"header": 3
+					},
+					"insert": "\n"
+				},
+				{
+					"attributes": {
+						"bold": true
+					},
+					"insert": "What are the financing options for the course?"
+				},
+				{
+					"attributes": {
+						"header": 3
+					},
+					"insert": "\n"
+				},
+				{
+					"insert": "There are three payment models for our course:\nIf you are unemployed and registered at the Agentur für Arbeit or Jobcenter, you can get the course 100% financed by them via an education voucher."
+				},
+				{
+					"attributes": {
+						"list": "ordered"
+					},
+					"insert": "\n"
+				},
+				{
+					"insert": "If option 1 doesn’t apply to you, you can cooperate with our partner Chancen eG. They will pay your fees for the course and if you find a job after successful completion of the course, you pay them back in small rates."
+				},
+				{
+					"attributes": {
+						"list": "ordered"
+					},
+					"insert": "\n"
+				},
+				{
+					"insert": "There also is the option for self payment."
+				},
+				{
+					"attributes": {
+						"list": "ordered"
+					},
+					"insert": "\n"
+				},
+				{
+					"insert": "Please "
+				},
+				{
+					"attributes": {
+						"link": "https://digitalcareerinstitute.org/signup"
+					},
+					"insert": "contact"
+				},
+				{
+					"insert": " our education councils for further information.\n\n"
+				},
+				{
+					"attributes": {
+						"header": 3
+					},
+					"insert": "\n"
+				},
+				{
+					"insert": "How can I get an education voucher?"
+				},
+				{
+					"attributes": {
+						"header": 3
+					},
+					"insert": "\n"
+				},
+				{
+					"insert": "To get an education voucher, you have to talk with your personal Arbeitsvermittler at the Agentur für Arbeit or Jobcenter who will check whether you are qualified.\n\n\nHow can I apply?"
+				},
+				{
+					"attributes": {
+						"header": 3
+					},
+					"insert": "\n"
+				},
+				{
+					"insert": "It’s really simple. Just fill out the "
+				},
+				{
+					"attributes": {
+						"link": "https://digitalcareerinstitute.org/signup"
+					},
+					"insert": "application form"
+				},
+				{
+					"insert": " and one of our education consultants will get in touch with you as soon as possible to guide you through the application process.\n\n\nWho can attend the courses?"
+				},
+				{
+					"attributes": {
+						"header": 3
+					},
+					"insert": "\n"
+				},
+				{
+					"insert": "The courses are open to anyone! We want to support everyone who is interested in pursuing a digital career. Your origin or previous knowledge do not matter.\n\n\nCan I get a visa (e.g. student visa) when taking part in a course?"
+				},
+				{
+					"attributes": {
+						"header": 3
+					},
+					"insert": "\n"
+				},
+				{
+					"insert": "No, the participation in our courses does not qualify you for a work or student visa.\n\n\nDo I need previous technical knowledge to join a course?"
+				},
+				{
+					"attributes": {
+						"header": 3
+					},
+					"insert": "\n"
+				},
+				{
+					"insert": "Absolutely not! Our courses are made for beginners, as well as people who have previous knowledge in the field of IT.\n\n\nHow good does my language level need to be to join a course?"
+				},
+				{
+					"attributes": {
+						"header": 3
+					},
+					"insert": "\n"
+				},
+				{
+					"insert": "Ideally you speak German or English on a B1 level. However, we don’t strictly require you to be able to show a language certificate, we simply want you to be able to follow the lessons. We offer German and English language classes as part of our courses to further improve your language skills.\n\n\nWhat courses do you offer?"
+				},
+				{
+					"attributes": {
+						"header": 3
+					},
+					"insert": "\n"
+				},
+				{
+					"attributes": {
+						"background": "transparent",
+						"color": "#1d1c1d"
+					},
+					"insert": "DCI offers a 4 week Orientation Course where you will learn the basics of Web Development and Online Marketing and participate in team and job application workshops, while building first connections with potential employers. DCI also offers two subsequent year long courses in Web Development and Online Marketing. In an exclusive cooperation with Amazon Web Services (AWS) we offer the AWS re/Start Cloud Consultant. For more information on the individual courses, please visit our"
+				},
+				{
+					"insert": " "
+				},
+				{
+					"attributes": {
+						"link": "https://digitalcareerinstitute.org/#courses"
+					},
+					"insert": "course pages"
+				},
+				{
+					"insert": ".\n\n\nWhich programming languages can I learn in the Web Development course?"
+				},
+				{
+					"attributes": {
+						"header": 3
+					},
+					"insert": "\n"
+				},
+				{
+					"insert": "In our Web Development course you will get to know HTML, CSS, SCSS and JavaScript. For more information, check out our Web Development "
+				},
+				{
+					"attributes": {
+						"link": "https://digitalcareerinstitute.org/courses/web-development-course"
+					},
+					"insert": "course overview"
+				},
+				{
+					"insert": ".\n\n\nWhat is the duration of a course?"
+				},
+				{
+					"attributes": {
+						"header": 3
+					},
+					"insert": "\n"
+				},
+				{
+					"attributes": {
+						"background": "transparent",
+						"color": "#1d1c1d"
+					},
+					"insert": "Our Orientation course is four weeks long. The Web Development course is 14 months and the Online Marketing course is 16 months in duration. Included in each of those time frames is a 2 month long integrated work placement which our students complete at the end of their courses. Our AWS re/Start Cloud Administration course has a duration of 3 months"
+				},
+				{
+					"insert": ".\n\n\nAre there part time courses for students, mothers or full time employees?"
+				},
+				{
+					"attributes": {
+						"header": 3
+					},
+					"insert": "\n"
+				},
+				{
+					"insert": "Unfortunately, we are not offering part time courses at the moment. However, this will change within the next few months. Feel free to sign up to our "
+				},
+				{
+					"attributes": {
+						"link": "https://digitalcareerinstitute.org/#newsletter"
+					},
+					"insert": "Newsletter"
+				},
+				{
+					"insert": " to be amongst the first people to find out when part time courses are available. \n\n\nI don’t live in one of the four locations. Can I do a course fully online?"
+				},
+				{
+					"attributes": {
+						"header": 3
+					},
+					"insert": "\n"
+				},
+				{
+					"insert": "Yes, we have recently started to offer fully remote online courses for all of Germany. So no matter where in Germany you live, feel free to "
+				},
+				{
+					"attributes": {
+						"link": "https://digitalcareerinstitute.org/signup"
+					},
+					"insert": "apply"
+				},
+				{
+					"insert": ".\n\n\nWhen do the new courses start?"
+				},
+				{
+					"attributes": {
+						"header": 3
+					},
+					"insert": "\n"
+				},
+				{
+					"attributes": {
+						"background": "transparent",
+						"color": "#1d1c1d"
+					},
+					"insert": "The orientation course kicks-off every two weeks. Web Development starts every 4 weeks and Online Marketing in regular intervals of 6-8 weeks. Our AWS re/Start Cloud Administration course starts all 3-4 months. The starting dates can differ from campus to campus. Check out our individual "
+				},
+				{
+					"attributes": {
+						"link": "https://digitalcareerinstitute.org/#courses"
+					},
+					"insert": "course pages"
+				},
+				{
+					"insert": " "
+				},
+				{
+					"attributes": {
+						"color": "#1d1c1d",
+						"background": "transparent"
+					},
+					"insert": "to figure out the next starting dates for each location."
+				},
+				{
+					"insert": "\n\n\nHow many teachers are responsible for a single class?"
+				},
+				{
+					"attributes": {
+						"header": 3
+					},
+					"insert": "\n"
+				},
+				{
+					"insert": "It is usually 1-2 teachers who are responsible for one class.\n\n\nWhy is the course an entire year long?"
+				},
+				{
+					"attributes": {
+						"header": 3
+					},
+					"insert": "\n"
+				},
+				{
+					"insert": "Our courses have a very detailed curriculum which is adapted to the requirements of the job market. In addition to that, we also assign a lot of time to project work, the creation of an individual portfolio and at the end of the course, there is a two month long internship which will help you gain practical experience. All of this should increase your chances of finding a good job. It is our goal to prepare as best as we can for your digital career.\n\n\nWhich languages are the courses taught in?"
+				},
+				{
+					"attributes": {
+						"header": 3
+					},
+					"insert": "\n"
+				},
+				{
+					"insert": "Most of our courses are taught in English however, we also offer each course in German. Which language you choose depends on your personal preferences and language skills.\n\n\nIs it possible to only join selected modules of each course?"
+				},
+				{
+					"attributes": {
+						"header": 3
+					},
+					"insert": "\n"
+				},
+				{
+					"insert": "No, that is not possible. If you join a course, you should participate in every module.\n\n\nDo I have to look for the integrated work placement myself?"
+				},
+				{
+					"attributes": {
+						"header": 3
+					},
+					"insert": "\n"
+				},
+				{
+					"insert": "No, we have a dedicated career success team who will actively support you in finding the right placement for you. In addition you will benefit from the large company network we have established at DCI.\n\n\nWhich career options do I have after completing a course?"
+				},
+				{
+					"attributes": {
+						"header": 3
+					},
+					"insert": "\n"
+				},
+				{
+					"attributes": {
+						"background": "transparent",
+						"color": "#1d1c1d"
+					},
+					"insert": "The certificate you receive after successful completion of a course, qualifies you to work in a digital company. This applies to Online Marketing and Web Development. When you finish the AWS re/Start Cloud Administration course, you will acquire an international authorized certificate."
+				},
+				{
+					"insert": "\n\n\nWhat kind of certificate do I receive at the end of a course?"
+				},
+				{
+					"attributes": {
+						"header": 3
+					},
+					"insert": "\n"
+				},
+				{
+					"insert": "After successful completion of the course, you will receive a certificate which certifies the content and duration of the further education measure as well as the completed internship. The certificate is a so-called further education certificate according to §81, which was checked and approved within the scope of the approval of the further education. The certificate serves you for application purposes and is recognized by companies.\n\n\nHow good is the certificate compared to a university degree?"
+				},
+				{
+					"attributes": {
+						"header": 3
+					},
+					"insert": "\n"
+				},
+				{
+					"insert": "Compared to universities, which are usually very focused on theory, our courses are much more practical, as practical skills are really important in future jobs. Our curriculum is created with companies from the industry which means our content is highly relevant and very well adapted to the current job market. Our goal is to help you get your dream job.\n\n\nWhat happens when I receive a job offer during the course?"
+				},
+				{
+					"attributes": {
+						"header": 3
+					},
+					"insert": "\n"
+				},
+				{
+					"insert": "Our goal is to successfully place all participants in a job. Therefore we support you if you find a job during the course and in this case we make it possible to leave the course early. How exactly this happens has to be clarified in each individual case.\n\n\nI have more questions that were not answered here. What can I do?"
+				},
+				{
+					"attributes": {
+						"header": 3
+					},
+					"insert": "\n"
+				},
+				{
+					"insert": "Feel free to "
+				},
+				{
+					"attributes": {
+						"link": "https://digitalcareerinstitute.org/signup"
+					},
+					"insert": "contact us"
+				},
+				{
+					"insert": ". We will try to answer your queries as quickly as possible.\n\n"
+				}
+			]
+		},
+		"order": 2,
+		"cta_button_url": "",
+		"cta_button_text": "GoGo gadget!",
+		"cta_text": "",
+		"prominent": false,
+		"__v": 0,
+		"companypage": false,
+		"metapage": true
+	}
+]

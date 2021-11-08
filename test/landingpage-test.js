@@ -1,24 +1,49 @@
-//const server = require('../server.js')
+const assert = require('assert');
 require("dotenv").config({ path: __dirname + "/../.env" });
 var expect = require("chai").expect;
 var chai = require("chai"),
   chaiHttp = require("chai-http");
 chai.use(chaiHttp);
 var request = require("supertest");
+const Course = require("../models/course");
+const Page = require("../models/page");
 
 var server = require("../server");
-//beforeEach(function () {
+const course_mocks = require('./mocks/course_mock.json')
+const page_mock = require('./mocks/page_mock.json')
 
-//});
-//afterEach(function () {
-//console.log('#####', server);
-//server.close();
-//});
-describe("Basic DOM tests", function() {
-  it("responds to /", function testSlash(done) {
-    request(server)
-      .get("/")
-      .expect(200, done);
+describe("Basic DOM tests", function () {
+  before('Displays course page', async () => {
+    await Course.insertMany(course_mocks)
+    await Page.insertMany(page_mock)
+  })
+  it('Landingpage', async () => {
+    await request(server)
+      .get('/')
+      .expect(200)
+      .expect((response) => {
+        assert.ok(response.text.includes('AWS re/Start Program'));
+        assert.ok(response.text.includes('Web Development'));
+      });
+  });
+  it('Course page', async () => {
+    await request(server)
+      .get('/courses/aws-re-start-program')
+      .expect(200)
+      .expect((response) => {
+        response.text
+        assert.ok(response.text.includes('AWS re/Start Program'));
+      });
+  });
+  it('FAq pages', async () => {
+    await request(server)
+      .get('/pages/faqs')
+      .expect(200)
+      .expect((response) => {
+        console.log(page_mock[0].content)
+        console.log('response.text', response.text);
+        assert.ok(response.text.includes('What are the financing options for the course'));
+      });
   });
   it("404 everything else", function testPath(done) {
     request(server)
@@ -29,40 +54,7 @@ describe("Basic DOM tests", function() {
         done();
       })
   });
-  //});
-
-  it("Landingpage page content", function(done) {
-    request(server)
-      .get("/")
-      .expect(200)
-      .expect("Content-Type", /html/)
-      .end(function(err, res) {
-        if (err) return done(err);
-        res.text.includes("Digital Career Institute");
-        res.text.includes("Start your");
-        done();
-      });
-  });
-  it("German landingpage page content", function(done) {
-    request(server)
-      .get("/de/")
-      .expect(200)
-      .expect("Content-Type", /html/)
-      .end(function(err, res) {
-        if (err) return done(err);
-        res.text.includes("Starte deine");
-        done();
-      });
-  });
-  it("Stories page content", function(done) {
-    request(server)
-      .get("/stories")
-      .expect(200)
-      .expect("Content-Type", /html/)
-      .end(function(err, res) {
-        if (err) return done(err);
-        res.text.includes("Stories route");
-        done();
-      });
-  });
+  after(async function () {
+    const res = await Course.remove()
+  })
 });
