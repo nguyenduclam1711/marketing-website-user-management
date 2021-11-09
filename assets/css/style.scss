@@ -340,7 +340,7 @@
       transition: transform .2s ease-in-out;
       border: none;
       margin: 0;
-      content: url(~/assets/submenu-arrow.svg);
+      content: url(~/assets/submenu-hollow-arrow.svg);
       position:absolute;
       right: 20px;
       width: 18px;
@@ -350,7 +350,7 @@
 .rotated {
   &:after {
     transform: rotate(-90deg);
-    content: url(/assets/submenu-hollow-arrow.svg);
+    content: url(/assets/submenu-arrow.svg);
   }
 }
 
