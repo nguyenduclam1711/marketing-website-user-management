@@ -27,7 +27,7 @@ mixin navigation
               .dropdown-menu.dropdown-menu-left.border-radius-0.shadow-sm.z-0.p-lg-3.courses-dropdown(aria-labelledby='navbarDropdownMenuLink')
                   div.grid-layout
                     each course in courses
-                      a.dropdown-item.p-2.nav-link.px-2(class=course && currentPath.includes(course.slug) ? `bg-nav-selected` : ``, href='/courses/'+ course.slug)
+                      a.dropdown-item.p-2.nav-link.px-2(class=course, href='/courses/'+ course.slug)
                           div.icon-container
                             img.object-fit-cover(alt=course.headline src="/images/" + course.menuicon)
                           div.details-container
