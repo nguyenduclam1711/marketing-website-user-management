@@ -126,27 +126,39 @@ const input = document.querySelector('input[name*="phone"]')
 if (input) {
 	const iti = intlTelInput(input, itiConfig);
 }
+const findNextQuestions = (diagramLinks, questions, flow) => {
+	var linksToNextQ = questions.map(q => {
+		return Object.values(flow.model.layers.find(layer => layer.type === "diagram-nodes").models)
+			.filter(links => Object.values(diagramLinks)
+				.filter(layer => layer.source === q.id).map(l => l.target).includes(links.id))
+	}).flat().map(a => a.ports[1].links).flat()
+
+	var nextQuestions = Object.values(flow.model.layers.find(layer => layer.type === "diagram-nodes").models)
+		.filter(node => {
+			return node.ports[0].links.find(l => {
+				if (linksToNextQ.includes(l)) {
+					return node
+				}
+			})
+		});
+	return nextQuestions
+}
 const render = (questions, flow) => {
 	const questionroot = document.querySelector(flow.renderselector)
 	if (questionroot) {
 		const diagramLinks = flow.model.layers.find(layer => layer.type === "diagram-links").models
 		if (diagramLinks) {
-			var linksToNextQ = questions.map(q => {
-				return Object.values(flow.model.layers.find(layer => layer.type === "diagram-nodes").models)
-					.filter(links => Object.values(diagramLinks)
-						.filter(layer => layer.source === q.id).map(l => l.target).includes(links.id))
-			}).flat().map(a => a.ports[1].links).flat()
-
-			var nextQuestions = Object.values(flow.model.layers.find(layer => layer.type === "diagram-nodes").models)
-				.filter(node => {
-					return node.ports[0].links.find(l => {
-						if (linksToNextQ.includes(l)) {
-							return node
-						}
-					})
-				});
 			const paramsString = window.location.search
 			let searchParams = new URLSearchParams(paramsString);
+			let nextQuestions = findNextQuestions(diagramLinks, questions, flow)
+			let isHidden = false
+			let i = 0
+			while (searchParams.get(nextQuestions[0].extras.questionidentifier) === "false") {
+				if (searchParams.get(nextQuestions[0].extras.questionidentifier) === "false") {
+					nextQuestions = findNextQuestions(diagramLinks, nextQuestions, flow)
+				}
+				i++
+			}
 			const html = `
 		<div class="w-100 container">
 		<div id="popup" class="py-5 d-flex flex-column justify-content-between w-300px w-100">
