@@ -40,8 +40,6 @@ describe("Basic DOM tests", function () {
       .get('/pages/faqs')
       .expect(200)
       .expect((response) => {
-        console.log(page_mock[0].content)
-        console.log('response.text', response.text);
         assert.ok(response.text.includes('What are the financing options for the course'));
       });
   });

@@ -4,41 +4,41 @@ const request = require("request");
 const puppeteer = require('puppeteer');
 const assert = require('assert');
 const supertest = require("supertest");
-const mongoose = require("mongoose");
 const test_mail = "thomas.kuhnert+test@digitalcareerinstitute.org"
-
-const server = require("../server");
+const app = require("../index");
 let browser
 (async () => {
     let hubspotContactID
     describe('Contactform and hubspot contact existence', function () {
         before(async function () {
             return new Promise(async resolve => {
-                const questions = await Question.find()
-                try {
-                    if (questions.length === 0) {
-                        console.log("No questions found in database. Fetching and reating questions...")
-                        var options = {
-                            method: 'GET',
-                            "content-type": "application/json",
-                            url: 'https://digitalcareerinstitute.org/admin/questions/fetch/student',
-                            qs: { hapikey: process.env.HUBSPOT_API_KEY }
+                app.on("app_started", async function () {
+                    const questions = await Question.find()
+                    try {
+                        if (questions.length === 0) {
+                            console.log("No questions found in database. Fetching and reating questions...")
+                            var options = {
+                                method: 'GET',
+                                "content-type": "application/json",
+                                url: 'https://digitalcareerinstitute.org/admin/questions/fetch/student',
+                                qs: { hapikey: process.env.HUBSPOT_API_KEY }
+                            }
+                            request(options, async function (error, response, body) {
+                                const json = JSON.parse(response.body);
+                                if (error) throw new Error(error);
+                                studen_question_mock = json.payload.questions
+                                delete studen_question_mock._id
+                                delete studen_question_mock._v
+                                await Question.create(studen_question_mock);
+                            });
                         }
-                        request(options, async function (error, response, body) {
-                            const json = JSON.parse(response.body);
-                            if (error) throw new Error(error);
-                            studen_question_mock = json.payload.questions
-                            delete studen_question_mock._id
-                            delete studen_question_mock._v
-                            await Question.create(studen_question_mock);
-                            resolve()
-                        });
+                    } catch (error) {
+                        console.log('error', error);
+                        reject(error)
+                    } finally {
+                        resolve()
                     }
-                } catch (error) {
-                    console.log('error', error);
-                } finally {
-                    resolve()
-                }
+                })
             });
         })
         it('Fills the contact form and submits it', async function () {
@@ -52,7 +52,7 @@ let browser
                         `--no-sandbox`,
                     ],
                 });
-                const serverInstance = supertest(server).get("/")
+                const serverInstance = supertest(app).get("/")
                 const page = await browser.newPage();
                 await page.goto(serverInstance.url + "signup", { waitUntil: 'networkidle2' });
                 page.waitForNavigation()
@@ -125,39 +125,30 @@ let browser
                                 }
                             })
                             if (submitButton[0]) {
-                                submitted = true
-                                await page.$eval('input[name="TermsofService"]', check => check.checked = true);
-                                await page.waitForTimeout(1000); // wait for 5 seconds
-                                await submitButton[0].click()
-                                await Promise.all([
-                                    page.waitForNavigation(),
-                                    page.waitForSelector('h1'),
-                                ]);
-                                const heading1 = await page.$eval("h1", el => el.textContent);
-                                if (heading1 === "Thank you for applying!") {
-                                    resolve()
-                                } else {
-                                    console.log('Error in Thank you page redirect', error);
-                                    reject()
+                                try {
+                                    submitted = true
+                                    await page.$eval('input[name="TermsofService"]', check => check.checked = true);
+                                    await page.waitForTimeout(3000); // wait for 5 seconds
+                                    await page.evaluate(() => {
+                                        let button = document.querySelector('button[type="submit"]')
+                                        if (button) {
+                                            button.click()
+                                        }
+                                    });
+                                    await Promise.all([
+                                        page.waitForNavigation({ waitUntil: 'domcontentloaded' }),
+                                        page.waitForNavigation({ waitUntil: 'load' }),
+                                        page.waitForSelector('h1'),
+                                    ]);
+                                    const heading1 = await page.$eval("h1", el => el.textContent);
+                                    if (heading1 === "Thank you for applying!") {
+                                        resolve()
+                                    } else {
+                                        reject('Error in Thank you page redirect')
+                                    }
+                                } catch (error) {
+                                    reject(error);
                                 }
-                                // TODO 
-                                // page.on('response', async (response) => {
-                                //     if (response.url() == `${serverInstance.url}contact`) {
-                                //         const responseJson = await response.json()
-                                //         if (responseJson.response.contact_id) {
-                                //             assert(responseJson.response.contact_id)
-
-                                //             const heading1 = await page.$eval("h1", el => el.textContent);
-                                //             if (heading1 === "Thank you for applying!") {
-                                //                 console.log('heading1', heading1);
-                                //                 resolve();
-                                //             } else {
-                                //                 console.log('error', error);
-                                //                 reject()
-                                //             }
-                                //         }
-                                //     }
-                                // });
                             } else {
                                 if (!submitted) {
                                     await page.waitForTimeout(500);
@@ -200,10 +191,12 @@ let browser
         });
         after(async function () {
             return new Promise(async resolve => {
-                const res = await Question.collection.drop()
-                console.log('Questions cleared');
-                resolve()
-
+                if (await Question.find()) {
+                    const res = await Question.collection.drop()
+                    console.log('Questions cleared');
+                }
+                console.log('Server closed');
+                app.close(resolve)
             })
         });
     });

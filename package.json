@@ -91,7 +91,7 @@
     "dev": "concurrently \"redis-server\" \"webpack --mode development --watch\" \"nodemon --inspect=9229 index.js --ignore 'assets' --ignore 'locales' --ignore 'public' --ignore 'test'\"  -n \"REDIS,WEBPACK,NODE\" --prefix name -c \"green.bold,red.bold,blue.bold\" --use_strict",
     "seed": "node seeds.js",
     "seed:delete": "node seeds.js --delete",
-    "test": "NODE_ENV=test mocha test/ --timeout 30000 --exit"
+    "test": "NODE_ENV=test MONGOURL='mongodb://localhost:27017/marketing-website-test' mocha test/ --timeout 30000 --exit"
   },
   "keywords": [],
   "author": "",
