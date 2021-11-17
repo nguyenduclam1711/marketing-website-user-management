@@ -12,7 +12,7 @@ NodeJs/Express/Passport/Pug/Redis, React in the backend
 
 ## Installation:
 1. Install `NodeJS/npm`
-1. Install `MongoDB` locally or run in a docker container `docker run --name dci-mongo -d mongo:latest`
+1. Install `MongoDB` locally or run in a docker container `docker run --name dci-mongo -p 27017:27017 -d mongo:latest`
 1. Install `Redis` or run it in a docker container `docker run --name dci-redis -d redis`
 1. copy the `.env.example` to `.env` and fill in the neccessary real secret keys what an admin eventually provides you.
 1. It can happend that it complains about a missing global `webpack` and `webpack-cli`. Just un\/install them global: `npm i webpack webpack-cli -g`
