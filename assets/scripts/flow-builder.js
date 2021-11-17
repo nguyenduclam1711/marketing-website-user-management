@@ -1,7 +1,7 @@
 import intlTelInput from 'intl-tel-input';
 import { get_form_payload, isGerman } from "./helper.js"
 import utilsScript from "./intl-tel-input-utils.min.js"
-const animtionDuration = 1;
+const animtionDuration = 0.3;
 const paramsString = window.location.search
 let searchParams = new URLSearchParams(paramsString);
 const getAnswers = (question, model) => Object.values(model.layers.find(layer => layer.type === "diagram-nodes").models)
