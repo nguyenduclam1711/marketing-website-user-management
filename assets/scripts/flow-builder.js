@@ -1,8 +1,9 @@
 import intlTelInput from 'intl-tel-input';
 import { get_form_payload, isGerman } from "./helper.js"
 import utilsScript from "./intl-tel-input-utils.min.js"
-const animtionDuration = 0.3;
-
+const animtionDuration = 1;
+const paramsString = window.location.search
+let searchParams = new URLSearchParams(paramsString);
 const getAnswers = (question, model) => Object.values(model.layers.find(layer => layer.type === "diagram-nodes").models)
 	.filter(links => Object.values(model.layers.find(layer => layer.type === "diagram-links").models)
 		.filter(layer => layer.source === question.id).map(l => l.target).includes(links.id))
@@ -45,13 +46,13 @@ fetch(`/admin/questions/overview`, {
 		})
 		const partiallyResolved = await Promise.all(allFlows)
 		const fullFlows = await Promise.all(partiallyResolved.map(res => res.json()))
-		fullFlows.map(res => res.payload.questions).map(question => {
-			const diagramNodes = question.model.layers.find(layer => layer.type === "diagram-nodes").models
+		fullFlows.map(res => res.payload.questions).map(flow => {
+			const diagramNodes = flow.model.layers.find(layer => layer.type === "diagram-nodes").models
 			const startquestion = Object.values(diagramNodes).filter(model => model.ports.find(port => port.label === "In").links.length === 0)
-			render(startquestion, question)
+			render(startquestion, flow)
 			document.addEventListener('submit', (e) => {
-				if (question.name === e.target.closest('form').dataset.flow) {
-					jumpToNextQuestion(e, diagramNodes, question)
+				if (flow.name === e.target.closest('form').dataset.flow) {
+					jumpToNextQuestion(e, diagramNodes, flow)
 				}
 			})
 		})
@@ -74,11 +75,16 @@ const jumpToNextQuestion = (e, diagramNodes, flow) => {
 	const form_payload = get_form_payload(e.target.elements)
 	localStorage.setItem(`dcianswers_${flow.name}`, JSON.stringify({ ...JSON.parse(localStorage.getItem(`dcianswers_${flow.name}`)), ...form_payload }))
 	const nextQuestions = Object.values(diagramNodes).filter(n => [...e.target.elements].find(i => i.type === "submit").dataset.nextquestions.includes(n.id.split(',')))
+	const paramsString = window.location.search
+	let searchParams = new URLSearchParams(paramsString);
 	if (nextQuestions.length > 0) {
 		document.querySelector(".dynamicinputform").classList.add('fade-out')
 		setTimeout(() => {
 			render(nextQuestions, flow)
 		}, animtionDuration * 1000);
+		setTimeout(() => {
+			e.target.closest('form').classList.add('fully-transparent')
+		}, animtionDuration * 1000 - 100);
 	} else {
 		const submitButton = document.querySelector("button[data-nextquestions='']")
 		const buttonOriginalText = submitButton.innerText
@@ -148,13 +154,12 @@ const render = (questions, flow) => {
 	if (questionroot) {
 		const diagramLinks = flow.model.layers.find(layer => layer.type === "diagram-links").models
 		if (diagramLinks) {
-			const paramsString = window.location.search
-			let searchParams = new URLSearchParams(paramsString);
 			let nextQuestions = findNextQuestions(diagramLinks, questions, flow)
-			let isHidden = false
+			let skipNextQuestion = false
 			let i = 0
 			while (searchParams.get(nextQuestions[0].extras.questionidentifier) === "false") {
 				if (searchParams.get(nextQuestions[0].extras.questionidentifier) === "false") {
+					skipNextQuestion = true
 					nextQuestions = findNextQuestions(diagramLinks, nextQuestions, flow)
 				}
 				i++
@@ -262,6 +267,9 @@ const render = (questions, flow) => {
 				renderElement.id = `questionroot_render_element_${flow.name}`
 				renderElement.classList.add('w-100')
 				renderElement.innerHTML = html
+				setTimeout(() => {
+					document.querySelector('.dynamicinputform').classList.remove('fully-transparent')
+				}, 100);
 				questionroot.appendChild(renderElement)
 			} else {
 				questionRootRenderElement.innerHTML = html
