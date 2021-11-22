@@ -48,7 +48,11 @@ fetch(`/admin/questions/overview`, {
 		const fullFlows = await Promise.all(partiallyResolved.map(res => res.json()))
 		fullFlows.map(res => res.payload.questions).map(flow => {
 			const diagramNodes = flow.model.layers.find(layer => layer.type === "diagram-nodes").models
-			const startquestion = Object.values(diagramNodes).filter(model => model.ports.find(port => port.label === "In").links.length === 0)
+			let startquestion = Object.values(diagramNodes).filter(model => model.ports.find(port => port.label === "In").links.length === 0)
+			const diagramLinks = flow.model.layers.find(layer => layer.type === "diagram-links").models
+			if (searchParams.get(startquestion[0].extras.questionidentifier) === "false") {
+				startquestion = findNextQuestions(diagramLinks, startquestion, flow)
+			}
 			render(startquestion, flow)
 			document.addEventListener('submit', (e) => {
 				if (flow.name === e.target.closest('form').dataset.flow) {
@@ -74,9 +78,9 @@ const jumpToNextQuestion = (e, diagramNodes, flow) => {
 	e.preventDefault()
 	const form_payload = get_form_payload(e.target.elements)
 	localStorage.setItem(`dcianswers_${flow.name}`, JSON.stringify({ ...JSON.parse(localStorage.getItem(`dcianswers_${flow.name}`)), ...form_payload }))
-	const nextQuestions = Object.values(diagramNodes).filter(n => [...e.target.elements].find(i => i.type === "submit").dataset.nextquestions.includes(n.id.split(',')))
-	const paramsString = window.location.search
-	let searchParams = new URLSearchParams(paramsString);
+	const nextQuestions = Object.values(diagramNodes).filter(n => {
+		return [...e.target.elements].find(i => i.type === "submit").dataset.nextquestions.includes(n.id.split(','))
+	})
 	if (nextQuestions.length > 0) {
 		document.querySelector(".dynamicinputform").classList.add('fade-out')
 		setTimeout(() => {
@@ -155,14 +159,14 @@ const render = (questions, flow) => {
 		const diagramLinks = flow.model.layers.find(layer => layer.type === "diagram-links").models
 		if (diagramLinks) {
 			let nextQuestions = findNextQuestions(diagramLinks, questions, flow)
-			let skipNextQuestion = false
 			let i = 0
-			while (searchParams.get(nextQuestions[0].extras.questionidentifier) === "false") {
-				if (searchParams.get(nextQuestions[0].extras.questionidentifier) === "false") {
-					skipNextQuestion = true
-					nextQuestions = findNextQuestions(diagramLinks, nextQuestions, flow)
+			if (nextQuestions.length > 0) {
+				while (searchParams.get(nextQuestions[0].extras.questionidentifier) === "false") {
+					if (searchParams.get(nextQuestions[0].extras.questionidentifier) === "false") {
+						nextQuestions = findNextQuestions(diagramLinks, nextQuestions, flow)
+					}
+					i++
 				}
-				i++
 			}
 			const html = `
 		<div class="w-100 container">
