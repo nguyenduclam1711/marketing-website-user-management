@@ -51,7 +51,9 @@ fetch(`/admin/questions/overview`, {
 			let startquestion = Object.values(diagramNodes).filter(model => model.ports.find(port => port.label === "In").links.length === 0)
 			const diagramLinks = flow.model.layers.find(layer => layer.type === "diagram-links").models
 			if (searchParams.get(startquestion[0].extras.questionidentifier) === "false") {
-				startquestion = findNextQuestions(diagramLinks, startquestion, flow)
+				while (startquestion.length > 0 && searchParams.get(startquestion[0].extras.questionidentifier) === "false") {
+					startquestion = findNextQuestions(diagramLinks, startquestion, flow)
+				}
 			}
 			render(startquestion, flow)
 			document.addEventListener('submit', (e) => {
