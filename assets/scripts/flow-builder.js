@@ -161,7 +161,7 @@ const render = (questions, flow) => {
 			let nextQuestions = findNextQuestions(diagramLinks, questions, flow)
 			let i = 0
 			if (nextQuestions.length > 0) {
-				while (searchParams.get(nextQuestions[0].extras.questionidentifier) === "false") {
+				while (nextQuestions.length > 0 && searchParams.get(nextQuestions[0].extras.questionidentifier) === "false") {
 					if (searchParams.get(nextQuestions[0].extras.questionidentifier) === "false") {
 						nextQuestions = findNextQuestions(diagramLinks, nextQuestions, flow)
 					}
