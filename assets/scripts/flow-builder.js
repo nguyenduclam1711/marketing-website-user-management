@@ -2,7 +2,8 @@ import intlTelInput from 'intl-tel-input';
 import { get_form_payload, isGerman } from "./helper.js"
 import utilsScript from "./intl-tel-input-utils.min.js"
 const animtionDuration = 0.3;
-
+const paramsString = window.location.search
+let searchParams = new URLSearchParams(paramsString);
 const getAnswers = (question, model) => Object.values(model.layers.find(layer => layer.type === "diagram-nodes").models)
 	.filter(links => Object.values(model.layers.find(layer => layer.type === "diagram-links").models)
 		.filter(layer => layer.source === question.id).map(l => l.target).includes(links.id))
@@ -45,13 +46,19 @@ fetch(`/admin/questions/overview`, {
 		})
 		const partiallyResolved = await Promise.all(allFlows)
 		const fullFlows = await Promise.all(partiallyResolved.map(res => res.json()))
-		fullFlows.map(res => res.payload.questions).map(question => {
-			const diagramNodes = question.model.layers.find(layer => layer.type === "diagram-nodes").models
-			const startquestion = Object.values(diagramNodes).filter(model => model.ports.find(port => port.label === "In").links.length === 0)
-			render(startquestion, question)
+		fullFlows.map(res => res.payload.questions).map(flow => {
+			const diagramNodes = flow.model.layers.find(layer => layer.type === "diagram-nodes").models
+			let startquestion = Object.values(diagramNodes).filter(model => model.ports.find(port => port.label === "In").links.length === 0)
+			const diagramLinks = flow.model.layers.find(layer => layer.type === "diagram-links").models
+			if (searchParams.get(startquestion[0].extras.questionidentifier) === "false") {
+				while (startquestion.length > 0 && searchParams.get(startquestion[0].extras.questionidentifier) === "false") {
+					startquestion = findNextQuestions(diagramLinks, startquestion, flow)
+				}
+			}
+			render(startquestion, flow)
 			document.addEventListener('submit', (e) => {
-				if (question.name === e.target.closest('form').dataset.flow) {
-					jumpToNextQuestion(e, diagramNodes, question)
+				if (flow.name === e.target.closest('form').dataset.flow) {
+					jumpToNextQuestion(e, diagramNodes, flow)
 				}
 			})
 		})
@@ -73,12 +80,17 @@ const jumpToNextQuestion = (e, diagramNodes, flow) => {
 	e.preventDefault()
 	const form_payload = get_form_payload(e.target.elements)
 	localStorage.setItem(`dcianswers_${flow.name}`, JSON.stringify({ ...JSON.parse(localStorage.getItem(`dcianswers_${flow.name}`)), ...form_payload }))
-	const nextQuestions = Object.values(diagramNodes).filter(n => [...e.target.elements].find(i => i.type === "submit").dataset.nextquestions.includes(n.id.split(',')))
+	const nextQuestions = Object.values(diagramNodes).filter(n => {
+		return [...e.target.elements].find(i => i.type === "submit").dataset.nextquestions.includes(n.id.split(','))
+	})
 	if (nextQuestions.length > 0) {
 		document.querySelector(".dynamicinputform").classList.add('fade-out')
 		setTimeout(() => {
 			render(nextQuestions, flow)
 		}, animtionDuration * 1000);
+		setTimeout(() => {
+			e.target.closest('form').classList.add('fully-transparent')
+		}, animtionDuration * 1000 - 100);
 	} else {
 		const submitButton = document.querySelector("button[data-nextquestions='']")
 		const buttonOriginalText = submitButton.innerText
@@ -126,27 +138,38 @@ const input = document.querySelector('input[name*="phone"]')
 if (input) {
 	const iti = intlTelInput(input, itiConfig);
 }
+const findNextQuestions = (diagramLinks, questions, flow) => {
+	var linksToNextQ = questions.map(q => {
+		return Object.values(flow.model.layers.find(layer => layer.type === "diagram-nodes").models)
+			.filter(links => Object.values(diagramLinks)
+				.filter(layer => layer.source === q.id).map(l => l.target).includes(links.id))
+	}).flat().map(a => a.ports[1].links).flat()
+
+	var nextQuestions = Object.values(flow.model.layers.find(layer => layer.type === "diagram-nodes").models)
+		.filter(node => {
+			return node.ports[0].links.find(l => {
+				if (linksToNextQ.includes(l)) {
+					return node
+				}
+			})
+		});
+	return nextQuestions
+}
 const render = (questions, flow) => {
 	const questionroot = document.querySelector(flow.renderselector)
 	if (questionroot) {
 		const diagramLinks = flow.model.layers.find(layer => layer.type === "diagram-links").models
 		if (diagramLinks) {
-			var linksToNextQ = questions.map(q => {
-				return Object.values(flow.model.layers.find(layer => layer.type === "diagram-nodes").models)
-					.filter(links => Object.values(diagramLinks)
-						.filter(layer => layer.source === q.id).map(l => l.target).includes(links.id))
-			}).flat().map(a => a.ports[1].links).flat()
-
-			var nextQuestions = Object.values(flow.model.layers.find(layer => layer.type === "diagram-nodes").models)
-				.filter(node => {
-					return node.ports[0].links.find(l => {
-						if (linksToNextQ.includes(l)) {
-							return node
-						}
-					})
-				});
-			const paramsString = window.location.search
-			let searchParams = new URLSearchParams(paramsString);
+			let nextQuestions = findNextQuestions(diagramLinks, questions, flow)
+			let i = 0
+			if (nextQuestions.length > 0) {
+				while (nextQuestions.length > 0 && searchParams.get(nextQuestions[0].extras.questionidentifier) === "false") {
+					if (searchParams.get(nextQuestions[0].extras.questionidentifier) === "false") {
+						nextQuestions = findNextQuestions(diagramLinks, nextQuestions, flow)
+					}
+					i++
+				}
+			}
 			const html = `
 		<div class="w-100 container">
 		<div id="popup" class="py-5 d-flex flex-column justify-content-between w-300px w-100">
@@ -218,7 +241,7 @@ const render = (questions, flow) => {
 				data-flow="${flow.name}"
 				name="${question.extras.questionidentifier}" 
 				class="btn-check dynamicinput"
-				data-trigger="${canTrigger(questions, flow.model)}"
+				data-trigger="${canTrigger(questions, flow.model) && nextQuestions.length !== 0}"
 				data-question="${question.extras.questionidentifier}" 
 				data-nextquestions="${nextQuestions.map(a => a.id)}" 
 				required
@@ -235,7 +258,7 @@ const render = (questions, flow) => {
 				<input type="text" name="age_field" class="agefield"/>
 				${flow.sendaltemail ? `<input type="hidden" name="sendaltemail" value="true" class="sendaltemail"/>` : ``}
 				<p><label class="checkbox TermsofService text-muted">${isGerman ? `Gelesen und akzeptiert` : `I have read and agree to the`}<input type="checkbox" name="TermsofService" value="true" required="required" class="dynamicinput"><span class="checkmark"></span></label><a href="#" class="ml-1 font-weight-normal text-dark text-decoration-none" data-toggle="modal" data-target="#dataPrivacy">${isGerman ? `Datenschutz` : `Data privacy`}</a></p>` : ``}
-                ${canTrigger(questions, flow.model) ? `` : `<div class="d-flex justify-content-end"><button class="btn btn-lg mb-4 answerbutton ${nextQuestions.length === 0 ? "w-md-50 w-100 btn-secondary" : "btn-outline-secondary w-100"}" data-nextquestions="${nextQuestions.map(a => a.id)}" type="submit">${nextQuestions.length === 0 ? (isGerman ? `Abschicken` : `Submit`) : (isGerman ? `Weiter` : `Next`)}`}</button></div>
+                ${canTrigger(questions, flow.model) && nextQuestions.length !== 0 ? `` : `<div class="d-flex justify-content-end"><button class="btn btn-lg mb-4 answerbutton ${nextQuestions.length === 0 ? "w-md-50 w-100 btn-secondary" : "btn-outline-secondary w-100"}" data-nextquestions="${nextQuestions.map(a => a.id)}" type="submit">${nextQuestions.length === 0 ? (isGerman ? `Abschicken` : `Submit`) : (isGerman ? `Weiter` : `Next`)}`}</button></div>
                 ${nextQuestions.length === 0 ? `<p class='text-muted small asterix'>${isGerman ? `Durch Deine Registrierung stimmst Du zu, dass personenbezogene Daten gespeichert werden. Diese dürfen von der Digital Career Institute gGmbH genutzt werden, um mit Dir in Kontakt zu treten, sofern Du dies nicht ausdrücklich untersagst.` : `With this registration you agree with the storage of your data. These data will be used by Digital Career Institute gGmbH to contact you. You have the right to access, modify, rectify and delete these data.`}</p>
 				</div>
             </div>
@@ -250,6 +273,9 @@ const render = (questions, flow) => {
 				renderElement.id = `questionroot_render_element_${flow.name}`
 				renderElement.classList.add('w-100')
 				renderElement.innerHTML = html
+				setTimeout(() => {
+					document.querySelector('.dynamicinputform').classList.remove('fully-transparent')
+				}, 100);
 				questionroot.appendChild(renderElement)
 			} else {
 				questionRootRenderElement.innerHTML = html
