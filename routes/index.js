@@ -8,7 +8,6 @@ if (process.env.NODE_ENV !== "test" && (!process.env.AUTHORIZATION || !process.e
   console.error(
     "Please set a Mailchimp URL or AUTHORIZATION ApiKey in .env file"
   );
-  process.exit();
 }
 
 router.get("/", IndexController.landingpage);
