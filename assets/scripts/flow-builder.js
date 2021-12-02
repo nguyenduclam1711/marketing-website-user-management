@@ -101,7 +101,7 @@ const jumpToNextQuestion = (e, diagramNodes, flow) => {
 		// ?initial_interest=false&initial_interest=webdev
 		// ?initial_interest=webdev&initial_interest=false
 		let hiddenQuestionWhichShouldStillBeenProcessed = Array.from(searchParams.entries()).reduce((acc, i) => {
-			if (!acc.includes(i[0])) {
+			if (searchParams.getAll(i[0]).length > 1) {
 				acc.push(i)
 			}
 			return acc
