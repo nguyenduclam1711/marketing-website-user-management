@@ -97,9 +97,6 @@ const jumpToNextQuestion = (e, diagramNodes, flow) => {
 		submitButton.innerText = "Loading..."
 		submitButton.disabled = true
 		let payload = JSON.parse(localStorage.getItem(`dcianswers_${flow.name}`))
-		// use cases:
-		// ?initial_interest=false&initial_interest=webdev
-		// ?initial_interest=webdev&initial_interest=false
 		let hiddenQuestionWhichShouldStillBeenProcessed = Array.from(searchParams.entries()).reduce((acc, i) => {
 			if (searchParams.getAll(i[0]).length > 1) {
 				acc.push(i)

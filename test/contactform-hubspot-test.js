@@ -7,105 +7,7 @@ const supertest = require("supertest");
 const test_mail = "thomas.kuhnert+test@digitalcareerinstitute.org"
 const app = require("../index");
 let browser
-
 (async () => {
-    const recursiveClick = async (submitButton, page, resolve, reject, submitted, checkFor = undefined) => {
-
-        let questionThatShouldBeHidden = await page.$$(`input[name="${checkFor}"]`)
-        if (questionThatShouldBeHidden.length > 0) {
-            reject("Element should not be visible")
-        }
-
-        await page.evaluate(() => {
-            const dropdowns = document.querySelectorAll('select');
-            if (dropdowns.length > 0) {
-                Array.from(dropdowns).map(dropdown => {
-                    const dropdownOptions = dropdown.querySelectorAll('option');
-                    const selected_option = [...dropdownOptions][2]
-                    selected_option.selected = true;
-                })
-            }
-        });
-        await page.evaluate(() => {
-            const numberInput = document.querySelector('input[type="number"]');
-            if (numberInput) {
-                numberInput.value = 33;
-            }
-        });
-        await page.evaluate(() => {
-            const textInputs = document.querySelectorAll('input[type="text"]:not(.answerbutton)');
-            if (textInputs.length > 0) {
-                Array.from(textInputs).map(textInput => {
-                    if (textInput) {
-                        textInput.value = "Testvalue";
-                    }
-                })
-            }
-        });
-        await page.evaluate((email) => {
-            const emailInputs = document.querySelectorAll('input[type="email"]:not(.answerbutton)');
-            if (emailInputs.length > 0) {
-                Array.from(emailInputs).map(async emailInput => {
-                    if (emailInput) {
-                        emailInput.value = email;
-                    }
-                })
-            }
-        }, test_mail);
-        await page.evaluate(() => {
-            const telInputs = document.querySelectorAll('input[type="tel"]:not(.answerbutton)');
-            if (telInputs.length > 0) {
-                Array.from(telInputs).map(telInput => {
-                    if (telInput) {
-                        telInput.value = 1234567890;
-                    }
-                })
-            }
-        });
-        let elHandleArray = await page.$$('input')
-        if (elHandleArray[0]) {
-            await elHandleArray[0].click()
-        }
-        await page.evaluate(() => {
-            let nextButton = document.querySelector('.answerbutton')
-            if (nextButton) {
-                nextButton.click()
-            }
-        })
-        if (submitButton[0]) {
-            try {
-                submitted = true
-                await page.$eval('input[name="TermsofService"]', check => check.checked = true);
-                await page.waitForTimeout(3000); // wait for 5 seconds
-
-                await page.evaluate(() => {
-                    let button = document.querySelector('button[type="submit"]')
-                    if (button) {
-                        button.click()
-                    }
-                });
-                await Promise.all([
-                    page.waitForNavigation({ waitUntil: 'domcontentloaded' }),
-                    page.waitForNavigation({ waitUntil: 'load' }),
-                    page.waitForSelector('h1'),
-                ]);
-                const heading1 = await page.$eval("h1", el => el.textContent);
-                if (heading1 === "Thank you for applying!") {
-                    resolve()
-                } else {
-                    reject('Error in Thank you page redirect')
-                }
-            } catch (error) {
-                reject(error);
-            }
-        } else {
-            if (!submitted) {
-                await page.waitForTimeout(500);
-                const nextSubmitButton = await page.$$('[data-nextquestions=""]')
-                recursiveClick(nextSubmitButton, page, resolve, reject, submitted, checkFor)
-            }
-        }
-    }
     let hubspotContactID
     describe('Contactform and hubspot contact existence', function () {
         before(async function () {
@@ -125,7 +27,6 @@ let browser
                                 const json = JSON.parse(response.body);
                                 if (error) throw new Error(error);
                                 studen_question_mock = json.payload.questions
-
                                 delete studen_question_mock._id
                                 delete studen_question_mock._v
                                 await Question.create(studen_question_mock);
@@ -135,35 +36,9 @@ let browser
                         console.log('error', error);
                         reject(error)
                     } finally {
-                        console.log("Done");
-                        resolve("done")
+                        resolve()
                     }
                 })
-            });
-        })
-        it('Fills the contact form where one question is skipped and submits it', async function () {
-            return new Promise(async function (resolve, reject) {
-                browser = await puppeteer.launch({
-                    defaultViewport: null,
-                    // headless: false,
-                    // devtools: true,
-                    // dumpio: true,
-                    args: [
-                        `--no-sandbox`,
-                    ],
-                });
-                const qs = await Question.find();
-                const firstQuestion = Object.values(qs[0].model.layers[1].models).filter(question => question.extras.questionidentifier)[0]
-                const serverInstance = supertest(app).get("/")
-                const page = await browser.newPage();
-                await page.goto(serverInstance.url + `signup?${firstQuestion.extras.questionidentifier}=false`, { waitUntil: 'networkidle2' });
-                page.waitForNavigation()
-                let submitted = false
-                page.waitForSelector('.dynamicinputform')
-                    .then(async () => {
-                        const submitButton = await page.$$('[data-nextquestions=""]')
-                        recursiveClick(submitButton, page, resolve, reject, submitted, firstQuestion.extras.questionidentifier)
-                    });
             });
         })
         it('Fills the contact form and submits it', async function () {
@@ -192,8 +67,98 @@ let browser
                         await page.mouse.move(126, 19);
                         await page.mouse.up();
 
+                        const recursiveClick = async (submitButton) => {
+                            await page.evaluate(() => {
+                                const dropdowns = document.querySelectorAll('select');
+                                if (dropdowns.length > 0) {
+                                    Array.from(dropdowns).map(dropdown => {
+                                        const dropdownOptions = dropdown.querySelectorAll('option');
+                                        const selected_option = [...dropdownOptions][2]
+                                        selected_option.selected = true;
+                                    })
+                                }
+                            });
+                            await page.evaluate(() => {
+                                const numberInput = document.querySelector('input[type="number"]');
+                                if (numberInput) {
+                                    numberInput.value = 33;
+                                }
+                            });
+                            await page.evaluate(() => {
+                                const textInputs = document.querySelectorAll('input[type="text"]:not(.answerbutton)');
+                                if (textInputs.length > 0) {
+                                    Array.from(textInputs).map(textInput => {
+                                        if (textInput) {
+                                            textInput.value = "Testvalue";
+                                        }
+                                    })
+                                }
+                            });
+                            await page.evaluate((email) => {
+                                const emailInputs = document.querySelectorAll('input[type="email"]:not(.answerbutton)');
+                                if (emailInputs.length > 0) {
+                                    Array.from(emailInputs).map(async emailInput => {
+                                        if (emailInput) {
+                                            emailInput.value = email;
+                                        }
+                                    })
+                                }
+                            }, test_mail);
+                            await page.evaluate(() => {
+                                const telInputs = document.querySelectorAll('input[type="tel"]:not(.answerbutton)');
+                                if (telInputs.length > 0) {
+                                    Array.from(telInputs).map(telInput => {
+                                        if (telInput) {
+                                            telInput.value = 1234567890;
+                                        }
+                                    })
+                                }
+                            });
+                            let elHandleArray = await page.$$('input')
+                            if (elHandleArray[0]) {
+                                await elHandleArray[0].click()
+                            }
+                            await page.evaluate(() => {
+                                let nextButton = document.querySelector('.answerbutton')
+                                if (nextButton) {
+                                    nextButton.click()
+                                }
+                            })
+                            if (submitButton[0]) {
+                                try {
+                                    submitted = true
+                                    await page.$eval('input[name="TermsofService"]', check => check.checked = true);
+                                    await page.waitForTimeout(3000); // wait for 5 seconds
+                                    await page.evaluate(() => {
+                                        let button = document.querySelector('button[type="submit"]')
+                                        if (button) {
+                                            button.click()
+                                        }
+                                    });
+                                    await Promise.all([
+                                        page.waitForNavigation({ waitUntil: 'domcontentloaded' }),
+                                        page.waitForNavigation({ waitUntil: 'load' }),
+                                        page.waitForSelector('h1'),
+                                    ]);
+                                    const heading1 = await page.$eval("h1", el => el.textContent);
+                                    if (heading1 === "Thank you for applying!") {
+                                        resolve()
+                                    } else {
+                                        reject('Error in Thank you page redirect')
+                                    }
+                                } catch (error) {
+                                    reject(error);
+                                }
+                            } else {
+                                if (!submitted) {
+                                    await page.waitForTimeout(500);
+                                    const nextSubmitButton = await page.$$('[data-nextquestions=""]')
+                                    recursiveClick(nextSubmitButton)
+                                }
+                            }
+                        }
                         const submitButton = await page.$$('[data-nextquestions=""]')
-                        recursiveClick(submitButton, page, resolve, reject, submitted)
+                        recursiveClick(submitButton)
                     });
             });
         })
