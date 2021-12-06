@@ -97,6 +97,17 @@ const jumpToNextQuestion = (e, diagramNodes, flow) => {
 		submitButton.innerText = "Loading..."
 		submitButton.disabled = true
 		let payload = JSON.parse(localStorage.getItem(`dcianswers_${flow.name}`))
+		let hiddenQuestionWhichShouldStillBeenProcessed = Array.from(searchParams.entries()).reduce((acc, i) => {
+			if (searchParams.getAll(i[0]).length > 1) {
+				acc.push(i)
+			}
+			return acc
+		}, []).filter(i => i[1] !== "false")
+		if (hiddenQuestionWhichShouldStillBeenProcessed.length > 0) {
+			hiddenQuestionWhichShouldStillBeenProcessed.forEach(q => {
+				payload[q[0]] = q[1]
+			})
+		}
 		fetch(`/contact`, {
 			method: "POST",
 			headers: {
