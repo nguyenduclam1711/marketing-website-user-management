@@ -101,6 +101,9 @@ const jumpToNextQuestion = (e, diagramNodes, flow) => {
 			if (searchParams.getAll(i[0]).length > 1) {
 				acc.push(i)
 			}
+			if (searchParams.getAll(i[0].replace('dci_', '')).length > 0) {
+				acc.push([i[0].replace('dci_', ''), i[1]])
+			}
 			return acc
 		}, []).filter(i => i[1] !== "false")
 		if (hiddenQuestionWhichShouldStillBeenProcessed.length > 0) {
