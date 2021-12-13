@@ -252,6 +252,7 @@ module.exports.contact = async (req, res, next) => {
     if (req.session.utmParams && req.session.utmParams.utm_term) {
       properties.push({ property: 'utm_term', value: req.session.utmParams.utm_term })
     }
+    properties.push({ property: 'preferred_language', value: req.session.locale && req.session.locale === "de" ? "German" : 'English' })
 
     var options = {
       method: 'POST',
