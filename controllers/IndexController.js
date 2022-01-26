@@ -282,22 +282,33 @@ module.exports.contact = async (req, res, next) => {
   } catch (e) {
     console.error(`### Error 2nd catch`, e.message)
     try {
-      const filteredOptions = options.body.properties
-      e.error.validationResults.map((missingP => {
-        filteredOptions.splice(filteredOptions.findIndex(i => i.property === missingP.name), 1)
-      }))
-      console.log(`### Try a second HS request without invalid properties: ${JSON.stringify(e.error.validationResults.map(i => i.name))}`)
-      const errorMailOptions = {
-        from: 'admin@digitalcareerinstitute.org',
-        to: settings.adminreceiver.split(','),
-        subject: 'Failed Hubspot request',
-        html: `Broken fields ${JSON.stringify(e.error.validationResults.map(i => i.name))}, <br/><br/><br/>Request body:<br/> <code style="500px">${JSON.stringify(req.body).replace('", "', '",<br/><br/><br/>"')} </code><br/><br/><br/>Session:<br/><code>${JSON.stringify(req.session)}</code><br/><br/><br/>Properties: <br/><code>${JSON.stringify(req.session)}</code><br/><br/><br/>`,
-        text: `Broken fields ${JSON.stringify(e.error.validationResults.map(i => i.name))}, Request body: ${JSON.stringify(req.body)}`,
+      // if just email field is broken eg. tommy@test.comm <-- wrong tld
+      if (e.error.validationResults.map(i => i.name).findIndex(i => i === 'email') === -1) {
+        const filteredOptions = options.body.properties
+        e.error.validationResults.map((missingP => {
+          filteredOptions.splice(filteredOptions.findIndex(i => i.property === missingP.name), 1)
+        }))
+        console.log(`### Try a second HS request without invalid properties: ${JSON.stringify(e.error.validationResults.map(i => i.name))}`)
+        const errorMailOptions = {
+          from: 'admin@digitalcareerinstitute.org',
+          to: settings.adminreceiver.split(','),
+          subject: 'Failed Hubspot request',
+          html: `Broken fields ${JSON.stringify(e.error.validationResults.map(i => i.name))}, <br/><br/><br/>Request body:<br/> <code style="500px">${JSON.stringify(req.body).replace('", "', '",<br/><br/><br/>"')} </code><br/><br/><br/>Session:<br/><code>${JSON.stringify(req.session)}</code><br/><br/><br/>Properties: <br/><code>${JSON.stringify(req.session)}</code><br/><br/><br/>`,
+          text: `Broken fields ${JSON.stringify(e.error.validationResults.map(i => i.name))}, Request body: ${JSON.stringify(req.body)}`,
+        }
+        const info = sendMail(res, req, errorMailOptions)
+        options.body.properties = filteredOptions
+        const hubspotPromise2 = await requestPromise(options)
+        console.log('### Result of 2nd hubspotPromise', hubspotPromise2);
+      } else {
+        console.log(`### Email ${email} seem to be invalid`);
+        const response = {
+          error: res.__(`Some fields are invalid or empty: ${emptyFields.map(a => `${a}, `)}`),
+        }
+        return res.json({
+          response
+        })
       }
-      const info = sendMail(res, req, errorMailOptions)
-      options.body.properties = filteredOptions
-      const hubspotPromise2 = await requestPromise(options)
-      console.log('### Result of 2nd hubspotPromise', hubspotPromise2);
     } catch (e) {
       console.error("### Error 1st catch", e.message)
     }
