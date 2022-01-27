@@ -280,7 +280,7 @@ module.exports.contact = async (req, res, next) => {
     const result = await Promise.all([hubspotPromise, contactSavepromise])
     console.log('### Result of 1st hubspotPromise', JSON.stringify(result));
   } catch (e) {
-    console.error(`### Error 2nd catch`, e.message)
+    console.error(`### Error 1nd catch`, e.message)
     try {
       const filteredOptions = options.body.properties
       e.error.validationResults.map((missingP => {
@@ -291,6 +291,8 @@ module.exports.contact = async (req, res, next) => {
       const hubspotPromise2 = await requestPromise(options)
       console.log('### Result of 2nd hubspotPromise', hubspotPromise2);
       // if just email field is broken eg. tommy@test.comm <-- wrong tld
+    } catch (e) {
+      console.error("### Error 2st catch", e.message)
       if (e.error.validationResults.map(i => i.name).findIndex(i => i === 'email') === -1) {
         const errorMailOptions = {
           from: 'admin@digitalcareerinstitute.org',
@@ -303,14 +305,12 @@ module.exports.contact = async (req, res, next) => {
       } else {
         console.log(`### Email ${email} seem to be invalid`);
         const response = {
-          error: res.__(`Some fields are invalid or empty: ${emptyFields.map(a => `${a}, `)}`),
+          error: res.__(`Email ${email} seem to be invalid`),
         }
         return res.json({
           response
         })
       }
-    } catch (e) {
-      console.error("### Error 1st catch", e.message)
     }
   } finally {
     finish(res, req, contact, courseReq)
