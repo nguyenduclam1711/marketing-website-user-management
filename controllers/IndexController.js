@@ -282,7 +282,6 @@ module.exports.contact = async (req, res, next) => {
   } catch (e) {
     console.error(`### Error 2nd catch`, e.message)
     try {
-      // if just email field is broken eg. tommy@test.comm <-- wrong tld
       const filteredOptions = options.body.properties
       e.error.validationResults.map((missingP => {
         filteredOptions.splice(filteredOptions.findIndex(i => i.property === missingP.name), 1)
@@ -291,6 +290,7 @@ module.exports.contact = async (req, res, next) => {
       options.body.properties = filteredOptions
       const hubspotPromise2 = await requestPromise(options)
       console.log('### Result of 2nd hubspotPromise', hubspotPromise2);
+      // if just email field is broken eg. tommy@test.comm <-- wrong tld
       if (e.error.validationResults.map(i => i.name).findIndex(i => i === 'email') === -1) {
         const errorMailOptions = {
           from: 'admin@digitalcareerinstitute.org',
