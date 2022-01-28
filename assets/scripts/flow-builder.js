@@ -76,6 +76,7 @@ fetch(`/admin/questions/overview`, {
 		})
 	})
 
+let showedAgeWarning = false
 const jumpToNextQuestion = (e, diagramNodes, flow) => {
 	e.preventDefault()
 	const form_payload = get_form_payload(e.target.elements)
@@ -84,13 +85,25 @@ const jumpToNextQuestion = (e, diagramNodes, flow) => {
 		return [...e.target.elements].find(i => i.type === "submit").dataset.nextquestions.includes(n.id.split(','))
 	})
 	if (nextQuestions.length > 0) {
-		document.querySelector(".dynamicinputform").classList.add('fade-out')
-		setTimeout(() => {
-			render(nextQuestions, flow)
-		}, animtionDuration * 1000);
-		setTimeout(() => {
-			e.target.closest('form').classList.add('fully-transparent')
-		}, animtionDuration * 1000 - 100);
+		const ageBox = document.querySelector('input[name*="age"]')
+		if (!showedAgeWarning && ageBox) {
+			if (Number(ageBox.value) < 18) {
+				const ageHint = document.createElement("div")
+				ageHint.classList.add('alert')
+				ageHint.classList.add('alert-danger')
+				ageHint.innerHTML = "You need to be at least 18 years old to join our courses"
+				ageBox.parentNode.insertBefore(ageHint, ageBox.nextSibling);
+				showedAgeWarning = true
+			}
+		} else {
+			document.querySelector(".dynamicinputform").classList.add('fade-out')
+			setTimeout(() => {
+				render(nextQuestions, flow)
+			}, animtionDuration * 1000);
+			setTimeout(() => {
+				e.target.closest('form').classList.add('fully-transparent')
+			}, animtionDuration * 1000 - 100);
+		}
 	} else {
 		const submitButton = document.querySelector("button[data-nextquestions='']")
 		const buttonOriginalText = submitButton.innerText
