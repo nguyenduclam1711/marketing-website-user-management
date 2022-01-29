@@ -13,7 +13,7 @@ module.exports.fetchJobs = async (req, res) => {
       await Job.deleteMany();
       const queryLangs = ["en", "de"];
       for (let queryLang of queryLangs) {
-        const url = `https://dci-jobs.personio.de/xml${
+        const url = `https://dci.jobs.personio.de/xml${
           queryLang === "en" ? `?language=en` : ``
         }`;
         responses.push(promisifiedRequest(url));
