@@ -1,10 +1,4 @@
 mixin navigation
-  if currentPath && !currentPath.includes('admin') && !currentPath.includes('users') && locals.settings && locals.settings.announcement_banner_string
-    .w-100.text-white.p-2.nav-banner.text-center.z-foreground.bg-primary
-      div
-        =__(locals.settings.announcement_banner_string)
-        if locals.settings && locals.settings.announcement_banner_cta && locals.settings.announcement_banner_cta !== currentPath
-          a.btn.btn-link.ml-3.btn-secondary.py-0(class=course  ? `btn-white` : `btn-secondary` style=course  ? `color: ${course.coloraccent} !important` : `` href=locals.settings.announcement_banner_cta)=__("Show More")
   nav#nav-primary.z-1.navbar.navbar-expand-lg.navbar-light.py-0.bg-tranition.px-0.px-md-0.flex-column(class=currentPath == "/" ? " z-foreground " : "" class=!blank ? " sticky-top " : "")
     .align-items-stretch.pl-md-0.pr-md-0.nav-content(class=currentPath && currentPath.includes('/admin') ? ' container-fluid' : " container-lg" )
       if !blank
