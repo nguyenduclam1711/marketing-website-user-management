@@ -84,7 +84,7 @@ const jumpToNextQuestion = (e, diagramNodes, flow) => {
 	const nextQuestions = Object.values(diagramNodes).filter(n => {
 		return [...e.target.elements].find(i => i.type === "submit").dataset.nextquestions.includes(n.id.split(','))
 	})
-	const ageBox = document.querySelector('input[name*="age"]')
+	const ageBox = document.querySelector('input[name="age"]')
 	if (!showedAgeWarning && ageBox && Number(ageBox.value) < 18) {
 		const ageHint = document.createElement("div")
 		const ageHintBox = document.createElement("div")
