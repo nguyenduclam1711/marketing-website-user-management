@@ -119,7 +119,7 @@ const jumpToNextQuestion = (e, diagramNodes, flow) => {
 						const div = document.createElement('div')
 						submitButton.innerText = buttonOriginalText
 						submitButton.disabled = false
-						div.innerHTML = `<div class="flash m-0 mr-3 alert fade show alert-success">Thank you for being interested in getting to know DCI! Our Career Success Management will get in touch with you to further discover how we can support you!<button class="close ml-3" type="button" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button></div>`
+						div.innerHTML = `<div class="flash m-0 mx-3 alert fade show alert-success">Thank you for being interested in getting to know DCI! Our Career Success Management will get in touch with you to further discover how we can support you!<button class="close ml-3" type="button" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button></div>`
 						document.body.appendChild(div)
 						$("#contactFormModal").modal('hide')
 					} else if (data.response.curriculumPdf) {
@@ -132,7 +132,7 @@ const jumpToNextQuestion = (e, diagramNodes, flow) => {
 					const div = document.createElement('div')
 					submitButton.innerText = buttonOriginalText
 					submitButton.disabled = false
-					div.innerHTML = `<div class="flash m-0 mr-3 alert fade show alert-danger ">${data.response.error}<button class="close ml-3" type="button" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button></div>`
+					div.innerHTML = `<div class="flash m-0 mx-3 alert fade show alert-danger ">${data.response.error}<button class="close ml-3" type="button" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button></div>`
 					document.body.appendChild(div)
 				}
 			}).catch(e => {

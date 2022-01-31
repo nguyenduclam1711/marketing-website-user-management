@@ -306,8 +306,7 @@ Array.from(document.querySelectorAll(".ajaxform")).map(form => {
         e.target.querySelector('#contactform_check').classList.remove("d-none")
         Array.from(e.target.elements).map(i => (i.value = "", i.style.boxShadow = "none"))
         const flashMessage = document.createElement('div')
-        flashMessage.classList.add("flash", "m-0", "mr-3", "alert", "fade", "show", "alert-success")
-
+        flashMessage.classList.add("flash", "m-0", "mx-3", "alert", "fade", "show", "alert-success")
         flashMessage.innerHTML = `${data.response.message}<button class="close ml-3" type="button" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>`
         document.body.appendChild(flashMessage)
         setTimeout(() => {
