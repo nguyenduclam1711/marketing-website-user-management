@@ -85,18 +85,16 @@ const jumpToNextQuestion = (e, diagramNodes, flow) => {
 		return [...e.target.elements].find(i => i.type === "submit").dataset.nextquestions.includes(n.id.split(','))
 	})
 	const ageBox = document.querySelector('input[name*="age"]')
-	if (!showedAgeWarning && ageBox) {
-		if (Number(ageBox.value) < 18) {
-			const ageHint = document.createElement("div")
-			const ageHintBox = document.createElement("div")
-			ageHintBox.classList.add('col-12')
-			ageHint.classList.add('alert')
-			ageHint.classList.add('alert-danger')
-			ageHint.innerHTML = "You need to be at least 18 years old to join our courses"
-			ageHintBox.appendChild(ageHint)
-			ageBox.closest(".row").insertBefore(ageHintBox, ageBox.closest("[class*=col-]").nextElementSibling);
-			showedAgeWarning = true
-		}
+	if (!showedAgeWarning && ageBox && Number(ageBox.value) < 18) {
+		const ageHint = document.createElement("div")
+		const ageHintBox = document.createElement("div")
+		ageHintBox.classList.add('col-12')
+		ageHint.classList.add('alert')
+		ageHint.classList.add('alert-danger')
+		ageHint.innerHTML = "You need to be at least 18 years old to join our courses"
+		ageHintBox.appendChild(ageHint)
+		ageBox.closest(".row").insertBefore(ageHintBox, ageBox.closest("[class*=col-]").nextElementSibling);
+		showedAgeWarning = true
 	} else {
 		if (nextQuestions.length > 0) {
 			document.querySelector(".dynamicinputform").classList.add('fade-out')
