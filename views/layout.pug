@@ -86,7 +86,7 @@ html.h-100(lang=locale === "de" ? 'de': 'en')
       - const menulocations = Object.keys(locals.messages)
         each menulocation in menulocations
           each message in messages[menulocation]
-            .flash.m-0.mr-3(class=`alert fade show alert-${menulocation} ${menulocation === 'error' ? 'alert-danger' : ''}`)
+            .flash.m-0.mx-3(class=`alert fade show alert-${menulocation} ${menulocation === 'error' ? 'alert-danger' : ''}`)
               != message
               button.close.ml-3(type='button', data-dismiss='alert', aria-label='Close')
                 span(aria-hidden='true') ×
