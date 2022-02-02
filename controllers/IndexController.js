@@ -199,8 +199,6 @@ module.exports.contact = async (req, res, next) => {
 
   if (!!process.env.HUBSPOT_API_KEY) {
     let fbclid = getFbClid(req, res, next);
-    let all_fields = { ...req.body }
-    delete all_fields.phone
     properties = [
       { property: 'hs_facebook_click_id', value: fbclid },
       {
@@ -211,7 +209,7 @@ module.exports.contact = async (req, res, next) => {
           'body': body,
           'is_company': sendaltemail,
           'utm_params': remainingUtmParams,
-          'all_fields': all_fields
+          'all_fields': req.body
         })
       }
     ];
