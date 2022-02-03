@@ -76,6 +76,7 @@ fetch(`/admin/questions/overview`, {
 		})
 	})
 
+let showedAgeWarning = false
 const jumpToNextQuestion = (e, diagramNodes, flow) => {
 	e.preventDefault()
 	const form_payload = get_form_payload(e.target.elements)
@@ -83,61 +84,74 @@ const jumpToNextQuestion = (e, diagramNodes, flow) => {
 	const nextQuestions = Object.values(diagramNodes).filter(n => {
 		return [...e.target.elements].find(i => i.type === "submit").dataset.nextquestions.includes(n.id.split(','))
 	})
-	if (nextQuestions.length > 0) {
-		document.querySelector(".dynamicinputform").classList.add('fade-out')
-		setTimeout(() => {
-			render(nextQuestions, flow)
-		}, animtionDuration * 1000);
-		setTimeout(() => {
-			e.target.closest('form').classList.add('fully-transparent')
-		}, animtionDuration * 1000 - 100);
+	const ageBox = document.querySelector('input[name="age"]')
+	if (!showedAgeWarning && ageBox && Number(ageBox.value) < 18) {
+		const ageHint = document.createElement("div")
+		const ageHintBox = document.createElement("div")
+		ageHintBox.classList.add('col-12')
+		ageHint.classList.add('alert')
+		ageHint.classList.add('alert-warning')
+		ageHint.innerHTML = "You need to be at least 18 years old to join our courses"
+		ageHintBox.appendChild(ageHint)
+		ageBox.closest(".row").insertBefore(ageHintBox, ageBox.closest("[class*=col-]").nextElementSibling);
+		showedAgeWarning = true
 	} else {
-		const submitButton = document.querySelector("button[data-nextquestions='']")
-		const buttonOriginalText = submitButton.innerText
-		submitButton.innerText = "Loading..."
-		submitButton.disabled = true
-		let payload = JSON.parse(localStorage.getItem(`dcianswers_${flow.name}`))
-		var entries = Array.from(searchParams.entries()).map(i => [i[0].replace('push_', ""), i[1]])
-		let hiddenQuestionWhichShouldStillBeenProcessed = entries.filter((item, index) => entries.map(i => i[0]).indexOf(item[0]) !== index)
-		if (hiddenQuestionWhichShouldStillBeenProcessed.length > 0) {
-			hiddenQuestionWhichShouldStillBeenProcessed.forEach(q => {
-				payload[q[0]] = q[1]
-			})
-		}
-		fetch(`/contact`, {
-			method: "POST",
-			headers: {
-				"content-type": "application/json"
-			},
-			body: JSON.stringify(payload)
-		}).then(res => res.json())
-			.then(data => {
-				if (data.response.contact_id) {
-					submitButton.innerText = "Thanks"
-					localStorage.removeItem(`dcianswers_${flow.name}`)
-					if (flow.sendaltemail === true) {
+		if (nextQuestions.length > 0) {
+			document.querySelector(".dynamicinputform").classList.add('fade-out')
+			setTimeout(() => {
+				render(nextQuestions, flow)
+			}, animtionDuration * 1000);
+			setTimeout(() => {
+				e.target.closest('form').classList.add('fully-transparent')
+			}, animtionDuration * 1000 - 100);
+		} else {
+			const submitButton = document.querySelector("button[data-nextquestions='']")
+			const buttonOriginalText = submitButton.innerText
+			submitButton.innerText = "Loading..."
+			submitButton.disabled = true
+			let payload = JSON.parse(localStorage.getItem(`dcianswers_${flow.name}`))
+			var entries = Array.from(searchParams.entries()).map(i => [i[0].replace('push_', ""), i[1]])
+			let hiddenQuestionWhichShouldStillBeenProcessed = entries.filter((item, index) => entries.map(i => i[0]).indexOf(item[0]) !== index)
+			if (hiddenQuestionWhichShouldStillBeenProcessed.length > 0) {
+				hiddenQuestionWhichShouldStillBeenProcessed.forEach(q => {
+					payload[q[0]] = q[1]
+				})
+			}
+			fetch(`/contact`, {
+				method: "POST",
+				headers: {
+					"content-type": "application/json"
+				},
+				body: JSON.stringify(payload)
+			}).then(res => res.json())
+				.then(data => {
+					if (data.response.contact_id) {
+						submitButton.innerText = "Thanks"
+						localStorage.removeItem(`dcianswers_${flow.name}`)
+						if (flow.sendaltemail === true) {
+							const div = document.createElement('div')
+							submitButton.innerText = buttonOriginalText
+							submitButton.disabled = false
+							div.innerHTML = `<div class="flash m-0 mr-3 alert fade show alert-success">Thank you for being interested in getting to know DCI! Our Career Success Management will get in touch with you to further discover how we can support you!<button class="close ml-3" type="button" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button></div>`
+							document.body.appendChild(div)
+							$("#contactFormModal").modal('hide')
+						} else if (data.response.curriculumPdf) {
+							$("#curriculumpopup").modal('hide')
+							window.open(`${window.location.origin}/images/${data.response.curriculumPdf}`, '_blank')
+						} else {
+							window.location.replace(`${window.location.origin}/thank-you/${data.response.contact_id}`);
+						}
+					} else if (data.response.error) {
 						const div = document.createElement('div')
 						submitButton.innerText = buttonOriginalText
 						submitButton.disabled = false
-						div.innerHTML = `<div class="flash m-0 mx-3 alert fade show alert-success">Thank you for being interested in getting to know DCI! Our Career Success Management will get in touch with you to further discover how we can support you!<button class="close ml-3" type="button" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button></div>`
+						div.innerHTML = `<div class="flash m-0 mr-3 alert fade show alert-danger ">${data.response.error}<button class="close ml-3" type="button" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button></div>`
 						document.body.appendChild(div)
-						$("#contactFormModal").modal('hide')
-					} else if (data.response.curriculumPdf) {
-						$("#curriculumpopup").modal('hide')
-						window.open(`${window.location.origin}/images/${data.response.curriculumPdf}`, '_blank')
-					} else {
-						window.location.replace(`${window.location.origin}/thank-you/${data.response.contact_id}`);
 					}
-				} else if (data.response.error) {
-					const div = document.createElement('div')
-					submitButton.innerText = buttonOriginalText
-					submitButton.disabled = false
-					div.innerHTML = `<div class="flash m-0 mx-3 alert fade show alert-danger ">${data.response.error}<button class="close ml-3" type="button" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button></div>`
-					document.body.appendChild(div)
-				}
-			}).catch(e => {
-				console.log('e', e);
-			})
+				}).catch(e => {
+					console.log('e', e);
+				})
+		}
 	}
 }
 
