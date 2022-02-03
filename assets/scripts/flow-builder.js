@@ -90,7 +90,7 @@ const jumpToNextQuestion = (e, diagramNodes, flow) => {
 		const ageHintBox = document.createElement("div")
 		ageHintBox.classList.add('col-12')
 		ageHint.classList.add('alert')
-		ageHint.classList.add('alert-danger')
+		ageHint.classList.add('alert-warning')
 		ageHint.innerHTML = "You need to be at least 18 years old to join our courses"
 		ageHintBox.appendChild(ageHint)
 		ageBox.closest(".row").insertBefore(ageHintBox, ageBox.closest("[class*=col-]").nextElementSibling);
