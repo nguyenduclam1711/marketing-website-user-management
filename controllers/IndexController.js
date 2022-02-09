@@ -83,7 +83,7 @@ module.exports.contactLocations = async (req, res) => {
   })
 };
 module.exports.contact = async (req, res, next) => {
-  const { firstname, lastname, email, age_field, body, phone, locations, sendaltemail, TermsofService, afa_jc_registered_, form_are_you_currently_unemployed } = req.body
+  const { firstname, lastname, email, age_field, body, phone, locations, sendaltemail, TermsofService, afa_jc_registered_, form_are_you_currently_unemployed, fb_event_id } = req.body
   if (age_field) {
     console.log('Bot stepped into honeypot!')
     if (req.headers['content-type'] === 'application/json') {
@@ -254,6 +254,9 @@ module.exports.contact = async (req, res, next) => {
     }
     properties.push({ property: 'preferred_language', value: req.session.locale && req.session.locale === "de" ? "German" : 'English' })
     properties.push({ property: 'phone_number_no_predial', value: phone })
+    if (fb_event_id) {
+      properties.push({ property: 'fb_event_id', value: fb_event_id })
+    }
 
     var options = {
       method: 'POST',

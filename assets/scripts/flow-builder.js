@@ -331,6 +331,12 @@ const render = (questions, flow) => {
 					_nb.fields.registerListener(emailField, true);
 				}
 			})
+			var cookies = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
+
+			var event_id = cookies.dci_eventid;
+			if (event_id !== undefined && document.getElementById("freeanswer_fb_event_id")) {
+				document.getElementById("freeanswer_fb_event_id").value = event_id;
+			}
 		}
 	}
 }
