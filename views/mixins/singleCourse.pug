@@ -174,7 +174,10 @@ mixin singleCourse
                     =location.name
                     if index != course.locations.length - 1
                       =", "
-                  =" & Online"
+                  if course.locations.length > 0
+                    =" & Online"
+                  else
+                    ="Online"
           .col-md-6.position-relative.p-5
             h5.font-weight-bold.text-muted.text-uppercase.mb-4: +translate("REQUIREMENTS")
 
