@@ -24,12 +24,13 @@ $turquoise: #3dbaf7;
 $textOrange: #da9446;
 $transition: 0.15s;
 $theme-colors: (
-  'secondary': $secondary,
+  "secondary": $secondary,
 );
-$pale-blue: #E7F2FF;
+$pale-blue: #e7f2ff;
 
-@import '../../node_modules/bootstrap/scss/bootstrap';
-@import '../../node_modules/quill/dist/quill.snow.css';
+@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "../../node_modules/quill/dist/quill.snow.css";
+@import "../../node_modules/antd/dist/antd.css";
 
 @mixin btn-color($color-pri, $color-sec, $color-border) {
   background-color: $color-pri;
@@ -97,7 +98,7 @@ $pale-blue: #E7F2FF;
   background-color: $bluetrans;
 }
 
-.btn[class*='-outline-'] {
+.btn[class*="-outline-"] {
   border-width: 2.5px;
   border-radius: 5px;
 }
@@ -140,9 +141,9 @@ $pale-blue: #E7F2FF;
   border-radius: 0;
 }
 .btn-check {
-    position: absolute;
-    clip: rect(0,0,0,0);
-    pointer-events: none;
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  pointer-events: none;
 }
 .btn-check:checked ~ label {
   background-color: #1f3fc7 !important;

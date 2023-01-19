@@ -9,6 +9,7 @@ module.exports = (env, argv) => {
     entry: {
       frontend: "./assets/scripts/frontend.js",
       backend: "./assets/scripts/backend.js",
+      userManagement: './assets/scripts/UserManagement/index.jsx',
     },
 
     // Define the destination directory and filenames of compiled resources

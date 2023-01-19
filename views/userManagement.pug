@@ -1,0 +1,4 @@
+extends layout.pug
+block content
+  #user-management-root
+  script(src=`/UserManagement.bundle.js${process.cwd().replace(/[^\d]/g, '') !== "" ? `?${process.cwd().replace(/[^\d]/g, '')}` : ``}`)
