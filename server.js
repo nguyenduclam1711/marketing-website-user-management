@@ -273,6 +273,8 @@ const contactsAdminRoutes = require('./routes/admin/contacts')
 const usersAdminRoutes = require('./routes/admin/users')
 const settingsAdminRoutes = require('./routes/admin/settings')
 const questionsAdminRoutes = require('./routes/admin/questions')
+const userManagementRoutes = require('./routes/user-management');
+const apiUserRoutes = require('./routes/api/user');
 
 app.use(i18nRoutes)
 app.use('/', indexRoutes)
@@ -300,6 +302,12 @@ app.use('/admin/users', usersAdminRoutes)
 app.use('/admin/redirects', redirectsAdminRoutes)
 
 app.use('/admin*', settingsAdminRoutes)
+
+app.use('/user-management', userManagementRoutes)
+
+// apis
+app.use('/api/user', apiUserRoutes)
+
 app.use(redirects)
 // app.get('*', function (req, res) {
 //   res.redirect('/')
