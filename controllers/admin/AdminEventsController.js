@@ -6,7 +6,7 @@ const fetchEventsByLocation = require("../../helpers/fetch_events_by_location");
 
 // to catch the error if 'EVENTBRIDE_API_KEY' path not exist in .env file
 if (!process.env.EVENTBRIDE_API_KEY) {
-  console.error("EVENTBRIDE_API_KEY MISSING");
+  console.log("EVENTBRIDE_API_KEY MISSING");
   // process.exit();
 }
 
