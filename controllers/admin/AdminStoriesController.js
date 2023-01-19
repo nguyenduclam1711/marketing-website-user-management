@@ -12,7 +12,7 @@ const AbstractController = require("./AbstractController");
 
 // to catch the error if 'IMAGE_UPLOAD_DIR' path not exist in .env file
 if (process.env.NODE_ENV !== "test" && !process.env.IMAGE_UPLOAD_DIR) {
-  console.error("IMAGE_UPLOAD_DIR MISSING")
+  console.log("IMAGE_UPLOAD_DIR MISSING")
 }
 
 module.exports.getStories = async function (req, res) {

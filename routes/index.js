@@ -5,7 +5,7 @@ const router = express.Router();
 const IndexController = require("../controllers/IndexController");
 
 if (process.env.NODE_ENV !== "test" && (!process.env.AUTHORIZATION || !process.env.URL)) {
-  console.error(
+  console.log(
     "Please set a Mailchimp URL or AUTHORIZATION ApiKey in .env file"
   );
 }
