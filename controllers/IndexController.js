@@ -88,7 +88,7 @@ module.exports.contact = async (req, res, next) => {
     console.log('Bot stepped into honeypot!')
     if (req.headers['content-type'] === 'application/json') {
       const response = {
-        message: res.__(`Thanks for your message`)
+        message: "Thanks for your message"
       }
       return res.json({
         response
@@ -96,7 +96,7 @@ module.exports.contact = async (req, res, next) => {
     } else {
       req.flash(
         'success',
-        res.__(`Thanks for your message`)
+        "Thanks for your message"
       );
       res.redirect(req.headers.referer)
     }
@@ -107,13 +107,13 @@ module.exports.contact = async (req, res, next) => {
   if (emptyFields.length > 0 || !email || !TermsofService) {
     if (req.headers['content-type'] === 'application/json') {
       const response = {
-        error: res.__(`Some fields are invalid or empty: ${emptyFields.map(a => `${a}, `)}`),
+        error: `Some fields are invalid or empty: ${emptyFields.map(a => `${a}, `)}`,
       }
       return res.json({
         response
       })
     } else {
-      req.flash('danger', res.__(`Some fields are invalid or empty: ${emptyFields.map(a => `${a}, `)}`))
+      req.flash('danger', `Some fields are invalid or empty: ${emptyFields.map(a => `${a}, `)}`)
       res.redirect(req.headers.referer)
       next()
       return
@@ -309,7 +309,7 @@ module.exports.contact = async (req, res, next) => {
       } else {
         console.log(`### Email ${email} seem to be invalid`);
         const response = {
-          error: res.__(`Email ${email} seem to be invalid`),
+          error: `Email ${email} seem to be invalid`,
         }
         return res.json({
           response
@@ -323,7 +323,7 @@ module.exports.contact = async (req, res, next) => {
 const finish = async (res, req, contact, courseReq) => {
   if (req.headers['content-type'] === 'application/json') {
     const response = {
-      message: res.__(`Thanks for your message`),
+      message: "Thanks for your message",
       contact_id: contact.id
     }
     let course
@@ -339,7 +339,7 @@ const finish = async (res, req, contact, courseReq) => {
   } else {
     req.flash(
       'success',
-      res.__(`Thanks for your message`)
+      "Thanks for your message"
     );
     res.redirect(req.headers.referer)
   }

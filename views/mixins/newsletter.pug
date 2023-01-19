@@ -6,15 +6,15 @@ mixin newsletter
         .p-2
           .row
             .col-lg-5.pr-0.pb-5.pb-lg-0
-              h3#nlheadline.font-weight-bold=__("Stay up to date on the latest")
-              p.mb-5.text-dark=__("Get the latest news on events, project presentations and more")
+              h3#nlheadline.font-weight-bold="Stay up to date on the latest"
+              p.mb-5.text-dark="Get the latest news on events, project presentations and more"
             .col-lg-7.d-flex.flex-column.justify-content-end.pt-5.pt-lg-5
               .ml-lg-5.pl-lg-5
                 form#mc-embedded-subscribe-form(name='mc-embedded-subscribe-form', method='post', action='/newsletter-signup')
                   div.mb-3
-                    label.text-white.font-size-120(for='newsletter_email')=__("Email")
+                    label.text-white.font-size-120(for='newsletter_email')="Email"
                     input#newsletter_email.subs_input.text-white.border-bottom.border-white.bg-transparent(type='email', required, name='email')
                   .d-flex.flex-column.justify-content-end.align-items-end
                     button.float-right#nlbtn.btn.btn-outline-primary(type="submit")
-                      span=__("Subscribe")
+                      span="Subscribe"
               .alert.alert-dismissible.fade.show.mt-3#response(role="alert")

@@ -8,8 +8,8 @@ block content
     .container-md.position-relative.mb-5.pb-200.z-1
       .row
         .col-md-6.right.py-3.py-md-5.pl-md-0
-          h1.display-1.my-3.mt-xl-5=__("Stories")
-          p.lead.mb-3.pt-3()=__("Lets transform your future into one of our success stories")
+          h1.display-1.my-3.mt-xl-5="Stories"
+          p.lead.mb-3.pt-3()="Lets transform your future into one of our success stories"
         .col-md-6.right.py-3.py-md-5.px-5.pl-md-0.position-static
 
       .position-relative.mb-3
@@ -34,7 +34,7 @@ block content
               a.position-absolute.mt-3.right.bottom.btn.btn-outline-primary.z-foreground(href=`/admin/stories/edit/${firststory.slug}`) Edit
           .col-md-4.d-flex.flex-column.align-items-end.justify-content-center.text-md-white.order-1.order-md-12
             h2.position-relative.d-inline-block.text-md-white
-              =__("Latest Story")
+              ="Latest Story"
               .text-underline-bold.bg-md-white
               
     .container.pb-200
@@ -42,13 +42,13 @@ block content
         .col-md-6
           .text-right
             h2.position-relative.d-inline-block.mb-5
-              =__("Student stories")
+              ="Student stories"
               .text-underline-bold.bg-primary
           each story, index in studentstories.splice(1)
             +fullstory(story, index)
         .col-md-6
           h2.mb-5.text-md-white
-            =__("Company stories")
+            ="Company stories"
           each story, index in companystories 
             +fullstory(story, index)
     .pb-200

@@ -150,7 +150,7 @@ mixin singleCourse
                 +translate("Teaching Mode")
                 =":"
               span
-                span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )=__( "On Campus & Online" )
+                span.padded-text(style=course && course.coloraccent ? `background-color: ${course.coloraccent.replace(/rgb/, "rgba").replace(/\)/, ", 0.33)")}` : `` )= "On Campus & Online"
             if course.courseLanguages
               .my-3
                 strong.mr-2
@@ -237,7 +237,7 @@ mixin singleCourse
               h2.font-weight-bold=`03`
               div(class=course && course.coloraccent ? `` : `text-primary`, style=course && course.coloraccent ? `color: ${course.coloraccent}` : `` )
                 include ../../assets/icons/course_checklist.svg
-            strong.text-muted=course.startYourClass ? course.startYourClass : __("Start your Class")
+            strong.text-muted=course.startYourClass ? course.startYourClass : "Start your Class"
 
       if course.financingoption
         section.text-center
