@@ -61,7 +61,7 @@ if (process.env.USE_REDIS !== undefined && process.env.USE_REDIS === 'true') {
 } else if (process.env.USE_REDIS === 'false') {
   console.log('Redis disabled')
 } else {
-  console.error('USE_REDIS is not defined in .env')
+  console.log('USE_REDIS is not defined in .env')
 }
 
 mongoose.set('useCreateIndex', true)
@@ -158,7 +158,7 @@ app.use(async (req, res, next) => {
       const getNavData = await redisClient.getAsync(`navData${req.session.locale}`)
       navData = JSON.parse(getNavData)
     } catch (error) {
-      console.error('Redis ERROR: Could not get navigation data: ' + error)
+      console.log('Redis ERROR: Could not get navigation data: ' + error)
     }
   }
   if (navData === null) {
@@ -189,7 +189,7 @@ app.use(async (req, res, next) => {
         await redisClient.setAsync(`navData${req.session.locale}`, JSON.stringify(navData))
       }
     } catch (error) {
-      console.error('Redis ERROR: Could not save navigation data: ' + error)
+      console.log('Redis ERROR: Could not save navigation data: ' + error)
     }
   }
 

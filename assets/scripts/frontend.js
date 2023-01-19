@@ -50,7 +50,7 @@ const toggleNL = (remove = false) => {
             responseContainer.innerHTML = alertContainer.innerHTML
           })
           .catch(error => {
-            console.error("Error:", error);
+            console.log("Error:", error);
           })
           .finally(() => {
             toggleNL(true);
@@ -321,7 +321,7 @@ Array.from(document.querySelectorAll(".ajaxform")).map(form => {
       })
       .catch(error => {
         e.target.querySelector('button').disabled = false;
-        console.error(error)
+        console.log(error)
       });
   })
 })

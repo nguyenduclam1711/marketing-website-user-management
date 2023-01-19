@@ -71,7 +71,7 @@ module.exports.register = async (req, res, next) => {
           );
           renderLogin(req, res, next, user)
         } catch (e) {
-          console.error(e)
+          console.log(e)
           req.flash("danger", `A error occured, please try it later again!`);
           res.redirect(req.headers.referer);
         }

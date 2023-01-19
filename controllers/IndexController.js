@@ -25,7 +25,7 @@ module.exports.landingpage = async (req, res) => {
     } else if (process.env.USE_REDIS === 'false') {
       // console.log('Redis disabled')
     } else {
-      console.error('USE_REDIS is not defined in .env')
+      console.log('USE_REDIS is not defined in .env')
     }
     if (process.env.USE_REDIS === 'true') {
       try {
@@ -33,7 +33,7 @@ module.exports.landingpage = async (req, res) => {
         indexData = JSON.parse(getNavData)
 
       } catch (error) {
-        console.error('Redis ERROR: Could not get IndexController data: ' + error)
+        console.log('Redis ERROR: Could not get IndexController data: ' + error)
       }
     }
     if (indexData === null) {
@@ -56,7 +56,7 @@ module.exports.landingpage = async (req, res) => {
         try {
           await redisClient.setAsync(`indexData${req.session.locale}`, JSON.stringify(indexData))
         } catch (error) {
-          console.error('Redis ERROR: Could not save IndexController data: ' + error)
+          console.log('Redis ERROR: Could not save IndexController data: ' + error)
         }
       }
     }
@@ -284,7 +284,7 @@ module.exports.contact = async (req, res, next) => {
     const result = await Promise.all([hubspotPromise, contactSavepromise])
     console.log('### Result of 1st hubspotPromise', JSON.stringify(result));
   } catch (e) {
-    console.error(`### Error 1nd catch`, e.message)
+    console.log(`### Error 1nd catch`, e.message)
     try {
       const filteredOptions = options.body.properties
       e.error.validationResults.map((missingP => {
@@ -296,7 +296,7 @@ module.exports.contact = async (req, res, next) => {
       console.log('### Result of 2nd hubspotPromise', hubspotPromise2);
       // if just email field is broken eg. tommy@test.comm <-- wrong tld
     } catch (e) {
-      console.error("### Error 2st catch", e.message)
+      console.log("### Error 2st catch", e.message)
       if (e.error.validationResults.map(i => i.name).findIndex(i => i === 'email') === -1) {
         const errorMailOptions = {
           from: 'admin@digitalcareerinstitute.org',

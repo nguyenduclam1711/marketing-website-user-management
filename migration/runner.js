@@ -14,7 +14,7 @@ mongoose.connect(process.env.MONGOURL, {
 });
 mongoose.Promise = global.Promise;
 if (!process.argv[2]) {
-  console.error('usage: node runner.js migration')
+  console.log('usage: node runner.js migration')
   process.exitCode = 1
 }
 
@@ -27,6 +27,6 @@ try {
     console.log(migrationRes);
   })()
 } catch (e) {
-  console.error(e)
+  console.log(e)
   process.exitCode = 2
 }
