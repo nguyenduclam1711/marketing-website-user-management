@@ -2,95 +2,95 @@ mixin signupform
   form#signupForm.mt-3.ajaxform(method="POST" data-redirect="true" action="/contact")
     .row
       .col-md-6.mb-3
-        label(for='firstname')=__("firstname")
+        label(for='firstname')="firstname"
         input#firstname.form-control(name="firstname" type='text', placeholder='Firstname', value=contact ? contact.firstname : '', required)
         input#track.form-control(name="track" type="hidden" )
       .col-md-6.mb-3
-        label(for='lastname')=__("lastname")
+        label(for='lastname')="lastname"
         input#lastname.form-control(name="lastname" type='text', placeholder='Lastname', value=contact ? contact.lastname : '', required)
       .col-md-12
         p
           label(for="age")
-            =__("Age")
+            ="Age"
           input#age.form-control(placeholder="30", name="age" type='number', value='', min="0", max="100", step="1", required)
             
       .col-md-12
-        label(for='email')=__("Email")
+        label(for='email')="Email"
         span.text-muted
         input#email.form-control(name="email" type='email', placeholder='email@example.com', value=contact ? contact.email : '', required)
       .col-md-12
         .form-group
-          label(for='body')=__("Message")
-          textarea.mb-3#body.form-control(name="body" placeholder=__("Please, write your message here..."))=contact ? contact.body : ''
+          label(for='body')="Message"
+          textarea.mb-3#body.form-control(name="body" placeholder="Please, write your message here...")=contact ? contact.body : ''
         .form-group
-          label(for='phone')=__("Phone")
+          label(for='phone')="Phone"
           input#phone.form-control(name="phone" type='number', pattern="[\+]\d*", placeholder='0170123456789' , value=contact ? contact.phone : '', required)
           input#age_field.agefield.form-control(name="age_field" tabindex="-1" type='text', placeholder='25')
         if global_locations && global_locations.length > 0
-          label(for='location')=__("Location")
+          label(for='location')="Location"
           select.mb-3.custom-select.text-muted.form-control(required='', name="locations" id="location")
-            option( contact && selected disabled value="")=__("Select your location here...")
+            option( contact && selected disabled value="")="Select your location here..."
             each location in global_locations.filter(l => !l.isCampus)
               option(value=(location._id) selected=contact && contact.locations && contact.locations[0].toString() === location._id.toString() ?  "selected" :  false )=location.name
         p
           label(for="unemployed")
-            =__("Are you currently unemployed?")
+            ="Are you currently unemployed?"
 
           select.mb-3.custom-select.text-muted.form-control(name="unemployed" id="unemployed" required)
-            option(selected disabled value="")=__("Please select an answer here...")
-            option(value="Yes" selected=contact && contact.unemployed == "yes" ? "selected" : false)=__("yes")
-            option(value="No" selected=contact && contact.unemployed == "no" ? "selected" : false)=__("no")
-            option(value="No, but soon" selected=contact && contact.unemployed == "no but soon" ?  "selected" : false )=__("no but soon")
+            option(selected disabled value="")="Please select an answer here..."
+            option(value="Yes" selected=contact && contact.unemployed == "yes" ? "selected" : false)="yes"
+            option(value="No" selected=contact && contact.unemployed == "no" ? "selected" : false)="no"
+            option(value="No, but soon" selected=contact && contact.unemployed == "no but soon" ?  "selected" : false )="no but soon"
         p
           label(for="jobcenter")
-            =__("Are you registered with the Jobcenter or Agentur für Arbeit?")
+            ="Are you registered with the Jobcenter or Agentur für Arbeit?"
 
           select.mb-3.custom-select.text-muted.form-control(name="jobcenter" id="jobcenter" required)
-            option(selected disabled value="")=__("Please select an answer here...")
-            option(value=1 selected=contact && contact.jobcenter == true ? "selected" : false)=__("yes")
-            option(value=0 selected=contact && contact.jobcenter == false ? "selected" : false )=__("no")
+            option(selected disabled value="")="Please select an answer here..."
+            option(value=1 selected=contact && contact.jobcenter == true ? "selected" : false)="yes"
+            option(value=0 selected=contact && contact.jobcenter == false ? "selected" : false )="no"
 
 
         p
           label(for="language_german")
-            =__("Your German skills?")
+            ="Your German skills?"
 
           select.mb-3.custom-select.text-muted.form-control(name="language_german" id="language_german" required)
-            option(selected disabled value="")=__("Please select an answer here...")
-            option(value="A1")=__("A1")
-            option(value="A2")=__("A2")
-            option(value="B1")=__("B1")
-            option(value="B2")=__("B2")
-            option(value="C1")=__("C1")
-            option(value="C2")=__("C2")
-            option(value="Mother Tongue")=__("Mother Tongue")              
+            option(selected disabled value="")="Please select an answer here..."
+            option(value="A1")="A1"
+            option(value="A2")="A2"
+            option(value="B1")="B1"
+            option(value="B2")="B2"
+            option(value="C1")="C1"
+            option(value="C2")="C2"
+            option(value="Mother Tongue")="Mother Tongue"              
 
         p
           label(for="language_english")
-            =__("Your English skills?")
+            ="Your English skills?"
 
           select.mb-3.custom-select.text-muted.form-control(name="language_english" id="language_english" required)
-            option(selected disabled value="")=__("Please select an answer here...")
-            option(value="A1")=__("A1")
-            option(value="A2")=__("A2")
-            option(value="B1")=__("B1")
-            option(value="B2")=__("B2")
-            option(value="C1")=__("C1")
-            option(value="C2")=__("C2")
-            option(value="Mother Tongue")=__("Mother Tongue")    
+            option(selected disabled value="")="Please select an answer here..."
+            option(value="A1")="A1"
+            option(value="A2")="A2"
+            option(value="B1")="B1"
+            option(value="B2")="B2"
+            option(value="C1")="C1"
+            option(value="C2")="C2"
+            option(value="Mother Tongue")="Mother Tongue"    
               
         p.dataPrivacyLink
           label.checkbox.TermsofService.text-muted
-            =__("I have read and agree to the")
+            ="I have read and agree to the"
             input(type='checkbox', name='TermsofService', value="true", required)
             span.checkmark
-          a.ml-1(data-toggle='modal', data-target='#dataPrivacy')=__("Data Privacy")
+          a.ml-1(data-toggle='modal', data-target='#dataPrivacy')="Data Privacy"
 
         input(type="hidden" name='signup_form' checked value="true")
 
         .text-center
           button.btn.btn-lg.btn-secondary.m-auto(type="submit")
-            div#contactform_text=__("SEND")
+            div#contactform_text="SEND"
             div#contactform_spinner.h-1.vertical-align-revert.rotating.text-white.d-none
               include ../../assets/media/spinner.svg
             div#contactform_check.h-1.vertical-align-revert.text-white.d-none

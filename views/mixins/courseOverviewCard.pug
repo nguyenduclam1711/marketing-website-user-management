@@ -8,18 +8,18 @@ mixin courseOverviewCard(course, classes="col-md-6")
             .text-muted.mt-3.mb-5.font-weight-bolder=course.courselength
           if course.startInterval
             .my-3
-              span.mr-2=__("Starts every")+":"
+              span.mr-2="Starts every"+":"
               span.padded-text()=course.startInterval
           if course.courseLanguages
             .my-3
-              span.mr-2=__("Language")+":"
+              span.mr-2="Language"+":"
               span.padded-text()=course.courseLanguages
       if currentPath && currentPath.includes('jobcenter')
         if course.jobcenterPdf
           div
             a.text-dark(href=`/images/${course.jobcenterPdf}` target="_blank")
                 .d-flex.justify-content-between.align-items-center.mt-4
-                  .text-muted=__("Download complete course curriculum")
+                  .text-muted="Download complete course curriculum"
                   .w-4.h-4
                     include ../../assets/icons/download.svg
       if currentPath && currentPath.includes('tour')
@@ -27,6 +27,6 @@ mixin courseOverviewCard(course, classes="col-md-6")
                 div
                   a.text-dark(href=`/images/${course.companiesPdf}` target="_blank")
                       .d-flex.justify-content-between.align-items-center.mt-4
-                        .text-muted=__("Download complete course curriculum")
+                        .text-muted="Download complete course curriculum"
                         .w-4.h-4
                           include ../../assets/icons/download.svg

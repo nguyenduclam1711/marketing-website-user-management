@@ -5,9 +5,9 @@ block content
       .jumbotron.container.mb-0.px-3.bg-light.pb-0.bg-transparent.z-1.position-relative
         .row
           .col-md-6.py-5.pr-0.pr-sm-5
-            h1.pt-5=__("Digital Careers Begin at the DCI.")
-            p.mt-5.mb-5=__("Certified and practical training. Language courses. Career service.  Our all-round service for your customer.")
-            a.btn.btn-lg.btn-secondary.mb-3.z-foreground(href=`${locale !== 'en' ? `/` + locale : ``}/#courses`, data-toggle='modal', data-target='#contactFormModal' title="Contact us")=__("Contact us")
+            h1.pt-5="Digital Careers Begin at the DCI."
+            p.mt-5.mb-5="Certified and practical training. Language courses. Career service.  Our all-round service for your customer."
+            a.btn.btn-lg.btn-secondary.mb-3.z-foreground(href=`${locale !== 'en' ? `/` + locale : ``}/#courses`, data-toggle='modal', data-target='#contactFormModal' title="Contact us")="Contact us"
 
           .col-md-6.d-none.d-md-block
             .bg-primary.bg-panel.h-50.position-absolute.bottom.shift-right-percent.w-300.z-minus.shift-md-reset
@@ -31,7 +31,7 @@ block content
         .container
           - partnersWithTestimonialsShown = partners.filter(p => !p.is_alumni_employer).splice(0, 8)
           if partnersWithTestimonialsShown.length > 0
-            p.m-0.pt-4.pb-3.font-weight-bold=__("Our Partners")
+            p.m-0.pt-4.pb-3.font-weight-bold="Our Partners"
             .row.justify-content-center.pb-5
               each partner, index in partnersWithTestimonialsShown
                 //- .splice(0,6)
@@ -44,8 +44,8 @@ block content
     .container.mt-5.mt-xl-0.text-center.text-lg-left
       .row
         .col-lg-6.d-flex.flex-column.justify-content-center
-          h2.mb-3=__("Who we are")
-          p=__("The Digital Career Institute gGmbH is a non-profit, Certqua AZAV-certified educational institution that specializes in offering continuing education courses in the digital field or for professions in the field of information and communication technology (ICT). What began as a small initiative to integrate refugees into the German labor market is now an established educational institute with over 100 employees throughout Germany. We benefit from the professional expertise and many years of experience of our founders, colleagues and lecturers, who are also strongly networked in the industry.")
+          h2.mb-3="Who we are"
+          p="The Digital Career Institute gGmbH is a non-profit, Certqua AZAV-certified educational institution that specializes in offering continuing education courses in the digital field or for professions in the field of information and communication technology (ICT). What began as a small initiative to integrate refugees into the German labor market is now an established educational institute with over 100 employees throughout Germany. We benefit from the professional expertise and many years of experience of our founders, colleagues and lecturers, who are also strongly networked in the industry."
         .col-lg-6.text-center.order-lg-12.mb-5.mb-5.mb-lg-0.mt-5.mt-lg-0
           .px-5.mb-4.text-left
             .px-sm-5.px-lg-0.px-lg-5.text-left.text-lg-center
@@ -78,8 +78,8 @@ block content
       .container.mt-5.mt-xl-0
         .row
           .col-md-6.mb-5
-            h2.mb-3=__('Our courses')
-            p=__("We offer a range of courses that help our students enter the job market and future-proof their careers.")
+            h2.mb-3='Our courses'
+            p="We offer a range of courses that help our students enter the job market and future-proof their careers."
         .row.justify-content-center
           each course in courses
             +courseOverviewCard(course)
@@ -90,9 +90,9 @@ block content
     //-       include ../assets/icons/arrow_fat.svg
 
     .container.my-5.mt-xl-0
-      h2.mb-3=__("Find your contact person") 
-      .mb-3=__("We are always there for you!")
-      .mb-3=__("Select location")
+      h2.mb-3="Find your contact person" 
+      .mb-3="We are always there for you!"
+      .mb-3="Select location"
       .row.pb-5.pb-md-0
         .col-md-5.pr-3.pr-sm-5
           .pr-0.pr-sm-5
@@ -136,15 +136,15 @@ block content
               div.mb-4
                 .p-3.bg-primary.d-inline-block.text-white
                   .font-weight-bold.font-size-120.px-4
-                    =__("Sustainable")
-              p.pt-2.mb-5=__("The digital sector is one of the fastest growing industries in Germany and is proving itself to be a sustainable and crisis-proof industry, especially now.")
+                    ="Sustainable"
+              p.pt-2.mb-5="The digital sector is one of the fastest growing industries in Germany and is proving itself to be a sustainable and crisis-proof industry, especially now."
           .col-md-6.text-white
             .p-5
               div.mb-4
                 .p-3.bg-white.d-inline-block
                   .font-weight-bold.text-primary.font-size-120.px-4
-                    =__("Digital")
-              p.pt-2.mb-5=__("Job profiles of our graduates include: Programmer, IT Consultant, Web Designer, Online Marketing Manager, Social Media Manager and many more.")
+                    ="Digital"
+              p.pt-2.mb-5="Job profiles of our graduates include: Programmer, IT Consultant, Web Designer, Online Marketing Manager, Social Media Manager and many more."
 
     .marker.w-8.h-7.bg-primary.d-flex.justify-content-center.align-items-center
       include ../assets/icons/circle.svg
@@ -153,8 +153,8 @@ block content
       if storysWithTestimonial.length > 0
         .container.mt-5.mt-xl-0
           h2.pb-3
-            =__("Successstories")
-          p=__("See what our participants say")
+            ="Successstories"
+          p="See what our participants say"
 
           +successCarousel(stories)
 
